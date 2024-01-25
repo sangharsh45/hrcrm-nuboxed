@@ -3,7 +3,6 @@ import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form,  } from "formik";
-import { Spacer } from "../../../../Components/UI/Elements";
 import {
   chooseCandididate
 }
@@ -116,8 +115,8 @@ class CandidateChooseForm extends Component {
                 >
                   <div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between w-[52%]" >
+               
+                  <div class=" flex justify-between w-[52%] mt-3" >
                     <p>Name</p>
                     <Switch
                       onChange={this.handleName}
@@ -194,8 +193,8 @@ class CandidateChooseForm extends Component {
                 </div>
                 <div class=" w-[47%]"
                 >
-                  <Spacer />
-                  <div class=" flex justify-between w-[55%]" >
+                 
+                  <div class=" flex justify-between w-[55%] mt-3" >
                     <p>Experience</p>
                     <Switch
                       onChange={this.handleExperience}
@@ -227,8 +226,8 @@ class CandidateChooseForm extends Component {
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end" >
+           
+              <div class=" flex justify-end mt-3" >
                 <Button
                   type="primary"
                   htmlType="submit"

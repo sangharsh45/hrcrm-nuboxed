@@ -11,17 +11,8 @@ const AddDonotCallModal = props => {
     <>
       <StyledModal
      title="Call Scheduler"
-        // title={<FormattedMessage
-        //   id="app.updatecandidate"
-        //   defaultMessage="Candidate"
-        // />}
         width="60%"
         visible={addDonotCallModal}
-        closable
-        // maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onCancel={() => handleDonotCallModal(false)}
         footer={null}
       >

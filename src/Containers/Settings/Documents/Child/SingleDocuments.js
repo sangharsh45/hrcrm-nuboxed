@@ -2,7 +2,7 @@ import React, { Component,lazy } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import {linkTypeToggle} from "../DocumentsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -96,7 +96,7 @@ class SingleDocuments extends Component {
                  
                     {this.props.document.editInd === true &&(
                      <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                     
                       onClick={() => handleDeleteDocument(documentTypeId)}
                       size="14px"

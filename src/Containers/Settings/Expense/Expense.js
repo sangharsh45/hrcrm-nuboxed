@@ -164,8 +164,11 @@ class Expense extends Component {
             </div>
             <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {expenses.length ? (
-                  expenses.map((expense, i) => (
+              {expenses.length ? (
+  expenses
+    .slice() 
+    .sort((a, b) => a.expenseType.localeCompare(b.expenseType)) 
+    .map((expense, i) => (
                     <SingleExpenses
                       key={i}
                       value={singleExpense}

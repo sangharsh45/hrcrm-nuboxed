@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 
@@ -52,7 +52,7 @@ class SingleItemTask extends Component {
                   {/* ) : null}  */}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                         onClick={() => handleDeleteItemTask(itemTaskId)}
                       size="14px"
                       style={{

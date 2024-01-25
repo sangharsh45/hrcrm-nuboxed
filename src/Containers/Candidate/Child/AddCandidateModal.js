@@ -9,18 +9,12 @@ const AddCandidateModal = props => {
   return (
     <>
       <StyledDrawer
-        //title="Candidate"
         title={<FormattedMessage
           id="app.candidate"
           defaultMessage="Candidate"
         />}
         width="60%"
         visible={addCandidateModal}
-        closable
-        // maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => handleCandidateModal(false)}
         footer={null}
       >

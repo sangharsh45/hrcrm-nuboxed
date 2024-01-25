@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Button ,Tooltip} from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
@@ -56,7 +56,7 @@ class SingleRoleTalent extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                   
                         onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
                       size="14px"

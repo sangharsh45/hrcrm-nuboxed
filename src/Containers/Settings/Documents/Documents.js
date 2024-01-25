@@ -144,8 +144,11 @@ class Documents extends Component {
             </div>
             <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
-                {documents.length ? (
-                  documents.map((document, i) => (
+              {documents.length ? (
+  documents
+    .slice() 
+    .sort((a, b) => a.documentTypeName.localeCompare(b.documentTypeName)) 
+    .map((document, i) => (
                     <SingleDocuments
                       key={i}
                       value={singleDocument}

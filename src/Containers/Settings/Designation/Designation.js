@@ -161,8 +161,11 @@ class Designation extends Component {
         <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {designations.length &&
-                  designations.map((designation, i) => (
+              {designations.length ? (
+  designations
+    .slice() 
+    .sort((a, b) => a.designationType.localeCompare(b.designationType)) 
+    .map((designation, i) => (
                     <SingleDesignation
                       key={i}
                       value={singleDesignation}
@@ -174,7 +177,10 @@ class Designation extends Component {
                       handleUpdateDesignation={this.handleUpdateDesignation}
                        handleDeleteDesignation={this.handleDeleteDesignation}
                     />
-                  ))}
+                    ))
+                    ) : (
+                      <p>No Data Available</p>
+                    )}
               </MainWrapper>
             </div>
             {isTextInputOpen ? (

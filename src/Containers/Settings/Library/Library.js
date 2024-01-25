@@ -165,8 +165,11 @@ class Library extends Component {
             <div class=" flex flex-col" >
              
               <MainWrapper style={{ height: "30em" }}>
-                {librarys.length ? (
-                  librarys.map((library, i) => (
+              {librarys.length ? (
+  librarys
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((library, i) => (
                     <SingleLibrary
                       key={i}
                       value={singleLibrary}

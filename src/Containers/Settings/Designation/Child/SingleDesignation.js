@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
@@ -50,7 +50,7 @@ class SingleDesignation extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
     
                       onClick={() => handleDeleteDesignation(designationTypeId)}
                       size="14px"

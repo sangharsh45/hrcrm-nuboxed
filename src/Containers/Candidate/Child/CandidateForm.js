@@ -9,7 +9,6 @@ import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
 import { getVendorContactData } from "../../Contact/ContactAction";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -17,7 +16,6 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { addCandidate } from "../CandidateAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { StyledLabel } from "../../../Components/UI/Elements";
-import { HeaderLabel } from "../../../Components/UI/Elements";
 import VideoUpload from "./VideoUpload"
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
@@ -420,8 +418,8 @@ class CandidateForm extends Component {
 
                   
                     <div class=" w-[75%]" >  
-                    <Spacer/>        
-                      <div class=" flex justify-between" >
+                        
+                      <div class=" flex justify-between mt-3" >
                         <div class=" w-[30%]" >
                           <FastField
                             name="salutation"
@@ -504,17 +502,17 @@ class CandidateForm extends Component {
                    handleSetVideo={this.handleSetVideo}
                    />
                    </div> 
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+               
+                  <div class=" w-full mt-3" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
+                  <div class=" text-[white] text-xs" >
                   Communication
                    
-                    </HeaderLabel>
                     </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between">
+                    </div>
+          
+                    <div class=" flex justify-between mt-3">
                     <div class=" w-full" >
                       <FastField
                         isRequired
@@ -621,7 +619,7 @@ class CandidateForm extends Component {
                     </div>
                     </div>
                   </div>
-                  {/* <Spacer /> */}
+                  
                   <div class=" flex justify-between" >
                   <div class=" w-full">
                       <FastField
@@ -642,16 +640,16 @@ class CandidateForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+             
+                  <div class=" w-full mt-3" style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >
+                      <div class=" text-[white] text-xs" >
                   Identity
-                    </HeaderLabel>
                     </div>
                     </div>
-                    <Spacer />
-                  <div class=" flex justify-between" >
+                    </div>
+                  
+                  <div class=" flex justify-between mt-3" >
                     <div class=" w-[47%]" >
                       <FastField
                         name="nationality"
@@ -768,11 +766,11 @@ class CandidateForm extends Component {
                     </div>
                   </div>
 
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                
+                  <div class=" w-full mt-3" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
-                    Correspondence</HeaderLabel>
+                      <div class=" text-[white] text-xs" >
+                    Correspondence</div>
                   </div>
                     </div>
                   <FieldArray
@@ -817,8 +815,8 @@ class CandidateForm extends Component {
                 <div class=" w-[48%]"
                 
                 >
-                  <Spacer />
-                  <div class=" flex justify-between" >
+               
+                  <div class=" flex justify-between mt-3" >
                   <div class=" w-[47.5%]">
                   <div class=" flex justify-between" >
                   <div class=" w-[30%]">
@@ -984,7 +982,7 @@ class CandidateForm extends Component {
                               component={InputComponent}
                               inlineLabel
                             />
-                            {/* <HeaderLabel>Experience(in Years)</HeaderLabel>  
+                            {/*  <div class=" text-[white] text-xs" >Experience(in Years)</div>  
 
                     {/* <Input 
                   type="number"
@@ -1071,8 +1069,8 @@ onChange={this.NumericOnly}
                       </div>
                     </FlexContainer> */}
 
-                    <Spacer  />
-                    <div class=" flex justify-between" >
+                   
+                    <div class=" flex justify-between mt-3" >
                     <div class=" w-[47.5%]">
                     <div class=" flex justify-between" >
                     <div class=" w-[48.5%]">
@@ -1122,8 +1120,8 @@ onChange={this.NumericOnly}
                       
                     </div>
 
-                    <Spacer  />
-                    <div class=" flex justify-between" >
+                    
+                    <div class=" flex justify-between mt-3" >
                   <div class=" w-[47.5%]">
                   <div class=" flex justify-between" >
                   <div class=" w-[25%]">
@@ -1204,8 +1202,8 @@ onChange={this.NumericOnly}
                       </div>
                     </div>
 
-                    <Spacer  />
-                    <div class=" flex justify-between" >
+              
+                    <div class=" flex justify-between mt-3" >
                     <div class=" w-[47.5%]">
                   <div class=" flex justify-between" >
                   <div class=" w-[48%]">
@@ -1382,8 +1380,8 @@ onChange={this.NumericOnly}
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end" >
+       
+              <div class=" flex justify-end mt-3" >
                 <Button
                   type="primary"
                   htmlType="submit"

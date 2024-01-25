@@ -6,7 +6,6 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -266,8 +265,8 @@ props. getCrm();
                       </StyledLabel>
                     </div>
                   </div>
-                  <Spacer />
-                  <StyledLabel>
+              
+                  <div class=" mt-3">
                   <Field
                     isRequired
                     name="companyName"
@@ -282,7 +281,7 @@ props. getCrm();
                     accounts={accounts}
                     inlineLabel
                   />
-                  </StyledLabel>
+                  </div>
                   <StyledLabel>
                   <Field
                     name="url"
@@ -295,8 +294,8 @@ props. getCrm();
                   />
                   </StyledLabel>
                          
-                  <Spacer />
-                  <div class=" flex justify-between">
+                 
+                  <div class=" flex justify-between mt-3">
                    <div class=" w-w47.5">
                
                       <FastField
@@ -335,9 +334,9 @@ props. getCrm();
                           />
                         </div>
                     </div>
-                  <Spacer/>
+               
                  
-                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" flex justify-between mt-3 max-sm:flex-col">
                     <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
@@ -376,7 +375,7 @@ props. getCrm();
                       </StyledLabel>
                     </div>
                   </div>
-                  <Spacer />
+             
 
                   {/* <div class=" w-1/2">
                     <StyledLabel>
@@ -484,8 +483,8 @@ props. getCrm();
       )}
     </Listbox>
              
-                  <Spacer />
-                  <StyledLabel>
+                
+                  <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -496,9 +495,9 @@ props. getCrm();
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                   
-                 <Spacer />
+                <div class=" mt-3">
                   <Field
                     name="notes"
                     label={
@@ -508,10 +507,11 @@ props. getCrm();
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+            
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

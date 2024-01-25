@@ -18,13 +18,8 @@ class AddLeadsModal extends Component {
             id="app.leads"
             defaultMessage="Add Leads"
           />}
-
           width={drawerWidth}
           visible={addLeadsModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"3rem"}}
           onClose={() => handleLeadsModal(false)}
           footer={null}
         >

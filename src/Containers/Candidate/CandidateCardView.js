@@ -1,11 +1,6 @@
 import React, { useEffect, useState,  lazy } from "react";
 import { MultiAvatar, MultiAvatar2,  StyledLabel } from '../../Components/UI/Elements'
 import FactCheckIcon from '@mui/icons-material/FactCheck';
-import SkillsLoadMore from "../../Containers/Candidate/Child/CandidateTable/SkillsLoadMore";
-import UpdateCandidateResumeModal from "./Child/CandidateTable/UpdateCandidateResumeModal";
-import { FlexContainer } from '../../Components/UI/Layout'
-import AddCandidatesTasksDrawerModal from "./AddCandidatesTasksDrawerModal"
-import AddPlayerModal from "./Child/CandidateTable/AddPlayerModal";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -41,6 +36,19 @@ import styled from 'styled-components'
 import { StyledPopconfirm  } from '../../Components/UI/Antd';
 import { UpCircleOutlined } from '@ant-design/icons';
 import { BundleLoader } from "../../Components/Placeholder";
+import { FlexContainer } from '../../Components/UI/Layout'
+const AddCandidatesTasksDrawerModal = lazy(() =>
+  import("./AddCandidatesTasksDrawerModal")
+);
+const AddPlayerModal = lazy(() =>
+  import("./Child/CandidateTable/AddPlayerModal")
+);
+const SkillsLoadMore = lazy(() =>
+  import("../../Containers/Candidate/Child/CandidateTable/SkillsLoadMore")
+);
+const UpdateCandidateResumeModal = lazy(() =>
+  import("./Child/CandidateTable/UpdateCandidateResumeModal")
+);
 
 const CandidateDetailsView =lazy(()=>import("../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
 const UpdateCandidateModal = lazy(() =>

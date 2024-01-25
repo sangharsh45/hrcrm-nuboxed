@@ -18,13 +18,13 @@ import {
   handleUpdateCandidateModal,
   setEditCandidate,
 } from "../CandidateAction";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction";
 import { getRoles } from "../../Settings/Category/Role/RoleAction";
 import { CurrencySymbol } from "../../../Components/Common";
-import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
-import StatusToggle from "./CandidateTable/StatusToggle";
-import UpdateCandidateModal from "./UpdateCandidate/UpdateCandidateModal";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+const SkillsLoadMore = lazy(() => import("./CandidateTable/SkillsLoadMore"));
+const StatusToggle = lazy(() => import("./CandidateTable/StatusToggle"));
+const UpdateCandidateModal = lazy(() => import("./UpdateCandidate/UpdateCandidateModal"));
 const CandidateDetailsView = lazy(() =>
   import("./CandidateTable/CandidateDetails/CandidateDetailsView")
 );

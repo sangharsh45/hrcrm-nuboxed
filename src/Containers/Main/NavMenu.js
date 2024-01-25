@@ -411,7 +411,7 @@ function NavMenu(props) {
                   style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
-                 <FormattedMessage id="app.candidate" defaultMessage="Candidate" />
+                 <FormattedMessage id="app.talent" defaultMessage="Talent" />
               
                   {/* {translatedMenuItems[10]} */}
                   &nbsp;&nbsp;&nbsp;

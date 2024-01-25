@@ -13,10 +13,6 @@ const AddChoiceCandidateModal = (props) => {
         title="Select talent data to share"
         width="60%"
         visible={props.addCandidateChoiceModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onCancel={() => props.handleChoiceCandidateModal(false)}
         footer={null}
       >

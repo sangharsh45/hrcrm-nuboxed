@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
@@ -50,7 +50,7 @@ class SingleIdProof extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                     
                       onClick={() => handleDeleteIdProof(IdProofTypeId)}
                       size="14px"

@@ -159,8 +159,11 @@ class KPIList extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {kpiListData.length ? (
-                  kpiListData.map((kpi, i) => (
+             {kpiListData.length ? (
+  kpiListData
+    .slice() 
+    .sort((a, b) => a.kpi.localeCompare(b.kpi)) 
+    .map((kpi, i) => (
                     <SingleKpi
                       key={i}
                       value={singleKpi}

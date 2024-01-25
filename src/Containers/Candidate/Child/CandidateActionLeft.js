@@ -157,13 +157,10 @@ const CandidateActionLeft = (props) => {
       )}
      <Tooltip title={<FormattedMessage id="app.tile" defaultMessage="Tile" />}>
       <Badge size="small" count={ props.viewType === "card" &&props.recordData.candidateDetails || 0} overflowCount={5000}>
-     <span
+     <span class=" mr-2 cursor-pointer text-4"
        onClick={() => props.setCandidateViewType("card")}
        style={{
-         marginRight: "0.5rem",
          color: props.viewType === "card" && "#1890ff",
-         fontSize: "1.0625em",
-         cursor: "pointer",
        }}
      >
       <TableViewIcon 
@@ -179,13 +176,10 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.billableCandidate" defaultMessage="Billable Candidate" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setCandidateViewType("billable")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "billable" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
             }}
           >
             <ReceiptIcon style={{fontSize:"1.4rem"}}  />
@@ -197,13 +191,11 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.all" defaultMessage="All" />}
       >
         <Badge size="small" count={ props.viewType === "table" &&props.recordData.candidateDetails || 0} overflowCount={5000}>
-          <span
+        <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setCandidateViewType("table")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "table" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
+
             }}
           >
             <GroupsIcon 
@@ -218,13 +210,10 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.white" defaultMessage="White" />}
       >
         <Badge size="small" count={ props.viewType === "list" &&props.recordCandidateCategoryData.candidateDetails || 0} overflowCount={5000}>
-          <span
+        <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setCandidateViewType("list")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "list" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
 
@@ -237,13 +226,10 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.blue" defaultMessage="Blue" />}
       >
         <Badge size="small" count={ props.viewType === "dashboard" &&props.recordCandidateCategoryDataBlue.candidateDetails || 0} overflowCount={5000}>
-          <span
+        <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setCandidateViewType("dashboard")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "dashboard" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
             {/* <i class="fa-solid fa-user-helmet-safety"></i> */}
@@ -267,13 +253,10 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
           <Badge size="small"count={ props.viewType === "map" &&props.recordData.candidateDetails || 0}>
-        <span
+          <span class=" mr-2 cursor-pointer text-4"
            onClick={() => props.setCandidateViewType("map")}
           style={{
-            fontSize: "1.0625em",
-            marginRight: "0.5rem",
             color: props.viewType === "map" && "#1890ff",
-            cursor: "pointer",
           }}
          
        
@@ -285,14 +268,9 @@ const CandidateActionLeft = (props) => {
       </Tooltip>
       <Tooltip>
      
-     <span
+      <span class=" mr-2 cursor-pointer text-4"
        onClick={() => props.setCandidateViewType("black")}
-       style={{
-         marginRight: "0.5rem",
-         //color: props.viewType === "dashboard" && "#1890ff",
-         fontSize: "1.0625em",
-         cursor: "pointer",
-       }}
+
      >
        <CircleIcon 
       //  icon={solid("circle")}
@@ -304,13 +282,10 @@ const CandidateActionLeft = (props) => {
         title={<FormattedMessage id="app.dollar" defaultMessage="Dollar" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setCandidateViewType("dollar")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "dollar" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
             <LocalAtmIcon />
@@ -343,7 +318,7 @@ const CandidateActionLeft = (props) => {
        )} */}
        <div className=" flex flex-nowrap flex-row items-center ">
       {user.userType !== "USER" && user.department !== "Vendor" && (
-        <div style={{width: "15rem"}}>
+        <div class=" w-[15rem]" >
           <Input
             placeholder="Search by Name, Skills & Identity ID"
         
@@ -419,7 +394,7 @@ const CandidateActionLeft = (props) => {
       )} */}
       
        {/* {props.inputCandidateDataSearch&& */}
-       {props.candidateCountSearch.count ?<div style={{ fontSize: "15px", fontWeight: "bold", color: "tomato" ,paddingLeft:"4px",width:"50%"}}>
+       {props.candidateCountSearch.count ?<div class=" w-[50%] text-base text-bold text-[tomato] pl-[0.3rem]" >
           # Search - {props.candidateCountSearch.count || 0} records{" "}
         </div>:
         null}
@@ -436,7 +411,7 @@ const CandidateActionLeft = (props) => {
               ) : (
               "Loading..."
                 )} */}
-       <div class=" w-[15%] items-center" >
+       <div class="w-[30%] mt-2 ml-2 max-sm:w-[45%]">
                <StyledSelect
   
   //style={{ width: '100%' }}

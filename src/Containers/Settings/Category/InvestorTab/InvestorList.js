@@ -153,8 +153,11 @@ class InvestorList extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {investorListData.length ? (
-                  investorListData.map((investor, i) => (
+             {investorListData.length ? (
+  investorListData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((investor, i) => (
                     <SingleInvestorList
                       key={i}
                       value={singleInvestor}

@@ -4,7 +4,7 @@ import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
 class SingleExpenses extends Component {
@@ -41,7 +41,7 @@ class SingleExpenses extends Component {
                                />:null}
                                 &nbsp;
                                 <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
 
                       onClick={() => handleDeleteExpense(expenseTypeId)}
                       size="14px"
