@@ -170,8 +170,11 @@ class Certification extends Component {
             <div class=" flex flex-col" >
              
               <MainWrapper style={{ height: "30em"}}>
-                {certifications.length ? (
-                  certifications.map((certification, i) => (
+              {certifications.length ? (
+  certifications
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((certification, i) => (
                     <SingleCertification
                       key={i}
                       value={singleCertification}

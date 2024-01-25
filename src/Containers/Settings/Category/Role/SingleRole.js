@@ -5,7 +5,7 @@ import {  TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 class SingleRole extends Component {
@@ -58,7 +58,7 @@ class SingleRole extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                   
                         onClick={() => handleDeleteRole(roleTypeId)}
                       size="14px"

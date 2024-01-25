@@ -153,8 +153,11 @@ class Customer extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {customerListData.length ? (
-                  customerListData.map((customer, i) => (
+             {customerListData.length ? (
+  customerListData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((customer, i) => (
                     <SingleCustomer
                       key={i}
                       value={singleCustomer}

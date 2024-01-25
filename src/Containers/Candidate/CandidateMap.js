@@ -1,7 +1,6 @@
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { candidateMapSelector } from "../Candidate/CandidateSelector";
 import { Marker, Popup } from "react-leaflet";
 import {
   MultiAvatar,
@@ -10,6 +9,9 @@ import {
 import Leaflet from "../../Components/Utils/Leaflet";
 import { getCandidateListByUserId } from "../Candidate/CandidateAction";
 import L from "leaflet";
+const candidateMapSelector = lazy(() =>
+  import("../Candidate/CandidateSelector")
+);
 const CandidateMapPopUpMarker = lazy(() =>
   import("../Candidate/CandidateMapPopUpMarker")
 );

@@ -183,8 +183,11 @@ class Department extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {departments.length ? (
-                  departments.map((department, i) => (
+              {departments.length ? (
+  departments
+    .slice() 
+    .sort((a, b) => a.departmentName.localeCompare(b.departmentName)) 
+    .map((department, i) => (
                     <SingleDepartment
                       key={i}
                       value={singleDepartment}

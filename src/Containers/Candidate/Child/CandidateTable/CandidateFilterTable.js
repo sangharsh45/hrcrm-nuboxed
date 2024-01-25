@@ -2,9 +2,8 @@ import React, { useEffect, useState ,useMemo} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
-import { CheckCircleTwoTone, CompassOutlined, EyeInvisibleTwoTone, EyeOutlined, StopTwoTone } from "@ant-design/icons";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
+import {  Select, } from "antd";
+import { StyledTable, } from "../../../../Components/UI/Antd";
 const Option =Select;
 
 function onChange(pagination, filters, sorter) {

@@ -162,8 +162,11 @@ class Education extends Component {
             </div>
             <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {educations.length ? (
-                  educations.map((education, i) => (
+              {educations.length ? (
+  educations
+    .slice() 
+    .sort((a, b) => a.educationType.localeCompare(b.educationType)) 
+    .map((education, i) => (
                     <SingleEducations
                       key={i}
                       value={singleEducation}

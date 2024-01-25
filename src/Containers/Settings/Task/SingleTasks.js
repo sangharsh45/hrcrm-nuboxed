@@ -1,7 +1,7 @@
 import React, { Component ,lazy} from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
@@ -66,7 +66,7 @@ class SingleTasks extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                     
                       onClick={() => handleDeleteTask(taskTypeId)}
                       size="14px"

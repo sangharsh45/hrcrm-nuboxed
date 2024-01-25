@@ -143,8 +143,11 @@ class IdProofs extends Component {
             </div>
             <div class=" flex flex-col" >           
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {idProofs.length ? (
-                  idProofs.map((idProof, i) => (
+              {idProofs.length ? (
+  idProofs
+    .slice() 
+    .sort((a, b) => a.IdProofType.localeCompare(b.IdProofType)) 
+    .map((idProof, i) => (
                     <SingleIdProof
                       key={i}
                       value={singleIdProof}

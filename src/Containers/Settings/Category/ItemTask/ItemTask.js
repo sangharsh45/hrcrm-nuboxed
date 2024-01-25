@@ -152,8 +152,11 @@ class ItemTask extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {itemTaskListData.length ? (
-                  itemTaskListData.map((listTask, i) => (
+             {itemTaskListData.length ? (
+  itemTaskListData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((listTask, i) => (
                     <SingleItemTask
                       key={i}
                       value={singleItemTask}

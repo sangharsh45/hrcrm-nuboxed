@@ -167,7 +167,10 @@ class Task extends Component {
             <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
               {tasks.length ? (
-                  tasks.map((task, i) => (
+  tasks
+    .slice() 
+    .sort((a, b) => a.taskType.localeCompare(b.taskType)) 
+    .map((task, i) => (
                     <SingleTasks
                       key={i}
                       value={singleTask}

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button, Switch, Tooltip } from "antd";
 import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
@@ -621,9 +621,9 @@ const SingleDepartment = (props) => {
                         style={{ fontSize: "1rem" }}
                       />
                     )}
-
+  <Tooltip title="Delete">
                     {mandetoryInd !== true && (
-                      <DeleteIcon
+                      <DeleteOutlined
                         onClick={() => handleDeleteDepartment(departmentId)}
                         size="14px"
                         style={{
@@ -633,6 +633,7 @@ const SingleDepartment = (props) => {
                         }}
                       />
                     )}
+                    </Tooltip>
                   </div>
                 </div>
               </div>

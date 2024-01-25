@@ -118,8 +118,11 @@ class BrandModel extends Component {
             <div class=" flex flex-col" >
                             {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
                             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                                {brandModel.length ? (
-                                    brandModel.map((brandmodel, i) => (
+                            {brandModel.length ? (
+  brandModel
+    .slice() 
+    .sort((a, b) => a.brand.localeCompare(b.brand)) 
+    .map((brandmodel, i) => (
                                         <SingleBrandModel
                                             key={i}
                                             value={singlebrand}

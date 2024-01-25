@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import { Select } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -64,7 +64,7 @@ class SingleKpi extends Component {
                   {/* ) : null}  */}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                    <DeleteOutlined
                         onClick={() => handleDeleteKpi(performanceManagementId)}
                       size="14px"
                       style={{

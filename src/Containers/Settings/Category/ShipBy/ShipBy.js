@@ -151,8 +151,11 @@ class ShipBy extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {ShipByData.length ? (
-                  ShipByData.map((ship, i) => (
+             {ShipByData.length ? (
+  ShipByData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((ship, i) => (
                     <SingleShipBy
                       key={i}
                       value={singleShipBy}

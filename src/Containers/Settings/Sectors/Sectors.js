@@ -162,8 +162,11 @@ class Sectors extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sectors.length ? (
-                  sectors.map((sector, i) => (
+              {sectors.length ? (
+  sectors
+    .slice() 
+    .sort((a, b) => a.sectorName.localeCompare(b.sectorName)) 
+    .map((sector, i) => (
                     <SingleSectors
                       key={i}
                       value={singleSector}

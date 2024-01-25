@@ -152,8 +152,11 @@ class RoleTalent extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {talentRoles.length ? (
-                  talentRoles.map((talentRole, i) => (
+             {talentRoles.length ? (
+  talentRoles
+    .slice() 
+    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
+    .map((talentRole, i) => (
                     <SingleRoleTalent
                       key={i}
                        value={singleRole}

@@ -1,11 +1,11 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import AddLeadsModal from "./Child/AddLeadsModal";
-import LeadsHeader from "./Child/LeadsHeader";
 import { BundleLoader } from "../../Components/Placeholder";
 import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, } from "./LeadsAction";
+const LeadsHeader=lazy(()=>import ("./Child/LeadsHeader"));
+const AddLeadsModal=lazy(()=>import ("./Child/AddLeadsModal"));
 const LeadsAllMobileCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllMobileCardList"));
 const LeadsJunkMobileList = lazy(()=>import("./Child/LeadsTable/LeadsJunkMobileList"));
 const LeadsTeamCardList = lazy(()=>import("./Child/LeadsTable/LeadsTeamCardList"));

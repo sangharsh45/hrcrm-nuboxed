@@ -29,16 +29,9 @@ class AddCandidateDrawerModal extends Component {
           title={fullName}
           width={"60%"}
           visible={this.props.addDrawerCandidateModal}
-        //   maskClosable={false}
-          closable
-          placement="right"
-          destroyOnClose
-          style={{marginTop:"3rem"}}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}          
-        //   onCancel={() => this.props.handleCandidateEmailModal(false)}
+      
         onClose={() => this.props.handleCandidateDrawerModal(false)}
-          //style={{ top: 40 }}
-        //   footer={null}
+      
         
         >
           <Suspense fallback={<BundleLoader />}>

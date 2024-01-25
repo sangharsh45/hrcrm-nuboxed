@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
+import {  StyledLabel } from "../../../../Components/UI/Elements";
 import { Button, Switch } from "antd";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, } from "draft-js";
@@ -253,8 +253,8 @@ class EmailCandidateForm extends Component {
                       unCheckedChildren="Customer"
                     />
                   </div>
-                  <Spacer /><Spacer />
-                  <div class=" flex justify-between" >
+                
+                  <div class=" flex justify-between mt-3" >
                     <div class=" w-[3%]" ><StyledLabel>To</StyledLabel></div>
                     <div class=" w-[26%]" >
                       <Field
@@ -323,7 +323,7 @@ class EmailCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "29%", marginRight: "29em" }}>
+                    <div class=" w-[29%] mr-[29em]" >
                       <Field
                         name="contact2"
                         //selectType="contactListFilter"
@@ -394,9 +394,8 @@ class EmailCandidateForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <Spacer />
-                  <div class=" flex items-center" >
+                
+                  <div class=" flex items-center mt-3" >
                     <span><FormattedMessage
                       id="app.subject"
                       defaultMessage="Subject"

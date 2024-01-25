@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import {
-  // handleCandidateModal,
   handleCandidateResumeModal,
   getCandidateListByUserId,
   getCandidatePagination,

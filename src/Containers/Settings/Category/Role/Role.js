@@ -228,8 +228,11 @@ class Department extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {roles.length ? (
-                  roles.map((role, i) => (
+              {roles.length ? (
+  roles
+    .slice() 
+    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
+    .map((role, i) => (
                     <SingleRole
                       key={i}
                       value={singleRole}
