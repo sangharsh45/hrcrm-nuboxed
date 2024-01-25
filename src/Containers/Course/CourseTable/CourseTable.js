@@ -2,20 +2,28 @@ import React, { useEffect, useState} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { FormattedMessage } from "react-intl";
-import { getCourse } from "../CourseAction";
+import { getCourse,handleEditModal,setEditCourse } from "../CourseAction";
 import { Link } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import InfiniteScroll from "react-infinite-scroll-component";
+import UpdateCourseModal from "./UpdateCourseModal";
+import { Tooltip } from "antd";
 
 function CourseTable(props) {
   useEffect(() => {
     props.getCourse();
   }, []);
-
+  const [currentCourseId, setCurrentCourseId] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
 
   const [rowdata, setrowData] = useState({});
 
+  function handleSetCurrentCourseId(item) {
+    setCurrentCourseId(item);
+    console.log(item);
+  }
   const handleRowData = (data) => {
     setrowData(data);
   };
@@ -30,19 +38,28 @@ function CourseTable(props) {
   const handleCollapseClick = () => {
     setIsExpanded(false);
   };
+  const{handleEditModal,addEditDrawerModal}=props;
 
   return (
     <>
         <div className='flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE",height:"75vh"}}>
+         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
-         <div className=""></div>
+        
          <div className=" md:w-[4.1rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
         <div className=" md:w-[6.1rem]"><FormattedMessage id="app.duration" defaultMessage="Duration"/></div>
         <div className=" md:w-[4.2rem] "><FormattedMessage id="app.price" defaultMessage="Price" /></div>
-        <div className="md:w-[5.8rem]"><FormattedMessage id="app.description" defaultMessage="Description" /></div>
+        <div className="md:w-[3.8rem]"><FormattedMessage id="app.description" defaultMessage="Description" /></div>
         <div className="w-12"></div>
             </div>
+            <InfiniteScroll
+        dataLength={props.courseById.length}
+      //   next={handleLoadMore}
+      // hasMore={hasMore}
+        // loader={fetchingTaskListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+        endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+      >
              {props.courseById.map((item) => {
                const currentdate = moment().format("DD/MM/YYYY");
                const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -51,7 +68,7 @@ function CourseTable(props) {
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
        <div class="flex">
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
+    <div className=" flex font-medium flex-col md:w-[18.1rem] max-sm:w-full  ">
     <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
     <Link
           toUrl={`/course/${item.courseId}`}
@@ -83,7 +100,7 @@ function CourseTable(props) {
     {item.currencyName} {item.price}
                     </h4>
     </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+    <div className=" flex font-medium flex-col md:w-[19rem] max-sm:flex-row w-full max-sm:justify-between ">
        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
@@ -109,6 +126,19 @@ function CourseTable(props) {
             )}
                     </h4>
     </div>
+<div>
+    <Tooltip title="Edit">
+              <BorderColorIcon
+                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
+                onClick={() => {
+                     props.setEditCourse(item);
+                    handleEditModal(true);
+                    handleSetCurrentCourseId(item);
+                  
+                }}
+              />
+            </Tooltip>
+            </div>
 
 {/* <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <h4 class=" text-xs text-cardBody font-poppins">
@@ -129,20 +159,30 @@ function CourseTable(props) {
 </div>
           );
         })}
+         </InfiniteScroll>
              
               </OnlyWrapCard>
               </div> 
+              <UpdateCourseModal
+        course={currentCourseId}
+        addEditDrawerModal={addEditDrawerModal}
+        handleEditModal={handleEditModal}
+        handleSetCurrentCourseId={handleSetCurrentCourseId}
+      />
     </>
   );
 }
 
 const mapStateToProps = ({ course }) => ({
   courseById: course.courseById,
+  addEditDrawerModal:course.addEditDrawerModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getCourse,
+      setEditCourse,
+      handleEditModal
     },
     dispatch
   );
