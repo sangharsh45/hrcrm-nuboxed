@@ -216,11 +216,16 @@ const initialState = {
   fetchingTagInProcessError: false,
   tagInPros: [],
 
-  updatingProcessTask: false,
-  updatingProcessTaskError: true,
-
   approvingSpare: false,
-  approvingSpareError: true,
+  approvingSpareError: false,
+
+  updatingProcessTask: false,
+  updatingProcessTaskError: false,
+
+
+  fetchingItemTaskCount: false,
+  fetchingItemTaskCountError: false,
+  itemTaskcount:{}
 
 };
 
@@ -1058,6 +1063,22 @@ export const refurbishReducer = (state = initialState, action) => {
             updatingProcessTask: false,
             updatingProcessTaskError: true,
           };  
+
+          case types.GET_TASK_ITEM_COUNT_REQUEST:
+            return { ...state, fetchingItemTaskCount: true };
+          case types.GET_TASK_ITEM_COUNT_SUCCESS:
+            return {
+              ...state,
+              fetchingItemTaskCount: false,
+              itemTaskcount: action.payload,
+            };
+          case types.GET_TASK_ITEM_COUNT_FAILURE:
+            return {
+              ...state,
+              fetchingItemTaskCount: false,
+              fetchingItemTaskCountError: true,
+            };
+
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getOrderByUser, handleOrderPhoneModal, qcInspectionButton } from "./RefurbishAction"
-import { Button } from "antd";
+import { Button,Badge } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -36,10 +36,10 @@ function ProductionOrderListById(props) {
                             id="app.duedate"
                             defaultMessage="duedate"
                         /></div>
-                        <div className=" md:w-[9.8rem] "><FormattedMessage
+                        {/* <div className=" md:w-[9.8rem] "><FormattedMessage
                             id="app.completedunit"
                             defaultMessage="Completed Units"
-                        /></div>
+                        /></div> */}
                         <div className="md:w-[5.8rem]"><FormattedMessage
                             id="app.status"
                             defaultMessage="status"
@@ -56,6 +56,7 @@ function ProductionOrderListById(props) {
                                 >
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
+                                        <Badge size="small" count={`${item.qcCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
                                             <span class="underline text-[#1890ff] cursor-pointer"
                                                 
                                                 onClick={() => {
@@ -64,6 +65,7 @@ function ProductionOrderListById(props) {
                                                 }}>
                                                 {item.newOrderNo}
                                             </span>
+                                            </Badge>
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
@@ -80,14 +82,11 @@ function ProductionOrderListById(props) {
                                             </h4>
 
                                         </div>
-                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-
-
-
+                                        {/* <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                             <h4 class=" text-sm text-cardBody font-poppins">
                                                 {item.qcCompletePhoneCount}/{item.totalPhone}
                                             </h4>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
 

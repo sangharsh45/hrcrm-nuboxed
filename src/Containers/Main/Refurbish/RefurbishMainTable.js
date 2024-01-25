@@ -479,7 +479,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import { Tooltip, Button } from "antd";
+import { Tooltip, Button,Badge } from "antd";
 import {
     getProductionOrderId,
     handleProductionNotesModal,
@@ -539,10 +539,10 @@ const ProductionOrderList = (props) => {
                         id="app.contact"
                         defaultMessage="contact"
                       /></div>
-                        <div className="md:w-[4.6rem]"><FormattedMessage
+                        {/* <div className="md:w-[4.6rem]"><FormattedMessage
                         id="app.unit"
                         defaultMessage="unit"
-                      /> #</div>
+                      /> #</div> */}
                         <div className="md:w-[5.8rem]"><FormattedMessage
                         id="app.balance"
                         defaultMessage="balance"
@@ -564,7 +564,8 @@ const ProductionOrderList = (props) => {
                             <div>
                                 <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 " >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full ">
+                                            <Badge size="small" count={`${item.totalReceiveQuantity} / ${item.phoneCount}`} overflowCount={5000}>
                                             <span
                                                 class="underline text-[#1890ff] cursor-pointer"
                                                 onClick={() => {
@@ -573,6 +574,7 @@ const ProductionOrderList = (props) => {
                                                 }}>
                                                 {item.newOrderNo}
                                             </span>
+                                            </Badge>
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
@@ -596,8 +598,6 @@ const ProductionOrderList = (props) => {
                                                 
                                                 <MultiAvatar
                   primaryTitle={item.contactPersonName}
-                  // imageId={item.ownerImageId}
-                  // imageURL={item.imageURL}
                   imgWidth={"2.1em"}
                   imgHeight={"2.1em"}
                 />
@@ -605,19 +605,12 @@ const ProductionOrderList = (props) => {
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
-                                            {/* <span
-                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
-                                                onClick={() => {
-                                                    handleRowData(item)
-                                                    props.handleProductBuilder(true)
-                                                }}> */}
+                                          
                                             {item.totalReceiveQuantity}/{item.phoneCount}
-                                            {/* </span> */}
-
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">

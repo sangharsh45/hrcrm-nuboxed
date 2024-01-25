@@ -1,27 +1,23 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styled from "styled-components";
 import { getPhoneTasklist } from "../Account/AccountAction";
-import { getTaskByPhoneId, addTaskByPhoneId,updateProcessTask } from "./RefurbishAction"
-import { MainWrapper, StyledLabel } from "../../../Components/UI/Elements";
+import { addTaskByPhoneId,updateProcessTask } from "./RefurbishAction"
+import {  StyledLabel } from "../../../Components/UI/Elements";
 import { Button, Input, Switch, Select } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
+const RepairTaskList=lazy(()=>import("./RepairTaskList"));
+
 const { Option } = Select;
 
 function RepairTaskTable(props) {
     useEffect(() => {
-        props.getPhoneTasklist(props.orgId)
-        props.getTaskByPhoneId(props.phoneId)
+        props.getPhoneTasklist(props.orgId);
     }, [])
     const [task, setTask] = useState("")
     const [customName, setCustomeName] = useState("")
     const [type, setType] = useState(false)
    
-    const [rowItem, setrowItem] = useState({});
-
-function handleRowItem(itms) {
-    setrowItem(itms)
-}
 
     const handleTask = (value) => {
         console.log(value)
@@ -41,10 +37,7 @@ function handleRowItem(itms) {
             userId: props.userId
         }, props.phoneId)
     }
-    const handleUpdateTask = () => {
-        props.updateProcessTask(rowItem.phoneTaskId)
-    }
-    console.log("rrrrrrrr",rowItem)
+   
     return (
         <>
         <div class="flex justify-around max-sm:flex-col">
@@ -83,36 +76,13 @@ function handleRowItem(itms) {
                   <Button type="primary"
                   onClick={handleSubmitTask}>Add</Button>
                   </div>
-
-              
                 </div>
-             
               </div>
               </div>
-            
-            <MainWrapper>
-        
-                {props.taskByPhone.map((item) => {
-                    return (
-                        <div class="cursor-pointer w-[18%] flex justify-center ">
-                            <div class="basis-[85%]">
-                                {item.taskName}
-                            </div>
-                            <div>
-                            <Switch
-                        // checked={props.paymentCollection || paymentCollection}
-                        onChange={handleUpdateTask} 
-                        isLoading={true}
-                        checkedChildren="Yes"
-                        unCheckedChildren="No"
-                    />
-                            </div>
-                        </div>
-                    )
-                })}
-            </MainWrapper>
-
-
+              <Suspense fallback={<BundleLoader />}>
+              <RepairTaskList phoneId={props.phoneId}/>
+            </Suspense>
+   
         </>
     );
 }
@@ -121,26 +91,17 @@ const mapStateToProps = ({ distributor, auth, refurbish }) => ({
     phoTasklist: distributor.phoTasklist,
     orgId: auth.userDetails.organizationId,
     taskByPhone: refurbish.taskByPhone,
-    userId: auth.userDetails.userId
+    userId: auth.userDetails.userId,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getPhoneTasklist,
-            getTaskByPhoneId,
             addTaskByPhoneId,
-            updateProcessTask
+            updateProcessTask,   
         },
         dispatch
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepairTaskTable);
-const EventWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EventName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;

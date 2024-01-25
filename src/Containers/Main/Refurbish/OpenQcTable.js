@@ -90,6 +90,7 @@ import { getOpenQcByUser } from "./RefurbishAction";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
+import { Badge } from "antd";
 
 function OpenQcTable(props) {
     useEffect(() => {
@@ -110,10 +111,11 @@ function OpenQcTable(props) {
                         id="app.duedate"
                         defaultMessage="duedate"
                       /></div>
-   <div className=" md:w-[9.8rem] "><FormattedMessage
+   {/* <div className=" md:w-[9.8rem] ">
+    <FormattedMessage
                         id="app.units"
                         defaultMessage="Units"
-                      /></div>
+                      /></div> */}
     <div className="md:w-[6.6rem]"></div>
     <div className="md:w-[5.8rem]"><FormattedMessage
                         id="app.status"
@@ -122,16 +124,15 @@ function OpenQcTable(props) {
     {/* <div className="md:w-[4.3rem]"></div> */}
   </div>
 {props.openQc.map((item) => { 
-    const currentdate = moment().format("DD/MM/YYYY");
-    const date = moment(item.creationDate).format("DD/MM/YYYY");
                return (
                    <div>
-                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
+                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 ">
                               <div class="flex">
                            <div className=" flex font-medium  md:w-[15.5rem] max-sm:w-full  ">
+                           <Badge size="small" count={`${item.qcCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
                           {item.newOrderNo}
+                          </Badge>
+
                            </div>
 
                            <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
@@ -140,14 +141,11 @@ function OpenQcTable(props) {
                                </h4>
                            
                            </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
-
-                            
+                           {/* <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                <h4 class=" text-sm text-cardBody font-poppins">
                                {item.qcCompletePhoneCount}/{item.totalPhone}
                                </h4>
-                           </div>
+                           </div> */}
                            </div>
                          
                            <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           

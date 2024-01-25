@@ -95,7 +95,7 @@ import { getOpenRepair } from "./RefurbishAction";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-
+import { Badge } from "antd";
 
 function OpenRepairTable(props) {
     useEffect(() => {
@@ -115,10 +115,10 @@ function OpenRepairTable(props) {
                         id="app.duedate"
                         defaultMessage="duedate"
                       /></div>
-   <div className=" md:w-[9.8rem] "><FormattedMessage
+   {/* <div className=" md:w-[9.8rem] "><FormattedMessage
                         id="app.completedphn"
                         defaultMessage="completedphn"
-                      /></div>
+                      /></div> */}
     <div className="md:w-[6.6rem]"></div>
     <div className="md:w-[5.8rem]"><FormattedMessage
                         id="app.notes"
@@ -130,12 +130,12 @@ function OpenRepairTable(props) {
     const date = moment(item.creationDate).format("DD/MM/YYYY");
                return (
                    <div>
-                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
+                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 ">
                               <div class="flex">
                            <div className=" flex font-medium  md:w-[15.5rem] max-sm:w-full  ">
+                           <Badge size="small" count={`${item.repairCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
                           {item.newOrderNo}
+                          </Badge>
                            </div>
 
                            <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
@@ -144,14 +144,11 @@ function OpenRepairTable(props) {
                                </h4>
                            
                            </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
-
-                            
-                               <h4 class=" text-sm text-cardBody font-poppins">
+                           {/* <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+<h4 class=" text-sm text-cardBody font-poppins">
                                {item.repairCompletePhoneCount}/{item.totalPhone}
                                </h4>
-                           </div>
+                           </div> */}
                            </div>
                          
                            <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
