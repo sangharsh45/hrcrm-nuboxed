@@ -5,12 +5,19 @@ const initialState = {
 
   addCourseModal:false,
 
+  setEditingCourse:{},
+
 
   addingTopic: false,
   addingTopicError: false,
 
+  addEditDrawerModal:false,
+
 
   addTestDrawerModal:false,
+
+  updatingCourse: false,
+  updatingCourseError: false,
 
 
   fetchingCourseDetailsById: false,
@@ -130,6 +137,37 @@ case types.SET_COURSE_VIEW_TYPE:
 
                         case types.HANDLE_TEST_DRAWER_MODAL:
                           return { ...state, addTestDrawerModal: action.payload };
+
+                          case types.HANDLE_EDIT_DRAWER_MODAL:
+                            return { ...state, addEditDrawerModal: action.payload };
+  
+
+
+                          case types.UPDATE_COURSE_REQUEST:
+                            return { ...state, updatingCourse: true };
+                          case types.UPDATE_COURSE_SUCCESS:
+                            return {
+                              ...state,
+                              updatingCourse: false,
+                              addEditDrawerModal: false,
+                              courseById: state.courseById.map((item) => {
+                                if (item.courseId === action.payload.courseId) {
+                                  return action.payload;
+                                } else {
+                                  return item;
+                                }
+                              }),
+                            };
+                          case types.UPDATE_COURSE_FAILURE:
+                            return {
+                              ...state,
+                              updatingCourse: false,
+                              updatingCourseError: true,
+                            };
+
+                            case types.SET_COURSE_EDIT:
+      return { ...state, setEditingCourse: action.payload };
+
                     
 
 

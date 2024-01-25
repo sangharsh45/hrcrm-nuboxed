@@ -175,3 +175,41 @@ export const handleTestDrawerModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const handleEditModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_EDIT_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const updateCourse = (data, courseId) => (dispatch) => {
+  dispatch({ type: types.UPDATE_COURSE_REQUEST });
+  axios
+    .put(`${asses_url}/course/updateCourse/${courseId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_COURSE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_COURSE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const setEditCourse = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_COURSE_EDIT,
+    payload: name,
+  });
+};
