@@ -2,18 +2,20 @@ import React from "react";
 import { Switch,  Popconfirm } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { approveSpare } from "./RefurbishAction";
+import { updateProcessTask } from "./RefurbishAction";
 
-function DistributorPaymentToggle(props) {
+function QCPhoneTaskToggle(props) {
     const [paymentCollection, setPaymentCollection] = React.useState(false)
 
+console.log(props.phoneTaskId)
+
     function handleToggleCollection(item) {
-        props.approveSpare(
+        props.updateProcessTask(
             {
-                approveSpareInd: true,
-                status:"approved"
+                completeTaskInd: true,
+                
             },
-            props.phoneSpareId,  
+            props.phoneTaskId,  
         );
     }
 
@@ -21,7 +23,7 @@ function DistributorPaymentToggle(props) {
         <>
             <div>
                 <Popconfirm
-                    title="Confirm received"
+                    title="Do you want to change ?"
                     onConfirm={() => handleToggleCollection()}
                     onCancel={null}
                     okText="Ok"
@@ -47,8 +49,8 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            approveSpare
+            updateProcessTask
         },
         dispatch
     );
-export default connect(mapStateToProps, mapDispatchToProps)(DistributorPaymentToggle);
+export default connect(mapStateToProps, mapDispatchToProps)(QCPhoneTaskToggle);

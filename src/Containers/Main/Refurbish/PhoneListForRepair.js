@@ -337,13 +337,12 @@
 
 
 
-import React, { useState, useEffect, useMemo,lazy } from "react";
+import React, { useState, useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { getRepairPhoneByUser, updaterepairStatus, getCatalogueByUser, handleRepairPhoneNotesOrderModal } from "./RefurbishAction";
-import { Button, Tooltip } from "antd";
-import { FileDoneOutlined, IeOutlined } from "@ant-design/icons";
+import { getRepairPhoneByUser, updaterepairStatus, getCatalogueByUser, handleRepairPhoneNotesOrderModal} from "./RefurbishAction";
+import { Button, Tooltip,Badge } from "antd";
+import { FileDoneOutlined } from "@ant-design/icons";
 import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
 import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
@@ -357,7 +356,8 @@ const AddingRepairSpareList = lazy(() => import('./AddingRepairSpareList'));
 
 function PhoneListForRepair(props) {
     useEffect(() => {
-        props.getRepairPhoneByUser(props.rowData.orderPhoneId, props.userId)
+        props.getRepairPhoneByUser(props.rowData.orderPhoneId, props.userId);
+        // props.gettASKItemCounts(RowData.phoneId);
     }, []);
 
     const [RowData, setRowData] = useState({});
@@ -400,7 +400,7 @@ function PhoneListForRepair(props) {
                     }}
                     onClick={onClick}
                 >
-                    <i className={`fas ${iconType}`} style={{ fontSize: "22px" }}></i>
+                    <i className={`fas ${iconType}`} style={{ fontSize: "1rem" }}></i>
                 </Button>
             </Tooltip>
         );
@@ -412,6 +412,8 @@ function PhoneListForRepair(props) {
     function handlePuaseButton() {
         setHide(hide)
     }
+
+
     function handleQCRepairStatus(type, item) {
         setActive(type)
         console.log(type)
@@ -467,8 +469,7 @@ function PhoneListForRepair(props) {
                         <div className="md:w-[6.9rem]"></div>
                     </div>
                     {props.repairPhone.map((item) => {
-                        const currentdate = moment().format("DD/MM/YYYY");
-                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                       
                         const starttimme = moment(item.qcStartTime).add(5, 'hours').add(30, 'minutes');
                         //  const endtimme = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
                         const time = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
@@ -511,7 +512,7 @@ function PhoneListForRepair(props) {
                                                         imgRadius={20}
                                                     />
                                                 ) : (
-                                                    <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                                    <span class="text-sm font-bold">
                                                         No QR
                                                     </span>
                                                 )}
@@ -590,7 +591,7 @@ function PhoneListForRepair(props) {
                                                         handleSetRowData(item);
                                                         hanldeSpare();
                                                     }}>
-                                                    Spares
+                                                   Add Spares
                                                 </Button>
 
 
@@ -601,6 +602,7 @@ function PhoneListForRepair(props) {
                                     <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Task">
+                                            <Badge size="small" count={`${item.taskCount} / ${item.totalTaskCount}`} overflowCount={5000}>
                                                 <FileDoneOutlined
                                                     style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black",fontSize:"1rem" }}
                                                     type="file-done"
@@ -609,7 +611,7 @@ function PhoneListForRepair(props) {
                                                         handleExpand(item.phoneId);
                                                     }}
                                                 />
-
+                                        </Badge>
                                             </Tooltip>
 
                                         </div>
@@ -670,6 +672,7 @@ const mapStateToProps = ({ refurbish, auth }) => ({
     userId: auth.userDetails.userId,
     locationId: auth.userDetails.locationId,
     phoNotesRepairOrderModal: refurbish.phoNotesRepairOrderModal,
+    itemTaskcount:refurbish.itemTaskcount
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -678,7 +681,8 @@ const mapDispatchToProps = (dispatch) =>
             getRepairPhoneByUser,
             updaterepairStatus,
             getCatalogueByUser,
-            handleRepairPhoneNotesOrderModal
+            handleRepairPhoneNotesOrderModal,
+           
         },
         dispatch
     );

@@ -88,6 +88,7 @@ import RepairPhoneListByTechnician from './RepairPhoneListByTechnician'
 import { getNoOfRepairTechnicianById } from "./RefurbishAction"
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { FormattedMessage } from 'react-intl'
+import { BundleLoader } from '../../../Components/Placeholder'
 
 const RepairTechnicianList = (props) => {
 
@@ -101,7 +102,10 @@ const RepairTechnicianList = (props) => {
         setRow(item)
         setShow(!show)
     }
-
+    
+if(props.fetchingNoOfRepairTechnicianById){
+return <BundleLoader/>
+}
     return (
         <>
             <div className=' flex justify-end sticky  z-auto'>

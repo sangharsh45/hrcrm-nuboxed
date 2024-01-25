@@ -87,6 +87,7 @@ import { bindActionCreators } from 'redux';
 import { getNoOfTechnicianById } from "./RefurbishAction";
 import { FormattedMessage } from 'react-intl';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
+import { BundleLoader } from '../../../Components/Placeholder';
 const QCPhoneListByTechnician =lazy(()=> import('./QCPhoneListByTechnician'));
 
 const TechnicianListByOrderId = (props) => {
@@ -102,6 +103,9 @@ const TechnicianListByOrderId = (props) => {
         setShow(!show)
     }
 
+    if(props.fetchingNoofTecnician){
+        return <BundleLoader/>
+        }
     return (
         <>
             <div className=' flex justify-end sticky  z-auto'>

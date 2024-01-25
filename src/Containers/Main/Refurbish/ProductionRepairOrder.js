@@ -162,7 +162,7 @@ import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getRepairOrderByUser, handleRepairPhone, repairInspectionButton, getOrderIdForCatalogueItem } from "./RefurbishAction"
-import { Button } from "antd";
+import { Button,Badge } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -200,10 +200,12 @@ function ProductionRepairOrder(props) {
                         id="app.duedate"
                         defaultMessage="duedate"
                       /></div>
-                        <div className=" md:w-[9.8rem] "> <FormattedMessage
+                        {/* <div className=" md:w-[9.8rem] "> 
+                        <FormattedMessage
                         id="app.units"
                         defaultMessage="Units"
-                      /></div>
+                      />
+                      </div> */}
                         <div className="md:w-[6.6rem]"></div>
                         <div className="md:w-[5.8rem]"><FormattedMessage
                         id="app.status"
@@ -220,6 +222,7 @@ function ProductionRepairOrder(props) {
                                 >
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[15.6rem] max-sm:w-full  ">
+                                        
                                             <span
                                                 class="underline text-[#1890ff] cursor-pointer"
                                                 onClick={() => {
@@ -228,7 +231,7 @@ function ProductionRepairOrder(props) {
                                                 }}>
                                                 {item.newOrderNo}
                                             </span>
-                                            &nbsp;&nbsp;
+                                          &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
                                                 class="text-[tomato] font-bold"
@@ -293,6 +296,7 @@ function ProductionRepairOrder(props) {
                                     >
                                         <div class="flex">
                                             <div className=" flex font-medium  md:w-[15.8rem] max-sm:w-full  ">
+                                            <Badge size="small" count={`${item.repairCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
                                                 <span class="underline text-[#1890ff] cursor-pointer"
                                                     onClick={() => {
                                                         handleRowData(item);
@@ -300,6 +304,7 @@ function ProductionRepairOrder(props) {
                                                     }}>
                                                     {item.newOrderNo}
                                                 </span>
+                                                </Badge>
                                                 &nbsp;&nbsp;
                                                 {date === currentdate ? (
                                                     <span class="text-[tomato] font-bold">
@@ -314,11 +319,11 @@ function ProductionRepairOrder(props) {
                                                 </h4>
 
                                             </div>
-                                            <div className=" flex font-medium  md:w-[37.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                            {/* <div className=" flex font-medium  md:w-[37.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                                 <h4 class=" text-sm text-cardBody font-poppins">
                                                     {item.repairCompletePhoneCount}/{item.totalPhone}
                                                 </h4>
-                                            </div>
+                                            </div> */}
                                         </div>
 
                                         <div className=" flex font-medium  md: max-sm:flex-row w-full max-sm:justify-between ">

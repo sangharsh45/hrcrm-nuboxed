@@ -1410,7 +1410,7 @@ export const approveSpare = (data,phoneSpareId) => (dispatch) => {
     type: types.APPROVE_SPARE_REQUEST,
   });
   axios
-    .put(`${base_url2}/phoneSpare/approve-spare/${phoneSpareId}`, data, {
+    .put(`${base_url2}/phoneSpare/approveSpare/${phoneSpareId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1431,12 +1431,12 @@ export const approveSpare = (data,phoneSpareId) => (dispatch) => {
       message.error("Something went wrong");
     });
 };
-export const updateProcessTask = (phoneTaskId) => (dispatch) => {
+export const updateProcessTask = (data,phoneTaskId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_PROCESS_TASK_REQUEST,
   });
   axios
-    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`, {
+    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`,data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1455,5 +1455,30 @@ export const updateProcessTask = (phoneTaskId) => (dispatch) => {
         payload: err,
       });
       message.error("Something went wrong");
+    });
+};
+export const gettASKItemCounts = (phoneId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_ITEM_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/itemTask/remainingTaskCount/${phoneId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_ITEM_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_TASK_ITEM_COUNT_FAILURE,
+        payload: err,
+      });
     });
 };
