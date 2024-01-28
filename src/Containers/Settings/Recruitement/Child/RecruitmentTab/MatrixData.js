@@ -112,4 +112,132 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatrixData);
 
+// import React, { useState,useEffect } from 'react';
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import { getLibrarys } from "../../../Library/LibraryAction";
+// import {addSkillLevel} from "../../../SettingsAction"
+
+// const MatrixData = (props) => {
+//   useEffect(() => {
+//         props.getLibrarys(props.organizationId)
+//       }, []);
+//   const data2 = [
+//     {
+//       skill: "Java",
+//       level1: "124",
+//       level2: "321",
+//       level3: "596"
+//     },
+//     {
+//       skill: "React",
+//       level1: "157",
+//       level2: "329",
+//       level3: "486"
+//     }
+//   ];
+
+//   const data = [
+//     { skillName: "Java" },
+//     { skillName: "React" },
+//     { skillName: "Angular" }
+//   ];
+//   const [skills, setSkills] = useState(props.matrixData.reduce((acc, skill) => {
+//     acc[skill.skill] = {
+//       level1: skill.level1 || '',
+//       level2: skill.level2 || '',
+//       level3: skill.level3 || ''
+//     };
+//     return acc;
+//   }, {}));
+
+//   const handleInputChange = (name, level, value) => {
+//     setSkills(prevSkills => ({
+//       ...prevSkills,
+//       [name]: {
+//         ...prevSkills[name],
+//         [level]: value
+//       }
+//     }));
+//   };
+
+//   const handleSaveClick = (name) => {
+//     const { level1, level2, level3 } = skills[name] || { level1: '', level2: '', level3: '' };
+//     console.log(`Skill: ${name}, Level 1: ${level1}, Level 2: ${level2}, Level 3: ${level3}`);
+//     // Add your saving logic here
+//   };
+
+//   return (
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>Skill Name</th>
+//           <th>Level 1</th>
+//           <th>Level 2</th>
+//           <th>Level 3</th>
+//           <th>Action</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//         {props.librarys.map(skill => (
+//           <tr key={skill.name}>
+//             <td>{skill.name}</td>
+//             <td>
+//               <input
+//                 type="text"
+//                 value={skills[skill.name]?.level1 || ''}
+//                 onChange={(e) => handleInputChange(skill.name, 'level1', e.target.value)}
+//               />
+//             </td>
+//             <td>
+//               <input
+//                 type="text"
+//                 value={skills[skill.name]?.level2 || ''}
+//                 onChange={(e) => handleInputChange(skill.name, 'level2', e.target.value)}
+//               />
+//             </td>
+//             <td>
+//               <input
+//                 type="text"
+//                 value={skills[skill.name]?.level3 || ''}
+//                 onChange={(e) => handleInputChange(skill.name, 'level3', e.target.value)}
+//               />
+//             </td>
+//             <td>
+//               <button onClick={() => handleSaveClick(skill.name)}>Save</button>
+//             </td>
+//           </tr>
+//         ))}
+//       </tbody>
+//     </table>
+//   );
+// };
+
+// const mapStateToProps = ({ librarys, auth }) => ({
+//   librarys: librarys.librarys,
+//   organizationId: auth.userDetails.organizationId,
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(
+//     {
+//       getLibrarys,
+//       addSkillLevel
+//     },
+//     dispatch
+//   );
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MatrixData);
+
+
+
+
+
+
+
+
+
+
+
+
 

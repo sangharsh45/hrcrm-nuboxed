@@ -41,6 +41,7 @@ const Matrix = (props) => {
           </Card> */}
           <MatrixData
           activeTab={activeTab}
+          matrixData={props.matrixData}
           />
         </TabPane>
       ))}
@@ -51,7 +52,7 @@ const Matrix = (props) => {
 const mapStateToProps = ({ settings, opportunity, auth }) => ({
     countries: auth.countries,
     organizationId: auth.userDetails.organizationId,
-
+    matrixData:settings.matrixData
 });
 
 const mapDispatchToProps = (dispatch) =>
