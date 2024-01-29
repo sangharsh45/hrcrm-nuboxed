@@ -9,7 +9,12 @@ class DashboardHeader extends Component {
       top: "3.35rem",
       zIndex: "998"}}>
         <ActionHeader
-           leftComponent={<DashboardActionLeft />}
+           leftComponent={<DashboardActionLeft 
+            viewType={this.props.viewType}
+            setDashboardViewType={this.props.setDashboardViewType}
+            handleButtonClick={this.props.handleButtonClick}
+            activeButton={this.props.activeButton}
+           />}
           rightComponent={<DashboardActionRight
           viewType={this.props.viewType}
             setDashboardViewType={this.props.setDashboardViewType}

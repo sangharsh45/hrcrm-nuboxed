@@ -5,6 +5,8 @@ import { Tooltip } from "antd";
 import { getBuilderByProId } from "../../ProductAction";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+import { DeleteOutlined } from "@ant-design/icons";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 
 function ProductbuilderTable2 (props) {
 
@@ -70,6 +72,23 @@ return (
                     {item.quantity}
                   </h4>
   </div>
+  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+  <StyledPopconfirm
+                          title="Do you want to delete?"
+                          // onConfirm={() => deleteLeadsData(item.leadsId)}
+                          >
+                     <Tooltip title="Delete">
+                          <DeleteOutlined
+                            type="delete"
+                            style={{
+                              cursor: "pointer",
+                              color: "red",
+                              fontSize: "1rem",
+                            }}
+                          />
+                       </Tooltip>
+                        </StyledPopconfirm>
+                        </div>
 </div>
 </div>
           );
