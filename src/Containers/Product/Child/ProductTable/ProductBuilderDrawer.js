@@ -11,14 +11,12 @@ const ProductBuilderDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title={`Product Builder`}
+        title={`Product Builder for -${particularDiscountData.name}- ${particularDiscountData.articleNo}`}
         width={drawerWidth}
         visible={proBuilderDrawer}
         destroyOnClose
         closable
         placement="right"
-        style={{marginTop:"3rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleProductBuilderDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

@@ -23,9 +23,10 @@ const GantChartTab= lazy(()=>import("./Child/GantChartTab"));
 const DashInvestorsChartTab= lazy(()=>import("./DashInvestorsChartTab"));
 const FunnelTab= lazy(()=>import("./Child/FunnelTab"));
 const DashboardDetailsTab= lazy(()=>import("./DashboardDetailsTab"));
-
-
-
+const DashboardOrderJumpstart= lazy(()=>import("./Child/JumpStart/DashboardOrderJumpstart"));
+const OrdersDashTab=lazy(()=>import("./OrdersDashTab"));
+const DashboardFinanceJumpstart= lazy(()=>import("./Child/JumpStart/DashboardFinanceJumpstart"));
+const FinanceDashTab=lazy(()=>import("./FinanceDashTab"));
 class Dashboard extends Component {
   state = { visible: false,activeButton:null };
 
@@ -96,7 +97,10 @@ class Dashboard extends Component {
              (<DashboardInvestorsOrgJumpstart/>)
              :viewType==="ALL" || this.state.activeButton==="Customer" ?
              (<DashboardCustomerOrgJumpstart/>)
-            
+             : this.state.activeButton==="Order" ?
+             (<DashboardOrderJumpstart/>)
+             : this.state.activeButton==="Finance" ?
+             (<DashboardFinanceJumpstart/>)
              :
              (
               <DashboardJumpstart />
@@ -108,6 +112,10 @@ class Dashboard extends Component {
        <TaskOrganizationTab/>)
        :this.state.activeButton==="Investors" ?(
         <InvestorsPitchTab/>)
+        :this.state.activeButton==="Order" ?(
+          <OrdersDashTab/>)
+          :this.state.activeButton==="Finance" ?(
+            <FinanceDashTab/>)
        : viewType==="ALL" || this.state.activeButton==="Customer" ?(
         <CustomerLeadsTab/>)
         :
@@ -139,12 +147,11 @@ class Dashboard extends Component {
      <div class="w-[47%] max-sm:w-wk">
      <div class=" flex flex-col display-block" >
        <div class=" flex justify-between" >
-       {viewType==="ME" || viewType==="test"?(
+       {viewType==="test" && (
             <TodoDashboardTab
             viewType={viewType}
-            />
-             )
-             :viewType==="bulb" ? (<SourceChart/>)
+            />)}
+             {viewType==="bulb" ? (<SourceChart/>)
             
              :null
             }

@@ -1,139 +1,112 @@
-import { Popover, } from "antd";
-import React, {  } from "react";
-import { StyledRangePicker } from "../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import {
-  setSelectedTimeIntervalReport,
-  setTimeRangeReport,
-
-} from "../DashboardAction";
-import { bindActionCreators } from "redux";
-import TimeInterval from "../../../Utils/TimeInterval";
+import React, {  lazy} from "react";
+import { StyledSelect, } from "../../../Components/UI/Antd";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { FormattedMessage } from "react-intl";
+import {
+  setDashboardViewType,
+} from "../DashboardAction";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import { Input,Tag } from "antd";
 
-const HeaderActionRight = (props) => {
+const DashboardShareForm=lazy(() => import("./DashboardShareForm"));
+
+
+const Option = StyledSelect.Option;
+const { Search } = Input;
+const HeaderActionRight  = (props) => {
+  const dummy = ["cloud", "azure", "fgfdg"];
   const {
-    setSelectedTimeIntervalReport,
-    dateRangeList,
     viewType,
     setDashboardViewType,
-    handleButtonClick,
-    activeButton,
     user,
+    role
   } = props;
-
+ 
   return (
-    <>
-      <div class=" flex items-center justify-evenly"  >
-        
-        <div class="flex w-[15rem] justify-between">
-
-        <span class="cursor-pointer" 
-        onClick={() => handleButtonClick("Tasks")} 
-        style={{
-          color:activeButton === "Tasks" && "#1890ff",
-          
-        }}
-        >
-            <FormattedMessage
-                        id="app.tasks"
-                        defaultMessage="Tasks"
-                      />
-          {/* Tasks */}
-        </span>
+    <div class=" flex items-center">
+         { user.department=== "Management" && (  
+            <>
+            
+        {/* <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setDashboardViewType("test")}
+          style={{
+            color: props.viewType === "test" && "#1890ff",
   
-       
-    {user.crmInd === true && (
-        <span class="cursor-pointer"
-        onClick={() =>  handleButtonClick("Customer")} 
-        style={{
-          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
-       
-        }}
-        >
-           <FormattedMessage
-                        id="app.prospect"
-                        defaultMessage="Prospect"
-                      />
+          }}
+        > <PersonIcon/>
+        
+        </span> */}
            
+{/* {user.recruitOppsInd===true && (
+
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setDashboardViewType("ques")}
+          style={{
+            color: props.viewType === "ques" && "#1890ff",
+  
+          }}
+        > <QuestionMarkIcon  />
+        
         </span>
-)}
-       
-    {user.imInd === true  && (
-        <span class="cursor-pointer"
-        onClick={() => handleButtonClick("Investors")} 
-        style={{
-          color:activeButton === "Investors" && "#1890ff",
-    
-        }}
-        >  
-          <FormattedMessage
-                        id="app.investors"
-                        defaultMessage="Investors"
-                      />   
+)}         
+{user.crmInd===true && (
+
+<span class=" mr-2 cursor-pointer text-xs"
+  onClick={() => props.setDashboardViewType("bulb")}
+  style={{
+    color: props.viewType === "bulb" && "#1890ff",
+
+  }}
+> <LightbulbIcon  />
+
+</span>
+)} */}
+            </>
+             )}
+
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "tomato",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
+                />
+              </Tag>
+            )}
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
            
-        </span>
-)}
-   
-    {user.erpInd === true && (
-        <span class="cursor-pointer"
-        onClick={() => handleButtonClick("Accounts")} 
-        style={{
-          color:activeButton === "Accounts" && "#1890ff",
-          
-        }}
-        >
-           <FormattedMessage
-                        id="app.customer"
-                        defaultMessage="Customer"
-                      /> 
-          
-        </span>
-    )}
-   </div>
-   
-      <>
-      <div class="">
-    <TimeInterval
-    style={{fontSize:"0.67"}}
-          times={dateRangeList}
-          handleClick={setSelectedTimeIntervalReport}
-        />
-        </div>
-        <Popover>
-          <StyledRangePicker
-            style={{width:"30%"}}
-            onChange={(range) => {
-              props.setTimeRangeReport(range[0], range[1]);
-              console.log(range);
-            }}
-
-          />
-        </Popover>
-        </>
-
-      </div>
-    </>
+    </div>
   );
 };
-
-
-const mapStateToProps = ({ auth, dashboard }) => ({
-  user: auth.userDetails,
-  userId: auth.userDetails.userId,
-  dateRangeList: dashboard.dateRangeList,
-
-
+const mapStateToProps = ({ account,report, auth,opportunity,dashboard }) => ({
+reportViewType: report.reportViewType,
+viewType:dashboard.viewType,
+user: auth.userDetails,
+role: auth.userDetails.role,
 });
-
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      setSelectedTimeIntervalReport,
-      setTimeRangeReport,
-    
+    // setReportViewType,
+    setDashboardViewType
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionRight);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HeaderActionRight)
+);

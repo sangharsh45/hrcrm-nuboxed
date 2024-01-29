@@ -1,143 +1,187 @@
-import React, {  lazy} from "react";
-import { StyledSelect, } from "../../../Components/UI/Antd";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import { FormattedMessage } from "react-intl";
-import {
-  setDashboardViewType,
-} from "../DashboardAction";
+import { Popover,Tooltip } from "antd";
+import React, {  } from "react";
+import { StyledRangePicker } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
-import { Input,Tag } from "antd";
+import {
+  setSelectedTimeIntervalReport,
+  setTimeRangeReport,
+  setDashboardViewType
+} from "../DashboardAction";
 import PersonIcon from '@mui/icons-material/Person';
-const DashboardShareForm=lazy(() => import("./DashboardShareForm"));
+import { bindActionCreators } from "redux";
+import TimeInterval from "../../../Utils/TimeInterval";
+import { FormattedMessage } from "react-intl";
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
-
-const Option = StyledSelect.Option;
-const { Search } = Input;
 const DashboardActionLeft = (props) => {
-  const dummy = ["cloud", "azure", "fgfdg"];
   const {
+    setSelectedTimeIntervalReport,
+    dateRangeList,
     viewType,
-    setDashboardViewType,
+    handleButtonClick,
+    activeButton,
     user,
-    role
   } = props;
- 
+
   return (
-    <div class=" flex items-center">
-         { user.department=== "Management" && (  
-            <>
-         
-            
-            
-            
-              {/* <Tag
-                color={viewType === "ME" ? "#FFA500" : "orange"}
-                style={{
-                  cursor: "pointer",                  
-                  fontWeight: viewType === "ME" ? "bold" : null,
-                  textAlign: "center",
-                  fontFamily:"poppins",
-                  borderColor: "orange",
-                }}
-                onClick={() => setDashboardViewType("ME")}
-              >
-                
-                
-                <FormattedMessage
-                  id="app.myview"
-                  defaultMessage="My View"
-                />
-                
-              </Tag> */}
-           
-             
-             
-            
-            
+    <>
+      <div class=" flex items-center justify-evenly"  >
+        
+        <div class="flex w-[22rem] justify-between">
+
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
           style={{
             color: props.viewType === "test" && "#1890ff",
   
-          }}
-        > <PersonIcon/>
+          }}> <PersonIcon/>
         
         </span>
-
-      
-           
-{user.recruitOppsInd===true && (
-
-        <span class=" mr-2 cursor-pointer text-xs"
-          onClick={() => props.setDashboardViewType("ques")}
-          style={{
-            color: props.viewType === "ques" && "#1890ff",
+        <span class="cursor-pointer" 
+        onClick={() => handleButtonClick("Tasks")} 
+        style={{
+          color:activeButton === "Tasks" && "#1890ff",
+          
+        }}
+        >
+         <Tooltip title="Task">
+             
+     <FactCheckIcon
+                style={{ fontSize: "1rem" }}
+              />
+              </Tooltip>
+        </span>
   
-          }}
-        > <QuestionMarkIcon  />
-        
+       
+    {user.crmInd === true && (
+        <span class="cursor-pointer"
+        onClick={() =>  handleButtonClick("Customer")} 
+        style={{
+          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
+       
+        }}
+        >
+          <Tooltip title="Customer">
+          <ApartmentIcon
+
+style={{ fontSize: "1rem" }}
+/>
+</Tooltip>        
         </span>
 )}
+       
+    {user.imInd === true  && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Investors")} 
+        style={{
+          color:activeButton === "Investors" && "#1890ff",
+    
+        }}
+        >  
+        <Tooltip title="Investors">
+          <LocationCityIcon
 
-           
-{user.crmInd===true && (
-
-<span class=" mr-2 cursor-pointer text-xs"
-  onClick={() => props.setDashboardViewType("bulb")}
-  style={{
-    color: props.viewType === "bulb" && "#1890ff",
-
-  }}
-> <LightbulbIcon  />
-
-</span>
+style={{ fontSize: "1rem" }}
+/>
+</Tooltip>       
+        </span>
 )}
-            </>
-             )}
+   
+    {user.erpInd === true && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Accounts")} 
+        style={{
+          color:activeButton === "Accounts" && "#1890ff",
+          
+        }}
+        >
+          <Tooltip title="Accounts">
+          <AcUnitIcon
+                style={{ fontSize: "1rem" }}
+              />
+          </Tooltip>
+        </span>
+    )}
+{user.imInd === true  && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Order")} 
+        style={{
+          color:activeButton === "Order" && "#1890ff",
+    
+        }}
+        >  <Tooltip title="Order">
+          <DynamicFeedIcon
+                style={{ fontSize: "1rem" }}
+              />
+           </Tooltip>
+        </span>
+)}
+   
+    {user.erpInd === true && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Finance")} 
+        style={{
+          color:activeButton === "Finance" && "#1890ff",
+          
+        }}
+        >
+           <FormattedMessage
+                        id="app.finance"
+                        defaultMessage="Finance"
+                      /> 
+          
+        </span>
+    )}
+    
+   </div>
+   
+      <>
+      <div class="">
+    <TimeInterval
+    style={{fontSize:"0.67"}}
+          times={dateRangeList}
+          handleClick={setSelectedTimeIntervalReport}
+        />
+        </div>
+        <Popover>
+          <StyledRangePicker
+            style={{width:"30%"}}
+            onChange={(range) => {
+              props.setTimeRangeReport(range[0], range[1]);
+              console.log(range);
+            }}
 
-{user.dashboardFullListInd===true && (
-              <Tag
-                color={viewType === "ALL" ? "tomato" : "#FFA500"}
-                style={{
-                  cursor: "pointer",                  
-                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
-                  textAlign: "center",
-                  fontFamily:"poppins",
-                  borderColor: "tomato",
-                }}
-               onClick={() => setDashboardViewType("ALL")}
-              >
-                <FormattedMessage
-                  id="app.enterprise"
-                  defaultMessage="Enterprise"
-                />
-              </Tag>
-            )}
-             {viewType==="ALL" && (
-        <DashboardShareForm/>
-        )}
-           
-    </div>
+          />
+        </Popover>
+        </>
+
+      </div>
+    </>
   );
 };
-const mapStateToProps = ({ account,report, auth,opportunity,dashboard }) => ({
-reportViewType: report.reportViewType,
-viewType:dashboard.viewType,
-user: auth.userDetails,
-role: auth.userDetails.role,
+
+
+const mapStateToProps = ({ auth, dashboard }) => ({
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
+  dateRangeList: dashboard.dateRangeList,
+  viewType:dashboard.viewType,
+
 });
+
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    // setReportViewType,
-    setDashboardViewType
+      setSelectedTimeIntervalReport,
+      setTimeRangeReport,
+      setDashboardViewType   
+    
     },
     dispatch
   );
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(DashboardActionLeft)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardActionLeft);
