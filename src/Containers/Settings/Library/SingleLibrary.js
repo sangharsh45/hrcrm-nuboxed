@@ -6,6 +6,8 @@ import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
+import moment from "moment";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 
 class SingleLibrary extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class SingleLibrary extends Component {
   }
   render() {
     const {
-      library: { name, definationId },
+      library: { name,creationDate, definationId },
       handleChange,
       data,
       value,
@@ -29,6 +31,8 @@ class SingleLibrary extends Component {
     } = this.props;
     console.log(linkedLibrarys);
     console.log("name", data);
+    const currentdate = moment().format("DD/MM/YYYY");
+        const date = moment(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <LibraryWrapper>
@@ -36,7 +40,8 @@ class SingleLibrary extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <LibraryName style={{ flexBasis: "85%" }}>{name}</LibraryName>
+                <LibraryName style={{ flexBasis: "85%" }}>{name} &nbsp;&nbsp;
+            {date === currentdate ? <span className="blink">New</span> : null}</LibraryName>
                 <div>
                   {this.props.library.editInd ? (
         <span
@@ -51,8 +56,13 @@ class SingleLibrary extends Component {
                   &nbsp;
                   &nbsp;
                   <Tooltip title="Delete">
+                  <StyledPopconfirm
+              // title="Do you want to delete?"
+              title={<FormattedMessage id="app.doyouwanttodelete" defaultMessage="Do you want to delete" />}
+              onConfirm={() => handleDeleteSkill(definationId)}
+            >
                     <DeleteOutlined
-                        onClick={() => handleDeleteSkill(definationId)}
+                        // onClick={() => handleDeleteSkill(definationId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -60,6 +70,7 @@ class SingleLibrary extends Component {
                         color: "red",
                       }}
                     />
+                     </StyledPopconfirm>
                   </Tooltip>
                   {/* {disableDelete && <ActionIcon
                                         tooltipTitle='Delete'

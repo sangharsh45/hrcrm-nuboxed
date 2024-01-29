@@ -255,7 +255,7 @@ function InvestorCardList(props) {
                           }}
                         />
                         &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
+                       {item.countryAlpha2Code}
                                     </h4>
                                 </div>
                                 </div>
@@ -285,11 +285,18 @@ function InvestorCardList(props) {
               {item.assignedTo === null ? (
                 "Not available"
               ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
+                )}
+                </>
               )}
             </span>
              

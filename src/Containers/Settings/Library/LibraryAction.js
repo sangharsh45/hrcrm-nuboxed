@@ -51,7 +51,7 @@ export const addLibrarys = (name) => (dispatch,getState) => {
       .then((res) => {
         message.success("New Skills successfully added to Library!");
        
-        dispatch(getLibrarys(orgId));
+        // dispatch(getLibrarys(orgId));
              dispatch({
             type: types.ADD_LIBRARYS_SUCCESS,
             payload: res.data,
@@ -196,5 +196,56 @@ export const addLibrarys = (name) => (dispatch,getState) => {
     dispatch({
       type: types.HANDLE_CLAER_REDUCER_DATA_LIBRARY,
     });
+  };
+
+  export const getLibraryRecords = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_LIBRARY_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/defination/count/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_LIBRARY_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_LIBRARY_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getCertificationRecords = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_CERTIFICATION_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/certificationsLibrary/count/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CERTIFICATION_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CERTIFICATION_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
   };
   

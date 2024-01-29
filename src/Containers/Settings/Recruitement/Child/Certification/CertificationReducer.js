@@ -49,7 +49,8 @@ export const certificationReducer = (state = initialState, action) => {
         return {
           ...state,
           addingCertifications: false,
-          certifications: [...state.certifications, action.payload],
+          certifications:[action.payload,...state.certifications]
+          // certifications: [...state.certifications, action.payload],
         };
       case types.ADD_CERTIFICATION_REQUEST:
         return { ...state, 

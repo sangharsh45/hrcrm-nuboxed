@@ -163,7 +163,7 @@ function Notifications(props) {
         {({ values }) => (
           <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
             <Form className="form-background">
-              <div class=" flex justify-between w-full"
+              <div class=" flex justify-between w-[30rem]"
              
               >
                <div class=" w-[44%] mt-[0.625em] ml-[1em]"
@@ -294,7 +294,7 @@ function Notifications(props) {
                   </div> */}
                 </div>
               </div>
-              <h4>Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
+              <h4 class=" mt-4">Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
             </Form>
           </MainWrapper>
         )}

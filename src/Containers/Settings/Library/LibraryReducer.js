@@ -8,6 +8,14 @@ const initialState = {
     fetchingLibrarysError: false,
     librarys: [],
 
+    fetchingLibraryByOrgId: false,
+    fetchingLibraryByOrgIdError: false,
+    libraryRecordData:{},
+
+    fetchingCertificationByOrgId: false,
+    fetchingCertificationByOrgIdError: false,
+    certificationRecordData:{},
+
     removingSkills: false,
     removingSkillsError: false,
 
@@ -47,7 +55,8 @@ export const librarysReducer = (state = initialState, action) => {
         return {
           ...state,
           addingLibrarys: false,
-          librarys: [...state.librarys, action.payload],
+          librarys:[action.payload,...state.librarys]
+          // librarys: [...state.librarys, action.payload],
         };
       case types.ADD_LIBRARYS_FAILURE:
         return { ...state, addingLibrarys: false, addingLibrarysError: true };
@@ -122,6 +131,37 @@ export const librarysReducer = (state = initialState, action) => {
                 librarys: [], 
                 // deletedTruck: [] 
               };
+
+
+              case types.GET_LIBRARY_RECORDS_REQUEST:
+                return { ...state, fetchingLibraryByOrgId: true };
+              case types.GET_LIBRARY_RECORDS_SUCCESS:
+                return {
+                  ...state,
+                  fetchingLibraryByOrgId: false,
+                  libraryRecordData: action.payload,
+                };
+              case types.GET_LIBRARY_RECORDS_FAILURE:
+                return {
+                  ...state,
+                  fetchingLibraryByOrgId: false,
+                  fetchingLibraryByOrgIdError: true,
+                };
+
+                case types.GET_CERTIFICATION_RECORDS_REQUEST:
+                  return { ...state, fetchingCertificationByOrgId: true };
+                case types.GET_CERTIFICATION_RECORDS_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingCertificationByOrgId: false,
+                    certificationRecordData: action.payload,
+                  };
+                case types.GET_CERTIFICATION_RECORDS_FAILURE:
+                  return {
+                    ...state,
+                    fetchingCertificationByOrgId: false,
+                    fetchingCertificationByOrgIdError: true,
+                  };
 
 
 

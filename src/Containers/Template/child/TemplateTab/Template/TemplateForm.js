@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
-import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { Formik, Form, Field } from "formik";
+import {getCustomerListByUserId} from "../../../../Customer/CustomerAction"
 import { Spacer } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
@@ -16,6 +16,7 @@ import { addTemplate } from "../../../../Rules/RulesAction";
 import CustomOption from "../../../../Rules/Child/RulesTab/CustomOption";
 import { getSignatureInd } from "../../../../Settings/SettingsAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
+import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 const TemplateSchema = Yup.object().shape({
   type: Yup.string().required("Input needed!"),
   subject: Yup.string().required("Input needed!"),
@@ -36,6 +37,7 @@ function TemplateForm(props) {
   }
   useEffect(() => {
     props.getSignatureInd();
+    props.getCustomerListByUserId(props.userId, 0,"creationdate");
   }, []);
   function uploadImageCallBack(file) {
     return new Promise((resolve, reject) => {
@@ -55,6 +57,24 @@ function TemplateForm(props) {
       });
     });
   }
+  const sortedCustomer =props.customerByUserId.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const customerNameOption = sortedCustomer.map((item) => {
+    return {
+      label: `${item.name}`,
+      value: item.customerId,
+    };
+  });
 
   return (
     <>
@@ -155,7 +175,12 @@ function TemplateForm(props) {
                         />
                       }
                       isColumn
-                      component={SearchSelect}
+                      component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
                       // value={values.customerId}
                       style={{
                         flexBasis: "80%",
@@ -255,8 +280,10 @@ function TemplateForm(props) {
   );
 }
 
-const mapStateToProps = ({ rule, settings }) => ({
+const mapStateToProps = ({ rule, settings,customer,auth }) => ({
   addingTemplate: rule.addingTemplate,
+  userId: auth.userDetails.userId,
+  customerByUserId: customer.customerByUserId,
   signatureInd: settings.signatureInd && settings.signatureInd,
 });
 
@@ -264,6 +291,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addTemplate,
+      getCustomerListByUserId,
       getSignatureInd,
     },
     dispatch

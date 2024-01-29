@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Select } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import { getDepartments } from "../../../Department/DepartmentAction";
+// import { getDepartments } from "../../../Department/DepartmentAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -16,7 +16,7 @@ const { Option } = Select;
 
 function LevelApproveForm(props) {
   useEffect(() => {
-    props.getDepartments();
+    // props.getDepartments();
   }, []);
 
   const selectedDepartment = props.departments;
@@ -238,7 +238,7 @@ const mapStateToProps = ({ settings,role, auth, departments }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDepartments,
+      // getDepartments,
       addApprove,
       getApproveData,
     },
