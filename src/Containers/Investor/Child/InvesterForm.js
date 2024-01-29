@@ -62,19 +62,46 @@ function InvesterForm(props) {
       AddInvestor,
       clearbit,
     } = props;
-   
-    const sectorOption = props.sectors.map((item) => {
+    const sortedSector =props.sectors.sort((a, b) => {
+      const nameA = a.sectorName.toLowerCase();
+      const nameB = b.sectorName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const sectorOption = sortedSector.map((item) => {
       return {
-        label: item.sectorName || "",
+        label: `${item.sectorName}`,
         value: item.sectorId,
       };
     });
-    const investorType = props.investorListData.map((item) => {
+
+    const sortedInvest =props.investorListData.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const investorType = sortedInvest.map((item) => {
       return {
-        label: item.name || "",
+        label: `${item.name}`,
         value: item.investorCategoryId,
       };
     });
+   
+
+ 
     const sortedCountry =props.countries.sort((a, b) => {
       const nameA = a.country_dial_code.toLowerCase();
       const nameB = b.country_dial_code.toLowerCase();
@@ -262,7 +289,7 @@ function InvesterForm(props) {
                   <Spacer/>
                   <div class=" flex justify-between">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="sectorId"
                             label={
                               <FormattedMessage
@@ -272,11 +299,14 @@ function InvesterForm(props) {
                             }
                             isColumn
                             placeholder="Sector"
-                            component={SelectComponent}
+                          
                             value={values.sectorId}
-                            options={
-                              Array.isArray(sectorOption) ? sectorOption : []
-                            }
+                            component={SelectComponent}
+                        options={
+                          Array.isArray(sectorOption)
+                            ? sectorOption
+                            : []
+                        }
                           />
                     </div>
                     <div class=" w-w47.5">
@@ -298,7 +328,7 @@ function InvesterForm(props) {
                   </div>
                   <div class=" flex justify-between">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="investorCategoryId"
                             label={
                               <FormattedMessage
@@ -308,11 +338,15 @@ function InvesterForm(props) {
                             }
                             isColumn
                             placeholder="Type"
-                            component={SelectComponent}
+                           
                             value={values.investorCategoryId}
+                            component={SelectComponent}
                             options={
-                              Array.isArray(investorType) ? investorType : []
+                              Array.isArray(investorType)
+                                ? investorType
+                                : []
                             }
+                             
                           />
                     </div>
                     </div> 
@@ -489,7 +523,7 @@ const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
   fullName: auth.userDetails.fullName,
-  investorListData:investorList.investorListData,
+  investorListData: investorList.investorListData,
   orgId:auth.userDetails.organizationId,
 });
 

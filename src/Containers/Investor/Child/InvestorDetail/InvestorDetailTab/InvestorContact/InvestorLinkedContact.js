@@ -187,8 +187,8 @@ class InvestorLinkedContact extends Component {
                   defaultMessage="Email"
                 /></div>
         <div className="md:w-[10.1rem]"><FormattedMessage
-                  id="app.mobileNumber"
-                  defaultMessage="Mobile Number"
+                  id="app.mobile"
+                  defaultMessage="Mobile #"
                 /></div>
         <div className="md:w-[7.2rem]"><FormattedMessage
                   id="app.Department"

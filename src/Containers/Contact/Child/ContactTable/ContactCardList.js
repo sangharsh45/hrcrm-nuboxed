@@ -8,6 +8,8 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
 import {  Tooltip, Select } from "antd";
+import DoNotDisturbOnTotalSilenceIcon from '@mui/icons-material/DoNotDisturbOnTotalSilence';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 import {
@@ -278,9 +280,9 @@ function ContactCardList(props) {
                                 
                                     <div class="text-sm text-cardBody font-poppins">
 
-                                    {item.thirdPartyAccessInd 
-    ? `${item.thirdPartyAccessInd}`
-    : 'Not Provided'}
+                                    {item.thirdPartyAccessInd === true
+    ?<Tooltip title="Provided"><AlarmOnIcon style={{color:"green",fontSize:"1rem"}}/></Tooltip> 
+    :  <Tooltip title="Not Provided"> <DoNotDisturbOnTotalSilenceIcon style={{color:"red",fontSize:"1rem"}}/></Tooltip>}
 
                                     </div>
                                 </div>
@@ -326,7 +328,7 @@ function ContactCardList(props) {
 
 </div>
             </div>
-                                <div class="flex flex-col w-6  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
+                                <div class="flex flex-col w-6  max-sm:flex-row max-sm:justify-evenly items-center">
                     <div class="rounded-full w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (

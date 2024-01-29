@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
  import {getCountries} from "../../../../Auth/AuthAction"
+import LeadsTab from "../../../../Rules/Child/RulesTab/LeadsTab";
  const WeekendCountryList = lazy(() => import("./WeekendCountryList"));
  const CountryList = lazy(() => import("./CountryList"));
 
@@ -64,6 +65,25 @@ function SettingsHolidayTab(props) {
                          
                                         <Suspense fallback={"Loading..."}>
                                             <WeekendCountryList 
+                                    //   country_id={this.departmentData.country_id} 
+                                                />
+                                            
+                                        </Suspense>
+                                 
+                     
+                    </TabPane>
+                    <TabPane 
+                       tab={
+                        <span >
+                   Leaves
+                        </span>
+                    }
+                   
+                   key="3"
+                    >
+                         
+                                        <Suspense fallback={"Loading..."}>
+                                            <LeadsTab 
                                     //   country_id={this.departmentData.country_id} 
                                                 />
                                             

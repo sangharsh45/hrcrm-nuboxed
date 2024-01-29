@@ -729,3 +729,32 @@ export const getperformanceRecord = (reptMngrId) => (dispatch) => {
       });
     });
 };
+
+export const deleteKpiData = (employeeKpiLinkId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_KPI_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/employee/delete/kpi/${employeeKpiLinkId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_KPI_DATA_SUCCESS,
+        payload: employeeKpiLinkId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_KPI_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};

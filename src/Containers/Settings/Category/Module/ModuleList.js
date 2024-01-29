@@ -262,12 +262,12 @@ const handleCrmClick = (checked) => {
     props.addingModules(data, props.orgId);
   };
 
-  const { eLearningInd } = props.moduleList;
-  console.log(eLearningInd);
-  const [elearningStatus, setElearningStatus] = useState(eLearningInd);
+  const { elearningInd } = props.moduleList;
+  console.log(elearningInd);
+  const [elearningStatus, setElearningStatus] = useState(elearningInd);
   useEffect(() => {
-    setElearningStatus(eLearningInd);
-  }, [eLearningInd]);
+    setElearningStatus(elearningInd);
+  }, [elearningInd]);
   
   const handleElearningClick = (checked) => {
     setElearningStatus(checked);
@@ -427,7 +427,7 @@ const handleCrmClick = (checked) => {
                         <Switch
                           style={{ width: "5em" }}
                           onChange={handleElearningClick}
-                          checked={elearningStatus || eLearningInd}
+                          checked={elearningStatus || elearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />

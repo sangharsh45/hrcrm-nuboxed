@@ -54,7 +54,7 @@ function Recruitment(props) {
       component: <General/>,
     },
     {
-      rulesName: "Holidays",
+      rulesName: "Holidays & Leaves",
       ruleId: "6",
       component: <SettingsHolidayTab />,
     },
@@ -69,11 +69,11 @@ function Recruitment(props) {
       ruleId: "7",
       component: <ReportScheduler />,
     },
-    {
-      rulesName: "Rules",
-      ruleId: "8",
-      component: <LeadsTab />,
-    },
+    // {
+    //   rulesName: "Rules",
+    //   ruleId: "8",
+    //   component: <LeadsTab />,
+    // },
     {
       rulesName: "Skills and Certifications",
       ruleId: "9",
@@ -185,9 +185,14 @@ function Recruitment(props) {
                 // handleRecruitProAdvance={handleRecruitProAdvance}
               />
             </div>
+            <Suspense 
+            // fallback={"Loading..."}
+            >
             <div class=" w-[74%]" >
+            
               <RecruitmentActionRight current={currentRulesOpen} />
             </div>
+            </Suspense>
           </div>
         {/* </Suspense> */}
       </div>
