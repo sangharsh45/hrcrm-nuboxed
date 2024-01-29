@@ -44,7 +44,7 @@ export const getCertification = (orgId) => (dispatch) => {
       })
       .then((res) => {
         message.success("Certification has been added successfully!");
-        dispatch(getCertification(orgId));
+        // dispatch(getCertification(orgId));
         console.log(res);
         dispatch({
           type: types.ADD_CERTIFICATION_SUCCESS,

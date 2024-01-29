@@ -26,7 +26,7 @@ class SchedulerTab extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.getDepartmentList()
+        this.props.getDepartmentList(this.props.orgId)
     }
 
     handleOnClick = (departmentId) => {
@@ -81,6 +81,7 @@ class SchedulerTab extends PureComponent {
 
 const mapStateToProps = ({ settings, opportunity, auth }) => ({
     departmentList: settings.departmentList,
+    orgId:auth.userDetails.organizationId,
 
 });
 

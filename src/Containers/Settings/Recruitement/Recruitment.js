@@ -174,7 +174,7 @@ function Recruitment(props) {
   return (
     <div>
       <div class=" flex ">
-        <Suspense fallback={"Loading..."}>
+        {/* <Suspense fallback={"Loading..."}> */}
         <div class=" flex flex-no-wrap w-full ">
             <div class=" w-[24%]">
               <RecruitmentActionLeft
@@ -189,7 +189,7 @@ function Recruitment(props) {
               <RecruitmentActionRight current={currentRulesOpen} />
             </div>
           </div>
-        </Suspense>
+        {/* </Suspense> */}
       </div>
       {/* )} */}
     </div>

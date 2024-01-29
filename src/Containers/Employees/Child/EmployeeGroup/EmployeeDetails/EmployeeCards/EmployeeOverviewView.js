@@ -50,8 +50,8 @@ class EmployeeOverviewView extends Component {
                 imageURL={singleEmployee.imageURL}
               />
             </div>
-            &nbsp; &nbsp; &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "80%" }}>
+            &nbsp;
+            <FlexContainer flexDirection="column" style={{ width: "100%" }}>
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"

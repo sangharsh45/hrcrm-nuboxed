@@ -70,8 +70,10 @@ function General(props) {
       >
         {({ values }) => (
           <MainWrapper style={{ height: "525px", width: "", overflow: "auto" }}>
+                <div class=" flex flex-row ">
             <Form className="form-background">
-            <div class=" flex justify-between w-full"
+          
+            <div class=" flex justify-between w-[30rem]"
              
              >
             <div class=" w-[44%] mt-[0.625em] ml-[1em]"
@@ -80,7 +82,7 @@ function General(props) {
 <div class=" flex justify-between w-[74%] "
                
                >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Orders (in months)</p>
+                    <p style={{ minWidth: "-webkit-fill-available" }}> drop Open Orders (in months)</p>
                     <div>
                       <Field
                         style={{ width: "10rem" }}
@@ -97,7 +99,7 @@ function General(props) {
                   <div class=" flex justify-between w-[74%] mt-4"
                  
                   >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Opportunities (in months)</p>
+                    <p style={{ minWidth: "-webkit-fill-available" }}> drop Open Opportunities (in months)</p>
                     <div>
                       <Field
                         name="oppTimePeriod"
@@ -112,7 +114,7 @@ function General(props) {
                   <div class=" flex justify-between w-[74%] mt-4"
                  
                  >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
+                    <p style={{ minWidth: "-webkit-fill-available" }}> Send Job Anniversary Email</p>
                     <div>
     {/* <Popconfirm
       title="Do you wish to change the status?"
@@ -134,7 +136,7 @@ function General(props) {
                   <div class=" flex justify-between w-[74%] mt-4"
                  
                  >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
+                    <p style={{ minWidth: "-webkit-fill-available" }}> Send BirthDay Email</p>
                     <div>
 
                     <Field
@@ -166,6 +168,7 @@ function General(props) {
                   </div>
             
                 </div>
+
               </div>
               <h4 class="mt-4">
                 Updated on{" "}
@@ -183,8 +186,11 @@ function General(props) {
                   {/* Update */}
                 </Button>
               </div>
-              <Notifications />
+         
+           
             </Form>
+            <Notifications />
+            </div>
           </MainWrapper>
         )}
       </Formik>

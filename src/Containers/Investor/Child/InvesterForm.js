@@ -6,6 +6,7 @@ import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
+import {getCountries} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../InvestorAction"
 import { HeaderLabel} from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
@@ -49,6 +50,7 @@ function InvesterForm(props) {
   useEffect(() => {
     props.getSectors();
      props.getAllEmployeelist();
+     props.getCountries();
      props.getInvestorList(props.orgId)
   }, []);
 
@@ -73,6 +75,25 @@ function InvesterForm(props) {
         value: item.investorCategoryId,
       };
     });
+    const sortedCountry =props.countries.sort((a, b) => {
+      const nameA = a.country_dial_code.toLowerCase();
+      const nameB = b.country_dial_code.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const countryNameOption = sortedCountry.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
+
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
@@ -215,7 +236,12 @@ function InvesterForm(props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(countryNameOption)
+                            ? countryNameOption
+                            : []
+                        }
                         value={values.countryDialCode1}
                         inlineLabel
                       />
@@ -457,6 +483,7 @@ const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector
   addingInvestor: investor.addingInvestor,
   clearbit: customer.clearbit,
   user: auth.userDetails,
+  countries:auth.countries,
   allEmployeeList:investor.allEmployeeList,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
@@ -469,6 +496,7 @@ const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      getCountries,
         AddInvestor,
       setClearbitData,
       getSectors,

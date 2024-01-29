@@ -15,11 +15,7 @@ const AddInvestorModal = (props) => {
           defaultMessage="Investor"
         />}
         width={drawerWidth}
-        style={{marginTop:"3rem"}}
         visible={props.addInvestorModal}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => props.handleInvestorModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>
