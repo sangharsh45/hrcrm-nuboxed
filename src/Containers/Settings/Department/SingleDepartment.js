@@ -20,7 +20,7 @@ const SingleDepartment = (props) => {
     setViewType((prevViewType) => (prevViewType === "view" ? "edit" : "view"));
   };
   const {
-    department: { departmentName,moduleMapper,crmInd,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,eLearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
+    department: { departmentName,moduleMapper,crmInd,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
    handleChange,
    name,
    value,
@@ -260,11 +260,11 @@ const SingleDepartment = (props) => {
     };
     props.addingDeptModules(data, departmentId);
   };
-  const [elearningStatus, setElearningStatus] = useState(eLearningInd);
+  const [elearningStatus, setElearningStatus] = useState(elearningInd);
 
   useEffect(() => {
-    setElearningStatus(eLearningInd);
-  }, [eLearningInd]);
+    setElearningStatus(elearningInd);
+  }, [elearningInd]);
   
   const handleElearningClick = (checked) => {
     setElearningStatus(checked);
@@ -419,7 +419,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{moduleMapper.eLearningInd === true && (
+{moduleMapper.elearningInd === true && (
   <>
 
                     <div class=" text-sm w-[5rem]  ml-4">Elearning</div>
@@ -434,7 +434,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleElearningClick}
-                          checked={elearningStatus || moduleMapper.eLearningInd}
+                          checked={elearningStatus || moduleMapper.elearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />

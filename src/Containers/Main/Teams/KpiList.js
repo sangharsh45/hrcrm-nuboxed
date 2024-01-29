@@ -4,10 +4,11 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import {getKpilist,addKpi,getEmployeeKpiList } from "./TeamsAction";
+import {getKpilist,addKpi, } from "./TeamsAction";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
+import AssigenedKpiCardList from "./TeamsCard.js/AssigenedKpiCardList";
 
 
 /**
@@ -22,7 +23,7 @@ function KpiList(props) {
   const [selected, setSelected] = useState("");
     useEffect(()=>{
         props.getKpilist(props.rowdata.departmentId)
-        props.getEmployeeKpiList(props.rowdata.employeeId)
+        // props.getEmployeeKpiList(props.rowdata.employeeId)
     },[]);
 
   function handleReset(resetForm) {
@@ -51,7 +52,7 @@ function KpiList(props) {
           // performanceManagementId:[],
           employeeId:props.rowdata.employeeId,
           performanceManagementId: selected,
-          value:"",
+          assignedValue:"",
       
         }}
         // validationSchema={TeamsSchema}
@@ -108,7 +109,7 @@ function KpiList(props) {
         <div class=" w-[45%]" >
                           <FastField
                             // isRequired
-                            name="value"
+                            name="assignedValue"
                             type="text"
                             // width={"100%"}
                             isColumn
@@ -119,11 +120,7 @@ function KpiList(props) {
                         </div>               
 </> 
         )}   
-    
-        
-        </div>
-       
-        <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+     <div class="flex justify-end w-wk  ">
           <Button
             htmlType="submit"
             type="primary"
@@ -132,9 +129,15 @@ function KpiList(props) {
             Submit
           </Button>
         </div>
+        
+        </div>
+       
+       
       </Form>
+   
         )}
       </Formik>
+      <AssigenedKpiCardList  rowdata={props.rowdata}/>
     </>
   );
 }
@@ -150,7 +153,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         getKpilist,
         addKpi,
-        getEmployeeKpiList
+      
     },
     dispatch
   );

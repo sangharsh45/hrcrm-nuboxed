@@ -38,34 +38,39 @@ class DepartmentRole extends PureComponent {
         return (
             <>
                 <TabsWrapper >
+                  
                     <StyledTabs type="card">
-                        {departmentRoleData.map((member, i) => {
-                            return (
-                                <TabPane
-                                    key={i}
-                                    tab={
-                                        <span onClick={() => this.handleOnClick(member)}>
-                                            {member.roleType}
-                                        </span>
-                                    }
-                                >
-                                    {this.state.departmentData.roleTypeId && (
-                                        <Suspense fallback={"Loading..."}>
-                                          
-                                            <AccessForm 
-                                            departmentId={this.props.departmentId}
-                                            departmentData={this.state.departmentData}
-                                            roleTypeId={this.state.departmentData.roleTypeId} 
+  {departmentRoleData ? (
+    Array.isArray(departmentRoleData) && departmentRoleData.length > 0 ? (
+      departmentRoleData.map((member, i) => (
+        <TabPane
+          key={i}
+          tab={
+            <span onClick={() => this.handleOnClick(member)}>
+              {member.roleType}
+            </span>
+          }
+        >
+        {this.state.departmentData.roleTypeId && (
+            <Suspense fallback={"Loading..."}>
+              
+                <AccessForm 
+                departmentId={this.props.departmentId}
+                departmentData={this.state.departmentData}
+                roleTypeId={this.state.departmentData.roleTypeId} 
 
-                                            />
-                                        </Suspense>
-                                    )}
-
-                                </TabPane>
-                            );
-                        })}
-
-                    </StyledTabs>
+                />
+            </Suspense>
+        )}
+        </TabPane>
+      ))
+    ) : (
+      <div>{departmentRoleData.message || 'No data available'}</div>
+    )
+  ) : (
+    <div>No data available</div>
+  )}
+</StyledTabs>
                 </TabsWrapper>
             </>
         )

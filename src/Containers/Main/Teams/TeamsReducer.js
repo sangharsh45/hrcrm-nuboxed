@@ -481,6 +481,22 @@ case types.GET_EMPLOYEE_KPI_LIST_FAILURE:
     };
 
 
+      
+    case types.DELETE_KPI_DATA_REQUEST:
+      return { ...state, deletingKpiData: true };
+    case types.DELETE_KPI_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingKpiData: false,
+        employeeKpiList: state.employeeKpiList.filter(
+          (item) => item.userKpiLinkId !== action.payload
+        ),
+      };
+    case types.DELETE_KPI_DATA_FAILURE:
+      return { ...state, deletingKpiData: false, deletingKpiDataError: false };
+
+
+
     default:
       return state;
   }

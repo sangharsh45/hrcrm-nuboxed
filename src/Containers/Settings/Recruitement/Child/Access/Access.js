@@ -37,7 +37,7 @@ class Access extends PureComponent {
         console.log(this.state.departmentData.departmentId)
         return (
             <>
-                <TabsWrapper style={{height:"100vh",overflowY: "scroll", }}>
+                <TabsWrapper style={{height:"150vh" }}>
                     <StyledTabs type="card">
                         {departmentList.map((member, i) => {
                             return (

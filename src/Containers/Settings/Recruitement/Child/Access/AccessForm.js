@@ -8,6 +8,7 @@ import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from 'redux';
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsAction"
+import moment from 'moment';
 
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
@@ -1000,15 +1001,13 @@ const onCheckAllTeamsChange = (e) => {
     <>
 
       {/* <Form className="form-background"> */}
-      <div style={{ display: "flex", justifyContent: "space-between", height: "100vh", overflowY: "scroll", paddingRight: "0.6em" }}>
-          {props.fetchingDepartmentAccess ? (
-            <BundleLoader />
-          ) : (
-            <TabsWrapper style={{height:"95rem"}}>
+      <div class=" flex justify-between h-[100vh] pr-2 overflow-y-auto" >
+         
+            <TabsWrapper style={{height:"120rem"}}>
  
  {props.departmentData.hrInd === true ? 
- <div>
-<div class=" text-clr flex justify-center text-base font-bold">General, HR & Self Service</div>
+ <div >
+<div class=" text-clr flex justify-center mt-4 text-base font-bold">General, HR & Self Service</div>
 
               <div class=" flex justify-around mt-4" >
             
@@ -1066,7 +1065,7 @@ const onCheckAllTeamsChange = (e) => {
            
             {/* Vendor */}
          
-            <div class=" flex justify-around mt-8" >
+            <div class=" flex justify-around mt-4" >
               
           
            
@@ -1125,7 +1124,7 @@ const onCheckAllTeamsChange = (e) => {
      
             </div>
 
-            <div class=" flex justify-around mt-8" >
+            <div class=" flex justify-around mt-4" >
             
            
                <div >
@@ -1175,30 +1174,12 @@ const onCheckAllTeamsChange = (e) => {
      
     {props.departmentData.crmInd === true ? 
     <div>     
-            <div class=" text-clr flex justify-center text-base mt-2 font-bold">CRM</div>
+            <div class=" text-clr mt-6 flex justify-center text-base  font-bold">CRM</div>
           
             <div class=" flex justify-around mt-4" >
-                {/* <div >
-                  <div>Vendor</div>
-                  <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
-                    Check all
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedVendorList} onChange={onVendorChange} />
-                </div>
-                <Spacer 
-               
-                /> */}
              
-             <div >
-              <div class="text-sm font-semibold">Junk</div>
-              <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
-              <label class="text-xs"> Check all</label>
-              </Checkbox>
-              <Divider />
-              <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
-
-            </div>
+             
+           
          
               
             <div  >
@@ -1256,7 +1237,17 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div> */}
               </div>
-            
+              <div class=" flex justify-around mt-4" >
+            <div >
+              <div class="text-sm font-semibold">Junk Leads</div>
+              <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
+              <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
+
+            </div>
+            </div>
               </div> 
               : null } 
 
@@ -1267,7 +1258,7 @@ const onCheckAllTeamsChange = (e) => {
            {props.departmentData.erpInd === true ? 
     <div>            
                 
-<div class=" text-clr text-base flex justify-center mt-2 font-bold">ERP</div>
+<div class=" text-clr text-base flex justify-center mt-6 font-bold">ERP</div>
           
                 <div class=" flex justify-around mt-4" >
               <div >
@@ -1313,7 +1304,7 @@ const onCheckAllTeamsChange = (e) => {
 
   </div> 
                 </div>
-                <div class=" flex justify-around" >
+                <div class=" flex justify-around mt-4" >
          
                <div >
                   <div class="text-sm font-semibold">Materials</div>
@@ -1362,9 +1353,93 @@ const onCheckAllTeamsChange = (e) => {
           </div>
           : null }
 
-{props.departmentData.imInd === true ? 
+
+
+
+ {props.departmentData.accountInd === true ?  
     <div>     
-            <div class=" text-clr text-base mt-2 flex justify-center font-bold">IM</div>
+            <div class=" text-clr text-base flex justify-center mt-6 font-bold">Accounting</div>
+        
+            <div class=" flex justify-around mt-4" >
+          
+
+              
+                <div >
+                  <div class="text-sm font-semibold">Payments</div>
+                  <Checkbox indeterminate={indeterminatePayments} onChange={onCheckAllPaymentsChange} checked={checkAllPayments}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={accountingCheckedList} value={checkedPaymentsList} onChange={onPaymentsChange} />
+                </div>
+              
+                    {/* Contact */}
+                    <div >
+                  <div class="text-sm font-semibold">Collections</div>
+                  <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
+                  <label class="text-xs"> Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
+
+                </div>
+         
+            
+
+{/* <div >
+    <div class="text-sm font-semibold">Invoices</div>
+    <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
+    <label class="text-xs">  Check all </label>
+    </Checkbox>
+    <Divider />
+    <CheckboxGroup options={accountingCheckedList} value={checkedDealList} onChange={onDealChange} />
+
+  </div> */}
+
+              </div>
+            
+           
+              </div> 
+                  : null }  
+
+{props.departmentData.recruitOppsInd === true ? 
+    <div>     
+            <div class=" text-clr text-base flex justify-center mt-6 font-bold">RecruitPro</div>
+           
+            <div class=" flex justify-around mt-4" >
+          
+
+              
+                <div >
+                  <div class="text-sm font-semibold">Requirement</div>
+                  <Checkbox indeterminate={indeterminateRequirement} onChange={onCheckAllRequirementChange} checked={checkAllRequirement}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={requirementCheckedList} value={checkedRequirementList} onChange={onRequirementChange} />
+                </div>
+   
+                   
+                <div  >
+                  <div class="text-sm font-semibold">Talent</div>
+                  <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedTalentList} onChange={onTalentChange} />
+                </div>
+            
+
+
+
+              </div>
+            
+          
+              </div> 
+                  : null } 
+                  {props.departmentData.imInd === true ? 
+    <div>     
+            <div class=" text-clr text-base mt-6 flex justify-center font-bold">IM</div>
        
             <div class=" flex justify-around mt-4" >
           
@@ -1428,92 +1503,9 @@ const onCheckAllTeamsChange = (e) => {
               </div> 
              : null } 
 
-
- {props.departmentData.accountInd === true ?  
-    <div>     
-            <div class=" text-clr text-base flex justify-center mt-2 font-bold">Accounting</div>
-        
-            <div class=" flex justify-around mt-4" >
-          
-
-              
-                <div >
-                  <div class="text-sm font-semibold">Payments</div>
-                  <Checkbox indeterminate={indeterminatePayments} onChange={onCheckAllPaymentsChange} checked={checkAllPayments}>
-                  <label class="text-xs">  Check all  </label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={accountingCheckedList} value={checkedPaymentsList} onChange={onPaymentsChange} />
-                </div>
-              
-                    {/* Contact */}
-                    <div >
-                  <div class="text-sm font-semibold">Collections</div>
-                  <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
-                  <label class="text-xs"> Check all</label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
-
-                </div>
-         
-            
-
-{/* <div >
-    <div class="text-sm font-semibold">Invoices</div>
-    <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
-    <label class="text-xs">  Check all </label>
-    </Checkbox>
-    <Divider />
-    <CheckboxGroup options={accountingCheckedList} value={checkedDealList} onChange={onDealChange} />
-
-  </div> */}
-
-              </div>
-            
-           
-              </div> 
-                  : null }  
-
-{props.departmentData.recruitOppsInd === true ? 
-    <div>     
-            <div class=" text-clr text-base flex justify-center mt-2 font-bold">RecruitPro</div>
-           
-            <div class=" flex justify-around mt-4" >
-          
-
-              
-                <div >
-                  <div class="text-sm font-semibold">Requirement</div>
-                  <Checkbox indeterminate={indeterminateRequirement} onChange={onCheckAllRequirementChange} checked={checkAllRequirement}>
-                  <label class="text-xs">  Check all  </label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={requirementCheckedList} value={checkedRequirementList} onChange={onRequirementChange} />
-                </div>
-   
-                   
-                <div  >
-                  <div class="text-sm font-semibold">Talent</div>
-                  <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
-                  <label class="text-xs">  Check all  </label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedTalentList} onChange={onTalentChange} />
-                </div>
-            
-
-
-
-              </div>
-            
-          
-              </div> 
-                  : null } 
-
 {props.departmentData.elearningInd === true ? 
     <div>     
-            <div class=" text-clr mt-2 text-base flex justify-center font-bold">E-Learning</div>
+            <div class=" text-clr mt-6 text-base flex justify-center font-bold">E-Learning</div>
        
             <div class=" flex justify-around mt-4" >
           
@@ -1585,7 +1577,7 @@ const onCheckAllTeamsChange = (e) => {
               </div> 
              : null }  
                
-              <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
+              <h4 class="mt-2">Updated on {moment(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               
               <div class=" flex justify-end" >
               <FloatButton.Group  >
@@ -1604,7 +1596,7 @@ const onCheckAllTeamsChange = (e) => {
 
 
             </TabsWrapper>
-          )}
+       
         </div>
       {/* </Form> */}
 

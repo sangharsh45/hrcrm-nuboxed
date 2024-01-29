@@ -161,7 +161,7 @@ function Notifications(props) {
         onSubmit={(values, { resetForm }) => {}}
       >
         {({ values }) => (
-          <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
+          <MainWrapper style={{ height: "446px", }}>
             <Form className="form-background">
               <div class=" flex justify-between w-[30rem]"
              
@@ -169,16 +169,11 @@ function Notifications(props) {
                <div class=" w-[44%] mt-[0.625em] ml-[1em]"
                 >
                   <div>
-                    <StyledLabel
-                      style={{
-                        flexBasis: "13%",
-                        marginTop: "0.625em",
-                        fontSize: "1em",
-                        fontStyle: "italic",
-                      }}
+                    <div class="flex font-bold mt-4  text-base"
+
                     >
                       Notifications
-                    </StyledLabel>
+                    </div>
                   </div>
 
               
@@ -246,7 +241,7 @@ function Notifications(props) {
                     </div>
                   </div>
               
-                  <div class=" flex justify-between mt-4"
+                  {/* <div class=" flex justify-between mt-4"
                 
                   >
                     <p>In Whatsapp</p>
@@ -266,7 +261,7 @@ function Notifications(props) {
                         />
                       </Popconfirm>
                     </div>
-                  </div>
+                  </div> */}
                   {/* <Spacer />
                   <div
                     style={{
