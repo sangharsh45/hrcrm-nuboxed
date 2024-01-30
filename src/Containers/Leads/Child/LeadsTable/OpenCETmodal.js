@@ -33,12 +33,10 @@ console.log("data",props.rowdata.name)
       <StyledDrawer
         title={props.rowdata.name}
         width="60%"
-        style={{marginTop:"5rem"}}
         visible={props.openCETmodal}
         destroyOnClose
         closable
         placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           props.handleCETmodal(false);
         }}
@@ -80,10 +78,10 @@ console.log("data",props.rowdata.name)
                           />
                         }
                       >
-                       
+                       &nbsp;
                         <PlusOutlined
                           type="plus"
-                          
+                          style={{color:"blue"}}
                           tooltiptitle={
                             <FormattedMessage
                               id="app.Create"

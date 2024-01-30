@@ -31,6 +31,7 @@ import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 const UpdateLeadsModal = lazy(() => import("../UpdateLeads/UpdateLeadsModal"));
 const OpenCETmodal = lazy(() => import("./OpenCETmodal"));
 const AddLeadsEmailDrawerModal = lazy(() => import("../UpdateLeads/AddLeadsEmailDrawerModal"));
@@ -111,7 +112,8 @@ const LeadsCardList = (props) => {
         {leadsAllData.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
-
+          const countryCode = item.address[0].country_alpha2_code
+          console.log(countryCode)
           const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -245,7 +247,7 @@ const LeadsCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
@@ -256,7 +258,7 @@ const LeadsCardList = (props) => {
                   </div>
                   <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-poppins">
-                      <ReactCountryFlag
+                      {/* <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
                         svg
                         style={{
@@ -264,11 +266,13 @@ const LeadsCardList = (props) => {
                           height: "1em",
                         }}
                         title={item.country}
-                      />
+                      /> */}
+                       <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
-                      {item.address &&
+                      {countryCode}
+                      {/* {item.address &&
                         item.address.length &&
-                        item.address[0].country}
+                        item.address[0].country} */}
                     </h4>
                   </div>
                 </div>
@@ -311,15 +315,22 @@ const LeadsCardList = (props) => {
                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins">
                       <span>
-                        {item.assignedTo === null ? (
-                          "None"
-                        ) : (
+                      {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
                           <MultiAvatar
                             primaryTitle={item.assignedTo}
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
                         )}
+                        </>
+              )}
                       </span>
                     </div>
                   </div>

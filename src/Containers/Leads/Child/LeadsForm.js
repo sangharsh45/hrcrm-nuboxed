@@ -220,6 +220,7 @@ props. getCrm();
                   </div>
 
                   <Field
+                    isRequired
                     name="email"
                     type="text"
                     label={
@@ -268,7 +269,7 @@ props. getCrm();
               
                   <div class=" mt-3">
                   <Field
-                    isRequired
+                  
                     name="companyName"
                     type="text"
                     label={

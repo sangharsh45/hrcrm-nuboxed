@@ -19,8 +19,6 @@ const UpdateLeadsModal = (props) => {
         visible={props.updateLeadsModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem" }}
         onClose={() => props.handleUpdateLeadsModal(false)}
         footer={null}
       >

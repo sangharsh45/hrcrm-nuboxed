@@ -88,7 +88,7 @@ import { message } from "antd"
       })
   };
 
-  export const allCurrencyMandatory = (mandatoryInd,cb) => (dispatch) => {
+  export const allCurrencyMandatory = (currencyId) => (dispatch) => {
 
     dispatch({
       type: types.ALL_CURRENCY_MANDATORY_REQUEST,
