@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
+import { getCurrencyConversion } from "../../../SettingsAction";
+
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 
@@ -63,7 +65,7 @@ const EditableCell = ({
 };
 function OneTimeTable (props) {
     useEffect(()=> {
-        // props.getOneTimeDeliveryCharge();
+        props.getCurrencyConversion(props.orgId);
     },[]);
 
     const [form] = Form.useForm();
@@ -71,8 +73,8 @@ function OneTimeTable (props) {
     const [editingKey, setEditingKey] = useState('');
 
     useEffect(() => {
-        setData(props.oneTimeDeliveryCharge)
-    }, [props.oneTimeDeliveryCharge])
+        setData(props.conversionCurrencies)
+    }, [props.conversionCurrencies])
 
     const isEditing = (record) => record.currencyConversionid === editingKey;
 
@@ -139,13 +141,13 @@ function OneTimeTable (props) {
             },
             {
                 title: "Conversion Factor",
-                dataIndex: "value1",
+                dataIndex: "conversionFactor",
                 width: "12%",
                 editable: true,
             },
             {
                 title: "Currency",
-                dataIndex: "currency1",
+                dataIndex: "conversionCurrency",
                 width: "12%",
                 editable: true,
             },
@@ -206,7 +208,7 @@ function OneTimeTable (props) {
                     <StyledTable
                         rowKey="currencyConversionid"
                         dataSource={data}
-                        loading={fetchingOneTimeDeliveryCharge}
+                        loading={props.fetchingCurrencyConversion}
                         scroll={{ y: 320 }}
                         pagination={false}
                         components={{
@@ -223,16 +225,17 @@ function OneTimeTable (props) {
         );   
 }
 
-const mapStateToProps = ({ rule }) => ({
-    // oneTimeDeliveryCharge: rule.oneTimeDeliveryCharge,
-
+const mapStateToProps = ({ settings,auth }) => ({
+    fetchingCurrencyConversion: settings.fetchingCurrencyConversion,
+    userId: auth.userDetails.userId,
+    orgId:auth.userDetails.organizationId,
+    conversionCurrencies:settings.conversionCurrencies
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getOneTimeDeliveryCharge,
-            // addOneTimeDeliveryCharge
+            getCurrencyConversion,
         },
         dispatch
     );

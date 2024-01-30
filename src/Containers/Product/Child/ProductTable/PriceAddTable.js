@@ -1,7 +1,7 @@
 import React, { useEffect,lazy, Suspense  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
+import { getCurrency } from "../../../Auth/AuthAction";
 import { getProductbuilder,addProductBuilder,handleDiscountModal,handleOfferModal } from "../../ProductAction";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 const ProductDiscountModal =lazy(()=>import("./ProductDiscountModal"));
@@ -11,6 +11,7 @@ function ProductbuilderTable (props) {
 
   useEffect(()=> {
     props.getProductbuilder();
+    props.getCurrency();
   },[]);
 
 return (
@@ -19,14 +20,14 @@ return (
          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
-         <div className=" md:w-[7%]">Country</div>
+         <div className=" md:w-[7%]">Currency</div>
         <div className=" md:w-[6.1rem]">Price(B2B)</div>
         <div className=" md:w-[4.2rem] ">Price(B2C)</div>
-        <div className="md:w-[5.8rem]">VAT</div>
+        <div className="md:w-[5.8rem]">VAT(%)</div>
         <div className="w-12"></div>
             </div>
       
-             {props.productBuilder.map((item) => {
+             {props.currencies && props.productBuilder.map((item) => {
           return (
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
@@ -34,7 +35,7 @@ return (
        <div class="flex">
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
     <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-                              {item.country}
+                              {item.currency_name}
                             </h4>
     </div>
 
@@ -64,7 +65,7 @@ return (
     
     <div class="flex md:items-center"> 
     
-    <div className=" flex font-medium flex-col  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+    {/* <div className=" flex font-medium flex-col  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
     <Button
     className="bg-[teal] text-xs"
                   type="primary"
@@ -76,8 +77,8 @@ return (
                 >
                   Discount
                 </Button>            
-</div> 
-<div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+</div>  */}
+{/* <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
 <Button
                                     type="primary"
@@ -94,7 +95,7 @@ return (
                                     Offer
                                 </Button>
 
-</div> 
+</div>  */}
 
 </div>
 
@@ -125,11 +126,12 @@ return (
 );
 }
 
-const mapStateToProps = ({product }) => ({
+const mapStateToProps = ({product,auth }) => ({
     productBuilder: product.productBuilder,
     fetchingProductBuilder: product.fetchingProductBuilder,
     addDiscountModal: product.addDiscountModal,
     addProductOfferModal: product.addProductOfferModal,
+    currencies:auth.currencies
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -139,6 +141,7 @@ const mapDispatchToProps = (dispatch) =>
             addProductBuilder,
             handleDiscountModal,
             handleOfferModal,
+            getCurrency
         },
         dispatch
     );

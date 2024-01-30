@@ -1048,7 +1048,8 @@ export const getProductbuilder = () => (dispatch) => {
     type: types.GET_PRODUCT_BUILDER_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplies`, {
+    .get(`${base_url2}/supplies`,
+    {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1156,3 +1157,29 @@ export const uploadCatalogueList = (data,) => (dispatch) => {
     });
 };
 
+export const removeProductBuilder = (data,productSupplyLinkId) => (dispatch) => {
+  dispatch({
+    type: types.REMOVE_PRODUCT_BUILDER_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/productionBuilder/supplies/${productSupplyLinkId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.REMOVE_PRODUCT_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_PRODUCT_BUILDER_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};

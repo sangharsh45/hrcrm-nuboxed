@@ -19,7 +19,7 @@ function DistributionTab(props) {
                     <TabPane tab={`Currency`} key="1">
                         <div class=" mt-3">
                         <CurrencyCoversionForm/>
-                        <CurrencyCoversionForm2/>
+                        {/* <CurrencyCoversionForm2/> */}
                         <OneTimeTable/>
                         </div>
                     </TabPane>

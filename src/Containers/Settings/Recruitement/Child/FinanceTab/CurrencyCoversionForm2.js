@@ -8,7 +8,7 @@ import { InputComponent } from "../../../../../Components/Forms/Formik/InputComp
 
 function CurrencyCoversionForm2(props)  {
 
-        const { distributorStartDate, distributorEndDate } = props;
+
         return (
             <>
                 <Formik
@@ -36,17 +36,15 @@ function CurrencyCoversionForm2(props)  {
                     }) => (
                         <Form>
                             <div class=" flex justify-between" >
-                                <div class=" w-full h-full"
-                                
-                                >
+                                <div class=" w-full h-full">
 
                                     <div class="flex justify-between">
                                         <div class=" w-[18%]" >
                                             <Field
                                                 isRequired
-                                                name="currency2"
+                                                name="conversionCurrency"
                                                 isColumn
-                                                label="Select"
+                                                label="Conservation Currency"
                                                 component={SelectComponent}
                                                 inlineLabel
                                                options={["USD","EUR","GBP","INR"]}
@@ -58,12 +56,11 @@ function CurrencyCoversionForm2(props)  {
                                         <div class=" w-[18%]" >
                                             <Field
                                                 isRequired
-                                                name="currency2"
+                                                name="conversionFactor"
                                                 isColumn
                                                 label="Conversion Factor"
                                                 component={InputComponent}
                                                 inlineLabel
-                                               options={["USD","EUR","GBP","INR"]}
                                                 style={{
                                                     flexBasis: "80%",
                                                 }}

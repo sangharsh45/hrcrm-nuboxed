@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
-import { getBuilderByProId } from "../../ProductAction";
+import { getBuilderByProId,removeProductBuilder } from "../../ProductAction";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -75,7 +75,7 @@ return (
   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
   <StyledPopconfirm
                           title="Do you want to delete?"
-                          // onConfirm={() => deleteLeadsData(item.leadsId)}
+                          onConfirm={() => props.removeProductBuilder({active:false},item.productSupplyLinkId)}
                           >
                      <Tooltip title="Delete">
                           <DeleteOutlined
@@ -110,6 +110,7 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getBuilderByProId,
+            removeProductBuilder
             
         },
         dispatch
