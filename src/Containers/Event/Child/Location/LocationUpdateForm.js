@@ -20,7 +20,7 @@ class LocationUpdateForm extends Component {
       corporate: this.props.storedLoc.corporateInd,
       inventory: this.props.storedLoc.inventoryInd,
       project: this.props.storedLoc.projectInd,
-      productionManufac: this.props.storedLoc.prodmanufInd,
+      productionManufac: this.props.storedLoc.prodManufactureInd,
       retail: this.props.storedLoc.retailInd,
     };
   }
@@ -150,7 +150,7 @@ handleInventory = () => {
             billingInd: this.state.billing  ? "true" :"false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
-            prodmanufInd: this.state.prodmanuf ? "true" : "false",
+            prodManufactureInd: this.state.prodmanuf ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
             retailInd: this.state.retail ? "true" : "false",
             timeZone:this.props.storedLoc.timeZone || "",
@@ -183,7 +183,7 @@ handleInventory = () => {
                 billingInd:this.state.billing  ? "true" :"false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
-                prodmanufInd: this.state.prodmanuf ? "true" : "false",
+                prodManufactureInd: this.state.prodmanuf ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
                 retailInd: this.state.retail ? "true" : "false",
                 orgId: this.props.orgId,

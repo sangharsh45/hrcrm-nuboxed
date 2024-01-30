@@ -3,7 +3,7 @@ import { Switch, Popconfirm, message } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  getEmployeelist,
+  // getAssignedToList,
   suspendEmployee,
   suspendStatus,
 } from "../../EmployeeAction";
@@ -15,45 +15,52 @@ function SuspendEmployee(props) {
   function handleToggleClick() {
     setAssignedIndicator(!assignedIndicator);
     if (props.suspendInd) {
-      props.suspendStatus(
+      props.suspendEmployee(
         {
           employeeId: props.employeeId,
           userId: props.userId,
+          suspendInd: props.suspendInd ? false : true,
         },
-        handleCallback,
-        props.employeeId
+        // handleCallback,
+        props.employeeId,
+        props.suspendInd? false : true ,
+   
+      
       );
     } else {
       props.suspendEmployee(
         {
           employeeId: props.employeeId,
           userId: props.userId,
+          suspendInd: props.suspendInd ? false : true,
         },
-        handleCallback,
-        props.employeeId
+        // handleCallback,
+        props.employeeId,
+        props.suspendInd? false : true ,
+      
       );
     }
   }
 
-  function handleCallback(a, b, c) {
-    // debugger;
-    if (a === "success") {
-      // debugger;
-      if (c === false) {
-        // debugger;
-        message.info(b);
-        setAssignedIndicator(false);
-        props.getEmployeelist(props.employeeId);
-      } else {
-        // debugger;
-        message.success("User login disabled sucessfully");
-        props.getEmployeelist(props.employeeId);
-      }
-    } else {
-      // debugger;
-      message.error("something went wrong");
-    }
-  }
+  // function handleCallback(a, b, c) {
+  //   // debugger;
+  //   if (a === "success") {
+  //     // debugger;
+  //     if (c === false) {
+  //       // debugger;
+  //       message.info(b);
+  //       setAssignedIndicator(false);
+  //       props.getAssignedToList(props.orgId);
+  //     } else {
+  //       // debugger;
+  //       message.success("User login disabled sucessfully");
+  //       props.getAssignedToList(props.orgId);
+  //     }
+  //   } else {
+  //     // debugger;
+  //     message.error("something went wrong");
+  //   }
+  // }
   function handleCancel() {
     if (props.suspendInd) {
       setToggle(true);
@@ -66,11 +73,11 @@ function SuspendEmployee(props) {
     <>
       <div>
         <Popconfirm
-          title="Change Login Status?"
+          title="Suspend Access to App?"
           onConfirm={() => handleToggleClick()}
           onCancel={handleCancel}
-          okText="Ok"
-          cancelText="Cancel"
+          okText="Yes"
+          cancelText="No"
         >
           <Switch
             checked={props.suspendInd || toggle}
@@ -87,13 +94,14 @@ function SuspendEmployee(props) {
 const mapStateToProps = ({ auth, employee }) => ({
   suspendedEmployees: employee.suspendedEmployees,
   userId: auth.userDetails.userId,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       suspendEmployee,
-      getEmployeelist,
+      // getAssignedToList,
       suspendStatus,
     },
     dispatch

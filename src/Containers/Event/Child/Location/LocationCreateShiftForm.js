@@ -149,7 +149,7 @@ function LocationCreateShiftForm(props) {
                       isRequired
                     />
                   </div>
-                      <div class=" w-[30%]">
+                      <div class=" w-[25%]">
                         <Field
                           isRequired
                           name="startDate"
@@ -169,7 +169,7 @@ function LocationCreateShiftForm(props) {
                           // }}
                         />
                       </div>
-                      <div class=" w-[30%]">
+                      <div class=" w-[26%]">
                       <Field
                         isRequired
                         name="endDate"
@@ -203,7 +203,7 @@ function LocationCreateShiftForm(props) {
                     </div>
                     </div>
 
-                    <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+                    <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"

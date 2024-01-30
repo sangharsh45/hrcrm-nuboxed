@@ -65,7 +65,7 @@ class DepartmentRole extends PureComponent {
         </TabPane>
       ))
     ) : (
-      <div>{departmentRoleData.message || 'No data available'}</div>
+      <div class=" flex items-center">{departmentRoleData.message || 'No data available'}</div>
     )
   ) : (
     <div>No data available</div>
