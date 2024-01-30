@@ -534,6 +534,16 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
+                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
+                    style={{
+                      border: "1px solid tomato",
+                      borderRadius: "5px",
+                      lineHeight: "24px",
+                      padding: "0px 10px",
+                    }}
+                  >
+                    {props.role}
+                  </div>
 
                   <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
@@ -872,6 +882,7 @@ const mapStateToProps = ({
     auth.userDetails.metaData.organization,
   department: auth.userDetails && auth.userDetails.department,
   roleType: auth.userDetails && auth.userDetails.roleType,
+  role: auth.userDetails && auth.userDetails.role,
   // orgImageId:auth.userDetails.orgImageId,
 
   imageId:

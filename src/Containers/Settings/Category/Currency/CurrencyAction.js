@@ -30,14 +30,14 @@ import { message } from "antd"
       });
   };
 
-  export const linkCountryToggle = ( data,countryId,cb) => (dispatch, getState) => {
+  export const linkCurrencyToggle = ( data,countryId,cb) => (dispatch, getState) => {
     //console.log(permissions, userId);
     const orgId = getState().auth.userDetails.organizationId;
     dispatch({
-      type: types.LINK_COUNTRY_TOGGLE_REQUEST,
+      type: types.LINK_CURRENCY_TOGGLE_REQUEST,
     });
     axios
-    .put(`${base_url}/countries/mandatory/${countryId}`, data, {
+    .put(`${base_url}/countries/currency/mandatory/${currencyId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -46,47 +46,20 @@ import { message } from "antd"
       .then((res) => {
         console.log(res);
         dispatch({
-          type: types.LINK_COUNTRY_TOGGLE_SUCCESS,
+          type: types.LINK_CURRENCY_TOGGLE_SUCCESS,
           payload: res.data,
         });
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: types.LINK_COUNTRY_TOGGLE_FAILURE,
+          type: types.LINK_CURRENCY_TOGGLE_FAILURE,
           payload: err,
         });
       })
   };
 
-  export const linkCountrySalesToggle = ( data,countryId,cb) => (dispatch, getState) => {
-    //console.log(permissions, userId);
-    const orgId = getState().auth.userDetails.organizationId;
-    dispatch({
-      type: types.LINK_COUNTRY_SALES_TOGGLE_REQUEST,
-    });
-    axios
-    .put(`${base_url}/countries/salesInd/${countryId}`, data, {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      },
-    })
-  
-      .then((res) => {
-        console.log(res);
-        dispatch({
-          type: types.LINK_COUNTRY_SALES_TOGGLE_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({
-          type: types.LINK_COUNTRY_SALES_TOGGLE_FAILURE,
-          payload: err,
-        });
-      })
-  };
+ 
 
   export const allCurrencyMandatory = (currencyId) => (dispatch) => {
 
@@ -94,7 +67,7 @@ import { message } from "antd"
       type: types.ALL_CURRENCY_MANDATORY_REQUEST,
     });
     axios
-    .put(`${base_url}/countries/currency/mandatory/${currencyId}`,{}, {
+    .put(`${base_url}/`,{}, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

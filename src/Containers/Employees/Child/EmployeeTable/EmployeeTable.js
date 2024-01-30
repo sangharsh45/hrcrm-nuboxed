@@ -4,11 +4,12 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { SearchOutlined, 
 } from '@ant-design/icons';
+import { DeleteOutlined } from "@ant-design/icons";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import Highlighter from 'react-highlight-words';
 import {getDepartments} from "../../../Settings/Department/DepartmentAction";
-import { StyledTable } from "../../../../Components/UI/Antd";
+import { StyledPopconfirm, StyledTable } from "../../../../Components/UI/Antd";
 import { Button, Tooltip,Input } from "antd";
 import {
   Spacer
@@ -19,7 +20,8 @@ import {
   handleEmployeePulseDrawerModal,
   getEmployeeTreeMap,
   getEmployeeDocument,
-  handleNotifyDrawer
+  handleNotifyDrawer,
+  deleteEmployeeData
 } from "../../EmployeeAction";
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import {
@@ -436,6 +438,36 @@ function EmployeeTable(props) {
         );
       },
     },
+    {
+      title: "",
+      dataIndex: "documentId",
+      width: "2%",
+      render: (name, item, i) => {
+        //debugger
+        return (
+          <>
+               {item.suspendInd === true && (
+                 <StyledPopconfirm
+                 title="Do you want to delete?"
+                 onConfirm={() => deleteEmployeeData(item.employeeId)}>
+           <Tooltip title="Delete">
+        
+           <DeleteOutlined
+        style={{
+          cursor: "pointer",
+          color: "red",
+          fontSize: "1rem",
+        }}
+           />
+       
+           </Tooltip>
+           </StyledPopconfirm>
+     )}
+            
+          </>
+        );
+      },
+    },
   ];
 
    const tab = document.querySelector(".ant-layout-sider-children");
@@ -502,7 +534,8 @@ const mapDispatchToProps = (dispatch) =>
       handleEmployeePulseDrawerModal,
       getEmployeeTreeMap,
       getEmployeeDocument,
-      handleNotifyDrawer
+      handleNotifyDrawer,
+      deleteEmployeeData
     },
     dispatch
   );

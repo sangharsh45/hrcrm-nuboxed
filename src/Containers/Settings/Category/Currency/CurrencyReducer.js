@@ -7,11 +7,10 @@ const initialState = {
     fetchingCurrencyListError: false,
     currencyList: [],
 
-    addingCountryToggle: false,
-    addingCountryToggleError: false,
+    addingCurrencyToggle: false,
+              addingCurrencyToggleError: false,
 
-    addingCountrySalesToggle: false,
-    addingCountrySalesToggleError: false,
+  
 
     addingMandatoryCurrency: false,
     addingMandatoryCurrencyError: false,
@@ -38,49 +37,28 @@ export const currencyReducer = (state = initialState, action) => {
         };
      
 
-        case types.LINK_COUNTRY_TOGGLE_REQUEST:
-            return { ...state, addingCountryToggle: true };
-          case types.LINK_COUNTRY_TOGGLE_SUCCESS:
+        case types.LINK_CURRENCY_TOGGLE_REQUEST:
+            return { ...state, addingCurrencyToggle: true };
+          case types.LINK_CURRENCY_TOGGLE_SUCCESS:
             return {
               ...state,
-              addingCountryToggle: false,
-              country: state.country.map((item) => {
-                if (item.country_id === action.payload.country_id) {
+              addingCurrencyToggle: false,
+              currencyList: state.currencyList.map((item) => {
+                if (item.currency_id === action.payload.currency_id) {
                   return action.payload;
                 } else {
                   return item;
                 }
               }),
             };
-          case types.LINK_COUNTRY_TOGGLE_FAILURE:
+          case types.LINK_CURRENCY_TOGGLE_FAILURE:
             return {
               ...state,
-              addingCountryToggle: false,
-              addingCountryToggleError: true,
+              addingCurrencyToggle: false,
+              addingCurrencyToggleError: true,
             };
 
-            case types.LINK_COUNTRY_SALES_TOGGLE_REQUEST:
-              return { ...state, addingCountrySalesToggle: true };
-            case types.LINK_COUNTRY_SALES_TOGGLE_SUCCESS:
-              return {
-                ...state,
-                addingCountrySalesToggle: false,
-                country: state.country.map((item) => {
-                  if (item.country_id === action.payload.country_id) {
-                    return action.payload;
-                  } else {
-                    return item;
-                  }
-                }),
-              };
-            case types.LINK_COUNTRY_SALES_TOGGLE_FAILURE:
-              return {
-                ...state,
-                addingCountrySalesToggle: false,
-                addingCountrySalesToggleError: true,
-              };
-
-
+        
             case types.ALL_CURRENCY_MANDATORY_REQUEST:
               return { ...state, addingMandatoryCurrency: true };
             case types.ALL_CURRENCY_MANDATORY_SUCCESS:

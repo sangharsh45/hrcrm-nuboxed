@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { getCurrencyList ,
-//   allCountryMandatory
+  allCurrencyMandatory
 } from "../Currency/CurrencyAction";
 import { Button, } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -41,7 +41,7 @@ class Currency extends Component {
     const { selected } = this.state;
     this.setState({ selected: !selected }, () => {
       localStorage.setItem('selected', this.state.selected);
-    //   this.props.allCountryMandatory(this.state.selected);
+       this.props.allCurrencyMandatory(this.state.selected);
     });
   };
 
@@ -178,7 +178,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         getCurrencyList,
   
-        // allCountryMandatory,
+        allCurrencyMandatory,
      
     },
     dispatch
