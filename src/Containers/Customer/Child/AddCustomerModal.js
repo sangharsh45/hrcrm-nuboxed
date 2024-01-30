@@ -7,6 +7,11 @@ const CustomerForm = lazy(() => import("./CustomerForm"));
 const AddCustomerModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
     const drawerWidth = isSmallScreen ? "90%" : "60%";
+    const handleClose = () => {
+      window.location.reload(true);
+    };
+
+    
   return (
     <>
       <StyledDrawer
@@ -20,7 +25,10 @@ const AddCustomerModal = (props) => {
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => props.handleCustomerModal(false)}
+        onClose={() => {
+          handleClose();
+          props.handleCustomerModal(false);
+        }}
       >
         <Suspense fallback={<BundleLoader />}>
           <CustomerForm />{" "}

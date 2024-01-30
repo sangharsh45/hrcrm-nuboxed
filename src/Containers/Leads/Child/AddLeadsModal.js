@@ -11,6 +11,9 @@ class AddLeadsModal extends Component {
     const { addLeadsModal, handleLeadsModal, ...formProps } = this.props;
     const isSmallScreen = window.innerWidth <= 600;
     const drawerWidth = isSmallScreen ? "90%" : "60%";
+    const handleClose = () => {
+      window.location.reload(true);
+    };
     return (
       <>
         <StyledDrawer
@@ -20,7 +23,9 @@ class AddLeadsModal extends Component {
           />}
           width={drawerWidth}
           visible={addLeadsModal}
-          onClose={() => handleLeadsModal(false)}
+          onClose={() =>{
+            handleClose();
+             handleLeadsModal(false)}}
           footer={null}
         >
         <Suspense fallback={<BundleLoader />}>

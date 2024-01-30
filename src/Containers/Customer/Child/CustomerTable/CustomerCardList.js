@@ -149,28 +149,28 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[92.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[17.7rem]"> 
+        <div className=" flex  w-[88.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[18.7rem]"> 
          <FormattedMessage
                         id="app.name"
                         defaultMessage="Name"
                       />
                       </div>
-                      <div className=" md:w-[4.1rem]">
+                      <div className=" md:w-[4.5rem]">
         <FormattedMessage
                         id="app.work"
                         defaultMessage="Work"
                       />
           
           </div>
-        <div className=" md:w-[5.1rem]">
+        <div className=" md:w-[6.1rem]">
         <FormattedMessage
                         id="app.sector"
                         defaultMessage="Sector"
                       />
           
           </div>
-          <div className=" md:w-[5.1rem]">
+          <div className=" md:w-[6.12rem]">
         <FormattedMessage
                         id="app.source"
                         defaultMessage="Source"
@@ -184,14 +184,14 @@ const [rowdata, setrowdata] = useState("");
                       />
           
           </div>
-        <div className="md:w-[5.9rem]">
+        <div className="md:w-[6.9rem]">
         <FormattedMessage
                         id="app.opportunity"
                         defaultMessage="Opportunity"
                       />
 
           </div>
-        <div className="md:w-[2.8rem]">
+        <div className="md:w-[3.8rem]">
         <FormattedMessage
                         id="app.pipeline"
                         defaultMessage="Pipeline"
@@ -252,7 +252,7 @@ const [rowdata, setrowdata] = useState("");
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
+                            <div className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -401,7 +401,7 @@ const [rowdata, setrowdata] = useState("");
               />
             </span>
                    </div>
-                   <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
+                   <div className=" flex font-medium justify-center flex-col w-[11.1rem] max-sm:flex-row  ">
                        
                        <h4 class=" text-sm text-cardBody font-poppins"></h4>
                        <Popconfirm

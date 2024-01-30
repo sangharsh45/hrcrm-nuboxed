@@ -455,7 +455,7 @@ export const customerReducer = (state = initialState, action) => {
         customerByUserId: [
           ...state.customerByUserId,
           ...action.payload],
-      
+          clearbit:null
       };
     case types.GET_CUSTOMERS_FAILURE:
       return {

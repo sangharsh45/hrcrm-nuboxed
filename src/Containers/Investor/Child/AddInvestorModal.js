@@ -7,6 +7,9 @@ const InvesterForm = lazy(() => import("./InvesterForm"));
 const AddInvestorModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
   const drawerWidth = isSmallScreen ? "90%" : "60%";
+  const handleClose = () => {
+    window.location.reload(true);
+  };
   return (
     <>
       <StyledDrawer
@@ -16,7 +19,9 @@ const AddInvestorModal = (props) => {
         />}
         width={drawerWidth}
         visible={props.addInvestorModal}
-        onClose={() => props.handleInvestorModal(false)}
+        onClose={() => {
+          handleClose();
+          props.handleInvestorModal(false)}}
       >
         <Suspense fallback={<BundleLoader />}>
           <InvesterForm />{" "}
