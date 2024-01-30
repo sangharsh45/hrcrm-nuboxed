@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { Switch, Tooltip } from "antd";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
@@ -270,12 +270,13 @@ const handleLoadMore = () => {
                           />
                         </Tooltip>
                       </div>
-                      <div>
+                      <div class=" ml-4">
                         <StyledPopconfirm
                           title="Do you want to delete?"
                           onConfirm={() => props.deleteLocation(item.locationDetailsId)}
                         >
-                          <DeleteIcon
+                            <Tooltip title="Delete">
+                          <DeleteOutlined
                             type="delete"
                             style={{
                               cursor: "pointer",
@@ -283,6 +284,7 @@ const handleLoadMore = () => {
                               fontSize: "1rem",
                             }}
                           />
+                          </Tooltip>
                         </StyledPopconfirm>
                       </div>
                       <div></div>

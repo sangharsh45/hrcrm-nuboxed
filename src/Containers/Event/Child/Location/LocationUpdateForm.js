@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { Formik, Form, Field, FieldArray } from "formik";
-import { StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -208,7 +207,7 @@ handleInventory = () => {
             <div class="overflow-y-auto h-[30rem] overflow-x-hidden">
             <Form class="form-background">
               <div class="flex justify-between max-sm:flex-col">
-                <div class="h-full w-[45%] max-sm:w-wk">
+                <div class="h-full w-[47.5%] max-sm:w-wk">
                   <div>
                     <Field
                       name="locationName"
@@ -221,13 +220,16 @@ handleInventory = () => {
                       isRequired
                     />
                   </div>
-                  <StyledLabel style={{ fontWeight: "bold",marginTop:"0.5rem" }}>Functions</StyledLabel>
+                  <div class="font-bold mt-2" >Functions</div>
                   <div class=" flex ">
                     <div  class=" w-[47%] mt-2">
                       <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
                       <div>
                         <Switch
-                          style={{ width: "6.25em" }}
+                        style={{
+                          width: "6.25em",
+                          //  backgroundColor: productionInd || this.state.production ? "rgb(119, 221, 119)" : "#E6E6E6",
+                        }}
                           checked={this.state.production}
                           onChange={this.handleProduction}
                           checkedChildren="Yes"
@@ -299,7 +301,11 @@ handleInventory = () => {
                         />
                       </div>
                     </div>
-                    <div  class=" w-[47%] mt-2">
+                 
+                   
+                  
+                  </div>
+                  <div  class=" w-[47%] mt-2">
                       <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
                       <div>
                         <Switch
@@ -311,13 +317,10 @@ handleInventory = () => {
                         />
                       </div>
                     </div>
-                   
-                  
-                  </div>
                 </div>
-                <div class="h-full w-[45%] max-sm:w-wk mt-2">
+                <div class="h-full w-[47.5%] max-sm:w-wk mt-2">
                   <div class=" w-full">
-                    <StyledLabel>Time Zone</StyledLabel>
+                  <div  >Time Zone</div>
                     <Field
                       name="timeZone"
                       type="text"

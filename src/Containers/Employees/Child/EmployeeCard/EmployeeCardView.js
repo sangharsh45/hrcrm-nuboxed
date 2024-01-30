@@ -141,7 +141,12 @@ function handleSetCurrentEmployeeId(employeeId,) {
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
           <div class=" font-normal text-xs  mt-2 text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
-          <div class=" font-normal text-xs mt-2 text-cardBody font-poppins ">Reports To:  {item.reportingManagerName}</div>
+          <div class=" font-normal text-xs mt-2 text-cardBody font-poppins ">Reports To:    <span>
+          {item.reportingManagerName 
+                        ? `${item.reportingManagerName}`
+                        : "Not Assigned"}
+                      </span>
+         </div>
           <div class=" flex flex-row justify-evenly mt-[0.3rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
        

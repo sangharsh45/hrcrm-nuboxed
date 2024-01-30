@@ -2,7 +2,6 @@ import * as types from "./PitchActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
-import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
 import Swal from 'sweetalert2'
 

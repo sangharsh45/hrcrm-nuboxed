@@ -135,22 +135,21 @@ function LocationCreateShiftForm(props) {
         }) => (
             <div class="overflow-y-auto h-[30rem] overflow-x-hidden">
                 <Form class="form-background">
-                <div class="flex justify-between">
-                <div class="w-wk">
+               
+                    <div class=" flex flex-row justify-between">
+                    <div class="w-[60%]">
                     <Field
                       name="shiftName"
                       label="Name"
                       type="text"
-                      width={"100%"}
+                       width={"80%"}
                       component={InputComponent}
                       isColumn
                       inlineLabel
                       isRequired
                     />
                   </div>
-                    </div>
-                    <div class=" flex justify-between">
-                      <div class=" w-1/2">
+                      <div class=" w-[30%]">
                         <Field
                           isRequired
                           name="startDate"
@@ -165,12 +164,12 @@ function LocationCreateShiftForm(props) {
                           component={DatePicker}
                           value={values.startDate}
                           inlineLabel
-                          style={{
-                            width: "100%",
-                          }}
+                          // style={{
+                          //   width: "100%",
+                          // }}
                         />
                       </div>
-                      <div class=" w-1/2">
+                      <div class=" w-[30%]">
                       <Field
                         isRequired
                         name="endDate"
@@ -184,9 +183,9 @@ function LocationCreateShiftForm(props) {
                         isColumn
                         value={values.endDate || values.startDate}
                         inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
+                        // style={{
+                        //   width: "100%",
+                        // }}
                         disabledDate={(currentDate) => {
                           if (values.startDate) {
                             if (

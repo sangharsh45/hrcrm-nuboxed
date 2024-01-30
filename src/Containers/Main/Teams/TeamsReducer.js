@@ -442,12 +442,15 @@ export const teamsReducer = (state = initialState, action) => {
               case types.ADD_KPI_SUCCESS:
                 return { ...state, addingKpi: false,
                    addingKpi: false,
-                   addDrawerPerformanceModal:false
+                  //  addDrawerPerformanceModal:false,
+                  employeeKpiList: [...state.employeeKpiList, action.payload],
                   //employees:[action.payload,...state.employees]
                  };
               case types.ADD_KPI_FAILURE:
                 return { ...state, addingKpi: false,
-                  addDrawerPerformanceModal:false };  
+                  addingKpiError: true,
+                  // addDrawerPerformanceModal:false
+                 };  
                   
                   
                   case types.GET_EMPLOYEE_KPI_LIST_REQUEST:

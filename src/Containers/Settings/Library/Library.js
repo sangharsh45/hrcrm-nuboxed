@@ -237,6 +237,7 @@ const mapStateToProps = ({ librarys, auth }) => ({
   fetchingLibrarysError: librarys.fetchingLibrarysError,
   userId: auth.userDetails.userId,
   libraryRecordData:librarys.libraryRecordData,
+  orgId: auth.userDetails.organizationId,
   organizationId: auth.userDetails.organizationId,
 });
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import {  Input, Space, Button, Badge } from "antd";
+import {  Input, Button, } from "antd";
 import {  SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
@@ -52,7 +52,7 @@ function ShftLocsTable(props) {
                         onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
                         style={{ width: 240, marginBottom: 8, display: "block" }}
                     />
-                    <Space>
+                   
                         <Button
                             type="primary"
                             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -80,7 +80,7 @@ function ShftLocsTable(props) {
                         >
                             Filter
                         </Button>
-                    </Space>
+                  
                 </div>
             ),
             filterIcon: (filtered) => (
@@ -126,58 +126,6 @@ function ShftLocsTable(props) {
         {
             title: "",
             width: "2%",
-            // render: (name, item, i) => {
-            //     return {
-            //         props: {
-            //             style: {
-            //                 background:
-            //                     show && orderId === item.orderId
-            //                         ? "rgb(158 183 223)"
-            //                         : null,
-            //             },
-            //         },
-
-            //         children: <span></span>,
-            //     };
-            // },
-        },
-        {
-            title: "Shift Id",
-            width: "22%",
-            dataIndex: "shiftId",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("shiftId"),
-            render: (text, item) => {
-                const currentdate = moment().format("DD/MM/YYYY");
-                const date = moment(item.creationDate).format("DD/MM/YYYY");
-                return {
-
-                    children: (
-                        <Badge size="small">
-                            <span
-                                onClick={() => {
-                                    handleOrder(item.shiftId);
-                                    handleSetParticularOrderData(item);
-                                }}
-
-                            >{`${item.shiftId} `}
-
-                                &nbsp;&nbsp;
-                                {date === currentdate ? (
-                                    <span
-                                        style={{
-                                            color: "tomato",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        New
-                                    </span>
-                                ) : null}
-                            </span>
-                        </Badge>
-                    ),
-                };
-            },
         },
        {
 title:"Name",
