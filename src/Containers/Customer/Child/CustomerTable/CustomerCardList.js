@@ -46,6 +46,7 @@ import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
 import CustomerContactDrawerModal from "./CustomerContactDrawerModal";
 import CustomerOpportunityDrawerModal from "./CustomerOpportunityDrawerModal";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -148,7 +149,7 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" flex justify-between w-[92.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[17.7rem]"> 
          <FormattedMessage
                         id="app.name"
@@ -232,6 +233,7 @@ const [rowdata, setrowdata] = useState("");
       {customerByUserId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const countryCode = item.address[0].countryAlpha2Code
          const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -297,7 +299,7 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
-                                    <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                    <div className=" flex font-medium  items-center  md:w-[5.24rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
 
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -305,7 +307,7 @@ const [rowdata, setrowdata] = useState("");
                            </h4>
                        
                        </div>
-                                <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   
@@ -314,7 +316,7 @@ const [rowdata, setrowdata] = useState("");
                                 
                                 </div> 
 
-                                <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-[6.215rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                          
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -322,26 +324,19 @@ const [rowdata, setrowdata] = useState("");
                            </h4>
                        
                        </div> 
-                                <div className=" flex font-medium flex-col justify-center md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col justify-center md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">
-                                    <ReactCountryFlag
-                          countryCode={item.address && item.address.length && item.address[0].country_alpha2_code}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                        />
-                        &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
+                                    <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
                                     </h4>
                                 </div>
                                 </div>
                              
-                                <div className=" flex font-medium flex-col md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -349,7 +344,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[5.82rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -371,14 +366,21 @@ const [rowdata, setrowdata] = useState("");
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
                                     <span>
-              {item.assignedTo === null ? (
-                "None"
+                                    {item.assignedTo === null ? (
+                "Not available"
               ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
+              )}
+              </>
               )}
             </span>
              
