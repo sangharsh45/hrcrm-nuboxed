@@ -30,7 +30,7 @@ import { message } from "antd"
       });
   };
 
-  export const linkCurrencyToggle = ( data,countryId,cb) => (dispatch, getState) => {
+  export const linkCurrencyToggle = ( data,currencyId) => (dispatch, getState) => {
     //console.log(permissions, userId);
     const orgId = getState().auth.userDetails.organizationId;
     dispatch({
