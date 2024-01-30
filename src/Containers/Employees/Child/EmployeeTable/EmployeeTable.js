@@ -449,7 +449,7 @@ function EmployeeTable(props) {
                {item.suspendInd === true && (
                  <StyledPopconfirm
                  title="Do you want to delete?"
-                 onConfirm={() => deleteEmployeeData(item.employeeId)}>
+                 onConfirm={() => props.deleteEmployeeData(item.userId)}>
            <Tooltip title="Delete">
         
            <DeleteOutlined

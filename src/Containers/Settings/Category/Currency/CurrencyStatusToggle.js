@@ -2,30 +2,30 @@ import React, { useEffect,useState } from "react";
 import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { linkCountryToggle } from "../Country/CountryAction";
+import { linkCurrencyToggle } from "../Currency/CurrencyAction";
 
 function CurrencyStatusToggle(props) {
-  const[data,setData]=useState(props.country)
+  const[data,setData]=useState(props.currencyList)
   useEffect(()=>{
-    setData(props.country)
-  },[props.country])
+    setData(props.currencyList)
+  },[props.currencyList])
   const [toggle, setToggle] = React.useState(props.mandatoryInd);
   console.log(props.mandatoryInd)
 
   function handleToggleCollection(item) {
     if (props.mandatoryInd) {
-      props.linkCountryToggle({
-        country_id: props.country_id,
+      props.linkCurrencyToggle({
+        currency_id: props.currency_id,
         mandatoryInd: props.mandatoryInd ? false : true,
          
-      },props.country_id);
+      },props.currency_id);
       setToggle( props.mandatoryInd ? false : true);
  
     } else {
-      props.linkCountryToggle({
-        country_id: props.country_id,
+      props.linkCurrencyToggle({
+        currency_id: props.currency_id,
         mandatoryInd: props.mandatoryInd ? false : true,
-      },props.country_id);
+      },props.currency_id);
       setToggle( props.mandatoryInd ? false : true);
     }
   }
@@ -65,16 +65,16 @@ function CurrencyStatusToggle(props) {
   );
 }
 
-const mapStateToProps = ({ auth, countrys }) => ({
+const mapStateToProps = ({ auth, currency }) => ({
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
-  country:countrys.country,
+  currencyList:currency.currencyList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        linkCountryToggle,
+      linkCurrencyToggle,
     },
     dispatch
   );

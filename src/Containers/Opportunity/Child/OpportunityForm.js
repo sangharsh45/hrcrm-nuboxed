@@ -19,6 +19,7 @@ import {
   getOppLinkedStages,
 } from "../OpportunityAction";
 import { getCrm} from "../../Leads/LeadsAction";
+import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
@@ -49,10 +50,30 @@ function OpportunityForm(props) {
      props.getOppLinkedWorkflow(props.orgId);
      props.getCrm();
      props.getAllEmployeelist();
+     props.getCurrencyList();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
+
+  const sortedCurrency =props.currencyList.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
 
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
@@ -394,9 +415,14 @@ const AllEmplo = props.allEmployeeList.map((item) => {
                       }
                       width="100%"
                       isColumn
-                      selectType="currencyName"
+                      // selectType="currencyName"
                       isRequired
-                      component={SearchSelect}
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
                     />
                   </div>
                 </div>
@@ -712,7 +738,7 @@ const AllEmplo = props.allEmployeeList.map((item) => {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity,investor, contact, customer,leads }) => ({
+const mapStateToProps = ({ auth, opportunity,currency,investor, contact, customer,leads }) => ({
   user: auth.userDetails,
   crmAllData:leads.crmAllData,
   userId: auth.userDetails.userId,
@@ -733,7 +759,8 @@ const mapStateToProps = ({ auth, opportunity,investor, contact, customer,leads }
   customerData: customer.customerData,
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName,
-  allEmployeeList:investor.allEmployeeList
+  allEmployeeList:investor.allEmployeeList,
+  currencyList: currency.currencyList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -746,7 +773,8 @@ const mapDispatchToProps = (dispatch) =>
       getOppLinkedWorkflow,
       getOppLinkedStages,
       getCrm,
-      getAllEmployeelist
+      getAllEmployeelist,
+      getCurrencyList
     },
     dispatch
   );

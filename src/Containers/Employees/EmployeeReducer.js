@@ -850,7 +850,7 @@ case types.GET_ADMIN_USER_FAILURE:
             ...state,
             deletingEmployeeData: false,
             employees: state.employees.filter(
-              (item) => item.employeeId !== action.payload
+              (item) => item.userId !== action.payload
             ),
           };
         case types.DELETE_EMPLOYEE_DATA_FAILURE:
