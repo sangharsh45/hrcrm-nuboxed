@@ -55,10 +55,11 @@ class SingleSectors extends Component {
                   <Tooltip title="Delete">
                     <DeleteOutlined
                         onClick={() => handleDeleteSector(sectorId)}
-                      size="14px"
+                     
                       style={{
                         verticalAlign: "center",
                         marginLeft: "5px",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />

@@ -87,6 +87,7 @@ import { catgPaymentReducer } from "../Containers/Settings/Category/Payment/Paym
 import { itemTaskReducer } from "../Containers/Settings/Category/ItemTask/ItemTaskReducer";
 import { moduleReducer } from "../Containers/Settings/Category/Module/ModuleReducer";
 import { kpiReducer } from "../Containers/Settings/Category/KPI/KPIReducer";
+import { currencyReducer } from "../Containers/Settings/Category/Currency/CurrencyReducer";
 
 
 const appReducer = combineReducers({
@@ -171,6 +172,7 @@ const appReducer = combineReducers({
   itemTask:itemTaskReducer,
   module:moduleReducer,
   kpi:kpiReducer,
+  currency:currencyReducer,
 });
 
 const rootReducer = (state, action) => {

@@ -4,11 +4,11 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
+import { StyledLabel } from "../../../../Components/UI/Elements";
 import {getTimeZone} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
  import { updateEmployee } from "../../EmployeeAction";
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
-import { HeaderLabel, Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
@@ -202,9 +202,11 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         type: this.state.typeInd ? "true" : "false",
         employee_type: this.state.workType,
         // job_type: this.state.active,
-        reportingManager: this.props.userDetails.userId
-          ? this.props.userDetails.userId
-          : "",
+        
+        reportingManager: setEditingEmployee.reportingManagerName || "",
+        // reportingManager: this.props.userDetails.userId
+        //   ? this.props.userDetails.userId
+        //   : "",
         address: [
           {
             addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",
@@ -228,6 +230,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             departmentId:this.state.selectedDept,
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
+          
             reportingManagerDeptId:values.reportingManagerDeptId,
             roleType:this.state.selectedRole,
             job_type: this.state.active ? "Full Time" : "Part Time",
@@ -268,8 +271,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             <Form className="form-background">
                   <div class="flex justify-between  pr-2 max-sm:flex-col">
                 <div class="  w-[47.5%] max-sm:w-wk">
-                  <Spacer />
-                  <div class=" flex flex-nowrap justify-between" >
+  
+                  <div class=" flex flex-nowrap justify-between mt-3" >
                   {/* <FastField name="imageId" component={Upload} /> */}
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
@@ -382,8 +385,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         isColumnWithoutNoCreate
                         //label="Mobile #"
                         label={<FormattedMessage
-                          id="app.personal"
-                          defaultMessage="Personal"
+                          id="app.dialCode"
+                          defaultMessage="Dial Code"
                         />}
                         isColumn
                         options={
@@ -399,8 +402,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       <Field
                         type="text"
                         name="mobileNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                       label="Personal"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -417,7 +420,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         isColumnWithoutNoCreate
                         label={<FormattedMessage
                           id="app.countryDialCode1"
-                          defaultMessage="Work #"
+                          defaultMessage="Dial Code"
                         />}
                         isColumn
                         options={
@@ -433,8 +436,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       <Field
                         type="text"
                         name="phoneNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                         label="Work #"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -510,11 +513,11 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   </div>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)",marginTop:"0.5rem" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
-                  Address for  Correspondence</HeaderLabel>
+                      <div class=" text-[white] text-xs" >
+                  Address for  Correspondence</div>
                   </div>
                     </div>
-                        {/* <Spacer /> */}
+                   
                   <FieldArray
                     name="address"
                     label="Address"
@@ -528,8 +531,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
  
                 </div>
                 <div class="  w-[47.5%] max-sm:w-wk ">
-                <div style={{ width: "100%" }}>
-                    <StyledLabel>Time Zone</StyledLabel>
+                <div class=" w-full" style={{ width: "100%" }}>
+                    <div>Time Zone</div>
                     <Field
                       name="timeZone"
                       type="text"
@@ -645,8 +648,8 @@ name="departmentId"
                     // isColumn
                     // selectType="roleType"
                      /> */}
-                         <Spacer/>
-                      <div class=" flex justify-between max-sm:flex-col" >
+      
+                      <div class=" flex justify-between mt-3 max-sm:flex-col" >
                       <div class=" w-w48 flex flex-col max-sm:w-wk">
                       <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select className="customize-select"
@@ -778,14 +781,14 @@ name="departmentId"
                
                   </div>
                   </div>
-                  <Spacer />
-                  <div>
+             
+                  <div class=" mt-3">
                     <StyledLabel><FormattedMessage
                       id="app.employeetype"
                       defaultMessage="Employee Type"
                     />
                     </StyledLabel>
-                    <Spacer />
+                
                     <Radio.Group
                       name="radiogroup"
                       defaultValue={this.state.workType}
@@ -815,12 +818,11 @@ name="departmentId"
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 mt-3 md:absolute ">
                 <Button
                   htmlType="submit"
                   type="primary"
-                  Loading={this.props.updateEmployee}
+                  loading={this.props.updatingEmployee}
                 >
                   Update
                 </Button>
@@ -842,7 +844,7 @@ const mapStateToProps = ({ auth,role,location, employee,designations,departments
     orgId: auth.userDetails.organizationId,
     countries: auth.countries,
     showLocation:location.showLocation,
-    updateEmployee: employee.updateEmployee,
+    updatingEmployee: employee.updatingEmployee,
     departmentId:departments.departmentId,
     designationTypeId:designations.designationTypeId,
     employees:employee.employees,

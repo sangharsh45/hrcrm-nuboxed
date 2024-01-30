@@ -363,8 +363,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                         isColumnWithoutNoCreate
                         //label="Mobile #"
                         label={<FormattedMessage
-                          id="app.personal"
-                          defaultMessage="Personal"
+                          id="app.dialCode"
+                          defaultMessage="Dial Code"
                         />}
                         placeholder="Select"
                         isColumn
@@ -381,8 +381,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       <Field
                         type="text"
                         name="mobileNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                         label="Personal"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -399,7 +399,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                         isColumnWithoutNoCreate
                         label={<FormattedMessage
                           id="app.countryDialCode1"
-                          defaultMessage="Work #"
+                          defaultMessage="Dial Code"
                         />}
                         placeholder="Select"
                         isColumn
@@ -416,8 +416,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       <Field
                         type="text"
                         name="phoneNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                         label="Work #"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -951,7 +951,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                 <Button
                   htmlType="submit"
                   type="primary"
-                  Loading={addingEmployee}
+                  loading={addingEmployee}
                 >
                   Submit
                 </Button>

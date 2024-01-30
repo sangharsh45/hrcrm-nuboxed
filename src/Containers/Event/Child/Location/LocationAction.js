@@ -1,6 +1,5 @@
 import * as types from "./LocationActionType";
 import axios from "axios";
-import dayjs from "dayjs";
 import { base_url,base_url2 } from "../../../../Config/Auth";
 import Swal from 'sweetalert2';
 
@@ -97,6 +96,12 @@ export const setLocationViewType = (viewType) => (dispatch) => {
           type: types.UPDATE_LOCATIONS_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Info Updated Succefully',
+          showConfirmButton: false,
+          timer: 1500
+        })
         cb();
       })
       .catch((err) => {

@@ -7,6 +7,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import Currency from "./Currency/Currency";
 const Documents = lazy(() =>
   import("../Documents/Documents")
 );
@@ -115,6 +116,19 @@ class OthersTab extends Component {
               >
                 <Suspense>
                   <Country />
+                </Suspense>
+              </TabPane>
+              <TabPane
+                tab={
+                  <>
+                 <LanguageIcon/>
+                    <span class=" ml-[0.25em]">Currency</span>
+                  </>
+                }
+                key="6"
+              >
+                <Suspense>
+                  <Currency />
                 </Suspense>
               </TabPane>
             </StyledTabs>

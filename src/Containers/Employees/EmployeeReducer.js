@@ -104,8 +104,8 @@ const initialState = {
   fetchingPermissionsListError: false,
   permissionsDataList: [],
 
-  updateEmployee: false,
-  updateEmployeeError: false,
+  updatingEmployee: false,
+  updatingEmployeeError: false,
 
   fetchingallCustomerEmployeeList:false,
   fetchingallCustomerEmployeeListError:false,
@@ -707,11 +707,11 @@ export const EmployeeReducer = (state = initialState, action) => {
                             
 
       case types.UPDATE_EMPLOYEE_REQUEST:
-        return { ...state, updateEmployee: true };
+        return { ...state, updatingEmployee: true };
       case types.UPDATE_EMPLOYEE_SUCCESS:
         return {
           ...state,
-          updateEmployee: false,
+          updatingEmployee: false,
           updateEmployeeModal: false,
           employees: state.employees.map((item) => {
             if (item.employeeId === action.payload.employeeId) {
@@ -724,8 +724,8 @@ export const EmployeeReducer = (state = initialState, action) => {
       case types.UPDATE_EMPLOYEE_FAILURE:
         return {
           ...state,
-          updateEmployee: false,
-          updateEmployeeError: true,
+          updatingEmployee: false,
+          updatingEmployeeError: true,
         };
 
         case types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE:

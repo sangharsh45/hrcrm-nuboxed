@@ -1,6 +1,6 @@
 import * as types from "./EmployeeActionType";
 import axios from "axios";
-import dayjs from "dayjs";
+import Swal from 'sweetalert2'
 import { base_url } from "../../Config/Auth";
 import { message } from "antd";
 
@@ -996,6 +996,12 @@ export const updateEmployee = (data, employeeId) => (dispatch) => {
         type: types.UPDATE_EMPLOYEE_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Info Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
