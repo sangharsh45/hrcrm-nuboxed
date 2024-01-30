@@ -1003,13 +1003,13 @@ const onCheckAllTeamsChange = (e) => {
       {/* <Form className="form-background"> */}
       <div class=" flex justify-between h-[100vh] pr-2 overflow-y-auto" >
          
-            <TabsWrapper style={{height:"120rem"}}>
+            <TabsWrapper style={{height:"140rem"}}>
  
  {props.departmentData.hrInd === true ? 
  <div >
-<div class=" text-clr flex justify-center mt-4 text-base font-bold">General, HR & Self Service</div>
+<div class=" text-clr flex justify-center mt-8 text-base font-bold">General, HR & Self Service</div>
 
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
             
               <div >
                 <div class="text-sm font-semibold">Users</div>
@@ -1034,7 +1034,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
               {/* Vendor */}
        
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
             
           
               <div >
@@ -1065,7 +1065,7 @@ const onCheckAllTeamsChange = (e) => {
            
             {/* Vendor */}
          
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
               
           
            
@@ -1124,7 +1124,7 @@ const onCheckAllTeamsChange = (e) => {
      
             </div>
 
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
             
            
                <div >
@@ -1174,9 +1174,9 @@ const onCheckAllTeamsChange = (e) => {
      
     {props.departmentData.crmInd === true ? 
     <div>     
-            <div class=" text-clr mt-6 flex justify-center text-base  font-bold">CRM</div>
+            <div class=" text-clr mt-8 flex justify-center text-base  font-bold">CRM</div>
           
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
              
              
            
@@ -1206,7 +1206,7 @@ const onCheckAllTeamsChange = (e) => {
             
 
             
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
               <div >
                   <div class="text-sm font-semibold">Opportunity</div>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
@@ -1237,7 +1237,7 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div> */}
               </div>
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
             <div >
               <div class="text-sm font-semibold">Junk Leads</div>
               <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
@@ -1258,9 +1258,9 @@ const onCheckAllTeamsChange = (e) => {
            {props.departmentData.erpInd === true ? 
     <div>            
                 
-<div class=" text-clr text-base flex justify-center mt-6 font-bold">ERP</div>
+<div class=" text-clr text-base flex justify-center mt-8 font-bold">ERP</div>
           
-                <div class=" flex justify-around mt-4" >
+                <div class=" flex justify-around mt-8" >
               <div >
               <div class="text-sm font-semibold">Shipper</div>
               <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
@@ -1283,7 +1283,7 @@ const onCheckAllTeamsChange = (e) => {
              
                 </div>
               
-                <div class=" flex justify-around mt-4" >
+                <div class=" flex justify-around mt-8" >
                 <div >
                   <div class="text-sm font-semibold">Order</div>
                   <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
@@ -1304,7 +1304,7 @@ const onCheckAllTeamsChange = (e) => {
 
   </div> 
                 </div>
-                <div class=" flex justify-around mt-4" >
+                <div class=" flex justify-around mt-8" >
          
                <div >
                   <div class="text-sm font-semibold">Materials</div>
@@ -1327,7 +1327,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
                 </div>
           
-                <div class=" flex justify-around mt-4" >
+                <div class=" flex justify-around mt-8" >
          
          <div >
             <div class="text-sm font-semibold">Inventory</div>
@@ -1358,11 +1358,19 @@ const onCheckAllTeamsChange = (e) => {
 
  {props.departmentData.accountInd === true ?  
     <div>     
-            <div class=" text-clr text-base flex justify-center mt-6 font-bold">Accounting</div>
+            <div class=" text-clr text-base flex justify-center mt-8 font-bold">Accounting</div>
         
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
           
+            <div >
+                  <div class="text-sm font-semibold">Collections</div>
+                  <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
+                  <label class="text-xs"> Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
 
+                </div>
               
                 <div >
                   <div class="text-sm font-semibold">Payments</div>
@@ -1374,15 +1382,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
               
                     {/* Contact */}
-                    <div >
-                  <div class="text-sm font-semibold">Collections</div>
-                  <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
-                  <label class="text-xs"> Check all</label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
-
-                </div>
+                
          
             
 
@@ -1404,11 +1404,18 @@ const onCheckAllTeamsChange = (e) => {
 
 {props.departmentData.recruitOppsInd === true ? 
     <div>     
-            <div class=" text-clr text-base flex justify-center mt-6 font-bold">RecruitPro</div>
+            <div class=" text-clr text-base flex justify-center mt-8 font-bold">RecruitPro</div>
            
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
           
-
+            <div  >
+                  <div class="text-sm font-semibold">Talent</div>
+                  <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedTalentList} onChange={onTalentChange} />
+                </div>
               
                 <div >
                   <div class="text-sm font-semibold">Requirement</div>
@@ -1420,14 +1427,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
    
                    
-                <div  >
-                  <div class="text-sm font-semibold">Talent</div>
-                  <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
-                  <label class="text-xs">  Check all  </label>
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedTalentList} onChange={onTalentChange} />
-                </div>
+               
             
 
 
@@ -1439,9 +1439,9 @@ const onCheckAllTeamsChange = (e) => {
                   : null } 
                   {props.departmentData.imInd === true ? 
     <div>     
-            <div class=" text-clr text-base mt-6 flex justify-center font-bold">IM</div>
+            <div class=" text-clr text-base mt-8 flex justify-center font-bold">IM</div>
        
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
           
 
               
@@ -1468,7 +1468,7 @@ const onCheckAllTeamsChange = (e) => {
              
 
             
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
               <div >
                   <div class="text-sm font-semibold">Deal</div>
                   <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
@@ -1505,9 +1505,9 @@ const onCheckAllTeamsChange = (e) => {
 
 {props.departmentData.elearningInd === true ? 
     <div>     
-            <div class=" text-clr mt-6 text-base flex justify-center font-bold">E-Learning</div>
+            <div class=" text-clr mt-8 text-base flex justify-center font-bold">E-Learning</div>
        
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
           
 
               
@@ -1534,7 +1534,7 @@ const onCheckAllTeamsChange = (e) => {
              
 
             
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
               <div >
                   <div class="text-sm font-semibold">Program</div>
                   <Checkbox indeterminate={indeterminateProgram} onChange={onCheckAllProgramChange} checked={checkAllProgram}>
@@ -1558,7 +1558,7 @@ const onCheckAllTeamsChange = (e) => {
            
               </div> 
 
-              <div class=" flex justify-around mt-4" >
+              <div class=" flex justify-around mt-8" >
               <div >
                   <div class="text-sm font-semibold">Topic</div>
                   <Checkbox indeterminate={indeterminateTopic} onChange={onCheckAllTopicChange} checked={checkAllTopic}>

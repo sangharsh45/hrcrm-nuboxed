@@ -357,15 +357,16 @@ export const handleEmployeeDrawerForAdmin = (isVisible) => (dispatch) => {
 };
 
 //suspend
-export const suspendEmployee = (data, cb,employeeId) => (dispatch) => {
+export const suspendEmployee = ( cb,employeeId,suspendInd) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.SUSPEND_EMPLOYEE_REQUEST,
   });
   axios
-    .put(`${base_url}/suspend/employee/${employeeId}`, data,{
+    .put(`${base_url}/suspend/employee/${employeeId}/${suspendInd}`,{},{
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          
         },
       })
     .then((res) => {

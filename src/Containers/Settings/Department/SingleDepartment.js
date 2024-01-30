@@ -20,7 +20,7 @@ const SingleDepartment = (props) => {
     setViewType((prevViewType) => (prevViewType === "view" ? "edit" : "view"));
   };
   const {
-    department: { departmentName,moduleMapper,crmInd,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
+    department: { departmentName,moduleMapper,crmInd,procurementInd,imInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
    handleChange,
    name,
    value,
@@ -328,7 +328,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleErpClick}
-                          checked={erpStatus || moduleMapper.erpInd}
+                          checked={erpStatus || erpInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -350,7 +350,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleCrmClick}
-                          checked={crmStatus || moduleMapper.crmInd}
+                          checked={crmStatus || crmInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -366,7 +366,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleImClick}
-                          checked={imStatus || moduleMapper.imInd}
+                          checked={imStatus || imInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -388,7 +388,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleRecruitProClick}
-                          checked={recruitProStatus || moduleMapper.recruitProInd}
+                          checked={recruitProStatus || recruitProInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -411,7 +411,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleHrClick}
-                          checked={hrStatus || moduleMapper.hrInd}
+                          checked={hrStatus || hrInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -434,7 +434,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleElearningClick}
-                          checked={elearningStatus || moduleMapper.elearningInd}
+                          checked={elearningStatus || elearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -495,7 +495,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleProductionClick}
-                          checked={productionStatus || moduleMapper.productionInd}
+                          checked={productionStatus || productionInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -518,7 +518,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleRepairClick}
-                          checked={repairStatus || moduleMapper.repairInd}
+                          checked={repairStatus || repairInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -556,7 +556,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleOrderManagementClick}
-                          checked={orderManagStatus || moduleMapper.orderManagementInd}
+                          checked={orderManagStatus || orderManagementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -578,7 +578,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleLogisticClick}
-                          checked={logisticsStatus || moduleMapper.logisticsInd}
+                          checked={logisticsStatus || logisticsInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -600,7 +600,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleProcurmentClick}
-                          checked={procurmentStatus || moduleMapper.procurementInd}
+                          checked={procurmentStatus || procurementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -625,10 +625,11 @@ const SingleDepartment = (props) => {
                     {mandetoryInd !== true && (
                       <DeleteOutlined
                         onClick={() => handleDeleteDepartment(departmentId)}
-                        size="14px"
+                     
                         style={{
                           verticalAlign: "center",
                           marginLeft: "5px",
+                          fontSize: "1rem",
                           color: "red",
                         }}
                       />

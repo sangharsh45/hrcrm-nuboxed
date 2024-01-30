@@ -337,7 +337,14 @@ export const EmployeeReducer = (state = initialState, action) => {
       return {
         ...state,
         suspendedEmployee: false,
-        addTeamTransferModal: false,
+        // addTeamTransferModal: false,
+        employees: state.employees.map((item) => {
+          if (item.employeeId === action.payload.employeeId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.SUSPEND_EMPLOYEE_FAILURE:
       return {
