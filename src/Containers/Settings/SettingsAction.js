@@ -4351,3 +4351,56 @@ export const LinkOnboardingStagePublish = (data, cb) => (dispatch) => {
       cb && cb("Failure");
     });
 };
+
+export const createCurrencyConversion = (data) => (dispatch) => {
+  dispatch({
+    type: types.CREATE_CURRENCY_CONVERSION_REQUEST,
+  });
+  axios
+    .post(`${base_url}/currencyConversion/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getOneTimeDeliveryCharge())
+      dispatch({
+        type: types.CREATE_CURRENCY_CONVERSION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.CREATE_CURRENCY_CONVERSION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getCurrencyConversion = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CURRENCY_CONVERSION_REQUEST,
+  });
+  axios
+    .get(`${base_url}/currencyConversion/All/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CURRENCY_CONVERSION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CURRENCY_CONVERSION_FAILURE,
+        payload: err,
+      });
+    });
+};

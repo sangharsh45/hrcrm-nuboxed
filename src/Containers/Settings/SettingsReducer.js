@@ -517,6 +517,13 @@ const initialState = {
   gettingNotificationConfigError:false,
   notificationConfig:{},
 
+  creatingCurrencyConversion: false,
+  creatingCurrencyConversionError: false,
+
+  fetchingCurrencyConversion: false,
+  fetchingCurrencyConversionError: false,
+  conversionCurrencies:[]
+
 };
 export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -3186,7 +3193,39 @@ export const settingsReducer = (state = initialState, action) => {
         linkingOnboardingProcessPublishError: true,
       };
           
-  
+      case types.CREATE_CURRENCY_CONVERSION_REQUEST:
+        return { ...state, creatingCurrencyConversion: true };
+    case types.CREATE_CURRENCY_CONVERSION_SUCCESS:
+        return {
+            ...state,
+            creatingCurrencyConversion: false,
+        };
+    case types.CREATE_CURRENCY_CONVERSION_FAILURE:
+        return {
+            ...state,
+            creatingCurrencyConversion: false,
+            creatingCurrencyConversionError: true,
+        };
+
+        case types.GET_CURRENCY_CONVERSION_REQUEST:
+          return {
+            ...state,
+            fetchingCurrencyConversion: true,
+            fetchingCurrencyConversionError: false,
+          };
+        case types.GET_CURRENCY_CONVERSION_SUCCESS:
+          return {
+            ...state,
+            fetchingCurrencyConversion: false,
+            fetchingCurrencyConversionError: false,
+            conversionCurrencies: action.payload,
+          };
+        case types.GET_CURRENCY_CONVERSION_FAILURE:
+          return {
+            ...state,
+            fetchingCurrencyConversion: false,
+            fetchingCurrencyConversionError: true,
+          };
 
     default:
       return state;

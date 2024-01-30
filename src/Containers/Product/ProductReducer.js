@@ -232,6 +232,9 @@ const initialState = {
   builderbyProductId: [],
 
   priceOpenDrawer: false,
+
+  removingProductBuilder: false,
+  removingProductBuilderError:false 
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -932,6 +935,23 @@ export const productReducer = (state = initialState, action) => {
         uploadingCatalogueList: false,
         uploadingCatalogueListError: true,
       };
+
+      case types.REMOVE_PRODUCT_BUILDER_REQUEST:
+        return { ...state, removingProductBuilder: true };
+      case types.REMOVE_PRODUCT_BUILDER_SUCCESS:
+        return {
+          ...state,
+          removingProductBuilder: false,
+          builderbyProductId: state.builderbyProductId.filter(
+            (item) => item.productSupplyLinkId !== action.payload.productSupplyLinkId
+          ),
+        };
+      case types.REMOVE_PRODUCT_BUILDER_FAILURE:
+        return {
+          ...state,
+          removingProductBuilder: false,
+          removingProductBuilderError: true,
+        };  
 
     default:
       return state;

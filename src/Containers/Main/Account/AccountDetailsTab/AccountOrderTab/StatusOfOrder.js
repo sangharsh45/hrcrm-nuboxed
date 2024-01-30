@@ -91,6 +91,17 @@ const StatusOfOrder = (props) => (
                     //qc completed msg on date and user who assign technician                   
                     description:
                         <>
+                        <Button
+                                        type='primary'
+                                        // onClick={() => props.startQCStatus({
+                                        //     orderPhoneId: props.particularRowData.orderId || "",
+                                        //     qcStartInd: 1,
+                                        //     qcStartUserId: props.userId
+                                        // },
+                                        //     props.distributorId
+                                        // )}
+                                    >
+                                        Start QC     </Button>
                             <b>{(props.particularRowData.qcStartInd === 2 || props.particularRowData.qcStartInd === 3) &&
                                 (
                                     <>

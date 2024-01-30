@@ -38,8 +38,8 @@ function AddOrderInAccount(props) {
     }
     const currencyOption = props.currencies.map((item) => {
         return {
-            label: item.currencyName || "",
-            value: item.currencyId,
+            label: item.currency_name || "",
+            value: item.currency_id,
         };
     });
     return (
