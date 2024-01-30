@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { updateOpportunity, getAllSalesList } from "../../OpportunityAction";
@@ -40,7 +41,27 @@ function UpdateOpportunityForm (props) {
     props.getOppLinkedStages(props.orgId);
     props. getCrm();
     props.getAllEmployeelist();
+    props.getCurrencyList();
   },[]);
+
+  const sortedCurrency =props.currencyList.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
@@ -377,9 +398,14 @@ function UpdateOpportunityForm (props) {
                         defaultValue={{
                           value: props.user.currency,
                         }}
-                        selectType="currencyName"
+                        // selectType="currencyName"
                         isRequired
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
                       />
 
                     
@@ -658,7 +684,7 @@ function UpdateOpportunityForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth, opportunity, customer,leads, contact,investor }) => ({
+const mapStateToProps = ({ auth, opportunity,currency, customer,leads, contact,investor }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -671,7 +697,8 @@ const mapStateToProps = ({ auth, opportunity, customer,leads, contact,investor }
   customerData: customer.customerData,
   crmAllData:leads.crmAllData,
   orgId: auth.userDetails.organizationId,
-  allEmployeeList:investor.allEmployeeList
+  allEmployeeList:investor.allEmployeeList,
+  currencyList: currency.currencyList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -684,7 +711,8 @@ const mapDispatchToProps = (dispatch) =>
       getContactData,
       getCustomerData,
       getCrm,
-      getAllEmployeelist
+      getAllEmployeelist,
+      getCurrencyList
     },
     dispatch
   );

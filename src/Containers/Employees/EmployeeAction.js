@@ -1156,7 +1156,7 @@ export const addOnboardingEmployee = (employeeId,data) => (dispatch) => {
 };
 
 export const deleteEmployeeData = (userId,orgId) => (dispatch, getState) => {
-  const { userId } = getState("auth").auth.userDetails;
+  // const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
     type: types.DELETE_EMPLOYEE_DATA_REQUEST,

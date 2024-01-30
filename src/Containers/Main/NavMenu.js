@@ -565,7 +565,7 @@ function NavMenu(props) {
         <hr />
         {/* Accessment */}
 
-        {user.elearningInd === true && user.assessmentAccessInd === true &&  (
+        {user.eLearningInd === true && user.assessmentAccessInd === true &&  (
             <Menu.Item key="/accessment" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
               <Link to="/Accessment">
                 <ComputerIcon
@@ -583,7 +583,7 @@ function NavMenu(props) {
             </Menu.Item>
           )}
 
-        {user.elearningInd === true && user.courseAccessInd === true && (
+        {user.eLearningInd === true && user.courseAccessInd === true && (
             <Menu.Item key="/course" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
               <Link to="/Course">
                 <NewspaperIcon
@@ -601,7 +601,7 @@ function NavMenu(props) {
             </Menu.Item>
           )}
         {/* Program */}
-        {user.elearningInd === true && user.programAccessInd === true && (
+        {user.eLearningInd === true && user.programAccessInd === true && (
             <Menu.Item key="/program" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
               <Link to="/Program">
                 <LibraryBooksIcon

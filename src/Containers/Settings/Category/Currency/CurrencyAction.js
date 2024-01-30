@@ -61,13 +61,13 @@ import { message } from "antd"
 
  
 
-  export const allCurrencyMandatory = (currencyId) => (dispatch) => {
+  export const allCurrencyMandatory = (mandatoryInd) => (dispatch) => {
 
     dispatch({
       type: types.ALL_CURRENCY_MANDATORY_REQUEST,
     });
     axios
-    .put(`${base_url}/`,{}, {
+    .put(`${base_url}/countries/currency/mandatory/all/${mandatoryInd}`,{}, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
