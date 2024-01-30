@@ -357,7 +357,7 @@ export const handleEmployeeDrawerForAdmin = (isVisible) => (dispatch) => {
 };
 
 //suspend
-export const suspendEmployee = ( cb,employeeId,suspendInd) => (dispatch) => {
+export const suspendEmployee = ( employeeId,suspendInd) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.SUSPEND_EMPLOYEE_REQUEST,
@@ -374,7 +374,7 @@ export const suspendEmployee = ( cb,employeeId,suspendInd) => (dispatch) => {
         type: types.SUSPEND_EMPLOYEE_SUCCESS,
         payload: res.data,
       });
-      cb && cb("success", res.data.message, res.data.assignInd);
+      // cb && cb("success", res.data.message, res.data.assignInd);
     })
     .catch((err) => {
       // debugger;
@@ -383,7 +383,7 @@ export const suspendEmployee = ( cb,employeeId,suspendInd) => (dispatch) => {
         type: types.SUSPEND_EMPLOYEE_FAILURE,
         payload: err,
       });
-      cb && cb("failuer", null, null);
+      // cb && cb("failuer", null, null);
     });
 };
 
@@ -1150,6 +1150,35 @@ export const addOnboardingEmployee = (employeeId,data) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.ADD_ONBOARDING_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteEmployeeData = (userId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_EMPLOYEE_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/employee/hard-delete/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_EMPLOYEE_DATA_SUCCESS,
+        payload: userId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_EMPLOYEE_DATA_FAILURE,
         payload: err,
       });
     });

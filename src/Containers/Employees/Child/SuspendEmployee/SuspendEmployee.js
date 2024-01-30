@@ -11,35 +11,11 @@ import {
 function SuspendEmployee(props) {
   const [assignedIndicator, setAssignedIndicator] = React.useState(false);
   const [toggle, setToggle] = React.useState(props.suspendInd);
-
-  function handleToggleClick() {
-    setAssignedIndicator(!assignedIndicator);
-    if (props.suspendInd) {
-      props.suspendEmployee(
-        {
-          employeeId: props.employeeId,
-          userId: props.userId,
-          suspendInd: props.suspendInd ? false : true,
-        },
-        // handleCallback,
-        props.employeeId,
-        props.suspendInd? false : true ,
-   
-      
-      );
-    } else {
-      props.suspendEmployee(
-        {
-          employeeId: props.employeeId,
-          userId: props.userId,
-          suspendInd: props.suspendInd ? false : true,
-        },
-        // handleCallback,
-        props.employeeId,
-        props.suspendInd? false : true ,
-      
-      );
-    }
+console.log("employeeId",props.employeeId)
+  function handleToggleClick(value) {
+    // setAssignedIndicator(!assignedIndicator);
+    setToggle(value)
+    props.suspendEmployee(props.employeeId,value)
   }
 
   // function handleCallback(a, b, c) {
@@ -62,7 +38,7 @@ function SuspendEmployee(props) {
   //   }
   // }
   function handleCancel() {
-    if (props.suspendInd) {
+    if (toggle) {
       setToggle(true);
     } else {
       setToggle(false);
@@ -72,20 +48,21 @@ function SuspendEmployee(props) {
   return (
     <>
       <div>
-        <Popconfirm
+        {/* <Popconfirm
           title="Suspend Access to App?"
           onConfirm={() => handleToggleClick()}
-          onCancel={handleCancel}
+           onCancel={handleCancel}
           okText="Yes"
           cancelText="No"
-        >
+        > */}
           <Switch
-            checked={props.suspendInd || toggle}
+            checked={ toggle}
             isLoading={true}
+             onChange={handleToggleClick}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />
-        </Popconfirm>
+        {/* </Popconfirm> */}
       </div>
     </>
   );

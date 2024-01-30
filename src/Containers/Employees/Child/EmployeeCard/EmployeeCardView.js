@@ -209,7 +209,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </Tooltip>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
-           <Tooltip title="Notify">
+           <Tooltip title="Assign as Admin">
            <CircleNotificationsIcon
            style={{ cursor: "pointer",fontSize: "1rem" }}
            onClick={() => {

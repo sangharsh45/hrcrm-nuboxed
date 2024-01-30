@@ -63,6 +63,9 @@ const initialState = {
   fetchingCertificationByUserIdError: false,
   certificationByUserId:[],
 
+  deletingEmployeeData: false,
+   deletingEmployeeDataError: false ,
+
   updatingEmployeeById: false,
   updatingEmployeeByIdError: false,
 
@@ -839,6 +842,20 @@ case types.GET_ADMIN_USER_FAILURE:
           addOnboadingEmpl: false,
           addOnboadingEmplError: true,
         };
+
+        case types.DELETE_EMPLOYEE_DATA_REQUEST:
+          return { ...state, deletingEmployeeData: true };
+        case types.DELETE_EMPLOYEE_DATA_SUCCESS:
+          return {
+            ...state,
+            deletingEmployeeData: false,
+            employees: state.employees.filter(
+              (item) => item.employeeId !== action.payload
+            ),
+          };
+        case types.DELETE_EMPLOYEE_DATA_FAILURE:
+          return { ...state, deletingEmployeeData: false, deletingEmployeeDataError: false };
+
 
 
 
