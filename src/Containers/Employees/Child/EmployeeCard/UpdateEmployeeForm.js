@@ -4,6 +4,8 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
+import Upload from "../../../../Components/Forms/Formik/Upload";
+import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
 import { StyledLabel } from "../../../../Components/UI/Elements";
 import {getTimeZone} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
@@ -40,10 +42,11 @@ class UpdateEmployeeForm extends Component {
   
 
   componentDidMount() {
-   const { getCountries ,getTimeZone,getRoles,getlocation,getEmployeelist} = this.props;
+   const { getCountries ,getTimeZone,getCurrencyList,getRoles,getlocation,getEmployeelist} = this.props;
     // console.log();
     getRoles(this.props.organizationId);
     getTimeZone();
+    getCurrencyList();
     // getCountries(getCountries);
     // getlocation(this.props.orgId);
     // getEmployeelist();
@@ -166,7 +169,24 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
       });
   
 
- 
+      const sortedCurrency =this.props.currencyList.sort((a, b) => {
+        const nameA = a.currency_name.toLowerCase();
+        const nameB = b.currency_name.toLowerCase();
+        // Compare department names
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      const currencyNameOption = sortedCurrency.map((item) => {
+        return {
+          label: `${item.currency_name}`,
+          value: item.currency_id,
+        };
+      });
 
 
   
@@ -273,7 +293,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                 <div class="  w-[47.5%] max-sm:w-wk">
   
                   <div class=" flex flex-nowrap justify-between mt-3" >
-                  {/* <FastField name="imageId" component={Upload} /> */}
+                  <FastField name="imageId" component={Upload} />
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
                     {/* <div class=" w-1/3 max-sm:w-full">
@@ -370,9 +390,14 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         defaultMessage="Currency"
                       />}
                       isColumn
-                      selectType="currencyName"
+                      // selectType="currencyName"
                       isRequired
-                      component={SearchSelect}
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
                     
                     />
                   </div>
@@ -835,7 +860,7 @@ name="departmentId"
     );
   }
 }
-const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,location,currency, employee,designations,departments }) => ({
     userDetails: auth.userDetails,
     roles: role.roles,
     timeZone: auth.timeZone,
@@ -849,11 +874,13 @@ const mapStateToProps = ({ auth,role,location, employee,designations,departments
     designationTypeId:designations.designationTypeId,
     employees:employee.employees,
     departments: departments.departments,
+    currencyList: currency.currencyList,
   });
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
         updateEmployee,
         getTimeZone,
+        getCurrencyList,
     //    getCountries,
     //    getDesignations,
         // getDepartments,

@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Listbox, } from '@headlessui/react'
+import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
@@ -116,12 +117,31 @@ function EmployeeForm (props) {
 //   }
   
   
+const sortedCurrency =props.currencyList.sort((a, b) => {
+  const nameA = a.currency_name.toLowerCase();
+  const nameB = b.currency_name.toLowerCase();
+  // Compare department names
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+});
+const currencyNameOption = sortedCurrency.map((item) => {
+  return {
+    label: `${item.currency_name}`,
+    value: item.currency_id,
+  };
+});
 
   useEffect(()=>{
-    const { getCountries ,getTimeZone,getAssignedToList,getRoles,getlocation,} = props;
+    const { getCountries ,getTimeZone,getCurrencyList,getAssignedToList,getRoles,getlocation,} = props;
     getRoles(props.organizationId);
     getCountries(getCountries);
     getlocation(props.orgId);
+    getCurrencyList();
     getAssignedToList(props.orgId)
     getTimeZone();
 },[]);
@@ -348,9 +368,14 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                           defaultMessage="Currency"
                         />}
                         isColumn
-                        selectType="currencyName"
+                        // selectType="currencyName"
                         isRequired
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
                       
                       />
                     </div>
@@ -964,9 +989,10 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
     );
   
 }
-const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,location,currency, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
+  currencyList: currency.currencyList,
   timeZone: auth.timeZone,
   fullName: auth.userDetails.fullName,
   assignedToList:employee.assignedToList,
@@ -988,6 +1014,7 @@ const mapDispatchToProps = (dispatch) =>
       getDepartments,
       getRoles,
       getlocation,
+      getCurrencyList,
       getTimeZone,
       getAssignedToList,
   }, dispatch);
