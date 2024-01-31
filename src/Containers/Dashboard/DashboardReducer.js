@@ -364,6 +364,10 @@ const initialState = {
   fetchingCompletedTaskTypes: false,
   fetchingCompletedTaskTypesError:false,
   completedtypeTasks:[],
+
+  fetchingJumpOrderCount: false,
+  fetchingJumpOrderCountError:false,
+  jumstartOrderCount:{},
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1633,6 +1637,21 @@ export const dashboardReducer = (state = initialState, action) => {
               fetchingCompletedTaskTypes: false,
               fetchingCompletedTaskTypesError: true,
             };  
+
+            case types.GET_JUMPSTART_ORDER_COUNT_REQUEST:
+              return { ...state, fetchingJumpOrderCount: true };
+            case types.GET_JUMPSTART_ORDER_COUNT_SUCCESS:
+              return {
+                ...state,
+                fetchingJumpOrderCount: false,
+                jumstartOrderCount: action.payload,
+              };
+            case types.GET_JUMPSTART_ORDER_COUNT_FAILURE:
+              return {
+                ...state,
+                fetchingJumpOrderCount: false,
+                fetchingJumpOrderCountError: true,
+              };  
 
     default:
       return state;

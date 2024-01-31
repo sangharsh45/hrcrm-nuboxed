@@ -16,8 +16,6 @@ const PriceDrawer = (props) => {
         destroyOnClose
         closable
         placement="right"
-        style={{marginTop:"3rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handlePriceDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

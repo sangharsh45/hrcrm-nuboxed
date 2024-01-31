@@ -1,18 +1,60 @@
-import React, { useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip } from "antd";
-import { getBuilderByProId,removeProductBuilder } from "../../ProductAction";
+import { Tooltip,Button } from "antd";
+import { getBuilderByProId,removeProductBuilder,updateProSupplBuilder } from "../../ProductAction";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { DeleteOutlined } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 function ProductbuilderTable2 (props) {
 
   useEffect(()=> {
     props.getBuilderByProId(props.particularDiscountData.productId);
   },[]);
+
+  const [editedFields, setEditedFields] = useState({});
+  const [editproductSupplyLinkId, setEditproductSupplyLinkId] = useState(null);
+
+  const handleChange = (productSupplyLinkId, fieldName, value) => {
+    setEditedFields((prevFields) => ({
+      ...prevFields,
+      [productSupplyLinkId]: {
+        ...prevFields[productSupplyLinkId],
+        [fieldName]: value,
+      },
+    }));
+  };
+
+  const handleEditClick = (productSupplyLinkId) => {
+    setEditproductSupplyLinkId(productSupplyLinkId);
+  };
+  const handleCancelClick = (productSupplyLinkId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
+    setEditproductSupplyLinkId(null);
+  };
+
+  const handleUpdateSupplies = (suppliesId,suppliesName,description,categoryName,subCategoryName, quantity,productSupplyLinkId
+    ) => {
+    const data = {
+      suppliesId: suppliesId, 
+      // productSupplyLinkId: productSupplyLinkId,
+      productId:props.particularDiscountData.productId, 
+      suppliesName:editedFields[productSupplyLinkId]?.suppliesName !== undefined ? editedFields[productSupplyLinkId].suppliesName : suppliesName,
+      description:editedFields[productSupplyLinkId]?.description !== undefined ? editedFields[productSupplyLinkId].description : description,
+      categoryName:editedFields[productSupplyLinkId]?.categoryName !== undefined ? editedFields[productSupplyLinkId].categoryName : categoryName,
+      subCategoryName: editedFields[productSupplyLinkId]?.subCategoryName !== undefined ? editedFields[productSupplyLinkId].subCategoryName : subCategoryName,                 
+      quantity: editedFields[productSupplyLinkId]?.quantity !== undefined ? editedFields[productSupplyLinkId].quantity : quantity,        
+                      
+    };
+  
+    props.updateProSupplBuilder(data)
+      setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
+      setEditproductSupplyLinkId(null);
+    
+  };
 
 return (
     <>
@@ -69,11 +111,43 @@ return (
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
       
       <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-                    {item.quantity}
-                  </h4>
+                   {editproductSupplyLinkId === item.productSupplyLinkId ? (
+                       <input
+                       style={{border:"2px solid black"}}
+                       value={editedFields[item.productSupplyLinkId]?.quantity !== undefined ? editedFields[item.productSupplyLinkId].quantity : item.quantity}
+                       onChange={(e) => handleChange(item.productSupplyLinkId, 'quantity', e.target.value)}
+                       />
+                       
+                    ) : (
+                      <div className="font-normal text-sm text-cardBody font-poppins">
+                        <span> {item.quantity}</span>
+                      </div>
+                    )}
+                    </h4>
   </div>
   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-  <StyledPopconfirm
+    <div>
+    {editproductSupplyLinkId === item.productSupplyLinkId ? (
+                        <>
+                      <Button onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
+                        Save
+                      </Button>
+                        <Button onClick={() => handleCancelClick(item.productSupplyLinkId)} style={{ marginLeft: '0.5rem' }}>
+                        Cancel
+                      </Button>
+                      </>
+                      
+                    ) : (
+                      <BorderColorIcon
+                        tooltipTitle="Edit"
+                        iconType="edit"
+                        onClick={() => handleEditClick(item.productSupplyLinkId)}
+                        style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
+                      />
+                    )}
+    </div>
+    <div>
+      <StyledPopconfirm
                           title="Do you want to delete?"
                           onConfirm={() => props.removeProductBuilder({active:false},item.productSupplyLinkId)}
                           >
@@ -87,7 +161,8 @@ return (
                             }}
                           />
                        </Tooltip>
-                        </StyledPopconfirm>
+                       </StyledPopconfirm>
+                       </div>
                         </div>
 </div>
 </div>
@@ -110,7 +185,8 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getBuilderByProId,
-            removeProductBuilder
+            removeProductBuilder,
+            updateProSupplBuilder
             
         },
         dispatch
@@ -180,7 +256,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProductbuilderTable2
 //     <>
   
 //         <StyledTable
-//             rowKey="suppliesId"
+//             rowKey="productSupplyLinkId"
 //             columns={columns}
 //             dataSource={props.builderbyProductId}
 //             loading={props.fetchingBuilderByProductId}

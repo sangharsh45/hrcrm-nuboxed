@@ -2155,3 +2155,30 @@ export const getCompletedTaskTypeDetails = (userId, name) => (dispatch) => {
       });
     });
 };
+
+export const getJumpOrderCount =
+  (userId,type, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_ORDER_COUNT_REQUEST });
+    axios
+      .get(
+        `${base_url}/Order/orderCount/${type}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        dispatch({
+          type: types.GET_JUMPSTART_ORDER_COUNT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_ORDER_COUNT_FAILURE,
+          payload: err,
+        });
+      });
+  };

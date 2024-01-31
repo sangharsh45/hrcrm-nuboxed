@@ -6,8 +6,9 @@ import { Tooltip,Button } from "antd";
 import { getProductbuilder,addProductBuilder } from "../../ProductAction";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
-import {  Select } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Formik, Form, Field,} from "formik";
+import { Select } from "../../../../Components/UI/Elements";
 
 const { Option } = Select;
 
@@ -17,50 +18,82 @@ function ProductbuilderTable (props) {
     props.getProductbuilder();
   },[]);
 
-  const [editedFields, setEditedFields] = useState({});
-  const [editsuppliesId, setEditsuppliesId] = useState(null);
+  const[selectedHsn,setselectedHsn]=useState("");
 
-  const handleChange = (suppliesId, fieldName, value) => {
-    setEditedFields((prevFields) => ({
-      ...prevFields,
-      [suppliesId]: {
-        ...prevFields[suppliesId],
-        [fieldName]: value,
-      },
-    }));
-  };
 
-  const handleEditClick = (suppliesId) => {
-    setEditsuppliesId(suppliesId);
-  };
-  const handleCancelClick = (suppliesId) => {
-    setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
-    setEditsuppliesId(null);
-  };
+const prosb = props.productBuilder
 
-  const handleUpdateSupplies = (suppliesId,hsn, name,description,categoryName,subCategoryName, quantity, 
-    ) => {
-    const data = {
-      suppliesId: suppliesId,
-      productId:props.particularDiscountData.productId, 
-      hsn:editedFields[suppliesId]?.hsn !== undefined ? editedFields[suppliesId].hsn : hsn,
-      suppliesName:editedFields[suppliesId]?.name !== undefined ? editedFields[suppliesId].name : name,
-      description:editedFields[suppliesId]?.description !== undefined ? editedFields[suppliesId].description : description,
-      categoryName:editedFields[suppliesId]?.categoryName !== undefined ? editedFields[suppliesId].categoryName : categoryName,
-      subCategoryName: editedFields[suppliesId]?.subCategoryName !== undefined ? editedFields[suppliesId].subCategoryName : subCategoryName,                 
-      quantity: editedFields[suppliesId]?.quantity !== undefined ? editedFields[suppliesId].quantity : quantity,        
-                          
-    };
-  
-    props.addProductBuilder(data)
-     
-     
-      setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
-      setEditsuppliesId(null);
-    
-  };
 return (
     <>
+        {/* <Formik
+                    enableReinitialize
+                    initialValues={{
+                        hsn:selectedHsn,
+                        // conversionCurrency:conversionCurrency,
+                        // conversionFactor:"",
+                        // reportingFactor:"1",
+                        // userId:props.userId,
+                        // orgId:props.orgId
+                    }}
+                    onSubmit={(values, { resetForm }) => {
+                        props.createCurrencyConversion({
+                            ...values,
+                        });
+                        resetForm();
+                    }
+                    }
+                >
+                    {({
+                        errors,
+                        touched,
+                        isSubmitting,
+                        setFieldValue,
+                        setFieldTouched,
+                        values,
+                        ...rest
+                    }) => (
+                        <Form>
+                            <div class=" flex" >
+                                <div class=" w-full h-full">
+
+                                    <div class="flex justify-between">
+                                    <div class=" w-[18%]">
+                                        <div class="hont-bold text-sm">HSN</div>
+        <Select value={selectedHsn} 
+        onChange={handleSelect1Change}
+        >
+          {prosb.map((option) => {
+          return   
+          <Option key={option.currency_id} value={option.currency_name}>
+             {option.currency_name}
+           </Option>
+})}
+        </Select>
+        </div>
+
+        <div>
+                                        
+                                        <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    // loading={props.creatingCurrencyConversion}
+                                    // style={{
+                                    //     marginTop: "20px",
+                                    //     marginLeft: "286px",
+                                    // }}
+                                >
+                                    Submit
+                                </Button>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                     
+                        </Form>
+                    )}
+                </Formik> */}
+
      <div className=' flex justify-end sticky z-auto'> 
          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
