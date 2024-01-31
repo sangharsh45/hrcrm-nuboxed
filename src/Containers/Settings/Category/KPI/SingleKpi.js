@@ -101,8 +101,8 @@ class SingleKpi extends Component {
                onChange={this.handleFrequency}
                >
          <option value="Monthly">Monthly</option>
-                      <option value="quarterly">Quarterly</option>
-                      <option value="halfYearly">Half yearly</option>
+                      <option value="Quarterly">Quarterly</option>
+                      <option value="Half yearly">Half yearly</option>
                   <option value="Annual">Annual</option>
                </Select>
                 <div class=" ml-auto" >
@@ -113,7 +113,7 @@ class SingleKpi extends Component {
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleupdateKpi(performanceManagementId, value, toggleViewType());
+                      handleupdateKpi(performanceManagementId, value, this.state.frequency, toggleViewType());
                     }}>
 
                   

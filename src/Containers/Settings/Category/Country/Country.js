@@ -193,7 +193,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Country);
 // import React, { Component } from "react";
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
-// import moment from "moment";
+// import dayjs from "dayjs";
 // import { MainWrapper } from "../../../../Components/UI/Layout";
 // import { getCountry,allCountryMandatory } from "../Country/CountryAction";
 // import SingleCountry from "./SingleCountry";
@@ -282,7 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Country);
 //             </div>
 //           </div>
 //         </div>
-//         <div>Updated on {moment(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</div>
+//         <div>Updated on {dayjs(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</div>
 //       </>
 //     );
 //   }

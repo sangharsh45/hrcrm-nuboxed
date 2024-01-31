@@ -14,7 +14,7 @@ import {
   searchExpenseName,
   ClearReducerDataOfExpense
 } from "./ExpenseAction";
-import moment from "moment";
+import dayjs from "dayjs";
 const SingleExpenses = lazy(() =>
   import("./SingleExpenses")
 );
@@ -266,7 +266,7 @@ class Expense extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {moment(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format("ll")} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</div>
+        <div>Updated on {dayjs(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format('YYYY-MM-DD')} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</div>
       </>
     );
   }

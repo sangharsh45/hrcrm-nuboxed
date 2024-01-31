@@ -1,5 +1,6 @@
 import { Popover,Tooltip } from "antd";
 import React, {  } from "react";
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import { StyledRangePicker } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import {
@@ -10,7 +11,6 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import { bindActionCreators } from "redux";
 import TimeInterval from "../../../Utils/TimeInterval";
-import { FormattedMessage } from "react-intl";
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -29,16 +29,19 @@ const DashboardActionLeft = (props) => {
 
   return (
     <>
-      <div class=" flex items-center justify-evenly"  >
+      <div class=" flex items-center "  >
         
-        <div class="flex w-[22rem] justify-between">
+        <div class="flex w-[12rem] justify-between">
 
-        <span class=" mr-2 cursor-pointer text-xs"
+        <span class=" cursor-pointer "
           onClick={() => props.setDashboardViewType("test")}
           style={{
-            color: props.viewType === "test" && "#1890ff",
+            color: props.viewType === "test" && "tomato",
   
-          }}> <PersonIcon/>
+          }}> 
+              <Tooltip title="My Details">
+          <PersonIcon  style={{ fontSize: "1rem" }}/>
+          </Tooltip>
         
         </span>
         <span class="cursor-pointer" 
@@ -51,7 +54,7 @@ const DashboardActionLeft = (props) => {
          <Tooltip title="Task">
              
      <FactCheckIcon
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "1rem",color:"#1890ff" }}
               />
               </Tooltip>
         </span>
@@ -65,31 +68,16 @@ const DashboardActionLeft = (props) => {
        
         }}
         >
-          <Tooltip title="Customer">
+          <Tooltip title="Prospects">
           <ApartmentIcon
 
-style={{ fontSize: "1rem" }}
+style={{ fontSize: "1rem",color:"#1890ff" }}
 />
 </Tooltip>        
         </span>
 )}
        
-    {user.imInd === true  && (
-        <span class="cursor-pointer"
-        onClick={() => handleButtonClick("Investors")} 
-        style={{
-          color:activeButton === "Investors" && "#1890ff",
-    
-        }}
-        >  
-        <Tooltip title="Investors">
-          <LocationCityIcon
 
-style={{ fontSize: "1rem" }}
-/>
-</Tooltip>       
-        </span>
-)}
    
     {user.erpInd === true && (
         <span class="cursor-pointer"
@@ -99,9 +87,9 @@ style={{ fontSize: "1rem" }}
           
         }}
         >
-          <Tooltip title="Accounts">
+          <Tooltip title="Customers">
           <AcUnitIcon
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "1rem",color:"#1890ff" }}
               />
           </Tooltip>
         </span>
@@ -115,7 +103,7 @@ style={{ fontSize: "1rem" }}
         }}
         >  <Tooltip title="Order">
           <DynamicFeedIcon
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "1rem",color:"#1890ff" }}
               />
            </Tooltip>
         </span>
@@ -129,25 +117,40 @@ style={{ fontSize: "1rem" }}
           
         }}
         >
-           <FormattedMessage
-                        id="app.finance"
-                        defaultMessage="Finance"
-                      /> 
+           <Tooltip title="Finance">
+          <ReceiptIcon  style={{ fontSize: "1rem" ,color:"#1890ff"}}/>
+          </Tooltip>
           
         </span>
     )}
+        {user.imInd === true  && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Investors")} 
+        style={{
+          color:activeButton === "Investors" && "#1890ff",
+    
+        }}
+        >  
+        <Tooltip title="Investors">
+          <LocationCityIcon
+
+style={{ fontSize: "1rem" ,color:"#1890ff"}}
+/>
+</Tooltip>       
+        </span>
+)}
     
    </div>
    
       <>
-      <div class="">
+      <div class="ml-2">
     <TimeInterval
     style={{fontSize:"0.67"}}
           times={dateRangeList}
           handleClick={setSelectedTimeIntervalReport}
         />
         </div>
-        <Popover>
+        {/* <Popover>
           <StyledRangePicker
             style={{width:"30%"}}
             onChange={(range) => {
@@ -156,7 +159,7 @@ style={{ fontSize: "1rem" }}
             }}
 
           />
-        </Popover>
+        </Popover> */}
         </>
 
       </div>

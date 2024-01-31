@@ -18,7 +18,7 @@ import {
   getSectors,
 } from "../Sectors/SectorsAction";
 import { Select } from "../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
 const SingleDepartment = lazy(() =>
   import("./SingleDepartment")
 );
@@ -296,7 +296,7 @@ class Department extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
+        <div>Updated on {dayjs(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format('YYYY-MM-DD')} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
       </>
     );
   }

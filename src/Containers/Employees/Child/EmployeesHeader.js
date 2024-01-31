@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import EmployeesActionLeft from "./EmployeesActionLeft";
-import EmployeesActionRight from "./EmployeesActionRight";
+const EmployeesActionLeft = lazy(() => import("./EmployeesActionLeft"));
+const EmployeesActionRight = lazy(() => import("./EmployeesActionRight"));
 class EmployeesHeader extends Component {
   render() {
     const { handleEmployeeModal,
@@ -11,9 +11,7 @@ class EmployeesHeader extends Component {
       handleClear,} = this.props;
     return (
       <>
-        <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+        <div>
           <ActionHeader
             leftComponent={
               <EmployeesActionLeft

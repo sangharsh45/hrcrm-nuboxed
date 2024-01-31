@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Select } from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper } from "../../../../Components/UI/Layout";
@@ -158,6 +158,7 @@ class Source extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
           <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -168,42 +169,11 @@ class Source extends Component {
             // value={currentData}
           />
             </div>
-
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-             {sources.length ? (
-  sources
-    .slice() 
-    .sort((a, b) => a.name.localeCompare(b.name)) 
-    .map((source, i) => (
-                    <SingleSource
-                      key={i}
-                      value={singleSource}
-                      name1="singleSource"
-                      source={source}
-                      linkedSectors={linkedSectors}
-                      updatingSources={updatingSources}
-                      handleChange={this.handleChange}
-                      handleUpdateSource={this.handleUpdateSource}
-                      handleDeleteSource={this.handleDeleteSource}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
-             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+             <div class=" flex items-center ml-[0.3125em] "
             
              >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Source"
                   name="name"
@@ -245,7 +215,7 @@ class Source extends Component {
               </div>
             ) : (
               <>
-                <br />
+  
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -261,14 +231,45 @@ class Source extends Component {
                     />
                   </Button>
                 </div>
-                {/* <div>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
+                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
+             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+             {sources.length ? (
+  sources
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((source, i) => (
+                    <SingleSource
+                      key={i}
+                      value={singleSource}
+                      name1="singleSource"
+                      source={source}
+                      linkedSectors={linkedSectors}
+                      updatingSources={updatingSources}
+                      handleChange={this.handleChange}
+                      handleUpdateSource={this.handleUpdateSource}
+                      handleDeleteSource={this.handleDeleteSource}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
       
        
         </div>
-        <div>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</div>
+        <div>Updated on {dayjs(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format('YYYY-MM-DD')} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</div>
       </>
     );
   }

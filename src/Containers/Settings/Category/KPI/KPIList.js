@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Select } from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, } from "../../../../Components/UI/Layout";
@@ -145,6 +145,7 @@ class KPIList extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
             <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -155,7 +156,70 @@ class KPIList extends Component {
             // value={currentData}
           />
             </div>
-
+            {isTextInputOpen ? (
+              <div class=" flex items-center "
+            
+              >
+                <TextInput
+                  placeholder="Add KPI"
+                  name="kpi"
+                  value={kpi}
+                  onChange={this.handleChange}
+                  width="55%"
+                  style={{ marginRight: "0.125em" }}
+                />
+                   <Select style={{ width: "35%"}}
+                onChange={this.handleFrequency}
+                placeholder="Select Frequency"
+                >
+                      <option value="Monthly">Monthly</option>
+                      <option value="Quarterly">Quarterly</option>
+                      <option value="Half Yearly">Half Yearly</option>
+                  <option value="Annual">Annual</option>
+    
+      
+      
+                </Select>
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!kpi}
+                  Loading={addingKpi}
+                  onClick={this.handleAddPayment}
+                  style={{ marginRight: "0.125em" }}
+                >
+                  {/* Save */}
+                  <FormattedMessage id="app.save" defaultMessage="Save" />
+                </Button>
+                &nbsp;
+                <Button type="primary" ghost onClick={this.toggleInput}>
+                  {/* Cancel */}
+                  <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
+                </Button>
+              </div>
+            ) : (
+              <>
+                
+                <div class=" flex justify-end" >
+                  <Button
+                    type="primary"
+                    ghost
+                    htmlType="button"
+                    loading={addingKpi}
+                    onClick={this.toggleInput}
+                  >
+                    {/* Add More */}
+                    <FormattedMessage
+                      id="app.addmore"
+                      defaultMessage="Add More"
+                    />
+                  </Button>
+                </div>
+                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].kpi}</div> */}
+              </>
+            )}
+</div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
@@ -184,76 +248,12 @@ class KPIList extends Component {
                   )}
               </MainWrapper>
             </div>
-            {isTextInputOpen ? (
-              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
-            
-              >
-                <br />
-                <br />
-                <TextInput
-                  placeholder="Add Kpi"
-                  name="kpi"
-                  value={kpi}
-                  onChange={this.handleChange}
-                  width="55%"
-                  style={{ marginRight: "0.125em" }}
-                />
-                   <Select style={{ width: "25%"}}
-                onChange={this.handleFrequency}
-                placeholder="Select Frequency"
-                >
-                      <option value="Monthly">Monthly</option>
-                      <option value="quarterly">Quarterly</option>
-                      <option value="halfYearly">Half yearly</option>
-                  <option value="Annual">Annual</option>
-    
-      
-      
-                </Select>
-                &nbsp;
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={!kpi}
-                  Loading={addingKpi}
-                  onClick={this.handleAddPayment}
-                  style={{ marginRight: "0.125em" }}
-                >
-                  {/* Save */}
-                  <FormattedMessage id="app.save" defaultMessage="Save" />
-                </Button>
-                &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
-                  {/* Cancel */}
-                  <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
-                </Button>
-              </div>
-            ) : (
-              <>
-                <br />
-                <div class=" flex justify-end" >
-                  <Button
-                    type="primary"
-                    ghost
-                    htmlType="button"
-                    loading={addingKpi}
-                    onClick={this.toggleInput}
-                  >
-                    {/* Add More */}
-                    <FormattedMessage
-                      id="app.addmore"
-                      defaultMessage="Add More"
-                    />
-                  </Button>
-                </div>
-                {/* <div>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].kpi}</div> */}
-              </>
-            )}
+         
           </MainWrapper>
       
        
         </div>
-        <div>Updated on {moment(this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updationDate).format("ll")} by {this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updatedBy}</div>
+        <div>Updated on {dayjs(this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updatedBy}</div>
       </>
     );
   }

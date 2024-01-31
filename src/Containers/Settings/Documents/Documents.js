@@ -2,7 +2,7 @@ import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
@@ -132,6 +132,7 @@ class Documents extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
      <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -142,40 +143,11 @@ class Documents extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
-              {documents.length ? (
-  documents
-    .slice() 
-    .sort((a, b) => a.documentTypeName.localeCompare(b.documentTypeName)) 
-    .map((document, i) => (
-                    <SingleDocuments
-                      key={i}
-                      value={singleDocument}
-                      name="singleDocument"
-                      document={document}
-                      linkedDocuments={linkedDocuments}
-                      updatingDocuments={updatingDocuments}
-                      handleChange={this.handleChange}
-                      handleUpdateDocument={this.handleUpdateDocument}
-                      handleDeleteDocument={this.handleDeleteDocument}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
                <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
                >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Document"
                   name="documentTypeName"
@@ -210,7 +182,7 @@ class Documents extends Component {
               </div>
             ) : (
               <>
-                <br />
+               
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -225,9 +197,39 @@ class Documents extends Component {
                
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
+              {documents.length ? (
+  documents
+    .slice() 
+    .sort((a, b) => a.documentTypeName.localeCompare(b.documentTypeName)) 
+    .map((document, i) => (
+                    <SingleDocuments
+                      key={i}
+                      value={singleDocument}
+                      name="singleDocument"
+                      document={document}
+                      linkedDocuments={linkedDocuments}
+                      updatingDocuments={updatingDocuments}
+                      handleChange={this.handleChange}
+                      handleUpdateDocument={this.handleUpdateDocument}
+                      handleDeleteDocument={this.handleDeleteDocument}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+         
           </MainWrapper>
         </div>
-        <div>Updated on {moment(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format("ll")} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</div>
+        <div>Updated on {dayjs(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format('YYYY-MM-DD')} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</div>
       </>
     );
   }
