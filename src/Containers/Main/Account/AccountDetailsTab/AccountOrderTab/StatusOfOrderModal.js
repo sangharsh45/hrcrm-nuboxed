@@ -19,6 +19,7 @@ class StatusOfOrderModal extends Component {
                       <FormattedMessage id="app.statusoforder" defaultMessage="Status of Order"/> -
                          {particularRowData.newOrderNo}
                         </div>}
+                        width="60%"
                     visible={addStatusOfOrder}
                     destroyOnClose
                     maskClosable={false}

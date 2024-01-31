@@ -182,8 +182,8 @@ class Source extends Component {
                   width="35%"
                   style={{ marginRight: "0.125em" }}
                 />
-                &nbsp;
-                <Select style={{ width: "25%"}}
+               
+                <Select style={{ width: "32%",marginLeft:"0.5rem"}}
                 onChange={this.handleType}
                 placeholder="Select Type"
                 >
@@ -195,14 +195,14 @@ class Source extends Component {
       
       
                 </Select>
-                &nbsp;
+             
                 <Button
                   type="primary"
                   htmlType="submit"
                   disabled={!name}
                   Loading={addingSources}
                   onClick={this.handleAddSource}
-                  style={{ marginRight: "0.125em" }}
+                  style={{ marginRight: "0.125em",marginLeft:"0.5rem" }}
                 >
                   {/* Save */}
                   <FormattedMessage id="app.save" defaultMessage="Save" />

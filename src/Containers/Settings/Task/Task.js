@@ -154,6 +154,7 @@ class Task extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
          <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -164,36 +165,11 @@ class Task extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {tasks.length ? (
-  tasks
-    .slice() 
-    .sort((a, b) => a.taskType.localeCompare(b.taskType)) 
-    .map((task, i) => (
-                    <SingleTasks
-                      key={i}
-                      value={singleTask}
-                      name="singleTask"
-                      task={task}
-                      linkedTasks={linkedTasks}
-                      updatingTasks={updatingTasks}
-                      handleChange={this.handleChange}
-                      handleUpdateTask={this.handleUpdateTask}
-                         handleDeleteTask={this.handleDeleteTask}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
                <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
                >
-                <br />
-                <br />
+             
                 <TextInput
                   placeholder="Add Task"
                   name="taskType"
@@ -222,7 +198,7 @@ class Task extends Component {
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -241,6 +217,32 @@ class Task extends Component {
                
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {tasks.length ? (
+  tasks
+    .slice() 
+    .sort((a, b) => a.taskType.localeCompare(b.taskType)) 
+    .map((task, i) => (
+                    <SingleTasks
+                      key={i}
+                      value={singleTask}
+                      name="singleTask"
+                      task={task}
+                      linkedTasks={linkedTasks}
+                      updatingTasks={updatingTasks}
+                      handleChange={this.handleChange}
+                      handleUpdateTask={this.handleUpdateTask}
+                         handleDeleteTask={this.handleDeleteTask}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer

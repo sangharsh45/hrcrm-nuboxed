@@ -170,6 +170,7 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
                        <div class=" flex w-[18vw]" >
                        <Input
          placeholder="Search by Name"
@@ -180,44 +181,11 @@ class Department extends Component {
             // value={currentData}
           />
         </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {departments.length ? (
-  departments
-    .slice() 
-    .sort((a, b) => a.departmentName.localeCompare(b.departmentName)) 
-    .map((department, i) => (
-                    <SingleDepartment
-                      key={i}
-                      value={singleDepartment}
-                      name="singleDepartment"
-                      department={department}
-                      linkedDepartments={linkedDepartments}
-                      updatinDepartments={updatingDepartments}
-                      handleChange={this.handleChange}
-                      handleSectorId={this.handleSectorId}
-                      handleUpdateDepartment={this.handleUpdateDepartment}
-                      sectors={this.props.sectors}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteDepartment={this.handleDeleteDepartment}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-
-              </MainWrapper>
-            </div>
-            {isTextInputOpen ? (
+        {isTextInputOpen ? (
             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
             >
-                <br />
-                <br />
+              
                   <TextInput
                     placeholder="Add Department"
                     name="departmentName"
@@ -254,7 +222,7 @@ class Department extends Component {
               </div>
             ) : (
               <>
-               <br />
+              
                <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -269,6 +237,40 @@ class Department extends Component {
                
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {departments.length ? (
+  departments
+    .slice() 
+    .sort((a, b) => a.departmentName.localeCompare(b.departmentName)) 
+    .map((department, i) => (
+                    <SingleDepartment
+                      key={i}
+                      value={singleDepartment}
+                      name="singleDepartment"
+                      department={department}
+                      linkedDepartments={linkedDepartments}
+                      updatinDepartments={updatingDepartments}
+                      handleChange={this.handleChange}
+                      handleSectorId={this.handleSectorId}
+                      handleUpdateDepartment={this.handleUpdateDepartment}
+                      sectors={this.props.sectors}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                     handleDeleteDepartment={this.handleDeleteDepartment}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+
+              </MainWrapper>
+            </div>
+           
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer
