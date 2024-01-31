@@ -1,5 +1,4 @@
 import React, { Component,lazy } from "react";
-import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
@@ -49,16 +48,16 @@ class SingleDocuments extends Component {
     } = this.props;
     console.log(linkedDocuments);
     return (
-      <DocumentWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div>
                 <div class=" flex" >
                   <div class=" w-60">
-                  <DocumentName style={{ flexBasis: "90%" }}>
+                  <div class=" font-semibold" >
                     {documentTypeName}
-                  </DocumentName>
+                  </div>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
                   <div class="flex justify-between w-96">
@@ -99,10 +98,11 @@ class SingleDocuments extends Component {
                     <DeleteOutlined
                     
                       onClick={() => handleDeleteDocument(documentTypeId)}
-                      size="14px"
+                     
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -122,8 +122,7 @@ class SingleDocuments extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                {/* <br />
-                <br /> */}
+              
               <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -141,7 +140,7 @@ class SingleDocuments extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -151,7 +150,7 @@ class SingleDocuments extends Component {
             )
           }
         </ViewEditCard>
-      </DocumentWrapper>
+      </div>
     );
   }
 }
@@ -168,15 +167,3 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDocuments);
 
-const DocumentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DocumentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DocumentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

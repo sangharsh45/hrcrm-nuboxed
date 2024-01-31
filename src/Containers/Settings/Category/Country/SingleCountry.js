@@ -1,5 +1,4 @@
 import React, { Component,lazy } from "react";
-import styled from "styled-components";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import CountryFlag1 from "./CountryFlag1";
@@ -27,7 +26,7 @@ class SingleCountry extends Component {
       documents,
     } = this.props;
     return (
-      <CountryWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -47,11 +46,11 @@ class SingleCountry extends Component {
 
                     <div class=" font-normal text-sm text-cardBody font-poppins">
                     <div style={{width:"70%"}}>
-  <CountryName class=" basis-11/12">
+  <div class=" basis-11/12 font-semibold">
   <CountryFlag1 countryCode={country_alpha2_code} />
   &nbsp;&nbsp;
     {country_name}
-  </CountryName>
+  </div>
   </div>
                     </div>
 
@@ -66,10 +65,10 @@ class SingleCountry extends Component {
 
 
                     <div class=" font-normal text-sm text-cardBody font-poppins">
-                    <div style={{width:"20%"}}>
-<CountryName >
+                    <div class=" w-[20%]" >
+                    <div class=" font-semibold" >
 +{country_dial_code}
-</CountryName>
+</div>
 </div>
                     </div>
 
@@ -83,10 +82,10 @@ Currency
 
 
 <div class=" font-normal text-sm text-cardBody font-poppins">
-<div style={{width:"70%"}}>
-<CountryName >
+<div class=" w-[70%]" >
+<div class=" font-semibold" >
 {country_currency_name}
-</CountryName>
+</div>
 </div>
 </div>
 
@@ -159,25 +158,14 @@ country_id={country_id}
             )
           }
         </ViewEditCard>
-      </CountryWrapper>
+      </div>
     );
   }
 }
 
 export default SingleCountry;
 
-const CountryWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const CountryName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const CountryValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+
 
 
 

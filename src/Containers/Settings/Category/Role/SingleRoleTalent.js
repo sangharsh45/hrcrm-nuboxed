@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button ,Tooltip} from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
@@ -35,14 +34,14 @@ class SingleRoleTalent extends Component {
      console.log(linkedRoles);
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <RoleWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <RoleType style={{ flexBasis: "43%" }}>
+                  <div class=" font-semibold" >
                   {roleType}
-                </RoleType>
+                </div>
              
                 <div>
                   {this.props.talentRole.editInd ? (
@@ -54,15 +53,16 @@ class SingleRoleTalent extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
                     <DeleteOutlined
                   
                         onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -80,7 +80,7 @@ class SingleRoleTalent extends Component {
                   />
              
              
-                  <br />
+                 
                   <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -92,7 +92,7 @@ class SingleRoleTalent extends Component {
                     Update
             
                 </Button> 
-                &nbsp;
+             
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                      Cancel 
             
@@ -102,22 +102,11 @@ class SingleRoleTalent extends Component {
               )
           }
         </ViewEditCard>
-      </RoleWrapper>
+      </div>
     );
   }
 }
 
 export default SingleRoleTalent;
 
-const RoleWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const RoleType = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

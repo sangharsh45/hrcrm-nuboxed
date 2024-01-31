@@ -14,6 +14,7 @@ import { handlePersonalModal } from "../../ProfileAction";
 import { handlePersonalDetailsModal } from "../../ProfileAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import PerformanceTable from "./Performance/PerformanceTable";
 const AddEducationModal = lazy(() => import("./ProfileBoost/Education/AddEducationModal"));
 const AddTrainingModal = lazy(() => import("./ProfileBoost/Training/AddTrainingModal"));
 const AddEmploymentModal = lazy(() => import("./ProfileBoost/Employment/AddEmploymentModal"));
@@ -110,43 +111,42 @@ class ProfileDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-            <TabPane
+
+          <TabPane
               tab={
                 <>
                   <span>
-                    <i class="fa fa-graduation-cap"></i>
-                    &nbsp; Education
+                    <MailOutlined type="mail" />
+                    Performance
                   </span>
-                  {activeKey === "1" && (
+                  {/* {activeKey === "9" && (
                     <>
-                      {addingEmail ? (
-                        <></>
-                      ) : (
-                          <>
-                            <PlusOutlined
-                              type="plus"
-                              tooltipTitle="Add"
-                              onClick={() => handleEducationModal(true)}
-                              size="1em"
-                              style={{
-                                marginLeft: 10,
-                                verticalAlign: "center",
-                              }}
-                            />
-                          </>
-                        )}
+                      <>
+                        <PlusOutlined
+                          type="plus"
+                          tooltipTitle="Add"
+                          onClick={() =>
+                            this.props.handleEmailProfileModal(true) 
+                          }
+                          size="1em"
+                          style={{
+                            marginLeft: 10,
+                            verticalAlign: "center",
+                          }}
+                        />
+                      </>
                     </>
-                  )}
+                  )} */}
                 </>
               }
               key="1"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <EducationTable employeeId={this.props.userDetails.employeeId}/>
+                <PerformanceTable 
+                employeeId={this.props.userDetails.employeeId}/>
               </Suspense>
             </TabPane>
-
             <TabPane
               tab={
                 <>
@@ -174,6 +174,44 @@ class ProfileDetailTab extends Component {
                 <TrainingTable employeeId={this.props.userDetails.employeeId}/>
               </Suspense>
             </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <span>
+                    <i class="fa fa-graduation-cap"></i>
+                    &nbsp; Education
+                  </span>
+                  {activeKey === "3" && (
+                    <>
+                      {addingEmail ? (
+                        <></>
+                      ) : (
+                          <>
+                            <PlusOutlined
+                              type="plus"
+                              tooltipTitle="Add"
+                              onClick={() => handleEducationModal(true)}
+                              size="1em"
+                              style={{
+                                marginLeft: 10,
+                                verticalAlign: "center",
+                              }}
+                            />
+                          </>
+                        )}
+                    </>
+                  )}
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <EducationTable employeeId={this.props.userDetails.employeeId}/>
+              </Suspense>
+            </TabPane>
+
+        
 
             <TabPane
               tab={
@@ -182,7 +220,7 @@ class ProfileDetailTab extends Component {
                     <BankOutlined type="bank" />
                     Employment
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "4" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -195,7 +233,7 @@ class ProfileDetailTab extends Component {
                   )}
                 </>
               }
-              key="3"
+              key="4"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -210,7 +248,7 @@ class ProfileDetailTab extends Component {
                     <PhoneOutlined type="phone" />
                     Emergency
                   </span>
-                  {activeKey === "4" && (
+                  {activeKey === "5" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -223,7 +261,7 @@ class ProfileDetailTab extends Component {
                   )}
                 </>
               }
-              key="4"
+              key="5"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -238,7 +276,7 @@ class ProfileDetailTab extends Component {
                   <span>
                     <i class="fa fa-credit-card"></i>&nbsp; Bank Details
                   </span>
-                  {activeKey === "5" && (
+                  {activeKey === "6" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -251,7 +289,7 @@ class ProfileDetailTab extends Component {
                   )}
                 </>
               }
-              key="5"
+              key="6"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -265,7 +303,7 @@ class ProfileDetailTab extends Component {
                   <span>
                     <i class="fa fa-id-card"></i>&nbsp; Personal Details
                   </span>
-                  {activeKey === "6" && (
+                  {activeKey === "7" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -278,7 +316,7 @@ class ProfileDetailTab extends Component {
                   )}
                 </>
               }
-              key="6"
+              key="7"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -294,7 +332,7 @@ class ProfileDetailTab extends Component {
                   </span>
                 </>
               }
-              key="7"
+              key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -308,7 +346,7 @@ class ProfileDetailTab extends Component {
                     <MailOutlined type="mail" />
                     Email
                   </span>
-                  {activeKey === "8" && (
+                  {activeKey === "9" && (
                     <>
                       <>
                         <PlusOutlined
@@ -328,7 +366,7 @@ class ProfileDetailTab extends Component {
                   )}
                 </>
               }
-              key="8"
+              key="9"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -337,41 +375,7 @@ class ProfileDetailTab extends Component {
               </Suspense>
             </TabPane>
 
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <MailOutlined type="mail" />
-                    Performance
-                  </span>
-                  {/* {activeKey === "9" && (
-                    <>
-                      <>
-                        <PlusOutlined
-                          type="plus"
-                          tooltipTitle="Add"
-                          onClick={() =>
-                            this.props.handleEmailProfileModal(true) 
-                          }
-                          size="1em"
-                          style={{
-                            marginLeft: 10,
-                            verticalAlign: "center",
-                          }}
-                        />
-                      </>
-                    </>
-                  )} */}
-                </>
-              }
-              key="9"
-            >
-              {/* <Suspense fallback={"Loading ..."}>
-                {" "}
-                <EmailTable 
-                employeeId={this.props.userDetails.employeeId}/>
-              </Suspense> */}
-            </TabPane>
+         
 
           </StyledTabs>
         </TabsWrapper>

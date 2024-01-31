@@ -82,6 +82,10 @@ const initialState = {
   fetchingDocumentsByIdError: false,
   documentsById: [],
 
+  fetchingPerformance: false,
+  fetchingPerformanceError: false,
+  performanceList:[],
+
 
 
   addingSalaryDetails: false,
@@ -967,6 +971,26 @@ export const profileReducer = (state = initialState, action) => {
         updatingVisaDetails: false,
         updatingVisaDetailsError: true,
       };
+
+
+      case types.GET_PERFORMANCE_LIST_REQUEST:
+        return {
+          ...state,
+          fetchingPerformance: true,
+          fetchingPerformanceError: false,
+        };
+      case types.GET_PERFORMANCE_LIST_SUCCESS:
+        return {
+          ...state,
+          fetchingPerformance: false,
+          performanceList: action.payload,
+        };
+      case types.GET_PERFORMANCE_LIST_FAILURE:
+        return {
+          ...state,
+          fetchingPerformance: false,
+          fetchingPerformanceError: true,
+        };
 
     default:
       return state;

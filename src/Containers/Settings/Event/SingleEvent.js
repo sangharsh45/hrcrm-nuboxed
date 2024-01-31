@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -31,14 +30,14 @@ class SingleEvent extends Component {
     console.log(linkedEvents);
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <EventWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <EventName style={{ flexBasis: "85%" }}>
+                <div class=" font-semibold" >
                   {eventType}
-                </EventName>
+                </div>
                 <div>
                   {this.props.event.editInd?
                 <BorderColorIcon 
@@ -47,15 +46,16 @@ class SingleEvent extends Component {
                     onClick={toggleViewType}
                     style={{fontSize:"1rem"}}
                   />:null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
                     <DeleteOutlined
                  
                         onClick={() => handleDeleteEvent(eventTypeId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -87,8 +87,7 @@ class SingleEvent extends Component {
                     onChange={handleChange}
                     style={{ width: "60%" }}
                   />
-                  <br />
-                  <br />
+                
                   <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -103,7 +102,7 @@ class SingleEvent extends Component {
               defaultMessage="Update"
             />
                 </Button>
-                &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage
@@ -116,22 +115,11 @@ class SingleEvent extends Component {
               )
           }
         </ViewEditCard>
-      </EventWrapper>
+      </div>
     );
   }
 }
 
 export default SingleEvent;
 
-const EventWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EventName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const EventValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

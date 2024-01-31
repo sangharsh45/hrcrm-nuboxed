@@ -1519,3 +1519,30 @@ export const updateVisaDetails = (employee, visaId, cb) => (
       cb && cb("error");
     });
 };
+
+export const getPerformanceList = () => (dispatch) => {
+  dispatch({
+    type: types.GET_PERFORMANCE_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/`,
+    {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PERFORMANCE_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PERFORMANCE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};

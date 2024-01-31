@@ -292,7 +292,7 @@ const handleCrmClick = (checked) => {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              <DepartmentWrapper>
+              <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -474,7 +474,7 @@ const handleCrmClick = (checked) => {
               )
           }
         </ViewEditCard>
-      </DepartmentWrapper>
+      </div>
                 {/* {departments.length ? (
                   departments.map((department, i) => ( */}
                     <SingleModuleList
@@ -543,15 +543,3 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(ModuleList);
-const DepartmentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DepartmentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

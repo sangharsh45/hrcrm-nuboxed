@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -280,7 +279,7 @@ const SingleDepartment = (props) => {
 
 
   return (
-    <DepartmentWrapper>
+    <div class=" w-full cursor-pointer">
       <ViewEditCard>
         {({ viewType: cardViewType }, toggleCardViewType) =>
           cardViewType === "view" ? (
@@ -288,7 +287,7 @@ const SingleDepartment = (props) => {
               <div className="w-full flex-row">
                 <div className="flex justify-between">
                   <div className="w-[9rem]">
-                    <DepartmentName>{departmentName}</DepartmentName>
+                  <div class=" font-semibold" >{departmentName}</div>
                   </div>
                   {mandetoryInd === true && (
   <>
@@ -665,7 +664,7 @@ const SingleDepartment = (props) => {
               defaultMessage="Update"
             />
                 </Button>
-                &nbsp;
+            
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage
@@ -678,7 +677,7 @@ const SingleDepartment = (props) => {
           )
         }
       </ViewEditCard>
-    </DepartmentWrapper>
+    </div>
   );
 };
 
@@ -694,18 +693,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDepartment);
 
-
-const DepartmentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-
-const DepartmentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

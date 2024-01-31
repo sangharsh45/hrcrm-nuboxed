@@ -26,7 +26,7 @@ const OnBoardingEmployeeForm = (props) => {
   console.log("cgdf",props.currentEmployeeId)
   return (
     <>
-      <div className="mt-4">
+      <div className="mt-4 flex">
       <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Workflow</label>
                       <select  className="customize-select"
@@ -93,7 +93,13 @@ const OnBoardingEmployeeForm = (props) => {
     </div>              
 </> 
         )} 
-        <div class=" flex justify-end">
+       
+          <Button>Submit</Button>
+      
+       
+     
+      </div>
+      <div class=" flex justify-end">
         <Tooltip title="Release Registration Email to the user">
           <Button
            onClick={() => {
@@ -103,8 +109,6 @@ const OnBoardingEmployeeForm = (props) => {
           >Onboarding Completed</Button>
              </Tooltip>
         </div>
-     
-      </div>
     </>
   );
 };

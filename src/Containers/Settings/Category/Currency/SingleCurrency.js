@@ -1,5 +1,4 @@
 import React, { Component,lazy } from "react";
-import styled from "styled-components";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
@@ -25,7 +24,7 @@ class SingleCurrency extends Component {
       documents,
     } = this.props;
     return (
-      <CountryWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -45,11 +44,9 @@ class SingleCurrency extends Component {
 
                     <div class=" font-normal text-sm text-cardBody font-poppins">
                     <div style={{width:"70%"}}>
-  <CountryName class=" basis-11/12">
-  {/* <CountryFlag1 countryCode={country_alpha2_code} />
-  &nbsp;&nbsp; */}
+  <div class=" basis-11/12 font-semibold">
     {currency_name}
-  </CountryName>
+  </div>
   </div>
                     </div>
 
@@ -157,25 +154,14 @@ country_id={country_id}
             )
           }
         </ViewEditCard>
-      </CountryWrapper>
+      </div>
     );
   }
 }
 
 export default SingleCurrency;
 
-const CountryWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const CountryName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const CountryValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+
 
 
 
