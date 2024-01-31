@@ -141,6 +141,7 @@ const EditableTable = (props) => {
       level2: '',
       level3: '',
       skillDefinationId: '',
+      skillLevelLinkId:""
     };
     setData([...data, newRow]);
   };
@@ -168,6 +169,7 @@ const EditableTable = (props) => {
       dataIndex: 'level1',
       render: (_, record) => (
         <Input
+        style={{width:"11em"}}
           value={record.level1}
           onChange={(e) => handleInputChange(e.target.value, record.key, 'level1')}
         />
@@ -178,6 +180,7 @@ const EditableTable = (props) => {
       dataIndex: 'level2',
       render: (_, record) => (
         <Input
+        style={{width:"11em"}}
           value={record.level2}
           onChange={(e) => handleInputChange(e.target.value, record.key, 'level2')}
         />
@@ -188,6 +191,7 @@ const EditableTable = (props) => {
       dataIndex: 'level3',
       render: (_, record) => (
         <Input
+        style={{width:"11em"}}
           value={record.level3}
           onChange={(e) => handleInputChange(e.target.value, record.key, 'level3')}
         />
@@ -219,15 +223,17 @@ const EditableTable = (props) => {
   };
 
   const handleSave = (key) => {
+    console.log(key)
     const targetRow = data.find((row) => row.key === key);
     if (targetRow) {
-      const { level1, level2, level3, skillDefinationId } = targetRow;
+      const { level1, level2, level3, skillDefinationId,skillLevelLinkId } = targetRow;
       console.log(`Skill ID: ${skillDefinationId}, Level 1: ${level1}, Level 2: ${level2}, Level 3: ${level3}`);
       const result = {
               skillDefinationId: skillDefinationId,
               level1: level1,
               level2: level2,
               level3: level3,
+              skillLevelLinkId:skillLevelLinkId,
               countryId:props.activeTab
             };
       props.addSkillLevel(result)
