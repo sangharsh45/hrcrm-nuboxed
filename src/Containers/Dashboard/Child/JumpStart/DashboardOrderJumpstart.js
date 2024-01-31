@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { JumpStartBox } from "../../../../Components/UI/Elements";
 import {
-//   getJumpInvestorlist,
+  getJumpOrderCount,
 //   getJumpInvestor2list,
 //   getJumpInvestor3list,
 //   getJumpInvestor4list,
@@ -20,25 +20,21 @@ import {
 
 function DashboardOrderJumpstart (props) {
  
-//   useEffect(()=>{
-//     if (props.timeRangeType === "today") {
-//     props.getJumpInvestorlist(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
-//   }
-//   else {
-//     props.getJumpInvestorlist(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
-//     props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
-//   }
-//   },[props.userId,props.startDate,props.endDate]);
+  useEffect(()=>{
+    if (props.timeRangeType === "today") {
+    props.getJumpOrderCount(props.type);
+    // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
+    // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
+    // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+  }
+  else {
+    props.getJumpOrderCount(props.type);
+    // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
+    // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
+    // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+  }
+  },[props.type]);
 
-
-    const { openPitchQualified,handlePitchQualifiedDrawer,openPitchAdded,handlePitchAddedDrawer,
-      openDealAdded,handleDealAddedDrawer,openDealClosed,handleDealClosedDrawer
-    } = props;
 
     return (
       <>
@@ -51,9 +47,9 @@ function DashboardOrderJumpstart (props) {
               defaultMessage="Orders Added"
             />}
             // jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
-            // cursorData={"pointer"}
-            // value={props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
-            // isLoading={props.user.fetchingJumpstartInvestor}
+            cursorData={"pointer"}
+            // value={ props.jumstartOrderCount.totalOrder}
+            // isLoading={props.fetchingJumpOrderCount}
           />
 
           <JumpStartBox
@@ -63,9 +59,9 @@ function DashboardOrderJumpstart (props) {
                 defaultMessage="Orders Open"
             />}
             // jumpstartClick={()=>handlePitchAddedDrawer(true)}
-            // cursorData={"pointer"}
-            // value={props.jumpstartInvestor2Count.createdinvestorLeadsList}
-            // isLoading={props.fetchingJumpstartInvestor2}
+            cursorData={"pointer"}
+            // value={ props.jumstartOrderCount.pendingOrder}
+            // isLoading={props.fetchingJumpOrderCount}
           />
 
           <JumpStartBox
@@ -75,9 +71,9 @@ function DashboardOrderJumpstart (props) {
                 defaultMessage="Orders Closed"
             />}
             // jumpstartClick={()=>handleDealAddedDrawer(true)}
-            // cursorData={"pointer"}
-            // value={props.jumpstartInvestor3Count.opportunityAdded}
-            // isLoading={props.fetchingJumpstartInvestor3}
+            cursorData={"pointer"}
+            // value={ props.jumstartOrderCount.completeOrder}
+            // isLoading={props.fetchingJumpOrderCount}
           />
           <JumpStartBox
             noProgress
@@ -86,9 +82,9 @@ function DashboardOrderJumpstart (props) {
                 defaultMessage="Orders Cancelled"
             />}
             // jumpstartClick={()=>handleDealClosedDrawer(true)}
-            // cursorData={"pointer"}
-            // value={ props.jumpstartInvestor4Count.closedOpportunity}
-            // isLoading={props.fetchingJumpstartInvestor4}
+            cursorData={"pointer"}
+            // value={ props.jumstartOrderCount.cancelOrder}
+            // isLoading={props.fetchingJumpOrderCount}
           />
         </div>
       </div>
@@ -115,25 +111,19 @@ function DashboardOrderJumpstart (props) {
   }
 const mapStateToProps = ({ dashboard, auth }) => ({
   user: auth.userDetails,
-  role: auth.userDetails.role,
   showDatelist: dashboard.showDatelist,
   orgId: auth.userDetails.organizationId,
-  showSalesDatelist: dashboard.showSalesDatelist,
-  fetchingSalesDatewiseReport: dashboard.fetchingSalesDatewiseReport,
-  fetchingSalesDatewiseReportError: dashboard.fetchingSalesDatewiseReportError,
-  fetchingDatewiseReport: dashboard.fetchingDatewiseReport,
-  fetchingDatewiseReportError: dashboard.fetchingDatewiseReportError,
-  recruiterId: auth.userDetails.userId,
+  fetchingJumpOrderCount: dashboard.fetchingJumpOrderCount,
   userId: auth.userDetails.employeeId,
   timeRangeType:dashboard.timeRangeType,
-  startDate: dashboard.startDate,
-  endDate: dashboard.endDate,
+  type: dashboard.type,
+ 
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getJumpInvestorlist,
+      getJumpOrderCount,
     //   getJumpInvestor2list,
     //   getJumpInvestor3list,
     //   getJumpInvestor4list,

@@ -234,7 +234,14 @@ const initialState = {
   priceOpenDrawer: false,
 
   removingProductBuilder: false,
-  removingProductBuilderError:false 
+  removingProductBuilderError:false,
+
+  fetchingProductCurrency: false,
+  fetchingProductCurrencyError:false,
+  ProductCurrency:[],
+  creatingProductCurrency: false,
+  creatingProductCurrencyError:false,
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -953,6 +960,61 @@ export const productReducer = (state = initialState, action) => {
           removingProductBuilderError: true,
         };  
 
+        case types.UPDATE_PRO_SUPPL_BUILDER_REQUEST:
+          return { ...state, addingProductBuilder: true };
+        case types.UPDATE_PRO_SUPPL_BUILDER_SUCCESS:
+          return {
+            ...state,
+            addingProductBuilder: false,
+            builderbyProductId:[action.payload, ...state.builderbyProductId],
+            // builderbyProductId: state.builderbyProductId.map((item) => {
+            //   if (item.productSupplyLinkId == action.payload.productSupplyLinkId) {
+            //     return action.payload;
+            //   } else {
+            //     return item;
+            //   }
+            // }),
+          };
+        case types.UPDATE_PRO_SUPPL_BUILDER_FAILURE:
+          return {
+            ...state,
+            addingProductBuilder: false,
+            addingProductBuilderError: true,
+          };
+
+          case types.GET_PRODUCT_CURRENCY_REQUEST:
+            return {
+              ...state,
+              fetchingProductCurrency: true,
+              fetchingProductCurrencyError: false,
+            };
+          case types.GET_PRODUCT_CURRENCY_SUCCESS:
+            return {
+              ...state,
+              fetchingProductCurrency: false,
+              ProductCurrency: action.payload,
+            };
+          case types.GET_PRODUCT_CURRENCY_FAILURE:
+            return {
+              ...state,
+              fetchingProductCurrency: false,
+              fetchingProductCurrencyError: true,
+            };
+
+            case types.CREATE_PRODUCT_CURRENCY_REQUEST:
+              return { ...state, creatingProductCurrency: true };
+            case types.CREATE_PRODUCT_CURRENCY_SUCCESS:
+              return {
+                ...state,
+                creatingProductCurrency: false,
+                ProductCurrency: [action.payload]
+              };
+            case types.CREATE_PRODUCT_CURRENCY_FAILURE:
+              return {
+                ...state,
+                creatingProductCurrency: false,
+                creatingProductCurrencyError: true,
+              };
     default:
       return state;
   }

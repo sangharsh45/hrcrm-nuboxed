@@ -1,8 +1,10 @@
-import React, { useEffect,lazy, Suspense  } from "react";
+import React, { useEffect,lazy, Suspense,useState  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getCurrency } from "../../../Auth/AuthAction";
-import { getProductbuilder,addProductBuilder,handleDiscountModal,handleOfferModal } from "../../ProductAction";
+import { Button } from "antd";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { getProductCurrency,createProductCurrency,handleDiscountModal,handleOfferModal } from "../../ProductAction";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 const ProductDiscountModal =lazy(()=>import("./ProductDiscountModal"));
 const ProductOfferModal =lazy(()=>import("./ProductOfferModal"));
@@ -10,9 +12,50 @@ const ProductOfferModal =lazy(()=>import("./ProductOfferModal"));
 function ProductbuilderTable (props) {
 
   useEffect(()=> {
-    props.getProductbuilder();
+    props.getProductCurrency(props.particularDiscountData.productId);
     props.getCurrency();
   },[]);
+
+  const [editedFields, setEditedFields] = useState({});
+  const [editproductSupplyLinkId, setEditproductSupplyLinkId] = useState(null);
+
+  const handleChange = (productSupplyLinkId, fieldName, value) => {
+    setEditedFields((prevFields) => ({
+      ...prevFields,
+      [productSupplyLinkId]: {
+        ...prevFields[productSupplyLinkId],
+        [fieldName]: value,
+      },
+    }));
+  };
+
+  const handleEditClick = (productSupplyLinkId) => {
+    setEditproductSupplyLinkId(productSupplyLinkId);
+  };
+  const handleCancelClick = (productSupplyLinkId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
+    setEditproductSupplyLinkId(null);
+  };
+
+  const handleUpdateSupplies = (productSupplyLinkId,hsn, name,description,categoryName,subCategoryName, quantity, 
+    ) => {
+    const data = {
+      productSupplyLinkId: productSupplyLinkId,
+      productId:props.particularDiscountData.productId, 
+      hsn:editedFields[productSupplyLinkId]?.hsn !== undefined ? editedFields[productSupplyLinkId].hsn : hsn,
+      suppliesName:editedFields[productSupplyLinkId]?.name !== undefined ? editedFields[productSupplyLinkId].name : name,
+      description:editedFields[productSupplyLinkId]?.description !== undefined ? editedFields[productSupplyLinkId].description : description,
+      categoryName:editedFields[productSupplyLinkId]?.categoryName !== undefined ? editedFields[productSupplyLinkId].categoryName : categoryName,
+      subCategoryName: editedFields[productSupplyLinkId]?.subCategoryName !== undefined ? editedFields[productSupplyLinkId].subCategoryName : subCategoryName,                 
+      quantity: editedFields[productSupplyLinkId]?.quantity !== undefined ? editedFields[productSupplyLinkId].quantity : quantity,        
+                          
+    };
+  
+    props.createProductCurrency(data)
+      setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
+      setEditproductSupplyLinkId(null);
+    
+  };
 
 return (
     <>
@@ -27,7 +70,7 @@ return (
         <div className="w-12"></div>
             </div>
       
-             {props.currencies && props.productBuilder.map((item) => {
+             {props.currencies.map((item) => {
           return (
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
@@ -96,7 +139,29 @@ return (
                                 </Button>
 
 </div>  */}
-
+ <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+    <div>
+    {editproductSupplyLinkId === item.productSupplyLinkId ? (
+                        <>
+                      <Button onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
+                        Save
+                      </Button>
+                        <Button onClick={() => handleCancelClick(item.productSupplyLinkId)} style={{ marginLeft: '0.5rem' }}>
+                        Cancel
+                      </Button>
+                      </>
+                      
+                    ) : (
+                      <BorderColorIcon
+                        tooltipTitle="Edit"
+                        iconType="edit"
+                        onClick={() => handleEditClick(item.productSupplyLinkId)}
+                        style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
+                      />
+                    )}
+    </div>
+  
+                        </div>
 </div>
 
 </div>
@@ -127,8 +192,8 @@ return (
 }
 
 const mapStateToProps = ({product,auth }) => ({
-    productBuilder: product.productBuilder,
-    fetchingProductBuilder: product.fetchingProductBuilder,
+    ProductCurrency: product.ProductCurrency,
+    fetchingProductCurrency: product.fetchingProductCurrency,
     addDiscountModal: product.addDiscountModal,
     addProductOfferModal: product.addProductOfferModal,
     currencies:auth.currencies
@@ -137,8 +202,8 @@ const mapStateToProps = ({product,auth }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getProductbuilder,
-            addProductBuilder,
+          getProductCurrency,
+          createProductCurrency,
             handleDiscountModal,
             handleOfferModal,
             getCurrency
@@ -458,7 +523,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProductbuilderTable)
 //     bindActionCreators(
 //         {
 //             getProductbuilder,
-//             addProductBuilder,
+//            
 //             handleDiscountModal,
 //             handleOfferModal,
 //         },
