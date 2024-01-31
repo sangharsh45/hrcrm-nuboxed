@@ -105,6 +105,7 @@ class BrandModel extends Component {
                             color: "#FFFAFA",
                         }}
                     >
+                          <div class=" flex flex-row justify-between">
                <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -115,39 +116,11 @@ class BrandModel extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-                            {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-                            <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                            {brandModel.length ? (
-  brandModel
-    .slice() 
-    .sort((a, b) => a.brand.localeCompare(b.brand)) 
-    .map((brandmodel, i) => (
-                                        <SingleBrandModel
-                                            key={i}
-                                            value={singlebrand}
-                                            name="singlebrand"
-                                            brandmodel={brandmodel}
-                                            updatingBrandModel={updatingBrandModel}
-                                            linkedBrand={linkedBrand}
-                                            handleChange={this.handleChange}
-                                            handleModelChange={this.handleModelChange}
-                                            handleSearchChange={this.handleSearchChange}
-                                            currentData={this.state.currentData}
-                                            setCurrentData={this.setCurrentData}
-                                        />
-                                    ))
-                                    ) : (
-                                        <p>No Data Available</p>
-                                      )}
-                            </MainWrapper>
-                        </div>
-                        {isTextInputOpen ? (
+            {isTextInputOpen ? (
                            <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
                            >
-                                <br />
-                                <br />
+                               
 
                                 <TextInput
                                     placeholder="Add brand"
@@ -157,7 +130,7 @@ class BrandModel extends Component {
                                     width="36%"
                                     style={{ marginRight: "2px" }}
                                 />
-                                <br />
+                              
                                 <TextInput
                                     placeholder="Add Model"
                                     name="model"
@@ -186,7 +159,7 @@ class BrandModel extends Component {
                             </div>
                         ) : (
                             <>
-                                <br />
+                               
                                 <div class=" flex justify-end" >
                                     <Button
                                         type="primary"
@@ -205,6 +178,35 @@ class BrandModel extends Component {
                                 {/* <div>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
                             </>
                         )}
+                         </div>
+            <div class=" flex flex-col" >
+                            {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
+                            <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+                            {brandModel.length ? (
+  brandModel
+    .slice() 
+    .sort((a, b) => a.brand.localeCompare(b.brand)) 
+    .map((brandmodel, i) => (
+                                        <SingleBrandModel
+                                            key={i}
+                                            value={singlebrand}
+                                            name="singlebrand"
+                                            brandmodel={brandmodel}
+                                            updatingBrandModel={updatingBrandModel}
+                                            linkedBrand={linkedBrand}
+                                            handleChange={this.handleChange}
+                                            handleModelChange={this.handleModelChange}
+                                            handleSearchChange={this.handleSearchChange}
+                                            currentData={this.state.currentData}
+                                            setCurrentData={this.setCurrentData}
+                                        />
+                                    ))
+                                    ) : (
+                                        <p>No Data Available</p>
+                                      )}
+                            </MainWrapper>
+                        </div>
+                       
                     </MainWrapper>
                 </div>
 

@@ -8,7 +8,7 @@ import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
-import { HeaderLabel, Spacer, StyledLabel } from "../../../Components/UI/Elements";
+import { StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -272,8 +272,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             <Form className="form-background">
                   <div class="flex justify-between  pr-2 max-sm:flex-col">
                 <div class=" w-[47.5%] max-sm:w-wk">
-                  <Spacer />
-                  <div class=" flex flex-nowrap justify-between" >
+                 
+                  <div class=" flex flex-nowrap justify-between mt-3" >
                   <FastField name="imageId" component={Upload} />
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
@@ -518,12 +518,12 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)",marginTop:"0.5rem" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
-                  Address for  Correspondence</HeaderLabel>
+                      <div class=" text-[white] text-xs" >
+                  Address for  Correspondence</div>
                   </div>
                     </div>
              
-                  {/* <Spacer /> */}
+              
                   <FieldArray
                     name="address"
                     label="Address"
@@ -542,7 +542,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
 
           
                 <div class=" w-[47.5%] max-sm:w-wk ">
-                <div style={{ width: "100%" }}>
+                <div class=" w-full">
                     <StyledLabel>Time Zone</StyledLabel>
                     <Field
                       name="timeZone"
@@ -934,14 +934,14 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                
                   </div>
                   </div>
-                  <Spacer />
-                  <div>
+                
+                  <div class=" mt-3">
                     <StyledLabel><FormattedMessage
                       id="app.employeetype"
                       defaultMessage="Employee Type"
                     />
                     </StyledLabel>
-                    <Spacer />
+                 
                     <Radio.Group
                       name="radiogroup"
                       defaultValue={workType}
@@ -971,8 +971,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+           
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   htmlType="submit"
                   type="primary"

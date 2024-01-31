@@ -5,7 +5,7 @@ import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getDesignations,
   addDesignations,
@@ -257,7 +257,7 @@ class Designation extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {moment(this.props.designations && this.props.designations.length && this.props.designations[0].updationDate).format("ll")} by {this.props.designations && this.props.designations.length && this.props.designations[0].name}</div>
+        <div>Updated on {dayjs(this.props.designations && this.props.designations.length && this.props.designations[0].updationDate).format('YYYY-MM-DD')} by {this.props.designations && this.props.designations.length && this.props.designations[0].name}</div>
       </>
     );
   }

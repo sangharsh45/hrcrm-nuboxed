@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
@@ -138,6 +138,7 @@ class Payment extends Component {
               color: "#FFFAFA",
             }}
           >
+               <div class=" flex flex-row justify-between">
             <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -148,41 +149,11 @@ class Payment extends Component {
             // value={currentData}
           />
             </div>
-
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-             {paymentsListData.length ? (
-  paymentsListData
-    .slice() 
-    .sort((a, b) => a.name.localeCompare(b.name)) 
-    .map((payment, i) => (
-                    <SinglePayment
-                      key={i}
-                      value={singlePayment}
-                      name1="singlePayment"
-                      payment={payment}
-                      updatingPayment={updatingPayment}
-                      handleChange={this.handleChange}
-                      handleupdatePayment={this.handleupdatePayment}
-                      handleDeletePayment={this.handleDeletePayment}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+               
                 <TextInput
                   placeholder="Add Payment"
                   name="name"
@@ -211,7 +182,7 @@ class Payment extends Component {
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -227,14 +198,44 @@ class Payment extends Component {
                     />
                   </Button>
                 </div>
-                {/* <div>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
+                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
+             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+             {paymentsListData.length ? (
+  paymentsListData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((payment, i) => (
+                    <SinglePayment
+                      key={i}
+                      value={singlePayment}
+                      name1="singlePayment"
+                      payment={payment}
+                      updatingPayment={updatingPayment}
+                      handleChange={this.handleChange}
+                      handleupdatePayment={this.handleupdatePayment}
+                      handleDeletePayment={this.handleDeletePayment}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
       
        
         </div>
-        <div>Updated on {moment(this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updationDate).format("ll")} by {this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updatedBy}</div>
+        <div>Updated on {dayjs(this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updatedBy}</div>
       </>
     );
   }

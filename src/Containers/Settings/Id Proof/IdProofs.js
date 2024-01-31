@@ -1,6 +1,6 @@
 import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { MainWrapper, } from "../../../Components/UI/Layout";
@@ -131,6 +131,7 @@ class IdProofs extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
          <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -140,6 +141,51 @@ class IdProofs extends Component {
             onChange={this.handleChangeDes}
             // value={currentData}
           />
+            </div>
+            {isTextInputOpen ? (
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+              >
+            
+                <TextInput
+                  placeholder="Add Idproof"
+                 name="IdProofType"
+                  value={IdProofType}
+                  onChange={this.handleChange}
+                  width="61%"                  
+                />
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!IdProofType}
+                  Loading={addingIdProofs}
+                  onClick={this.handleAddIdProofs}
+                  style={{ marginRight: "0.125em" }}
+                >
+                  Save
+                </Button>
+                &nbsp;
+                <Button type="primary" ghost onClick={this.toggleInput}>
+                  Cancel
+                </Button>
+              </div>
+            ) : (
+              <>
+               
+                <div class=" flex justify-end" >
+                  <Button
+                    type="primary"
+                    ghost
+                    htmlType="button"
+                    Loading={addingIdProofs}
+                    onClick={this.toggleInput}
+                  >
+                    Add More
+                  </Button>
+                </div>
+              </>
+            )}
             </div>
             <div class=" flex flex-col" >           
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
@@ -169,54 +215,10 @@ class IdProofs extends Component {
                   )}
               </MainWrapper>
             </div>
-            {isTextInputOpen ? (
-              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
-            
-              >
-                <br />
-                <br />
-                <TextInput
-                  placeholder="Add Idproof"
-                 name="IdProofType"
-                  value={IdProofType}
-                  onChange={this.handleChange}
-                  width="61%"                  
-                />
-                &nbsp;
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={!IdProofType}
-                  Loading={addingIdProofs}
-                  onClick={this.handleAddIdProofs}
-                  style={{ marginRight: "0.125em" }}
-                >
-                  Save
-                </Button>
-                &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
-                  Cancel
-                </Button>
-              </div>
-            ) : (
-              <>
-                <br />
-                <div class=" flex justify-end" >
-                  <Button
-                    type="primary"
-                    ghost
-                    htmlType="button"
-                    Loading={addingIdProofs}
-                    onClick={this.toggleInput}
-                  >
-                    Add More
-                  </Button>
-                </div>
-              </>
-            )}
+          
           </MainWrapper>         
         </div>
-        <div>Updated on {moment(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format("ll")} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</div>
+        <div>Updated on {dayjs(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format('YYYY-MM-DD')} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</div>
       </>
     );
   }

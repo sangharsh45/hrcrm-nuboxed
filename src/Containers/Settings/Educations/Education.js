@@ -14,7 +14,7 @@ import {
   searchEducationsName,
   ClearReducerDataOfEducation
 } from "./EducationAction";
-import moment from "moment";
+import dayjs from "dayjs";
 const SingleEducations = lazy(() =>
   import("./SingleEducation")
 );
@@ -268,7 +268,7 @@ class Education extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {moment(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format("ll")} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</div>
+        <div>Updated on {dayjs(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format('YYYY-MM-DD')} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</div>
       </>
     );
   }

@@ -1,9 +1,9 @@
 import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import EmployeesHeader from "./Child/EmployeesHeader";
-import AddEmploymentModal from "./Child/AddEmployeeModal";
 import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
+const EmployeesHeader = lazy(() => import("./Child/EmployeesHeader"));
+const AddEmploymentModal = lazy(() => import("./Child/AddEmployeeModal"));
 const EmployeeCardView = lazy(() => import("./Child/EmployeeCard/EmployeeCardView"));
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
 

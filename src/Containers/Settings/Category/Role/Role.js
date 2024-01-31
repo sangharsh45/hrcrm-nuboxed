@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button, Input } from "antd";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getRoles,
   addRoles,
@@ -349,7 +349,7 @@ class Department extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {moment(this.props.roles && this.props.roles.length && this.props.roles[0].updationDate).format("ll")} by {this.props.roles && this.props.roles.length && this.props.roles[0].name}</div>
+        <div>Updated on {dayjs(this.props.roles && this.props.roles.length && this.props.roles[0].updationDate).format('YYYY-MM-DD')} by {this.props.roles && this.props.roles.length && this.props.roles[0].name}</div>
       </>
     );
   }

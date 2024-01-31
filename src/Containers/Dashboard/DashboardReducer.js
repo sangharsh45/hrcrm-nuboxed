@@ -1,6 +1,6 @@
 import * as types from "./DashboardActionTypes";
 import dayjs from "dayjs";
-import moment from "moment";
+
 
 const initialState = {
   fetchingSkillsCloud: false,
@@ -186,32 +186,41 @@ const initialState = {
         .toISOString(),
       endDate: dayjs().toISOString(),
     },
+    // {
+    //   id: 2,
+    //   type: "week",
+    //   value: "1W",
+    //   starter: false,
+    //   isSelected: false,
+    //   startDate: dayjs().startOf("week").toISOString(),
+    //   endDate: dayjs().endOf("week").toISOString(),
+    // },
     {
       id: 2,
-      type: "week",
-      value: "1W",
-      starter: false,
-      isSelected: false,
-      startDate: moment().startOf("week").toISOString(),
-      endDate: moment().endOf("week").toISOString(),
-    },
-    {
-      id: 3,
       type: "month",
       value: "MTD",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("month").toISOString(),
-      endDate: moment().endOf("month").toISOString(),
+      startDate: dayjs().startOf("month").toISOString(),
+      endDate: dayjs().endOf("month").toISOString(),
     },
     {
-      id: 4,
+      id: 3,
       type: "quarter",
       value: "QTD",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("quarter").toISOString(),
-      endDate: moment().endOf("quarter").toISOString(),
+      startDate: dayjs().startOf("quarter").toISOString(),
+      endDate: dayjs().endOf("quarter").toISOString(),
+    },
+    {
+      id: 4,
+      type: "quarter",
+      value: "YTD",
+      starter: false,
+      isSelected: false,
+      startDate: dayjs().startOf("quarter").toISOString(),
+      endDate: dayjs().endOf("quarter").toISOString(),
     },
 
  
