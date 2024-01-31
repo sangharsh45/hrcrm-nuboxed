@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -36,14 +35,14 @@ class SingleSource extends Component {
     console.log("name", name);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <SectorWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <SectorName style={{ flexBasis: "85%" }}>
+                <div class=" font-semibold" >
                   {name}
-                </SectorName>
+                </div>
                 <div>
                   {/* {this.props.source.editInd ? ( */}
                     <BorderColorIcon
@@ -54,14 +53,15 @@ class SingleSource extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   {/* ) : null}  */}
-                  &nbsp;
+                 
                   <Tooltip title="Delete">
                     <DeleteOutlined
                         onClick={() => handleDeleteSource(sourceId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -85,11 +85,10 @@ class SingleSource extends Component {
                   onChange={handleChange}
                   style={{ width: "45%" }}
                 />
-                <br />
-                <br />
+               
                 <Select 
               defaultValue={listType}
-               style={{width:"25%"}}
+               style={{width:"25%",marginLeft:"0.5rem"}}
                placeholder="Select Type"
                onChange={this.handleType}
                >
@@ -115,7 +114,7 @@ class SingleSource extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -125,22 +124,11 @@ class SingleSource extends Component {
             )
           }
         </ViewEditCard>
-      </SectorWrapper>
+      </div>
     );
   }
 }
 
 export default SingleSource;
 
-const SectorWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const SectorName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const SectorValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

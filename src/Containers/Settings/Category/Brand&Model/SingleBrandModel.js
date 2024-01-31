@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -27,14 +26,14 @@ class SingleBrandModel extends Component {
         } = this.props;
 
         return (
-            <SectorWrapper>
+            <div class=" w-full cursor-pointer">
                 <ViewEditCard>
                     {({ viewType }, toggleViewType) =>
                         viewType === "view" ? (
                             <div class=" flex justify-between" >
-                                <SectorName style={{ flexBasis: "90%" }}>
+                                <div class=" font-semibold" >
                                     {brand} {model}
-                                </SectorName>
+                                </div>
                                 <div>
                                     <BorderColorIcon
 
@@ -44,14 +43,15 @@ class SingleBrandModel extends Component {
                                         style={{ fontSize: "1rem" }}
                                     />
                                     {/* ) : null}  */}
-                                    &nbsp;
+                                   
                                     <Tooltip title="Delete">
                                         <DeleteOutlined
 
-                                            size="14px"
+                                         
                                             style={{
                                                 verticalAlign: "center",
-                                                marginLeft: "5px",
+                                                marginLeft: "1rem",
+                                                fontSize: "1rem",
                                                 color: "red",
                                             }}
                                         />
@@ -68,7 +68,7 @@ class SingleBrandModel extends Component {
                                     width="36%"
                                     style={{ marginRight: "2px" }}
                                 />
-                                <br />
+                              
                                 <TextInput
                                     name={name}
                                     value={value || model}
@@ -76,7 +76,7 @@ class SingleBrandModel extends Component {
                                     onChange={handleModelChange}
                                     width="36%"
                                 />
-                                <br />
+                                
                                 <div class=" flex justify-end" >
                                     <Button
                                         type="primary"
@@ -93,7 +93,7 @@ class SingleBrandModel extends Component {
                                         Save
                                         {/* <FormattedMessage id="app.save" defaultMessage="Save" /> */}
                                     </Button>
-                                    &nbsp;
+                                   
                                     <Button type="primary" ghost onClick={() => toggleViewType()}>
                                         Cancel
                                         {/* <FormattedMessage id="app.cancel" defaultMessage="Cancel" /> */}
@@ -103,22 +103,10 @@ class SingleBrandModel extends Component {
                         )
                     }
                 </ViewEditCard>
-            </SectorWrapper>
+            </div>
         );
     }
 }
 
 export default SingleBrandModel;
 
-const SectorWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const SectorName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const SectorValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

@@ -758,3 +758,65 @@ export const deleteKpiData = (employeeKpiLinkId,orgId) => (dispatch, getState) =
       });
     });
 };
+
+export const updateCompletedValue= (data,employeeId, cb) => (dispatch) => {
+  // console.log(leadDocumentsId, DocumentsName);
+  dispatch({
+    type: types.UPDATE_COMPLETED_VALUE_REQUEST,
+  });
+  axios
+    .post(
+      `${base_url}/employee/kpi-completed-value/save`,data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Value has been updated successfully!");
+      console.log(res);
+       dispatch(getEmployeeKpiList(employeeId));
+      dispatch({
+        type: types.UPDATE_COMPLETED_VALUE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_COMPLETED_VALUE_FAILURE,
+      });
+    });
+};
+
+export const updateAssignedValue= (data,employeeId, cb) => (dispatch) => {
+  // console.log(leadDocumentsId, DocumentsName);
+  dispatch({
+    type: types.UPDATE_ASSIGNED_VALUE_REQUEST,
+  });
+  axios
+    .post(
+      `${base_url}/employee/kpi-completed-value/save`,data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Value has been updated successfully!");
+      console.log(res);
+       dispatch(getEmployeeKpiList(employeeId));
+      dispatch({
+        type: types.UPDATE_ASSIGNED_VALUE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ASSIGNED_VALUE_FAILURE,
+      });
+    });
+};

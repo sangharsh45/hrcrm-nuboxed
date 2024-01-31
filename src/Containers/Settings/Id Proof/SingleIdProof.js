@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
@@ -30,14 +29,14 @@ class SingleIdProof extends Component {
     console.log(linkedIdProofs);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <IdProofWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <IdProofName style={{ flexBasis: "85%" }}>
+               <div class=" font-semibold" >
                   {IdProofType}
-                </IdProofName>
+                </div>
                 <div>
                   {this.props.idProof.editInd ? (
                     <BorderColorIcon
@@ -48,15 +47,16 @@ class SingleIdProof extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
                     <DeleteOutlined
                     
                       onClick={() => handleDeleteIdProof(IdProofTypeId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -80,8 +80,7 @@ class SingleIdProof extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -99,7 +98,7 @@ class SingleIdProof extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -109,22 +108,11 @@ class SingleIdProof extends Component {
             )
           }
         </ViewEditCard>
-      </IdProofWrapper>
+      </div>
     );
   }
 }
 
 export default SingleIdProof;
 
-const IdProofWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const IdProofName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const IdProofValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

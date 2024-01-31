@@ -1,5 +1,4 @@
 import React, { Component ,lazy} from "react";
-import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -33,13 +32,13 @@ class SingleTasks extends Component {
     console.log(linkedTasks);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <TaskWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
                    <div class=" flex w-2/5">
-                <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
+                   <div class=" font-semibold" >{taskType}</div>
                 <div>
                   </div>
                 </div>
@@ -64,15 +63,16 @@ class SingleTasks extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+               
                   <Tooltip title="Delete">
                     <DeleteOutlined
                     
                       onClick={() => handleDeleteTask(taskTypeId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -96,8 +96,7 @@ class SingleTasks extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -111,7 +110,7 @@ class SingleTasks extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -121,22 +120,11 @@ class SingleTasks extends Component {
             )
           }
         </ViewEditCard>
-      </TaskWrapper>
+      </div>
     );
   }
 }
 
 export default SingleTasks;
 
-const TaskWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const TaskName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const TaskValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

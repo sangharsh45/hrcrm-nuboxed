@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -29,14 +28,14 @@ class SingleEducations extends Component {
     console.log(linkedEducations);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <EducationWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <EducationName style={{ flexBasis: "85%" }}>
+                <div class=" font-semibold" >
                   {educationType}
-                </EducationName>
+                </div>
                 <div>
                   {this.props.education.editInd ? (
                     <BorderColorIcon
@@ -47,15 +46,16 @@ class SingleEducations extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
                     <DeleteOutlined
                      
                       onClick={() => handleDeleteEducation(educationTypeId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -79,8 +79,7 @@ class SingleEducations extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -98,7 +97,7 @@ class SingleEducations extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -108,22 +107,11 @@ class SingleEducations extends Component {
             )
           }
         </ViewEditCard>
-      </EducationWrapper>
+      </div>
     );
   }
 }
 
 export default SingleEducations;
 
-const EducationWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EducationName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const EducationValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

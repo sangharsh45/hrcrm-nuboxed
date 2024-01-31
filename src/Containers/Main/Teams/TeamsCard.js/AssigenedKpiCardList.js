@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import {  Select, Tooltip } from "antd"
 import { DeleteOutlined } from "@ant-design/icons";
-import {getEmployeeKpiList,deleteKpiData} from "../TeamsAction"
-import moment from "moment";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import {getEmployeeKpiList,deleteKpiData,updateAssignedValue} from "../TeamsAction"
+import { Button } from 'antd';
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 const Option = Select;
@@ -15,63 +15,72 @@ function onChange(pagination, filters, sorter) {
 
 function AssigenedKpiCardList(props) {
 
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(0);
+  const [editedFields, setEditedFields] = useState({});
+  const [editContactId, setEditContactId] = useState(null);
 
   useEffect(() => {
     props.getEmployeeKpiList(props.rowdata.employeeId)
   }, []);
 
 
-  const [RowData, setRowData] = useState("");
+  const handleChange = (userKpiLinkId, fieldName, value) => {
+    setEditedFields((prevFields) => ({
+      ...prevFields,
+      [userKpiLinkId]: {
+        ...prevFields[userKpiLinkId],
+        [fieldName]: value,
+      },
+    }));
+  };
 
-  function handleCurrentRowData(datas) {
-    setRowData(datas);
-  }
+  const handleEditClick = (userKpiLinkId) => {
+    setEditContactId(userKpiLinkId);
+  };
+  const handleCancelClick = (userKpiLinkId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [userKpiLinkId]: undefined }));
+    setEditContactId(null);
+  };
 
-//   const handleLoadMore = () => {
 
-//       setPage(page + 1);
-//       props.getInvestorsbyId(
-//         props.currentUser ? props.currentUser : props.userId,
-//         page,
-//         props.filter?props.filter:"creationdate"
-//       );
-//   };
 
-  const {
-    fetchingInvestors,
-    investorsbyId,
-    handleUpdateInvestorModal,
-    updateInvestorModal,
-    fetchingInvestorsError,
-    fetchingAllCustomers,
-    user,
-    IconShowhover,
-  } = props;
-  console.log("ee");
- 
-  // if (fetchingInvestors) {
-  //   return <BundleLoader />;
-  // }
+  const handleUpdateAssigned = (userKpiLinkId,  assignedValue) => {
+    const data = {
+        userKpiLinkId: userKpiLinkId, 
+       employeeId: props.rowdata.employeeId,
+       assignedValue: editedFields[userKpiLinkId]?.assignedValue !== undefined ? editedFields[userKpiLinkId].assignedValue : assignedValue,
+    };
+  
+    props.updateAssignedValue(data, props.rowdata.employeeId,)
+     
+     
+      setEditedFields((prevFields) => ({ ...prevFields, [userKpiLinkId]: undefined }));
+      setEditContactId(null);
+    
+  };
+
 
   return (
     <>
   
-  <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+  <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
           <div className=" md:w-[13.5rem]">
         <FormattedMessage
                   id="app.name"
                   defaultMessage="Name"
                 /></div>
-        <div className=" md:w-[8.1rem]"><FormattedMessage
-                  id="app.Value"
-                  defaultMessage="Value"
-                /></div>
+ 
         <div className="md:w-[10.1rem]"><FormattedMessage
                   id="app.Frequency"
                   defaultMessage="Frequency"
+                /></div>
+                 <div className="md:w-[10.1rem]"><FormattedMessage
+                  id="app.completedValue"
+                  defaultMessage="Completed Value"
+                /></div>
+                       <div className=" md:w-[8.1rem]"><FormattedMessage
+                  id="app.assignedValue"
+                  defaultMessage="Assigned Value"
                 /></div>
        
         
@@ -109,21 +118,58 @@ function AssigenedKpiCardList(props) {
                                 <div class="flex">
 
                              
-                                <div className=" flex font-medium flex-col md:w-[13.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                   
-                                    <div class="text-sm text-cardBody font-poppins">
-                                         {item.assignedValue}
-                                    </div>
-                                </div>
-                                <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                              
+                                <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
                                 
                                   <div class="text-sm text-cardBody font-poppins">
                                   {item.frequency}
                                   </div>
                               </div>
+
+                              <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                {item.completedValue}
+                                </div>
+                            </div>
+                            <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                   <div class="text-sm text-cardBody font-poppins">
+                                   {editContactId === item.userKpiLinkId ? (
+                     <input
+                     style={{border:"2px solid black"}}
+                       value={editedFields[item.userKpiLinkId]?.assignedValue !== undefined ? editedFields[item.userKpiLinkId].assignedValue : item.assignedValue}
+                       onChange={(e) => handleChange(item.userKpiLinkId, 'assignedValue', e.target.value)}
+                     />
+                   ) : (
+                     <div className="font-normal text-sm text-cardBody font-poppins">
+                       <span>{item.assignedValue}</span>
+                     </div>
+                   )}
+                                   </div>
+                               </div>
                               </div>
-   
-                                <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                              <div className=" flex  ml-8" style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+                    {editContactId === item.userKpiLinkId ? (
+                        <>
+                      <Button onClick={() => handleUpdateAssigned(item.userKpiLinkId, item.assignedValue)}>
+                        Save
+                      </Button>
+                        <Button onClick={() => handleCancelClick(item.userKpiLinkId)} style={{ marginLeft: '0.5rem' }}>
+                        Cancel
+                      </Button>
+                      </>
+                      
+                    ) : (
+                      <BorderColorIcon
+                        tooltipTitle="Edit"
+                        iconType="edit"
+                         onClick={() => handleEditClick(item.userKpiLinkId)}
+                        style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '1rem', }}
+                      />
+                    )}
+                  </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
@@ -145,6 +191,7 @@ function AssigenedKpiCardList(props) {
 
                                     </div>
                                 </div>
+
                               
                              
                             </div>
@@ -154,7 +201,7 @@ function AssigenedKpiCardList(props) {
                     )
                 })}
                     
-      </OnlyWrapCard>
+      </div>
      
 
    
@@ -175,7 +222,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getEmployeeKpiList,
-        deleteKpiData
+        deleteKpiData,
+        updateAssignedValue
     },
     dispatch
   );

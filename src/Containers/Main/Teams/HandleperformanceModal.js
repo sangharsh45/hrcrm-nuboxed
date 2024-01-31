@@ -15,14 +15,8 @@ console.log(this.props.rowdata)
       <div>
         <StyledDrawer
         title="KPI List"
-         // title={this.props.customer.name}
-          width="60%"
-          style={{ marginTop: "3rem" }}
+          width="70%"
           visible={this.props.addDrawerPerformanceModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleperformanceDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

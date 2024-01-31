@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -35,22 +34,22 @@ class SingleKpi extends Component {
     console.log("kpi", kpi);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <SectorWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" flex  flex-col justify-between ml-4">
-                 <h1>KPI</h1>
-                <SectorName style={{ flexBasis: "65%" }}>
+                 <div class=" flex text-base text-[#40A9FF]">KPI</div>
+                 <div class=" font-semibold" >
                   {kpi}
-                </SectorName>
+                </div>
                 </div>
                 <div class=" flex  flex-col justify-between">
-                <h1>Frequency</h1>
-                <SectorName style={{ flexBasis: "65%" }}>
+                <div class=" flex text-base text-[#40A9FF]">Frequency</div>
+                <div class=" font-semibold" >
                   {frequency}
-                </SectorName>
+                </div>
                 </div>
                 <div>
                   {/* {this.props.source.editInd ? ( */}
@@ -62,14 +61,15 @@ class SingleKpi extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   {/* ) : null}  */}
-                  &nbsp;
+                  
                   <Tooltip title="Delete">
                     <DeleteOutlined
                         onClick={() => handleDeleteKpi(performanceManagementId)}
-                      size="14px"
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -93,8 +93,7 @@ class SingleKpi extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+                
                 <Select 
               defaultValue={frequency}
                style={{width:"25%"}}
@@ -121,7 +120,7 @@ class SingleKpi extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -131,22 +130,10 @@ class SingleKpi extends Component {
             )
           }
         </ViewEditCard>
-      </SectorWrapper>
+      </div>
     );
   }
 }
 
 export default SingleKpi;
 
-const SectorWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const SectorName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const SectorValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

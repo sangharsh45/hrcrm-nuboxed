@@ -151,15 +151,29 @@ function General(props) {
   
   </div>
                   </div>
-                  <div class=" flex justify-between w-[74%] mt-4"
+                  <div class=" font-bold text-base mt-4"> Process </div>
+                  <div class=" flex flex-col justify-between w-[74%] mt-4"
                  
                  >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Production Process Only</p>
-                    <div>
+            
+                    <div class=" flex flex-row">
+                    <p style={{ minWidth: "-webkit-fill-available" }}> Production</p>
                       <Field
                         name="inspectionRequiredInd"
                         component={SwitchComponent}
                         data={values.inspectionRequiredInd}
+                        checkedChildren={"Yes"}
+                        unCheckedChildren={"No"}
+                        width={"5em"}
+                      />
+                    </div>
+              
+                    <div class=" flex flex-row mt-2">
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Repair</p>
+                      <Field
+                        // name="inspectionRequiredInd"
+                        component={SwitchComponent}
+                        // data={values.inspectionRequiredInd}
                         checkedChildren={"Yes"}
                         unCheckedChildren={"No"}
                         width={"5em"}

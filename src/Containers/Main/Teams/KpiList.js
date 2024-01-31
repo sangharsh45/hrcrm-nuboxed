@@ -72,11 +72,11 @@ function KpiList(props) {
             <Form className="form-background">
             <div class="flex justify-between  pr-2 max-sm:flex-col">
             <div class=" w-w47.5 max-sm:w-wk">
-            <label class=" text-[#444] font-bold text-[0.75rem]" >Workflow</label>
+            <label class=" text-[#444] font-bold text-[0.75rem]" >KPI</label>&nbsp;
                       <select  className="customize-select"
                        
                       onChange={handleWorkflowChange}>
-          <option value="">Select Workflow</option>
+          <option value="">Select Kpi</option>
           {props.kpiList.map((item, index) => (
             <option 
            

@@ -25,7 +25,7 @@ class SingleModuleList extends Component {
     console.log("35l",this.props)
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <DepartmentWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -196,29 +196,17 @@ class SingleModuleList extends Component {
                                 return <Option value={item.sectorId}>{item.sectorName} </Option>;
                             })}
                </Select> */}
-                  <br />
-                  <br />
+                
               
                 </div>
               )
           }
         </ViewEditCard>
-      </DepartmentWrapper>
+      </div>
     );
   }
 }
 
 export default SingleModuleList;
 
-const DepartmentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DepartmentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+

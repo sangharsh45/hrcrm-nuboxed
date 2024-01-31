@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components';
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
@@ -22,15 +21,15 @@ class SingleExpenses extends Component {
         console.log(linkedExpenses)
         // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
         return (
-            <ExpenseWrapper>
+            <div class=" w-full cursor-pointer">
                 <ViewEditCard>
                     {({ viewType }, toggleViewType) => (
                         viewType === 'view'
                             ?
                             <div class=" flex justify-between" >
-                                <ExpenseName style={{ flexBasis: '85%' }}>
+                                <div class=" font-semibold" >
                                     {expenseType}
-                                </ExpenseName>
+                                </div>
                                 <div>
                                     {this.props.expense.editInd?
                          <BorderColorIcon 
@@ -39,15 +38,16 @@ class SingleExpenses extends Component {
                             onClick={toggleViewType}
                             style={{fontSize:"1rem"}}
                                />:null}
-                                &nbsp;
+                              
                                 <Tooltip title="Delete">
                     <DeleteOutlined
 
                       onClick={() => handleDeleteExpense(expenseTypeId)}
-                      size="14px"
+                  
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
@@ -73,8 +73,7 @@ class SingleExpenses extends Component {
                                     onChange={handleChange}
                                     style={{ width: '60%' }}
                                 />
-                                <br />
-                                <br />
+                              
                                 <div class=" ml-auto" >
                                 <Button
                                     type='primary'
@@ -88,10 +87,11 @@ class SingleExpenses extends Component {
                                        id="app.update"
                                        defaultMessage="Update"
                                     />
-                                </Button>&nbsp;
+                                </Button>
                                 <Button
                                     type='primary'
                                     ghost
+                                  
                                     onClick={() => toggleViewType()}
                                 >
                                     {/* Cancel */}
@@ -104,22 +104,11 @@ class SingleExpenses extends Component {
                             </div>
                     )}
                 </ViewEditCard>
-            </ExpenseWrapper>
+            </div>
         )
     }
 }
 
 export default SingleExpenses;
 
-const ExpenseWrapper = styled.div`
-    width: 100%;
-    cursor: pointer;
-`
-const ExpenseName = styled.h3`
-    color:  ${props => props.theme.color || 'teal'};
-    font-weight: 600;
-`
-const ExpenseValue = styled.h3`
-    color: #999;
-    font-size: 1.3rem;
-`
+

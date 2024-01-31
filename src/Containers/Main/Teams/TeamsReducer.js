@@ -9,6 +9,9 @@ const initialState = {
   fetchingEmployeeListError: false ,
   teamEmployeeList:[],
 
+  updatingAssignedValue: false,
+   updatingAssignedValueError: false, 
+
   fetchingEmployeeKpi: false,
   fetchingEmployeeKpiError: false,
   employeeKpiList:[],
@@ -497,6 +500,38 @@ case types.GET_EMPLOYEE_KPI_LIST_FAILURE:
       };
     case types.DELETE_KPI_DATA_FAILURE:
       return { ...state, deletingKpiData: false, deletingKpiDataError: false };
+
+
+      case types.UPDATE_COMPLETED_VALUE_REQUEST:
+        return { ...state, updatingCompletedValue: true };
+      case types.UPDATE_COMPLETED_VALUE_SUCCESS:
+        // return { ...state, updatingDepartments: false, Departments: [...state.Departments, action.payload] };
+        return {
+          ...state,
+          updatingCompletedValue: false,
+          employeeKpiList: state.employeeKpiList.map((equipment) =>
+          equipment.userKpiLinkId === action.payload.userKpiLinkId ? action.payload : equipment
+          ),
+        };
+      case types.UPDATE_COMPLETED_VALUE_FAILURE:
+        return { ...state, updatingCompletedValue: false, updatingCompletedValueError: true };
+
+
+        case types.UPDATE_ASSIGNED_VALUE_REQUEST:
+          return { ...state, updatingAssignedValue: true };
+        case types.UPDATE_ASSIGNED_VALUE_SUCCESS:
+          // return { ...state, updatingDepartments: false, Departments: [...state.Departments, action.payload] };
+          return {
+            ...state,
+            updatingAssignedValue: false,
+            employeeKpiList: state.employeeKpiList.map((equipment) =>
+            equipment.userKpiLinkId === action.payload.userKpiLinkId ? action.payload : equipment
+            ),
+          };
+        case types.UPDATE_ASSIGNED_VALUE_FAILURE:
+          return { ...state, updatingAssignedValue: false, updatingAssignedValueError: true };
+        
+      
 
 
 
