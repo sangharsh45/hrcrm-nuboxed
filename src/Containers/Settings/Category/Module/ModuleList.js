@@ -467,8 +467,7 @@ const handleCrmClick = (checked) => {
                                 return <Option value={item.sectorId}>{item.sectorName} </Option>;
                             })}
                </Select> */}
-                  <br />
-                  <br />
+           
               
                 </div>
               )
@@ -518,7 +517,7 @@ logisticsStatus={logisticsStatus}
             </div>
            
           </MainWrapper>
-          <h4>Updated on {moment(props.moduleList.updationDate).format("ll")} by {props.moduleList.updatedBy}</h4>
+          <div>Updated on {moment(props.moduleList.updationDate).format("ll")} by {props.moduleList.updatedBy}</div>
         </div>
      
       </>

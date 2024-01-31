@@ -268,7 +268,7 @@ class Task extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.tasks && this.props.tasks.length && this.props.tasks[0].updationDate).format("ll")} by {this.props.tasks && this.props.tasks.length && this.props.tasks[0].name}</h4>
+        <div>Updated on {moment(this.props.tasks && this.props.tasks.length && this.props.tasks[0].updationDate).format("ll")} by {this.props.tasks && this.props.tasks.length && this.props.tasks[0].name}</div>
       </>
     );
   }

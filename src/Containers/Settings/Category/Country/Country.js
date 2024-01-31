@@ -282,7 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Country);
 //             </div>
 //           </div>
 //         </div>
-//         <h4>Updated on {moment(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</h4>
+//         <div>Updated on {moment(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</div>
 //       </>
 //     );
 //   }
