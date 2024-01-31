@@ -344,11 +344,10 @@ import { getRepairPhoneByUser, updaterepairStatus, getCatalogueByUser, handleRep
 import { Button, Tooltip,Badge } from "antd";
 import { FileDoneOutlined } from "@ant-design/icons";
 import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
-import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import moment from "moment";
+import CategoryIcon from '@mui/icons-material/Category'
 import { NoteAddOutlined } from "@mui/icons-material";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 const RepairPhoneNotesOrderModal = lazy(() => import('./RepairPhoneNotesOrderModal'));
 const RepairTaskTable = lazy(() => import('./RepairTaskTable'));
@@ -420,7 +419,7 @@ function PhoneListForRepair(props) {
         console.log(item)
         const data = {
             repairStatus: type,
-            orderPhoneId: props.rowData.orderId,
+            orderPhoneId: props.rowData.orderId, 
             phoneId: item.phoneId,
             repairTechnicianId: props.userId,
             qcInspectionInd: type === "Complete" ? 2 : 1
@@ -431,38 +430,39 @@ function PhoneListForRepair(props) {
     return (
         <>
             <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto '>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                    <div className=" md:w-[3.1rem]"><FormattedMessage
+            <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                    <div className=" md:w-[5.5rem]"><FormattedMessage
                         id="app.oem"
                         defaultMessage="OEM"
                       /></div>
-                        <div className=" md:w-[2.2rem]"><FormattedMessage
+                        <div className=" md:w-[6.2rem]"><FormattedMessage
                         id="app.model"
                         defaultMessage="model"
                       /></div>
-                       <div className=" md:w-[5.8rem] "><FormattedMessage
+                       <div className=" md:w-[6.8rem] "><FormattedMessage
                         id="app.iMEI"
                         defaultMessage="iMEI"
                       /></div>
-                        <div className="md:w-[3.6rem]"></div>
-                        <div className="md:w-[4.8rem]"><FormattedMessage
+                        <div className="md:w-[5.4rem]"></div>
+                        <div className="md:w-[5.6rem]"><FormattedMessage
                         id="app.repair"
                         defaultMessage="repair"
                       /></div>
-                        <div className="md:w-[4.8rem]"><FormattedMessage
+                       <div className="md:w-[8.2rem]"><FormattedMessage
+                        id="app.estimated"
+                        defaultMessage="Estimated"
+                      /></div>
+                        <div className="md:w-[6.8rem]"><FormattedMessage
                         id="app.starttime"
                         defaultMessage="starttime"
                       /></div>
-                       <div className="md:w-[4.3rem]"><FormattedMessage
+                       <div className="md:w-[6.3rem]"><FormattedMessage
                         id="app.endtime"
                         defaultMessage="endtime"
                       /></div>
-                        <div className="md:w-[7.2rem]"><FormattedMessage
-                        id="app.estimatedtime"
-                        defaultMessage="estimatedtime"
-                      /></div>
-                        <div className="md:w-[6.5rem]"><FormattedMessage
+                       
+                        <div className="md:w-[7.5rem]"><FormattedMessage
                         id="app.hours"
                         defaultMessage="Hours"
                       /></div>
@@ -476,7 +476,7 @@ function PhoneListForRepair(props) {
                         const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
                         return (
                             <div>
-                                <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
+                                <div className="flex rounded-xl  w-full  mt-4 bg-white h-12 items-center p-3 "
 
                                 >
                                     <div class="flex">
@@ -484,26 +484,26 @@ function PhoneListForRepair(props) {
                                             {item.company}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[2.8rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                        <div className=" flex font-medium   md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.model}
-                                            </h4>
+                                            </div>
 
                                         </div>
-                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 {item.imei}
-                                            </h4>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
                                         <div class=" text-xs text-cardBody font-poppins text-center">
-                                            <SubTitle>
+                                            
                                                 {item.qrCodeId ? (
                                                     <QRCodeModal
                                                         qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
@@ -516,12 +516,12 @@ function PhoneListForRepair(props) {
                                                         No QR
                                                     </span>
                                                 )}
-                                            </SubTitle>
+                                            
 
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[6.6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[7.6rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
 
@@ -555,6 +555,12 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
+                                    <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.totalhours} minutes
+
+                                        </div>
+                                    </div>
                                     <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcStartTime === null ? "" : moment(starttimme).format('LT')}
@@ -562,7 +568,7 @@ function PhoneListForRepair(props) {
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[13.3rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <>{item.qcStartTime === null ? "" : moment(starttimme).format('LT')}</>
 
@@ -574,24 +580,19 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
-                                            {item.totalhours}
-
-                                        </div>
-                                    </div>
-                                    <div className=" flex font-medium  md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                    <div className=" flex font-medium  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Spare">
                                                 <Button
                                                 type="primary"
-                                                style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "white" }}
 
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         hanldeSpare();
                                                     }}>
-                                                   Add Spares
+                                                <CategoryIcon style={{color:"white",height:"0.75rem",fontSize:"0.75rem"}}/>Spares
                                                 </Button>
 
 
@@ -599,18 +600,18 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Task">
                                             <Badge size="small" count={`${item.taskCount} / ${item.totalTaskCount}`} overflowCount={5000}>
-                                                <FileDoneOutlined
-                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black",fontSize:"1rem" }}
-                                                    type="file-done"
+                                                <Button
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "white" }}
+                                                    type="primary"
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         handleExpand(item.phoneId);
                                                     }}
-                                                />
+                                                ><FileDoneOutlined style={{color:"white",height:"0.75rem",fontSize:"0.75rem"}}/>Tasks</Button>
                                         </Badge>
                                             </Tooltip>
 
@@ -638,7 +639,7 @@ function PhoneListForRepair(props) {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                </div>
                 <div class="flex justify-end">
                     <Button
                         type="primary"

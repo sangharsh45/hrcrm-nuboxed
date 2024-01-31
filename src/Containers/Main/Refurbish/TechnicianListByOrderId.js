@@ -86,7 +86,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getNoOfTechnicianById } from "./RefurbishAction";
 import { FormattedMessage } from 'react-intl';
-import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import { BundleLoader } from '../../../Components/Placeholder';
 const QCPhoneListByTechnician =lazy(()=> import('./QCPhoneListByTechnician'));
 
@@ -109,7 +108,7 @@ const TechnicianListByOrderId = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky  z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+            <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[8.1rem]"><FormattedMessage
                         id="app.name"
@@ -143,16 +142,16 @@ const TechnicianListByOrderId = (props) => {
                          </span>
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                        <div className=" flex font-medium   md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                
-                                            </h4>
+                                            </div>
 
                                         </div>
-                                        <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                        <div className=" flex font-medium   md:w-[8.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.totalPhone}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -161,7 +160,7 @@ const TechnicianListByOrderId = (props) => {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                </div>
                 
             </div>
             {show && <QCPhoneListByTechnician row={row} orderPhoneId={props.rowData.orderPhoneId} />}

@@ -6,11 +6,11 @@ import {
   handleOpportunityModal,
   setOpportunityViewType,
 } from "./OpportunityAction";
-import OpportunityBoard from "./Child/OpportunityBoard"
-import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
-import OpportunityMobileWonCard from "./Child/OpportunityTable/OpportunityMobileWonCard";
-import OpportunityLostMobileCard from "./Child/OpportunityTable/OpportunityLostMobileCard";
-import OpportunityAllMobileCardList from "./Child/OpportunityTable/OpportunityAllMobileCardList";
+const OpportunityBoard = lazy(() => import("./Child/OpportunityBoard"));
+const OpportunityWonCard = lazy(() => import("./Child/OpportunityTable/OpportunityWonCard"));
+const OpportunityAllMobileCardList = lazy(() => import("./Child/OpportunityTable/OpportunityAllMobileCardList"));
+const OpportunityLostMobileCard = lazy(() => import("./Child/OpportunityTable/OpportunityLostMobileCard"));
+const OpportunityMobileWonCard = lazy(() => import("./Child/OpportunityTable/OpportunityMobileWonCard"));
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));

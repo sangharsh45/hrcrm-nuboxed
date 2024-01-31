@@ -12,8 +12,7 @@ const QCPhoneNotesOrderModal = (props) => {
             <StyledDrawer
                 title={`Notes`}
                 visible={props.phoNotesQCOrderModal}
-                closable
-                destroyOnClose
+                width="40%"
                 onClose={() => props.handleQCPhoneNotesOrderModal(false)}
                 footer={null}
             >

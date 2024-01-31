@@ -9,8 +9,8 @@ import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import { updateQCStatus } from "../Account/AccountAction"
 import moment from "moment";
+import CategoryIcon from '@mui/icons-material/Category'
 import { NoteAddOutlined } from "@mui/icons-material";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 const AddingQCSpareList = lazy(() => import('./AddingQCSpareList'));
 const QCPhoneNotesOrderModal = lazy(() => import('./QCPhoneNotesOrderModal'));
@@ -91,30 +91,31 @@ function OrderPhoneListById(props) {
     return (
         <>
             <div className=' flex justify-end sticky flex-col z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[3.1rem]"><FormattedMessage
+            <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[5.5rem]"><FormattedMessage
                             id="app.oem"
                             defaultMessage="OEM"
                         /></div>
-                        <div className=" md:w-[2.2rem]"><FormattedMessage
+                        <div className=" md:w-[5.2rem]"><FormattedMessage
                             id="app.model"
                             defaultMessage="model"
                         /></div>
-                        <div className=" md:w-[5.8rem] "><FormattedMessage
+                        <div className=" md:w-[6.8rem] "><FormattedMessage
                             id="app.iMEI"
                             defaultMessage="iMEI"
                         /></div>
-                        <div className="md:w-[3.6rem]"><FormattedMessage
-                            id="app.qrcode"
-                            defaultMessage="qrcode"
-                        /></div>
+                        <div className="md:w-[5.4rem]"></div>
                         <div className="md:w-[4.6rem]"></div>
-                        <div className="md:w-[4.8rem]"><FormattedMessage
+                        <div className="md:w-[7.5rem]"><FormattedMessage
+                            id="app.estimate"
+                            defaultMessage="Estimate"
+                        /></div>
+                        <div className="md:w-[5.8rem]"><FormattedMessage
                             id="app.starttime"
                             defaultMessage="starttime"
                         /></div>
-                        <div className="md:w-[4.3rem]"><FormattedMessage
+                        <div className="md:w-[6.3rem]"><FormattedMessage
                             id="app.endtime"
                             defaultMessage="endtime"
                         /></div>
@@ -122,10 +123,7 @@ function OrderPhoneListById(props) {
                             id="app.actualeffort"
                             defaultMessage="actualeffort"
                         /></div>
-                        <div className="md:w-[7.5rem]"><FormattedMessage
-                            id="app.estimatehours"
-                            defaultMessage="estimatehours"
-                        /></div>
+                        
                         <div className="md:w-[6.9rem]"></div>
                     </div>
                     {props.orderPhoneList.map((item) => {
@@ -137,7 +135,7 @@ function OrderPhoneListById(props) {
                         const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
                         return (
                             <div>
-                                <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
+                                <div className="flex rounded-xl   mt-4 bg-white h-12 items-center p-3 "
 
                                 >
                                     <div class="flex">
@@ -146,18 +144,18 @@ function OrderPhoneListById(props) {
                                         </div>
 
                                         <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.model}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                         <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 {item.imei}
-                                            </h4>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -181,7 +179,7 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[8.21rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {props.rowData.qcInspectionInd === 1 && <ButtonGroup>
                                                 <StatusIcon
@@ -212,7 +210,12 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
+                                    <div className=" flex font-medium  md:w-[8.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.totalhours} minutes
 
+                                        </div>
+                                    </div>
                                     <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcStartTime === null ? "" : moment(item.qcStartTime).format('LT')}
@@ -232,41 +235,37 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
-                                            {item.totalhours}
-
-                                        </div>
-                                    </div>
+                                    
                                     <div className=" flex font-medium  max-sm:flex-row  max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                        <div class=" text-xs text-cardBody font-poppins text-center mr-2">
                                             <Tooltip title="Spare">
 
-                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black",fontSize: "1rem" }} >
+                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "white",fontSize: "1rem" }} >
                                                     <Button
                                                     type="primary"
                                                         onClick={() => {
                                                             handleSetRowData(item);
                                                             hanldeSpare();
                                                         }}>
-                                                            Add Spares </Button>
+                                                             <CategoryIcon style={{color:"white",height:"0.75rem",fontSize:"0.75rem"}}/> Spares </Button>
                                                 </span>
 
                                             </Tooltip>
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Task">
-                                                <FileDoneOutlined
-                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black",fontSize: "1rem" }}
-                                                    type="file-done"
+                                                <Button
+                                                  type="primary"
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "white" }}
+                                                    //type="file-done"
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         handleExpand(item.phoneId);
                                                     }}
-                                                />
+                                                ><FileDoneOutlined style={{color:"white",height:"0.75rem",fontSize:"0.75rem"}}/>Tasks</Button>
 
                                             </Tooltip>
 
@@ -295,7 +294,7 @@ function OrderPhoneListById(props) {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                </div>
                 <div class="flex justify-end">
                     {props.rowData.qcInspectionInd === 1 ? <Button
                         type="primary"

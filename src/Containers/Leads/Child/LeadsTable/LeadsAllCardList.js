@@ -34,6 +34,7 @@ import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenCETmodal from "./OpenCETmodal";
 import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 
 const ButtonGroup = Button.Group;
 
@@ -77,8 +78,8 @@ const LeadsAllCardList = (props) => {
      <div className=' flex justify-end sticky top-28 z-auto'>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[9.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]"></div>
+      <div className=" md:w-[8.1rem]">Name</div>
+        <div className=" md:w-[6.1rem]"></div>
         <div className=" md:w-[4.2rem] ">Phone #</div>
         <div className="md:w-[5.8rem]">Country</div>
         <div className="md:w-[8.5rem]">Company</div>
@@ -99,7 +100,7 @@ const LeadsAllCardList = (props) => {
         {allleadsInfo.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
-
+          const countryCode = item.address[0].country_alpha2_code
           const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -233,7 +234,7 @@ const LeadsAllCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
            
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
@@ -242,22 +243,12 @@ const LeadsAllCardList = (props) => {
                      
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
                     <h4 class=" text-xs text-cardBody font-poppins">
-                      <ReactCountryFlag
-                        countryCode={item.countryAlpha2Code}
-                        svg
-                        style={{
-                          width: "1em",
-                          height: "1em",
-                        }}
-                        title={item.country}
-                      />
+                    <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
-                      {item.address &&
-                        item.address.length &&
-                        item.address[0].country}
+                      {countryCode}
                     </h4>
                   </div>
                 </div>

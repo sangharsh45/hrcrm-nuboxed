@@ -1,94 +1,8 @@
-// import React, { useState, useEffect, useMemo } from "react";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { StyledTable } from "../../../Components/UI/Antd";
-// import { getOpenQcByUser } from "./RefurbishAction";
-// import { Button, Tooltip } from "antd";
-// import moment from "moment";
-
-
-// function OpenQcTable(props) {
-//     useEffect(() => {
-//         props.getOpenQcByUser(props.locationId, props.userId)
-//     }, [props.locationId, props.userId])
-
-
-//     const columns = [
-//         {
-//             title: "",
-//             width: "1%"
-//         },
-//         {
-//             title: "Order",
-//             dataIndex: "newOrderNo",
-//             width: "30%",
-
-//         },
-
-//         {
-//             title: "Due Date",
-//             width: "30%",
-//             render: (text, item) => {
-//                 return (
-//                     <>{item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}</>
-//                 )
-//             }
-//         },
-//         {
-//             title: "Completed Phones",
-//             width: "20%",
-//             render: (text, item) => {
-//                 return (
-//                     <>{item.qcCompletePhoneCount}/{item.totalPhone}</>
-//                 )
-//             }
-//         },
-
-//         {
-//             title: "Note",
-//             dataIndex: "reason",
-//             width: "30%",
-//         },
-
-//     ];
-//     return (
-//         <>
-//             <StyledTable
-//                 columns={columns}
-//                 dataSource={props.openQc}
-//                 loading={props.fetchingOpenQc}
-//                 pagination={false}
-//                 scroll={{ y: 200 }}
-//             />
-
-//         </>
-//     );
-// }
-
-// const mapStateToProps = ({ refurbish, auth }) => ({
-//     fetchingOpenQc: refurbish.fetchingOpenQc,
-//     userId: auth.userDetails.userId,
-//     openQc: refurbish.openQc,
-//     locationId: auth.userDetails.locationId,
-// });
-
-// const mapDispatchToProps = (dispatch) =>
-//     bindActionCreators(
-//         {
-//             getOpenQcByUser
-//         },
-//         dispatch
-//     );
-
-// export default connect(mapStateToProps, mapDispatchToProps)(OpenQcTable);
-
-
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getOpenQcByUser } from "./RefurbishAction";
 import moment from "moment";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { Badge } from "antd";
 
@@ -101,13 +15,13 @@ function OpenQcTable(props) {
     return (
         <>
     <div className=' flex justify-end sticky top-28 z-auto'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+    <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
 <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-<div className=" md:w-[4.1rem]"><FormattedMessage
+<div className=" md:w-[34.12rem]"><FormattedMessage
                         id="app.order"
                         defaultMessage="order"
                       /></div>
-    <div className=" md:w-[5.1rem]"><FormattedMessage
+    <div className=" md:w-[35.1rem]"><FormattedMessage
                         id="app.duedate"
                         defaultMessage="duedate"
                       /></div>
@@ -123,32 +37,35 @@ function OpenQcTable(props) {
                       /></div>
     {/* <div className="md:w-[4.3rem]"></div> */}
   </div>
+  <div class="overflow-y-auto h-[67vh]">
 {props.openQc.map((item) => { 
                return (
                    <div>
                        <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 ">
                               <div class="flex">
-                           <div className=" flex font-medium  md:w-[15.5rem] max-sm:w-full  ">
+                           <div className=" flex font-medium  md:w-[32.6rem] max-sm:w-full  ">
                            <Badge size="small" count={`${item.qcCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
+                           <span class=" cursor-pointer w-[7rem] flex">
                           {item.newOrderNo}
+                          </span>
                           </Badge>
 
                            </div>
 
-                           <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                               <h4 class=" text-xs text-cardBody font-poppins">   
+                           <div className=" flex font-medium   md:w-[22.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                               <div class=" text-xs text-cardBody font-poppins">   
                                {item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}
-                               </h4>
+                               </div>
                            
                            </div> 
                            {/* <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                               <h4 class=" text-sm text-cardBody font-poppins">
+                               <div class=" text-sm text-cardBody font-poppins">
                                {item.qcCompletePhoneCount}/{item.totalPhone}
-                               </h4>
+                               </div>
                            </div> */}
                            </div>
                          
-                           <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
+                           <div className=" flex font-medium  md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
                                <div class=" text-xs text-cardBody font-poppins text-center">
                               {item.reason}
 
@@ -159,7 +76,8 @@ function OpenQcTable(props) {
                        </div>
                    </div>
 )})}
-</OnlyWrapCard>
+</div>
+</div>
 
 </div>
 </>

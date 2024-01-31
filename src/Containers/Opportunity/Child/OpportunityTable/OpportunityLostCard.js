@@ -94,6 +94,7 @@ function OpportunityLostCard(props) {
         hasMore={hasMore}
         loader={fetchinglostOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
         height={"75vh"}
+        style={{overflowX:"hidden"}}
       >
  <CardWrapper>      
               {lostOpportunity.map((item) => {
@@ -114,7 +115,7 @@ function OpportunityLostCard(props) {
                     // }}
                   >
                     <div class="flex ">
-                    <div className=" flex font-medium  md:w-[13rem] max-sm:flex-row w-full ">
+                    <div className=" flex font-medium  md:w-[13.5rem] max-sm:flex-row w-full ">
                               <div>
 <SubTitle>
           <MultiAvatar
