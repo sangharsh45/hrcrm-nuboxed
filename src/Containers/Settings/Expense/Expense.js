@@ -152,6 +152,7 @@ class Expense extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
         <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -162,36 +163,11 @@ class Expense extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {expenses.length ? (
-  expenses
-    .slice() 
-    .sort((a, b) => a.expenseType.localeCompare(b.expenseType)) 
-    .map((expense, i) => (
-                    <SingleExpenses
-                      key={i}
-                      value={singleExpense}
-                      name="singleExpense"
-                      expense={expense}
-                      linkedExpenses={linkedExpenses}
-                      updatingExpenses={updatingExpenses}
-                      handleChange={this.handleChange}
-                      handleUpdateExpense={this.handleUpdateExpense}
-                         handleDeleteExpense={this.handleDeleteExpense}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Expense"
                   name="expenseType"
@@ -220,7 +196,7 @@ class Expense extends Component {
               </div>
             ) : (
               <>
-                <br />
+                
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -239,6 +215,32 @@ class Expense extends Component {
                 
               </>
             )}
+              </div>
+            <div class=" flex flex-col" >
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {expenses.length ? (
+  expenses
+    .slice() 
+    .sort((a, b) => a.expenseType.localeCompare(b.expenseType)) 
+    .map((expense, i) => (
+                    <SingleExpenses
+                      key={i}
+                      value={singleExpense}
+                      name="singleExpense"
+                      expense={expense}
+                      linkedExpenses={linkedExpenses}
+                      updatingExpenses={updatingExpenses}
+                      handleChange={this.handleChange}
+                      handleUpdateExpense={this.handleUpdateExpense}
+                         handleDeleteExpense={this.handleDeleteExpense}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer

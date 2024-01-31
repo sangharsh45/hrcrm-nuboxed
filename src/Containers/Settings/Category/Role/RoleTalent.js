@@ -139,6 +139,7 @@ class RoleTalent extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
                 <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -149,38 +150,11 @@ class RoleTalent extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-             {talentRoles.length ? (
-  talentRoles
-    .slice() 
-    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
-    .map((talentRole, i) => (
-                    <SingleRoleTalent
-                      key={i}
-                       value={singleRole}
-                      name="singleRole"
-                       talentRole={talentRole}
-                       linkedRoles={linkedRoles}
-                       handleDeleteTalentRole={this.handleDeleteTalentRole}
-                       updatinRoles={updatingRoles}
-                       handleChange={this.handleChange}
-                       handleUpdateTalentRole={this.handleUpdateTalentRole}
-                      
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper> 
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+             
                 <TextInput
                   placeholder="Add Role"
                    name="roleType"
@@ -208,7 +182,7 @@ class RoleTalent extends Component {
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -222,6 +196,34 @@ class RoleTalent extends Component {
                 </div>
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
+             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+             {talentRoles.length ? (
+  talentRoles
+    .slice() 
+    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
+    .map((talentRole, i) => (
+                    <SingleRoleTalent
+                      key={i}
+                       value={singleRole}
+                      name="singleRole"
+                       talentRole={talentRole}
+                       linkedRoles={linkedRoles}
+                       handleDeleteTalentRole={this.handleDeleteTalentRole}
+                       updatinRoles={updatingRoles}
+                       handleChange={this.handleChange}
+                       handleUpdateTalentRole={this.handleUpdateTalentRole}
+                      
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper> 
+            </div>
+         
           </MainWrapper>
      
    

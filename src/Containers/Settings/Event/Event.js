@@ -156,6 +156,7 @@ class Event extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
          <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -166,6 +167,53 @@ class Event extends Component {
             // value={currentData}
           />
             </div>
+            {isTextInputOpen ? (
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+              >
+               
+                <TextInput
+                  placeholder="Add Event"
+                  name="eventType"
+                  value={eventType}
+                  onChange={this.handleChange}
+                  width="61%"
+                  style={{ marginRight: "0.125em" }}
+                />
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!eventType}
+                  Loading={addingEvents}
+                  onClick={this.handleAddEvent}
+                  style={{ marginRight: "0.125em" }}
+                >
+                  Save
+                </Button>
+                &nbsp;
+                <Button type="primary" ghost onClick={this.toggleInput}>
+                  Cancel
+                </Button>
+              </div>
+            ) : (
+              <>
+             
+                <div class=" flex justify-end" >
+                  <Button
+                    type="primary"
+                    ghost
+                    htmlType="button"
+                    Loading={addingEvents}
+                    onClick={this.toggleInput}
+                  >
+                    Add More
+                  </Button>
+                </div>
+               
+              </>
+            )}
+              </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
@@ -195,53 +243,7 @@ class Event extends Component {
 )}
               </MainWrapper>
             </div>
-            {isTextInputOpen ? (
-              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
-            
-              >
-                <br />
-                <br />
-                <TextInput
-                  placeholder="Add Event"
-                  name="eventType"
-                  value={eventType}
-                  onChange={this.handleChange}
-                  width="61%"
-                  style={{ marginRight: "0.125em" }}
-                />
-                &nbsp;
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={!eventType}
-                  Loading={addingEvents}
-                  onClick={this.handleAddEvent}
-                  style={{ marginRight: "0.125em" }}
-                >
-                  Save
-                </Button>
-                &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
-                  Cancel
-                </Button>
-              </div>
-            ) : (
-              <>
-                <br />
-                <div class=" flex justify-end" >
-                  <Button
-                    type="primary"
-                    ghost
-                    htmlType="button"
-                    Loading={addingEvents}
-                    onClick={this.toggleInput}
-                  >
-                    Add More
-                  </Button>
-                </div>
-               
-              </>
-            )}
+         
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer

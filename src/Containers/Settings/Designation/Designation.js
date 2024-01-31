@@ -147,6 +147,7 @@ class Designation extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
                       <div class=" flex w-[18vw]" >
                       <Input
          placeholder="Search by Name"
@@ -158,37 +159,11 @@ class Designation extends Component {
           />
        
         </div>
-        <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {designations.length ? (
-  designations
-    .slice() 
-    .sort((a, b) => a.designationType.localeCompare(b.designationType)) 
-    .map((designation, i) => (
-                    <SingleDesignation
-                      key={i}
-                      value={singleDesignation}
-                      name="singleDesignation"
-                      designation={designation}
-                      linkedDesignations={linkedDesignations}
-                      updatingDesignations={updatingDesignations}
-                      handleChange={this.handleChange}
-                      handleUpdateDesignation={this.handleUpdateDesignation}
-                       handleDeleteDesignation={this.handleDeleteDesignation}
-                    />
-                    ))
-                    ) : (
-                      <p>No Data Available</p>
-                    )}
-              </MainWrapper>
-            </div>
-            {isTextInputOpen ? (
+        {isTextInputOpen ? (
              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
              >
-                <br />
-                <br />
+               
                 <TextInput
                   placeholder="Add Designation"
                   name="designationType"
@@ -215,7 +190,7 @@ class Designation extends Component {
               </div>
             ) : (
               <>
-                <br />
+               
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -230,6 +205,33 @@ class Designation extends Component {
                
               </>
             )}
+            </div>
+        <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {designations.length ? (
+  designations
+    .slice() 
+    .sort((a, b) => a.designationType.localeCompare(b.designationType)) 
+    .map((designation, i) => (
+                    <SingleDesignation
+                      key={i}
+                      value={singleDesignation}
+                      name="singleDesignation"
+                      designation={designation}
+                      linkedDesignations={linkedDesignations}
+                      updatingDesignations={updatingDesignations}
+                      handleChange={this.handleChange}
+                      handleUpdateDesignation={this.handleUpdateDesignation}
+                       handleDeleteDesignation={this.handleDeleteDesignation}
+                    />
+                    ))
+                    ) : (
+                      <p>No Data Available</p>
+                    )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer

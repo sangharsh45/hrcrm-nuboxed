@@ -1,13 +1,9 @@
 import React, { Component,Suspense } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { connect } from "react-redux";
-// import { getCandidateDocument } from "../Candidate/CandidateAction";
 import { bindActionCreators } from "redux";
-// import CandidateDocumentView from "../Candidate/CandidateDocumentView"
 import styled from 'styled-components'
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import { sortedLastIndex } from "lodash";
-import { MainWrapper } from "../../../../Components/UI/Elements";
 import EmployeeTreeMap from "./EmployeeTreeMap";
 import EmployeeDocumentView from "./EmployeeDrawer/EmployeeDocumentView";
 
@@ -27,18 +23,9 @@ class EmployeePulseDrawerModal extends Component {
       <div>
  <StyledDrawer
           title={this.props.employeeName.fullName}
-          width={"40vw"}
+          width={"60%"}
           visible={this.props.addDrawerEmployeePulseModal}
-        //   maskClosable={false}
-          closable
-          placement="right"
-          destroyOnClose
-          style={{marginTop:"5rem"}}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}          
-        //   onCancel={() => this.props.handleCandidateEmailModal(false)}
         onClose={() => this.props.handleEmployeePulseDrawerModal(false)}
-          //style={{ top: 40 }}
-        //   footer={null}
         
         >
           <Suspense fallback={<BundleLoader />}>

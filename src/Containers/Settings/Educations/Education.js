@@ -150,6 +150,7 @@ class Education extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
         <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -160,40 +161,11 @@ class Education extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {educations.length ? (
-  educations
-    .slice() 
-    .sort((a, b) => a.educationType.localeCompare(b.educationType)) 
-    .map((education, i) => (
-                    <SingleEducations
-                      key={i}
-                      value={singleEducation}
-                      name="singleEducation"
-                      education={education}
-                      linkedEducations={linkedEducations}
-                      updatingEducations={updatingEducations}
-                      handleChange={this.handleChange}
-                      handleUpdateEducation={this.handleUpdateEducation}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                      handleDeleteEducation={this.handleDeleteEducation}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
              >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Education"
                   name="educationType"
@@ -222,7 +194,7 @@ class Education extends Component {
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -241,6 +213,36 @@ class Education extends Component {
               
               </>
             )}
+               </div>
+            <div class=" flex flex-col" >
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {educations.length ? (
+  educations
+    .slice() 
+    .sort((a, b) => a.educationType.localeCompare(b.educationType)) 
+    .map((education, i) => (
+                    <SingleEducations
+                      key={i}
+                      value={singleEducation}
+                      name="singleEducation"
+                      education={education}
+                      linkedEducations={linkedEducations}
+                      updatingEducations={updatingEducations}
+                      handleChange={this.handleChange}
+                      handleUpdateEducation={this.handleUpdateEducation}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                      handleDeleteEducation={this.handleDeleteEducation}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+        
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer

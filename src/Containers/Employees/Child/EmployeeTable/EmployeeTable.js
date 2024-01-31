@@ -326,7 +326,7 @@ function EmployeeTable(props) {
     // },
 
     {
-      title: "Suspend",
+      title: "Stop Access",
       width: "5%",
       
 

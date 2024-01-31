@@ -215,6 +215,7 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
             <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -225,44 +226,11 @@ class Department extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {roles.length ? (
-  roles
-    .slice() 
-    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
-    .map((role, i) => (
-                    <SingleRole
-                      key={i}
-                      value={singleRole}
-                      name="singleRole"
-                      role={role}
-                      linkedRoles={linkedRoles}
-                      updatinRoles={updatingRoles}
-                      handleChange={this.handleChange}
-                      handleUpdateRole={this.handleUpdateRole}
-                      departments={this.props.departments}
-                      departmentId={this.state.departmentId}
-                      handleDepartment={this.handleDepartment}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                      handleDeleteRole={this.handleDeleteRole}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Role"
                   name="roleType"
@@ -307,7 +275,7 @@ class Department extends Component {
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -322,6 +290,40 @@ class Department extends Component {
                
               </>
             )}
+                </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {roles.length ? (
+  roles
+    .slice() 
+    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
+    .map((role, i) => (
+                    <SingleRole
+                      key={i}
+                      value={singleRole}
+                      name="singleRole"
+                      role={role}
+                      linkedRoles={linkedRoles}
+                      updatinRoles={updatingRoles}
+                      handleChange={this.handleChange}
+                      handleUpdateRole={this.handleUpdateRole}
+                      departments={this.props.departments}
+                      departmentId={this.state.departmentId}
+                      handleDepartment={this.handleDepartment}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                      handleDeleteRole={this.handleDeleteRole}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+           
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer
