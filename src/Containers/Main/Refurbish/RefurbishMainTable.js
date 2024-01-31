@@ -495,9 +495,9 @@ import {
 import { withRouter } from "react-router";
 import moment from "moment";
 import { FormattedMessage } from "react-intl";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { HistoryOutlined} from "@ant-design/icons";
 import { BundleLoader } from "../../../Components/Placeholder";
+import CategoryIcon from '@mui/icons-material/Category'
 const TechnicianModal =lazy(()=>import("./TechnicianModal"));
 const AssignOrderModal  =lazy(()=>import("./AssignOrderModal"));
 const AddAssignRepairModal =lazy(()=>import("./AddAssignRepairModal"));
@@ -525,13 +525,13 @@ const ProductionOrderList = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+            <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[8.1rem]"><FormattedMessage
+                        <div className=" md:w-[12.1rem]"><FormattedMessage
                         id="app.orderid"
                         defaultMessage="orderid"
                       /></div>
-                        <div className=" md:w-[10.1rem]"><FormattedMessage
+                        <div className=" md:w-[9.1rem]"><FormattedMessage
                         id="app.customer"
                         defaultMessage="customer"
                       /></div>
@@ -543,10 +543,10 @@ const ProductionOrderList = (props) => {
                         id="app.unit"
                         defaultMessage="unit"
                       /> #</div> */}
-                        <div className="md:w-[5.8rem]"><FormattedMessage
+                        {/* <div className="md:w-[5.8rem]"><FormattedMessage
                         id="app.balance"
                         defaultMessage="balance"
-                      /></div>
+                      /></div> */}
                         <div className="md:w-[7.7rem]"><FormattedMessage
                         id="app.expectedprice"
                         defaultMessage="expectedprice"
@@ -564,10 +564,10 @@ const ProductionOrderList = (props) => {
                             <div>
                                 <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 " >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full ">
+                                        <div className=" flex font-medium  md:w-[10.6rem] max-sm:w-full ">
                                             <Badge size="small" count={`${item.totalReceiveQuantity} / ${item.phoneCount}`} overflowCount={5000}>
                                             <span
-                                                class="underline text-[#1890ff] cursor-pointer"
+                                                class="underline text-[#1890ff] cursor-pointer w-[7rem] flex"
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleProductBuilder(true)
@@ -585,23 +585,23 @@ const ProductionOrderList = (props) => {
                                         </div>
 
                                         <div className=" flex font-medium   md:w-[10.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.distributorName}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                         <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 
                                                 <MultiAvatar
                   primaryTitle={item.contactPersonName}
                   imgWidth={"2.1em"}
                   imgHeight={"2.1em"}
                 />
-                                            </h4>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -612,11 +612,11 @@ const ProductionOrderList = (props) => {
                                         </div>
                                     </div> */}
 
-                                    <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.receiveRemainingQuantity}
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.expectedPrice}
@@ -640,7 +640,7 @@ const ProductionOrderList = (props) => {
                                                     handleRowData(item);
                                                     props.handleAllSpareList(true)
                                                 }}
-                                            > Approve Spares</Button>
+                                            ><CategoryIcon style={{color:"white",height:"0.75rem",fontSize:"0.75rem"}}/> Spares</Button>
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[10.12rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -705,7 +705,7 @@ const ProductionOrderList = (props) => {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                </div>
                 <Suspense fallback={<BundleLoader/>}>
                 <AssignOrderModal
                     handleAssignOrderById={props.handleAssignOrderById}

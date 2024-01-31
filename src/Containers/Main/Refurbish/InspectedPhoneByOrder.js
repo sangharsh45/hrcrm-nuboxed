@@ -118,7 +118,7 @@ import { bindActionCreators } from "redux";
 import { getDispatchUpdateList } from "../Inventory/InventoryAction"
 import { SubTitle } from "../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
+
 const QRCodeModal =lazy(()=>import("../../../Components/UI/Elements/QRCodeModal"));
 
 function InspectedPhoneByOrder(props) {
@@ -128,8 +128,8 @@ function InspectedPhoneByOrder(props) {
 
     return (
         <>
-            <div className='flex justify-end sticky ticky top-0 z-10 h-[25rem]'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+            <div className='flex justify-end sticky ticky top-0 z-10 '>
+            <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[8.1rem]"><FormattedMessage
                         id="app.oem"
@@ -161,6 +161,7 @@ function InspectedPhoneByOrder(props) {
                       /></div>
                         <div className="md:w-[7.2rem]"></div>
                     </div>
+                    <div class="overflow-y-auto h-[30vh]">
                     {props.updateDispatchList.map((item) => {
                         return (
                             <div>
@@ -171,19 +172,19 @@ function InspectedPhoneByOrder(props) {
                                         </div>
 
                                         <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.model}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                         <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 
                                             {item.imei}
-                                            </h4>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -235,7 +236,8 @@ function InspectedPhoneByOrder(props) {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                    </div>
+                </div>
                 
             </div>
         </>

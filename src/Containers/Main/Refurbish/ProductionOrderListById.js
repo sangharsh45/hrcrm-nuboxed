@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { getOrderByUser, handleOrderPhoneModal, qcInspectionButton } from "./RefurbishAction"
 import { Button,Badge } from "antd";
 import moment from "moment";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from '../../../Components/Placeholder';
 const OrderPhoneModal = lazy(() => import('./OrderPhoneModal'));
@@ -25,14 +24,14 @@ function ProductionOrderListById(props) {
     }
     return (
         <>
-            <div className=' flex justify-end sticky top-28 z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[4.1rem]"><FormattedMessage
+            <div className=' flex justify-end sticky top-28 z-auto'>          
+<div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[34.12rem]"><FormattedMessage
                             id="app.order"
                             defaultMessage="order"
                         /></div>
-                        <div className=" md:w-[5.1rem]"><FormattedMessage
+                        <div className=" md:w-[35.1rem]"><FormattedMessage
                             id="app.duedate"
                             defaultMessage="duedate"
                         /></div>
@@ -46,18 +45,19 @@ function ProductionOrderListById(props) {
                         /></div>
 
                     </div>
+                    <div class="overflow-y-auto h-[67vh]">
                     {props.orderByUser.map((item) => {
                         const currentdate = moment().format("DD/MM/YYYY");
                         const date = moment(item.creationDate).format("DD/MM/YYYY");
                         return (
-                            <div>
-                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
+                            <div >
+                                <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 "
 
                                 >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[33.8rem] max-sm:w-full  ">
                                         <Badge size="small" count={`${item.qcCompletePhoneCount} / ${item.totalPhone}`} overflowCount={5000}>
-                                            <span class="underline text-[#1890ff] cursor-pointer"
+                                            <span class="underline text-[#1890ff] cursor-pointer w-[7rem] flex"
                                                 
                                                 onClick={() => {
                                                     handleRowData(item);
@@ -69,23 +69,23 @@ function ProductionOrderListById(props) {
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
-                                                class="text-[tomato] font-bold"
+                                                class="text-[tomato] font-bold ml-4"
                                                 >
                                                     New
                                                 </span>
                                             ) : null}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[26.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                        <div className=" flex font-medium   md:w-[22.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                         {/* <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 {item.qcCompletePhoneCount}/{item.totalPhone}
-                                            </h4>
+                                            </div>
                                         </div> */}
                                     </div>
                                     <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -99,6 +99,7 @@ function ProductionOrderListById(props) {
                                     <div className=" flex font-medium  md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcInspectionInd === 0 ? <Button
+                                            style={{width:"8rem"}}
                                                 type="primary"
                                                 onClick={() => {
                                                     props.qcInspectionButton({
@@ -111,7 +112,7 @@ function ProductionOrderListById(props) {
                                                 Start Inspection
                                                 
                                                 </Button> : item.qcInspectionInd === 1 ?
-                                                <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : <label class="text-green-600">Inspection Completed</label>}
+                                                <Button  style={{width:"8rem"}} onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : <div class="text-green-600">Inspection Completed</div>}
 
                                         </div>
                                     </div>
@@ -121,7 +122,8 @@ function ProductionOrderListById(props) {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                    </div>
+                </div>
                 <Suspense fallback={<BundleLoader/>}>
                 <OrderPhoneModal
                     showPhoneList={props.showPhoneList}

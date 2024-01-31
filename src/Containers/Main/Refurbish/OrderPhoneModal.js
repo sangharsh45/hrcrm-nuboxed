@@ -8,11 +8,9 @@ const OrderPhoneModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title={rowData.newOrderNo}
+                title= {(`Order# - ${rowData.newOrderNo}`)}
                 width="80%"
                 visible={showPhoneList}
-                closable
-                destroyOnClose
                 onClose={() => handleOrderPhoneModal(false)}
                 footer={null}
             >

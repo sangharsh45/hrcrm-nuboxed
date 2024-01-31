@@ -6,7 +6,7 @@ import moment from "moment";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -106,8 +106,9 @@ const LeadsCardList = (props) => {
         dataLength={leadsAllData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingLeads?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
+        style={{overflowX:"hidden"}}
       >
         {leadsAllData.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
@@ -146,7 +147,7 @@ const LeadsCardList = (props) => {
                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
                     <div className="flex max-sm:w-full ">
                       <div>
-                        <SubTitle>
+                       
                           <MultiAvatar
                             primaryTitle={item.name}
                             imageId={item.imageId}
@@ -154,14 +155,14 @@ const LeadsCardList = (props) => {
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
-                        </SubTitle>
+                       
                       </div>
                       <div class="w-[4%]"></div>
 
                       <div class="max-sm:w-full md:flex items-center">
                         <Tooltip>
                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                            <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                            <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.name}
                               &nbsp;&nbsp;
                               {date === currentdate ? (
@@ -174,14 +175,14 @@ const LeadsCardList = (props) => {
                                   New
                                 </span>
                               ) : null}
-                            </h4>
+                            </div>
                           </div>
                         </Tooltip>
                       </div>
                     </div>
                   </div>
 
-                  <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+                  <div class="flex flex-row items-center md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between">
                   
 
                     <div>
@@ -249,15 +250,15 @@ const LeadsCardList = (props) => {
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
          
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
                         ? `${item.countryDialCode} ${item.phoneNumber}`
                         : "Not Available"}
                  
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                       {/* <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
                         svg
@@ -273,14 +274,14 @@ const LeadsCardList = (props) => {
                       {/* {item.address &&
                         item.address.length &&
                         item.address[0].country} */}
-                    </h4>
+                    </div>
                   </div>
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.companyName || "Not Available"}
-                    </h4>
+                    </div>
                   </div>
                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
@@ -306,9 +307,9 @@ const LeadsCardList = (props) => {
 
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
            
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                       {item.sector}
-                    </h4>
+                    </div>
                   </div>
                 </div>
                 <div class="flex md:items-center ">
@@ -334,7 +335,7 @@ const LeadsCardList = (props) => {
                       </span>
                     </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                  <div className=" flex font-medium flex-col md:w-16  max-sm:flex-row w-full max-sm:justify-between">
                     <span>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
@@ -345,7 +346,7 @@ const LeadsCardList = (props) => {
                       />
                     </span>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
                     <Tooltip title="Qualify? Lead will move to Prospect section!">

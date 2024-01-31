@@ -119,7 +119,6 @@ import { bindActionCreators } from 'redux';
 import { getNoOfPhoneInQCById } from "./RefurbishAction";
 import { SubTitle } from '../../../Components/UI/Elements';
 import { FormattedMessage } from 'react-intl';
-import { OnlyWrapCard } from '../../../Components/UI/Layout';
 const QRCodeModal =lazy(()=>import('../../../Components/UI/Elements/QRCodeModal'));
 
 const QCPhoneListByTechnician = (props) => {
@@ -130,7 +129,7 @@ const QCPhoneListByTechnician = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky z-10 h-60'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+            <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[8.1rem]"><FormattedMessage
                         id="app.oem"
@@ -144,11 +143,11 @@ const QCPhoneListByTechnician = (props) => {
                         id="app.imei"
                         defaultMessage="imei"
                       /></div>
-                        <div className="md:w-[4.6rem]"><FormattedMessage
+                        <div className="md:w-[5rem]"><FormattedMessage
                         id="app.os"
                         defaultMessage="os"
                       /> </div>
-                        <div className="md:w-[5.8rem]"><FormattedMessage
+                        <div className="md:w-[4.8rem]"><FormattedMessage
                         id="app.gb"
                         defaultMessage="gb"
                       /></div>
@@ -172,23 +171,23 @@ const QCPhoneListByTechnician = (props) => {
                                         </div>
 
                                         <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                            <div class=" text-xs text-cardBody font-poppins">
                                                 {item.model}
-                                            </h4>
+                                            </div>
 
                                         </div>
                                         <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                                 
                                             {item.imei}
-                                            </h4>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[4.52rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                            
                                             {item.os}
@@ -236,7 +235,7 @@ const QCPhoneListByTechnician = (props) => {
                             </div>
                         )
                     })}
-                </OnlyWrapCard>
+                </div>
                 
             </div>
         </>
