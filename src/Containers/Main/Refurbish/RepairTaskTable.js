@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPhoneTasklist } from "../Account/AccountAction";
 import { addTaskByPhoneId,updateProcessTask } from "./RefurbishAction"
-import {  StyledLabel } from "../../../Components/UI/Elements";
 import { Button, Input, Switch, Select } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 const RepairTaskList=lazy(()=>import("./RepairTaskList"));
@@ -44,7 +43,7 @@ function RepairTaskTable(props) {
             <div class=" h-full w-w47.5 max-sm:w-wk">
             <div class="flex justify-between">
                   <div class="w-[31%]">
-                  <StyledLabel>Add Task</StyledLabel>
+                  <div class="font-bold text-base">Add Custom Task</div>
                   </div>
                   <div class="w-[31%]">
                   <Switch

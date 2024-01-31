@@ -670,7 +670,7 @@ const ProductionOrderList = (props) => {
                                                         }}
                                                     >Assign For Repair</Button>
                                                 </Tooltip>
-                                                : item.qcRepairInd === 2 ? <b>Assigned </b>
+                                                : item.qcRepairInd === 2 ? <b>QC Assigned </b>
                                                     : item.qcRepairInd === 3 ? <b style={{ color: "deepgreen" }}>Repair on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>
