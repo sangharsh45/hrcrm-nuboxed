@@ -227,14 +227,14 @@ class ItemTask extends Component {
                     />
                   </Button>
                 </div>
-                {/* <h4>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</h4> */}
+                {/* <div>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
               </>
             )}
           </MainWrapper>
       
        
         </div>
-        <h4>Updated on {moment(this.props.itemTaskListData && this.props.itemTaskListData.length && this.props.itemTaskListData[0].updationDate).format("ll")} by {this.props.itemTaskListData && this.props.itemTaskListData.length && this.props.itemTaskListData[0].updatedBy}</h4>
+        <div>Updated on {moment(this.props.itemTaskListData && this.props.itemTaskListData.length && this.props.itemTaskListData[0].updationDate).format("ll")} by {this.props.itemTaskListData && this.props.itemTaskListData.length && this.props.itemTaskListData[0].updatedBy}</div>
       </>
     );
   }

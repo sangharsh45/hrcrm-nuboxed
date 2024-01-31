@@ -227,7 +227,7 @@ class Documents extends Component {
             )}
           </MainWrapper>
         </div>
-        <h4>Updated on {moment(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format("ll")} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</h4>
+        <div>Updated on {moment(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format("ll")} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</div>
       </>
     );
   }

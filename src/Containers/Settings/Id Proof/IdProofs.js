@@ -216,7 +216,7 @@ class IdProofs extends Component {
             )}
           </MainWrapper>         
         </div>
-        <h4>Updated on {moment(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format("ll")} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</h4>
+        <div>Updated on {moment(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format("ll")} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</div>
       </>
     );
   }

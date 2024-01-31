@@ -269,7 +269,7 @@ class Event extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.events && this.props.events.length && this.props.events[0].updationDate).format("ll")} by {this.props.events && this.props.events.length && this.props.events[0].name}</h4>
+        <div>Updated on {moment(this.props.events && this.props.events.length && this.props.events[0].updationDate).format("ll")} by {this.props.events && this.props.events.length && this.props.events[0].name}</div>
       </>
     );
   }

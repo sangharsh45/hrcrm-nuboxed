@@ -268,7 +268,7 @@ class Education extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format("ll")} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</h4>
+        <div>Updated on {moment(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format("ll")} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</div>
       </>
     );
   }

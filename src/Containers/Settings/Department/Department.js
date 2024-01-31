@@ -296,7 +296,7 @@ class Department extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
+        <div>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
       </>
     );
   }

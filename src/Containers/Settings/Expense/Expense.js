@@ -266,7 +266,7 @@ class Expense extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format("ll")} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</h4>
+        <div>Updated on {moment(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format("ll")} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</div>
       </>
     );
   }
