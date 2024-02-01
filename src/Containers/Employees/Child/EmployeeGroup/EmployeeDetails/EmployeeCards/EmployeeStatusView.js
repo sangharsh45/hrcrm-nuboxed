@@ -16,6 +16,9 @@ class EmployeeStatusView extends Component {
     const {
       singleEmployee: {
         emailId,
+        currency,
+        workplace,
+        reportingManagerName,
         employeeId,
         phoneNo,
         mobileNo,
@@ -82,12 +85,13 @@ class EmployeeStatusView extends Component {
         <ProfileItemRow label="Linkedin" value={linkedinPublicUrl || ""} />
         {/* <ProfileItemRow label="Twitter" value={twitter || ""} /> */}
         <ProfileItemRow label="Date of Joining" value={moment(dateOfJoining).format("YYYY-MM-DD")} />
-        <ProfileItemRow label="Currency" value={tradeCurrency} />
+        <ProfileItemRow label="Currency" value={currency} />
         {/* <ProfileItemRow label="Designation" value={designation} />
         <ProfileItemRow label="Department" value={department} />
         <ProfileItemRow label="Level" value={level || ""} /> */}
         {/* <ProfileItemRow label="Details" value={departmentDetails} /> */}
-        <ProfileItemRow label="Reporting Manager"  />
+        <ProfileItemRow label="Reporting Manager" value={reportingManagerName}  />
+        <ProfileItemRow label="Eorkplace" value={workplace}  />
         <ProfileItemRow label="Time Zone" value={timeZone} />
         {/* <ProfileItemRow label="Level" value={level || ""} /> */}
         {/* <ProfileItemRow label="TimeZone" value={timeZone} /> */}

@@ -46,8 +46,8 @@ function General(props) {
           orgId: props.organizationId,
           jobAniEmailInd: props.requirementDuration.jobAniEmailInd,
           birthdayEmailInd: props.requirementDuration.birthdayEmailInd,
-          productionInd: props.requirementDuration.productionInd,
-          repairInd: props.requirementDuration.repairInd,
+          orderCreatProductionInd: props.requirementDuration.orderCreatProductionInd,
+          orderCreatRepairInd: props.requirementDuration.orderCreatRepairInd,
         }}
         onSubmit={(values) => {
           console.log(values)
@@ -160,9 +160,9 @@ function General(props) {
                     <div class=" flex flex-row">
                     <p style={{ minWidth: "-webkit-fill-available" }}> Production</p>
                       <Field
-                        name="productionInd"
+                        name="orderCreatProductionInd"
                         component={SwitchComponent}
-                        data={values.productionInd}
+                        data={values.orderCreatProductionInd}
                         checkedChildren={"Yes"}
                         unCheckedChildren={"No"}
                         width={"5em"}
@@ -172,9 +172,9 @@ function General(props) {
                     <div class=" flex flex-row mt-2">
                     <p style={{ minWidth: "-webkit-fill-available" }}>Repair</p>
                       <Field
-                         name="repairInd"
+                         name="orderCreatRepairInd"
                         component={SwitchComponent}
-                        data={values.repairInd}
+                        data={values.orderCreatRepairInd}
                         checkedChildren={"Yes"}
                         unCheckedChildren={"No"}
                         width={"5em"}

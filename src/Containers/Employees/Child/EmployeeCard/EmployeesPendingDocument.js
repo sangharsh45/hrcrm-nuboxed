@@ -18,15 +18,15 @@ const EmployeesPendingDocument = (props) => {
 // }
 console.log("employeeName",props.employeeName)
   return (
-    <div class="overflow-y-auto max-h-[39rem]">
+    <div class="overflow-y-auto h-[40rem]">
       <CardWrapper>  
    {props.employeeName.listOfDocPending.map((item) => {
      return (
-  <CardElement>
+  <CardElement >
     
      <div class=" flex flex-row justify-between w-wk max-sm:flex-col">
       <div class="flex">
-     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+     <div className=" flex font-medium flex-col md:w-[15rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
@@ -70,6 +70,11 @@ const mapDispatchToProps = (dispatch) =>
   );
 export default connect(mapStateToProps, mapDispatchToProps) (EmployeesPendingDocument)
 
+const ScrollableContainer = styled.div`
+  overflow-y: auto;
+  max-height: 42rem;
+`;
+
 const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -87,7 +92,7 @@ border-radius: 0.75rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 4rem;
+    height: 2.5rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;

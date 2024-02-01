@@ -2,9 +2,8 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import { Tag, Tooltip, Select, Popover } from "antd";
-import { StyledSelect, StyledRangePicker } from "../../../Components/UI/Antd";
-import dayjs from "dayjs";
+import { Tag, } from "antd";
+import { StyledSelect, } from "../../../Components/UI/Antd";
 import {
   setSelectedReportType,
   setSelectedTimeIntervalReport,
@@ -12,8 +11,6 @@ import {
   setTimeRangeReport,
   setSubSelectedReportType,
 } from "../ReportAction";
-import { TimeInterval } from "../../../Utils";
-import { FlexContainer } from "../../../Components/UI/Layout";
 const Option = StyledSelect.Option;
 class ReportActionLeft extends React.Component {
   render() {
@@ -40,30 +37,30 @@ class ReportActionLeft extends React.Component {
     const dynamicData = [{ userName: "Samli", id: "1" }, { userName: "priya", id: "2" }]
     console.log(selectedSubReportType)
     return (
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center" >
           {user.department === "Management" && (
               <>
-              <FlexContainer>
-              <div>
+              <div class=" flex">
+              <div class=" mt-2">
                   <Tag
-                    color={reportViewType === "ALL" ? "#FFA500" : "orange"}
+                    color={reportViewType === "ALL" ? "tomato" : "#FFA500"}
                     style={{
                       cursor: "pointer",
                       fontWeight: reportViewType === "ALL" ? "bold" : null,
                       textAlign: "center",
-                      // color: "orange",
-                      borderColor: "orange",
+                      fontFamily:"poppins",
+                      borderColor: "tomato",
                     }}
                     onClick={() => setReportViewType("ALL")}
                   >
                     {/* Organization */}
                     <FormattedMessage
-                      id="app.organization"
-                      defaultMessage="Organization"
+                      id="app.enterprise"
+                      defaultMessage="Enterprise"
                     />
                   </Tag>
                 </div>
-                <div>
+                {/* <div>
                   <Tag
                     color={reportViewType === "ME" ? "	#FFA500" : "orange"}
                     style={{
@@ -74,8 +71,8 @@ class ReportActionLeft extends React.Component {
                     }}
                     onClick={() => setReportViewType("ME")}
                   >My View</Tag>
-                </div>
-                <div>
+                </div> */}
+                <div class=" mt-2">
               {reportViewType === "ME" ? (
                 <StyledSelect
                   showSearch
@@ -117,10 +114,10 @@ class ReportActionLeft extends React.Component {
               )}
 
             </div>
-                </FlexContainer>
+                </div>
               </>
             )}
-    </FlexContainer>
+    </div>
     );
   }
 }

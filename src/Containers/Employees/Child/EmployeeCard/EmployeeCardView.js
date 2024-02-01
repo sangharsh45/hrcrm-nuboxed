@@ -88,7 +88,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             <div class=" h-h86 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
-              {props.filteredData.map((item) => {
+              {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
                 console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
@@ -171,7 +171,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 handleSetCurrentEmployeeId(item)
               }}
             >
+               <Tooltip title="Pulse">
               <MonitorHeartIcon  style={{ fontSize: "1rem", color: "#df9697" }}/>
+              </Tooltip>
      </span>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
@@ -189,7 +191,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 count={item.noOfDocPending}
                 overflowCount={999}
               > 
+                  <Tooltip title="Required Documents">
               <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+              </Tooltip>
               </Badge>
      </span>
             {/* ):null} */}

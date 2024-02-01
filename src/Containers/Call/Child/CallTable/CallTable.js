@@ -1,12 +1,12 @@
 import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import DeleteIcon from "@mui/icons-material/Delete";
+import dayjs from "dayjs";
+import { DeleteOutlined } from "@ant-design/icons";
 import { Tooltip, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
+
 import {
   deleteCall,
   getCallListRangeByUserId,
@@ -76,7 +76,7 @@ const [currentNameId, setCurrentNameId] = useState("");
   return (
     <>
        <div className=' flex justify-end sticky top-28 z-auto'>
-       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+       <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[7.1rem]"><FormattedMessage
                   id="app.type"
@@ -102,14 +102,15 @@ const [currentNameId, setCurrentNameId] = useState("");
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
+                 <div className="md:w-[6.21rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
         <div className="md:w-[9.2rem]"><FormattedMessage
                   id="app.completed"
                   defaultMessage="completed"
                 /></div>
-        <div className="md:w-[6.21rem]"><FormattedMessage
-                  id="app.owner"
-                  defaultMessage="owner"
-                /></div>
+       
         <div className="w-12"></div>
       </div>
       <InfiniteScroll
@@ -128,7 +129,7 @@ const [currentNameId, setCurrentNameId] = useState("");
                 ? item.empName
                     .split(' ')
                     .map(word => (word ? word.charAt(0).toUpperCase() : '')) 
-                    .slice(0,1)
+                    .slice(0,2)
                 : ''
             }));
              return (
@@ -156,25 +157,47 @@ const [currentNameId, setCurrentNameId] = useState("");
               
    
               </div>
-              <div class="flex  flex-col md:w-[14.35rem] max-sm:flex-row max-sm:justify-between w-full">
-              <p> {moment(item.startDate).format("llll")}</p>
+              <div class="flex  flex-col justify-center md:w-[14.35rem] max-sm:flex-row max-sm:justify-between w-full">
+              <p> {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
               </div>
               <div class="flex  flex-col md:w-[2.2rem] max-sm:flex-row max-sm:justify-between w-full">
              
               <div>
-                
+           
               <Avatar.Group
                    maxCount={7}
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
                 >
-                   {findEmp.map((item, index) => {
+                    {item.included &&
+                  item.included.map((candidate, i) => {
+                     const data1 = candidate.empName
+                     .slice(0,2)
+                    //  .split("")[0]
+                     .toUpperCase();
+                   console.log("datas", data1);
+                    return (
+                      <Tooltip title={candidate.empName} key={i}>
+                      <Avatar style={{ backgroundColor: "#f56a00" }}>
+                      {data1}
+                    
+                    </Avatar>
+                    </Tooltip>
+                     
+
+                   
+                    );
+                  })}
+                   {/* {findEmp.map((item, index) => {
 return (
+  <Tooltip title={item.empName}>
   <Avatar style={{ backgroundColor: "#f56a00" }}>
               <p key={index}>{item.empName}</p>
               </Avatar>
+              </Tooltip>
                      );
-                   })}
+                   })} */}
             </Avatar.Group>
+        
         
               </div>
               </div>
@@ -182,33 +205,44 @@ return (
               
               <div class="flex items-center md:w-[30rem]">
              <div class="flex  flex-col md:w-[8.35rem] max-sm:flex-row max-sm:justify-between w-full">
-          
-              <MultiAvatar2
-                    primaryTitle={item.assignedTo}
-                   // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
+             <span>
+              {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.woner ? (
+                  
+                  null
+                ) : (
+                <MultiAvatar2
+                  primaryTitle={item.assignedTo}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                )}
+                </>
+              )}
+            </span>
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
+              <div class="flex  flex-col md:w-[8.38rem] max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
+             
+             <MultiAvatar2
+                   primaryTitle={item.woner}
+                   //imageId={item.ownerImageId}
+                   imageURL={item.imageURL}
+                   imgWidth={"1.8em"}
+                   imgHeight={"1.8em"}
+                 />
+            
+             </div>
               <div class="flex  flex-col md:w-[10.35rem] max-sm:flex-row max-sm:justify-between w-full">
            
               <p> {item.completionInd ? "Yes" : "No"}</p>
               </div>
             
               
-              <div class="flex  flex-col md:w-[8.38rem] max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
              
-              <MultiAvatar2
-                    primaryTitle={item.woner}
-                    //imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
-             
-              </div>
               <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                     <Tooltip title="Notes">
@@ -222,9 +256,11 @@ return (
            </Tooltip>
                     </div>
                     <div>
-                    <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
+                    <Tooltip title="Delete">
+                    <DeleteOutlined  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
                 onClick={() => deleteCall(item.callId, employeeId)}
               />
+                </Tooltip>
                     </div>
                   </div>
               </div>
@@ -234,7 +270,7 @@ return (
           })}
    
       </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       <AddCallNotesDrawerModal
 handleSetCallNameId={handleSetCallNameId}
