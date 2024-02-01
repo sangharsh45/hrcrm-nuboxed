@@ -1127,7 +1127,7 @@ export const handlePriceDrawer = (modalProps) => (dispatch) => {
   });
 };
 
-export const uploadCatalogueList = (data,) => (dispatch) => {
+export const uploadCatalogueList = (data) => (dispatch) => {
   dispatch({ type: types.UPLOAD_CATALOGUE_LIST_REQUEST });
   axios
     .post(`${base_url2}/excel/product-details`, data, {
@@ -1257,6 +1257,29 @@ export const createProductCurrency = (data,) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.CREATE_PRODUCT_CURRENCY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getSearchBuilder = (hsn) => (dispatch) => {
+  dispatch({
+    type: types.GET_SEARCH_BUILDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/supplies/suppliesList/${hsn}`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_SEARCH_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_SEARCH_BUILDER_FAILURE,
         payload: err,
       });
     });

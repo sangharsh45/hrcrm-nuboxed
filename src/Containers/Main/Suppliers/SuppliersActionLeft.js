@@ -1,21 +1,14 @@
 import React from "react";
 import GridViewIcon from '@mui/icons-material/GridView';
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import {
     inputDataSearch, setSuppliersDashboardType, setSelectedTimeInterval,
     setTimeRange
 } from "./SuppliersAction";
 import { connect } from "react-redux";
-import { Button, Input, Tooltip, Badge } from "antd";
-import { AppstoreOutlined, BookOutlined, AreaChartOutlined } from "@ant-design/icons";
-import { TimeInterval } from "../../../Utils";
-import moment from "moment";
+import {  Input, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-
-const { Search } = Input;
-
 
 
 const Option = StyledSelect.Option;
@@ -26,14 +19,9 @@ class SuppliersActionLeft extends React.Component {
             user,
             viewType,
             setSuppliersViewType,
-            setSuppliersDashboardType,
-            dateRangeList, setSelectedTimeInterval,
-            setTimeRange, startDate,
-            endDate,
         } = this.props;
-        const creationDate = user.creationDate;
         return (
-            <FlexContainer alignItems="center">
+            <div class="items-center">
                 <Tooltip
                 title={<FormattedMessage id="app.suppliersList" defaultMessage="Suppliers List" />}
                 >
@@ -110,7 +98,7 @@ class SuppliersActionLeft extends React.Component {
                 &nbsp;
                 &nbsp;
 
-            </FlexContainer>
+            </div>
         );
     }
 }

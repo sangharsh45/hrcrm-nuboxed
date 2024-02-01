@@ -1,16 +1,14 @@
-import React, { useReducer } from "react";
+import React,{lazy,Suspense} from "react";
 import Button from "antd/lib/button";
-import Icon from "antd/lib/icon";
 import { connect } from "react-redux";
 import { base_url } from "../../../Config/Auth";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { Tooltip } from "antd";
 import { handleSuppliersModal } from "../../Main/Suppliers/SuppliersAction";
-import AddSuppliersModal from "./Child/AddSuppliersModal";
 import { FormattedMessage } from "react-intl";
 
+const AddSuppliersModal =lazy(()=>import("./Child/AddSuppliersModal"));
 
 
 class SuppliersActionRight extends React.Component {
@@ -54,11 +52,13 @@ class SuppliersActionRight extends React.Component {
             {/* <i class="fas fa-plus"></i> */}
           </Button>
         </Tooltip>
-
-        <AddSuppliersModal
+<Suspense fallback={"Loading"}>
+<AddSuppliersModal
           handleSuppliersModal={handleSuppliersModal}
           addSuppliersModal={addSuppliersModal}
         />
+</Suspense>
+        
       </>
     );
   }
@@ -67,9 +67,6 @@ class SuppliersActionRight extends React.Component {
 const mapStateToProps = ({ suppliers, auth }) => ({
   addSuppliersModal: suppliers.addSuppliersModal,
   user: auth.userDetails,
-  //   role: auth.userDetails.role,
-  //   department: auth.userDetails.department,
-  //   user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
