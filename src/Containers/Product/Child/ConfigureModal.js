@@ -18,8 +18,6 @@ class ConfigureModal extends Component {
           visible={addConfigureModal}
           destroyOnClose
           maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"3rem" }}
           onClose={() => handleConfigureModal(false)}
           footer={null}
         >

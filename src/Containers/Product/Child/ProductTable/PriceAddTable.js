@@ -5,7 +5,7 @@ import { getCurrency } from "../../../Auth/AuthAction";
 import { Button } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { getProductCurrency,createProductCurrency,handleDiscountModal,handleOfferModal } from "../../ProductAction";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+
 const ProductDiscountModal =lazy(()=>import("./ProductDiscountModal"));
 const ProductOfferModal =lazy(()=>import("./ProductOfferModal"));
 
@@ -60,7 +60,7 @@ function ProductbuilderTable (props) {
 return (
     <>
         <div className=' flex justify-end sticky z-auto'> 
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[7%]">Currency</div>
@@ -169,7 +169,7 @@ return (
           );
         })}
              
-              </OnlyWrapCard>
+              </div>
               </div>
 
 

@@ -24,7 +24,6 @@ import { Tooltip } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import EuroIcon from '@mui/icons-material/Euro';
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 
 const UpdateProductModal =lazy(()=>import("../../Child/UpdateProductModal"));
 const PriceDrawer =lazy(()=>import("./PriceDrawer"));
@@ -36,8 +35,8 @@ function ProductCardList(props) {
     const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
-        setPage(page + 1);
         props.getProducts(page);
+        setPage(page + 1);
     }, []);
 
     const [particularDiscountData, setParticularDiscountData] = useState({});
@@ -47,8 +46,19 @@ function ProductCardList(props) {
     }
 
     const handleLoadMore = () => {
-        setPage(page + 1);
-        props.getProducts(page);
+        const proPag = props.products && props.products.length && props.products[0].pageCount
+        setTimeout(() => {
+            if  (props.products)
+            {
+              if (page < proPag) {
+                setPage(page + 1);
+                props.getProducts(page);
+            }
+            if (page === proPag){
+              setHasMore(false)
+            }
+          }
+          }, 100);   
     };
 
     const {
@@ -65,7 +75,7 @@ function ProductCardList(props) {
     return (
         <>
          <div className=' flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+         <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[7%]">Article #</div>
@@ -80,8 +90,9 @@ function ProductCardList(props) {
         dataLength={products.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingProducts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingProducts?<div class="text-center font-semibold text-xs">Loading...</div>:null}
         height={"75vh"}
+        endMessage={ <div class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </div>}
       >
              {products.map((item) => {
           return (
@@ -203,7 +214,7 @@ function ProductCardList(props) {
           );
         })}
               </InfiniteScroll> 
-              </OnlyWrapCard>
+              </div>
               </div>
 
 <Suspense fallback={"Loading"}>

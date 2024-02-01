@@ -10,7 +10,6 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { updateProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { CurrencySymbol } from "../../../Components/Common";
 
@@ -65,6 +64,7 @@ class Productform extends Component {
             customerMarginInd: this.props.setEditingProducts.customerMarginInd ? true : false,
             distributorMarginInd: this.props.setEditingProducts.distributorMarginInd ? true : false,
             consumerMaxMargin: this.props.setEditingProducts.consumerMaxMargin || 0,
+            articleNo:this.props.setEditingProducts.articleNo || "",
             // unitInStock: this.props.setEditingProducts.unitInStock || "",
           }}
           validationSchema={ProductSchema}
@@ -107,8 +107,21 @@ class Productform extends Component {
                       <Field name="imageId" component={Upload} />
                     </div>
                   </div>
-                  <div class="mb-4">
 
+                  <div class="mt-4">
+                 
+                 <Field
+                   name="articleNo"
+                   label="Article #"
+                   placeholder="Article No"
+                   width={"100%"}
+                   isColumn
+                   inlineLabel
+                   component={InputComponent}
+                 />
+</div>
+<div class="flex justify-between mt-4">
+<div class="w-[48%]">
                   <Field
                     defaultValue={{
                       label: this.props.setEditingProducts.categoryName,
@@ -127,6 +140,8 @@ class Productform extends Component {
                     style={{ flexBasis: "80%" }}
                   />
                   </div>
+                
+               
                   <div class="mt-4">
                  
                   <Field
@@ -145,6 +160,7 @@ class Productform extends Component {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
+</div>
 </div>
 <div class="mt-4">
                   

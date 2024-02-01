@@ -226,6 +226,7 @@ const initialState = {
 
   addingProductBuilder: false,
   addingProductBuilderError: false,
+  addedProBuilder:[],
 
   fetchingBuilderByProductId: false,
   fetchingBuilderByProductIdError: false,
@@ -898,6 +899,7 @@ export const productReducer = (state = initialState, action) => {
       return {
         ...state,
         addingProductBuilder: false,
+        addedProBuilder:action.payload,
         builderbyProductId: [action.payload]
       };
     case types.ADD_PRODUCT_BUILDER_FAILURE:
