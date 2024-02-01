@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import { Tooltip, Popconfirm } from "antd";
 import {getSuppliersList } from "../SuppliersAction"
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { Link } from "../../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
@@ -38,7 +37,7 @@ function SuppliersCardList(props) {
 return(
 <>
 <div className=' flex justify-end sticky top-28 z-auto'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+<div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
 <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.1rem]">  <FormattedMessage
                         id="app.name"
@@ -69,7 +68,7 @@ return(
         dataLength={props.supplierList.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={props.fetchingSupplierList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingSupplierList?<div class="text-center font-semibold text-xs">Loading...</div>:null}
         height={"75vh"}
       >
 {props.supplierList.map((item) => {
@@ -173,7 +172,7 @@ return(
   )
 })}
 </InfiniteScroll>
-  </OnlyWrapCard>
+  </div>
   </div>
 
  

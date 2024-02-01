@@ -7,7 +7,7 @@ class SupplierDetailsRight extends Component {
   render() {
     console.log(this.props.supplier);
     return (
-      <div style={{ width: "100%" }}>
+      <div class="w-full">
         <Suspense fallback={<BundleLoader />}>
         
         </Suspense>

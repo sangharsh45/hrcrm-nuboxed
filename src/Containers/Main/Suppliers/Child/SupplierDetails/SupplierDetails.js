@@ -2,7 +2,7 @@ import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getSupplierBySupplierId } from "../../SuppliersAction";
-import { FlexContainer, MainWrapper } from "../../../../../Components/UI/Layout";
+import { MainWrapper } from "../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import SupplierDetailsHeader from "../SupplierDetails/SupplierDetailsHeader"
@@ -24,18 +24,18 @@ class SupplierDetails extends Component {
               <BundleLoader />
             </MainWrapper>
           ) : (
-            <FlexContainer>
+            <div>
               <Suspense fallback={"Loading..."}>
-                <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
+                <div class="flex flex-nowrap w-full">
                   <div style={{ width: "22%" }}>
                     <SupplierDetailsLeft supplier={supplier} />
                   </div>
                   <div style={{ width: "78%" }}>
                     <SupplierDetailsRight supplier={supplier} />
                   </div>
-                </FlexContainer>
+                </div>
               </Suspense>
-            </FlexContainer>
+            </div>
           )}
         </>SupplierDetailsRight
       </>

@@ -11,7 +11,7 @@ const ProductBuilderDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title={`Product Builder for -${particularDiscountData.name}- ${particularDiscountData.articleNo}`}
+        title={`Product Builder for ${particularDiscountData.name} ${particularDiscountData.articleNo}`}
         width={drawerWidth}
         visible={proBuilderDrawer}
         destroyOnClose

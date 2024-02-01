@@ -175,7 +175,19 @@ class Productform extends Component {
                     <Field name="imageId" component={Upload} />
                   </div>
                 </div>
-                <div class="flex justify-between mt-5">
+                <div class="mt-4">
+                <Field
+                  name="articleNo"
+                  label="Article #"
+                  placeholder="Article No"
+                  isColumn
+                  width={"100%"}
+                  inlineLabel
+                  component={InputComponent}
+                  
+                />
+                </div>
+                <div class="flex justify-between mt-4">
                  <div class="w-[48%]">
                 <Field
                   isRequired
@@ -234,7 +246,7 @@ class Productform extends Component {
                       
                     />
                   </div>
-                  <div class="w-[48%] mt-3">
+                  <div class="w-[48%]">
                     <Field
                       name="subAttributeName"
                       label="Sub Attribute"
@@ -249,19 +261,8 @@ class Productform extends Component {
                     />
                   </div>
                 </div>
-                <div class="w-[47%] mt-5">
-                <Field
-                  name="articleNo"
-                  label="Article #"
-                  placeholder="Article No"
-                  isColumn
-                  width={"100%"}
-                  inlineLabel
-                  component={InputComponent}
-                  
-                />
-                </div>
-                <div class="flex justify-between mt-5">
+                
+                {/* <div class="flex justify-between mt-5">
                 <div class="w-[30%]">
                     <Field
                       name="expireDays"
@@ -304,7 +305,7 @@ class Productform extends Component {
                   checked={this.state.subscriptionAvailable}
                   onChange={this.handleSubscriptionAvailableChange}
                 />
-              </div>
+              </div> */}
               </div>
               <div class="h-full w-[45%]">
                 {/* <Spacer style={{ marginTop: "0.625em" }} />

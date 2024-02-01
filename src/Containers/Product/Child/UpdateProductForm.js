@@ -142,7 +142,7 @@ class Productform extends Component {
                   </div>
                 
                
-                  <div class="mt-4">
+                  <div class="w-[47%]">
                  
                   <Field
                     defaultValue={{
@@ -220,7 +220,7 @@ class Productform extends Component {
                       />
                     </div>
                   </div>
-                  <div class="flex justify-between mt-4">
+                  {/* <div class="flex justify-between mt-4">
                  <div class="w-[30%]">
                     <Field
                         name="expireDays"
@@ -255,7 +255,7 @@ class Productform extends Component {
                         style={{ flexBasis: "30%" }}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                 </div>
 

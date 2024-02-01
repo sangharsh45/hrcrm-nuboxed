@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import SupplierDetailCard from "./SupplierCard/SupplierDetailCard";
 import SupplierOverViewCard from "./SupplierCard/SupplierOverViewCard";
 import SupplierOverViewDetailCard from "./SupplierCard/SupplierOverViewDetailCard";
@@ -9,11 +8,11 @@ class SupplierDetailsLeft extends Component {
     const { supplier } = this.props;
     return (
       <>
-        <FlexContainer flexDirection="column" style={{ display: "block" }}>
+        <div class="flex-col block">
           <SupplierOverViewCard  supplier={supplier}/>
           <SupplierDetailCard supplier={supplier} />
           <SupplierOverViewDetailCard supplier={supplier} />
-        </FlexContainer>
+        </div>
       </>
     );
   }

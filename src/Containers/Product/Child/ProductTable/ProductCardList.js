@@ -120,41 +120,41 @@ function ProductCardList(props) {
                     </SubTitle>
         </div>
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+    <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.articleNo}
-                            </h4>
+                            </div>
     </div>
 
     <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                         {item.name} 
-                    </h4>
+                    </div>
     
     </div> 
  
     </div>
     
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                       
                       {item.categoryName}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.subCategoryName}
-                    </h4>
+                    </div>
     </div>
     
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
         
 
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
                {item.attributeName}
-             </h4>
+             </div>
     </div>
  
     <div class="flex md:items-center"> 
@@ -195,7 +195,7 @@ function ProductCardList(props) {
                         </div>
             </div>
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-<h4 class=" text-xs text-cardBody font-poppins">
+<div class=" text-xs text-cardBody font-poppins">
 <Tooltip title="Edit">
                                         <EditOutlined
                                     style={{ cursor: "pointer", fontSize: "12px" }}
@@ -205,7 +205,7 @@ function ProductCardList(props) {
                                             }}
                                         />
                                     </Tooltip>
-</h4>
+</div>
 
 
 </div>

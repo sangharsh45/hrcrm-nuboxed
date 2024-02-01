@@ -18,17 +18,13 @@ class SupplierOverViewView extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "70%" }}
-          >
-            <div style={{ width: "25%" }}>
+        <div class="flex justify-between">
+          <div class="flex start-0 flex-nowrap w-[70%]">
+            <div class="w-[25%]">
               <MultiAvatar />
             </div>
             &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "70%" }}>
+            <div class="flex-col  w-[70%]">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -36,7 +32,7 @@ class SupplierOverViewView extends Component {
               >
                 {`${shipperName || ""}`}
               </Title>
-            </FlexContainer>
+            </div>
             <Tooltip title={<FormattedMessage id="app.feedback" defaultMessage="Feedback" />}>
               <span
                 onClick={() => handleFeedbackModal(true)}
@@ -48,8 +44,8 @@ class SupplierOverViewView extends Component {
                 ></i>
               </span>
             </Tooltip>
-          </FlexContainer>
-        </FlexContainer>
+          </div>
+        </div>
         {/* <ShipperFeedbackModal
           handleFeedbackModal={handleFeedbackModal}
           feedbackModal={feedbackModal}

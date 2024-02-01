@@ -243,6 +243,10 @@ const initialState = {
   creatingProductCurrency: false,
   creatingProductCurrencyError:false,
 
+  fetchingSearchedBuilders: false,
+  fetchingSearchedBuildersError:false,
+  searchedBuilders:[],
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -900,7 +904,7 @@ export const productReducer = (state = initialState, action) => {
         ...state,
         addingProductBuilder: false,
         addedProBuilder:action.payload,
-        builderbyProductId: [action.payload]
+        builderbyProductId:[action.payload,...state.builderbyProductId]
       };
     case types.ADD_PRODUCT_BUILDER_FAILURE:
       return {
@@ -1017,6 +1021,22 @@ export const productReducer = (state = initialState, action) => {
                 creatingProductCurrency: false,
                 creatingProductCurrencyError: true,
               };
+
+              case types.GET_SEARCH_BUILDER_REQUEST:
+                return { ...state, fetchingSearchedBuilders: true };
+              case types.GET_SEARCH_BUILDER_SUCCESS:
+                return { ...state, 
+                  fetchingSearchedBuilders: false,
+                  searchedBuilders: action.payload,
+                };
+              case types.GET_SEARCH_BUILDER_FAILURE:
+                return {
+                  ...state,
+                  fetchingSearchedBuilders: false,
+                  fetchingSearchedBuildersError: true,
+                };
+
+
     default:
       return state;
   }
