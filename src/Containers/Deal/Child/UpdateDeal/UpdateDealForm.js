@@ -258,8 +258,7 @@ function UpdateDealForm (props) {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
-                  <StyledLabel>
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                     <Field
                       isRequired
                       name="opportunityName"
@@ -274,11 +273,11 @@ function UpdateDealForm (props) {
                       // accounts={accounts}
                       inlineLabel
                     />
-                  </StyledLabel>
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+                  </div>
+                
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           isRequired
                           name="startDate"
@@ -294,10 +293,10 @@ function UpdateDealForm (props) {
                           isColumn
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           isRequired
                           name="endDate"
@@ -326,13 +325,13 @@ function UpdateDealForm (props) {
                             }
                           }}
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+                
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           name="proposalAmount"
                           // label="Proposal Amount"
@@ -347,7 +346,7 @@ function UpdateDealForm (props) {
                           width={"100%"}
                           component={InputComponent}
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class=" w-w47.5 max-sm:w-wk">
                       <Field
@@ -369,7 +368,7 @@ function UpdateDealForm (props) {
                         component={SearchSelect}
                       />
 
-                      <Spacer />
+                      
                     </div>
                   </div>
                 </div>
@@ -486,8 +485,8 @@ function UpdateDealForm (props) {
                     inlineLabel
                   />
 
-                  <Spacer />
-
+                 
+<div class="mt-3">
                   <Field
                     name="contactId"
                     isColumnWithoutNoCreate
@@ -514,11 +513,11 @@ function UpdateDealForm (props) {
                     value={values.contactId}
                     inlineLabel
                   />
-
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+</div>
+              
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <Field
                           name="oppWorkflow"
                           isColumnWithoutNoCreate
@@ -539,11 +538,11 @@ function UpdateDealForm (props) {
                           margintop={"0"}
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
-                    <Spacer />
-                    <div class="w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+    
+                    <div class="w-w47.5 max-sm:w-wk ">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           name="oppStage"
                           isColumnWithoutNoCreate
@@ -577,14 +576,14 @@ function UpdateDealForm (props) {
                           margintop={"0"}
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
+                
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"

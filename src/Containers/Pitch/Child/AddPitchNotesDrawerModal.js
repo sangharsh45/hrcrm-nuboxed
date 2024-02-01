@@ -15,12 +15,10 @@ class AddPitchNotesDrawerModal extends Component {
         // title="Notes"
           title={this.props.item.firstName}
           width="60%"
-          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerPitchNotesModal}
           closable
           placement="right"
           destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handlePitchNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

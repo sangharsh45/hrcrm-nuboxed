@@ -15,9 +15,7 @@ import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
 } from "../../../../Components/UI/Elements";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import {
   getRecruiterList,
   handleUpdateOpportunityModal,
@@ -75,9 +73,9 @@ function DealWonCard(props) {
   <>
 
      
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+<div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12.12rem]"><FormattedMessage
+        <div className=" md:w-[13.12rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
@@ -119,7 +117,7 @@ function DealWonCard(props) {
          dataLength={wonDeals.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingWonDeals ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingWonDeals ?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
          {wonDeals.map((item) => {
@@ -141,7 +139,6 @@ function DealWonCard(props) {
                       <div class="flex ">
                       <div className=" flex font-medium  md:w-[13.1rem] max-sm:flex-row w-full ">
                                 <div>
-<SubTitle>
             <MultiAvatar
               primaryTitle={item.opportunityName}
               imageId={item.imageId}
@@ -149,7 +146,6 @@ function DealWonCard(props) {
               imgWidth={"1.8rem"}
               imgHeight={"1.8rem"}
             />
-          </SubTitle>
 </div>
                                    <div class="w-[4%]">
 
@@ -157,10 +153,10 @@ function DealWonCard(props) {
                                    
                                         <Tooltip>
                                         <div class=" flex max-sm:w-full  flex-row md:flex-col">
-                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                                 
                                             <Link
                         toUrl={`dealDetails/${item.invOpportunityId}`}
@@ -179,7 +175,7 @@ function DealWonCard(props) {
           </span>
         ) : null} */}
        
-                                            </h4>
+                                            </div>
 </div>
                                         </Tooltip>
                               
@@ -187,20 +183,20 @@ function DealWonCard(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-sm text-cardBody font-poppins">   
-                                    
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                    <div class=" text-sm text-cardBody font-poppins">   
+                                    <Link to ="/investor">
                         {item.investor}
-                    
-                                    </h4>
+                        </Link>
+                                    </div>
                                 </div>
                                
                                 <div className=" flex font-medium flex-col md:w-[6.4rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                    <h4 class=" text-sm text-cardBody font-poppins">
-                                    <SubTitle>
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                    <div class=" text-sm text-cardBody font-poppins">
+                                   
             {item.contactName === null ? "None" :
               <MultiAvatar2
                 primaryTitle={item.contactName}
@@ -210,13 +206,13 @@ function DealWonCard(props) {
                 imgHeight={"1.8em"}
               />
             }
-            </SubTitle>
-                                    </h4>
+          
+                                    </div>
                                 </div>
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
 
                                     <div class=" text-sm justify-center text-cardBody font-poppins">
                                     {moment(item.startDate).format("ll")}
@@ -224,7 +220,7 @@ function DealWonCard(props) {
                                 </div>
                              
                                 <div className=" flex font-medium flex-col md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     <CurrencySymbol currencyType={item.currency} />
@@ -234,7 +230,7 @@ function DealWonCard(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     <Dropdown
@@ -270,7 +266,7 @@ function DealWonCard(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                     <div class=" text-sm text-cardBody font-poppins">
                                     
@@ -286,7 +282,7 @@ function DealWonCard(props) {
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[5.1rem] max-sm:flex-row w-full mb-1 max-sm:justify-between ">
                        
-                       {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                       {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
               <Tooltip title={item.ownerName}>
           <span>
@@ -365,8 +361,7 @@ function DealWonCard(props) {
                         }
                       >
                         {user.imInd === true && user.dealUpdateInd === true && (
-                          <span
-                            style={{ cursor: "pointer", color: "blue" }}
+                          <span class="cursor-pointer text-[blue]"
                             onClick={() => {
                               handleUpdateDealModal(true);
                               handleSetCurrentItem(item);
@@ -439,7 +434,7 @@ function DealWonCard(props) {
                 })}
       </InfiniteScroll>
 
-      </OnlyWrapCard>
+      </div>
       <UpdateDealModal
         currentItem={currentItem}
         openupdateDealModal={openupdateDealModal}

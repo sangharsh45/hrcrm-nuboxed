@@ -11,7 +11,6 @@ import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { Button, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import {
   getRecruiterName,
@@ -310,7 +309,7 @@ function DealForm(props) {
           <Form className="form-background">
             <div class=" flex justify-around max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk">
-                <Spacer />
+              <div class="mt-3">
                 <Field
                   isRequired
                   name="opportunityName"
@@ -326,8 +325,8 @@ function DealForm(props) {
                   // accounts={accounts}
                   inlineLabel
                 />
-                <Spacer />
-                <div class="flex justify-between max-sm:flex-col">
+               </div>
+                <div class="flex justify-between max-sm:flex-col mt-3">
                 <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="startDate"
@@ -373,8 +372,8 @@ function DealForm(props) {
                     />
                   </div>
                 </div>
-                <Spacer />
-                <div class="flex justify-between max-sm:flex-col">
+               
+                <div class="flex justify-between max-sm:flex-col mt-3">
                 <div class="  w-w47.5 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
@@ -413,11 +412,11 @@ function DealForm(props) {
                     />
                   </div>
                 </div>
-                <Spacer />
-                <StyledLabel><FormattedMessage
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
+                  <FormattedMessage
                           id="app.description"
                           defaultMessage="description"
-                        /></StyledLabel>
+                        /></div>
                 <div>
                   <div>
                     <span onClick={SpeechRecognition.startListening}>
@@ -558,7 +557,7 @@ function DealForm(props) {
                 
 <div class="mt-2 flex justify-between max-sm:flex-col">
 <div class=" w-w47.5 max-sm:w-wk">
-               <StyledLabel>
+<div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="investorId"
                     // selectType="customerList"
@@ -581,7 +580,7 @@ function DealForm(props) {
                     value={values.investorId}
                     inlineLabel
                   />
-                </StyledLabel>
+                </div>
             </div>
                 <div class=" w-w47.5 max-sm:w-wk">
                 <FastField
@@ -604,7 +603,7 @@ function DealForm(props) {
                           />
                         </div>
                         </div>
-                <StyledLabel>
+                        <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="contactId"
                     // selectType="contactListFilter"
@@ -633,7 +632,7 @@ function DealForm(props) {
                     isColumn
                     inlineLabel
                   />
-                </StyledLabel>
+                </div>
                 {/* <StyledLabel>
                   <Field
                     name="oppInnitiative"
@@ -663,11 +662,11 @@ function DealForm(props) {
                     inlineLabel
                   />
                 </StyledLabel> */}
-                <Spacer />
+               
 
-                <div class="flex justify-between max-sm:flex-col">
+                <div class="flex justify-between max-sm:flex-col mt-3">
                   <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="oppWorkflow"
                         // selectType="contactListFilter"
@@ -689,11 +688,11 @@ function DealForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
-                  <Spacer />
-                  <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                  
+                  <div class=" w-w47.5 max-sm:w-wk ">
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="oppStage"
                         isRequired
@@ -723,14 +722,14 @@ function DealForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
                 </div>
               </div> 
   
             </div>
-            <Spacer />
-            <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+           
+            <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute  mt-3">
               <Button
                 type="primary"
                 htmlType="submit"

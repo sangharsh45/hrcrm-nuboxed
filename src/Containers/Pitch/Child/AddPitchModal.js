@@ -25,8 +25,6 @@ class AddPitchModal extends Component {
           visible={this.props.addPitchModal}
           destroyOnClose
           maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"3rem"}}
           onClose={() => this.props.handlePitchModal(false)}
           footer={null}
         >

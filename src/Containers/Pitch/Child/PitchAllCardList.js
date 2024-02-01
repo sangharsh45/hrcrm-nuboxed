@@ -8,7 +8,6 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import "jspdf-autotable";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -65,7 +64,8 @@ const PitchAllCardList = (props) => {
 
   return (
     <>
-   <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+ <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+  <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
@@ -102,7 +102,7 @@ const PitchAllCardList = (props) => {
         dataLength={props.allPitchData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllPitch?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
    {props.allPitchData.map((item) => { 
@@ -156,10 +156,10 @@ const PitchAllCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
-                                            {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                                 {/* <Link
                                                  toUrl={`customer/${item.customerId}`}
@@ -174,16 +174,12 @@ const PitchAllCardList = (props) => {
                                                &nbsp;&nbsp;
                                                {date === currentdate ? (
                                                  <span
-                                                   style={{
-                                                     color: "tomato",
-                                                     fontWeight: "bold",
-                                                   }}
-                                                 >
+                                                 class="text-[tomato] font-bold">
                                                    New
                                                  </span>
                                                ) : null}
                                               
-                                                                                   </h4>
+                                                                                   </div>
                                             </div>
                                         </Tooltip>
                                         </div>
@@ -252,20 +248,20 @@ const PitchAllCardList = (props) => {
      </div>  
                                 <div class="flex justify-between md:ml-4">
                                 <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4> */}
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </div> */}
 
-                           <h4 class="text-[0.82rem] text-cardBody font-poppins">
+                           <div class="text-[0.82rem] text-cardBody font-poppins">
   {item.countryDialCode && item.phoneNumber
     ? `${item.countryDialCode} ${item.phoneNumber}`
     : 'Not available'}
-</h4>
+</div>
 
                        </div>
                        <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                  {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                  <h4 class=" text-[0.82rem] text-cardBody font-poppins">
+                                  {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                  <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -276,23 +272,22 @@ const PitchAllCardList = (props) => {
                         />
                         &nbsp;
                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
+                                    </div>
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 ">
                        <div className=" flex font-medium flex-col  md:w-[11.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4> */}
-                           <h4 className="text-[0.82rem] text-cardBody font-poppins">
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
+                           <div className="text-[0.82rem] text-cardBody font-poppins">
                            {item.companyName || "Not Available"}
-</h4>
+</div>
 
                        </div>
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
-                <span
+                <span class="cursor-pointer"
                   //type="edit"
-                  style={{ cursor: "pointer" }}
                   onClick={() => {}}
                 >
                   {" "}
@@ -307,10 +302,10 @@ const PitchAllCardList = (props) => {
                         </div>
                                 {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </div>
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 </div> */}
                                 </div>
                                
@@ -319,7 +314,7 @@ const PitchAllCardList = (props) => {
      <div class="flex justify-between max-sm:mb-1 md:items-center">
      <div class="flex justify-between items-center max-sm:w-[50%] ">
      <div className=" flex font-medium flex-col md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
@@ -339,7 +334,7 @@ const PitchAllCardList = (props) => {
                                 </div>
      <div className=" flex font-medium flex-col md:w-[3.5rem]  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                       {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
               <MultiAvatar
@@ -354,7 +349,7 @@ const PitchAllCardList = (props) => {
                                
                          
                    <div className=" flex font-medium flex-col md:w-16 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</h4> */}
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
@@ -441,12 +436,8 @@ onClick={()=>{
                     <div class="flex flex-col w-6 max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-            <span
-              style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
-                cursor: "pointer",
-              }}
+            <span class="cursor-pointer"
+             
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
@@ -479,7 +470,7 @@ onClick={()=>{
                     )
                 })}
                   </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       <UpdateLPitchModal
         item={currentLeadsId}
         updatePitchModal={props.updatePitchModal}

@@ -6,8 +6,6 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import { StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -128,8 +126,7 @@ function UpdatePitchForm (props) {
             <Form className="form-background">
             <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk"   >
-                    <Spacer/>
-                    <div class=" flex  flex-nowrap">
+                    <div class=" flex  flex-nowrap mt-3">
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
@@ -207,7 +204,7 @@ function UpdatePitchForm (props) {
                       </div>
                     </div>
                   </div>
-                    <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="email"
                     type="text"                   
@@ -219,7 +216,7 @@ function UpdatePitchForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
+                    </div>
                     <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[32%]">
                   
@@ -240,7 +237,7 @@ function UpdatePitchForm (props) {
                       
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FastField
                         //isRequired
                         type="text"
@@ -256,11 +253,11 @@ function UpdatePitchForm (props) {
                         inlineLabel
                         width={"100%"}
                         />     
-                        </StyledLabel>              
+                        </div>              
                          </div>
                   </div>
-                  <Spacer/>
-                    <StyledLabel>
+
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <Field
              
                     name="companyName"
@@ -277,8 +274,8 @@ function UpdatePitchForm (props) {
                     accounts={accounts}
                     inlineLabel
                     />
-                    </StyledLabel>
-                    <StyledLabel>
+                    </div>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="url"
                     type="text"
@@ -291,10 +288,10 @@ function UpdatePitchForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
+                    </div>
                   <div class=" flex justify-between max-sm:flex-col">
                     <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="vatNo"
                         type="text" 
@@ -310,10 +307,10 @@ function UpdatePitchForm (props) {
                         component={InputComponent}
                         inlineLabel
                         />
-                        </StyledLabel>
+                        </div>
                     </div>
                     <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -329,7 +326,7 @@ function UpdatePitchForm (props) {
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>                    
                     </div>
                      <div class=" flex justify-between">
@@ -349,7 +346,7 @@ function UpdatePitchForm (props) {
                       />
                     </div> */}
                     <div class="w-full">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <Field
                           name="source"
                           isColumnWithoutNoCreate
@@ -370,15 +367,15 @@ function UpdatePitchForm (props) {
                           margintop={"0"}
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
         
            </div>
                 </div>
                  </div>
                  <div class=" h-3/4 w-w47.5 max-sm:w-wk "   >
-                   <Spacer/>
                    
-                    <div class="">
+                   
+                    <div class=" mt-3">
                     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
@@ -449,8 +446,8 @@ function UpdatePitchForm (props) {
       )}
     </Listbox>
                     </div>
-                  <Spacer />
-                  <StyledLabel>
+
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -461,10 +458,9 @@ function UpdatePitchForm (props) {
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                  
-                 <Spacer/>
-                 <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -475,11 +471,10 @@ function UpdatePitchForm (props) {
                     isColumn
                     component={TextareaComponent}
                     /> 
-                    </StyledLabel>                 
+                    </div>                 
                 </div>
               </div>
-              <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"

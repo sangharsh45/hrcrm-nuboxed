@@ -13,12 +13,10 @@ class AddDealsNotesDrawerModal extends Component {
         <StyledDrawer
           title={this.props.currentItem.opportunityName}
           width="60%"
-          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerDealsNotesModal}
           closable
           placement="right"
           destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleDealsNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

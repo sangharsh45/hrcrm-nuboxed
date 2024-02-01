@@ -6,8 +6,6 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import { StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { setClearbitData} from "../../Leads/LeadsAction";
@@ -251,7 +249,7 @@ props.getAllEmployeelist();
                   
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -267,11 +265,11 @@ props.getAllEmployeelist();
                         inlineLabel
                         width={"100%"}
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <StyledLabel>
+                 
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <Field
                 
                     name="companyName"
@@ -286,8 +284,8 @@ props.getAllEmployeelist();
                     accounts={accounts}
                     inlineLabel
                   />
-                  </StyledLabel>
-                  <StyledLabel>
+                  </div>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="url"
                     type="text"
@@ -297,10 +295,10 @@ props.getAllEmployeelist();
                     component={InputComponent}
                     inlineLabel
                   />
-                  </StyledLabel>
+                  </div>
                   <div class=" flex justify-between">
                     <div class=" w-w47.5">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="vatNo"
                         type="text"
@@ -315,10 +313,10 @@ props.getAllEmployeelist();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class="w-w47.5">
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -334,7 +332,7 @@ props.getAllEmployeelist();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
                   <div class=" flex justify-between">
@@ -373,7 +371,6 @@ props.getAllEmployeelist();
                           />
                         </div>
                     </div>
-                  <Spacer />
 
                   {/* <div class=" w-1/2">
                     <StyledLabel>
@@ -485,8 +482,8 @@ props.getAllEmployeelist();
       )}
     </Listbox>
              
-                  <Spacer />
-                  <StyledLabel>
+
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -497,9 +494,9 @@ props.getAllEmployeelist();
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                   
-                 <Spacer />
+                <div class="mt-3">
                   <Field
                     name="notes"
                     label={
@@ -509,10 +506,11 @@ props.getAllEmployeelist();
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+         
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
