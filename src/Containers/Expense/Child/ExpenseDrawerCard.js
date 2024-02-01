@@ -6,11 +6,9 @@ import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEdit
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { base_url } from "../../../Config/Auth";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import EditUpload from "../../../Components/Forms/Edit/EditUpload";
 
 const AddDocumentModal = lazy(() => import("./AddDocumentModal"));
@@ -91,7 +89,7 @@ function ExpenseDrawerCard(props) {
   return (
     <>
     
-      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+    <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
       <div className=" md:w-[10.1rem]"></div>
         <div className=" md:w-[8.1rem]">ID</div>
@@ -346,7 +344,7 @@ style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
                   )
               })}
 
-    </OnlyWrapCard>
+    </div>
 
         <UpdateExpenseModal
       // expenseId={currentExpenseId}

@@ -4,8 +4,6 @@ import { bindActionCreators } from "redux";
 import { Tooltip, DatePicker } from "antd";
 import dayjs from "dayjs";
 import { DeleteOutlined } from "@ant-design/icons";
-import {  OnlyWrapCard } from '../../../Components/UI/Layout';
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import {
   getMileageByVoucherId,
   handleUpdateMileageModal,
@@ -89,7 +87,7 @@ function MileageDrawerCard(props) {
 
   return (
     <>
-     <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+    <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
      <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[9.2rem]">ID</div>
         <div className="md:w-[6.8rem]">Cost Code</div>
@@ -266,7 +264,7 @@ function MileageDrawerCard(props) {
             </div>
           );
         })}
-      </OnlyWrapCard>
+      </div>
 
       <UpdateMileageModal
         mileageId={currentMileageId}

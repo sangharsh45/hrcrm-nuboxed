@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import {  Tooltip } from "antd";
 import { getExpenseById,handlePExpenseVoucherIdDrawer,getPendingExpense,deleteExpense } from "../ExpenseAction";
 import { DeleteOutlined, } from "@ant-design/icons";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import dayjs from "dayjs";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
@@ -45,7 +44,7 @@ return <BundleLoader/>
 }
     return (
       <>
-         <OnlyWrapCard className="h-[32rem]">  
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className="p-0.5 inline-flex items-center rounded-md w-max ml-1">
             <span className="pl-2 pr-4 relative">
               <span
@@ -144,7 +143,7 @@ return <BundleLoader/>
                         </div>
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       
 
         <PExpenseVoucherIdDrawer

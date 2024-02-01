@@ -3,14 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { Button, Tooltip,Popconfirm, DatePicker, Switch } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../Components/UI/Elements";
+import { Button, DatePicker, Switch } from "antd";
+import { TextInput, } from "../../../Components/UI/Elements";
 import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { elipsize } from "../../../Helpers/Function/Functions";
-import moment from "moment";
-import { date } from "yup";
+import dayjs from "dayjs";
 
 class SingleHoliday extends Component {
   constructor(props) {
@@ -36,7 +34,7 @@ class SingleHoliday extends Component {
   };
   onChangeDatePicker = (date, dateString) => {
     console.log(date, dateString);
-    this.setState({ date: moment(dateString) });
+    this.setState({ date: dayjs(dateString) });
   };
  
   handleChangeHolidayTime = (checked) => {
@@ -80,7 +78,7 @@ class SingleHoliday extends Component {
                     // marginRight: "8%",
                   }}
                 >
-                  {`${moment(date).format("ll")}`}
+                  {`${dayjs(date).format("DD/MM/YYYY")}`}
                 </StageValue>
                 <StageValue
                   style={{
@@ -131,9 +129,9 @@ class SingleHoliday extends Component {
                       size="0.75em"
                     />
                   </div>)}
-                  &nbsp; &nbsp;
+                
                   {this.props.role === "ADMIN" && (
-                  <div style={{}}>
+                  <div class=" ml-2">
                     <ActionIcon
                       tooltipTitle="Delete"
                       iconType="delete"
@@ -146,21 +144,22 @@ class SingleHoliday extends Component {
               </div>
 
             ) : (
-                <FlexContainer>
+                <div class=" flex">
                   <TextInput
                     name={this.props.newHolidayName}
                     defaultValue={holidayName}
                     onChange={this.handleChange}
                     width={"48%"}
                   />
-                &nbsp;
+            <div class=" ml-2">
                   <DatePicker
-                    defaultValue={moment(date)}
+                    defaultValue={dayjs(date)}
                     onChange={this.onChangeDatePicker}
                   />
-                &nbsp;
+                  </div>
+               
                   <Switch
-                    style={{ width: "6.25em", marginLeft: "0.625em" }}
+                    style={{ width: "6.25em", marginLeft: "1rem" }}
                     onChange={this.handleChangeHolidayTime}
                     checked={this.state.holidayType}
                     checkedChildren="Optional"
@@ -175,7 +174,7 @@ class SingleHoliday extends Component {
 
                                         width={"25%"}
                                     /> */}
-                &nbsp;
+               
                   {/* <TextInput
                                         name={newDays}
                                         defaultValue={days}
@@ -186,12 +185,9 @@ class SingleHoliday extends Component {
                                         placeholder="Days"
                                         width={"24%"}
                                     /> */}
-                  <Spacer />
-                  <Spacer style={{ marginBottom: "0.625em" }} />
-                  <FlexContainer
-                    justifyContent="flex-end"
-                    marginRight="0.3125em"
-                    marginTop="0.625em"
+    
+                  <div class=" flex justify-end mr-[0.3125em] ml-2 mt-[0.625em] mb-[0.625em]"
+                  
                   >
                     <Button
                       type="primary"
@@ -216,7 +212,7 @@ class SingleHoliday extends Component {
                  defaultMessage="Save"
                 />
                   </Button>
-                  &nbsp;
+                 <div class=" ml-2">
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                       {/* Cancel */}
                       <FormattedMessage
@@ -224,8 +220,9 @@ class SingleHoliday extends Component {
                  defaultMessage="Cancel"
                 />
                   </Button>
-                  </FlexContainer>
-                </FlexContainer>
+                  </div>
+                  </div>
+                </div>
               )
           }
         </ViewEditCard>

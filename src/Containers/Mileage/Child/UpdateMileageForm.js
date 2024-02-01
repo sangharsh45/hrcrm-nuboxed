@@ -1,12 +1,12 @@
 import { Button, DatePicker, message } from "antd";
 import React, { useState, useEffect } from "react";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import { TextInput } from "../../../Components/UI/Elements";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateMileage, 
 } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import * as Yup from "yup";
 import { Select } from "antd";
 
@@ -50,7 +50,7 @@ function UpdateMileageForm(props) {
     
         if (`${row.id}date` === id) {
           console.log(dateString);
-          return { ...row, mileageDate: moment(dateString).toISOString() };
+          return { ...row, mileageDate: dayjs(dateString).toISOString() };
         } else {
           return row;
         }
@@ -339,7 +339,7 @@ function UpdateMileageForm(props) {
           {/* ); */}
         {/* })} */}
       </table>
-      <Spacer />
+  <div class=" mt-3">
       <Button
         style={{ float: "right" }}
         type="primary"
@@ -348,6 +348,7 @@ function UpdateMileageForm(props) {
       >
         Submit
       </Button>
+      </div>
       {/* &nbsp; &nbsp; &nbsp;
       <Button
         style={{ float: "right", marginRight: "1%" }}

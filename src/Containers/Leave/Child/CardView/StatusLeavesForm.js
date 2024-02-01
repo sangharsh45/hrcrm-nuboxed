@@ -3,7 +3,7 @@ import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLeaveStatusByLeaveId } from '../../LeavesAction';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const StatusLeavesForm = (props) => {
   useEffect(() => {
@@ -20,7 +20,7 @@ const StatusLeavesForm = (props) => {
             leaveStatus.map((status, i) => (
               <Timeline.Item key={i}>
                  {status.approvedStatus === 'Approved' ? (
-                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
+                  ` ${dayjs(status.createdOn).format("DD-MM-YYYY")} Approved By ${status.employeeName} on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`
                 ) : status.approvedStatus === 'Pending' ? (
                   `Pending With ${status.employeeName}.`
                 ) : null}

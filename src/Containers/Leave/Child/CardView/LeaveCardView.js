@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { Select } from "antd";
 import styled from "styled-components";
 import {  DeleteOutlined } from "@ant-design/icons";
-import moment from "moment";
+import dayjs from "dayjs";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -69,7 +69,7 @@ function LeaveCardView(props) {
                             "No Transaction"
                           ) : (
                             <span class="text-xs">
-                              {moment.utc(item.startDate).format("DD-MM-YYYY")}
+                              {dayjs(item.startDate).format("DD-MM-YYYY")}
                             </span>
                           )}
                           &nbsp;
@@ -85,7 +85,7 @@ function LeaveCardView(props) {
                           "No Transaction"
                         ) : (
                           <span class="text-xs">
-                            {moment.utc(item.endDate).format("DD-MM-YYYY")}
+                            {dayjs(item.endDate).format("DD-MM-YYYY")}
                           </span>
                         )}
                         &nbsp;

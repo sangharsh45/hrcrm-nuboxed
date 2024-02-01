@@ -1,7 +1,7 @@
 import { Button, DatePicker, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
 import {  TextInput } from "../../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getExpenses } from "../../../Settings/Expense/ExpenseAction";
@@ -30,7 +30,7 @@ function UpdateExpenseForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, expenseDate: moment(dateString).toISOString() };
+          return { ...data, expenseDate: dayjs(dateString).toISOString() };
         } else {
           return data;
         }

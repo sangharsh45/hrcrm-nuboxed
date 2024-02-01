@@ -3,22 +3,13 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Switch } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, Field, } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { Spacer,StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-// import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
-// import {
-//     addEvent,
-//     deleteEvent,
-//     updateEvent,
-//     handleEventModal,
-// } from "../../EventAction";
 import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { updateLeaves } from "../../LeavesAction";
 
 /**
@@ -153,12 +144,8 @@ class UpdateLeaveForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "100%",
-                  }}
+              <div class=" flex justify-between" >
+                <div class=" h-full w-full"
                 >
                   {/* <Radio.Group name="radiogroup">
                                             <Radio
@@ -191,12 +178,11 @@ class UpdateLeaveForm extends Component {
                         </Radio>
                                         </Radio.Group> */}
 
-                  <Spacer />
-                  <FlexContainer
-                    justifyContent="space-between"
-                    style={{ width: "100%" }}
+                  
+                  <div class=" flex justify-between w-full mt-3"
+                 
                   >
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="startDate"
@@ -219,10 +205,10 @@ class UpdateLeaveForm extends Component {
                         }}
                       />
 
-                      <Spacer />
+                   
                     </div>
                     {this.state.isAccepted?(
-                    <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="endDate"
@@ -258,11 +244,8 @@ class UpdateLeaveForm extends Component {
                       />
                     </div>
                      ):(
-                      <div class=" flex items-center h-16 flex-row-reverse"
-                        style={{
-                          width: "25%",
-                          fontWeight: "bold",
-                        }}
+                      <div class=" flex items-center h-16 flex-row-reverse w-[25%] font-bold"
+                       
                       >
                         
                         <Switch
@@ -274,15 +257,12 @@ class UpdateLeaveForm extends Component {
                         
                       </div>
                     )}
-                  </FlexContainer>
-                  <Spacer />
-  <div class="w-3/12 max-sm:w-wk"
-                      style={{
-                        
-                        fontWeight: "bold",
-                      }}
+                  </div>
+                
+  <div class="w-3/12 max-sm:w-wk mt-3 font-bold"
+                    
                     >
-                      <StyledLabel> Half Day</StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> Half Day</div>
                       <Switch
                          onChange={this.radioClick}
                         checked={this.state.isAccepted}
@@ -291,8 +271,8 @@ class UpdateLeaveForm extends Component {
                       />
                       
                     </div>
-                    <Spacer />
-                    <div class=" w-1/2 max-sm:w-wk">
+                   
+                    <div class=" w-1/2 mt-3 max-sm:w-wk">
               <Field
                 name="coverDetails"
                 //label="Cover"
@@ -305,7 +285,7 @@ class UpdateLeaveForm extends Component {
                 isColumn
               />
             </div>
-                  <Spacer />
+                 <div class=" mt-3">
                   <Field
                     isRequired
                     name="reason"
@@ -323,18 +303,18 @@ class UpdateLeaveForm extends Component {
                       // marginTop: "0.25em",
                     }}
                   />
-
-                  <Spacer />
+</div>
+                
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
-                &nbsp;
+         
+              <div class=" flex justify-end mt-3" >
+                
                 <Button htmlType="submit" type="primary"
                   Loading={updatingLeave}>
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

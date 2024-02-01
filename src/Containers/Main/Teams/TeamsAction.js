@@ -797,7 +797,7 @@ export const updateAssignedValue= (data,employeeId, cb) => (dispatch) => {
   });
   axios
     .post(
-      `${base_url}/employee/kpi-completed-value/save`,data,
+      `${base_url}/employee/kpi-assigned-value/save`,data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

@@ -1,5 +1,6 @@
-import React from "react";
-import LeaveJumpstart from "./LeaveJumpstart";
+import React,{lazy} from "react";
+const LeaveJumpstart = lazy(() => import("./LeaveJumpstart"));
+
 class LeaveJumpstartBoxex extends React.Component {
   render() {
     const { leaveFetching } = this.props;

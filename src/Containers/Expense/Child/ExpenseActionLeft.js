@@ -1,5 +1,4 @@
 import React from 'react'
-import { FlexContainer } from '../../../Components/UI/Layout'
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
@@ -8,7 +7,7 @@ import { Tooltip } from "antd";
 
 const ExpenseActionLeft = (props) => {
     return (
-        <FlexContainer alignItems='center'>
+        <div class=" flex items-center" >
           <Tooltip
         title={<FormattedMessage id="app.card" defaultMessage="Card" />}
       >
@@ -59,7 +58,7 @@ const ExpenseActionLeft = (props) => {
           </span>
     
       </Tooltip>
-        </FlexContainer>
+        </div>
     )
 }
 

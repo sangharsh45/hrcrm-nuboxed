@@ -12,9 +12,7 @@ class MileageHeader extends Component {
         } = this.props;
         return (
             <>
-                <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+                <div >
                     <ActionHeader
                         leftComponent={
                             <MileageActionLeft

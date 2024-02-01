@@ -6,7 +6,6 @@ import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEdit
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { base_url } from "../../../Config/Auth";
 import { DeleteOutlined,UploadOutlined } from "@ant-design/icons";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -96,7 +95,7 @@ if(fetchingExpenseByVoucherId) {
   
   return (
     <>
-       <OnlyWrapCard>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
        {inputValues.map((item,index) => { 
                   return (
                       <div key={index}>
@@ -334,7 +333,7 @@ style={{ border: "1px solid grey" }}
                   )
               })}
 
-    </OnlyWrapCard>
+    </div>
         <UpdateExpenseModal
       // expenseId={currentExpenseId}
       updateExpenseModal={updateExpenseModal}

@@ -1,13 +1,13 @@
-import React, { Component, Suspense, lazy } from "react";
-import ReportHeader from "./Child/ReportHeader";
+import React, {  Suspense, lazy } from "react";
 import { BundleLoader } from "../../Components/Placeholder";
 import { connect } from "react-redux";
 import { setTimeRangeReport } from "./ReportAction";
 import { bindActionCreators } from "redux";
-import Requirement from "./Child/MyViewReports/Requirement";
-import OrgSelected from "./Child/OrganizationView/Selected";
-import OrgRequirement from "./Child/OrganizationView/Requirement";
-import Selected from "./Child/MyViewReports/Selected";
+const ReportHeader =lazy(()=> import("./Child/ReportHeader"));
+const Requirement =lazy(()=> import("./Child/MyViewReports/Requirement"));
+const OrgSelected =lazy(()=> import("./Child/OrganizationView/Selected"));
+const OrgRequirement =lazy(()=> import("./Child/OrganizationView/Requirement"));
+const Selected =lazy(()=> import("./Child/MyViewReports/Selected"));
 
 class Reports extends React.Component {
   componentDidMount() {
