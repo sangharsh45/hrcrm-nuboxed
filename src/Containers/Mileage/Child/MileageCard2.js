@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { getMileageByUserId,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { DeleteOutlined } from "@ant-design/icons";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
@@ -36,7 +35,7 @@ class MileageCard2 extends React.Component {
     return (
       <>
          <div class=" h-h86 overflow-auto overflow-x-auto">
-      <OnlyWrapCard>
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       {MileageDat.map((item) => { 
                     return (
                         <div>
@@ -50,16 +49,16 @@ class MileageCard2 extends React.Component {
                                    
                                         <Tooltip >
                                           <div class="flex max-sm:justify-between w-full flex-row md:flex-col">
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
-                                            </h4>
-                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div>
+                                            <div class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                             <div onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                               
@@ -67,27 +66,27 @@ class MileageCard2 extends React.Component {
 
                                 <div className=" flex font-medium flex-col   md:w-52  max-sm:justify-between w-full max-sm:flex-row  ">
                            
-                                    <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins"> Voucher Date </div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         
                                     
                                     {dayjs(item.voucherDate).format("MMM Do YY")}
 
-                                    </h4>
+                                    </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:justify-between w-full max-sm:flex-row ">
                                   
 
-                                    <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">Amount</div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         € {item.amount}
-                                    </h4>
+                                    </div>
                                 </div>
                                 {/* <div className=" flex font-medium flex-col w-20 ">
                        
-                                    <h4 class=" text-xs text-cardBody font-poppins">Approve</h4>
+                                    <div class=" text-xs text-cardBody font-poppins">Approve</div>
 
-                                    <h4 class=" text-xs text-cardBody font-poppins"
+                                    <div class=" text-xs text-cardBody font-poppins"
                                       onClick={() => {
                         props.handleLoadCarModal(true)
                          props.setRequirementsData(item);
@@ -99,10 +98,10 @@ class MileageCard2 extends React.Component {
                       
                                     >
                                         <u>Nixa</u>
-                                    </h4>
+                                    </div>
                                 </div> */}
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:justify-between w-full max-sm:flex-row ">
-                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
+                                    {/* <div class=" text-sm text-cardBody font-poppins">Status</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -201,7 +200,7 @@ class MileageCard2 extends React.Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
 
 

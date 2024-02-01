@@ -1,12 +1,10 @@
-import React, { Component ,lazy} from "react";
+import React, {lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../HolidayAction";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper } from "../../../Components/UI/Layout";
 import dayjs from "dayjs";
-import moment from "moment";
-import SingleHoliday2 from "./SingleHoliday2"; 
 import { BundleLoader } from "../../../Components/Placeholder";
 import { DatePicker } from "antd";
 const SingleHoliday=lazy(()=>import("./SingleHoliday"));
@@ -107,7 +105,7 @@ class HolidayPage extends React.Component {
     this.setState({ holidayType: "", singleHoliday: "" });
 };
   render() {
-    const currentYear = moment().format('YYYY');
+    const currentYear = dayjs().format('YYYY');
    
     const { selectedYear } = this.state;
     console.log(this.props.workplace)
@@ -124,23 +122,17 @@ class HolidayPage extends React.Component {
 
     return (
       <>
-        <FlexContainer>
+        <div class=" flex">
           <div  class="max-sm:w-[24rem] md:w-2/4">
             <MainWrapper>
-              <h1
-                style={{
-                  display: "flex",
-                  justifyContent: "left",
-                  fontSize: "1.25em",
-                  color: "white",
-                  backgroundColor: "#40A9FF",
-                }}
+              <div class=" flex justify-left text-[1rem] text-[white] bg-[#40A9FF]"
+            
               >
                 Holiday List-<div>
                 <DatePicker 
                 //  format="YYYY"
-                defaultValue={moment(currentYear, 'YYYY')}
-                // value={this.state.selectedYear ? moment(this.state.selectedYear, 'YYYY') : null}
+                defaultValue={dayjs(currentYear, 'YYYY')}
+                // value={this.state.selectedYear ? dayjs(this.state.selectedYear, 'YYYY') : null}
                     //  value={selectedYear}
                  onChange={this.onChange}
                   picker="year" />
@@ -151,7 +143,7 @@ class HolidayPage extends React.Component {
                 }}>
                 Mandatory-10
               </div> */}
-              </h1>
+              </div>
             
               {/* <FlexContainer
                 justifyContent="space-between"
@@ -267,7 +259,7 @@ class HolidayPage extends React.Component {
                 )} */}
             </MainWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

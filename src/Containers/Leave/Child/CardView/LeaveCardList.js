@@ -1,5 +1,4 @@
 import React, { useEffect, useState,  lazy } from "react";
-import {  OnlyWrapCard } from '../../../../Components/UI/Layout'
 import {  Button, Tooltip } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -56,7 +55,7 @@ function LeaveCardList (props) {
             <>
             
 
-           <OnlyWrapCard style={{height:"70vh"}}>
+            <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         {/* <InfiniteScroll
                     dataLength={props.tableRequirement.length}
                 next={handleLoadMore}
@@ -252,7 +251,7 @@ function LeaveCardList (props) {
       
         {/* </InfiniteScroll> */}
 
-      </OnlyWrapCard >
+      </div >
             
               <UpdateLeavesModal
         leaveId={currentLeaveId}

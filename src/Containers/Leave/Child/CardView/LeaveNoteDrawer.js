@@ -12,10 +12,7 @@ const LeaveNoteDrawer = (props) => {
         title={`Note - ${leavesItems.leaveId}`}
         width="60%"
         visible={noteLeaveDrawer}
-        maskClosable={false}
-        destroyOnClose
         onClose={() => handleLeaveNoteDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <LeaveNote leavesItems={leavesItems} />{" "} 

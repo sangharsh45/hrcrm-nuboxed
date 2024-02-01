@@ -11,7 +11,6 @@ import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { addLeaveNote } from "../../LeavesAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 
 
 /**
@@ -122,7 +121,7 @@ class LeaveNoteForm extends Component {
                   // editorState={editorState}
                   toolbar={toolbarOption}
                 />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -141,7 +140,7 @@ class LeaveNoteForm extends Component {
                     />
                     {/* Post */}
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             );
           }}

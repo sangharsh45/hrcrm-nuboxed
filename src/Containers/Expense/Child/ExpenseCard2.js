@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  Tooltip } from "antd";
 import { getExpenseById,handleExpenseVoucherIdDrawer } from "../ExpenseAction";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import dayjs from "dayjs";
 const ExpenseVoucherIdDrawer=lazy(()=>import("./ExpenseVoucherIdDrawer"));
 
@@ -39,7 +38,7 @@ function ExpenseCard2(props) {
     return (
       <>
       <div class=" h-h86 overflow-auto overflow-x-auto">
-         <OnlyWrapCard>      
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
               {Expenses.map((item) => {
                  return (
                   <div>
@@ -47,48 +46,48 @@ function ExpenseCard2(props) {
                       style={{
                           borderBottom: "3px dotted #515050"
                       }}>
-                          <h4 class=" text-sm text-cardBody font-poppins">
+                          <div class=" text-sm text-cardBody font-poppins">
                                  Name
-                                  </h4> 
+                                  </div> 
                       <div className=" flex font-medium flex-col md:w-72 max-sm:w-full justify-between max-sm:flex-row  ">
 
                          
                               <Tooltip >
                                 <div  class=" flex max-sm:w-full justify-between max-sm:flex-row md:flex-col ">
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <div class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
-                                  </h4>
-                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                  </div>
+                                  <div class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
-         </h4>
+         </div>
          </div>
 </Tooltip>
 
 </div>
 <div className=" flex font-medium flex-col  md:w-52 max-sm:w-full justify-between max-sm:flex-row ">
                            
-                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-xs text-cardBody font-poppins">
+                           <div class=" text-sm text-cardBody font-poppins"> Voucher Date </div>
+                           <div class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
 
-                           </h4>
+                           </div>
                        </div>
                        <div className=" flex font-medium flex-col md:w-32 max-sm:w-full justify-between max-sm:flex-row ">
                                   
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-sm text-cardBody font-poppins">Amount</div>
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
-                                  </h4>
+                                  </div>
                               </div>
                               <div className=" flex font-medium flex-col md:w-[12rem] max-sm:w-full justify-between max-sm:flex-row ">
-                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
+                                    {/* <div class=" text-sm text-cardBody font-poppins">Status</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -138,7 +137,7 @@ function ExpenseCard2(props) {
                         </div>
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
 
         <ExpenseVoucherIdDrawer

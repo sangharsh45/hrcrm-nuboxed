@@ -54,7 +54,7 @@ class ExpenseActionRight extends React.Component {
         >
           Export
         </Button>
-        &nbsp;
+     <div class=" ml-2">
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"
@@ -62,6 +62,7 @@ class ExpenseActionRight extends React.Component {
           >Add           
           </Button>
         </Tooltip>
+        </div>
       </div>
     );
   }

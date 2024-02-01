@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { addMileage, getMileageByUserId } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import * as Yup from "yup";
 import { Select } from "antd";
 
@@ -50,7 +50,7 @@ function MileageForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, mileageDate: moment(dateString).toISOString() };
+          return { ...data, mileageDate: dayjs(dateString).toISOString() };
         } else {
           return data;
         }
@@ -360,23 +360,26 @@ function MileageForm(props) {
       </table>
 
       <div class=" mt-3">
+        <div class=" mr-2">
       <Button
-        style={{ float: "right",marginRight:"5px" }}
+        style={{ float: "right" }}
         type="primary"
         onClick={handleSubmit}
         Loading={addingMileage}
       >
         Submit
       </Button>
-      &nbsp; &nbsp; &nbsp;
+      </div>
+<div class=" ml-3 mr-2">
       <Button
-        style={{ float: "right",marginRight:"5px"}}
+        style={{ float: "right"}}
         type="primary"
         onClick={handleAddRowClick}
-        Loading={addingMileage}
+        loading={addingMileage}
       >
         Add more
       </Button>
+      </div>
       </div>
     </div>
   );

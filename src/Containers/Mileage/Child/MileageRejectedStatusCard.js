@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
 import { getMileageByUserId,getRejectdMileage,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 const MileageVoucherIdDrawer = lazy(() => import("./MileageVoucherIdDrawer"))
 
 
@@ -35,7 +34,7 @@ class MileageRejectedStatusCard extends React.Component {
     return (
       <>
         
-      <OnlyWrapCard className="h-[32rem]">
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className="p-0.5 inline-flex items-center rounded-md w-max ml-1">
             <span className="pl-2 pr-4 relative">
               <span
@@ -138,7 +137,7 @@ class MileageRejectedStatusCard extends React.Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
 
 
 

@@ -1,4 +1,4 @@
-import { Popover,Tooltip } from "antd";
+import { Badge, Popover,Tooltip } from "antd";
 import React, {  } from "react";
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { StyledRangePicker } from "../../../Components/UI/Antd";
@@ -32,7 +32,11 @@ const DashboardActionLeft = (props) => {
       <div class=" flex items-center "  >
         
         <div class="flex w-[12rem] justify-between">
-
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
         <span class=" cursor-pointer "
           onClick={() => props.setDashboardViewType("test")}
           style={{
@@ -44,100 +48,136 @@ const DashboardActionLeft = (props) => {
           </Tooltip>
         
         </span>
+        </Badge>
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
         <span class="cursor-pointer" 
         onClick={() => handleButtonClick("Tasks")} 
         style={{
-          color:activeButton === "Tasks" && "#1890ff",
+          color:activeButton === "Tasks" && "tomato",
           
         }}
         >
          <Tooltip title="Task">
              
      <FactCheckIcon
-                style={{ fontSize: "1rem",color:"#1890ff" }}
+                style={{ fontSize: "1rem", }}
               />
               </Tooltip>
         </span>
-  
+  </Badge>
        
     {user.crmInd === true && (
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
         <span class="cursor-pointer"
         onClick={() =>  handleButtonClick("Customer")} 
         style={{
-          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
+          color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && viewType === "ALL" && "#444" : viewType === "ALL" && "tomato" ,
        
         }}
         >
           <Tooltip title="Prospects">
           <ApartmentIcon
 
-style={{ fontSize: "1rem",color:"#1890ff" }}
+style={{ fontSize: "1rem", }}
 />
 </Tooltip>        
         </span>
+        </Badge>
 )}
        
 
    
     {user.erpInd === true && (
+         <Badge
+         size="small"
+         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+         // overflowCount={999}
+       >
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Accounts")} 
         style={{
-          color:activeButton === "Accounts" && "#1890ff",
+          color:activeButton === "Accounts" && "tomato",
           
         }}
         >
           <Tooltip title="Customers">
           <AcUnitIcon
-                style={{ fontSize: "1rem",color:"#1890ff" }}
+                style={{ fontSize: "1rem", }}
               />
           </Tooltip>
         </span>
+        </Badge>
     )}
 {user.imInd === true  && (
+      <Badge
+      size="small"
+      // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+      // overflowCount={999}
+    >
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Order")} 
         style={{
-          color:activeButton === "Order" && "#1890ff",
+          color:activeButton === "Order" && "tomato",
     
         }}
         >  <Tooltip title="Order">
           <DynamicFeedIcon
-                style={{ fontSize: "1rem",color:"#1890ff" }}
+                style={{ fontSize: "1rem", }}
               />
            </Tooltip>
         </span>
+        </Badge>
 )}
    
     {user.erpInd === true && (
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Finance")} 
         style={{
-          color:activeButton === "Finance" && "#1890ff",
+          color:activeButton === "Finance" && "tomato",
           
         }}
         >
            <Tooltip title="Finance">
-          <ReceiptIcon  style={{ fontSize: "1rem" ,color:"#1890ff"}}/>
+          <ReceiptIcon  style={{ fontSize: "1rem" ,}}/>
           </Tooltip>
           
         </span>
+        </Badge>
     )}
         {user.imInd === true  && (
+            <Badge
+            size="small"
+            // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+            // overflowCount={999}
+          >
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Investors")} 
         style={{
-          color:activeButton === "Investors" && "#1890ff",
+          color:activeButton === "Investors" && "tomato",
     
         }}
         >  
         <Tooltip title="Investors">
           <LocationCityIcon
 
-style={{ fontSize: "1rem" ,color:"#1890ff"}}
+style={{ fontSize: "1rem" ,}}
 />
 </Tooltip>       
         </span>
+        </Badge>
 )}
     
    </div>

@@ -1,7 +1,6 @@
-import React, { Component,useEffect,useState } from "react";
+import React, {useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { base_url } from "../../../../Config/Auth";
@@ -9,15 +8,8 @@ import { Empty, Button, Tooltip, Modal } from "antd";
 import jsPDF from "jspdf";
 import dayjs from "dayjs";
 import "jspdf-autotable";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import {
-  HeaderText,
-  Spacer,
-  SubTitle,
-} from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
-// import { getAllLatestContacts } from "../../../Contact/ContactAction";
 import { getSalesReports } from "../../ReportAction";
 import styled from "styled-components";
 import TableHeader from "./TableHeader";
@@ -286,7 +278,7 @@ console.log(fullDate);
     const tab = document.querySelector(".ant-layout-sider-children");
     const tableHeight = tab && tab.offsetHeight - 100;
     return (
-      <FlexContainer>
+      <div class=" flex">
         <PDFPreviewTable>
           <StyledTable
             // rowSelection={rowSelection}
@@ -308,9 +300,9 @@ console.log(fullDate);
             pagination={false}
             scroll={{ y: tableHeight }}
           />
-          <Spacer />
-          <FlexContainer
-            justifyContent="flex-end"
+       
+          <div class=" flex justify-end mt-3"
+          
             style={{ padding: "0em 1.25em" }}
           >
           
@@ -342,19 +334,14 @@ console.log(fullDate);
             </Modal>
         </Tooltip>
         
-            &nbsp;&nbsp;
-            <span
+         
+            <span class=" ml-4 mr-2 text-4 cursor-pointer"
             href={`${base_url}/excel/export/user/${props.userId
             }?type=${"expense"}&startDate=${props.startDate}&endDate=${props.endDate
             }=${props.userId}
           `}
            // onClick={() => props.setCandidateViewType("table")}
-            style={{
-              marginRight: "0.5rem",
-             // color: props.viewType === "table" && "#1890ff",
-              fontSize: "1.25em",
-              cursor: "pointer",
-            }}
+         
           >
             <InsertDriveFileIcon/>
           </span>
@@ -375,15 +362,10 @@ console.log(fullDate);
                 }}
               ></Button>
             </Tooltip> */}
-            &nbsp;&nbsp;
-            <span           
+           
+            <span class=" ml-4 mr-2 text-4 cursor-pointer"    
            // onClick={() => props.setCandidateViewType("table")}
-            style={{
-              marginRight: "0.5rem",
-             // color: props.viewType === "table" && "#1890ff",
-              fontSize: "1.25em",
-              cursor: "pointer",
-            }}
+          
           >
            <InsertDriveFileIcon/>
           </span>
@@ -400,9 +382,9 @@ console.log(fullDate);
                 }}
               ></Button>
             </Tooltip> */}
-          </FlexContainer>
+          </div>
         </PDFPreviewTable>
-      </FlexContainer>
+      </div>
     );
   }
 

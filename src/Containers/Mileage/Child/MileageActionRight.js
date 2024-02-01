@@ -2,14 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { base_url } from "../../../Config/Auth";
-import { Icon, Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import { Button, Tooltip } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { handleMileageModal } from "../MileageAction";
-// import { setAccountFilterText, setAccountFilterUser } from "../AccountAction";
-// import { getUsers } from "../../Team/TeamAction";
 
 const Option = StyledSelect.Option;
 
@@ -27,7 +22,7 @@ class MileageActionRight extends React.Component {
   };
   render() {
     return (
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center ml2" >
         {/* <Button
           type={this.state.isClicked === "import" ? "primary" : ""}
           onClick={() => this.handleClicked("import")}
@@ -35,15 +30,15 @@ class MileageActionRight extends React.Component {
         >
           Import
         </Button> */}
-        &nbsp;
-        <Spacer />
+       
+      
         <Button
           type={this.state.isClicked === "export" ? "primary" : ""}
           onClick={() => this.handleClicked("export")}
         >
           Export
         </Button>
-        &nbsp;
+      <div class=" ml-2">
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"
@@ -54,7 +49,8 @@ class MileageActionRight extends React.Component {
             Add
           </Button>
         </Tooltip>
-      </FlexContainer>
+        </div>
+      </div>
     );
   }
 }
