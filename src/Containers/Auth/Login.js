@@ -11,7 +11,7 @@ import Button from "antd/lib/button";
 import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
-   import FWLogo from "../../Assets/Images/logodd.png";
+   import FWLogo from "../../Assets/Images/name.jpg";
    import FWLogo1 from "../../Assets/Images/dsdde.jpg";
 
 
@@ -86,7 +86,7 @@ class Login extends Component {
           <div class=" flex justify-center w-1/2 items-center md:min-h-screen max-sm:w-wk h-[80vh] "
             style={{
               // backgroundColor: "#F5F5F5",
-              backgroundColor:"black",
+              backgroundColor:"white",
               flexDirection: "column",
               position: "relative",
               margin: "auto",

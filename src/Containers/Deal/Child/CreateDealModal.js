@@ -16,11 +16,9 @@ const CreateDealModal = (props) => {
           defaultMessage="Deal"
         />}
         width={drawerWidth}
-        style={{marginTop:"3rem"}}
         visible={opencreateDealModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleDealModal(false)}
         footer={null}
       >

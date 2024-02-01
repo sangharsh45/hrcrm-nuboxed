@@ -11,11 +11,9 @@ const UpdateDealModal = (props) => {
       <StyledDrawer
         title={props.currentItem.opportunityName}
         width={drawerWidth}
-        style={{marginTop:"3rem"}}
         visible={props.openupdateDealModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => props.handleUpdateDealModal(false)}
         footer={null}
       >

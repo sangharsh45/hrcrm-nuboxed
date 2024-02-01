@@ -15,11 +15,9 @@ const AddConvertPitchStatusModal = (props) => {
           defaultMessage="Convert as Investor"
         />}
         width={drawerWidth}
-        style={{marginTop:"3rem"}}
         visible={props.addPitchConvertModal}
         closable
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => props.handlePitchConvertModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>

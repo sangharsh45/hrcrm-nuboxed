@@ -21,12 +21,10 @@ console.log("data",props.rowdata.name)
       <StyledDrawer
         title={props.rowdata.firstName}
         width="60%"
-        style={{marginTop:"3rem"}}
         visible={props.openASSImodal}
         destroyOnClose
         closable
         placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           props.handleAssimodal(false);
         }}

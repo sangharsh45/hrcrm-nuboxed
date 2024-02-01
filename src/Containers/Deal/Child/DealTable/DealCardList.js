@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
 import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip,  Menu, Dropdown, Progress } from "antd";
@@ -14,7 +13,6 @@ import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
  } from "../../../../Components/UI/Elements";
 import {
   getRecruiterList,
@@ -92,12 +90,12 @@ function DealCardList(props) {
         hasMore={hasMore}
         loader={
           fetchingDeal ? (
-            <h4 style={{ textAlign: "center" }}>Loading...</h4>
+            <div class="flex justify-center">Loading...</div>
           ) : null
         }
         height={"75vh"}
       >
-        <CardWrapper>
+        <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
 
           {dealsByuserId.map((item) => {
             var findProbability = item.probability;
@@ -107,12 +105,11 @@ function DealCardList(props) {
               }
             });
             return (
-              <CardElement>
+              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[7rem] 
+              text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
                 <div class=" flex flex-no-wrap items-center h-[2.81em]"
                 >
-                  <div class=" mr-[0.2rem]"
-                    style={{ flexBasis: "15%",}}
-                  >
+                  <div class=" mr-[0.2rem]  basis-[15%]">
                     <MultiAvatar
                       primaryTitle={item.opportunityName}
                       imageId={item.imageId}
@@ -122,17 +119,10 @@ function DealCardList(props) {
                     />
                   </div>
                   &nbsp;
-                  <div class=" flex flex-col"
-                    style={{ flexBasis: "83%", overflow: "hidden" }}
+                  <div class=" flex flex-col basis-[83%] overflow-hidden"
                   >
-                    <div
-                      class="font-semibold "
-                      style={{
-                        color: "#337df4",
-                        cursor: "pointer",
-                        fontSize: "1em",
-                      }}
-                    >
+                    <div 
+                      class="font-semibold text-[#337df4] cursor-pointer text-sm ">
                       <Link
                         toUrl={`dealDetails/${item.invOpportunityId}`}
                         title={`${item.opportunityName}`}
@@ -145,34 +135,22 @@ function DealCardList(props) {
                 <div className="flex justify-around">
                   <div>
                     {item.customer && (
-                      <SubTitle
-                        overflow="hidden"
-                        textOverflow="ellipsis"
-                        style={{
-                          cursor: "pointer",
-                          fontSize: "0.9375em",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
+                      <div class="overflow-hidden text-ellipsis cursor-pointer text-sm flex items-center"
+                        
                         // onClick={handleSecondaryTitleClick || null}
                       >
                         {item.customer || ""}
-                      </SubTitle>
+                      </div>
                     )}
                   </div>
                   <div>
-                    <SubTitle
-                      style={{
-                        fontWeight: 500,
-                        fontSize: "0.9375em",
-                        // marginTop: "-0.37em",
-                        marginBottom: "-0.18em",
-                      }}
+                    <div class="font-medium text-sm -mb-[0.18em]"
+                     
                     >
                       &nbsp;&nbsp;
                       {<CurrencySymbol currencyType={item.currency} />}
                       &nbsp;{item.proposalAmount || ""}
-                    </SubTitle>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-around">
@@ -234,13 +212,7 @@ function DealCardList(props) {
                   </span>
                 </div>
 
-                <div
-                  style={{
-                    width: "100%",
-                    paddingLeft: "0.5em",
-                    marginTop: "-0.18em",
-                  }}
-                >
+                <div class="w-full pl-[0.5em] -mt-[0.18em]">
                   <div class="flex justify-between w-wk">
                     <div>
                       {item.approveInd && item.opportunityOwner ? (
@@ -363,8 +335,7 @@ function DealCardList(props) {
                         }
                       >
                         {user.imInd === true && user.dealUpdateInd === true && (
-                          <span
-                            style={{ cursor: "pointer", color: "blue" }}
+                          <span class="cursor-pointer text-[blue]"
                             onClick={() => {
                               handleUpdateDealModal(true);
                               handleSetCurrentItem(item);
@@ -398,10 +369,10 @@ function DealCardList(props) {
                     </div>
                   </div>
                 </div>
-              </CardElement>
+              </div>
             );
           })}
-        </CardWrapper>
+        </div>
       </InfiniteScroll>
 
       <UpdateDealModal
@@ -497,57 +468,3 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(DealCardList);
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`;
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-const CardElement = styled.div`
-  border-radius: 0.35rem;
-  border: 3px solid #eeeeee;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0.25em 0.62em #aaa;
-  height: 7rem;
-  color: rgb(68, 68, 68);
-  margin: 1em;
-  padding: 0.2rem;
-  width: 19vw;
-  display: flex;
-  flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: -webkit-fill-available;
-  }
-`;

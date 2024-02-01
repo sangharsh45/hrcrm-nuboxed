@@ -169,7 +169,7 @@ function ContactCardList(props) {
         dataLength={contactByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingContacts?<h4 class="font-semibold" style={{ textAlign: 'center' }}>Loading More...</h4>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page</p>}
       >

@@ -14,6 +14,7 @@ import { Button, Tooltip,Dropdown ,Menu,Progress} from "antd";
 import { FormattedMessage } from "react-intl";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BundleLoader } from "../../../../../Components/Placeholder";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const ButtonGroup = Button.Group;
 
@@ -49,40 +50,41 @@ const DealsAllCardList = (props) => {
 
   return (
     <>
-   <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+    <div className=" flex  w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-20"><FormattedMessage
+        <div className=" md:w-[10.1rem]"><FormattedMessage
                   id="app.investor"
                   defaultMessage="investor"
                 /></div>
-        <div className=" md:w-32 "><FormattedMessage
+        <div className=" md:w-[12.2rem] "><FormattedMessage
                   id="app.sponsor"
                   defaultMessage="sponsor"
                 /></div>
-        <div className="md:w-32"><FormattedMessage
+        <div className="md:w-[12.1rem]"><FormattedMessage
                   id="app.startdate"
                   defaultMessage="startdate"
                 /></div>
-        <div className="md:w-56"><FormattedMessage
-                  id="app.proposalamt"
-                  defaultMessage="proposalamt"
+        <div className="md:w-[8.5rem]"><FormattedMessage
+                  id="app.value"
+                  defaultMessage="Value"
                 /></div>
-        <div className="md:w-20"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.stages"
                   defaultMessage="stages"
                 /></div> 
-        <div className="md:w-24"><FormattedMessage
-                  id="app.salesRep"
-                  defaultMessage="salesRep"
+        <div className="md:w-[7.1rem]"><FormattedMessage
+                  id="app.assignto"
+                  defaultMessage="Assign To"
                 /></div>
-        <div className="md:w-20"><FormattedMessage
+        <div className="md:w-[5.3rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-20"></div>
+        <div className="md:w-[0.8rem]"></div>
         <div className="w-12"></div>
 
       </div>
@@ -90,7 +92,7 @@ const DealsAllCardList = (props) => {
         dataLength={props.allDealsData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllDealsData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
    {props.allDealsData.map((item) => { 
@@ -124,7 +126,7 @@ const DealsAllCardList = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-1"
+                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-1"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -150,10 +152,10 @@ const DealsAllCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
-                                            {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                                 {/* <Link
                                                  toUrl={`customer/${item.customerId}`}
@@ -163,17 +165,14 @@ const DealsAllCardList = (props) => {
                                                {/* </Link> */}
                                                &nbsp;&nbsp;
                                                {date === currentdate ? (
-                                                 <span
-                                                   style={{
-                                                     color: "tomato",
-                                                     fontWeight: "bold",
-                                                   }}
+                                                 <span class="text-[tomato] font-bold"
+                                            
                                                  >
                                                    New
                                                  </span>
                                                ) : null}
                                               
-                                                                                   </h4>
+                                                                                   </div>
                                             </div>
                                         </Tooltip>
                                         </div>
@@ -181,17 +180,17 @@ const DealsAllCardList = (props) => {
                                 </div>
                                 <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
 
-<h4 class=" text-sm text-cardBody font-poppins">   
-
+<div class=" text-sm text-cardBody font-poppins">   
+<Link to ="/investor">
 {item.investor}
-
-</h4>
+</Link>
+</div>
 </div>
 
 <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
 
 
-<h4 class=" text-sm text-cardBody font-poppins">
+<div class=" text-sm text-cardBody font-poppins">
 <SubTitle>
 {item.contactName === null ? "None" :
 <MultiAvatar2
@@ -203,7 +202,7 @@ imgHeight={"1.8em"}
 />
 }
 </SubTitle>
-</h4>
+</div>
 </div>
 </div>
 <div class="flex">
@@ -267,11 +266,22 @@ strokeColor={"#005075"}
 <div class=" text-sm text-cardBody font-poppins">
 
 <span>
+{item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
 <MultiAvatar2
 primaryTitle={item.assignedTo}
 imgWidth={"1.8rem"}
 imgHeight={"1.8rem"}
 />
+  )}
+  </>
+              )}
 </span>
 
 </div>
@@ -301,7 +311,7 @@ imgHeight={"1.8rem"}
                     )
                 })}
                   </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       {/* <UpdateLPitchModal
         item={currentLeadsId}
         updatePitchModal={props.updatePitchModal}
