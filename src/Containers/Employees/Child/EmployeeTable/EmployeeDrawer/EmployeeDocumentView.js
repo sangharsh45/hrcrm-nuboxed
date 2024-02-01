@@ -8,7 +8,7 @@ class EmployeeDocumentView extends Component {
     return (
       <>
         <CardWrapper>
-          {this.props.documentsByEmployeeId.map((item) => {
+          {this.props.documentsByEmployeeId.length === 0?<div class=" flex items-center mt-8">Data Not Available</div>:this.props.documentsByEmployeeId.map((item) => {
             return (
               <CardElement key={item.documentId}>
                 <MainWrapper>

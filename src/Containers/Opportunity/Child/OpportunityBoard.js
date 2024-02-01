@@ -70,11 +70,18 @@ const StageHeader = styled.div`
 function OpportunityBoard(props) {
   const { udatingOpp } = props;
 
+  // const processData = useMemo(() => {
+  //   if (!props.opportunityProcess) return null;
+  //   let id = props.opportunityProcess[0];
+  //   return id;
+  // }, [props.opportunityProcess]);
   const processData = useMemo(() => {
     if (!props.opportunityProcess) return null;
-    let id = props.opportunityProcess[0];
-    return id;
-  }, [props.opportunityProcess]);
+
+    const publishIndTrueItem = props.opportunityProcess.find(item => item.publishInd === true);
+console.log("publishIndTrueItem",publishIndTrueItem)
+    return publishIndTrueItem ? publishIndTrueItem : null;
+}, [props.opportunityProcess]);
 
 
   useEffect(() => {
@@ -84,6 +91,7 @@ function OpportunityBoard(props) {
 
   useEffect(() => {
     if (!processData) return;
+    console.log("processData",processData)
     props.getProcessStagesForOpportunity(processData.opportunityWorkflowDetailsId);
   }, [processData]);   
 

@@ -1,11 +1,9 @@
-
-
 import React, {  PureComponent,lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import { getDepartmentRoleData } from "../../../SettingsAction"
+//  import { getDepartmentAccess } from "../../../SettingsAction"
 const AccessForm = lazy(() => import("./AccessForm"));
 
 const TabPane = StyledTabs.TabPane;
@@ -20,9 +18,9 @@ class DepartmentRole extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        this.props.getDepartmentRoleData(this.props.departmentId)
-    }
+    // componentDidMount() {
+    //     this.props.getDepartmentAccess(this.state.departmentData.departmentId)
+    // }
 
     handleOnClick = (data) => {
         console.log(data);
@@ -34,7 +32,7 @@ class DepartmentRole extends PureComponent {
     };
     render() {
         const { departmentRoleData } = this.props;
-        console.log(this.state.departmentData.roleTypeId)
+        // console.log(this.state.departmentData.roleTypeId)
         return (
             <>
                 <TabsWrapper >
@@ -51,6 +49,7 @@ class DepartmentRole extends PureComponent {
             </span>
           }
         >
+      
         {this.state.departmentData.roleTypeId && (
             <Suspense fallback={"Loading..."}>
               
@@ -78,13 +77,13 @@ class DepartmentRole extends PureComponent {
 }
 
 const mapStateToProps = ({ settings, opportunity, auth }) => ({
-    departmentRoleData: settings.departmentRoleData,
+    // departmentRoleData: settings.departmentRoleData,
 
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
-        getDepartmentRoleData
+        // getDepartmentRoleData
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepartmentRole);
@@ -98,6 +97,83 @@ export default connect(mapStateToProps, mapDispatchToProps)(DepartmentRole);
 
 
 
+
+
+
+
+
+
+
+
+
+
+// import React, { useState,useEffect } from 'react';
+// import { Tabs, Card } from 'antd';
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import {getDepartmentAccess} from "../../../SettingsAction"
+// // import {getCountries} from "../../../../Auth/AuthAction"
+// // import MatrixData from './MatrixData';
+
+
+// const { TabPane } = Tabs;
+
+// const DepartmentRole = (props) => {
+//   useEffect(() => {
+//     props.getDepartmentAccess(activeTab1);
+//     console.log(activeTab1)
+//   },[activeTab1,props.departmentRoleData]);
+
+//   useEffect(() => {
+//     // props.getDepartmentAccess(activeTab1);
+//     // console.log(activeTab1)
+//   },[props.departmentRoleData]);
+
+//   // useEffect(() => {
+   
+//   //   props.getDepartmentAccess(activeTab,props.organizationId);
+//   //   console.log(activeTab)
+//   // },[activeTab]);
+ 
+//   const [activeTab1, setActiveTab1] = useState(props.departmentRoleData.length > 0 ? props.departmentRoleData[0].roleTypeId : null);
+
+//   const handleTabClick = (key) => {
+//     console.log(key)
+//     setActiveTab1(key);
+//     props.getDepartmentAccess(key);
+//   };
+
+//   return (
+//     <Tabs type="card" activeKey={activeTab1} onChange={handleTabClick}>
+//       {props.departmentRoleData && props.departmentRoleData.map((item) => (
+//         <TabPane key={item.roleTypeId
+//         } tab={item.roleType}>
+//           {/* <Card>
+//             <p>Country: {item.country_name}</p>
+//             <p>ID: {item.country_id}</p>
+//           </Card> */}
+//           hello
+//           {/* <MatrixData
+//           activeTab={activeTab}
+//           matrixData={props.matrixData}
+//           /> */}
+//         </TabPane>
+//       ))}
+//     </Tabs>
+//   );
+// };
+
+// const mapStateToProps = ({ settings, opportunity, auth }) => ({
+//     organizationId: auth.userDetails.organizationId,
+//     departmentAcces: settings.departmentAcces,
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//     bindActionCreators({
+//       getDepartmentAccess
+//     }, dispatch);
+
+// export default connect(mapStateToProps, mapDispatchToProps)(DepartmentRole);
 
 
 
