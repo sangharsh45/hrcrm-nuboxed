@@ -14,8 +14,6 @@ const UpdateProductModal = (props) => {
         visible={props.updateProductModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem" }}
         onClose={() => props.handleUpdateProductModal(false)}
         footer={null}
       >

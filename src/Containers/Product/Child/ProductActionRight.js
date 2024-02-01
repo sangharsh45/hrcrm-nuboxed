@@ -20,17 +20,9 @@ class ProductActionRight extends React.Component {
     return (
       <>
 
-        <FlexContainer alignItems="center">
+        <div class="items-center">
 
-          <Button
-            type="primary"
-            ghost
-            onClick={() => this.props.history.push("/import/product")}
-          >
-            Import
-          </Button>
-          &nbsp;
-
+    
           <Tooltip title="Export Product">
             <Button
               className="export"
@@ -41,15 +33,7 @@ class ProductActionRight extends React.Component {
           </Tooltip>
           &nbsp;
 
-          &nbsp;
-          <Tooltip placement="left" title="Create">
-            <Button
-              type="primary"
-              onClick={() => handleConfigureModal(true)}
-            >Add
-
-            </Button>
-          </Tooltip>
+         
           <Tooltip placement="left" title="Create">
             <Button
               type="primary"
@@ -59,7 +43,17 @@ class ProductActionRight extends React.Component {
               Upload
             </Button>
           </Tooltip>
-        </FlexContainer>
+          &nbsp;
+          <Tooltip placement="left" title="Create">
+            <Button
+              type="primary"
+              onClick={() => handleConfigureModal(true)}
+            >Add
+
+            </Button>
+          </Tooltip>
+        </div>
+        
         <UploadCatalogue
           handleUploadProductModal={this.props.handleUploadProductModal}
           uploadProductList={this.props.uploadProductList}

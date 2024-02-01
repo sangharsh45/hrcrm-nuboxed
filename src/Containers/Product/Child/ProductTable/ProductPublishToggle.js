@@ -35,7 +35,7 @@ class ProductPublishToggle extends Component {
                         cancelText="Cancel"
                     >
                         <Switch
-                            checked={this.props.item.publishInd}
+                            checked={this.props.publishInd}
                             //   disabled={this.props.collectInd}
                             checkedChildren="Publish"
                             unCheckedChildren="UnPublish"

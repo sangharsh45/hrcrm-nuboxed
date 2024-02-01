@@ -891,7 +891,7 @@ function ProductListingTable(props) {
           // rowSelection={rowSelection}
           rowKey=""
           columns={columns}
-          loading={fetchingProducts || fetchingProductsError}
+          // loading={fetchingProducts || fetchingProductsError}
           dataSource={products}
           onChange={console.log("contact onChangeHere...")}
           scroll={{ y: 400 }}
