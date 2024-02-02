@@ -4,8 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { updateEmployeeById } from "../../../../EmployeeAction";
 import { Button } from "antd";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../../../Components/UI/Elements";
+import { TextInput } from "../../../../../../Components/UI/Elements";
 import EditUpload from "../../../../../../Components/Forms/Edit/EditUpload";
 class EmployeeOverviewEdit extends Component {
   constructor(props) {
@@ -46,10 +45,8 @@ class EmployeeOverviewEdit extends Component {
     const { singleEmployee, toggleViewType, updatingEmployeeById } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
-          style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
-        >
+      <div className="flex flex-col p-4">
+      
           <EditUpload
             imageId={singleEmployee.imageId}
             imageURL={singleEmployee.imageURL}
@@ -57,7 +54,7 @@ class EmployeeOverviewEdit extends Component {
             imgHeight={100}
             getImage={this.setImage}
           />
-          &nbsp;&nbsp;
+          <div class=" ml-2">
           <EditableInput
             defaultValue={singleEmployee.firstName}
             handleChange={this.handleChange}
@@ -72,12 +69,14 @@ class EmployeeOverviewEdit extends Component {
             value={this.state.fields.firstName}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+   
           {/* <EditableInput
                         defaultValue={user.middleName}
                         handleChange={this.handleChange}
                         name={'middleName'}
                         value={this.state.fields.middleName} /> */}
+                        <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={singleEmployee.lastName}
             handleChange={this.handleChange}
@@ -89,9 +88,10 @@ class EmployeeOverviewEdit extends Component {
             value={this.state.fields.lastName}
             width="100%"
           />
-        </FlexContainer>
+          </div>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25rem] " >
           <Button
             type="primary"
             Loading={updatingEmployeeById}
@@ -99,11 +99,12 @@ class EmployeeOverviewEdit extends Component {
           >
             <FormattedMessage id="app.save" defaultMessage="Save" />
           </Button>
-          &nbsp;
+<div class=" ml-2">
           <Button type="ghost" onClick={() => toggleViewType()}>
             <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
           </Button>
-        </FlexContainer>
+          </div>
+        </div>
       </>
     );
   }

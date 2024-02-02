@@ -1,14 +1,12 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
-import EmployeeDetailHeader from "./EmployeeDetailHeader";
 import {
-  FlexContainer,
   MainWrapper,
 } from "../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { getEmployeeById } from "../../../EmployeeAction";
+const EmployeeDetailHeader = lazy(() => import("./EmployeeDetailHeader"));
 const EmployeeDetailLeft = lazy(() => import("./EmployeeDetailLeft"));
 const EmployeeDetailRight = lazy(() => import("./EmployeeDetailRight"));
 
@@ -30,18 +28,18 @@ class EmployeeDetails extends Component {
             <BundleLoader />
           </MainWrapper>
         ) : (
-          <FlexContainer>
+          <div class=" flex ">
             <Suspense fallback={""}>
-              <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div style={{ width: "25%" }}>
+              <div class=" flex flex-no-wrap w-full" >
+                <div class=" w-[25%]" >
                   <EmployeeDetailLeft  singleEmployee= {singleEmployee}/>
                 </div>
-                <div style={{ width: "75%" }}>
+                <div class=" w-[75%]" >
                   <EmployeeDetailRight singleEmployee= {singleEmployee}/>
                 </div>
-              </FlexContainer>
+              </div>
             </Suspense>
-          </FlexContainer>
+          </div>
         )}
       </>
     );

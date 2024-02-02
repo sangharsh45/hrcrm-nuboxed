@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ViewEditCard } from "../../../../../../Components/UI/Elements";
-import EmployeeOverviewView from "./EmployeeOverviewView";
-import EmployeeOverviewEdit from "./EmployeeOverviewEdit";
+const EmployeeOverviewView = lazy(() => import("./EmployeeOverviewView"));
+const EmployeeOverviewEdit = lazy(() => import("./EmployeeOverviewEdit"));
 
 class ProfileOverviewCard extends Component {
     render() {

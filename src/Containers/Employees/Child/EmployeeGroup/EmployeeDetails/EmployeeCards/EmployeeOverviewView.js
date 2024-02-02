@@ -1,23 +1,14 @@
 import React, { Component } from "react";
 import { Formik, Form, Field } from "formik";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-import axios from "axios";
-import { base_url } from "../../../../../../Config/Auth";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import FormikPlacesAutoComplete from "../../../../../../Components/Forms/Formik/FormikPlacesAutoComplete";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import {
-  Title,
-  SubTitle,
   MultiAvatar,
 } from "../../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { ActionIcon, Leaflet } from "../../../../../../Components/Utils";
-import { AddressComponent } from "../../../../../../Components/Common";
-import MapPopupMarker from "../../../../../Profile/Child/ProfileCards/MapPopupMarker";
+import { ActionIcon, } from "../../../../../../Components/Utils";
 import L from "leaflet";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -37,30 +28,25 @@ class EmployeeOverviewView extends Component {
 
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "85%" }}
+        <div class=" flex justify-between" >
+          <div class=" flex justify-start flex-no-wrap w-[85%]"
           >
-            <div style={{ width: "20%" }}>
+            <div class=" w-[20%]" >
               <MultiAvatar
                 primaryTitle={singleEmployee.firstName}
                 imageId={singleEmployee.imageId}
                 imageURL={singleEmployee.imageURL}
               />
             </div>
-            &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "100%" }}>
-              <Title
-                overflow="hidden"
-                textOverflow="ellipsis"
-                fontSize={"1.375em"}
+          
+            <div class=" flex flex-col w-full ml-2" >
+              <div class=" w-wk text-[#444] overflow-hidden text-lg textOverflow-ellipsis"
+             
               >{`${singleEmployee.fullName || ""} 
-                `}</Title>
-            </FlexContainer>
-          </FlexContainer>
-          <FlexContainer style={{ width: "15%" }} justifyContent="flex-end">
+                `}</div>
+            </div>
+          </div>
+          <div class=" flex justify-end w-[15%] ml-2" >
             {/* <ActionIcon
               tooltipTitle="Address"
               iconType="environment"
@@ -74,19 +60,20 @@ class EmployeeOverviewView extends Component {
               handleIconClick={this.handleMapModalVisible}
               size="1em"
             /> */}
-            &nbsp;&nbsp;
-            <ActionIcon
-              //tooltipTitle="Edit"
-              tooltipTitle={<FormattedMessage
-                id="app.edit"
-                defaultMessage="Edit"
-              />}
-              iconType="edit"
-              handleIconClick={toggleViewType}
-              size="1em"
+      <Tooltip title="Edit">
+            <BorderColorIcon
+             
+              // iconType="edit"
+              onClick={toggleViewType}
+              style={{
+                color: "grey",
+                cursor: "pointer",
+                fontSize: "1rem",
+              }}
             />
-          </FlexContainer>
-        </FlexContainer>
+            </Tooltip>
+          </div>
+        </div>
       </>
     );
   }

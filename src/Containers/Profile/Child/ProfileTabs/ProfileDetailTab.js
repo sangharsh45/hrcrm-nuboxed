@@ -119,24 +119,8 @@ class ProfileDetailTab extends Component {
                     <MailOutlined type="mail" />
                     Performance
                   </span>
-                  {/* {activeKey === "9" && (
-                    <>
-                      <>
-                        <PlusOutlined
-                          type="plus"
-                          tooltipTitle="Add"
-                          onClick={() =>
-                            this.props.handleEmailProfileModal(true) 
-                          }
-                          size="1em"
-                          style={{
-                            marginLeft: 10,
-                            verticalAlign: "center",
-                          }}
-                        />
-                      </>
-                    </>
-                  )} */}
+                 
+                   
                 </>
               }
               key="1"

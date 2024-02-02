@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { ActionHeader } from "../../../../../Components/Utils";
-import EmployeeDetailActionLeft from "./EmployeeDetailActionLeft";
+const EmployeeDetailActionLeft = lazy(() => import("./EmployeeDetailActionLeft"));
 
 class EmployeeDetailHeader extends Component {
   render() {
     return (
-      <div style={{zIndex: "999",
-        position: "sticky",
-        top: "3rem"}}>
+      <div>
         <ActionHeader
           leftComponent={<EmployeeDetailActionLeft />}
           rightComponent={<></>}

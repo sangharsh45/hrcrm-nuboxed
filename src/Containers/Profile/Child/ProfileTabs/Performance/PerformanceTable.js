@@ -50,14 +50,14 @@ const PerformanceTable = (props) => {
 
   return (
     <>
-      <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         {props.employeeKpiList.map((item) => (
             <div key={item.id}>
               <div className="flex justify-between mt-4" 
             //   style={{ borderBottom: '3px dotted #515050' }}
               >
                 <div className="flex justify-between w-2/3">
-                 
+{/*                  
                   <div className="Ccard__title w-40">
                     <div className="text-base text-cardBody font-medium font-poppins">
                     Name
@@ -65,9 +65,9 @@ const PerformanceTable = (props) => {
                   
                       <div className="font-normal text-sm text-cardBody font-poppins">{item.kpiName}</div>
                    
-                  </div>
+                  </div> */}
                 
-                  <div className="Ccard__title w-28">
+                  {/* <div className="Ccard__title w-28">
                     <div className="text-base text-cardBody font-medium font-poppins">
                     Frequency
                     </div>
@@ -78,7 +78,7 @@ const PerformanceTable = (props) => {
                         </span>
                       </div>
                   
-                  </div>
+                  </div> */}
                   <div className="Ccard__title w-36">
                     <div className="text-base text-cardBody font-medium font-poppins">
                     Assigned Value
