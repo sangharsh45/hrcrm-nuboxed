@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import DownloadIcon from '@mui/icons-material/Download';
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import {
