@@ -89,17 +89,17 @@ function ContactInvestCardList(props) {
     <>
       
 
-          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-          <div className=" flex justify-between w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.1rem]"><FormattedMessage
+      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex  w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[15.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[10.1rem]"><FormattedMessage
+        <div className=" md:w-[12.1rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-        <div className=" md:w-[7.6rem] "><FormattedMessage
+        <div className=" md:w-[8.6rem] "><FormattedMessage
                   id="app.designation"
                   defaultMessage="designation"
                 /></div>
@@ -130,7 +130,7 @@ function ContactInvestCardList(props) {
         dataLength={contactByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingContactsInvest?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingContactsInvest?<div  class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
        
@@ -158,14 +158,14 @@ function ContactInvestCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
+                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
                                 >
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-<div className="flex max-sm:w-full"> 
+<div className="flex items-center max-sm:w-full"> 
 <div>
                                 <SubTitle>
             <MultiAvatar2
@@ -179,7 +179,7 @@ function ContactInvestCardList(props) {
           &nbsp;
           <div class="max-sm:w-full md:w-[12.1rem]">
                                         <Tooltip>
-                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
+                                          <div class=" flex  max-sm:w-full justify-between flex-row md:flex-col">
                                             {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </div> */}
@@ -190,11 +190,8 @@ function ContactInvestCardList(props) {
           title={`${item.fullName}`}
         >{item.fullName}</Link>&nbsp;&nbsp;
         {date === currentdate ? (
-          <span
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
+          <span class="text-[tomato] font-bold"
+           
           >
             New
           </span>
@@ -233,7 +230,7 @@ function ContactInvestCardList(props) {
                                      {item.oppNo}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[8.05rem] max-sm:flex-row w-full  ">
+                                <div className=" flex font-medium flex-col md:w-[5.05rem] max-sm:flex-row w-full  ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
@@ -269,7 +266,7 @@ function ContactInvestCardList(props) {
           </Tooltip>
 
                    </div>
-                                <div class="flex flex-col md: w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                                <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -279,7 +276,7 @@ function ContactInvestCardList(props) {
                   handleCurrentContactIdata(item);
                 }}
               >
-               <PhoneInTalkIcon style={{fontSize:"1rem"}}/>
+               <PhoneInTalkIcon className=" !text-base cursor-pointer"/>
               </span>
             )}
             {item.doNotCallInd === true && (
@@ -297,9 +294,9 @@ function ContactInvestCardList(props) {
                         <div class=" max-sm:flex justify-end max-sm:w-full">
                         <Tooltip title={item.emailId}>
            
-            <MailOutlineIcon
+            <MailOutlineIcon className=" !text-base cursor-pointer"
               type="mail"
-              style={{ cursor: "pointer",fontSize:"1rem" }}
+             
               onClick={() => {
                 props.getContactById(item.contactId);
                 props.handleCurrentContactIdata(true);
@@ -309,14 +306,14 @@ function ContactInvestCardList(props) {
                         </div>
                      
                         <div >
-                        <span
-              style={{ cursor: "pointer" }}
+                        <span class="cursor-pointer"
+              
               onClick={() => {
                 handleCurrentContactIdata(item);
                 props.handleContactDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
-              <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697"}}/>
+              <MonitorHeartIcon className=" !text-base cursor-pointer"/>
             )}
             </span>
                         </div>
@@ -328,17 +325,10 @@ function ContactInvestCardList(props) {
                     <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-            <span
-              style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
-                cursor: "pointer",
-              }}
+            <span class="cursor-pointer"
+             
             >
-            <LocationOnIcon   style={{
-                cursor: "pointer",
-                fontSize: "1rem"
-              }}/>
+            <LocationOnIcon  className=" !text-base cursor-pointer"/>
             </span>
           </Tooltip>
           </div>
@@ -356,7 +346,7 @@ function ContactInvestCardList(props) {
             {user.imInd === true  && user.investorContactUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                className=" !text-base cursor-pointer"
                 onClick={() => {
                   handleUpdateContactInvestModal(true);
                   handleCurrentContactIdata(item);
@@ -369,14 +359,14 @@ function ContactInvestCardList(props) {
                       </div>  
                     
                       </div>  
-                      <div class="flex flex-col w-6 justify-evenly  ">
+                      <div class="flex flex-col w-4 justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
                   props.handleContactInvestNotesDrawerModal(true);
                   handleCurrentContactIdata(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="text-green-500 cursor-pointer !text-base"
               />
            </Tooltip>
 
@@ -388,7 +378,7 @@ function ContactInvestCardList(props) {
                     )
                 })}
        </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
      
 
       <UpdateContactInvestModal

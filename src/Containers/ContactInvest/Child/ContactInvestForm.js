@@ -5,7 +5,6 @@ import { Button, Select, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -401,8 +400,8 @@ class ContactInvestForm extends Component {
                       )}
                     </div>
                   </div>
-                  <Spacer />
-                  < div class=" flex justify-between">
+                 
+                  < div class=" flex justify-between mt-3">
                     <div class=" w-full">
                       <FastField
                         type="text"
@@ -421,7 +420,7 @@ class ContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -432,7 +431,7 @@ class ContactInvestForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />
-
+</div>
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk " >
                   <div class=" flex  justify-between">
@@ -475,8 +474,8 @@ class ContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">         
+                
+                  <div class=" flex justify-between mt-3">         
                   <div class="w-w47.5">
                     <FastField
                       name="departmentId"
@@ -512,10 +511,11 @@ class ContactInvestForm extends Component {
                           />
                         </div>
                   </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="w-full mt-3 "
+                   style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
+                  <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" > Address</div>
                   </div>
                     </div>
                   <FieldArray
@@ -529,7 +529,7 @@ class ContactInvestForm extends Component {
                     )}
                   />
 
-                  <Spacer />
+                  
                   {/* <Field
                     name="address[0].address1"
                     // label="Address"
@@ -543,7 +543,7 @@ class ContactInvestForm extends Component {
                     isColumn
                     width="100%"
                   />
-                  <Spacer /> */}
+                   */}
                   {/* <Field
                     name="address[0].street"
                     //label="Street"
@@ -558,8 +558,8 @@ class ContactInvestForm extends Component {
                     isColumn
                     width="100%"
                   /> */}
-                  <Spacer />
-                  <div class=" flex  justify-between">
+                  
+                  <div class=" flex  justify-between mt-6">
                     {/* <div style={{ width: "47%" }}>
                       <Field
                         name="address[0].city"
@@ -576,7 +576,7 @@ class ContactInvestForm extends Component {
                       />
                     </div> */}
                   </div>
-                  <Spacer />
+                 
                   {/* <FlexContainer justifyContent="space-between">
                     <div style={{ width: "47%" }}>
                       <Field
@@ -613,8 +613,8 @@ class ContactInvestForm extends Component {
                   </FlexContainer> */}
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-4 ">
                 <Button
                   type="primary"
                   htmlType="submit"

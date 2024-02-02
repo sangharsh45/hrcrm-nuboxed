@@ -100,13 +100,13 @@ const ContactInvestActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-2"
             onClick={() => props.setContactInvetViewType("card")}
             style={{
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <AccountBalanceIcon />
+            <AccountBalanceIcon className=" text-base cursor-pointer" />
           </span>
         </Badge>
       </Tooltip>
@@ -123,7 +123,7 @@ const ContactInvestActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-2 text-base cursor-pointer"
             onClick={() => props.setContactInvetViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
@@ -147,13 +147,13 @@ const ContactInvestActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-2 "
             onClick={() => props.setContactInvetViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-           <PeopleIcon/>
+           <PeopleIcon className=" text-base cursor-pointer"/>
           </span>
         </Badge>
       </Tooltip>
@@ -186,7 +186,7 @@ const ContactInvestActionLeft = (props) => {
       >
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
       </Button> */}
-      <div style={{ width: "35%",marginTop:"0.5rem" }}>
+      <div class="w-[35%] mt-[0.5rem]">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

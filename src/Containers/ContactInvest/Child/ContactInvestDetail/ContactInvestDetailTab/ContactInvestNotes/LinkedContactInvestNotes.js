@@ -17,7 +17,7 @@ class LinkedContactNotes extends Component {
     const { fetchingNotesListByContactId, notesListByContactId } = this.props;
     return (
       <>
-        <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
+        <div class="bg-[#dcdcdc] h-[14.35em]">
           <NoteContactInvestForm
             type={"contact"}
             contactId={this.props.contactiData.contactId}
@@ -29,8 +29,7 @@ class LinkedContactNotes extends Component {
         <br />
 
         <BorderBox>
-          <div 
-           style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
+          <div class="h-[200] overflow-auto p-[0.3rem]">
             {fetchingNotesListByContactId ? (
               <BundleLoader />
             ) : (

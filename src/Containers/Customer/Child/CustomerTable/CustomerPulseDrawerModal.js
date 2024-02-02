@@ -16,12 +16,10 @@ class CustomerPulseDrawerModal extends Component {
         // title="Notes"
           title={this.props.customer.name}
           width="60%"
-          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerCustomerPulseModal}
           closable
           placement="right"
           destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleCustomerPulseDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

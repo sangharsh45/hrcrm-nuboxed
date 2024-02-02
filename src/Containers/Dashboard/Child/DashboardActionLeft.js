@@ -31,7 +31,7 @@ const DashboardActionLeft = (props) => {
     <>
       <div class=" flex items-center "  >
         
-        <div class="flex w-[12rem] justify-between">
+        <div class="flex w-[7rem] justify-between">
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
