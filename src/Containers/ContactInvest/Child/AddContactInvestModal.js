@@ -19,8 +19,6 @@ function AddContactInvestModal (props) {
         visible={addContactInvestModal}
         closable
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => handleContactInvestModal(false)}
         footer={null}
       >

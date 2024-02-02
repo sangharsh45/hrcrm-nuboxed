@@ -99,8 +99,8 @@ render() {
             noProgress
             title={
               <FormattedMessage
-                id="app.joiningDate"
-                defaultMessage=" "
+                id="app.#Contacts"
+                defaultMessage="#Contacts "
               />
             }
             // title="Joining Date"

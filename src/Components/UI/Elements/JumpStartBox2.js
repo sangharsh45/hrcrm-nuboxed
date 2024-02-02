@@ -18,7 +18,7 @@ const JumpStartWrapper = styled.div`
   display: flex;
   justify-content: "space-between";
   align-items: center;
-  background: ${(props) => props.bgColor || "lightgreen"};
+  background: ${(props) => props.bgColor || "lightblue"};
   color: #333 !important;
   cursor: ${(props) => (props.clickable ? "pointer" : "")};
   -webkit-box-shadow: 0 0.5em 0.375em -0.375em rgb(46, 44, 44);

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import moment from "moment";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
 
 class DashboardJumpStart extends React.Component{
@@ -102,7 +102,7 @@ render() {
           />
   
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={
               <FormattedMessage
@@ -132,7 +132,7 @@ render() {
             value={this.props.showDatelist.taggedProfile}
             isLoading={this.props.fetchingDatewiseReport}
           /> */}
-          <JumpStartBox
+          <JumpStartBox2
             noProgress
             // title="Open Tasks"
             title={
@@ -157,7 +157,7 @@ render() {
             // }
             
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={
               <FormattedMessage
