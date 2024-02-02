@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,lazy} from 'react';
 import { ViewEditCard } from "../../../../../../Components/UI/Elements"
 const EmployeeAboutView = lazy(() => import("./EmployeeAboutView"));
 const EmployeeAboutEdit = lazy(() => import("./EmployeeAboutEdit"));
