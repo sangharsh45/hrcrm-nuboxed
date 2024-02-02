@@ -99,7 +99,7 @@ function ProductionOrderListById(props) {
                                     <div className=" flex font-medium  md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcInspectionInd === 0 ? <Button
-                                            style={{width:"8rem"}}
+                                            className="w-32"
                                                 type="primary"
                                                 onClick={() => {
                                                     props.qcInspectionButton({
@@ -112,7 +112,7 @@ function ProductionOrderListById(props) {
                                                 Start Inspection
                                                 
                                                 </Button> : item.qcInspectionInd === 1 ?
-                                                <Button  style={{width:"8rem"}} onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : <div class="text-green-600">Inspection Completed</div>}
+                                                <Button  className="w-32" onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : <div class="text-green-600">Inspection Completed</div>}
 
                                         </div>
                                     </div>

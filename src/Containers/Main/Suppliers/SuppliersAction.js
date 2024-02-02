@@ -500,16 +500,18 @@ export const getAllSuppliersList = () => (dispatch) => {
     type: types.GET_ALL_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/supplier/all-suppliers`, {})
+    .get(`${base_url2}/supplier/all-suppliers`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: types.GET_ALL_SUPPLIERS_LIST_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: types.GET_ALL_SUPPLIERS_LIST_FAILURE,
         payload: err,
@@ -1126,4 +1128,10 @@ export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const emptysUPPLIERS = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_SUPPLIER_LIST, 
+  });
 };

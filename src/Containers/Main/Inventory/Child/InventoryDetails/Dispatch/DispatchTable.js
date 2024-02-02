@@ -13,7 +13,6 @@ import {
   handleCreateAWB
 } from "../../../InventoryAction"
 import { withRouter } from "react-router";
-import { OnlyWrapCard } from "../../../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 
 const DispatchPhoneListModal = lazy(() => import("./DispatchPhoneListModal"));
@@ -42,17 +41,15 @@ function DispatchTable(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+      <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=""></div>
             <div className=" md:w-[7%]"><FormattedMessage id="app.order" defaultMessage="Order #" /></div>
-            <div className=" md:w-[4.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer" /></div>
-            <div className="md:w-[5.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact" /></div>
-            <div className="md:w-[5.2rem]"><FormattedMessage id="app.phones" defaultMessage="Phones #" /></div>
+            <div className=" md:w-[5.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer" /></div>
+            <div className="md:w-[5.2rem]"><FormattedMessage id="app.units" defaultMessage="Units" /></div>
             <div className="md:w-[8.5rem]"><FormattedMessage id="app.inspection" defaultMessage="Inspection" /></div>
             <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery" /></div>
             <div className="md:w-[5.2rem]"><FormattedMessage id="app.packed" defaultMessage="Packed ?" /></div>
-            <div className="md:w-[5.2remb]"><FormattedMessage id="app.attribute" defaultMessage="Attribute" /></div>
             <div className=" md:w-[6.1rem]"><FormattedMessage id="app.shipper" defaultMessage="Shipper" /></div>
             <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery" /></div>
             <div className=" md:w-[6.1rem]"><FormattedMessage id="app.awb" defaultMessage="AWB" /></div>
@@ -220,7 +217,7 @@ function DispatchTable(props) {
             );
           })}
 
-        </OnlyWrapCard>
+        </div>
       </div>
 
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import {getBOM} from "../ProcurementAction";
 import { FormattedMessage } from "react-intl";
 
@@ -17,7 +16,7 @@ function ProcurementCard(props) {
   return (
     <>
        <div className=' flex justify-end sticky top-28 z-auto'>
-       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+       <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[7.1rem]"></div>
         <div className=" md:w-[10.1rem]"><FormattedMessage
@@ -50,7 +49,7 @@ function ProcurementCard(props) {
         dataLength={callListRangeByUserId.length}
         next={handleLoadMore}
       hasMore={hasMore}
-        loader={fetchingCallListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCallListRangeByUserId?<div class="text-center">Loading...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
       >
@@ -114,7 +113,7 @@ function ProcurementCard(props) {
           })}
    
       </InfiniteScroll> */}
-      </OnlyWrapCard>
+      </div>
       </div>
     </>
   );

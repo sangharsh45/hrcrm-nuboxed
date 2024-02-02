@@ -63,7 +63,6 @@ function ProBuildSearchedToggle (props) {
                         subAttributeName:props.item.subAttributeName,
                         subCategoryName:props.item.subCategoryName,
                         suppliesId:props.item.suppliesId,
-                        productId:props.particularDiscountData.productId,
                         quantity:props.item.quantity,
                     },);
       }

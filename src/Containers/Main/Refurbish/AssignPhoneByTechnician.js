@@ -123,17 +123,11 @@ const AssignPhoneByTechnician = (props) => {
 
     return (
         <div>
-            <div style={{ margin: "10px 0", display: "flex", justifyContent: "space-between" }}>
+            <div class="flex justify-between m-2">
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Department</label>
+                    <div class="text-sm font-semibold m-2">Department</div>
                     <Select
-                        style={{
-                            width: 250,
-                        }}
+                    className="w-[250px]"
                         value={department}
                         onChange={(value) => handleDepartment(value)}
                     >
@@ -143,15 +137,9 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Technician</label>
+                <div class="text-sm font-semibold m-2">Technician</div>
                     <Select
-                        style={{
-                            width: 250,
-                        }}
+                        className="w-[250px]"
                         value={technician}
                         onChange={(value) => handleTechnician(value)}
                     >
@@ -161,15 +149,9 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Due Date</label>
+                <div class="text-sm font-semibold m-2">Due Date</div>
                     <DatePicker
-                        style={{
-                            width: 250,
-                        }}
+                         className="w-[250px]"
                         value={dueDate}
                         onChange={(value) => hanldeOnChange(value)}
                     />
@@ -186,7 +168,7 @@ const AssignPhoneByTechnician = (props) => {
 
                 />
             )}
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "5px" }}>
+            <div class="flex justify-end mt-1">
                 <Button
                     type='primary'
                     onClick={() => props.UpdateTechnicianByPhone({

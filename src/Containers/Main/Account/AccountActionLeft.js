@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { Input, Tooltip, Badge } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { inputDataSearch, getRecords,getAccountRecords, getAllRecords,getDistributorCount } from "./AccountAction";
-import { DeleteOutlined, TableOutlined, BookOutlined, AppstoreOutlined } from "@ant-design/icons";
+import { DeleteOutlined} from "@ant-design/icons";
 import moment from "moment";
 const { Search } = Input;
 
@@ -55,7 +54,7 @@ const AccountActionLeft = (props) => {
     var costB = `${Number(totalB).toFixed(2)}`;
 
     return (
-        <FlexContainer alignItems="center">
+        <div class="flex items-center" >
             <div class="max-sm:hidden">
             {user.functionName !== "Customer Care" && (
                 
@@ -67,10 +66,10 @@ const AccountActionLeft = (props) => {
                             marginRight: "0.5rem",
                             color: props.viewType === "list" && "#1890ff",
                             // fontSize: "17px",
-                            cursor: "pointer",
+                            // cursor: "pointer",
                         }}
                         onClick={() => props.setDistributorViewType("list")}>
-                               <TocIcon  />
+                               <TocIcon className="text-base cursor-pointer" />
                         </span>
                     </Badge>
                 </Tooltip>
@@ -182,7 +181,7 @@ const AccountActionLeft = (props) => {
                             </>
                         </div>
                     ) : null}
-        </FlexContainer>
+        </div>
     );
 };
 

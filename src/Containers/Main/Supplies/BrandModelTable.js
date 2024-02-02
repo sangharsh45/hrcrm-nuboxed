@@ -51,7 +51,7 @@ const BrandModelTable = (props) => {
                 pagination={false}
             rowSelection={rowSelection}
             />
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div class="flex justify-end">
                 <Button
                     type="primary"
                 onClick={handleSubmit}
@@ -64,7 +64,6 @@ const BrandModelTable = (props) => {
 }
 const mapStateToProps = ({ supplies}) => ({
     brandModel: supplies.brandModel,
-    // taggedBrand: supplies.taggedBrand
 });
 
 const mapDispatchToProps = (dispatch) =>

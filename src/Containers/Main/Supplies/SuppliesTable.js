@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import QrCode from "./QrCode"
@@ -17,35 +17,22 @@ import {
   PhoneFilled,
 } from "@ant-design/icons";
 import moment from "moment";
-import TagBrandModel from "./TagBrandModel";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import InventoryIcon from '@mui/icons-material/Inventory';
-import UpdateSuppliesFormDrawer from "./UpdateSuppliesFormDrawer";
+import { BundleLoader } from "../../../Components/Placeholder";
 
-function onChange(pagination, filters, sorter) {
-  console.log("params", pagination, filters, sorter);
-}
+const UpdateSuppliesFormDrawer =lazy(()=>import("./UpdateSuppliesFormDrawer"));
+const TagBrandModel =lazy(()=>import("./TagBrandModel"));
+
 
 function SuppliesTable(props) {
   useEffect(() => {
     props.getSuppliesList();
   }, []);
 
-  const [showHistory, setshowHistory] = useState(false);
-  const [suppliesId, setSuppliesId] = useState("");
-  const [currentSuppliesId, setCurrentSuppliesId] = useState("");
   const [particularDiscountData, setParticularDiscountData] = useState({});
 
-  function handleSetCurrentSuppliesId(suppliesId) {
-    setCurrentSuppliesId(suppliesId);
-    console.log(suppliesId);
-  }
   function handleParticularRowData(item) {
     setParticularDiscountData(item);
-  }
-  function handleSuppliesHistory(suppliesId) {
-    setshowHistory(!showHistory);
-    setSuppliesId(suppliesId);
   }
 
   const { updateSuppliesDrawer, handleUpdateSupplieDrawer } = props;
@@ -53,7 +40,7 @@ function SuppliesTable(props) {
   return (
     <>
       <div className=" flex justify-end sticky top-28 z-auto">
-        <OnlyWrapCard style={{ height: "80vh", backgroundColor: "#E3E8EE" }}>
+      <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=" md:w-[6.1rem]">HSN</div>
             <div className=" md:w-[5.1rem]">Name</div>
@@ -164,9 +151,11 @@ function SuppliesTable(props) {
               </>
             );
           })}
-        </OnlyWrapCard>
+        </div>
       </div>
-      <TagBrandModel
+
+<Suspense fallback={<BundleLoader/>}>
+<TagBrandModel
         addBrandModel={props.addBrandModel}
         handleBrandModel={props.handleBrandModel}
         particularDiscountData={particularDiscountData}
@@ -176,6 +165,8 @@ function SuppliesTable(props) {
       updateSuppliesDrawer={updateSuppliesDrawer}
       handleUpdateSupplieDrawer={handleUpdateSupplieDrawer}
       />
+</Suspense>
+     
     </>
   );
 }

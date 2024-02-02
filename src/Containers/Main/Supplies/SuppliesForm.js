@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button } from "antd";
 import * as Yup from "yup";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { Formik, Form, Field } from "formik";
 import { base_url2 } from "../../../Config/Auth";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import Upload from "../../../Components/Forms/Formik/Upload";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { CurrencySymbol } from "../../../Components/Common";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { addSupplies } from "./SuppliesAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { getCurrency } from "../../Auth/AuthAction"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
 const SuppliesSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  // cost: Yup.string().required("Input needed!"),
   hsn: Yup.string().required("Input needed!"),
 });
 class Suppliesform extends Component {
@@ -34,7 +29,7 @@ class Suppliesform extends Component {
         value: item.currencyName,
       };
     })
-    console.log(this.props.groupId)
+  
     return (
       <>
         <Formik
@@ -63,7 +58,6 @@ class Suppliesform extends Component {
             this.props.addSupplies(
               {
                 ...values,
-                // baseComponentInd: this.state.baseComponent,
               },
               this.props.groupId
             );
@@ -79,19 +73,15 @@ class Suppliesform extends Component {
             ...rest
           }) => (
             <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
-                  <FlexContainer flexWrap="no-wrap">
-                    <div style={{ width: "40%" }}>
-                      <Spacer />
+              <div class="flex justify-between">
+                <div class="h-full w-[45%]">
+                  <div class="flex-nowrap">
+                    <div class="w-[40%]">
+                      <div class="mt-3">
                       <Field name="imageId" component={Upload} />
+                      </div>
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Field
                     isRequired
                     name="categoryName"
@@ -116,8 +106,8 @@ class Suppliesform extends Component {
                     isColumn
                     inlineLabel
                   />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                   <div class="flex justify-between">
+                    <div class="w-full">
                       <Field
                         name="attributeName"
                         label="Attribute"
@@ -142,16 +132,11 @@ class Suppliesform extends Component {
                         style={{ flexBasis: "80%" }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "50%",
-                  }}
-                >
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                <div class="h-full w-[50%]">
+                <div class="flex justify-between">
+                    <div class="w-[47%]">
                       <Field
                         name="name"
                         label="Name"
@@ -161,7 +146,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         name="hsn"
                         label="HSN"
@@ -171,20 +156,10 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <FlexContainer justifyContent="space-between">
-                    {/* <div style={{ width: "47%" }}>
-                      <Field
-                        name="cost"
-                        label="Cost"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div> */}
-                    <div style={{ width: "47%" }}>
+                  <div class="flex justify-between">
+                   <div class="w-[47%]">
                       <Field
                         name="reorder"
                         label="Re-order"
@@ -194,7 +169,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                   <div class="w-[47%]">
                       <Field
                         name="currencyName"
                         label="Currency"
@@ -207,9 +182,9 @@ class Suppliesform extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between">
+                   <div class="w-[47%]">
                       <Field
                         name="netWeight"
                         label="Net Weight"
@@ -219,7 +194,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                   <div class="w-[47%]">
                       <Field
                         name="netUnit"
                         label="Units"
@@ -232,9 +207,9 @@ class Suppliesform extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between">
+                   <div class="w-[47%]">
                       <Field
                         name="grossWeight"
                         label="Gross Weight"
@@ -244,7 +219,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                   <div class="w-[47%]">
                       <Field
                         name="grossUnit"
                         label="Units"
@@ -257,11 +232,9 @@ class Suppliesform extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-        
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                  </div>
+                  <div class="flex justify-between mt-4">
+                    <div class="w-full">
                       <Field
                         name="description"
                         label="Description"
@@ -271,12 +244,10 @@ class Suppliesform extends Component {
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  {/* <StyledLabel>Additional Info</StyledLabel> */}
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -284,7 +255,7 @@ class Suppliesform extends Component {
                 >
                   Create
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

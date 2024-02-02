@@ -5,7 +5,7 @@ import { BundleLoader } from "../../../../../../Components/Placeholder";
 
 class SupplierDetailsRight extends Component {
   render() {
-    console.log(this.props.supplier);
+
     return (
       <div class="w-full">
         <Suspense fallback={<BundleLoader />}>

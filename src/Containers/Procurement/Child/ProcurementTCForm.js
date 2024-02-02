@@ -104,11 +104,6 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            height: "80px",
-                                            marginTop: "0px",
-                                        }}
                                     />
                                 </div>
                                 <div class="w-[30%]">
@@ -119,11 +114,6 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            // height: "80px",
-                                            marginTop: "0px",
-                                        }}
                                     />
                                 </div>
 

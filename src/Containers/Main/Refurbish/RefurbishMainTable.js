@@ -678,7 +678,8 @@ const ProductionOrderList = (props) => {
                                         <div class=" text-base text-cardBody font-poppins text-center">
                                             <Tooltip title="Notes">
                                                 <NoteAltIcon
-                                                    style={{ cursor: "pointer" }}
+                                                className="text-base cursor-pointer"
+                                                    // style={{ cursor: "pointer" }}
                                                     onClick={() => {
                                                         handleRowData(item);
                                                         props.handleProductionNotesModal(true);
@@ -692,6 +693,7 @@ const ProductionOrderList = (props) => {
                                         <div class=" text-base text-cardBody font-poppins text-center">
                                             <Tooltip title="History">
                                                 <HistoryOutlined
+                                                className="text-base cursor-pointer"
                                                     onClick={() => {
                                                         props.handleTechnicianModal(true)
                                                         handleRowData(item);

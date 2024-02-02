@@ -11,7 +11,7 @@ import { FormattedMessage } from "react-intl";
 class SupplierOverViewView extends Component {
   render() {
     const {
-        supplier: { shipperName },
+        supplier: { name },
       toggleViewType,
       handleFeedbackModal,
       feedbackModal,
@@ -19,18 +19,18 @@ class SupplierOverViewView extends Component {
     return (
       <>
         <div class="flex justify-between">
-          <div class="flex start-0 flex-nowrap w-[70%]">
-            <div class="w-[25%]">
+          <div class="flex start-0 flex-nowrap w-full">
+            <div>
               <MultiAvatar />
             </div>
             &nbsp;
-            <div class="flex-col  w-[70%]">
+            <div class="flex-col w-wk">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
-                // fontSize={"22px"}
+                fontSize={"0.875rem"}
               >
-                {`${shipperName || ""}`}
+                {`${name || ""}`}
               </Title>
             </div>
             <Tooltip title={<FormattedMessage id="app.feedback" defaultMessage="Feedback" />}>
@@ -40,7 +40,7 @@ class SupplierOverViewView extends Component {
               >
                 <i
                   class="far fa-comment-alt"
-                  style={{ fontSize: "15px", marginTop: "4px" }}
+                  style={{ fontSize: "15px" }}
                 ></i>
               </span>
             </Tooltip>

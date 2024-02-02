@@ -10,7 +10,7 @@ class ShipperDetailsRight extends Component {
   render() {
     console.log(this.props.shipper);
     return (
-      <div style={{ width: "100%" }}>
+      <div class="w-full">
         <Suspense fallback={<BundleLoader />}>
           <ShipperDetailsTab shipper={this.props.shipper} />
         </Suspense>

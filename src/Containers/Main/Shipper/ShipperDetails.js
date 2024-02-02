@@ -1,8 +1,8 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getShipperByShipperId } from "./ShipperAction";
-import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
+import {  MainWrapper } from "../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../Components/Placeholder";
 import ShipperDetailsHeader from "./ShipperDetailsHeader";
@@ -24,18 +24,18 @@ class ShipperDetails extends Component {
               <BundleLoader />
             </MainWrapper>
           ) : (
-            <FlexContainer>
+            <div>
               <Suspense fallback={"Loading..."}>
-                <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                  <div style={{ width: "22%" }}>
+                <div class="flex flex-nowrap" flexWrap="no-wrap" style={{ width: "100%" }}>
+                  <div class="w-[22%]">
                     <ShipperDetailsLeft shipper={shipper} />
                   </div>
-                  <div style={{ width: "78%" }}>
+                  <div class="w-[78%]">
                     <ShipperDetailsRight shipper={shipper} />
                   </div>
-                </FlexContainer>
+                </div>
               </Suspense>
-            </FlexContainer>
+            </div>
           )}
         </>
       </>

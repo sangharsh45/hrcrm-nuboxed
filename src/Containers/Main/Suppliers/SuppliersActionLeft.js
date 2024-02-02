@@ -1,5 +1,5 @@
 import React from "react";
-import GridViewIcon from '@mui/icons-material/GridView';
+import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import {
@@ -21,32 +21,32 @@ class SuppliersActionLeft extends React.Component {
             setSuppliersViewType,
         } = this.props;
         return (
-            <div class="items-center">
+            <div class="flex items-center">
                 <Tooltip
-                title={<FormattedMessage id="app.suppliersList" defaultMessage="Suppliers List" />}
-                >
-                    <GridViewIcon
+                title={<FormattedMessage id="app.suppliersList" defaultMessage="Suppliers List" />}>
+                    
+                        <div class="mr-2"
                         style={{
-                            marginRight: "0.3rem",
                             color: viewType === "card" && "#1890ff",
+                        
                         }}
-                        // iconType="appstore-o"
-                        // tooltipTitle="Suppliers Library"
-                        onClick={() => setSuppliersViewType("card")}
-                    />
+                        onClick={() => setSuppliersViewType("card")}>
+                               <TocIcon className="text-base cursor-pointer" />
+                        </div >
                 </Tooltip>
-                {/* <Tooltip title="ALL Suppliers">
-                <Badge size="small">
-                    <span
+                
+                <Tooltip title="ALL Suppliers">
+                <div class="mr-2 text-base cursor-pointer"
                         style={{
-                            marginRight: "0.5rem",
+                            // cursor: "pointer",
                             color: viewType === "all" && "#1890ff",
+                            // fontSize: "17px",
                         }}
                         onClick={() => setSuppliersViewType("all")}
-                    >All
-                    </span>
-                    </Badge>
-                </Tooltip> */}
+                    > ALL
+                    </div>
+           
+                </Tooltip>
                 {/* <Tooltip title="Dashboard View">
                     <AreaChartOutlined
                         style={{
@@ -95,8 +95,6 @@ class SuppliersActionLeft extends React.Component {
           />
    
       </div>
-                &nbsp;
-                &nbsp;
 
             </div>
         );

@@ -1,7 +1,6 @@
 import React, { useState, useEffect,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styled from "styled-components";
 import { getPhoneTasklist } from "../Account/AccountAction";
 import { addTaskByPhoneId } from "./RefurbishAction"
 import { Button, Input, Switch, Select } from "antd";
@@ -100,11 +99,3 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(DistributorPhoneTaskTable);
-const EventWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EventName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
