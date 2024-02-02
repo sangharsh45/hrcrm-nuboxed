@@ -8,8 +8,6 @@ import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getCountries} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../InvestorAction"
-import { HeaderLabel} from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {AddInvestor} from "../InvestorAction";
@@ -236,7 +234,7 @@ function InvesterForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                 
                   {/* <Field
                     name="email"
                     type="text"
@@ -249,7 +247,7 @@ function InvesterForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />                   */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-3">
                     <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
@@ -286,8 +284,8 @@ function InvesterForm(props) {
                     </div>
                   </div>
 
-                  <Spacer/>
-                  <div class=" flex justify-between">
+                  
+                  <div class=" flex justify-between mt-3">
                   <div class=" w-w47.5">
                   <Field                     
                             name="sectorId"
@@ -351,7 +349,7 @@ function InvesterForm(props) {
                     </div>
                     </div> 
                  
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -362,6 +360,7 @@ function InvesterForm(props) {
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
@@ -438,8 +437,8 @@ function InvesterForm(props) {
       </Listbox>
                   </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between max-sm:flex-col">
+                    
+                    <div class=" flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
@@ -474,13 +473,14 @@ function InvesterForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-3 w-full" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                      <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" >Corporate Address</div>
                   </div>
                     </div>
-                  <Spacer />
+                 
+                  <div class="mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -491,11 +491,12 @@ function InvesterForm(props) {
                       />
                     )}
                   />
+              </div>
                 </div>
               </div>
-              <Spacer />
+           
              
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
