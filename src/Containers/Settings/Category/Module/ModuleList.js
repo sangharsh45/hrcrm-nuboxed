@@ -1,13 +1,17 @@
 import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
-import styled from "styled-components";
 import {addingModules,getModules} from "../Module/ModuleAction"
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
 import {  Switch } from "antd";
 import moment from "moment";
+import FWLogo from "../../../../Assets/Images/crm.jpg";
+import FWLogo1 from "../../../../Assets/Images/Im.jpg";
+import FWLogo2 from "../../../../Assets/Images/Hr.jpg";
+import FWLogo3 from "../../../../Assets/Images/Recruitpro.jpg";
+import FWLogo4 from "../../../../Assets/Images/elearning.jpg";
 const SingleModuleList = lazy(() =>
   import("./SingleModuleList")
 );
@@ -291,7 +295,7 @@ const handleCrmClick = (checked) => {
           >
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              <MainWrapper style={{ height: "27rem", marginTop: "0.625em" }}>
               <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
@@ -299,9 +303,16 @@ const handleCrmClick = (checked) => {
               <div class="flex" >
                 <div class="w-full flex-row">
               <div class=" flex " >
-             
-                    <div class=" text-sm ">CRM</div>
-                    <div   class=" w-[7%] ml-2">
+             <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm font-semibold">CRM</div>
+                    <div   class=" ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleCrmClick}
@@ -319,11 +330,19 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-                
+                    </div>
+                    </div>
                   
-
-                    <div class=" text-sm  ml-2">IM</div>
-                    <div   class=" w-[7%] ml-2">
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+                    <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+             <div class="flex justify-center mt-1">
+                    <div class=" text-sm font-semibold  ml-2">IM</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleImClick}
@@ -341,7 +360,8 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </div>
+                    </div>
                     {/* <div>Account</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
@@ -377,8 +397,16 @@ const handleCrmClick = (checked) => {
                       </Popconfirm>
                     </div>
 */}
-                      <div class=" text-sm  ml-2">HR</div>
-                    <div   class=" w-[7%] ml-2">
+ <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo2}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                      <div class=" text-sm  ml-2 font-semibold">HR</div>
+                    <div   class="  ml-2">
                    
                         <Switch
                          style={{ width: "5em" }}
@@ -391,14 +419,22 @@ const handleCrmClick = (checked) => {
                         />
                     
                     </div> 
-
+                    </div>
+                    </div>
 
                    
 
-                  
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo3}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
            
-                    <div class=" text-sm  ml-2">Rcruitpro</div>
-                    <div   class=" w-[7%] ml-2">
+                    <div class=" text-sm  ml-2 font-semibold">Rcruitpro</div>
+                    <div   class=" ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleRecruitProClick}
@@ -415,8 +451,18 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-                    <div class=" text-sm  ml-2">Elearning</div>
-                    <div   class=" w-[7%] ml-2">
+                    </div>
+                    </div>
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo4}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm  ml-2 font-semibold">Elearning</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleElearningClick}
@@ -433,7 +479,8 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </div> 
+                    </div>
                    
 
                    
