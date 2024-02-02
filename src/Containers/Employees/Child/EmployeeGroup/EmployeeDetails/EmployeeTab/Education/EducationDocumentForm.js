@@ -1,25 +1,17 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, Tooltip, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-// import dayjs from "dayjs";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 import { addEducationDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
-import dayjs from "dayjs";
 import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
 function onChange(date) {}
 
@@ -90,18 +82,9 @@ componentDidMount() {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                 width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                    }}
+                <div class=" w-[45%]"
                 >
                    <FastField
                     name="documentTypeId"
@@ -127,7 +110,7 @@ componentDidMount() {
                     className="field"
                     isColumn
                      />
-                  <Spacer />
+              <div class=" mt-3">
                   <FastField
                     name="educationTypeId"
                     // type="text"
@@ -153,8 +136,8 @@ componentDidMount() {
                     className="field"
                     isColumn
                       />
-                  <Spacer />
-                  <div>
+                      </div>
+                      <div class=" mt-3">
                     <Field
                       isRequired
                       name="courseName"
@@ -172,10 +155,9 @@ componentDidMount() {
                       inlineLabel
                       />
                   </div>
-                  <Spacer />
-                  <div>
-                    <StyledLabel>Course Type</StyledLabel>
-                    <Spacer />
+                  <div class=" mt-3">
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Course Type</div>
+                    <div class=" mt-3">
                     <ButtonGroup>
                       <StatusIcon
                         color="blue"
@@ -206,9 +188,9 @@ componentDidMount() {
                         //  }
                       />
                     </ButtonGroup>
+                    </div>
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="specialization"
@@ -226,8 +208,7 @@ componentDidMount() {
                       inlineLabel
                       />
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="university"
@@ -245,10 +226,10 @@ componentDidMount() {
                       inlineLabel
                       />
                   </div>
-                  <Spacer />
+                
 
-                  <div style={{ display: "flex" }}>
-                    <div style={{ width: "50%" }}>
+                  <div class=" flex mt-3" >
+                    <div class=" w-[50%]" >
                       <Field
                         name="yearOfPassing"
                         //label="Year of Passing"
@@ -265,8 +246,8 @@ componentDidMount() {
                         inlineLabel
                         />
                     </div>
-                    &nbsp; &nbsp;
-                    <div style={{ width: "49%" }}>
+                 
+                    <div class=" w-[49%] ml-4" >
                       <Field
                         isRequired
                         //label="Marks Secured"
@@ -283,8 +264,7 @@ componentDidMount() {
                         component={InputComponent}
                       />
                     </div>
-                    &nbsp;&nbsp;
-                    <div style={{ width: "60%"}}>
+                    <div class=" w-[60%] ml-4" >
                       <Field
                         name="marksType"
                         label={
@@ -303,13 +283,10 @@ componentDidMount() {
                     </div>
                   </div>
 
-                  <Spacer />
+              
                 </div>
 
-                <div
-                  style={{
-                    width: "45%",
-                    }}
+                <div class=" w-[45%]"
                 >
                   <Field
                     name="documentId"
@@ -322,7 +299,7 @@ componentDidMount() {
                     isRequired
                     component={DragableUpload}
                   />
-                  <Spacer />
+                <div class=" mt-3" >
 
                   <Field
                     name="documentTitle"
@@ -337,7 +314,8 @@ componentDidMount() {
                     isColumn
                     component={InputComponent}
                     />
-                  <Spacer />
+                   </div>
+                   <div class=" mt-3" >
                   <Field
                     name="documentDescription"
                     //label="Description of document"
@@ -352,11 +330,12 @@ componentDidMount() {
                     width={"100%"}
                     component={TextareaComponent}
                       />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                        </div>
+                 
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -364,7 +343,7 @@ componentDidMount() {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

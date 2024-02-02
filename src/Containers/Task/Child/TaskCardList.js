@@ -179,6 +179,7 @@ const TaskCardList = (props) => {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
+  // <div class="rounded-full h-10 w-16 bg-red-500"></div>
                       <div
                         style={{
                           borderRadius: "50%",

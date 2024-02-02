@@ -24,12 +24,7 @@ class UpdateEducationModal extends Component {
           />}
           width="30%"
           visible={updateEducationModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
           onClose={() => handleUpdateEducationModal(false)}
-          footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <UpdateEducationForm />

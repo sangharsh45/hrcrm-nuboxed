@@ -1,24 +1,12 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button,Tooltip } from "antd";
+import { Formik, Form, Field,  } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-// import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
-import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-// import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
-import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-import ButtonGroup from "antd/lib/button/button-group";
-// import dayjs from "dayjs";
 import { updateEmployeeSalaryDetails } from "../../../../../../Profile/ProfileAction";
-// import { addSalaryDetails } from "../../../../ProfileAction";
 import dayjs from "dayjs";
 function onChange(date) {}
 
@@ -65,11 +53,7 @@ class UpdateSalaryForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                  // border: "0.125em solid green"
-                }}
+              <div class=" w-full"
               >
                 <div>
                   <Field
@@ -95,9 +79,9 @@ class UpdateSalaryForm extends Component {
                   />
                 </div>
 
-                <Spacer />
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+             
+                <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
                     <Field
                       name="startingDate"
                       //label="From"
@@ -121,15 +105,10 @@ class UpdateSalaryForm extends Component {
                       }}
                     />
                   </div>
-                </FlexContainer>
-                <Spacer />
+                </div>
               </div>
 
-              <div
-                style={{
-                  width: "45%",
-                  // border: "0.125em solid green"
-                }}
+              <div class=" w-[45%]"
               >
                 <Field
                   name="netSalary"
@@ -146,11 +125,11 @@ class UpdateSalaryForm extends Component {
                   component={InputComponent}
                   style={{ height: "2.0625em", marginTop: "0.25em" }}
                 />
-                <Spacer />
+               
               </div>
 
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -158,7 +137,7 @@ class UpdateSalaryForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

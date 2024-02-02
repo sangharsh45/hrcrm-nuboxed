@@ -1,4 +1,4 @@
-import React from "react";
+import React,{lazy} from "react";
 import { connect } from "react-redux";
 import {
   getCertification,
@@ -13,9 +13,9 @@ import {
   getCertificationByUserId,
   deleteCertificationByUserId,
 } from "../../../../EmployeeAction";
-
 import { Select } from "antd";
-import EmployeeCertificationSelect from "./EmployeeCertificationSelect";
+const EmployeeCertificationSelect = lazy(() => import("./EmployeeCertificationSelect"));
+
 // import CertificationSelect from "./CertificationSelect";
 
 const { Option } = Select;

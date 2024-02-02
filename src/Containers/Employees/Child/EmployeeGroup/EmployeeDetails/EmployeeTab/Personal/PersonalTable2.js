@@ -1,28 +1,24 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import {
-  StyledTable,
   StyledModal,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
-import { Button, Icon,Tooltip } from "antd";
+import { Button,Tooltip } from "antd";
 import {
   handleUpdatePersonalModal,
   setEditPersonal,
 } from "../../../../../../Profile/ProfileAction";
-import UpdatePersonalModal from "../Personal/UpdatePersonalModal";
 import {
   getPersonalDetails,
   setCurrentPersonal,
 } from "../../../../../../Profile/ProfileAction";
-import EditIcon from '@mui/icons-material/Edit';
 import { Leaflet } from "../../../../../../../Components/Utils";
 import { Field, Form, Formik } from "formik";
 import MapPopupMarker from "../../../../../../Profile/Child/ProfileCards/MapPopupMarker";
 import { AddressComponent } from "../../../../../../../Components/Common";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import FormikPlacesAutoComplete from "../../../../../../../Components/Forms/Formik/FormikPlacesAutoComplete";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { deleteEmergencyTable } from "../../../../../../Profile/ProfileAction";
@@ -30,6 +26,8 @@ import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+const UpdatePersonalModal = lazy(() => import("../Personal/UpdatePersonalModal"));
+
 class PersonalTable2 extends Component {
   constructor(props) {
     super(props);
@@ -92,128 +90,7 @@ class PersonalTable2 extends Component {
           }
         }
       });
-    const columns = [
-      {
-        //title: "Name",
-        title: <FormattedMessage
-          id="app.name"
-          defaultMessage="Name"
-        />,
-        render: (name, item, i) => {
-          return (
-            <span>{` ${item.contactSalutation} 
-                ${item.contactFirstName}
-                ${item.contactMiddleName}
-                ${item.contactLastName}`}</span>
-          );
-        },
-      },
-
-      {
-        //title: "Mobile No",
-        title: <FormattedMessage
-          id="app.mobileNo"
-          defaultMessage="Mobile No"
-        />,
-        dataIndex: "mobileNo",
-      },
-      {
-        //title: "Phone No",
-        title: <FormattedMessage
-          id="app.phoneNo"
-          defaultMessage="Phone No"
-        />,
-        dataIndex: "phoneNo",
-      },
-
-      // {
-      //   title: "Address",
-      //   dataIndex: "contactAddress",
-      //   width: "35%",
-      //   render: (name, item, i) => {
-      //     //debugger
-      //     return item.address.map((item) => {
-      //       return (
-      //         <span>
-      //           {item.country}-{item.state}
-      //         </span>
-      //       );
-      //     });
-      //   },
-      // },
-
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-         const dataLoc=` Address : ${item.address &&
-          item.address.length &&
-          item.address[0].address1} 
-         Street : ${item.address &&
-           item.address.length &&
-           item.address[0].street}   
-        State : ${item.address && item.address.length && item.address[0].state}
-       Country : ${(item.address &&
-         item.address.length &&
-         item.address[0].country) ||
-         ""} 
-         PostalCode : ${item.address &&
-           item.address.length &&
-           item.address[0].postalCode} `;
-          return (
-            <Tooltip overlayStyle={{ maxWidth: "300px" }}
-            title={dataLoc}>
-
-            <LocationOnIcon  style={{
-              cursor: "pointer",
-              fontSize: "0.8rem"}}
-              
-              iconType="environment"
-              // handleIconClick={() => {
-              //   this.props.setCurrentPersonal(item);
-              //   this.handleMapModalVisible();
-              // }}
-              size="1em"
-            />
-             </Tooltip>
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          //debugger
-          return (
-            <BorderColorIcon 
-              style={{ cursor: "pointer",fontSize:"0.8rem", }}
-              onClick={() => {
-                //debugger
-                setEditPersonal(item);
-                handleUpdatePersonalModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-              onConfirm={() => deleteEmergencyTable(item.id)}
-            >
-                         <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"0.8rem", color: "red" }} />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+ 
 
     if (fetchingPersonalDetailsError) {
       return <APIFailed />;
@@ -222,8 +99,154 @@ class PersonalTable2 extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[6.5rem]">
+        <FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                /></div>
+ 
+        <div className="md:w-[10.1rem]">  <FormattedMessage id="app.mobileNo" defaultMessage="Mobile No" /></div>
+                 <div className="md:w-[10.1rem]">
+                 <FormattedMessage
+          id="app.phoneNo"
+          defaultMessage="Phone No"
+        /></div>
+              
+        
+        <div className="w-[10.2rem]"></div>
+
+      </div>
+   
+        
+      {personal.map((item) => { 
+          const dataLoc=` Address : ${item.address &&
+            item.address.length &&
+            item.address[0].address1} 
+           Street : ${item.address &&
+             item.address.length &&
+             item.address[0].street}   
+          State : ${item.address && item.address.length && item.address[0].state}
+         Country : ${(item.address &&
+           item.address.length &&
+           item.address[0].country) ||
+           ""} 
+           PostalCode : ${item.address &&
+             item.address.length &&
+             item.address[0].postalCode} `;
+        
+        
+                    return (
+                        <div>
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                                >
+                                     
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                
+                                            <span>{` ${item.contactSalutation} 
+              ${item.contactFirstName}
+              ${item.contactMiddleName}
+              ${item.contactLastName}`}</span>
+     
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="flex">
+
+                             
+                              
+                                <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                  <div class="text-sm text-cardBody font-poppins">
+                                  {item.mobileNo}
+                                  </div>
+                              </div>
+
+                              <div className=" flex font-medium flex-col md:w-[10.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                {item.phoneNo}
+                                </div>
+                            </div>
+                         
+                              </div>
+                              <div className=" flex  " style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+                   
+                              <>
+                              <Tooltip overlayStyle={{ maxWidth: "300px" }}
+          title={dataLoc}>
+
+          <LocationOnIcon  style={{
+            cursor: "pointer",
+            fontSize: "0.8rem"}}
+            
+            iconType="environment"
+            // handleIconClick={() => {
+            //   this.props.setCurrentPersonal(item);
+            //   this.handleMapModalVisible();
+            // }}
+            size="1em"
+          />
+           </Tooltip>
+          </>
+                 
+                  </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <BorderColorIcon 
+            style={{ cursor: "pointer", fontSize: "1rem" }}
+            onClick={() => {
+              //debugger
+              setEditPersonal(item);
+              handleUpdatePersonalModal(true);
+            }}
+          />
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteEmergencyTable(item.id)}
+          >
+            <DeleteIcon
+              type="delete"
+              style={{ cursor: "pointer", fontSize: "1rem", color: "red" }}
+            />
+          </StyledPopconfirm>
+
+                                    </div>
+                                </div>
+
+                              
+                             
+                            </div>
+                        </div>
+
+
+                    )
+                })}
+                    
+      </div>
         {/* {emailCredential && ( */}
-        <StyledTable
+        {/* <StyledTable
           // rowKey="opportunityId"
           columns={columns}
           dataSource={personal}
@@ -231,7 +254,7 @@ class PersonalTable2 extends Component {
           onChange={console.log("task onChangeHere...")}
           scroll={{ y: tableHeight }}
           pagination={false}
-        />
+        /> */}
 
         <UpdatePersonalModal
           updatePersonalModal={updatePersonalModal}
@@ -248,7 +271,7 @@ class PersonalTable2 extends Component {
           footer={null}
         >
           <>
-            <FlexContainer>
+            <div class=" flex">
               {!address ? (
                 <>
                   {this.state.addAddressVisible && (
@@ -260,10 +283,7 @@ class PersonalTable2 extends Component {
                   )}
                 </>
               ) : null}
-              <FlexContainer
-                justifyContent="space-between"
-                alignItems="flex-start"
-                flexWrap="nowrap"
+              <div class=" flex justify-between items-start flex-no-wrap"
               >
                 <div>
                   <div className="product3" style={{ width: "180" }}>
@@ -280,7 +300,7 @@ class PersonalTable2 extends Component {
                   </div>
                 </div>
                 <div class="vl"></div>
-                <div style={{ alignSelf: "flex-end" }}>
+                <div class=" flex self-end" >
                   {markers && (
                     <Leaflet
                       height={400}
@@ -300,8 +320,8 @@ class PersonalTable2 extends Component {
                     />
                   )}
                 </div>
-              </FlexContainer>
-            </FlexContainer>
+              </div>
+            </div>
           </>
         </StyledModal>
       </>

@@ -1,16 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import { updateTrainingDetails } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
@@ -69,13 +64,10 @@ class UpdateTrainingForm extends Component {
                                         justifyContent: "space-between",
                                     }}
                                 > */}
-                <div
-                  style={{
-                    width: "100%",
-                     }}
+                <div class=" w-full"
                 >
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+               <div class=" flex justify-between" >
+                      <div class=" w-full" >
                       <FastField
                         isRequired
                         name="courseName"
@@ -91,11 +83,10 @@ class UpdateTrainingForm extends Component {
                         inlineLabel
                          />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "60%" }}>
+                  <div class=" flex justify-between mt-3" >
+                      <div class=" w-[60%]" >
                       {/* <StyledLabel>Organization/Institution</StyledLabel> */}
                       <FastField
                         type="Organization"
@@ -111,7 +102,7 @@ class UpdateTrainingForm extends Component {
                         inlineLabel
                        />
                     </div>
-                    <div style={{ width: "30%" }}>
+                    <div class=" w-[30%]" >
                       {/* <StyledLabel>Grade</StyledLabel> */}
                       <FastField
                         name="grade"
@@ -126,10 +117,9 @@ class UpdateTrainingForm extends Component {
                         inlineLabel
                        />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class=" flex justify-between mt-3" >
+                      <div class=" w-[47%]" >
                       <Field
                         name="startDate"
                         //label="Start Date"
@@ -146,7 +136,8 @@ class UpdateTrainingForm extends Component {
                          />
                     </div>
 
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]"
+                  >
                       <Field
                         name="endDate"
                         //label="End Date "
@@ -175,8 +166,8 @@ class UpdateTrainingForm extends Component {
                         inlineLabel
                         />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+               
                 </div>
 
                 {/* <div
@@ -235,8 +226,7 @@ class UpdateTrainingForm extends Component {
 
                  {/* </div> */}
                 {/* </div> */}
-                <Spacer style={{ marginTop: "1.25em" }} />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end mt-3" >
                   <Button
                     htmlType="submit"
                     type="primary"
@@ -247,7 +237,7 @@ class UpdateTrainingForm extends Component {
                       defaultMessage="Update"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

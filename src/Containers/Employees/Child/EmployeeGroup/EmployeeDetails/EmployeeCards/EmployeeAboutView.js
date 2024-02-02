@@ -124,7 +124,7 @@ const ProfileItemRow = ({ label, value }) => {
     <div class=" flex items-center flex-no-wrap m-2"
     >
      <div class=" text-[#444] font-semibold" >{label}</div>
-     <div className="overflow-hidden truncate ml-2">{value}</div>
+     <div className="overflow-hidden truncate ml-8">{value}</div>
     </div>
   );
 };

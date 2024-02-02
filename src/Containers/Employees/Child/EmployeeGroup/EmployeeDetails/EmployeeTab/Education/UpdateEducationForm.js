@@ -1,25 +1,14 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { lazy, Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, Tooltip, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-// import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-// import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-// import dayjs from "dayjs";
 import { updateEducationDetails } from "../../../../../../Profile/ProfileAction";
-// import { addEducationDetails } from "../../../../ProfileAction";
-import dayjs from "dayjs";
 import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 function onChange(date) {}
@@ -95,10 +84,7 @@ class UpdateEducationForm extends Component {
                     justifyContent: "space-between",
                   }}
                 > */}
-              <div
-                style={{
-                  width: "100%",
-                   }}
+              <div class=" w-full"
               >
                 <FastField
                   name="educationTypeId"
@@ -125,8 +111,8 @@ class UpdateEducationForm extends Component {
                   className="field"
                   isColumn
                   />
-                <Spacer />
-                <div>
+     
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="courseName"
@@ -144,10 +130,9 @@ class UpdateEducationForm extends Component {
                     inlineLabel
                     />
                 </div>
-                <Spacer />
-                <div>
-                  <StyledLabel>Course Type</StyledLabel>
-                  <Spacer />
+                <div class=" mt-3">
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Course Type</div>
+                <div class=" mt-3">
                   <ButtonGroup>
                     <StatusIcon
                       color="blue"
@@ -178,9 +163,9 @@ class UpdateEducationForm extends Component {
                       //  }
                     />
                   </ButtonGroup>
+                  </div>
                 </div>
-                <Spacer />
-                <div>
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="specialization"
@@ -198,8 +183,7 @@ class UpdateEducationForm extends Component {
                     inlineLabel
                       />
                 </div>
-                <Spacer />
-                <div>
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="university"
@@ -217,9 +201,9 @@ class UpdateEducationForm extends Component {
                     inlineLabel
                     />
                 </div>
-                <Spacer />
-                <div style={{ display: "flex" }}>
-                  <div style={{ width: "50%" }}>
+                
+                <div class=" flex mt-3" >
+                  <div class=" w-[50%]" >
                     <Field
                       name="yearOfPassing"
                       // label="Year of Passing"
@@ -236,8 +220,8 @@ class UpdateEducationForm extends Component {
                       inlineLabel
                       />
                   </div>
-                  &nbsp; &nbsp;
-                  <div style={{ width: "49%" }}>
+               
+                  <div class=" w-[49%] ml-4" >
                     <Field
                       isRequired
                       //label="Marks Secured"
@@ -254,8 +238,7 @@ class UpdateEducationForm extends Component {
                       component={InputComponent}
                       />
                   </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "60%" }}>
+                  <div class=" w-[60%] ml-4" >
                     <Field
                       name="marksType"
                       label={
@@ -274,7 +257,7 @@ class UpdateEducationForm extends Component {
                   </div>
                 </div>
 
-                <Spacer />
+             
               </div>
 
               {/* <div
@@ -311,8 +294,8 @@ class UpdateEducationForm extends Component {
                   <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div> */}
               {/* </div> */}
-              <Spacer style={{ marginTop: "1.25em" }} />
-              <FlexContainer justifyContent="flex-end">
+           
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -320,7 +303,7 @@ class UpdateEducationForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

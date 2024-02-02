@@ -31,7 +31,7 @@ class EmployeeDetails extends Component {
           <div class=" flex ">
             <Suspense fallback={""}>
               <div class=" flex flex-no-wrap w-full" >
-                <div class=" w-[25%]" >
+                <div class=" w-[25%] overflow-scroll h-[98vh]" >
                   <EmployeeDetailLeft  singleEmployee= {singleEmployee}/>
                 </div>
                 <div class=" w-[75%]" >

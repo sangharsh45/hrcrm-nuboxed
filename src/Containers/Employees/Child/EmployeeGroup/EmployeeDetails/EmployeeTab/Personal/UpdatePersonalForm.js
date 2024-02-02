@@ -1,24 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button,} from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-// import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
-// import Upload from "../../../../../../Components/Forms/Formik/Upload";
-import AddressFieldArray from "../../../../../../../Components/Forms/Formik/AddressFieldArray";
-// import { DatePicker } from "antd";
-// import { profileReducer } from "../../../../ProfileReducer";
-// import { addPersonalDetails } from "../../../../ProfileAction";
 import { updatePersonalDetails } from "../../../../../../Profile/ProfileAction";
 
 function onChange(date, dateString) {}
@@ -95,18 +84,9 @@ class UpdatePersonalForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "100%",
-                     }}
+                <div class=" w-full"
                 >
                   {/* <FlexContainer flexWrap="no-wrap"> */}
 
@@ -143,12 +123,10 @@ class UpdatePersonalForm extends Component {
                                                 <DatePicker onChange={onChange} />
                                             </div>
                                         </FlexContainer> */}
-                  <Spacer />
+                 
 
-                  <Spacer />
-
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "25%" }}>
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[25%]" >
                       <FastField
                         name="contactSalutation"
                         type="text"
@@ -166,7 +144,7 @@ class UpdatePersonalForm extends Component {
                         isColumn
                        />
                     </div>
-                    <div style={{ width: "67%" }}>
+                    <div class=" w-[67%]" >
                       <FastField
                         isRequired
                         name="contactFirstName"
@@ -184,12 +162,11 @@ class UpdatePersonalForm extends Component {
                         inlineLabel
                         />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <Spacer />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "55%" }}>
+                 
+                  <div class=" flex justify-between mt-3" >
+                  <div class=" w-[55%]" >
                       <FastField
                         name="contactLastName"
                         // label="Last Name"
@@ -206,7 +183,7 @@ class UpdatePersonalForm extends Component {
                         inlineLabel
                        />
                     </div>
-                    <div style={{ width: "38%" }}>
+                    <div class=" w-[38%]" >
                       <FastField
                         name="contactMiddleName"
                         // label="Middle "
@@ -223,11 +200,11 @@ class UpdatePersonalForm extends Component {
                         inlineLabel
                         />
                     </div>
-                  </FlexContainer>
+                  </div>
                   {/* </FlexContainer> */}
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[47%]">
                       <Field
                         name="countryDialCode"
                         // label="Mobile #"
@@ -244,7 +221,7 @@ class UpdatePersonalForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                       <Field
                         type="text"
                         name="mobileNo"
@@ -261,11 +238,11 @@ class UpdatePersonalForm extends Component {
                         isColumn
                         />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+        
 
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[47%]">
                       <Field
                         name="countryDialCode1"
                         //  label="Phone #"
@@ -282,7 +259,7 @@ class UpdatePersonalForm extends Component {
                         width={"100%"}
                         />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                       <Field
                         type="text"
                         name="phoneNo"
@@ -299,13 +276,11 @@ class UpdatePersonalForm extends Component {
                         isColumn
                         />
                     </div>
-                  </FlexContainer>
+                  </div>
                   {/* <FlexContainer justifyContent="space-between"> */}
 
                   {/* </FlexContainer> */}
-                  <Spacer />
-
-                  <Spacer />
+ 
                 </div>
 
                 {/* <div
@@ -327,10 +302,10 @@ class UpdatePersonalForm extends Component {
 
                   <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div> */}
-                <Spacer />
+  
               </div>
-              <Spacer style={{ marginTop: "1.25em" }} />
-              <FlexContainer justifyContent="flex-end">
+             
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -338,7 +313,7 @@ class UpdatePersonalForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>
