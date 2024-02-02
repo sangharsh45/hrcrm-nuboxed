@@ -136,7 +136,7 @@ function LeaveCardList (props) {
                     </div>
  
      <div className=" flex font-medium flex-col md:w-48 max-sm:justify-between w-full max-sm:flex-row ">
-                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins">Status</h4> */}
 
                                     <div class=" text-base text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -207,7 +207,9 @@ function LeaveCardList (props) {
             <Tooltip title="Delete">
              <DeleteOutlined
          type="delete"
-         style={{ cursor: "pointer" }}
+         style={{  cursor: "pointer",
+         color: "red",
+         fontSize: "1rem", }}
             // onClick={() => {
             //   // props.getProviderById(item.serviceId);
             //   props.handleDrawerContactlistModal(true);

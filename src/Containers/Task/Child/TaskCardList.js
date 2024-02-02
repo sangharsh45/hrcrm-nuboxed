@@ -11,10 +11,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { Tooltip, Button, Avatar,FloatButton } from "antd";
-import moment from "moment";
+import { Tooltip, Button,  } from "antd";
+import dayjs from "dayjs";
 import { DeleteOutlined } from "@ant-design/icons";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledPopconfirm, } from "../../../Components/UI/Antd";
@@ -123,7 +122,7 @@ const TaskCardList = (props) => {
     <>
     
           <div className=' flex justify-end sticky top-28 z-auto'>
-          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.5rem]"><FormattedMessage
                           id="app.type"
@@ -164,9 +163,9 @@ const TaskCardList = (props) => {
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
       >
       {taskListRangeByUserId.map((item) => { 
-        const currentDate = moment();
-        const completionDate = moment(item.completionDate);
-        const endDate = moment(item.endDate);
+        const currentDate = dayjs();
+        const completionDate = dayjs(item.completionDate);
+        const endDate = dayjs(item.endDate);
         const difference = currentDate.diff(endDate, 'days');
         const incompleteDeviationDate = endDate.diff(currentDate, 'days');
         const completeDeviation = endDate.diff(completionDate, 'days');
@@ -252,7 +251,7 @@ const TaskCardList = (props) => {
                        
                        {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">End</div> */}
                        <div class="text-xs text-cardBody font-poppins"> 
-                        {`${moment(item.endDate).format("ll")}`}</div>
+                        {`${dayjs(item.endDate).format("YYYY/MM/DD")}`}</div>
                    </div>
                                 <div class="flex flex-col w-20">
                                   {/* <StyledLabel>today-enddate</StyledLabel> */}
@@ -386,7 +385,7 @@ const TaskCardList = (props) => {
                                     <div class="text-sm text-cardBody font-poppins">Start</div>
 
                                     <div class="text-sm text-cardBody font-poppins">
-                                     {`${moment(item.startDate).format("ll")}`}
+                                     {`${dayjs(item.startDate).format("YYYY/MM/DD")}`}
                                     </div>
                                 </div> */}
                        
@@ -553,7 +552,7 @@ const TaskCardList = (props) => {
                     )
                 })}
                  </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
 </div>
 <UpdateTaskModal
           updateTaskModal={updateTaskModal}

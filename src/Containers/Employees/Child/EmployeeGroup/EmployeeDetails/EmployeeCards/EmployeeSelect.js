@@ -1,4 +1,4 @@
-import React, { Component, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import { bindActionCreators } from "redux";
@@ -6,7 +6,6 @@ import {
     addTopicByUserId,
 } from "../../../../../Employees/EmployeeAction";
 import { getLibrarys } from "../../../../../Settings/Library/LibraryAction";
-import { StyledSelect } from "../../../../../../Components/UI/Antd";
 const { Option } = Select;
 function EmployeeSelect(props) {
   const [selectType, setSelectType] = useState("");

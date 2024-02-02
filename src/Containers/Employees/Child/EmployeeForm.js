@@ -8,7 +8,6 @@ import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
-import { StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -453,11 +452,11 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                   <div class=" flex justify-between max-sm:flex-col" >
                   <div class=" w-w48 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofjoining"
                       defaultMessage=" Date Of Joining"
                     />
-                    </StyledLabel> */}
+                    </div> */}
                     <Field
                       isRequired
                       name="dateOfJoining"
@@ -475,11 +474,11 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                     />
                   </div>
                   <div class=" w-w47.5 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofbirth"
                       defaultMessage=" Date Of Birth"
                     />
-                    </StyledLabel> */}
+                    </div> */}
                     <Field
                       isRequired
                       name="dob"
@@ -543,7 +542,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
           
                 <div class=" w-[47.5%] max-sm:w-wk ">
                 <div class=" w-full">
-                    <StyledLabel>Time Zone</StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Time Zone</div>
                     <Field
                       name="timeZone"
                       type="text"
@@ -886,12 +885,12 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                      /> */}
                          <div class=" flex " >
                   <div>
-                    <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.jobtype"
                         defaultMessage="Job Type"
                       />
-                    </StyledLabel>
+                    </div>
                     <Switch
                           checked={active}
                           onChange={handleJobType}
@@ -917,14 +916,14 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       />
                     </ButtonGroup> */}
                   </div>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-                  <div>
-                    <StyledLabel>
+        
+                  <div class=" ml-4">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.category"
                         defaultMessage="Category"
                       />
-                    </StyledLabel>
+                    </div>
                     <Switch
                           checked={typeInd}
                           onChange={handleType}
@@ -936,37 +935,40 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                 
                   <div class=" mt-3">
-                    <StyledLabel><FormattedMessage
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.employeetype"
                       defaultMessage="Employee Type"
                     />
-                    </StyledLabel>
+                    </div>
                  
                     <Radio.Group
                       name="radiogroup"
                       defaultValue={workType}
                     >
                       <Radio
+                        style={{marginLeft:"0.5rem"}}
                         value={"Employee"}
                         onChange={() => radioClick("employee")}
                       >
                         Employee
                       </Radio>
-                      &nbsp;&nbsp;
+                  
                       <Radio
+                      style={{marginLeft:"0.5rem"}}
                         value={"contractor"}
                         onChange={() => radioClick("contractor")}
                       >
                         Contractor
                       </Radio>
-                      &nbsp;&nbsp;
+                    
                       <Radio
+                        style={{marginLeft:"0.5rem"}}
                         value={"intern"}
                         onChange={() => radioClick("intern")}
                       >
                         Intern
                       </Radio>
-                      &nbsp;&nbsp;
+                 
                     </Radio.Group>
                   </div>
                 </div>

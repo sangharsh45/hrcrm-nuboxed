@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import EmployeeOverviewCard from "./EmployeeCards/EmployeeOverviewCard";
-import EmployeeTopicOfInterest from "./EmployeeCards/EmployeeTopicOfInterest";
-import EmployeeStatusCard from "./EmployeeCards/EmployeeStatusCard";
-import EmployeeAboutCard from "./EmployeeCards/EmployeeAboutCard";
-import EmployeePersonalCard from "./EmployeeCards/EmployeePersonalCard";
-import EmployeeDetailMap from "./EmployeeCards/EmployeeDetailMap";
-import EmployeeCertificationLibrary from "./EmployeeCards/EmployeeCertificationLibrary";
+const EmployeeOverviewCard = lazy(() => import("./EmployeeCards/EmployeeOverviewCard"));
+const EmployeeTopicOfInterest = lazy(() => import("./EmployeeCards/EmployeeTopicOfInterest"));
+const EmployeeStatusCard = lazy(() => import("./EmployeeCards/EmployeeStatusCard"));
+const EmployeeAboutCard = lazy(() => import("./EmployeeCards/EmployeeAboutCard"));
+const EmployeePersonalCard = lazy(() => import("./EmployeeCards/EmployeePersonalCard"));
+const EmployeeCertificationLibrary = lazy(() => import("./EmployeeCards/EmployeeCertificationLibrary"));
 
 class EmployeeDetailLeft extends Component {
   render() {
     const { singleEmployee } = this.props;
     
     return (
-      <FlexContainer flexDirection="column" style={{ display: "block" }}>
+      <div class=" flex flex-col display-block" >
         <EmployeeOverviewCard singleEmployee={singleEmployee} />
         <EmployeeTopicOfInterest singleEmployee={singleEmployee} />
         <EmployeeCertificationLibrary 
@@ -25,7 +23,7 @@ class EmployeeDetailLeft extends Component {
         <EmployeeAboutCard singleEmployee={singleEmployee} />
         {/* <EmployeeDetailMap singleEmployee={singleEmployee} /> */}
         <EmployeePersonalCard singleEmployee={singleEmployee} />
-      </FlexContainer>
+      </div>
     );
   }
 }

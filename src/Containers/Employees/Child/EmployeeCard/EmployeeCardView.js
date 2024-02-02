@@ -150,8 +150,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
           <div class=" flex flex-row justify-evenly mt-[0.3rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
        
-          <span
-              style={{ cursor: "pointer" }}
+          <span class=" cursor-pointer"
             
             >
               
@@ -161,8 +160,8 @@ function handleSetCurrentEmployeeId(employeeId,) {
    
            </div>
           <div class=" font-normal text-xs text-cardBody font-poppins ">
-          <span
-              style={{ cursor: "pointer" }}
+          <span class=" cursor-pointer"
+         
               onClick={() => {
                 // props.getCandidateById(item.candidateId);
                  props.getEmployeeDocument(item.employeeId);
@@ -202,10 +201,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
            <Tooltip 
                    title={`${item.workplace} , ${item.location}`}
                    >
-          <span
-              style={{ cursor: "pointer" }}
-            
-            >
+           <span class=" cursor-pointer">
               
               <PlaceIcon  style={{ fontSize: "1rem", }}/>
          

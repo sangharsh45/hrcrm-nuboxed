@@ -105,7 +105,7 @@ class EmployeeCertificationLibrary extends React.Component {
         {({ viewType }, toggleViewType) =>
           viewType === "view" ? (
             <div class=" h-[11rem]" >
-              <div class=" flex" >
+           <div class=" flex justify-between" >
                <div class=" font-semibold mb-[0.2rem] text-[0.875em]"
               
               >
