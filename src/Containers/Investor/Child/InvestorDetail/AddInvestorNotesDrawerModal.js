@@ -20,12 +20,10 @@ class AddInvestorNotesDrawerModal extends Component {
         // title="Notes"
           title={this.props.RowData.name}
           width="60%"
-          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerInvestorNotesModal}
           closable
           placement="right"
           destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleInvestorNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

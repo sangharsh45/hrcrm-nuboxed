@@ -103,16 +103,16 @@ function InvestorTeamCardList(props) {
   return (
     <>
   
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-40">Sector</div>
-        <div className=" md:w-28 ">Country</div>
-        <div className="md:w-36"># Deals</div>
-        <div className="md:w-24">Pipeline Value</div>
-        <div className="md:w-28">Assigned to</div>
-        <div className="md:w-24">Owner</div>
-        <div className="md:w-24">Source</div>
+  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[13.4rem]">Name</div>
+        <div className=" md:w-[13.1rem]">Sector</div>
+        <div className=" md:w-[6.2rem] ">Country</div>
+        <div className="md:w-[7.12rem]"># Deals</div>
+        <div className="md:w-[8.2rem]">Pipeline Value</div>
+        <div className="md:w-[7.3rem]">Assigned to</div>
+        <div className="md:w-[8.21rem]">Owner</div>
+        <div className="md:w-[6.34rem]">Source</div>
         {/* <div className="w-12">Action</div> */}
 
       </div>
@@ -145,7 +145,7 @@ function InvestorTeamCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
+                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -390,7 +390,7 @@ function InvestorTeamCardList(props) {
                     )
                 })}
      </InfiniteScroll> 
-     </OnlyWrapCard>
+     </div>
      
 
       <UpdateInvestorModal
