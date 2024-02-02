@@ -42,8 +42,8 @@ class App extends Component {
               <Route exact path="/register/:type?" component={Register} />
 
               {/* <Route exact path="/login/:username?/:password?" component={Login} /> */}
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={LoginHr} />
+              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={LoginHr} />
               <Route exact path="/mobilelogin" component={AppLoginMessage} />
               <Route
                 exact
