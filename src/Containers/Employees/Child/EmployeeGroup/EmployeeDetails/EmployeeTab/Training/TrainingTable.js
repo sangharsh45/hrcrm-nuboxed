@@ -11,15 +11,17 @@ import {
   getTrainingDetails,
   setEditTraining,
   handleUpdateTrainingModal,
-  deleteDocument,
 } from "../../../../../../Profile/ProfileAction";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { deleteTrainingTable } from "../../../../../../Profile/ProfileAction";
-import UpdateTrainingModal from "./UpdateTrainingModal";
-import moment from "moment";
+import dayjs from "dayjs";
 import { base_url } from "../../../../../../../Config/Auth";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
+import { Tooltip } from "antd";
+const UpdateTrainingModal = lazy(() =>
+  import("./UpdateTrainingModal")
+);
 
 
 class TrainingTable extends Component {
@@ -40,146 +42,7 @@ class TrainingTable extends Component {
       deleteTrainingTable,
     } = this.props;
 
-    const columns = [
-      {
-        //title: " Course Name",
-        title: (
-          <span className="font-poppins">
-          <FormattedMessage
-            id="app.courseName"
-            defaultMessage=" Course Name"
-          />
-             </span>
-        )
-       ,
-        dataIndex: "courseName",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-        // width: "35%"
-      },
-      {
-        //title: "Start Date",
-        title: 
-        (
-          <span className="font-poppins">
-        <FormattedMessage
-          id="app.startDate"
-          defaultMessage="Start Date"
-        />
-          </span>
-        )
-        ,
-        dataIndex: "startDate",
-        render: (name, item, i) => {
-          return <span className="font-poppins">{moment(item.startDate).format("LL")}</span>;
-        },
-      },
-//       {
-//         //title: "End Date",
-//         title:
-//         (
-//           <span className="font-poppins">
-// <FormattedMessage
-//           id="app.endDate"
-//           defaultMessage="End Date"
-//         />
-//           </span>
-//         ) ,
-//         dataIndex: "endDate",
-//         render: (name, item, i) => {
-//           return <span className="font-poppins">{moment(item.endDate).format("LL")}</span>;
-//         },
-//       },
-      {
-        // title: "Organization/Institution",
-        title:(
-          <span className="font-poppins">
- <FormattedMessage
-          id="app.organization"
-          defaultMessage="Organization/Institution"
-        />
-          </span>
-        ),
-        dataIndex: "organization",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        //title: "Grade",
-        title: 
-        (
-          <span className="font-poppins">
-        <FormattedMessage
-          id="app.grade"
-          defaultMessage="Grade"
-        />
-        </span>),
-        dataIndex: "grade",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <>
-              {item.documentId ? (
-                <a
-                  href={`${base_url}/document/${item.documentId}`}
-                  target="_blank"
-                >
-                    {user.userAccessInd === true ? (
-                  <DownloadIcon
-                    type="download"
-                    // onClick={() => startDownload()}
-                    style={{ cursor: "pointer" }}
-                  />
-                    ):null}
-                </a>
-              ) : null}
-            </>
-          );
-        },
-      },
-
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          //debugger
-          return (
-            <BorderColorIcon
-              style={{ cursor: "pointer",fontSize: "0.8rem" }}
-              onClick={() => {
-                setEditTraining(item);
-                handleUpdateTrainingModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-              onConfirm={() => deleteTrainingTable(item.id)}
-            >
-              <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"0.8rem", color: "red" }} />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+  
 
     if (fetchingTrainingDetailsError) {
       return <APIFailed />;
@@ -188,15 +51,154 @@ class TrainingTable extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
+
+<div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[13.5rem]">
+        <FormattedMessage
+                  id="app.courseName"
+                  defaultMessage="Course Name"
+                /></div>
+ 
+        <div className="md:w-[10.1rem]">  <FormattedMessage id="app.startDate" defaultMessage="Start Date" /></div>
+                 <div className="md:w-[10.1rem]">
+                 <FormattedMessage
+          id="app.organization"
+          defaultMessage="Organization/Institution"
+        /></div>
+                       <div className=" md:w-[8.1rem]">
+                       <FormattedMessage id="app.grade" defaultMessage="Grade" /></div>
+
+                      
+        
+        <div className="w-[10.2rem]"></div>
+
+      </div>
+   
+        
+      {training.map((item) => { 
+        
+        
+                    return (
+                        <div>
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                                >
+                                     
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                
+      {item.courseName}
+     
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="flex">
+
+                             
+                              
+                                <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                  <div class="text-sm text-cardBody font-poppins">
+                                  <span className="font-poppins">{dayjs(item.startDate).format("YYYY/MM/DD")}</span>
+                                  </div>
+                              </div>
+
+                              <div className=" flex font-medium flex-col md:w-[10.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                {item.organization}
+                                </div>
+                            </div>
+                            <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                   <div class="text-sm text-cardBody font-poppins">
+                 
+                     <div className="font-normal text-sm text-cardBody font-poppins">
+                       <span>{item.grade}</span>
+                     </div>
+                 
+                                   </div>
+                               </div>
+
+                          
+                              </div>
+                              <div className=" flex  " style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+                   
+                              <>
+                              {item.documentId ? (
+              <a
+                href={`${base_url}/document/${item.documentId}`}
+                target="_blank"
+              >
+                  {user.userAccessInd === true ? (
+                <DownloadIcon
+                  type="download"
+                  // onClick={() => startDownload()}
+                  style={{ cursor: "pointer",fontSize:"1rem" }}
+                />
+                  ):null}
+              </a>
+            ) : null}
+          </>
+                 
+                  </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <BorderColorIcon
+            style={{ cursor: "pointer",fontSize: "1rem" }}
+            onClick={() => {
+              setEditTraining(item);
+              handleUpdateTrainingModal(true);
+            }}
+          />
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteTrainingTable(item.id)}
+          >
+            <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"1rem", color: "red" }} />
+          </StyledPopconfirm>
+
+                                    </div>
+                                </div>
+
+                              
+                             
+                            </div>
+                        </div>
+
+
+                    )
+                })}
+                    
+      </div>
         {/* {emailCredential && ( */}
-        <StyledTable
+        {/* <StyledTable
           columns={columns}
           dataSource={training}
           Loading={fetchingTrainingDetails || fetchingTrainingDetailsError}
           onChange={console.log("task onChangeHere...")}
           scroll={{ y: tableHeight }}
           pagination={false}
-        />
+        /> */}
         <UpdateTrainingModal
           updateTrainingModal={updateTrainingModal}
           handleUpdateTrainingModal={handleUpdateTrainingModal}

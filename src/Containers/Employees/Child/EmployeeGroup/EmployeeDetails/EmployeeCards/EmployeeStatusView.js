@@ -98,13 +98,13 @@ export default EmployeeStatusView;
 
 const ProfileItemRow = ({ label, value }) => {
   return (
-    <div className="flex items-center flex-no-wrap m-1.5 w-10">
+    <div class=" flex items-center flex-no-wrap m-2">
       <div class=" text-[#444] font-semibold" >{label}</div>
-      <div className="overflow-hidden truncate">
-        <Tooltip title={value} placement="topLeft">
+      <div className="overflow-hidden truncate ml-8">
+       
           {/* {elipsize(value, 27)} */}
           {value}
-        </Tooltip>
+       
       </div>
     </div>
   );

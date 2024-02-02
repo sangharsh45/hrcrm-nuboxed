@@ -4,14 +4,9 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { updateEmployeeById } from "../../../../EmployeeAction";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import EditableInput from "../../../../../../Components/Forms/Edit/EditableInput";
-// import EditSearchSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
-import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import EditableSelect from "../../../../../../Components/Forms/Edit/EditableSelect";
 import { getAllUsersByOrganizationId } from "../../../../../Call/CallAction";
-import { callReducer } from "../../../../../Call/CallReducer";
 class EmployeeAboutEdit extends Component {
   constructor(props) {
     super(props);
@@ -71,14 +66,10 @@ class EmployeeAboutEdit extends Component {
     console.log(ReportingData);
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
-          style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
-        >
-          <div style={{ width: "100%" }}></div>
-          <Spacer style={{ margin: "0.1875em" }} />
+        <div className="flex flex-col p-4">
+          <div class=" w-full"></div>
 
-          <div style={{ width: "100%" }}>
+          <div class=" w-full mt-3 m-[0.1875em]">
             <EditableSelect
               defaultValue={designation}
               handleChange={this.handleChange}
@@ -102,14 +93,11 @@ class EmployeeAboutEdit extends Component {
               style={{ width: "100%" }}
             />
           </div>
-          <Spacer style={{ margin: "0.125em" }} />
 
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full mt-3 m-[0.125em]"
           >
             {/* {userType === "ADMIN" && ( */}
-            <div style={{ width: "40%" }}>
+            <div class=" w-[40%]" >
               <EditableSelect
                 defaultValue={department}
                 handleChange={this.handleChange}
@@ -140,7 +128,7 @@ class EmployeeAboutEdit extends Component {
               />
             </div>
             {/* )} */}
-            <div style={{ width: "58%" }}>
+            <div class=" w-[58%]" >
               <EditableInput
                 defaultValue={departmentDetails}
                 handleChange={this.handleChange}
@@ -156,8 +144,8 @@ class EmployeeAboutEdit extends Component {
                 width="100%"
               />
             </div>
-          </FlexContainer>
-          <div style={{ width: "58%" }}>
+          </div>
+          <div class=" w-[58%]" >
             {/* <EditableSelect
               defaultValue={ReportingData || undefined}
               handleChange={this.handleChange}
@@ -184,9 +172,9 @@ class EmployeeAboutEdit extends Component {
             />
           </div>
 
-          <Spacer style={{ margin: "0.125em" }} />
+ 
           {userType === "ADMIN" && (
-            <div style={{ width: "100%" }}>
+            <div class=" w-[58%] mt-3 m-[0.125em]" >
               <EditableSelect
                 defaultValue={label}
                 handleChange={this.handleChange}
@@ -217,8 +205,8 @@ class EmployeeAboutEdit extends Component {
               />
             </div>
           )}
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingEmployeeById}
@@ -226,11 +214,12 @@ class EmployeeAboutEdit extends Component {
           >
             <FormattedMessage id="app.save" defaultMessage="Save" />
           </Button>
-          &nbsp;
+        <div class=" ml-2">
           <Button type="ghost" onClick={() => toggleViewType()}>
             <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
           </Button>
-        </FlexContainer>
+          </div>
+        </div>
       </>
     );
   }

@@ -21,12 +21,7 @@ class UpdateTrainingModal extends Component {
             defaultMessage="Training"
           />}
           width="30%"
-          // height="20vh"
           visible={updateTrainingModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
           onClose={() => handleUpdateTrainingModal(false)}
           footer={null}
         >

@@ -19,12 +19,7 @@ class AddTrainingModal extends Component {
           }
           width="55%"
           visible={addTrainingModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
           onClose={() => handleTrainingModal(false)}
-          footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <TrainingDocumentForm />

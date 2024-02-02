@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../../../Components/Placeholder";
 import { getNotesListByEmployeeId } from "../../../../../EmployeeAction";
-import EmployeesNoteForm from "./EmployeesNoteForm";
 import { SingleNote } from "../../../../../../../Components/Common";
+const EmployeesNoteForm = lazy(() => import("./EmployeesNoteForm"));
 
 class EmployeesNotes extends Component {
   componentDidMount() {

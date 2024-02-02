@@ -16,15 +16,24 @@ const initialState = {
 
     reportViewType: "ME",
     dateRangeList: [
+        // {
+        //     id: 1,
+        //     type: "Today",
+        //     value: "Today",
+        //     starter: false,
+        //     isSelected: true,
+        //     startDate: dayjs()
+        //         // .subtract(1, "days")
+        //         .toISOString(),
+        //     endDate: dayjs().toISOString(),
+        // },
         {
             id: 1,
-            type: "Today",
-            value: "Today",
+            type: "Lastmonth",
+            value: "MTD",
             starter: false,
-            isSelected: true,
-            startDate: dayjs()
-                // .subtract(1, "days")
-                .toISOString(),
+            isSelected: false,
+            startDate: dayjs().startOf("month").toISOString(),
             endDate: dayjs().toISOString(),
         },
         {
@@ -36,17 +45,9 @@ const initialState = {
             startDate: dayjs().startOf("week").toISOString(),
             endDate: dayjs().toISOString(),
         },
+    
         {
             id: 3,
-            type: "Lastmonth",
-            value: "MTD",
-            starter: false,
-            isSelected: false,
-            startDate: dayjs().startOf("month").toISOString(),
-            endDate: dayjs().toISOString(),
-        },
-        {
-            id: 4,
             type: "Yesterday",
             value: "YTD",
             starter: false,
@@ -91,8 +92,12 @@ const initialState = {
     //     .endOf("year")
     //     .toISOString(),
 
-    reportTypes: ["Requirement", "Selected"],
+    investor: ["Investor List","Investor all contacts","All Deals","Open Deals","Closed Deals","Pitch"],
+    prospect: ["Prospect List","Prospect all contacts","All Opportunities","Open Opportunities","Closed Opportunities","Pitch"],
+    recruitProType: ["Requirement", "Selected"],
+    hr: ["Employee","Suspended Employee","All Attendedance","Expenses","Mileages","Leaves"],
     reportType: ["Requirement", "Selected"],
+    reportTypes: ["Requirement", "Selected"],
     selectedReportType: "Select Report",
 
     selectedSubReportType: "Select",

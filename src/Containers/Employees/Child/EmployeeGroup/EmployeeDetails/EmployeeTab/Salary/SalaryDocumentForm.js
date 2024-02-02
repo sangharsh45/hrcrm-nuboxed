@@ -1,19 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, Field,} from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
-import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import { addSalaryDetails } from "../../../../../../Profile/ProfileAction";
@@ -66,20 +58,9 @@ class SalaryDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  // border: "0.125em solid red",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                    // border: "0.125em solid green"
-                  }}
+                <div class=" w-[45%]"
                 >
                   
                     <Field
@@ -103,7 +84,7 @@ class SalaryDocumentForm extends Component {
                         
                       }}
                     />
-                    <Spacer />
+                  <div class=" mt-3">
                   <Field
                     name="netSalary"
                     //label="Net Salary"
@@ -119,11 +100,12 @@ class SalaryDocumentForm extends Component {
                     component={InputComponent}
                     style={{ height: "2.0625em"}}
                   />
+                  </div>
                   
 
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "37%" }}>
+                 
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[37%]" >
         
                       <Field
                         name="startingDate"
@@ -148,7 +130,7 @@ class SalaryDocumentForm extends Component {
                         }}
                       />
                       </div>
-                      <div style={{ width: "55%" }}>
+                      <div class=" w-[55%]" >
                   
                         <Field
                           name="currency"
@@ -169,18 +151,16 @@ class SalaryDocumentForm extends Component {
                         />
 
 </div>
-                  </FlexContainer>
+                  </div>
                     
            
-                  <Spacer />
-
-                  <Spacer />
+                 
                 </div>
 
               
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+             
+              <div class=" flex justify-end mt-3">
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -188,7 +168,7 @@ class SalaryDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

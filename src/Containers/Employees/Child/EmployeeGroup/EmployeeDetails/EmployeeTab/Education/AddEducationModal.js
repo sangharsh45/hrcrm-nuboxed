@@ -23,12 +23,8 @@ class AddEducationModal extends Component {
           />}
           width="60%"
           visible={addEducationModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
           onClose={() => handleEducationModal(false)}
-          footer={null}
+        
         >
           <Suspense fallback={<BundleLoader />}>
             <EducationDocumentForm />

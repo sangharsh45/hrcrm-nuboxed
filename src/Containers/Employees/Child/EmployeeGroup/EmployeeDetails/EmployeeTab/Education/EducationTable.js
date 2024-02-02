@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -13,12 +13,12 @@ import {
   setEditEducation,
 } from "../../../../../../Profile/ProfileAction";
 import DownloadIcon from "@mui/icons-material/Download";
-import UpdateEducationModal from "../../../../EmployeeGroup/EmployeeDetails/EmployeeTab/Education/UpdateEducationModal";
 import { base_url } from "../../../../../../../Config/Auth";
 import { deleteEducationTable } from "../../../../../../Profile/ProfileAction";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip } from "antd";
+const UpdateEducationModal = lazy(() => import("../../../../EmployeeGroup/EmployeeDetails/EmployeeTab/Education/UpdateEducationModal"));
 
 class EducationTable extends Component {
   componentDidMount() {
@@ -153,7 +153,7 @@ class EducationTable extends Component {
                 target="_blank"
               >
                 {user.userAccessInd ? (
-                <DownloadIcon
+                <DownloadIcon 
                   type="download"
                   // onClick={() => startDownload()}
                   style={{ cursor: "pointer",fontSize: "1rem", }}
@@ -168,7 +168,7 @@ class EducationTable extends Component {
                                     
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
-                                    <BorderColorIcon
+                                    <BorderColorIcon 
             style={{ cursor: "pointer", fontSize: "1rem" }}
             onClick={() => {
               setEditEducation(item);

@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { Divider } from "antd";
-import {
-    Title,
-    SubTitle,
-    MultiAvatar,
-    StyledLabel,
-} from "../../../../../../Components/UI/Elements";
 import { StyledCollapse } from "../../../../../../Components/UI/Antd";
-import moment from "moment";
-import { Icon } from "antd";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../../Components/Utils";
+import dayjs from "dayjs";
 import { CaretRightOutlined } from "@ant-design/icons";
 const Panel = StyledCollapse.Panel;
 class EmployeePersonalView extends Component {
@@ -26,7 +16,7 @@ class EmployeePersonalView extends Component {
         console.log("***************", this.props);
         return (
             <>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                     {/* <ActionIcon
                         //tooltipTitle="Edit"
                         tooltiptitle={<FormattedMessage
@@ -37,7 +27,7 @@ class EmployeePersonalView extends Component {
                         handleIconClick={toggleViewType}
                         size="1em"
                     /> */}
-                </FlexContainer>
+                </div>
                 <StyledCollapse
                     bordered={false}
                     defaultActiveKey={["0"]}
@@ -62,7 +52,7 @@ class EmployeePersonalView extends Component {
                                 id="app.dob"
                                 defaultMessage="Date Of Birth"
                             />}
-                            value={moment(dob).format("YYYY-MM-DD")} />
+                            value={dayjs(dob).format("YYYY-MM-DD")} />
                     </Panel>
                 </StyledCollapse>
 
@@ -80,14 +70,11 @@ export default EmployeePersonalView;
 
 const ProfileItemRow = ({ label, value }) => {
     return (
-        <FlexContainer
-            alignItems="center"
-            flexWrap="nowrap"
-            style={{ margin: "0.4rem" }}
+        <div class=" flex items-center flex-no-wrap m-2"
         >
-            <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
-            <SubTitle style={{ marginLeft: "-1.125em" }}>{value}</SubTitle>
-        </FlexContainer>
+             <div class=" text-[#444] font-semibold" >{label}</div>
+             <div className="overflow-hidden truncate ml-2">{value}</div>
+        </div>
     );
 };
 
