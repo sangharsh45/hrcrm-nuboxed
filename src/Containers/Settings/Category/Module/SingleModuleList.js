@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Switch, } from "antd";
+import { Switch, Tooltip, } from "antd";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
+import FWLogo from "../../../../Assets/Images/Erp.jpg";
+import FWLogo1 from "../../../../Assets/Images/Production.jpg";
+import FWLogo2 from "../../../../Assets/Images/repair.jpg";
+import FWLogo3 from "../../../../Assets/Images/elearning.jpg";
+import FWLogo4 from "../../../../Assets/Images/logistic.jpg";
+import FWLogo5 from "../../../../Assets/Images/payment.jpg";
 const { Option } = Select;
 
 class SingleModuleList extends Component {
@@ -25,7 +30,7 @@ class SingleModuleList extends Component {
     console.log("35l",this.props)
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <div class=" w-full cursor-pointer">
+      <div class=" w-full cursor-pointer mt-4">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -33,9 +38,16 @@ class SingleModuleList extends Component {
                 <div class="w-full flex-row">
               <div class=" flex " >
              
-           
-              <div class=" text-sm ">ERP</div>
-                    <div   class=" w-[7%] ml-2">
+              <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+              <div class=" text-sm font-semibold ">ERP</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleErpClick}
@@ -52,10 +64,20 @@ class SingleModuleList extends Component {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </div>
+                    </div>
            {this.props.moduleList.erpInd === true && ( 
-            <>  
-              <div class=" text-sm  ml-2">Production</div>
-                    <div   class=" w-[7%] ml-2">
+            <> 
+            <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+              <div class=" text-sm  ml-2 font-semibold">Production</div>
+                    <div   class=" ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleProductionClick}
@@ -72,9 +94,18 @@ class SingleModuleList extends Component {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
-                    <div class=" text-sm  ml-2">Repair</div>
-                    <div   class=" w-[7%] ml-2">
+                    </div> 
+                    </div>
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo2}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm  ml-2 font-semibold">Repair</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleRepairClick}
@@ -92,7 +123,8 @@ class SingleModuleList extends Component {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+</div>
+</div>
                     {/* <div class=" text-sm  ml-2">Inventory</div>
                     <div   class=" w-[7%] ml-2">
               
@@ -105,9 +137,19 @@ class SingleModuleList extends Component {
                         />
                  
                     </div> */}
-
-                    <div class=" text-sm  ml-2">Order Management</div>
-                    <div   class=" w-[7%] ml-2">
+  <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo3}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    {/* <div class=" text-sm  ml-2">Order Management</div> */}
+                    <Tooltip title="Order Management">
+                    <div class=" text-sm  ml-2 font-semibold">OMS</div>
+                    </Tooltip>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleOrderManagementClick}
@@ -124,9 +166,18 @@ class SingleModuleList extends Component {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
-                    <div class=" text-sm  ml-2">Logistics</div>
-                    <div   class=" w-[7%] ml-2">
+</div>
+</div>
+<div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo4}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm  ml-2 font-semibold">Logistics</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleLogisticClick}
@@ -143,9 +194,18 @@ class SingleModuleList extends Component {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
-                    <div class=" text-sm  ml-2">Procurement</div>
-                    <div   class=" w-[7%] ml-2">
+</div>
+</div>
+<div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo5}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm  ml-2 font-semibold">Procurement</div>
+                    <div   class="  ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleProcurmentClick}
@@ -161,6 +221,8 @@ class SingleModuleList extends Component {
                           unCheckedChildren="No"
                         />
                       {/* </Popconfirm> */}
+                    </div>
+                    </div>
                     </div>
                     </>   
               
