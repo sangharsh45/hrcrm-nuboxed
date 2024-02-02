@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {getSuppliersList,emptysUPPLIERS } from "../SuppliersAction"
+import {getAllSuppliersList,emptysUPPLIERS } from "../SuppliersAction"
 import { Link } from "../../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
 
-function SuppliersCardList(props) {
+function AllSuppliersCardList(props) {
   useEffect(() => {
-    props.getSuppliersList(props.userId);
+    props.getAllSuppliersList();
   }, []);
 
   const [hasMore, setHasMore] = useState(true);
@@ -30,10 +30,6 @@ function SuppliersCardList(props) {
   const handleLoadMore = () => {
       setPage(page + 1);
   };
-
-  useEffect(() => {
-    props.emptysUPPLIERS();
-  }, []);
 
   
 return(
@@ -65,13 +61,13 @@ return(
           </div>
         </div>
         <InfiniteScroll
-        dataLength={props.supplierList.length}
+        dataLength={props.allSupplierList.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={props.fetchingSupplierList?<div class="text-center font-semibold text-xs">Loading...</div>:null}
         height={"75vh"}
       >
-{props.supplierList.map((item) => {
+{props.allSupplierList.map((item) => {
   return (
     <>
      <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3"    
@@ -180,7 +176,7 @@ return(
 )
 }
 const mapStateToProps = ({ shipper, suppliers,auth }) => ({
-  supplierList: suppliers.supplierList,
+  allSupplierList: suppliers.allSupplierList,
   userId: auth.userDetails.userId,
   fetchingSupplierList: suppliers.fetchingSupplierList,
   fetchingSupplierListError: suppliers.fetchingSupplierListError,
@@ -192,10 +188,10 @@ const mapStateToProps = ({ shipper, suppliers,auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getSuppliersList,
+      getAllSuppliersList,
       emptysUPPLIERS
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SuppliersCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(AllSuppliersCardList);

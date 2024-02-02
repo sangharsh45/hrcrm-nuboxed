@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { updateShipper,getEmployeelistAsErp } from "./ShipperAction";
 import {getShipByData} from "../../Settings/Category/ShipBy/ShipByAction";
@@ -104,11 +102,9 @@ function UpdateShipperForm(props) {
                   component={InputComponent}
                   isColumn
                   inlineLabel
-                  style={{ flexBasis: "60%" }}
                 />
 
-                <Spacer style={{ marginTop: "1.25em" }} />
-                <FlexContainer justifyContent="space-between">
+                <div class="flex justify-between mt-5">
                 <div class="w-[30%] max-sm:w-[40%] ">
                     <FastField
                       name="dialCode"
@@ -139,9 +135,8 @@ function UpdateShipperForm(props) {
                       }}
                     />
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <div style={{ width: "100%" }}>
+                </div>
+                <div class="w-full mt-3">
                   <FastField
                     type="email"
                     name="emailId"
@@ -151,16 +146,11 @@ function UpdateShipperForm(props) {
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                    style={{
-                      flexBasis: "80%",
-                      // height: "29px",
-                      // marginTop: "0px",
-                    }}
                   />
                 </div>
 
 
-                <Spacer style={{ marginTop: "1.25em" }} />
+                <div class="w-full mt-5">
                 <Field
                   name="shipById"
                   selectType="shipperName"
@@ -172,9 +162,8 @@ function UpdateShipperForm(props) {
                   isColumn
                   value={values.shipById}
                   inlineLabel
-                  style={{ flexBasis: "80%" }}
                 />
-              </div>
+              </div></div>
 
               <div class="h-full w-w47.5 max-sm:w-full">
               <div class=" h-full w-full">
@@ -250,7 +239,7 @@ function UpdateShipperForm(props) {
       </Listbox>
       </div>
                 <div>
-                  <Spacer />
+                <div class="mt-3">
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -261,11 +250,11 @@ function UpdateShipperForm(props) {
                       />
                     )}
                   />
+                  </div>
                 </div>
               </div>
             </div>
-            <Spacer style={{ marginTop: "1.25em" }} />
-            <FlexContainer justifyContent="flex-end">
+            <div class="flex justify-end mt-3">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -273,7 +262,7 @@ function UpdateShipperForm(props) {
               >
  <FormattedMessage id="app.update" defaultMessage="Update"/>
               </Button>
-            </FlexContainer>
+            </div>
           </Form>
           </div>
         )}

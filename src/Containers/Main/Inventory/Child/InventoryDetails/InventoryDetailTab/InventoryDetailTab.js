@@ -167,6 +167,7 @@ class InventoryDetailTab extends PureComponent {
                 <>
                   <span>
                   <ViewInArIcon
+                  className="text-base"
               // style={{ fontSize: "large" }}
             />&nbsp;
                  <FormattedMessage id="app.catalogue" defaultMessage="Catalogue" />

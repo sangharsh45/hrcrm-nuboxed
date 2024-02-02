@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
-import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getSuppliesList,
   handleUpdateSupplieDrawer,
@@ -13,51 +10,32 @@ import {
   handleCurrencyPriceModal,
   handleBrandModel
 } from "./SuppliesAction";
-import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
-import { DeleteFilled, DeleteOutlined, EditOutlined, MoneyCollectOutlined, PhoneFilled, } from "@ant-design/icons";
+import {Tooltip} from "antd";
+import { DeleteFilled,PhoneFilled, } from "@ant-design/icons";
 import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
-import QrCode from "./QrCode"
+import QrCode from "./QrCode";
 
-function onChange(pagination, filters, sorter) {
-  console.log("params", pagination, filters, sorter);
-}
 
 function SuppliesCard(props) {
   useEffect(() => {
     props.getSuppliesList();
   }, []);
 
-  const [showHistory, setshowHistory] = useState(false);
-  const [suppliesId, setSuppliesId] = useState("");
-  const [currentSuppliesId, setCurrentSuppliesId] = useState("");
   const [particularDiscountData, setParticularDiscountData] = useState({});
 
-  function handleSetCurrentSuppliesId(suppliesId) {
-    setCurrentSuppliesId(suppliesId);
-    console.log(suppliesId);
-  }
   function handleParticularRowData(item) {
     setParticularDiscountData(item);
   }
-  function handleSuppliesHistory(suppliesId) {
-    setshowHistory(!showHistory);
-    setSuppliesId(suppliesId);
-  }
 
-  const {
-    updateSuppliesModal,
-    handleUpdateSupplieDrawer,
-  } = props;
   return(
     <>
-    <OnlyWrapCard style={{height:"80vh"}}>
+   <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     {props.purchaseList.map((item) => {
       return (
         <>
          <div className="flex justify-between mt-2 "
-                      // style={hrStyle}
+                     
                       style={{
                         borderBottom: "3px dotted #515050"
                       }}
@@ -201,7 +179,7 @@ function SuppliesCard(props) {
       )
     })}
     
-      </OnlyWrapCard>
+      </div>
       <TagBrandModel
         addBrandModel={props.addBrandModel}
         handleBrandModel={props.handleBrandModel}

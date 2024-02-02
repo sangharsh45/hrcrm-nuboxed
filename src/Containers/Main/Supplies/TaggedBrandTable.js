@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { getTaggedBrandById } from "./SuppliesAction"
 import { bindActionCreators } from 'redux'
@@ -33,7 +33,7 @@ const TaggedBrandTable = (props) => {
         </>
     )
 }
-const mapStateToProps = ({ auth, brandmodel, supplies }) => ({
+const mapStateToProps = ({supplies }) => ({
     taggedBrand: supplies.taggedBrand
 });
 

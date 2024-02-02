@@ -47,16 +47,14 @@ class ProcurementTab extends Component {
                         
                           <Tooltip title="Add BOM">
                             <PlusOutlined
+                            className="ml-1"
                               type="plus"
                               tooltipTitle="Create"
                               onClick={() => {
                                 this.props.handleBOMdrawer(true);
                               }}
-                              size="14px"
-                              style={{
-                                verticalAlign: "center",
-                                marginLeft: "5px",
-                              }}
+                              size="1rem"
+                              
                             />
                           </Tooltip>
                         &nbsp;
@@ -101,16 +99,13 @@ class ProcurementTab extends Component {
                         
                           <Tooltip title="Add Indent">
                             <PlusOutlined
+                             className="ml-1"
                               type="plus"
                               tooltipTitle="Create"
                               onClick={() => {
                                 this.props.handleAddIndentModal(true);
                               }}
-                              size="14px"
-                              style={{
-                                verticalAlign: "center",
-                                marginLeft: "5px",
-                              }}
+                              size="1rem"
                             />
                           </Tooltip>
                         &nbsp;
@@ -210,16 +205,13 @@ class ProcurementTab extends Component {
                         
                           <Tooltip title="Create Dispatch">
                             <PlusOutlined
+                             className="ml-1"
                               type="plus"
                               tooltipTitle="Create"
                               onClick={() => {
                                 this.props.handleProcDispatchModal(true);
                               }}
-                              size="14px"
-                              style={{
-                                verticalAlign: "center",
-                                marginLeft: "5px",
-                              }}
+                              size="1rem"
                             />
                           </Tooltip>
                         &nbsp;

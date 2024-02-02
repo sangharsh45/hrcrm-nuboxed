@@ -1,14 +1,14 @@
-import React, { useReducer } from "react";
+import React,{lazy,Suspense} from "react";
 import Button from "antd/lib/button";
-import Icon from "antd/lib/icon";
 import { connect } from "react-redux";
 import { base_url } from "../../../Config/Auth";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import { Tooltip } from "antd";
 import { handleSuppliesModal } from "./SuppliesAction";
-import SuppliesAddModal from "./SuppliesAddModal";
+import { BundleLoader } from "../../../Components/Placeholder";
 
+const SuppliesAddModal=lazy(()=>import("./SuppliesAddModal"));
 
 class SuppliesActionRight extends React.Component {
   render() {
@@ -25,7 +25,6 @@ class SuppliesActionRight extends React.Component {
               href={`${base_url}/export/supplies`}
             >
              
-              {/* <i class="fas fa-download"></i> */}
             </Button>
           </Tooltip>
           : null}
@@ -33,18 +32,17 @@ class SuppliesActionRight extends React.Component {
           <Tooltip placement="left" title="Create">
             <Button
               type="primary"
-              //ghost
               onClick={() => handleSuppliesModal(true)}
             >Add
-              {/* <i class="fas fa-plus"></i> */}
             </Button>
           </Tooltip>
         )}
-
+<Suspense fallback={<BundleLoader/>}>
         <SuppliesAddModal
           handleSuppliesModal={handleSuppliesModal}
           addSuppliesModal={addSuppliesModal}
         />
+        </Suspense>
       </>
     );
   }
@@ -53,9 +51,7 @@ class SuppliesActionRight extends React.Component {
 const mapStateToProps = ({ supplies, auth }) => ({
   addSuppliesModal: supplies.addSuppliesModal,
   user: auth.userDetails,
-  //   role: auth.userDetails.role,
-  //   department: auth.userDetails.department,
-  //   user: auth.userDetails,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

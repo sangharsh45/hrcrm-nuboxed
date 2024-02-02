@@ -1,4 +1,4 @@
-import { Button, DatePicker, Select, Typography, message } from 'antd'
+import { Button, DatePicker, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
@@ -12,8 +12,9 @@ import {
 import { getCatalogueListById } from "../Account/AccountAction"
 
 const { Option } = Select;
+
 const AssignCatalogueRepairForm = (props) => {
-    const [user, setUser] = useState("")
+    
     const [technician, setTechnician] = useState("")
     const [department, setDepartment] = useState("")
     const [selectedRow, setselectedRow] = useState([]);

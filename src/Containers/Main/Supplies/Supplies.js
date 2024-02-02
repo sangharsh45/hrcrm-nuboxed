@@ -1,13 +1,14 @@
-import React, { Suspense,useState, useEffect } from "react";
+import React, { Suspense,useState, useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setSuppliesViewType, handleSuppliesModal } from "./SuppliesAction";
 import SuppliesHeader from "./SuppliesHeader";
-import SuppliesTable from "./SuppliesTable";
-import SuppliesDeletedTable from "./SuppliesDeletedTable";
 import { BundleLoader } from "../../../Components/Placeholder";
-import SuppliesCard from "./SuppliesCard";
-import SuppliesDeletedCard from "./SuppliesDeletedCard";
+
+const SuppliesTable =lazy(()=>import("./SuppliesTable"));
+const SuppliesDeletedTable =lazy(()=>import("./SuppliesDeletedTable"));
+const SuppliesCard =lazy(()=>import("./SuppliesCard"));
+const SuppliesDeletedCard =lazy(()=>import("./SuppliesDeletedCard"));
 
 function Supplies(props) {
     const { setSuppliesViewType, viewType, handleSuppliesModal } = props;

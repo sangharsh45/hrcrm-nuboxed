@@ -27,17 +27,17 @@ class SupplierDetails extends Component {
             <div>
               <Suspense fallback={"Loading..."}>
                 <div class="flex flex-nowrap w-full">
-                  <div style={{ width: "22%" }}>
+                  <div class="w-[22%]">
                     <SupplierDetailsLeft supplier={supplier} />
                   </div>
-                  <div style={{ width: "78%" }}>
+                  <div class="w-[78%]">
                     <SupplierDetailsRight supplier={supplier} />
                   </div>
                 </div>
               </Suspense>
             </div>
           )}
-        </>SupplierDetailsRight
+        </>
       </>
     );
   }

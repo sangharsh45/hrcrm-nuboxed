@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 
 class SupplierDetailView extends Component {
   render() {
@@ -34,30 +33,14 @@ export default SupplierDetailView;
 
 const ShipperItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
-      style={{ margin: "0.4rem", fontSize: "13px" }}
-    >
-      <div
-        style={{
-          color: "#444",
-          fontWeight: 600,
-          width: "40%",
-        }}
-      >
+    <div class="flex items-center flex-nowrap m-1 text-sm">
+      <div class="text-[#444] font-semibold w-[40%]">
         {label}
       </div>
       <div
-        style={{
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          width: "61%",
-        }}
-      >
+      class=" whitespace-nowrap overflow-hidden text-ellipsis w-[61%]">
         {value}
       </div>
-    </FlexContainer>
+    </div>
   );
 };

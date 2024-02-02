@@ -20,12 +20,10 @@ const DispatchProcDrawer = (props) => {
       <StyledDrawer
         title="Dispatch"
         width="60%"
-        style={{marginTop:"3rem"}}
         visible={dispatchProcModal}
         destroyOnClose
         closable
         placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleProcDispatchModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>

@@ -19,12 +19,10 @@ const BOMDrawerForm = (props) => {
       <StyledDrawer
         title="BOM"
         width="60%"
-        style={{marginTop:"3rem"}}
         visible={addBOMdrawer}
         destroyOnClose
         closable
         placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleBOMdrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

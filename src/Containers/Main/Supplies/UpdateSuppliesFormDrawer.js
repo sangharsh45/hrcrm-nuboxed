@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer} from "../../../Components/UI/Antd";
-import UpdateSuppliesForm from "./UpdateSuppliesForm";
+import { BundleLoader } from "../../../Components/Placeholder";
+const UpdateSuppliesForm =lazy(()=>import("./UpdateSuppliesForm"));
 
 
 class UpdateSuppliesFormDrawer extends Component {
@@ -16,13 +17,12 @@ class UpdateSuppliesFormDrawer extends Component {
                     visible={updateSuppliesDrawer}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"3rem" }}
                     onClose={() => handleUpdateSupplieDrawer(false)}
                     footer={null}
                 >
+                    <Suspense fallback={<BundleLoader/>}>
                     <UpdateSuppliesForm particularDiscountData={particularDiscountData}/>
-
+                    </Suspense>
                 </StyledDrawer>
             </div>
         );

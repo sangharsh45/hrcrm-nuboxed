@@ -49,7 +49,7 @@ const OrderPhoneTab = (props) => {
                                 </span>
                                 &nbsp;&nbsp;
                                 <span onClick={handleOpenQc}>
-                                    <HandymanIcon style={{fontSize:"1rem"}}/>
+                                    <HandymanIcon className="text-base"/>
                                 </span>
 
                             </>
@@ -68,7 +68,7 @@ const OrderPhoneTab = (props) => {
                             </span>
                             &nbsp;&nbsp;
                             <span onClick={handleOpenRepair}>
-                                <HandymanIcon style={{fontSize:"1rem"}}/>
+                                <HandymanIcon className="text-base"/>
                             </span>
 
                         </>

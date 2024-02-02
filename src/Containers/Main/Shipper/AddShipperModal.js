@@ -13,10 +13,7 @@ const AddShipperModal = (props) => {
                 width="60%"
                 visible={addShipperModal}
                 closable
-                // maskClosable={false}
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"3rem"}}
                 onClose={() => handleShipperModal(false)}
                 footer={null}
             >

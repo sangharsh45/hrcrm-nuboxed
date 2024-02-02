@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -137,7 +136,7 @@ function AddSuppliersForm (props) {
                       />
                     </div>
                   </div>
-                  <div style={{ width: "100%" }}>
+                  <div class="w-full">
                     <FastField
                       type="email"
                       name="emailId"
@@ -228,7 +227,7 @@ function AddSuppliersForm (props) {
       </Listbox>
       </div>
                   <div>
-                    <Spacer />
+                    <div class="mt-3">
                     <FieldArray
                       name="address"
                       render={(arrayHelpers) => (
@@ -239,11 +238,12 @@ function AddSuppliersForm (props) {
                         />
                       )}
                     />
+                    </div>
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end">
+
+              <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"

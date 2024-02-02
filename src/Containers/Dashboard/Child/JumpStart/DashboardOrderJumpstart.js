@@ -22,19 +22,18 @@ function DashboardOrderJumpstart (props) {
  
   useEffect(()=>{
     if (props.timeRangeType === "today") {
-    props.getJumpOrderCount(props.type);
+    props.getJumpOrderCount(props.timeRangeType);
     // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
     // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
     // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
   }
   else {
-    props.getJumpOrderCount(props.type);
+    props.getJumpOrderCount(props.timeRangeType);
     // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
     // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
     // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
   }
-  },[props.type]);
-
+  },[props.timeRangeType]);
 
     return (
       <>
@@ -116,7 +115,6 @@ const mapStateToProps = ({ dashboard, auth }) => ({
   fetchingJumpOrderCount: dashboard.fetchingJumpOrderCount,
   userId: auth.userDetails.employeeId,
   timeRangeType:dashboard.timeRangeType,
-  type: dashboard.type,
  
 });
 

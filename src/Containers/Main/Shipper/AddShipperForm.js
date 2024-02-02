@@ -4,11 +4,9 @@ import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { addShipper, getEmployeelistAsErp } from "./ShipperAction";
 import { Listbox } from '@headlessui/react';
@@ -29,7 +27,6 @@ function AddShipperForm(props) {
   useEffect(() => {
     props.getEmployeelistAsErp();
     props.getShipByData(props.orgId);
-    // props.getAllSalesList();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -118,8 +115,6 @@ function AddShipperForm(props) {
                   />
                   <div class=" flex justify-between">
                     <div class="w-[30%] max-sm:w-[40%] ">
-                      {/* <label>Dial Code</label> */}
-
                       <FastField
                         name="dialCode2"
                         selectType="dialCode"
@@ -147,7 +142,7 @@ function AddShipperForm(props) {
                       />
                     </div>
                   </div>
-                  <div style={{ width: "100%" }}>
+                  <div class="w-full">
                     <FastField
                       type="email"
                       name="emailId"
@@ -159,9 +154,7 @@ function AddShipperForm(props) {
                       inlineLabel
                     />
                   </div>
-                  <div style={{ width: "100%" }}>
-                    {/* <label>Ship By</label> */}
-
+                  <div class="w-full">
                     <FastField
                       name="shipById"
                       label={<FormattedMessage id="app.shipby" defaultMessage="Ship By" />}
@@ -257,7 +250,7 @@ function AddShipperForm(props) {
                     </Listbox>
                   </div>
                   <div>
-                    <Spacer />
+                <div class="mt-3">
                     <FieldArray
                       name="address"
                       render={(arrayHelpers) => (
@@ -269,10 +262,11 @@ function AddShipperForm(props) {
                       )}
                     />
                   </div>
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+         
+              <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -280,7 +274,7 @@ function AddShipperForm(props) {
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           </div>
         )}

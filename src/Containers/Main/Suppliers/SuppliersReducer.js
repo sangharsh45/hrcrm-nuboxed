@@ -155,7 +155,7 @@ const initialState = {
 
   fetchingAllSupplierListById: false,
   fetchingAllSupplierListByIdError: false,
-  AllSupplierList: [],
+  allSupplierList: [],
 
   fetchingInputSupplierData: false,
   fetchingInputSupplierDataError: false,
@@ -592,7 +592,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingAllSupplierListById: false,
-        AllSupplierList: action.payload,
+        allSupplierList: action.payload,
       };
     case types.GET_ALL_SUPPLIERS_LIST_FAILURE:
       return {
@@ -608,7 +608,7 @@ export const suppliersReducer = (state = initialState, action) => {
         ...state,
         fetchingInputSupplierData: false,
         supplierList: state.viewType === "dashboard" ? null : action.payload,
-        AllSupplierList: state.viewType === "dashboard" ? action.payload : null,
+        allSupplierList: state.viewType === "dashboard" ? action.payload : null,
       };
     case types.INPUT_SEARCH_DATA_FAILURE:
       return {
@@ -1120,7 +1120,8 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingPoDetailsListError: true,
       };
 
-
+      case types.EMPTY_SUPPLIER_LIST:
+        return { ...state, supplierList: [] };
       
     
 

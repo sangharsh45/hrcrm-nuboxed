@@ -1,11 +1,9 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Spacer } from "../../../Components/UI/Elements";
 import { getDeleteHistory } from "./SuppliesAction";
 import ReInstateSupplies from "./ReInstateSupplies";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
+
 
 function SuppliesDeletedCard(props) {
     useEffect(() => {
@@ -13,7 +11,7 @@ function SuppliesDeletedCard(props) {
     }, [])
     return(
         <>
-        <OnlyWrapCard style={{height:"80vh"}}>
+        <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         {props.deleteSuppliesHistory.map((item) => {
           return (
             <>
@@ -137,7 +135,7 @@ function SuppliesDeletedCard(props) {
           )
         })}
         
-          </OnlyWrapCard>
+          </div>
          
         </>
         )

@@ -14,11 +14,9 @@ class AddIndentDrawer extends Component {
                 <StyledDrawer
                     title="Create"
                     width="60%"
-                    style={{marginTop:"3rem"}}
                     visible={addIndentModal}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                     onClose={() => handleAddIndentModal(false)}
                     footer={null}
                 >

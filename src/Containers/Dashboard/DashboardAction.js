@@ -1,8 +1,7 @@
 import * as types from "./DashboardActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../Config/Auth";
-import { message } from "antd";
+import { base_url, base_url2 } from "../../Config/Auth";
 
 export const getSkillsCloud = () => (dispatch) => {
   dispatch({
@@ -2156,12 +2155,11 @@ export const getCompletedTaskTypeDetails = (userId, name) => (dispatch) => {
     });
 };
 
-export const getJumpOrderCount =
-  (userId,type, startDate, endDate) => (dispatch) => {
+export const getJumpOrderCount =(type) => (dispatch) => {
     dispatch({ type: types.GET_JUMPSTART_ORDER_COUNT_REQUEST });
     axios
       .get(
-        `${base_url}/Order/orderCount/${type}`,
+        `${base_url2}/order/orderCount/${type}`,
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",
