@@ -17,7 +17,6 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import {
   getRecruiterList,
   handleUpdateOpportunityModal,
@@ -73,13 +72,13 @@ function OpportunityAllCardList(props) {
       } = props;
       return (    
   <>
- <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
- <div className="flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+<div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+ <div className="flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.8rem]">Name</div>
-        <div className=" md:w-[10.1rem]">Prospect</div>
-        <div className=" md:w-[12.2rem] ">Sponsor</div>
+        <div className=" md:w-[9.1rem]">Prospect</div>
+        <div className=" md:w-[8.2rem] ">Sponsor</div>
         <div className="md:w-[8.8rem]">Start Date</div>
-        <div className="md:w-[12.3rem]">Proposal Amount</div>
+        <div className="md:w-[11.3rem]">Proposal Amount</div>
         <div className="md:w-[5.2rem]">Stages</div> 
         <div className="md:w-[8.1rem]">Sales Rep</div>
         <div className="md:w-[2.2rem]">Owner</div>
@@ -91,7 +90,7 @@ function OpportunityAllCardList(props) {
         dataLength={allOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+        loader={fetchingAllOpportunity?<div class="flex justify-center" >Loading...</div> :null}
         height={"75vh"}
       >
  <CardWrapper>      
@@ -128,7 +127,7 @@ function OpportunityAllCardList(props) {
                                       <Tooltip>
                                       <div class=" flex max-sm:w-full  flex-row md:flex-col">
         
-                                          <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                          <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                               
                                           <Link
         toUrl={`opportunity/${item.opportunityId}`}
@@ -136,7 +135,7 @@ function OpportunityAllCardList(props) {
        {item.opportunityName}
        </Link>&nbsp;&nbsp;
      
-                                          </h4>
+                                          </div>
 </div>
                                       </Tooltip>
                             
@@ -144,17 +143,17 @@ function OpportunityAllCardList(props) {
 
                               <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">   
+                                  <div class=" text-sm text-cardBody font-poppins">   
                                   
                                   {item.customer}
                   
-                                  </h4>
+                                  </div>
                               </div>
                              
-                              <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                              <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                 
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <div class=" text-sm text-cardBody font-poppins">
                                   <SubTitle>
                                   {item.contactName === null ? "None" :
             <MultiAvatar2
@@ -166,11 +165,11 @@ function OpportunityAllCardList(props) {
             />
           }
           </SubTitle>
-                                  </h4>
+                                  </div>
                               </div>
                               </div>
                               <div class="flex">
-                              <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                              <div className=" flex font-medium flex-col md:w-[8rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
                                   <div class=" text-sm justify-center text-cardBody font-poppins">
@@ -214,7 +213,7 @@ trigger={["click"]}
 {" "}
 <Progress
 type="circle"
-style={{ cursor: "pointer", color: "red",fontSize:"1rem" }}
+className=" !text-base cursor-pointer text-[red]"
 percent={findProbability}
 width={30}
 strokeColor={"#005075"}
@@ -269,7 +268,7 @@ strokeColor={"#005075"}
                  <div>
                  <span
        
-       style={{ cursor: "pointer" }}
+       className=" cursor-pointer"
 onClick={() => {
 props.getAllRecruitmentByOppId(item.opportunityId);
 props.getAllRecruitmentPositionByOppId(item.opportunityId);
@@ -285,7 +284,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
 >
          {user.pulseAccessInd === true && (
            <MonitorHeartIcon
-             style={{ fontSize: "1rem", color: "#df9697" }}
+           className=" !text-base cursor-pointer text-[#df9697]"
            />
          )}
        </span>
@@ -307,10 +306,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
      
        >
         <LockIcon
-              style={{
-                fontSize: "1rem",
-                cursor: "pointer",
-              }}
+         className=" !text-base cursor-pointer"
             />
           </span>
    </Tooltip> 
@@ -332,7 +328,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
                       {user.opportunityUpdateInd ===true && (
             
             <span
-              style={{ cursor: "pointer", color: "grey" }}
+            className=" !text-base cursor-pointer text-[grey]"
+             
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
@@ -340,7 +337,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
               }}
             >
                           <BorderColorIcon
-                            style={{ color: "grey", fontSize: "1rem" }}
+                          className=" !text-base cursor-pointer text-[grey]"
+                            
                           />
                         </span>
                       )}
@@ -368,11 +366,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
                       
                         <DeleteOutlined
                           type="delete"
-                          style={{
-                            cursor: "pointer",
-                            color: "red",
-                            fontSize: "1rem",
-                          }}
+                          className=" !text-base cursor-pointer text-[red]"
                         />
                         )}
                         </Tooltip>
@@ -393,7 +387,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
   
 
       </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       <UpdateOpportunityModal
         opportunityId={currentOpportunityId}
         opportunityName={currentOpportunityId}

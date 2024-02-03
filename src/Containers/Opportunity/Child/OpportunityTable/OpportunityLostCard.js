@@ -17,7 +17,6 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import {
   getRecruiterList,
   handleUpdateOpportunityModal,
@@ -74,7 +73,7 @@ function OpportunityLostCard(props) {
       } = props;
       return (    
   <>
- <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+ <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
  <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.8rem]">Name</div>
         <div className=" md:w-[10.1rem]">Prospect</div>
@@ -92,7 +91,7 @@ function OpportunityLostCard(props) {
         dataLength={lostOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchinglostOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+        loader={fetchinglostOpportunity?<div class="flex justify-center">Loading...</div> :null}
         height={"75vh"}
         style={{overflowX:"hidden"}}
       >
@@ -133,10 +132,10 @@ function OpportunityLostCard(props) {
                                  
                                       <Tooltip>
                                       <div class=" flex max-sm:w-full  flex-row md:flex-col">
-                                          {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                          {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                           Name
-                                          </h4> */}
-                                          <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                          </div> */}
+                                          <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                               
                                           <Link
         toUrl={`opportunity/${item.opportunityId}`}
@@ -154,7 +153,7 @@ function OpportunityLostCard(props) {
         </span>
       ) : null} */}
      
-                                          </h4>
+                                          </div>
 </div>
                                       </Tooltip>
                             
@@ -162,19 +161,19 @@ function OpportunityLostCard(props) {
 
                               <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
                          
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                  <h4 class=" text-sm text-cardBody font-poppins">   
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                  <div class=" text-sm text-cardBody font-poppins">   
                                   
                                   {item.customer}
                   
-                                  </h4>
+                                  </div>
                               </div>
                              
                               <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
                                 
 
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                  <div class=" text-sm text-cardBody font-poppins">
                                   <SubTitle>
                                   {item.contactName === null ? "None" :
             <MultiAvatar2
@@ -186,12 +185,12 @@ function OpportunityLostCard(props) {
             />
           }
           </SubTitle>
-                                  </h4>
+                                  </div>
                               </div>
                               </div>
                               <div class="flex">
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
 
                                   <div class=" text-sm justify-center text-cardBody font-poppins">
                                   {moment(item.startDate).format("ll")}
@@ -199,7 +198,7 @@ function OpportunityLostCard(props) {
                               </div>
                            
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                   <div class=" text-sm text-cardBody font-poppins text-center">
                                   <CurrencySymbol currencyType={item.currency} />
@@ -209,7 +208,7 @@ function OpportunityLostCard(props) {
                                   </div>
                               </div>
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                   <div class=" text-sm text-cardBody font-poppins text-center">
                                   <Dropdown
@@ -234,7 +233,7 @@ trigger={["click"]}
 {" "}
 <Progress
 type="circle"
-style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+className=" !text-base cursor-pointer text-[red]"
 percent={findProbability}
 width={30}
 strokeColor={"#005075"}
@@ -245,7 +244,7 @@ strokeColor={"#005075"}
                                   </div>
                               </div>
                               <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                  {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                   <div class=" text-sm text-cardBody font-poppins">
                                   
@@ -261,7 +260,7 @@ strokeColor={"#005075"}
                               </div>
                               <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
                      
-                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                     {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
             <Tooltip title={item.ownerName}>
         <span>
@@ -280,7 +279,7 @@ strokeColor={"#005075"}
                  <div>
                  <span
        
-       style={{ cursor: "pointer" }}
+       className=" cursor-pointer"
 onClick={() => {
 props.getAllRecruitmentByOppId(item.opportunityId);
 props.getAllRecruitmentPositionByOppId(item.opportunityId);
@@ -296,7 +295,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
 >
          {user.pulseAccessInd === true && (
            <MonitorHeartIcon
-             style={{ fontSize: "0.8rem", color: "#df9697" }}
+           className=" !text-base cursor-pointer text-[#df9697]"
+            
            />
          )}
        </span>
@@ -316,11 +316,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
       }}         
      
        >
-        <LockIcon
-              style={{
-                fontSize: "0.8rem",
-                cursor: "pointer",
-              }}
+        <LockIcon className=" !text-base cursor-pointer"
+             
             />
           </span>
    </Tooltip> 
@@ -347,8 +344,9 @@ handleSetCurrentOpportunityId(item.opportunityName);
                     >
                       {user.opportunityUpdateInd ===true && (
             
-            <span
-              style={{ cursor: "pointer", color: "grey" }}
+            <span 
+            className=" !text-base cursor-pointer text-[grey]"
+              
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
@@ -356,7 +354,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
               }}
             >
                           <BorderColorIcon
-                            style={{ color: "grey", fontSize: "1rem" }}
+                          className=" !text-base cursor-pointer text-[grey]"
+                            
                           />
                         </span>
                       )}
@@ -375,11 +374,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
                       
                         <DeleteOutlined
                           type="delete"
-                          style={{
-                            cursor: "pointer",
-                            color: "red",
-                            fontSize: "1rem",
-                          }}
+                          className=" !text-base cursor-pointer text-[red]"
                         />
                         )}
                         </StyledPopconfirm>
@@ -398,7 +393,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
   
 
       </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       <UpdateOpportunityModal
         opportunityId={currentOpportunityId}
         opportunityName={currentOpportunityId}

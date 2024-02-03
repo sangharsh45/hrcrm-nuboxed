@@ -5,7 +5,6 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -253,7 +252,7 @@ props. getCrm();
                   
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -263,7 +262,7 @@ props. getCrm();
                         inlineLabel
                         width={"100%"}
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
               
@@ -283,7 +282,7 @@ props. getCrm();
                     inlineLabel
                   />
                   </div>
-                  <StyledLabel>
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="url"
                     type="text"
@@ -293,7 +292,7 @@ props. getCrm();
                     component={InputComponent}
                     inlineLabel
                   />
-                  </StyledLabel>
+                  </div>
                          
                  
                   <div class=" flex justify-between mt-3">
@@ -339,7 +338,7 @@ props. getCrm();
                  
                     <div class=" flex justify-between mt-3 max-sm:flex-col">
                     <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="vatNo"
                         type="text"
@@ -354,10 +353,10 @@ props. getCrm();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class="w-w47.5">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -373,7 +372,7 @@ props. getCrm();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
              
