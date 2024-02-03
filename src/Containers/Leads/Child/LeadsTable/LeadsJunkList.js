@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
-import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { DeleteOutlined } from "@ant-design/icons";
@@ -21,13 +20,13 @@ import {
   updateTypeForLead,
   reInstateJunkLeads
 } from "../../../Leads/LeadsAction";
-import ReactCountryFlag from 'react-country-flag';
 import { Button, Tooltip,  } from "antd";
 import { FormattedMessage } from "react-intl";
 import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
 import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 
 const ButtonGroup = Button.Group;
 
@@ -56,17 +55,17 @@ const LeadsJunkList = (props) => {
 };
   return (
     <>
- <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
- <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[9.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]"></div>
-        <div className=" md:w-[4.2rem] ">Phone #</div>
-        <div className="md:w-[5.8rem]">Country</div>
-        <div className="md:w-[8.5rem]">Company</div>
-        <div className="md:w-[3.8rem]">Sector</div> 
-        <div className="md:w-[5.2rem]">Assigned to</div>
-        <div className="md:w-[1.5rem]">Owner</div>
-        <div className="md:w-[3.3rem]">Reinstate</div>
+  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+ <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+ <div className=" md:w-[12.1rem]">Name</div>
+        <div className=" md:w-[9.1rem]"></div>
+        <div className=" md:w-[7.2rem] ">Phone #</div>
+        <div className="md:w-[8.8rem]">Country</div>
+        <div className="md:w-[10.5rem]">Company</div>
+        <div className="md:w-[6.8rem]">Sector</div> 
+        <div className="md:w-[8.2rem]">Assigned to</div>
+        <div className="md:w-[5.5rem]">Owner</div>
+        <div className="md:w-[7.3rem]">Reinstate</div>
         <div className="w-12">Action</div>
 
       </div>
@@ -74,13 +73,13 @@ const LeadsJunkList = (props) => {
         dataLength={junkedLeadsData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingJunkedLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingJunkedLeads?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
       {junkedLeadsData.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
-       
+         const countryCode = item.address[0].country_alpha2_code
          const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -102,12 +101,12 @@ const LeadsJunkList = (props) => {
                } `;
                     return (
                       <div>
-                      <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3">
+                      <div className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3">
                               <div class="flex"> 
                           <div className=" flex font-medium flex-col w-[13rem]   max-sm:w-full">
                           <div className="flex max-sm:w-full"> 
 <div>
-<SubTitle>
+
       <MultiAvatar
         primaryTitle={item.name}
         imageId={item.imageId}
@@ -115,7 +114,7 @@ const LeadsJunkList = (props) => {
         imgWidth={"1.8em"}
         imgHeight={"1.8em"}
       />
-    </SubTitle>
+   
 </div>
                              <div class="w-[4%]">
 
@@ -125,29 +124,26 @@ const LeadsJunkList = (props) => {
                                   <Tooltip>
                                     <div class="max-sm:w-full justify-between flex md:flex-col">
                                      
-                                      <h4 class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
+                                      <div class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
                                       {item.name}
                                      &nbsp;&nbsp;
                                      {date === currentdate ? (
-    <span
-      style={{
-        color: "tomato",
-        fontWeight: "bold",
-      }}
+    <span class="text-xs text-[tomato] font-bold" 
+      
     >
       New
     </span>
   ) : null}   
 
  
-                                      </h4>
+                                      </div>
                                       </div>
                                   </Tooltip>
                                   </div>
                                   </div>
                           </div>
 
-                          <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+                          <div class="flex flex-row items-center md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between">
 
 <div>
 <ButtonGroup>
@@ -209,53 +205,45 @@ props.updateTypeForLead(item.leadsId,typ)
 </div>
 <div class="flex"> 
                           <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                     <h4 class=" text-[0.82rem] text-cardBody font-poppins">  
+                     <div class=" text-[0.82rem] text-cardBody font-poppins">  
                      {item.countryDialCode && item.phoneNumber ? (
 `${item.countryDialCode} ${item.phoneNumber}`
 ) : (
 "Not Available"
 )} 
                     
-                     </h4>
+                     </div>
                  </div>
                  <div className=" flex font-medium flex-col justify-center md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                            <h4 class=" text-[0.82rem] text-cardBody font-poppins">
-                            <ReactCountryFlag
-                  countryCode={item.countryAlpha2Code}
-                  svg
-                  style={{
-                    width: '1em',
-                    height: '1em',
-                  }}
-                  title={item.country}
-                />
-                &nbsp;
-                {item.address && item.address.length && item.address[0].country}
-                            </h4>
+                            <div class=" text-[0.82rem] text-cardBody font-poppins">
+                            <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                            </div>
                         </div>
                
                  </div>
                  <div class="flex"> 
                  <div className=" flex font-medium flex-col justify-center  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
-                     <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
+                     <div class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
                      <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
 {item.companyName || "Not Available"}
 </Link>
 
-                     </h4>
+                     </div>
                  </div>
                  <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
               {item.url !== null ? (
         <Tooltip title={item.url}>
           <span
             //type="edit"
-            style={{ cursor: "pointer" }}
+            class="cursor-pointer"
             onClick={() => {}}
           >
             {" "}
             <a href={`https://www.${item.url}`} target="_blank">
               <OpenInBrowserIcon
-                style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
+                className=" !text-base cursor-pointer text-green-800"
               />
             </a>
           </span>
@@ -264,9 +252,9 @@ props.updateTypeForLead(item.leadsId,typ)
                   </div>
                  
                           <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
-                              <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
+                              <div class=" text-[0.82rem] text-cardBody font-poppins">   
                               {item.sector}
-                              </h4>
+                              </div>
                           </div>
                           </div>
                           <div class="flex mb-1"> 
@@ -300,7 +288,7 @@ props.updateTypeForLead(item.leadsId,typ)
         />
       </span>
              </div>
-             <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+             <div className=" flex font-medium items-center  md:w-32 max-sm:flex-row w-full  ">
                               <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                               </div>
@@ -317,7 +305,7 @@ Resinstate
                           <div>
       <Tooltip title="Edit">
         <BorderColorIcon
-          style={{ cursor: "pointer",fontSize: "0.8rem" }}
+         className=" !text-base cursor-pointer"
           onClick={() => {
             props.setEditLeads(item);
             handleUpdateLeadsModal(true);
@@ -336,11 +324,7 @@ Resinstate
          <Tooltip title="Delete">
       <DeleteOutlined
         type="delete"
-        style={{
-          cursor: "pointer",
-          color: "red",
-          fontSize: "1rem",
-        }}
+        className=" !text-base cursor-pointer text-[red]"
       />
       </Tooltip>
     </StyledPopconfirm>
@@ -353,15 +337,10 @@ Resinstate
               <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
                 <div>
               <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-      <span
-        style={{
-          cursor: "pointer",
-        }}
+      <span className=" cursor-pointer"
+       
       >
-      <LocationOnIcon   style={{
-          cursor: "pointer",
-          fontSize: "0.8rem"
-        }}/>
+      <LocationOnIcon  className=" !text-base cursor-pointer"/>
       </span>
     </Tooltip>
     </div>
@@ -369,7 +348,7 @@ Resinstate
     <Tooltip title={item.email}>
         <MailOutlineIcon
           type="mail"
-          style={{ cursor: "pointer",fontSize:"0.8rem"  }}
+          className=" !text-base cursor-pointer"
           onClick={() => {
             handleSetCurrentLeadsId(item);
             props.handleLeadsEmailDrawerModal(true);
@@ -385,7 +364,7 @@ Resinstate
                     )
                 })}
                 </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       <UpdateLeadsModal
         item={currentLeadsId}
         updateLeadsModal={updateLeadsModal}

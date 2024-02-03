@@ -8,7 +8,6 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { MultiAvatar } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -26,7 +25,6 @@ import {
   handleLeadsConfirmationModal
 } from "../../../Leads/LeadsAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ReactCountryFlag from "react-country-flag";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
@@ -88,16 +86,16 @@ const LeadsCardList = (props) => {
    return (
     <>
      <div className=' flex justify-end sticky top-28 z-auto'>
-      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[6.1rem]"></div>
-        <div className=" md:w-[4.2rem] ">Phone #</div>
-        <div className="md:w-[5.8rem]">Country</div>
-        <div className="md:w-[8.5rem]">Company</div>
-        <div className="md:w-[3.8rem]">Sector</div> 
-        <div className="md:w-[5.2rem]">Assigned to</div>
-        <div className="md:w-[1.5rem]">Owner</div>
+     <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12.1rem]">Name</div>
+        <div className=" md:w-[9.1rem]"></div>
+        <div className=" md:w-[7.2rem] ">Phone #</div>
+        <div className="md:w-[10.8rem]">Country</div>
+        <div className="md:w-[10.5rem]">Company</div>
+        <div className="md:w-[6.8rem]">Sector</div> 
+        <div className="md:w-[8.2rem]">Assigned to</div>
+        <div className="md:w-[4.5rem]">Owner</div>
         <div className="md:w-[3.3rem]">Qualify</div>
         <div className="w-12"></div>
 
@@ -106,7 +104,7 @@ const LeadsCardList = (props) => {
         dataLength={leadsAllData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingLeads?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+        loader={fetchingLeads?<div class="flex justify-center" >Loading...</div>:null}
         height={"75vh"}
         style={{overflowX:"hidden"}}
       >
@@ -141,7 +139,7 @@ const LeadsCardList = (props) => {
           return (
             <div>
               <div
-                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
@@ -166,11 +164,8 @@ const LeadsCardList = (props) => {
                               {item.name}
                               &nbsp;&nbsp;
                               {date === currentdate ? (
-                                <span class="text-xs"
-                                  style={{
-                                    color: "tomato",
-                                    fontWeight: "bold",
-                                  }}
+                                <span class="text-xs text-[tomato] font-bold"
+                                  
                                 >
                                   New
                                 </span>
@@ -286,18 +281,13 @@ const LeadsCardList = (props) => {
                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
-                        <span
-                          style={{ cursor: "pointer" }}
+                        <span class="cursor-pointer"
                           onClick={() => {}}
                         >
                           {" "}
                           <a href={`https://www.${item.url}`} target="_blank">
                             <OpenInBrowserIcon
-                              style={{
-                                cursor: "pointer",
-                                color: "green",
-                                fontSize: "1rem",
-                              }}
+                               className=" !text-base cursor-pointer text-green-800"
                             />
                           </a>
                         </span>
@@ -356,10 +346,7 @@ const LeadsCardList = (props) => {
                             props.handleLeadsConfirmationModal(true);
                          
                           }}
-                          style={{
-                            cursor: "pointer",
-                            fontSize: "1.5rem",
-                          }}
+                          className=" !text-base cursor-pointer "
                         />
                       </Tooltip>
                      
@@ -374,11 +361,7 @@ const LeadsCardList = (props) => {
                             handleLeadsNotesDrawerModal(true);
                          
                           }}
-                          style={{
-                            color: "green",
-                            cursor: "pointer",
-                            fontSize: "1rem",
-                          }}
+                          className=" !text-base cursor-pointer text-green-800"
                         />
                       </Tooltip>
                     </div>
@@ -392,7 +375,7 @@ const LeadsCardList = (props) => {
                         }
                       >
                         <AddchartIcon
-                          style={{ fontSize: "1rem", cursor: "pointer" }}
+                          className=" !text-base cursor-pointer "
                           onClick={() => {
                                 handleRowData(item);
                             props.handleCETmodal(true);
@@ -408,11 +391,7 @@ const LeadsCardList = (props) => {
                       <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                            style={{
-                              color: "grey",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                             className=" !text-base cursor-pointer text-[gray]"
                             onClick={() => {
                               props.setEditLeads(item);
                               handleUpdateLeadsModal(true);
@@ -431,11 +410,7 @@ const LeadsCardList = (props) => {
                      <Tooltip title="Delete">
                           <DeleteOutlined
                             type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                            className=" !text-base cursor-pointer text-[red]"
                           />
                        </Tooltip>
                         </StyledPopconfirm>
@@ -449,16 +424,11 @@ const LeadsCardList = (props) => {
                         overlayStyle={{ maxWidth: "300px" }}
                         title={dataLoc}
                       >
-                        <span
-                          style={{
-                            cursor: "pointer",
-                          }}
+                        <span class="cursor-pointer"
+                         
                         >
                           <LocationOnIcon
-                            style={{
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                             className=" !text-base cursor-pointer"
                           />
                         </span>
                       </Tooltip>
@@ -467,7 +437,7 @@ const LeadsCardList = (props) => {
                       <Tooltip title={item.email}>
                         <MailOutlineIcon
                           type="mail"
-                          style={{ cursor: "pointer", fontSize: "1rem" }}
+                          className=" !text-base cursor-pointer"
                           onClick={() => {
                             handleSetCurrentLeadsId(item);
                             props.handleLeadsEmailDrawerModal(true);
@@ -483,7 +453,7 @@ const LeadsCardList = (props) => {
           );
         })}
          </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       <UpdateLeadsModal
         item={currentLeadsId}

@@ -7,8 +7,6 @@ import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getSources} from "../../../Settings/Category/Source/SourceAction"
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import { StyledLabel } from "../../../../Components/UI/Elements";
-import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -131,8 +129,8 @@ function UpdateLeadsForm (props) {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col ">
                 <div class=" h-full w-[47.5%] max-sm:w-wk"   >
-                    <Spacer/>
-                    <div class=" flex  flex-nowrap">
+                   
+                    <div class=" flex  flex-nowrap mt-3">
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
@@ -210,7 +208,7 @@ function UpdateLeadsForm (props) {
                       </div>
                     </div>
                   </div>
-                    <StyledLabel>
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="email"
                     type="text"                   
@@ -222,7 +220,7 @@ function UpdateLeadsForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
+                    </div>
                     <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[35%]">
                   
@@ -243,7 +241,7 @@ function UpdateLeadsForm (props) {
                       
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <FastField
                         //isRequired
                         type="text"
@@ -254,11 +252,11 @@ function UpdateLeadsForm (props) {
                         inlineLabel
                         width={"100%"}
                         />     
-                        </StyledLabel>              
+                        </div>              
                          </div>
                   </div>
-                  <Spacer/>
-                    <StyledLabel>
+
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <Field
                     isRequired
                     name="companyName"
@@ -275,8 +273,8 @@ function UpdateLeadsForm (props) {
                     accounts={accounts}
                     inlineLabel
                     />
-                    </StyledLabel>
-                    <StyledLabel>
+                    </div>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="url"
                     type="text"
@@ -289,10 +287,10 @@ function UpdateLeadsForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
-                  <Spacer />
+                    </div>
                   
-                  <div class=" flex justify-between">
+                  
+                  <div class=" flex justify-between mt-3">
                    <div class=" w-1/2 max-sm:w-wk">
                       <FastField
                         name="sectorId"
@@ -332,11 +330,11 @@ function UpdateLeadsForm (props) {
            </div>
                 </div>
               
-                     <Spacer/>
+                   
           
-                <div class=" flex justify-between max-sm:flex-col">
+                <div class=" flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-1/2 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="vatNo"
                         type="text" 
@@ -352,10 +350,10 @@ function UpdateLeadsForm (props) {
                         component={InputComponent}
                         inlineLabel
                         />
-                        </StyledLabel>
+                        </div>
                     </div>
                     <div class=" w-2/5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -371,15 +369,15 @@ function UpdateLeadsForm (props) {
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>                    
                     </div>
                  </div>
 
                  <div class=" h-3/4 w-[47.5%] max-sm:w-wk "   >
-                   <Spacer/>
+                  
                    
-                    <div class="">
+                    <div class=" mt-3">
                     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
@@ -447,8 +445,8 @@ function UpdateLeadsForm (props) {
       )}
     </Listbox>
                     </div>
-                  <Spacer />
-                  <StyledLabel>
+                 
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -459,10 +457,10 @@ function UpdateLeadsForm (props) {
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                  
-                 <Spacer/>
-                 <StyledLabel>
+               
+                 <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -473,11 +471,11 @@ function UpdateLeadsForm (props) {
                     isColumn
                     component={TextareaComponent}
                     /> 
-                    </StyledLabel>                 
+                    </div>                 
                 </div>
               </div>
-              <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"

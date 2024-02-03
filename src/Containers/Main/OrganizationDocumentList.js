@@ -88,9 +88,12 @@ this.setState({
     const{user}=this.props;
     return (
       <div className="overflow-y-auto max-h-[39rem]">
-        <CardWrapper>
+     <div class="flex flex-col  justify-center flex-wrap w-full max-sm:justify-between  max-sm:items-center">    
           {this.props.repositoryData.map((item) => (
-            <CardElement key={item.id}>
+            <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[4rem] 
+            text-[#444444] m-3 p-1 w-wk flex flex-col  "
+            
+            key={item.id}>
               <div className="flex flex-row justify-between w-wk max-sm:flex-col">
                 <div className="flex">
                   <div className="flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between">
@@ -164,7 +167,7 @@ this.setState({
            {user.repositoryCreateInd ===true && (
             <DeleteIcon
               type="delete"
-              style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
+              className=" !text-base cursor-pointer text-[red]"
             />
             )} 
           </StyledPopconfirm>
@@ -178,7 +181,7 @@ this.setState({
             <DownloadIcon
               type="download"
 
-              style={{ cursor: "pointer",fontSize: "1rem",}}
+              className=" !text-base cursor-pointer"
             />
                 </a>
             {/* )} */}
@@ -186,9 +189,9 @@ this.setState({
                         </div>
                 </div>
               </div>
-            </CardElement>
+            </div>
           ))}
-        </CardWrapper>
+        </div>
       </div>
     );
   }
@@ -213,33 +216,3 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationDocumentList);
 
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-const CardElement = styled.div`
-  border-radius: 0.75rem;
-  border: 3px solid #EEEEEE;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0.25em 0.62em #aaa;
-  height: 4rem;
-  color: rgb(68, 68, 68);
-  margin: 1em;
-  padding: 0.2rem;
-  width: -webkit-fill-available;
-  display: flex;
-  flex-direction: column;
-
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    margin: 0.25em;
-    height: 7rem;
-  }
-`;

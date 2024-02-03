@@ -14,7 +14,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar2,
-  SubTitle,
 } from "../../../../Components/UI/Elements";
 import {
   getRecruiterList,
@@ -70,19 +69,20 @@ function OpportunityCloseCard(props) {
         dataLength={closeOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCloseOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+        loader={fetchingCloseOpportunity?<div class="flex justify-center" >Loading...</div> :null}
         height={"86vh"}
       >
- <CardWrapper>      
+<div class="flex  justify-center flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">    
               {closeOpportunity.map((item) => {
                  
                  var findProbability = 0;
                  return (
 
-                    <CardElement>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[16rem] 
+                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col  ">
 
                       <div class="flex items-center justify-between ">
-                      <h4>Name</h4>
+                      <div>Name</div>
                         <Header>
                         <Link
           toUrl={`opportunity/${item.opportunityId}`}
@@ -101,14 +101,14 @@ function OpportunityCloseCard(props) {
            
                         <div class="flex  justify-between">
                             <h3>Customer</h3>
-                            <h4>{item.customer}</h4>
+                            <div>{item.customer}</div>
                         </div>
                         <div class="flex justify-between">
                             <div>
-                    <h4>Sponsor</h4> 
+                    <div>Sponsor</div> 
                     </div>
                     <div>
-                    <SubTitle>
+                  
             {item.contactName === null ? "None" :
               <MultiAvatar2
                 primaryTitle={item.contactName}
@@ -118,24 +118,24 @@ function OpportunityCloseCard(props) {
                 imgHeight={"1.8em"}
               />
             }
-            </SubTitle>
+            
             </div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Start Date</h4> 
-            <h4>{moment(item.startDate).format("ll")}</h4>
+                    <div>Start Date</div> 
+            <div>{moment(item.startDate).format("ll")}</div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Proposal Amount</h4> 
-            <h4><span>
+                    <div>Proposal Amount</div> 
+            <div><span>
             <CurrencySymbol currencyType={item.currency} />
             &nbsp;
             {item.proposalAmount}
-          </span></h4>
+          </span></div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Stages</h4> 
-            <h4><span>
+                    <div>Stages</div> 
+            <div><span>
             <Dropdown
               overlay={
                 <div>
@@ -158,19 +158,19 @@ function OpportunityCloseCard(props) {
                 {" "}
                 <Progress
                   type="circle"
-                  style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+                  className=" !text-base cursor-pointer text-[red]"
                   percent={findProbability}
                   width={30}
                   strokeColor={"#005075"}
                 />
               </Tooltip>
             </Dropdown>
-          </span></h4>
+          </span></div>
                     </div>  
                     <div class="flex  justify-between" >
-    <h4>
+    <div>
     Sales Rep
-    </h4>
+    </div>
     <span>
             <MultiAvatar2
               primaryTitle={item.assignedTo}
@@ -180,9 +180,9 @@ function OpportunityCloseCard(props) {
             </span>
 </div>
 <div class="flex  justify-between" >
-    <h4>
+    <div>
     Owner
-    </h4>
+    </div>
     <Tooltip title={item.ownerName}>
           <span>
             <MultiAvatar2
@@ -210,17 +210,14 @@ function OpportunityCloseCard(props) {
        
          >
           <LockIcon
-                style={{
-                  fontSize: "0.8rem",
-                  cursor: "pointer",
-                }}
+               className=" !text-base cursor-pointer"
               />
             </span>
      </Tooltip> 
      &nbsp;
      <span
          
-            style={{ cursor: "pointer" }}
+         className=" cursor-pointer "
             onClick={() => {
                 props.getAllRecruitmentByOppId(item.opportunityId);
                 props.getAllRecruitmentPositionByOppId(item.opportunityId);
@@ -236,7 +233,8 @@ function OpportunityCloseCard(props) {
             >
               {user.pulseAccessInd === true && (
                 <MonitorHeartIcon
-                  style={{ fontSize: "0.8rem", color: "#df9697" }}
+                className=" !text-base cursor-pointer text-[#df9697]"
+                 
                 />
               )}
             </span>
@@ -253,14 +251,17 @@ function OpportunityCloseCard(props) {
             {user.opportunityUpdateInd ===true && (
               
             <span
-              style={{ cursor: "pointer", color: "grey" }}
+            className=" !text-base cursor-pointer text-[grey]"
+             
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
                 handleSetCurrentOpportunityId(item);
               }}
             >
-                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
+                 <BorderColorIcon
+                 className=" !text-base cursor-pointer "
+                   style={{fontSize:"0.8rem" }}/>
               </span>
            )}
           </Tooltip>
@@ -272,7 +273,7 @@ function OpportunityCloseCard(props) {
              {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
              {user.opportunityDeleteInd ===true && (
             <DeleteOutlined
-            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
+            type="delete" className=" !text-base cursor-pointer text-[red]" />
              )}
           </StyledPopconfirm>
                            </div>
@@ -280,10 +281,10 @@ function OpportunityCloseCard(props) {
                       
                        
                         
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
+              </div>
   
 
       </InfiniteScroll>
@@ -395,33 +396,4 @@ width:100%
 text-align:center
   }
 `
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.75rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 17rem;
-    color: rgb(68,68,68);
-    margin: 1em;
-    padding: 0.2rem;
-    width: 19vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width:  -webkit-fill-available;
-    
-  }
-`
+
