@@ -60,33 +60,33 @@ function EventCardList (props) {
       <div className=' flex justify-end sticky top-28 z-auto'>
       <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
    
-         <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[6.2rem]"><FormattedMessage
+         <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[8.8rem]"><FormattedMessage
                   id="app.type"
                   defaultMessage="type"
                 /></div>
-        <div className=" md:w-[6.23rem]"><FormattedMessage
+        <div className=" md:w-[13.23rem]"><FormattedMessage
                   id="app.subject"
                   defaultMessage="subject"
                 /></div>
-        <div className=" md:w-[7.25rem] "><FormattedMessage
+        <div className=" md:w-[9.25rem] "><FormattedMessage
                   id="app.start"
                   defaultMessage="start"
                 /></div>
-        <div className=" md:w-[7.43rem] "><FormattedMessage
+        <div className=" md:w-[8.43rem] "><FormattedMessage
                   id="app.end"
                   defaultMessage="end"
                 /></div>
-        <div className="md:w-[4.2rem]"><FormattedMessage
+        <div className="md:w-[9.7rem]"><FormattedMessage
                   id="app.team"
                   defaultMessage="team"
                 /></div>
-        <div className="md:w-[4.32rem]"><FormattedMessage
+        <div className="md:w-[6.32rem]"><FormattedMessage
                   id="app.include"
                   defaultMessage="include"
                 /></div>
      
-        <div className="md:w-[5.15rem]"><FormattedMessage
+        <div className="md:w-[6.15rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
@@ -113,7 +113,7 @@ function EventCardList (props) {
       {eventListRangeByUserId.map((item) => { 
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-[2.75rem] items-center p-3"
+                            <div className="flex rounded-xl  mt-4 bg-white h-[2.75rem] items-center p-3"
                                 style={{
                                     // borderBottom: "3px dotted #515050"
                                 }}>
@@ -136,7 +136,7 @@ function EventCardList (props) {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[5.26rem] max-sm:flex-row  w-full ">
+                                <div className=" flex font-medium flex-col  md:w-[12.26rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
@@ -144,19 +144,21 @@ function EventCardList (props) {
                                 </div>
                                 </div>
                                 <div class="flex  items-center md:w-[55rem]">
-                                <div className=" flex font-medium flex-col md:w-[11.23rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[8.23rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[12.32rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[10.32rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
-                               
+                                <div className=" flex font-medium flex-col md:w-[9.32rem] max-sm:flex-row  w-full">
+                                   
+                                </div>
                                 <div className=" flex font-medium flex-col md:w-[7.31rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div> */}
 
@@ -187,7 +189,7 @@ function EventCardList (props) {
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-[3.69rem] max-sm:flex-row  w-full ">
+                                <div className="flex font-medium flex-col md:w-[4.69rem] max-sm:flex-row  w-full ">
                                     {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
@@ -216,7 +218,7 @@ function EventCardList (props) {
                                     </div>
                                 </div>
                                 </div>
-                                <div class="flex md:w-[24rem]">
+                                <div class="flex md:w-[14rem]">
                                
                                 <div className="flex font-medium flex-col md:w-[4.12rem] max-sm:flex-row  w-full ">
                        

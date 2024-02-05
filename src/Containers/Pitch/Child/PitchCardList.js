@@ -331,16 +331,23 @@ const PitchCardList = (props) => {
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
-              {item.assignedTo === null ? (
-                "None"
+                      {item.assignedTo === null ? (
+                "Not available"
               ) : (
-                <MultiAvatar
-                  primaryTitle={item.assignedTo}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
-                />
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
+                          <MultiAvatar
+                            primaryTitle={item.assignedTo}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                        )}
+                        </>
               )}
-            </span>
+                      </span>
              
                                     </div>
                                 </div>

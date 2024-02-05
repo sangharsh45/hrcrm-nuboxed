@@ -297,7 +297,7 @@ function UpdateEventForm (props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-          <div class=" flex justify-around max-sm:flex-col">
+          <div class=" flex justify-between max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <Field
                     isRequired

@@ -5,9 +5,9 @@ import { Select } from "../../../../Components/UI/Elements";
 import FWLogo from "../../../../Assets/Images/Erp.jpg";
 import FWLogo1 from "../../../../Assets/Images/Production.jpg";
 import FWLogo2 from "../../../../Assets/Images/repair.jpg";
-import FWLogo3 from "../../../../Assets/Images/elearning.jpg";
+import FWLogo3 from "../../../../Assets/Images/ordermanagement.jpg";
 import FWLogo4 from "../../../../Assets/Images/logistic.jpg";
-import FWLogo5 from "../../../../Assets/Images/payment.jpg";
+import FWLogo5 from "../../../../Assets/Images/proceurement.jpg";
 const { Option } = Select;
 
 class SingleModuleList extends Component {
