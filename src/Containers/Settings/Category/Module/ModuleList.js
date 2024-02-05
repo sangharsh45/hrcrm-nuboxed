@@ -5,7 +5,7 @@ import {addingModules,getModules} from "../Module/ModuleAction"
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
-import {  Switch } from "antd";
+import {  Popconfirm, Switch } from "antd";
 import moment from "moment";
 import FWLogo from "../../../../Assets/Images/crm.jpg";
 import FWLogo1 from "../../../../Assets/Images/Im.jpg";
@@ -313,22 +313,23 @@ const handleCrmClick = (checked) => {
             <div class="flex justify-center mt-1">
                     <div class=" text-sm font-semibold">CRM</div>
                     <div   class=" ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleCrmClick}
+                        onConfirm={() => handleCrmClick(!crmStatus)}
                         // onCancel={handleCrmCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "5em" }}
-                          onChange={handleCrmClick}
+                          onChange={() => {}}
+                          // onChange={handleCrmClick}
                           checked={crmStatus || crmInd}
                           // checked={crmStatus || crmInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div>
                     </div>
@@ -343,22 +344,22 @@ const handleCrmClick = (checked) => {
              <div class="flex justify-center mt-1">
                     <div class=" text-sm font-semibold  ml-2">IM</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleImClick}
-                        onCancel={handleImCancel}
+                        onConfirm={() => handleImClick(!imStatus)}
+                        // onCancel={handleImCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "5em" }}
-                          onChange={handleImClick}
-                         
+                          // onChange={handleImClick}
+                          onChange={() => {}}
                           checked={imStatus || imInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div>
                     </div>
@@ -407,16 +408,24 @@ const handleCrmClick = (checked) => {
             <div class="flex justify-center mt-1">
                       <div class=" text-sm  ml-2 font-semibold">HR</div>
                     <div   class="  ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleHrClick(!hrStatus)}
+                        // onCancel={handleHrCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
                    
                         <Switch
                          style={{ width: "5em" }}
-                         onChange={handleHrClick}
+                         onChange={() => {}}
                         
                          checked={hrStatus || hrInd}
                          checkedChildren="Yes"
                          unCheckedChildren="No"
                          
                         />
+                              </Popconfirm>
                     
                     </div> 
                     </div>
@@ -435,21 +444,22 @@ const handleCrmClick = (checked) => {
            
                     <div class=" text-sm  ml-2 font-semibold">Rcruitpro</div>
                     <div   class=" ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleRecruitProClick}
+                        onConfirm={() => handleRecruitProClick(!recruitProStatus)}
                         // onCancel={handleRecruitProCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "5em" }}
-                          onChange={handleRecruitProClick}
+                          onChange={() => {}}
+                          // onChange={handleRecruitProClick}
                           checked={recruitProStatus || recruitProInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div>
                     </div>
@@ -463,21 +473,22 @@ const handleCrmClick = (checked) => {
             <div class="flex justify-center mt-1">
                     <div class=" text-sm  ml-2 font-semibold">Elearning</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleElearningClick}
-                        onCancel={handleElearningCancel}
+                        onConfirm={() => handleElearningClick(!elearningStatus)}
+                        // onCancel={handleElearningCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "5em" }}
-                          onChange={handleElearningClick}
+                          onChange={() => {}}
+                          // onChange={handleElearningClick}
                           checked={elearningStatus || elearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div> 
                     </div>

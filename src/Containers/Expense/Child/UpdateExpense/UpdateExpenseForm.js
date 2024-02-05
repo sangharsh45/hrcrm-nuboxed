@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {  TextInput } from "../../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
+import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
 import { connect } from "react-redux";
 import { getExpenses } from "../../../Settings/Expense/ExpenseAction";
 import { updateExpense  } from "../../ExpenseAction";
@@ -67,6 +68,7 @@ function UpdateExpenseForm(props) {
   }
   useEffect(() => {
     props.getExpenses();
+    props.getCurrencyList();
   }, []);
   function handleCurrencyChange(currency, id) {
     console.log(currency);
@@ -164,7 +166,7 @@ function UpdateExpenseForm(props) {
     if (status === "Success") {
       props.getExpenseById(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {
@@ -274,10 +276,12 @@ function UpdateExpenseForm(props) {
                   disabled
                   defaultValue={props.user.currency}
                 >
-                  {props.currencies.map((item) => {
+                 {props.currencyList.map((item) => {
                     return (
-                      <Option value={item.currencyName} defaultValue={props.user.address[0].country}>
-                        {item.currencyName}
+                      <Option value={item.currency_name} 
+                      // defaultValue={props.user.address[0].country}
+                       >
+                        {item.currency_name}
                       </Option>
                     );
                   })}
@@ -324,11 +328,11 @@ function UpdateExpenseForm(props) {
   );
 }
 
-const mapStateToProps = ({ expense, auth,expenses }) => ({
+const mapStateToProps = ({ expense, auth,currency,expenses }) => ({
   // addingExpense: expense.addingExpense,
   updateExpense:expense.updateExpense,
   updateExpenseError:expense.updateExpenseError,
-  currencies: auth.currencies,
+  currencyList: currency.currencyList,
   userId: auth.userDetails.userId,
   user: auth.userDetails,
   setEditingExpense:expense.setEditingExpense,
@@ -338,7 +342,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
        updateExpense,
-    //   getExpenseById,
+       getCurrencyList,
       getExpenses,
     },
     dispatch

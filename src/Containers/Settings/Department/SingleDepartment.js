@@ -2,13 +2,15 @@ import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip } from "antd";
+import {linkDepartmentDocumentToggle} from "../Department/DepartmentAction"
+import { Button, Popconfirm, Switch, Tooltip } from "antd";
 import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
+import DepartmentStatusToggle from "./DepartmentStatusToggle";
 const { Option } = Select;
 
 const SingleDepartment = (props) => {
@@ -47,21 +49,52 @@ const SingleDepartment = (props) => {
     };
     props.addingDeptModules(data, departmentId);
   };
-  const [mandatoryStatus, setMandatoryStatus] = useState(mandetoryInd);
-  useEffect(() => {
-    setMandatoryStatus(mandetoryInd);
-  }, [mandetoryInd]);
+  const [toggle, setToggle] = React.useState(mandetoryInd);
+  function handleToggleCollection(item) {
+    if (mandetoryInd) {
+      props.linkDepartmentDocumentToggle({
+        departmentName:departmentName,
+        departmentId: departmentId,
+        editInd:false,
+        mandetoryInd: mandetoryInd ? false : true,
+      },
+      departmentId,
+      );
+
+    } else {
+      props.linkDepartmentDocumentToggle({
+        departmentName: departmentName,
+        departmentId: departmentId,
+        editInd:false,
+        mandetoryInd: mandetoryInd ? false : true,
+      },
+      departmentId,
+      );
+    }
+  }
+
+  function handleCancel() {
+    if (mandetoryInd) {
+      setToggle(true);
+    } else {
+      setToggle(false);
+    }
+  }
+  // useEffect(() => {
+  //   setMandatoryStatus(mandetoryInd);
+  // }, [mandetoryInd]);
   
-  const handleMandatoryClick = (checked) => {
-    setMandatoryStatus(checked);
-    let data = {
-      value: checked,
-      departmentId:departmentId,
-      orgId: props.orgId,
-      type: "mandatory",
-    };
-    props.addingDeptModules(data, departmentId);
-  };
+  // const handleMandatoryClick = (checked) => {
+  //   setMandatoryStatus(checked);
+  //   let data = {
+  //     value: checked,
+     
+  //     departmentId:departmentId,
+  //     orgId: props.orgId,
+  //     type: "mandatory",
+  //   };
+  //   props.linkDepartmentDocumentToggle(data, departmentId);
+  // };
 
   const [erpStatus, setErpStatus] = useState(erpInd);
 
@@ -289,10 +322,17 @@ const SingleDepartment = (props) => {
                   <div className="w-[9rem]">
                   <div class=" font-semibold" >{departmentName}</div>
                   </div>
-                  {mandetoryInd === true && (
+                  {/* {mandetoryInd === true && ( */}
   <>
-                    <div class=" text-sm  ml-2">Mandatory</div>
-                    <div   class=" w-[7%] ml-2">
+                    {/* <div class=" text-sm  ml-2">Mandatory</div> */}
+                    <div   class=" w-[15%] ml-2">
+                    
+                    <DepartmentStatusToggle
+                      mandetoryInd={mandetoryInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleMandatoryClick}
@@ -300,60 +340,61 @@ const SingleDepartment = (props) => {
                         okText="Yes"
                         cancelText="No"
                       > */}
-                        <Switch
+                        {/* <Switch
                           style={{ width: "4em" }}
                           onChange={handleMandatoryClick}
                           checked={mandatoryStatus || mandetoryInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
-                        />
+                        /> */}
                       {/* </Popconfirm> */}
-                    </div>
+                    {/* </div> */}
                     </>
-)}
+{/* )} */}
 <div class=" flex flex-col w-[80%] ">
 <div class=" flex flex-row ">
 {moduleMapper.erpInd === true && (
   <>
-                    <div class=" text-sm w-[2rem] ml-4">ERP</div>
-                    <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={handleErpClick}
-                        onCancel={handleErpCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      > */}
-                        <Switch
-                          style={{ width: "4em" }}
-                          onChange={handleErpClick}
-                          checked={erpStatus || erpInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      {/* </Popconfirm> */}
-                    </div>
-                    </>
+    <div class="text-sm w-[2rem] ml-4">ERP</div>
+    <div class="w-[7%] ml-2">
+      <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleErpClick(!erpStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
+        <Switch
+          style={{ width: "4em" }}
+          onChange={() => {}}
+          checked={erpStatus || erpInd}
+          checkedChildren="Yes"
+          unCheckedChildren="No"
+        />
+      </Popconfirm>
+    </div>
+  </>
 )}
+
 {moduleMapper.crmInd === true && (
   <>
                   <div class=" text-sm w-[2rem] ml-4 ">CRM</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleCrmClick}
-                        onCancel={handleCrmCancel}
+                        onConfirm={() => handleCrmClick(!crmStatus)}
+                        // onCancel={handleCrmCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleCrmClick}
+                          onChange={() => {}}
+                          // onChange={handleCrmClick}
                           checked={crmStatus || crmInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -361,15 +402,20 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[2rem] ml-4">IM</div>
                     <div   class=" w-[7%] ml-2">
-                 
+                    <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleImClick(!imStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleImClick}
+                          onChange={() => {}}
                           checked={imStatus || imInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                 
+                    </Popconfirm>
                     </div>
                     </>
 )}
@@ -377,21 +423,21 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[5rem] ml-4">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleRecruitProClick}
-                        onCancel={handleRecruitProCancel}
+                        onConfirm={() => handleRecruitProClick(!recruitProStatus)}
+                        // onCancel={handleRecruitProCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleRecruitProClick}
+                          onChange={() => {}}
                           checked={recruitProStatus || recruitProInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -400,21 +446,21 @@ const SingleDepartment = (props) => {
 
                     <div class=" text-sm w-[2rem] ml-4">HR</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleHrClick}
-                        onCancel={handleHrCancel}
+                        onConfirm={() => handleHrClick(!hrStatus)}
+                        // onCancel={handleHrCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleHrClick}
+                          onChange={() => {}}
                           checked={hrStatus || hrInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -423,21 +469,21 @@ const SingleDepartment = (props) => {
 
                     <div class=" text-sm w-[5rem]  ml-4">Elearning</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleElearningClick}
-                        onCancel={handleElearningCancel}
+                        onConfirm={() => handleElearningClick(!elearningStatus)}
+                        // onCancel={handleElearningCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleElearningClick}
+                          onChange={() => {}}
                           checked={elearningStatus || elearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -484,21 +530,21 @@ const SingleDepartment = (props) => {
 
                     <div class=" text-sm w-[5rem] ml-4">Production</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleProductionClick}
-                        onCancel={handleProductionCancel}
+                        onConfirm={() => handleProductionClick(!productionStatus)}
+                        // onCancel={handleProductionCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleProductionClick}
+                          onChange={() => {}}
                           checked={productionStatus || productionInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -507,21 +553,21 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Repair</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleRepairClick}
-                        onCancel={handleRepairCancel}
+                        onConfirm={() => handleRepairClick(!repairStatus)}
+                        // onCancel={handleRepairCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleRepairClick}
+                          onChange={() => {}}
                           checked={repairStatus || repairInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -545,21 +591,21 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[9rem] ml-4">Order Management</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleOrderManagementClick}
-                        onCancel={handleOrderManagementCancel}
+                        onConfirm={() => handleOrderManagementClick(!orderManagStatus)}
+                        // onCancel={handleOrderManagementCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleOrderManagementClick}
+                          onChange={() => {}}
                           checked={orderManagStatus || orderManagementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -567,21 +613,21 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleLogisticClick}
-                        onCancel={handleLogisticCancel}
+                        onConfirm={() => handleLogisticClick(!logisticsStatus)}
+                        // onCancel={handleLogisticCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleLogisticClick}
+                          onChange={() => {}}
                           checked={logisticsStatus || logisticsInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -589,21 +635,21 @@ const SingleDepartment = (props) => {
   <>
                     <div class=" text-sm w-[5rem] ml-4">Procurement</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={handleProcurmentClick}
-                        onCancel={handleProcurmentCancel}
+                        onConfirm={() => handleProcurmentClick(!procurmentStatus)}
+                        // onCancel={handleProcurmentCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={handleProcurmentClick}
+                          onChange={() => {}}
                           checked={procurmentStatus || procurementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </>
 )}
@@ -688,6 +734,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addingDeptModules,
+      linkDepartmentDocumentToggle,
     },
     dispatch
   );

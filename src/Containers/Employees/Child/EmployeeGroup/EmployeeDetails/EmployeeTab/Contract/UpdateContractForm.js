@@ -1,18 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { Formik, Form, Field, } from "formik";
-import {
-    Spacer,
-} from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-
 import { updateContractDetails } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
 
@@ -63,23 +58,12 @@ class UpdateContractForm extends Component {
                         ...rest
                     }) => (
                         <Form className="form-background">
-                            <div
-                                style={{
-                                    display: "flex",
-                                    // border: "0.125em solid red",
-                                    width: "100%",
-                                    height: "100%",
-                                    justifyContent: "space-between",
-                                }}
+                            <div class=" flex w-full h-full justify-between"
                             >
-                                <div
-                                    style={{
-                                        width: "100%",
-                                        // border: "0.125em solid green"
-                                    }}
+                                <div class=" w-full"
                                 >
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                    <div class=" flex justify-between" >
+                                        <div class=" w-[47%]" >
                                             <Field
                                                 name="previous_start_date"
                                                 //label="Start Date"
@@ -103,7 +87,7 @@ class UpdateContractForm extends Component {
                                                 }}
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class=" w-[47%]" >
                                             <Field
                                                 name="previous_end_date"
                                                 // label="End Date "
@@ -140,10 +124,9 @@ class UpdateContractForm extends Component {
                                                 }}
                                             />
                                         </div>
-                                    </FlexContainer>
-                                    <Spacer />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "100%" }}>
+                                    </div>
+                                    <div class=" flex justify-between mt-3" >
+                                        <div class=" w-full" >
                                             <Field
                                                 isRequired
                                                 name="contract_Type"
@@ -167,8 +150,8 @@ class UpdateContractForm extends Component {
                                             />
                                         </div>
 
-                                    </FlexContainer>
-                                    <Spacer />
+                                    </div>
+                                  <div class=" mt-3">
                                     <Field
                                         name="notes"
                                         // label="Notes"
@@ -185,10 +168,11 @@ class UpdateContractForm extends Component {
                                             marginTop: "0.25em",
                                         }}
                                     />
+                                    </div>
                                 </div>
                             </div>
-                            <Spacer />
-                            <FlexContainer justifyContent="flex-end">
+                          
+                            <div class=" flex justify-end mt-3" >
                                 <Button
                                     htmlType="submit"
                                     type="primary"
@@ -196,7 +180,7 @@ class UpdateContractForm extends Component {
                                 >
                                     <FormattedMessage id="app.update" defaultMessage="Update" />
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     )}
                 </Formik>

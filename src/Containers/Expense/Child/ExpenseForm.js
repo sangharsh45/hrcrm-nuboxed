@@ -6,7 +6,7 @@ import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {DeleteOutlined} from '@ant-design/icons';
-import { getCurrency } from "../../Auth/AuthAction";
+import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { addExpense, getExpenseById } from "../ExpenseAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 const { Option } = Select;
@@ -72,7 +72,7 @@ function ExpenseForm(props) {
     });
   }
   useEffect(() => {
-    props.getCurrency();
+    props.getCurrencyList();
     props.getExpenses();
   }, []);
   function handleCurrencyChange(currency, id) {
@@ -232,7 +232,7 @@ function ExpenseForm(props) {
     if (status === "Success") {
       props.getExpenseById(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {
@@ -267,7 +267,7 @@ function ExpenseForm(props) {
       Name
       </div>
          <input className="customize-select"
-                  style={{ width: "34%",boxShadow: "0 0.15em 0.3em #aaa" }}
+                  style={{ width: "24%",boxShadow: "0 0.15em 0.3em #aaa" }}
                   value={name}
                   onChange={handleNmae}
                   // name={`${item.id}attribute`}
@@ -358,12 +358,12 @@ function ExpenseForm(props) {
 
                   defaultValue={props.user.currency}
                 >
-                  {props.currencies.map((item) => {
+                  {props.currencyList.map((item) => {
                     return (
-                      <Option value={item.currencyName} 
+                      <Option value={item.currency_name} 
                       // defaultValue={props.user.address[0].country}
                        >
-                        {item.currencyName}
+                        {item.currency_name}
                       </Option>
                     );
                   })}
@@ -416,9 +416,9 @@ function ExpenseForm(props) {
   );
 }
 
-const mapStateToProps = ({ expense, auth,expenses }) => ({
+const mapStateToProps = ({ expense,currency, auth,expenses }) => ({
   addingExpense: expense.addingExpense,
-  currencies: auth.currencies,
+  currencyList: currency.currencyList,
   userId: auth.userDetails.userId,
   expenses: expenses.expenses,
   user: auth.userDetails,
@@ -429,7 +429,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       addExpense,
       getExpenseById,
-      getCurrency,
+      getCurrencyList,
       getExpenses
     },
     dispatch

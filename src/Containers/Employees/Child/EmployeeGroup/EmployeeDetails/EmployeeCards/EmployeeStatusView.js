@@ -8,6 +8,7 @@ class EmployeeStatusView extends Component {
     const {
       singleEmployee: {
         emailId,
+        label,
         currency,
         workplace,
         reportingManagerName,
@@ -20,12 +21,6 @@ class EmployeeStatusView extends Component {
         countryDialCode,
         countryDialCode1,
         timeZone,
-        tradeCurrency,
-        designation,
-        department,
-        userType,
-        level,
-        departmentDetails,
         // mataData: { firstName, lastName, email },
       },
 
@@ -48,46 +43,21 @@ class EmployeeStatusView extends Component {
           />
                </Tooltip>
         </div>
-        {/* <ProfileItemRow //label="Email" 
-          label={<FormattedMessage
-            id="app.emailId"
-            defaultMessage="Email"
-          />}
-          value={emailId} />
-        <ProfileItemRow //label="Emp Id" 
-          label={<FormattedMessage
-            id="app.employeeId"
-            defaultMessage="Emp Id"
-          />}
-          value={employeeId} /> */}
+  
         <ProfileItemRow //label="Phone #" 
           label={<FormattedMessage
             id="app.phone"
             defaultMessage="Phone #"
           />}
           value={phone} />
-        {/* <ProfileItemRow
-          //label="Date of Joining"
-          label={<FormattedMessage
-            id="app.dateOfJoining"
-            defaultMessage="Date of Joining"
-          />}
-          value={moment(dateOfJoining).format("YYYY-MM-DD")}
-        /> */}
         <ProfileItemRow label="Mobile #" value={mobile} />
         <ProfileItemRow label="Linkedin" value={linkedinPublicUrl || ""} />
-        {/* <ProfileItemRow label="Twitter" value={twitter || ""} /> */}
-        <ProfileItemRow label="Date of Joining" value={dayjs(dateOfJoining).format("YYYY-MM-DD")} />
+        <ProfileItemRow label="Level" value={label || "Data Not Available"} /> 
+        <ProfileItemRow label="Date of Joining" value={dayjs(dateOfJoining).format("DD/MM/YYYY")} />
         <ProfileItemRow label="Currency" value={currency} />
-        {/* <ProfileItemRow label="Designation" value={designation} />
-        <ProfileItemRow label="Department" value={department} />
-        <ProfileItemRow label="Level" value={level || ""} /> */}
-        {/* <ProfileItemRow label="Details" value={departmentDetails} /> */}
         <ProfileItemRow label="Reporting Manager" value={reportingManagerName}  />
         <ProfileItemRow label="Workplace" value={workplace}  />
         <ProfileItemRow label="Time Zone" value={timeZone} />
-        {/* <ProfileItemRow label="Level" value={level || ""} /> */}
-        {/* <ProfileItemRow label="TimeZone" value={timeZone} /> */}
         {/* <ProfileItemRow label="Reporting Manager" value={mataData.firstName} /> */}
       </>
     );

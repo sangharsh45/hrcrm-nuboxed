@@ -224,9 +224,10 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             type: typeInd ? "true" : "false",
             employee_type: workType,
             // job_type: active,
-            reportingManager: props.userDetails.userId
-              ? props.userDetails.userId
-              : "",
+            reportingManager:"",
+            // reportingManager: props.userDetails.userId
+            //   ? props.userDetails.userId
+            //   : "",
             address: [
               {
                 addressType: "",
@@ -819,60 +820,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       /> */}
                     </div>
                   </div>
-                  <div class="mt-2">
-                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label>
-                    </div>
-
-
-                  <div class=" flex justify-between  max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
-                      <Field
-  isRequired
-  name="reportingManagerDeptId"
-  label={<FormattedMessage id="app.department" defaultMessage="Department" />}
-  isColumnWithoutNoCreate
-  component={SearchSelect}
-  value={values.reportingManagerDeptId}
-  selectType="departmentName"
-  isColumn
-  inlineLabel
-  onChange={(selectedDepartment) => {
-    setFieldValue("reportingManagerDeptId", selectedDepartment);
-    // Handle other updates here, if needed
-  }}
-/>
-                     </div>
-                    
-                     <div class="w-w48  max-sm:w-wk">
-                     <Field
-  name="reportingManager"
-  isColumnWithoutNoCreate
-  label={<FormattedMessage id="app.reportingManager" defaultMessage="Reporting Manager" />}
-  component={SelectComponent}
-  options={
-    values.reportingManagerDeptId
-      ? (Array.isArray(
-          getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
-        )
-          ? getEmployeesbyDepartment(
-              "reportingManagerDeptId",
-              values.reportingManagerDeptId
-            )
-          : [])
-      : [] // Set it to an empty array or a default value when department is not selected
-  }
-  isColumn
-  value={values.reportingManager}
-  filterOption={{
-    filterType: "departmentId",
-    filterValue: values.reportingManagerDeptId,
-  }}
-  disabled={!values.reportingManagerDeptId}
-  inlineLabel
-/>
-
-              </div>
-              </div>
+             
                   {/* <Field
                     name="workplace"
                     label={<FormattedMessage
@@ -971,6 +919,60 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                  
                     </Radio.Group>
                   </div>
+                  <div class="mt-2">
+                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label>
+                    </div>
+
+
+                  <div class=" flex justify-between  max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
+                      <Field
+  isRequired
+  name="reportingManagerDeptId"
+  label={<FormattedMessage id="app.department" defaultMessage="Department" />}
+  isColumnWithoutNoCreate
+  component={SearchSelect}
+  value={values.reportingManagerDeptId}
+  selectType="departmentName"
+  isColumn
+  inlineLabel
+  onChange={(selectedDepartment) => {
+    setFieldValue("reportingManagerDeptId", selectedDepartment);
+    // Handle other updates here, if needed
+  }}
+/>
+                     </div>
+                    
+                     <div class="w-w48  max-sm:w-wk">
+                     <Field
+  name="reportingManager"
+  isColumnWithoutNoCreate
+  label={<FormattedMessage id="app.reportingManager" defaultMessage="Reporting Manager" />}
+  component={SelectComponent}
+  options={
+    values.reportingManagerDeptId
+      ? (Array.isArray(
+          getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
+        )
+          ? getEmployeesbyDepartment(
+              "reportingManagerDeptId",
+              values.reportingManagerDeptId
+            )
+          : [])
+      : [] // Set it to an empty array or a default value when department is not selected
+  }
+  isColumn
+  value={values.reportingManager}
+  filterOption={{
+    filterType: "departmentId",
+    filterValue: values.reportingManagerDeptId,
+  }}
+  disabled={!values.reportingManagerDeptId}
+  inlineLabel
+/>
+
+              </div>
+              </div>
                 </div>
               </div>
            

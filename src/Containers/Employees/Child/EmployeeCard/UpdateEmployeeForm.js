@@ -712,57 +712,7 @@ name="departmentId"
                     </div>
                   </div>
 
-                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
-                  <div class=" flex justify-between  max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
-                  <Field
-                    name="reportingManagerDeptId"
-                    label={<FormattedMessage
-                      id="app.department"
-                      defaultMessage="Department"
-                    />}
-                    isColumnWithoutNoCreate
-                    component={SelectComponent}
-                    // value={values.departmentId}
-                    width={"100%"}
-                    options={
-                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
-                    }
-                    isColumn
-                    inlineLabel
-                     />
-                     </div>
-                  
-                     <div class="w-w47.5 max-sm:w-wk">
-                     <Field
-                    name="reportingManager"
-                    isColumnWithoutNoCreate
-                    label={<FormattedMessage
-                      id="app.reportingManager"
-                      defaultMessage="Reporting Manager"
-                    />}
-                    component={SelectComponent}
-                    options={
-                      Array.isArray(
-                        this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
-                      )
-                        ? this.getEmployeesbyDepartment(
-                            "reportingManagerDeptId",
-                            values.reportingManagerDeptId
-                          )
-                        : []
-                    }
-                    isColumn
-                    value={values.reportingManager}
-                    filterOption={{
-                      filterType: "reportingManagerDeptId",
-                      filterValue: values.reportingManagerDeptId,
-                    }}
-                    disabled={!values.reportingManagerDeptId}
-                    inlineLabel
-                   />
-              </div>
-              </div>
+                
                   {/* <Field
                     name="workplace"
                     label={<FormattedMessage
@@ -841,6 +791,57 @@ name="departmentId"
                       &nbsp;&nbsp;
                     </Radio.Group>
                   </div>
+                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
+                  <div class=" flex justify-between  max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
+                  <Field
+                    name="reportingManagerDeptId"
+                    label={<FormattedMessage
+                      id="app.department"
+                      defaultMessage="Department"
+                    />}
+                    isColumnWithoutNoCreate
+                    component={SelectComponent}
+                    // value={values.departmentId}
+                    width={"100%"}
+                    options={
+                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
+                    }
+                    isColumn
+                    inlineLabel
+                     />
+                     </div>
+                  
+                     <div class="w-w47.5 max-sm:w-wk">
+                     <Field
+                    name="reportingManager"
+                    isColumnWithoutNoCreate
+                    label={<FormattedMessage
+                      id="app.reportingManager"
+                      defaultMessage="Reporting Manager"
+                    />}
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
+                      )
+                        ? this.getEmployeesbyDepartment(
+                            "reportingManagerDeptId",
+                            values.reportingManagerDeptId
+                          )
+                        : []
+                    }
+                    isColumn
+                    value={values.reportingManager}
+                    filterOption={{
+                      filterType: "reportingManagerDeptId",
+                      filterValue: values.reportingManagerDeptId,
+                    }}
+                    disabled={!values.reportingManagerDeptId}
+                    inlineLabel
+                   />
+              </div>
+              </div>
                 </div>
               </div>
               <div class="flex justify-end w-wk bottom-2 mr-2 mt-3 md:absolute ">

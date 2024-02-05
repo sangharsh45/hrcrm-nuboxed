@@ -4,6 +4,10 @@ import TocIcon from '@mui/icons-material/Toc';
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
+import { connect } from "react-redux";
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 
 const ExpenseActionLeft = (props) => {
     return (
@@ -42,7 +46,7 @@ const ExpenseActionLeft = (props) => {
     
       </Tooltip>
       <Tooltip
-        title="Group"
+        title="Category"
       >
        
        <span class=" mr-2 cursor-pointer text-[1rem]"
@@ -58,8 +62,41 @@ const ExpenseActionLeft = (props) => {
           </span>
     
       </Tooltip>
+      {props.user.expenseFullListInd === true && (
+      <Tooltip
+        title="All"
+      >
+       
+       <span class=" mr-2 cursor-pointer text-[1rem]"
+            onClick={() => props.setExpenseViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+            
+            <ListAltIcon  
+            // icon={solid('users')}
+             />
+          </span>
+    
+      </Tooltip>
+       )}
         </div>
     )
 }
 
-export default ExpenseActionLeft; 
+const mapStateToProps = ({ customer, auth, candidate }) => ({
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+
+    },
+    dispatch
+  );
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ExpenseActionLeft)
+);

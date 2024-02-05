@@ -82,7 +82,7 @@ class LinkedDocuments extends Component {
                                             
                                               <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                   
-                                              <span>{` ${dayjs(item.creationDate).format("YYYY/MM/DD")}`}</span>
+                                              <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>
        
          
                                               </div>

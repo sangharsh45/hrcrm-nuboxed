@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Tooltip, } from "antd";
+import { Popconfirm, Switch, Tooltip, } from "antd";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
 import FWLogo from "../../../../Assets/Images/Erp.jpg";
@@ -48,21 +48,21 @@ class SingleModuleList extends Component {
             <div class="flex justify-center mt-1">
               <div class=" text-sm font-semibold ">ERP</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleErpClick}
-                        onCancel={this.props.handleErpCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      > */}
+                    <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => this.props.handleErpClick(!this.props.erpStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
                         <Switch
-                         onChange={this.props.handleErpClick}
+                              onChange={() => {}}
+                        //  onChange={this.props.handleErpClick}
                           style={{ width: "4em" }}
                           checked={this.props.erpStatus || this.props.moduleList.erpInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div>
                     </div>
@@ -78,21 +78,22 @@ class SingleModuleList extends Component {
             <div class="flex justify-center mt-1">
               <div class=" text-sm  ml-2 font-semibold">Production</div>
                     <div   class=" ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleProductionClick}
-                        onCancel={this.props.handleProductionCancel}
+                        onConfirm={() => this.props.handleProductionClick(!this.props.productionStatus)}
+                        // onCancel={this.props.handleProductionCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                         onChange={this.props.handleProductionClick}
+                          onChange={() => {}}
+                        //  onChange={this.props.handleProductionClick}
                          checked={this.props.productionStatus || this.props.moduleList.productionInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div> 
                     </div>
@@ -106,22 +107,23 @@ class SingleModuleList extends Component {
             <div class="flex justify-center mt-1">
                     <div class=" text-sm  ml-2 font-semibold">Repair</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleRepairClick}
-                        onCancel={this.props.handleRepairCancel}
+                        onConfirm={() => this.props.handleRepairClick(!this.props.repairStatus)}
+                        // onCancel={this.props.handleRepairCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
-                        onChange={this.props.handleRepairClick}
+                                                onChange={() => {}}
+                        // onChange={this.props.handleRepairClick}
                         checked={this.props.repairStatus || this.props.moduleList.repairInd}
                           style={{ width: "4em" }}
  
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
 </div>
 </div>
@@ -150,21 +152,21 @@ class SingleModuleList extends Component {
                     <div class=" text-sm  ml-2 font-semibold">OMS</div>
                     </Tooltip>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleOrderManagementClick}
-                        onCancel={this.props.handleOrderManagementCancel}
+                        onConfirm={() => this.props.handleOrderManagementClick(!this.props.orderManagStatus)}
+                        // onCancel={this.props.handleOrderManagementCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
                           style={{ width: "4em" }}
-                          onChange={this.props.handleOrderManagementClick}
+                          onChange={() => {}}
                          checked={this.props.orderManagStatus || this.props.moduleList.orderManagementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
 </div>
 </div>
@@ -178,21 +180,21 @@ class SingleModuleList extends Component {
             <div class="flex justify-center mt-1">
                     <div class=" text-sm  ml-2 font-semibold">Logistics</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleLogisticClick}
-                        onCancel={this.props.handleLogisticCancel}
+                        onConfirm={() => this.props.handleLogisticClick(!this.props.logisticsStatus)}
+                        // onCancel={this.props.handleLogisticCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
-                         onChange={this.props.handleLogisticClick}
+                               onChange={() => {}}
                          checked={this.props.logisticsStatus || this.props.moduleList.logisticsInd}
                           style={{ width: "4em" }}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
 </div>
 </div>
@@ -206,21 +208,21 @@ class SingleModuleList extends Component {
             <div class="flex justify-center mt-1">
                     <div class=" text-sm  ml-2 font-semibold">Procurement</div>
                     <div   class="  ml-2">
-                    {/* <Popconfirm
+                    <Popconfirm
                         title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleProcurmentClick}
-                        onCancel={this.props.handleProcurmentCancel}
+                        onConfirm={() => this.props.handleProcurmentClick(!this.props.procurmentStatus)}
+                        // onCancel={this.props.handleProcurmentCancel}
                         okText="Yes"
                         cancelText="No"
-                      > */}
+                      >
                         <Switch
-                         onChange={this.props.handleProcurmentClick}
+                       onChange={() => {}}
                          checked={this.props.procurmentStatus || this.props.moduleList.procurementInd}
                           style={{ width: "4em" }}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                      </Popconfirm>
                     </div>
                     </div>
                     </div>
