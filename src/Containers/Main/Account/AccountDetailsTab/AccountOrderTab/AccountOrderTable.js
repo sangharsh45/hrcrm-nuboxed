@@ -73,39 +73,39 @@ const AccountOrderTable = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[7.4rem]">
+            <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[9.41rem]">
                             <FormattedMessage
                                 id="app.orderno"
                                 defaultMessage="Order No"
                             />
                         </div>
-                        <div className=" md:w-[5.1rem]">
+                        <div className=" md:w-[8.1rem]">
                             <FormattedMessage
                                 id="app.created"
                                 defaultMessage="Created"
                             />
                         </div>
-                        <div className=" md:w-[8.8rem]">
+                        <div className=" md:w-[11.2rem]">
                             <FormattedMessage
                                 id="app.location"
                                 defaultMessage="Location"
                             />
                         </div>
-                        <div className="md:w-[3.8rem]">
+                        <div className="md:w-[5.8rem]">
                             <FormattedMessage
                                 id="app.units"
                                 defaultMessage="Units"
                             />
                         </div>
-                        <div className="md:w-[2.9rem]">
+                        <div className="md:w-[5.9rem]">
                             <FormattedMessage
                                 id="app.contact"
                                 defaultMessage="Contact"
                             />
                         </div>
-                        <div className="md:w-[6.12rem]">
+                        <div className="md:w-[9.12rem]">
                             <FormattedMessage
                                 id="app.expectedprice"
                                 defaultMessage="Expected Price"
@@ -449,7 +449,7 @@ const AccountOrderTable = (props) => {
                             )
                         })}
                     </div>
-                </OnlyWrapCard>
+                </div>
             </div>
             <Suspense fallback={<BundleLoader />}>
                 <AddLocationInOrder

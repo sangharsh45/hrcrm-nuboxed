@@ -221,7 +221,7 @@ class Category extends Component {
                 />
               </StyledTabs>
 
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div class="flex justify-center">Loading...</div>}>
                 {this.renderTabContent(activeKey)}
               </Suspense>
             </TabsWrapper>

@@ -14,8 +14,6 @@ const UpdateAccountModal = (props) => {
                 visible={props.updateAccountModal}
                 maskClosable={false}
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop:"3rem" }}
                 onClose={() => props.handleUpdateAccountModal(false)}
                 footer={null}
             >
