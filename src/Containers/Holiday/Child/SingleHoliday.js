@@ -243,7 +243,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SingleHoliday);
 const StageWrapper = styled.div`
   width: 100%;
   height: auto;
-  cursor: pointer;
+  // cursor: pointer;
 `;
 const StageName = styled.h3`
   color: ${(props) => props.theme.color || "teal"};

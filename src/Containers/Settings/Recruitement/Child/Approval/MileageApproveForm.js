@@ -11,8 +11,14 @@ import {getDepartments} from "../../../Department/DepartmentAction"
 import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
+  import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
 const MileageLevelApproveForm = lazy(() => import("./MileageLevelApproveForm"));
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const MileageSchema = Yup.object().shape({
+    roleTypeId: Yup.string().required("Input needed!"),
+});
 class MileageApproveForm extends Component {
     constructor(props) {
         super(props);
@@ -99,7 +105,7 @@ class MileageApproveForm extends Component {
                     
                     }}
 
-
+                    validationSchema={MileageSchema}
                     onSubmit={(values, { resetForm }) => {
                         console.log(values);
                         // if (this.state.approveType) {

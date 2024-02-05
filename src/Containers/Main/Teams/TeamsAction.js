@@ -255,7 +255,7 @@ export const linkSalesUserToTeam = (team, teamId, cb) => (dispatch) => {
       // cb && cb("success", res.data.message);
     })
     .catch((err) => {
-      message.error("some error occoured");
+      message.error("Something went wrong! occoured");
       console.log(err);
       dispatch({
         type: types.LINK_SALES_USER_TO_TEAM_FAILURE,

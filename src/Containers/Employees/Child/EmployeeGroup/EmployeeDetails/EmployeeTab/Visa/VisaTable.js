@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,8 +14,9 @@ import {getVisaDetails,
 import DownloadIcon from "@mui/icons-material/Download";
 import { base_url } from "../../../../../../../Config/Auth";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import moment from "moment";
-import UpdateVisaModal from "./UpdateVisaModal";
+import dayjs from "dayjs";
+import { Tooltip } from "antd";
+const UpdateVisaModal =lazy(()=>import("./UpdateVisaModal"));
 
 class VisaTable extends Component {
   componentDidMount() {
@@ -44,115 +44,7 @@ class VisaTable extends Component {
     } = this.props;
     console.log(employeeId);
 
-    const columns = [
- 
-      {
-        //title: "Course Name",
-        title: (
-          <span className="font-poppins">
-          <FormattedMessage id="app.country" defaultMessage="Country" />
-          </span>
-        ),
-        dataIndex: "country",
-      
-      },
-      {
-        //title: "Year of Passing",
-        title: (
-          <span className="font-poppins">
-          <FormattedMessage
-            id="app.type"
-            defaultMessage="Type"
-          />
-           </span>
-        ),
-        dataIndex: "type",
-     
-      },
-  
-   
-    {
-      //title: "Start Date",
-      title: <FormattedMessage
-        id="app.startDate"
-        defaultMessage="Start Date"
-      />,
-      dataIndex: "startDate",
-      render: (name, item, i) => {
-        return <span>{moment.utc(item.startDate).format("LL")}</span>;
-      },
-    },
-    {
-      //title: "End Date",
-      title: <FormattedMessage
-        id="app.endDate"
-        defaultMessage="End Date"
-      />,
-      dataIndex: "endDate",
-      render: (name, item, i) => {
-        return <span>{moment(item.endDate).format("LL")}</span>;
-      },
-    },
-    {
-      title: "",
-      dataIndex: "documentId",
-      width: "2%",
-      render: (name, item, i) => {
-        return (
-          <>
-            {/* {item.documentId ? ( */}
-              <a
-                href={`${base_url}/document/${item.documentId}`}
-                target="_blank"
-              >
-                {user.userAccessInd === true ? (
-                <DownloadIcon
-                  type="download"
-                  // onClick={() => startDownload()}
-                  style={{ cursor: "pointer",fontSize: "0.8rem" }}
-                />
-                ):null}
-              </a>
-            {/* ) : null} */}
-          </>
-        );
-      },
-    },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <BorderColorIcon
-              style={{ cursor: "pointer", fontSize: "0.8rem" }}
-              onClick={() => {
-                setEditVisa(item);
-                handleUpdateVisaModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-              onConfirm={() => deleteVisa(item.visaId)}
-            >
-              <DeleteIcon
-                type="delete"
-                style={{ cursor: "pointer", fontSize: "0.8rem", color: "red" }}
-              />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+
 
     // if (fetchingEducationDetailsError) {
     //   return <APIFailed />;
@@ -161,8 +53,149 @@ class VisaTable extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
+
+<div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+<div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+<div className=" md:w-[6.5rem]">
+<FormattedMessage
+        id="app.country"
+        defaultMessage="Country"
+      /></div>
+
+<div className="md:w-[10.1rem]">
+    <FormattedMessage id="app.type" defaultMessage="Type" /></div>
+       <div className="md:w-[7.1rem]">
+       <FormattedMessage
+id="app.startDate"
+defaultMessage="Start Date"
+/></div>
+             <div className=" md:w-[8.1rem]">
+             <FormattedMessage id="app.endDate" defaultMessage="End Date" /></div>
+
+        
+
+<div className="w-[10.2rem]"></div>
+
+</div>
+
+
+{visaDetails.map((item) => { 
+
+
+          return (
+              <div>
+                  <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                      >
+                           
+                           <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+<div class="max-sm:w-full">
+                              <Tooltip>
+                                <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                
+                                  <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                      
+{item.country}
+
+
+                                  </div>
+                                  </div>
+                              </Tooltip>
+                              </div>
+                              </div>
+                      </div>
+                      <div class="flex">
+
+                   
+                    
+                      <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                      
+                        <div class="text-sm text-cardBody font-poppins">
+                        {item.type}
+                        </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                      
+                      <div class="text-sm text-cardBody font-poppins">
+                      <span>{dayjs(item.startDate).format("DD/MM/YYYY")}</span>
+                      </div>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                         
+                         <div class="text-sm text-cardBody font-poppins">
+       
+           <div className="font-normal text-sm text-cardBody font-poppins">
+           <span>{dayjs(item.endDate).format("DD/MM/YYYY")}</span>
+           </div>
+       
+                         </div>
+                     </div>
+
+               
+                    </div>
+                    <div className=" flex  " style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+         
+                    <>
+                    <a
+              href={`${base_url}/document/${item.documentId}`}
+              target="_blank"
+            >
+              {user.userAccessInd === true ? (
+              <DownloadIcon
+                type="download"
+                // onClick={() => startDownload()}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
+              />
+              ):null}
+            </a>
+</>
+       
+        </div>
+                      <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                          
+
+                          <div class=" text-sm text-cardBody font-poppins text-center">
+                          <BorderColorIcon 
+  style={{ cursor: "pointer", fontSize: "1rem" }}
+  onClick={() => {
+    setEditVisa(item);
+    handleUpdateVisaModal(true);
+  }}
+/>
+
+                          </div>
+                      </div>
+                      <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                          
+
+                          <div class=" text-sm text-cardBody font-poppins text-center">
+                          <StyledPopconfirm
+  title="Do you want to delete?"
+  onConfirm={() => deleteVisa(item.visaId)}
+>
+  <DeleteIcon
+    type="delete"
+    style={{ cursor: "pointer", fontSize: "1rem", color: "red" }}
+  />
+</StyledPopconfirm>
+
+                          </div>
+                      </div>
+
+                    
+                   
+                  </div>
+              </div>
+
+
+          )
+      })}
+          
+</div>
         {/* {emailCredential && ( */}
-        <StyledTable
+        {/* <StyledTable
           // rowKey="opportunityId"
           columns={columns}
           dataSource={visaDetails}
@@ -178,7 +211,7 @@ class VisaTable extends Component {
               </>
             );
           }}
-        />
+        /> */}
  <UpdateVisaModal
           updateVisaModal={updateVisaModal}
           handleUpdateVisaModal={handleUpdateVisaModal}

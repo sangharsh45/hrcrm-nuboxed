@@ -16,13 +16,7 @@ const UpdateCustomerModal = (props) => {
         title={props.setEditingCustomer.name}
         width={drawerWidth}
         visible={props.updateCustomerModal}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => props.handleUpdateCustomerModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateCustomerForm customerId={props.customerId} />{" "}

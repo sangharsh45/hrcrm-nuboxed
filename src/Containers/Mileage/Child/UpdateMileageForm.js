@@ -190,7 +190,7 @@ function UpdateMileageForm(props) {
     if (status === "Success") {
       props.getMileageByUserId(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {

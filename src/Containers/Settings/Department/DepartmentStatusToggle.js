@@ -56,7 +56,7 @@ console.log("mndtry",props.mandetoryInd);
             isLoading={true}
             style={{
               width: "9em",
-              backgroundColor: props.mandetoryInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+              // backgroundColor: props.mandetoryInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
             }}
           
             checkedChildren="Mandatory"

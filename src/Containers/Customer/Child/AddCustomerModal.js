@@ -20,11 +20,7 @@ const AddCustomerModal = (props) => {
           defaultMessage="Customer"
         />}
         width={drawerWidth}
-        style={{marginTop:"3rem"}}
         visible={props.addCustomerModal}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           handleClose();
           props.handleCustomerModal(false);

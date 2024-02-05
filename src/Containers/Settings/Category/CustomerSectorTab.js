@@ -35,25 +35,49 @@ class CustomerSectorTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: "1",
+      activeKey: "0",
       value: 1,
     };
   }
 
-  onChange = (e) => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
+  // onChange = (e) => {
+  //   this.setState({
+  //     value: e.target.value,
+  //   });
+  // };
 
   handleTabChange = (key) => this.setState({ activeKey: key });
+  renderTabContent = (key) => {
+    switch (key) {
+      case "0":
+        return    <Sectors />;
+      case "1":
+        return  <Source />;
+      case "2":
+        return     <ShipBy />;
+      case "3":
+        return    <Customer />;
+        case "4":
+          return        <BrandModel />;
+          case "5":
+            return            <Vat />;
+            case "6":
+              return              <Payment />;
+      default:
+        return null;
+    }
+  };
   render() {
+    const { activeKey } = this.state;
     return (
       <>
          <div class="flex flex-nowrap" >
           <div class=" w-[70%]" >
             <TabsWrapper>
-              <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
+            <StyledTabs
+                defaultActiveKey={activeKey}
+                onChange={this.handleTabChange}
+              >
                 <TabPane
                   tab={
                     <>
@@ -65,9 +89,9 @@ class CustomerSectorTab extends Component {
                   }
                   key="0"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <Sectors />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
                 <TabPane
                   tab={
@@ -80,9 +104,9 @@ class CustomerSectorTab extends Component {
                   }
                   key="1"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <Source />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
                 <TabPane
                   tab={
@@ -95,9 +119,9 @@ class CustomerSectorTab extends Component {
                   }
                   key="2"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <ShipBy />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
                 <TabPane
                   tab={
@@ -110,9 +134,9 @@ class CustomerSectorTab extends Component {
                   }
                   key="3"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <Customer />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
 
                 <TabPane
@@ -126,9 +150,9 @@ class CustomerSectorTab extends Component {
                   }
                   key="4"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <BrandModel />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
                 <TabPane
                   tab={
@@ -156,11 +180,14 @@ class CustomerSectorTab extends Component {
                   }
                   key="6"
                 >
-                  <Suspense>
+                  {/* <Suspense>
                     <Payment />
-                  </Suspense>
+                  </Suspense> */}
                 </TabPane>
               </StyledTabs>
+              <Suspense fallback={<div>Loading...</div>}>
+                {this.renderTabContent(activeKey)}
+              </Suspense>
             </TabsWrapper>
           </div>
         </div>

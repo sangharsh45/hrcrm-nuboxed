@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import TocIcon from '@mui/icons-material/Toc';
 import {  Input, Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import GridViewIcon from '@mui/icons-material/GridView';
 import GroupsIcon from "@mui/icons-material/Groups";
 import CategoryIcon from '@mui/icons-material/Category';
@@ -62,7 +63,7 @@ const LeavesActionLeft = (props) => {
       </Tooltip>
      
       <Tooltip
-        title="Group"
+        title="Category"
       >
        
           <span
@@ -102,12 +103,33 @@ const LeavesActionLeft = (props) => {
           </span>
     
       </Tooltip>
+
+      {props.user.leaveFullListInd === true && (
+      <Tooltip
+        title="All"
+      >
+       
+       <span class=" mr-2 cursor-pointer text-[1rem]"
+            onClick={() => props.setExpenseViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+            
+            <ListAltIcon  
+            // icon={solid('users')}
+             />
+          </span>
+    
+      </Tooltip>
+       )}
     </div>
   );
 };
 
 const mapStateToProps = ({ auth, employee }) => ({
-
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

@@ -54,19 +54,10 @@ function EmployeeExperienceForm(props) {
         }) => (
           <Form className="form-background">
             <MainWrapper>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "center",
-                }}
+            <div class=" flex w-full h-full justify-evenly items-center"
+                          
               >            
-                <div
-                  style={{                  
-                    width: "15%",                   
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="keySkillsId"
@@ -85,10 +76,7 @@ function EmployeeExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{              
-                    width: "15%",                  
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="experience"
@@ -100,10 +88,7 @@ function EmployeeExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{                   
-                    width: "8%",
-                  }}
+                <div class=" w-[8%]"
                 >
                   <Button
                     type="primary"

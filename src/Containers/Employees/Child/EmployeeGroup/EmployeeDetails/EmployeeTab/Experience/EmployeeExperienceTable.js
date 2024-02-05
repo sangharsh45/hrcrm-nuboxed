@@ -6,7 +6,6 @@ import {EditOutlined} from "@ant-design/icons";
 import {  getTopicsByUserId } from "../../../../../../Employees/EmployeeAction";
 import { Popconfirm, Form, Input, Typography, Button,Tooltip } from 'antd';
 import { Select } from "../../../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import styled from "styled-components";
 
 const { Option } = Select;
@@ -172,7 +171,7 @@ function handleExpertClick (skillSetDetailsId) {
             console.log(name);
             console.log(item);
             return (
-              <FlexContainer justifyContect="space-evenly">
+              <div class=" flex justify-evenly" >
                 <ButtonGroup>
                   <RoleButton
                     type="Beginner"
@@ -211,7 +210,7 @@ function handleExpertClick (skillSetDetailsId) {
                   />
                 </ButtonGroup>
               
-              </FlexContainer>
+              </div>
             );
           },
         },

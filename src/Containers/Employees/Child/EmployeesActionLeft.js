@@ -175,7 +175,7 @@ const EmployeesActionLeft = (props) => {
                      value={props.selectedDepartment}
                     //  disabled={!props.selectedLocation}
                   >
-                    <option value="">All Department</option>
+                    <option value="">All Departments</option>
                     {props.departments.map((item) => {
                       return (
                         <option value={item.departmentName}>
