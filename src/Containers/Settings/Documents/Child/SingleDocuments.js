@@ -61,7 +61,7 @@ class SingleDocuments extends Component {
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
                   <div class="flex justify-between w-96">
-                  <div  >
+                  <div class=" w-[8rem]"  >
                     <Select style={{ width: "100%"}}
                 onChange={this.handleStageType}
                 value={userType}

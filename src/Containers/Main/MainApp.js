@@ -587,7 +587,7 @@ function MainApp(props) {
                                             </Badge>
                                         </FlexContainer>
                                     </a> */}
-                  <a href="#" style={{ height: 45, marginRight: 10 }}>
+                  <a href="#" style={{  marginRight: 10 }}>
                     <div  class=" flex items-center h-full"
                     >
                       <NotificationPopover />

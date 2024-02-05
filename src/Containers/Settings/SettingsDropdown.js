@@ -172,6 +172,7 @@ class SettingsDropdown extends Component {
             <SettingOutlined 
               type="setting"
               style={{
+                fontSize:"1rem",
                 // fontSize:
                 //   pathName === "/opportunity-stage" ||
                 //     pathName === "/opportunity-source" ||

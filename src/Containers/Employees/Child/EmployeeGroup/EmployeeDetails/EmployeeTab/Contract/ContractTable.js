@@ -11,7 +11,7 @@ import {
   setEditContract,
 } from "../../../../../../Profile/ProfileAction";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import moment from "moment";
+import dayjs from "dayjs";
 import UpdateContractModal from "./UpdateContractModal";
 class ContractTable extends Component {
   componentDidMount() {
@@ -42,7 +42,7 @@ class ContractTable extends Component {
         />,
         dataIndex: "previous_start_date",
         render: (name, item, i) => {
-          return <span>{moment(item.previous_start_date).format("LL")}</span>;
+          return <span>{dayjs(item.previous_start_date).format("DD/MM/YYYY")}</span>;
         },
       },
       {
@@ -52,7 +52,7 @@ class ContractTable extends Component {
         />,
         dataIndex: "previous_end_date",
         render: (name, item, i) => {
-          return <span>{moment(item.previous_end_date).format("LL")}</span>;
+          return <span>{dayjs(item.previous_end_date).format("DD/MM/YYYY")}</span>;
         },
       },
 
