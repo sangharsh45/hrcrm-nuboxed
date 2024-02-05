@@ -218,6 +218,21 @@ console.log(this.state.firstCase)
                     </StyledLabel> */}
                     
                   </div>
+                  <div class=" w-3/12 max-sm:w-wk ml-4"
+                      style={{
+                       
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <StyledLabel> Half Day</StyledLabel>
+                      <Switch
+                         onChange={this.radioClick}
+                        checked={this.state.isAccepted}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                      />
+                      
+                    </div>
                   {this.state.isAccepted?(
                    <div style={{ width: "47%" }}>
                    <Field
@@ -253,7 +268,7 @@ console.log(this.state.firstCase)
                  </div>
                  
                   ):(
-                    <div class=" flex items-center h-16 flex-row-reverse w-3/12 max-sm:w-wk"
+                    <div class=" flex items-center h-16 flex-row-reverse mr-4  max-sm:w-wk"
                       style={{
                        
                         fontWeight: "bold",
@@ -272,25 +287,11 @@ console.log(this.state.firstCase)
                 
   
                     
-                     <div class="mt-3 w-3/12 max-sm:w-wk"
-                      style={{
-                       
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <StyledLabel> Half Day</StyledLabel>
-                      <Switch
-                         onChange={this.radioClick}
-                        checked={this.state.isAccepted}
-                        checkedChildren="Yes"
-                        unCheckedChildren="No"
-                      />
-                      
-                    </div>
+                    
          
                   </div>
            
-                  <div class="mt-3 w-1/2 max-sm:w-wk">
+                  <div class="mt-3 w-w47.5 max-sm:w-wk">
                   <Field
                     name="coverDetails"
                     //label="Cover"

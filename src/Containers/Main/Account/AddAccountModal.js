@@ -15,8 +15,6 @@ const AddAccountModal = (props) => {
                 closable
                 // maskClosable={false}
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"3rem"}}
                 onClose={() => handleDistributorModal(false)}
                 footer={null}
             >
