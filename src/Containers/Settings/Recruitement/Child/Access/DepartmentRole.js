@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-//  import { getDepartmentAccess } from "../../../SettingsAction"
+ import { getDepartmentRoleData } from "../../../SettingsAction"
 const AccessForm = lazy(() => import("./AccessForm"));
 
 const TabPane = StyledTabs.TabPane;
@@ -18,9 +18,9 @@ class DepartmentRole extends PureComponent {
         }
     }
 
-    // componentDidMount() {
-    //     this.props.getDepartmentAccess(this.state.departmentData.departmentId)
-    // }
+    componentDidMount() {
+        this.props.getDepartmentRoleData(this.props.departmentId)
+    }
 
     handleOnClick = (data) => {
         console.log(data);
@@ -49,7 +49,7 @@ class DepartmentRole extends PureComponent {
             </span>
           }
         >
-      
+         {/* hello */}
         {this.state.departmentData.roleTypeId && (
             <Suspense fallback={"Loading..."}>
               
@@ -77,16 +77,123 @@ class DepartmentRole extends PureComponent {
 }
 
 const mapStateToProps = ({ settings, opportunity, auth }) => ({
-    // departmentRoleData: settings.departmentRoleData,
+    departmentRoleData: settings.departmentRoleData,
 
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
-        // getDepartmentRoleData
+        getDepartmentRoleData
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepartmentRole);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, {  PureComponent,lazy, Suspense } from "react";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import { StyledTabs } from "../../../../../Components/UI/Antd";
+// import { TabsWrapper } from "../../../../../Components/UI/Layout";
+// //  import { getDepartmentAccess } from "../../../SettingsAction"
+// const AccessForm = lazy(() => import("./AccessForm"));
+
+// const TabPane = StyledTabs.TabPane;
+// class DepartmentRole extends PureComponent {
+
+//     constructor(props) {
+//         super(props)
+
+//         this.state = {
+//             key: "",
+//             departmentData: {}
+//         }
+//     }
+
+//     // componentDidMount() {
+//     //     this.props.getDepartmentAccess(this.state.departmentData.departmentId)
+//     // }
+
+//     handleOnClick = (data) => {
+//         console.log(data);
+//         debugger;
+//         this.setState({
+//             departmentData: data,
+//         });
+
+//     };
+//     render() {
+//         const { departmentRoleData } = this.props;
+//         // console.log(this.state.departmentData.roleTypeId)
+//         return (
+//             <>
+//                 <TabsWrapper >
+                  
+//                     <StyledTabs type="card">
+//   {departmentRoleData ? (
+//     Array.isArray(departmentRoleData) && departmentRoleData.length > 0 ? (
+//       departmentRoleData.map((member, i) => (
+//         <TabPane
+//           key={i}
+//           tab={
+//             <span onClick={() => this.handleOnClick(member)}>
+//               {member.roleType}
+//             </span>
+//           }
+//         >
+      
+//         {this.state.departmentData.roleTypeId && (
+//             <Suspense fallback={"Loading..."}>
+              
+//                 <AccessForm 
+//                 departmentId={this.props.departmentId}
+//                 departmentData={this.state.departmentData}
+//                 roleTypeId={this.state.departmentData.roleTypeId} 
+
+//                 />
+//             </Suspense>
+//         )}
+//         </TabPane>
+//       ))
+//     ) : (
+//       <div class=" flex items-center">{departmentRoleData.message || 'No data available'}</div>
+//     )
+//   ) : (
+//     <div>No data available</div>
+//   )}
+// </StyledTabs>
+//                 </TabsWrapper>
+//             </>
+//         )
+//     }
+// }
+
+// const mapStateToProps = ({ settings, opportunity, auth }) => ({
+//     // departmentRoleData: settings.departmentRoleData,
+
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//     bindActionCreators({
+//         // getDepartmentRoleData
+//     }, dispatch);
+
+// export default connect(mapStateToProps, mapDispatchToProps)(DepartmentRole);
 
 
 

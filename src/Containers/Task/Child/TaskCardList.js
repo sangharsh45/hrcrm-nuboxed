@@ -329,15 +329,24 @@ const TaskCardList = (props) => {
                     <div className=" flex font-medium flex-col md:w-[4.2rem] max-sm:flex-row justify-between w-full ">
                                   {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
                                   <div class="text-xs text-cardBody font-poppins mb-2">
-                                  {item.assignedToName === null ? (
-              ""
-            ) : (
-              <MultiAvatar
-                primaryTitle={item.assignedToName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-            )}
+                                  <span>
+              {item.assignedToName === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedToName === item.submittedBy ? (
+                  
+                  null
+                ) : (
+                <MultiAvatar
+                  primaryTitle={item.assignedToName}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                )}
+                </>
+              )}
+            </span>
                                   </div>
                               </div>
                         

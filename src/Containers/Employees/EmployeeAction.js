@@ -400,6 +400,7 @@ export const inputEmployeeDataSearch = (name) => (dispatch) => {
       },
     })
     .then((res) => {
+      message.success(res.data);
       if (res.data.employeeId) {
         console.log(res.data);
         // dispatch(getAllLatestContactsForLazyLoading(res.data));

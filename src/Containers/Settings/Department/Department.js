@@ -14,9 +14,9 @@ import {
   updateDepartments,
   ClearReducerDataOfDepartment
 } from "./DepartmentAction";
-import {
-  getSectors,
-} from "../Sectors/SectorsAction";
+// import {
+//   getSectors,
+// } from "../Sectors/SectorsAction";
 import { Select } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
 const SingleDepartment = lazy(() =>
@@ -137,7 +137,7 @@ class Department extends Component {
     const { getDepartments, getSectors } = this.props;
     console.log();
     getDepartments(getDepartments);
-    getSectors();
+    // getSectors();
   }
   render() {
     const {
@@ -315,7 +315,7 @@ const mapStateToProps = ({ departments, sector }) => ({
   updatingDepartmentsError: departments.updatingDepartmentsError,
   fetchingDepartments: departments.fetchingDepartments,
   fetchingDepartmentsError: departments.fetchingDepartmentsError,
-  sectors: sector.sectors,
+  // sectors: sector.sectors,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -324,7 +324,7 @@ const mapDispatchToProps = (dispatch) =>
       addDepartments,
        removeDepartments,
       updateDepartments,
-      getSectors,
+      // getSectors,
       ClearReducerDataOfDepartment,
       searchDepartmentName
     },
