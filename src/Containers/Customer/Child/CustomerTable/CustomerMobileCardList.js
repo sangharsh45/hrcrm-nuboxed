@@ -5,11 +5,10 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select,Button ,Popconfirm} from "antd";
+import dayjs from "dayjs";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
@@ -33,13 +32,21 @@ import {
   handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
+const AddCustomerDrawerModal = lazy(() =>
+  import("../../AddCustomerDrawerModal")
+);
+const CustomerPulseDrawerModal = lazy(() =>
+  import("./CustomerPulseDrawerModal")
+);
+const AddCustomerNotesDrawerModal = lazy(() =>
+  import("../CustomerDetail/AddCustomerNotesDrawerModal")
+);
+const AddCustomerEmailDrawerModal = lazy(() =>
+  import("../UpdateCustomer/AddCustomerEmailDrawerModal")
+);
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -137,7 +144,7 @@ const [rowdata, setrowdata] = useState("");
     
  
          <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         
         <InfiniteScroll
         dataLength={customerByUserId.length}
@@ -148,10 +155,10 @@ const [rowdata, setrowdata] = useState("");
       >
       
       {customerByUserId.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -432,7 +439,7 @@ const [rowdata, setrowdata] = useState("");
                     )
                 })}
                 </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       
   

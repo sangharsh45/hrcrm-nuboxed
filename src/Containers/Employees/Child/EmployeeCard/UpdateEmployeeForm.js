@@ -117,7 +117,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
       this.props.showLocation
         .filter((option) => {
           if (
-            option.country_id === filterOptionValue &&
+            option.country_name === filterOptionValue &&
             option.probability !== 0
           ) {
             return option;
@@ -216,7 +216,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
        const WorkplaceOptions = this.props.countries.map((item) => {
       return {
         label: `${item.country_name || ""}`,
-        value: item.country_id,
+        value: item.country_name,
       };
     });
  
@@ -682,7 +682,7 @@ name="departmentId"
         </select> */}
         </div>
         </div>
-
+        <div class=" w-w48 max-sm:w-wk">
  <Field
                     name="roleType"
                     label={<FormattedMessage
@@ -719,6 +719,7 @@ name="departmentId"
                     // isColumn
                     // selectType="roleType"
                      /> 
+                      </div>
       
                       <div class=" flex justify-between mt-3 max-sm:flex-col" >
                       <div class=" w-w48 flex flex-col max-sm:w-wk">
@@ -793,7 +794,7 @@ name="departmentId"
                     // isColumn
                     // selectType="roleType"
                      /> 
-                     {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
+                    {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select className="customize-select"
              
                       onChange={this.handleLocationChange}
@@ -815,17 +816,6 @@ name="departmentId"
                     </div>
                   </div>
 
-                
-                  {/* <Field
-                    name="workplace"
-                    label={<FormattedMessage
-                      id="app.workplace"
-                      defaultMessage="Work place"
-                    />}
-                    width={"100%"}
-                    isColumn
-                    component={InputComponent}
-                     /> */}
                          <div class=" flex " >
                   <div>
                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">

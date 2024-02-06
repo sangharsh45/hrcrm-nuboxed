@@ -1,9 +1,10 @@
-import React, { Component,Suspense } from "react";
+import React, { Component,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import CustomerPulseJumpstart from "./CustomerPulseJumpstart";
+const CustomerPulseJumpstart =lazy(()=> import("./CustomerPulseJumpstart"));
+
 
 
 class CustomerPulseDrawerModal extends Component {
@@ -17,9 +18,6 @@ class CustomerPulseDrawerModal extends Component {
           title={this.props.customer.name}
           width="60%"
           visible={this.props.addDrawerCustomerPulseModal}
-          closable
-          placement="right"
-          destroyOnClose
           onClose={() => this.props.handleCustomerPulseDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

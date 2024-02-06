@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import { FlexContainer } from "../../Components/UI/Layout";
+import dayjs from "dayjs";
 import { GroupView } from "../../Components/Common";
 import {
   getCustomerRequirement,
@@ -15,9 +14,15 @@ import {
   handleUpdateCustomerDrawerModal,
   setEditCustomer,
 } from "../Customer/CustomerAction";
-import SingleCardView from "./SingleCardView";
-import AddCustomerDrawerModal from "./AddCustomerDrawerModal";
-import UpdateCustomerDrawerModal from "./Child/CustomerTable/UpdateCustomerDrawerModal";
+const SingleCardView = lazy(() =>
+  import("./SingleCardView")
+);
+const AddCustomerDrawerModal = lazy(() =>
+  import("./AddCustomerDrawerModal")
+);
+const UpdateCustomerDrawerModal = lazy(() =>
+  import("./Child/CustomerTable/UpdateCustomerDrawerModal")
+);
 
 class CustomerCardView extends Component {
 
@@ -28,10 +33,10 @@ class CustomerCardView extends Component {
       getCustomerRequirement,
       getCustomerCloser,
     } = this.props;
-    const startDate = moment()
+    const startDate = dayjs()
       .startOf("month")
       .toISOString();
-    const endDate = moment()
+    const endDate = dayjs()
       .endOf("month")
       .toISOString();
     if (userId) {
@@ -66,10 +71,10 @@ class CustomerCardView extends Component {
       user: { userId },
       getAllCustomerByCloser,
     } = this.props;
-    const startDate = moment()
+    const startDate = dayjs()
       .startOf("month")
       .toISOString();
-    const endDate = moment()
+    const endDate = dayjs()
       .endOf("month")
       .toISOString();
 
@@ -202,7 +207,7 @@ class CustomerCardView extends Component {
         >
           {(isViewAll) =>
             !isViewAll ? (
-              <FlexContainer>
+              <div class=" flex">
                 {latestCustomer &&
                   latestCustomer.slice(0, 5).map((customer, i) => {
                     return (
@@ -217,9 +222,9 @@ class CustomerCardView extends Component {
                       />
                     );
                   })}
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 {latestCustomer &&
                   latestCustomer.map((customer, i) => {
                     return (
@@ -234,7 +239,7 @@ class CustomerCardView extends Component {
                       />
                     );
                   })}
-              </FlexContainer>
+              </div>
             )
           }
         </GroupView>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { SearchOutlined } from "@ant-design/icons";
 import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
@@ -195,8 +195,8 @@ function CustomerBlueTable(props) {
           item.middleName || ""
         } ${item.lastName || ""}`;
 
-        const currentdate = moment().format("DD/MM/YYYY");
-        const date = moment(item.creationDate).format("DD/MM/YYYY");
+        const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(item.creationDate).format("DD/MM/YYYY");
         console.log(date, currentdate, currentdate === date);
         return (
           <>

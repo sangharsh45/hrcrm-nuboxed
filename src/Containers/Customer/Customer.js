@@ -2,8 +2,6 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import CustomerWhiteTable from "../Customer/Child/CustomerTable/CustomerWhiteTable";
-import CustomerBlueTable from "../Customer/Child/CustomerTable/CustomerBlueTable";
 import {
     handleCustomerModal,
     getCustomerListByUserId,
@@ -15,12 +13,14 @@ import {
     getCustomerFilterData,   
   } from "./CustomerAction";
 import CustomerMap from "./CustomerMap"
-import moment from "moment";
-import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";
-import CustomerMobileCardList from "./Child/CustomerTable/CustomerMobileCardList";
-import CustomerAllMobileCardList from "./Child/CustomerTable/CustomerAllMobileCardList";
-import CustomerMobileTeamCardList from "./Child/CustomerTable/CustomerMobileTeamCardList";
-import CustomerMapView from "./CustomerMapView";
+import dayjs from "dayjs";
+const CustomerWhiteTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerWhiteTable"));
+const CustomerBlueTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerBlueTable"));
+const CustomerTeamCardList =lazy(()=> import("./Child/CustomerTable/CustomerTeamCardList"));
+const CustomerMobileCardList =lazy(()=> import("./Child/CustomerTable/CustomerMobileCardList"));
+const CustomerAllMobileCardList =lazy(()=> import("./Child/CustomerTable/CustomerAllMobileCardList"));
+const CustomerMobileTeamCardList =lazy(()=> import("./Child/CustomerTable/CustomerMobileTeamCardList"));
+const CustomerMapView =lazy(()=> import("./CustomerMapView"));
 const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
@@ -32,10 +32,10 @@ class Customer extends Component {
   currentUser:"",
   isMobile: false, };
   handleClear = () => {
-    const startDate = moment()
+    const startDate = dayjs()
       .startOf("month")
       .toISOString();
-    const endDate = moment()
+    const endDate = dayjs()
       .endOf("month")
       .toISOString();
     this.setState({ currentData: "" });
