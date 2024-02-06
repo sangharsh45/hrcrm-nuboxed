@@ -87,12 +87,13 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
              
-              <CardWrapper>      
+            <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
                 console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
-                    <CardElement>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
+                  text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
                       <CardImage>
                    <Tooltip 
                    title={item.country}
@@ -147,7 +148,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                         : "Not Assigned"}
                       </span>
          </div>
-          <div class=" flex flex-row justify-evenly mt-[0.3rem] w-full items-end">
+          <div class=" flex flex-row justify-evenly mt-[0.5rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
        
           <span class=" cursor-pointer"
@@ -301,10 +302,10 @@ function handleSetCurrentEmployeeId(employeeId,) {
        
                         </div>  */}
 
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
+              </div>
               </div>
               <UpdateEmployeeModal
                 storedData={storedData}
@@ -394,50 +395,8 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeCardView)
 
-const MainWrapper = styled.div`
-  /* */
-  margin: 0px 20px;
-  @media only screen and (max-width: 600px) {
-  }
-`
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.35rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 9.5rem;
-    color: rgb(68,68,68);
-    margin: 1rem;
-    padding: 0.2rem;
-    width: 19vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: 22rem;
-    
-  }
-`
-const CardDescription = styled.div`
-  
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
+
+
 const CardImage = styled.div`
   
   width:200;
@@ -449,20 +408,7 @@ const CardImage = styled.div`
     flex-direction:column
   }
 `
-const WithOutImage = styled.div`
-  
-  width:200px;
-  height:200px;
-  display:flex;
-    align-items: center;
-    flex-direction:column
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
+
 
 const Header = styled.div`
   text-overflow: ellipsis;
@@ -490,16 +436,7 @@ width:100%
 text-align:center
   }
 `
-const Desc = styled.p`
-  height: 0px;
-`
-const Price = styled.div`
-  height: 1.5em;
-  font-weight: 700;
-  font-family: Poppins;
-  font-size: 1em;
-  white-space: nowrap;
-`
+
 
 const AppIcon = (props) => (
   <i

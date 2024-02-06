@@ -21,10 +21,25 @@ import {
 } from "../ReportAction";
 const Option = StyledSelect.Option;
 class ReportActionLeft extends React.Component {
+  // state = {
+  //   // dropdownData: {
+  //   //   investorTypes: ["Investor List","Investor all contacts","All Deals","Open Deals","Closed Deals","Pitch"],
+  //   //   prospectTypes: ["Prospect List","Prospect all contacts","All Opportunities","Open Opportunities","Closed Opportunities","Pitch"],
+  //   //   hrTypes: ["Employee","Suspended Employee","All Attendedance","Expenses","Mileages","Leaves"],
+  //   //   recruitProType: ["Requirement", "Selected"],
+  //   //   // Add more icons and corresponding items as needed
+  //   // },
+  //   activeIcon: null,
+  // };
+  // handleIconClick = (iconKey) => {
+  //   this.setState({ activeIcon: iconKey });
+  // };
   render() {
     const {
       reportTypes,
+      handleIconClick,
       reportType,
+      investorTypes,
       selectedReportType,
       dateRangeList,
       reportViewType,
@@ -34,6 +49,8 @@ class ReportActionLeft extends React.Component {
       setSelectedTimeIntervalReport,
       role,
       user,
+      activeIcon,
+      dropdownData,
       selectedSubReportType,
       reportOpportunitySubTypes,
       reportRequirementSubTypes,
@@ -50,15 +67,8 @@ class ReportActionLeft extends React.Component {
 <div class="flex w-[12rem] justify-between">
         <Badge
         size="small"
-        // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
       >
         <span class=" cursor-pointer "
-          // onClick={() => props.setReportViewType("test")}
-          // style={{
-          //   color: props.reportViewType === "test" && "tomato",
-  
-          // }}
           > 
               <Tooltip title="My Details">
           <PersonIcon  style={{ fontSize: "1rem" }}/>
@@ -68,17 +78,11 @@ class ReportActionLeft extends React.Component {
         </Badge>
         <Badge
         size="small"
-        // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
       >
         <span class="cursor-pointer" 
-        // onClick={() => handleButtonClick("Tasks")} 
-        // style={{
-        //   color:activeButton === "Tasks" && "tomato",
-          
-        // }}
+ onClick={() => handleIconClick("hrTypes")}
         >
-         <Tooltip title="Task">
+         <Tooltip title="HR">
              
      <FactCheckIcon
                 style={{ fontSize: "1rem", }}
@@ -87,18 +91,13 @@ class ReportActionLeft extends React.Component {
         </span>
   </Badge>
        
-    {user.crmInd === true && (
+    {/* {user.crmInd === true && ( */}
         <Badge
         size="small"
-        // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
       >
         <span class="cursor-pointer"
-        // onClick={() =>  handleButtonClick("Customer")} 
-        // style={{
-        //   color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && reportViewType === "ALL" && "#444" : reportViewType === "ALL" && "tomato" ,
-       
-        // }}
+          onClick={() => handleIconClick("prospectTypes")}
+      
         >
           <Tooltip title="Prospects">
           <ApartmentIcon
@@ -108,22 +107,16 @@ style={{ fontSize: "1rem", }}
 </Tooltip>        
         </span>
         </Badge>
-)}
+{/* )} */}
        
 
    
-    {user.erpInd === true && (
+    {/* {user.erpInd === true && ( */}
          <Badge
          size="small"
-         // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-         // overflowCount={999}
        >
         <span class="cursor-pointer"
-        // onClick={() => handleButtonClick("Accounts")} 
-        // style={{
-        //   color:activeButton === "Accounts" && "tomato",
-          
-        // }}
+
         >
           <Tooltip title="Customers">
           <AcUnitIcon
@@ -132,19 +125,12 @@ style={{ fontSize: "1rem", }}
           </Tooltip>
         </span>
         </Badge>
-    )}
-{user.imInd === true  && (
+
+{/* {user.imInd === true  && ( */}
       <Badge
       size="small"
-      // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-      // overflowCount={999}
     >
         <span class="cursor-pointer"
-        // onClick={() => handleButtonClick("Order")} 
-        // style={{
-        //   color:activeButton === "Order" && "tomato",
-    
-        // }}
         >  <Tooltip title="Order">
           <DynamicFeedIcon
                 style={{ fontSize: "1rem", }}
@@ -152,15 +138,16 @@ style={{ fontSize: "1rem", }}
            </Tooltip>
         </span>
         </Badge>
-)}
+{/* )} */}
    
-    {user.erpInd === true && (
+    {/* {user.erpInd === true && ( */}
         <Badge
         size="small"
         // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
         <span class="cursor-pointer"
+            // onClick={() => this.handleIconClick("investorTypes")}
         // onClick={() => handleButtonClick("Finance")} 
         // style={{
         //   color:activeButton === "Finance" && "tomato",
@@ -173,15 +160,16 @@ style={{ fontSize: "1rem", }}
           
         </span>
         </Badge>
-    )}
-        {user.imInd === true  && (
+    {/* )} */}
+        {/* {user.imInd === true  && ( */}
             <Badge
             size="small"
             // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
             // overflowCount={999}
           >
         <span class="cursor-pointer"
-        // onClick={() => handleButtonClick("Investors")} 
+         onClick={() => handleIconClick("investorTypes")}
+        // onClick={() => setReportViewType("investor")} 
         // style={{
         //   color:activeButton === "Investors" && "tomato",
     
@@ -195,7 +183,7 @@ style={{ fontSize: "1rem" ,}}
 </Tooltip>       
         </span>
         </Badge>
-)}
+{/* )} */}
     
    </div>
           {user.department === "Management" && (
@@ -274,6 +262,36 @@ style={{ fontSize: "1rem" ,}}
               )}
 
             </div>
+            {activeIcon && (
+            <div class=" mt-2">
+              {/* {reportViewType === "investor" ? ( */}
+              <StyledSelect
+                  showSearch
+                  width={"20%"}
+                  placeholder="Select Report"
+                  onChange={(e) => this.props.handleDropChange(e)}
+                  defaultValue={selectedReportType}
+                  filterOption={(input, option) =>
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                   {dropdownData[activeIcon].map((item, i) => (
+                <Option key={i} value={item}>
+                  {item}
+                </Option>
+              ))}
+                  {/* {investorTypes.map((option, i) => (
+                    <Option key={i} value={option}>
+                      {option}
+                    </Option>
+                  ))} */}
+                </StyledSelect>
+            
+
+            </div>
+               )}
                 </div>
               </>
             )}
@@ -283,6 +301,7 @@ style={{ fontSize: "1rem" ,}}
 }
 const mapStateToProps = ({ report, auth }) => ({
   reportTypes: report.reportTypes,
+  investorTypes:report.investorTypes,
   role: auth.userDetails.role,
   user: auth.userDetails,
   reportType: report.reportType,

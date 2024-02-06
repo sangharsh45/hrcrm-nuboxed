@@ -6,6 +6,10 @@ const initialState = {
     fetchingOrganisationReportError: false,
     organisationReportData: [],
 
+    fetchingAllReportInvestors: false,
+     fetchingAllReportInvestorsError: false,
+     allReportInvestors:[],
+
     fetchingMyViewReport: false,
     fetchingMyViewReportError: false,
     myViewReportData: [],
@@ -92,7 +96,7 @@ const initialState = {
     //     .endOf("year")
     //     .toISOString(),
 
-    investor: ["Investor List","Investor all contacts","All Deals","Open Deals","Closed Deals","Pitch"],
+    investorTypes: ["Investor List","Investor all contacts","All Deals","Open Deals","Closed Deals","Pitch"],
     prospect: ["Prospect List","Prospect all contacts","All Opportunities","Open Opportunities","Closed Opportunities","Pitch"],
     recruitProType: ["Requirement", "Selected"],
     hr: ["Employee","Suspended Employee","All Attendedance","Expenses","Mileages","Leaves"],
@@ -201,6 +205,15 @@ export const reportReducer = (state = initialState, action) => {
                 fetchingSalesReports: false,
                 fetchingSalesReportsError: true,
             };
+
+
+            case types.GET_ALL_REPORT_INVESTORS_REQUEST:
+                return { ...state, fetchingAllReportInvestors: true };
+              case types.GET_ALL_REPORT_INVESTORS_SUCCESS:
+                return { ...state, fetchingAllReportInvestors: false, allReportInvestors: action.payload };
+              case types.GET_ALL_REPORT_INVESTORS_FAILURE:
+                return { ...state, fetchingAllReportInvestors: false, fetchingAllReportInvestorsError: true };
+          
         default:
             return state;
     }

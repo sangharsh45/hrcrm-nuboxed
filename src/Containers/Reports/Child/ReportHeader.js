@@ -8,7 +8,12 @@ class ReportHeader extends Component {
     return (
       <div >
         <ActionHeader
-          leftComponent={<ReportActionLeft />}
+
+          leftComponent={<ReportActionLeft   
+            handleIconClick={this.props.handleIconClick}
+            activeIcon={this.props.activeIcon}
+            dropdownData={this.props.dropdownData}
+               handleDropChange={this.props.handleDropChange}/>}
           rightComponent={<ReportActionRight />}
           // rightComponent={<ReportActionRight
           // />}

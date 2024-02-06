@@ -137,3 +137,29 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
     type: types.SET_SUB_SELECTED_REPORT_TYPE,
     payload: type,
   });
+
+  export const getAllReportInvestors = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_REPORT_INVESTORS_REQUEST,
+    });
+    axios               
+      .get(`${base_url}/investor/report/all-investor/enterprise/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_REPORT_INVESTORS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_ALL_REPORT_INVESTORS_FAILURE,
+          payload: err,
+        });
+      });
+  };
