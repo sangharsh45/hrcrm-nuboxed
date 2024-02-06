@@ -954,6 +954,27 @@ h1{
   background: rgba(1, 30, 70, 0.7);
   pointer-events: auto;
 }
+/* HeaderLabel
+-------------
+
+<div class=" text-[white] text-xs" >
+ */
+/* cardwrapper code
+----------------------
+
+<div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
+ */
+
+/* cardelement code 
+---------------------
+
+ <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
+text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
+ */
+
+/* ONLYWRAPCARD CODE 
+------------------------
+ <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]"> */
 
 /* STYLEDLABEL */
 /* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> */

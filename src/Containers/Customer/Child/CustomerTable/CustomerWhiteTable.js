@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { SearchOutlined,} from '@ant-design/icons';
 import {getSectors} from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import { getAllSalesList} from "../../../Opportunity/OpportunityAction";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import { Tooltip,Button,Input } from "antd";
@@ -197,8 +197,8 @@ function CustomerWhiteTable(props) {
         const fullName = ` ${item.salutation || ""} ${item.firstName ||
           ""} ${item.middleName || ""} ${item.lastName || ""}`;
 
-        const currentdate = moment().format("DD/MM/YYYY");
-        const date = moment(item.creationDate).format("DD/MM/YYYY");
+        const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(item.creationDate).format("DD/MM/YYYY");
         console.log(date, currentdate, currentdate === date);
         return (
           <>

@@ -10,7 +10,6 @@ import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { addNote } from "../../../../CustomerAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 
 
 /**
@@ -124,7 +123,7 @@ class NoteForm extends Component {
                   // editorState={editorState}
                   toolbar={toolbarOption}
                 />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -143,7 +142,7 @@ class NoteForm extends Component {
                     />
                     {/* Post */}
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             );
           }}

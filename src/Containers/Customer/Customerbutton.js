@@ -10,9 +10,10 @@ function Customerbutton (props) {
     return (
       
             <>
-              <CardWrapper>
+         <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center"> 
              
-                    <CardElement>
+         <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
+text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
                       <CardImage>
               <Button  type='primary'>
                 Last Three Month
@@ -22,9 +23,9 @@ function Customerbutton (props) {
               </Button>
                         </CardImage>
                   
-                    </CardElement>
+                    </div>
              
-              </CardWrapper>
+              </div>
 
             </>
       
@@ -47,51 +48,7 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(Customerbutton)
 
-const MainWrapper = styled.div`
-  /* */
-  margin: 0px 20px;
-  @media only screen and (max-width: 600px) {
-  }
-`
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    justify-content: center;
-    flex-direction: column;
-  }
-`
-const CardElement = styled.div`
- 
-//   width: 20%;
-border-radius: 0.2rem;
-  //border:2px solid #EEEEEE;
-  //background-color: rgb(255, 255, 255);
-  height: auto;
-    color: rgb(68, 68, 68);
-    margin: 0.3rem;
-    padding: 0.3rem;
-    width: 6vw;
-   
-//   padding: 0 20px;
-  margin-top: 0.5em;
-  /* margin:0px 20px; */
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    
-  }
-`
-const CardDescription = styled.div`
-  
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
+
 const CardImage = styled.div`
   
   width:200;
@@ -104,59 +61,7 @@ const CardImage = styled.div`
     flex-direction:column
   }
 `
-const WithOutImage = styled.div`
-  
-  width:200px;
-  height:200px;
-  display:flex;
-    align-items: center;
-    flex-direction:column
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
 
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-  margin-left:14px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`
-const Desc = styled.p`
-  height: 0px;
-`
-const Price = styled.div`
-  height: 1.5em;
-  font-weight: 500;
-  font-family: Poppins;
-  font-size: 1em;
-  white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis
-`
 
 const AppIcon = (props) => (
   <i

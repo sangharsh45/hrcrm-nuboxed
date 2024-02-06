@@ -9,8 +9,6 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { updateCustomer,setEditCustomer ,setClearbitData} from "../../CustomerAction";
-import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
-import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -138,8 +136,8 @@ function UpdateCustomerForm (props) {
                       </a>
                     ) : null}
                   </div>
-                  <Spacer />
-                   <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
+                
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
                   <Field
                       defaultValue={{
                         label: setEditingCustomer.name,
@@ -168,7 +166,7 @@ function UpdateCustomerForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                  <Spacer />
+
                   {/* <Spacer />
                   <Field
                     name="email"
@@ -181,7 +179,7 @@ function UpdateCustomerForm (props) {
                     component={InputComponent}
                     inlineLabel
                     /> */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-3">
                    <div class=" w-3/12 max-sm:w-[31%]">
                       <FastField
                         name="countryDialCode"
@@ -212,9 +210,9 @@ function UpdateCustomerForm (props) {
                         />                   
                          </div>
                   </div>
-                  <Spacer/>
+                 
                   
-                     <div class=" flex justify-between">
+                     <div class=" flex justify-between mt-3">
                      <div class="w-w47.5 max-sm:w-w47.5">
                       <FastField                      
                         name="sectorId"
@@ -252,7 +250,7 @@ function UpdateCustomerForm (props) {
            </div>
                  </div>
                 
-                 <Spacer/>
+           <div class=" mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -262,13 +260,14 @@ function UpdateCustomerForm (props) {
                     width={"100%"}
                     isColumn
                     component={TextareaComponent}
-                    />   
+                    />  
+                    </div> 
                  </div>
 
                  <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
-                   <Spacer/>
-                   <div class=" flex justify-between mb-[0.35rem]">
+                 
+                   <div class=" flex justify-between mt-3 mb-[0.35rem]">
                    <div class=" h-full w-full">
                    <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -380,10 +379,10 @@ function UpdateCustomerForm (props) {
                  
                   <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                 <div class=" text-[white] text-xs" >Corporate Address</div>
                   </div>
                     </div>
-                  <Spacer /><Spacer />
+                <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -394,6 +393,7 @@ function UpdateCustomerForm (props) {
                       />
                     )}
                   />
+                  </div>
         {/* <div class=" flex justify-between">
                     <div class=" w-1/2 max-sm:w-wk">
                      <Field
@@ -425,8 +425,7 @@ function UpdateCustomerForm (props) {
                                      
                 </div>
               </div>
-              <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              <div class="flex justify-end w-wk mt-3 bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

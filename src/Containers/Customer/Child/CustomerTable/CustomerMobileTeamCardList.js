@@ -32,14 +32,21 @@ import {
   customerToAccount,
   handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
-
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+const AddCustomerDrawerModal = lazy(() =>
+  import("../../AddCustomerDrawerModal")
+);
+const AddCustomerEmailDrawerModal = lazy(() =>
+  import("../UpdateCustomer/AddCustomerEmailDrawerModal")
+);
+const AddCustomerNotesDrawerModal = lazy(() =>
+  import("../CustomerDetail/AddCustomerNotesDrawerModal")
+);
+const CustomerPulseDrawerModal = lazy(() =>
+  import("./CustomerPulseDrawerModal")
+);
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
 );

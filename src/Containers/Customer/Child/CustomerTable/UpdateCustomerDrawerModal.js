@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { getCustomerDetailsById } from "../../CustomerAction";
@@ -8,7 +8,10 @@ import {
 import { setEditCustomer } from "../../CustomerAction";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import UpdateCardCustomerForm from "../UpdateCustomer/UpdateCardCustomerForm";
+const UpdateCardCustomerForm = lazy(() =>
+  import("../UpdateCustomer/UpdateCardCustomerForm")
+);
+
 
 class UpdateCustomerDrawerModal extends Component {
   // componentDidMount() {
@@ -31,12 +34,7 @@ class UpdateCustomerDrawerModal extends Component {
         <StyledDrawer
           title={name}
           width="55em"
-          style={{ marginTop: "5rem" }}
           visible={this.props.updateDrawerCustomerModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() =>
             this.props.handleUpdateCustomerDrawerModal(
               this.props.updateCustomerDrawerProps,
