@@ -112,10 +112,10 @@ const SingleDepartment = (props) => {
     };
     props.addingDeptModules(data, departmentId);
   };
-  const [imStatus, setImStatus] = useState(moduleMapper.imInd);
+  const [imStatus, setImStatus] = useState(imInd);
   useEffect(() => {
-    setImStatus(moduleMapper.imInd);
-  }, [moduleMapper.imInd]);
+    setImStatus(imInd);
+  }, [imInd]);
   
   const handleImClick = (checked) => {
     setImStatus(checked);

@@ -6,16 +6,14 @@ import { bindActionCreators } from "redux";
 import { Radio } from "antd";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
-import { StyledLabel } from "../../../../Components/UI/Elements";
 import {getTimeZone} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
  import { updateEmployee } from "../../EmployeeAction";
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-import moment from "moment";
+import dayjs from "dayjs";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 
 
@@ -92,6 +90,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
     const selectedRole = event.target.value;
     this.setState({ selectedRole });
   };
+ 
 
   getRoleOptions(filterOptionKey, filterOptionValue) {
     const roleOptions =
@@ -111,6 +110,25 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         }));
 
     return roleOptions;
+  }
+  getLocationOptions(filterOptionKey, filterOptionValue) {
+    const LocationOptions =
+      this.props.showLocation.length &&
+      this.props.showLocation
+        .filter((option) => {
+          if (
+            option.country_id === filterOptionValue &&
+            option.probability !== 0
+          ) {
+            return option;
+          }
+        })
+        .map((option) => ({
+          label: option.locationName || "",
+          value: option.locationDetailsId,
+        }));
+  
+    return LocationOptions;
   }
   getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
     const StagesOptions =
@@ -188,6 +206,26 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         };
       });
 
+      const DepartmentOptions = this.props.departments.map((item) => {
+        return {
+          label: `${item.departmentName || ""}`,
+          value: item.departmentId,
+        };
+      });
+
+       const WorkplaceOptions = this.props.countries.map((item) => {
+      return {
+        label: `${item.country_name || ""}`,
+        value: item.country_id,
+      };
+    });
+ 
+
+ 
+  
+
+ 
+
 
   
       const { clearbit,setEditingEmployee } = this.props;
@@ -196,6 +234,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         <Formik
       initialValues={{
         salutation: setEditingEmployee.salutation || "",
+        departmentId:setEditingEmployee.departmentName,
         firstName: setEditingEmployee.firstName || "",
         lastName: setEditingEmployee.lastName || "",
         emailId:  setEditingEmployee.emailId || "",
@@ -203,18 +242,19 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         countryDialCode:  setEditingEmployee.countryDialCode || "",
         countryDialCode1: setEditingEmployee.countryDialCode1 || "",
         phoneNo:  setEditingEmployee.phoneNo || "",
-        location:this.state.selectedLocation,
-        workplace:this.state.selectedCountry,
-        dateOfJoining:moment(),
-        dob:moment(),
+        // location:this.state.selectedLocation,
+        // workplace:this.state.selectedCountry,
+        dateOfJoining:dayjs(),
+        dob:dayjs(),
         mobileNo:  setEditingEmployee.mobileNo || "",
         country:  setEditingEmployee.country || "",
         workplace: setEditingEmployee.workplace || "",
+        location: setEditingEmployee.location || "",
         designationTypeId: setEditingEmployee.designationTypeId || "",
         departmentId:setEditingEmployee.department,
-        reportingManagerDeptId: setEditingEmployee.reportingManagerDeptId || "",
+        reportingManagerDeptId: setEditingEmployee.reportingManagerDept || "",
         roleType: setEditingEmployee.roleType || "",
-        roleType:this.state.selectedRole,
+        // roleType:this.state.selectedRole,
         linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
         label:  setEditingEmployee.label || "",
 
@@ -224,9 +264,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         // job_type: this.state.active,
         
         reportingManager: setEditingEmployee.reportingManagerName || "",
-        // reportingManager: this.props.userDetails.userId
-        //   ? this.props.userDetails.userId
-        //   : "",
+     
         address: [
           {
             addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",
@@ -247,12 +285,14 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         this.props.updateEmployee(
           {
             ...values,
-            departmentId:this.state.selectedDept,
-            location:this.state.selectedLocation,
-            workplace:this.state.selectedCountry,
-          
+            // departmentId:this.state.selectedDept,
+            // location:this.state.selectedLocation,
+            // workplace:this.state.selectedCountry,
+          //    reportingManager: this.props.userDetails.userId
+          // ? this.props.userDetails.userId
+          // : "",
             reportingManagerDeptId:values.reportingManagerDeptId,
-            roleType:this.state.selectedRole,
+            // roleType:this.state.selectedRole,
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
             // job_type: this.state.active,
@@ -310,7 +350,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         isColumn
                         />
                     </div> */}
-                    <div class=" w-2/4 max-sm:w-full">
+                    <div class=" w-wk max-sm:w-full">
                       <Field
                         isRequired
                         name="firstName"
@@ -363,7 +403,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   </div>
                   </div>
                
-                  <div>
+                 
+             
+                  <div class=" flex justify-between" >
+                  <div class=" w-[70%] flex flex-col max-sm:w-wk">
                     <Field
                       isRequired
                       name="emailId"
@@ -377,10 +420,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       inlineLabel
                       />
                   </div>
-             
-                  <div class=" flex justify-between" >
-                  
-                  <div class="w-w47.5 max-sm:w-wk">
+                  <div class=" max-sm:w-wk">
                     <Field
                       name="currency"
                       isColumnWithoutNoCreate
@@ -474,11 +514,11 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                
                   <div class=" flex justify-between max-sm:flex-col" >
                   <div class=" w-w48 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/*<div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofjoining"
                       defaultMessage=" Date Of Joining"
                     />
-                    </StyledLabel> */}
+                  </div> */}
                     <Field
                       isRequired
                       name="dateOfJoining"
@@ -496,11 +536,11 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     />
                   </div>
                   <div class=" w-w47.5 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/*<div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofbirth"
                       defaultMessage=" Date Of Birth"
                     />
-                    </StyledLabel> */}
+                  </div> */}
                     <Field
                       isRequired
                       name="dob"
@@ -556,8 +596,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
  
                 </div>
                 <div class="  w-[47.5%] max-sm:w-wk ">
-                <div class=" w-full" style={{ width: "100%" }}>
-                    <div>Time Zone</div>
+                <div class=" w-full mt-4" >
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Time Zone</div>
                     <Field
                       name="timeZone"
                       type="text"
@@ -574,7 +614,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
     
 <div class=" flex justify-between max-sm:flex-col" >
 <div class=" w-w48 flex flex-col max-sm:w-wk">
-<label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+{/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
 <select className="customize-select"
 name="departmentId"
                        
@@ -585,21 +625,27 @@ name="departmentId"
               {item.departmentName}
             </option>
           ))}
-        </select>
-                      {/* <Field
-  isRequired  // This makes the field mandatory
-  name="departmentId"
-  label={<FormattedMessage
-    id="app.department"
-    defaultMessage="Department"
-  />}
-  isColumnWithoutNoCreate
-  component={SearchSelect}
-  value={values.departmentId}
-  selectType="departmentName"
-  isColumn
-  inlineLabel
-/> */}
+        </select> */}
+  <Field
+                          name="departmentId"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.Department"
+                              defaultMessage="Department"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(DepartmentOptions)
+                              ? DepartmentOptions
+                              : []
+                          }
+                          value={values.departmentId}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                     <FastField
@@ -619,7 +665,7 @@ name="departmentId"
                   </div>
                   <div class=" flex justify-between mt-2" >
                   <div class=" w-w48 flex flex-col max-sm:w-wk">
-                  <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
+                  {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
        
                   <select className="customize-select"
                  
@@ -633,11 +679,11 @@ name="departmentId"
               {item.roleType}
             </option>
           ))}
-        </select>
+        </select> */}
         </div>
         </div>
 
-{/* <Field
+ <Field
                     name="roleType"
                     label={<FormattedMessage
                       id="app.role"
@@ -672,12 +718,32 @@ name="departmentId"
                     // width={"100%"}
                     // isColumn
                     // selectType="roleType"
-                     /> */}
+                     /> 
       
                       <div class=" flex justify-between mt-3 max-sm:flex-col" >
                       <div class=" w-w48 flex flex-col max-sm:w-wk">
-                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
-                      <select className="customize-select"
+                      <Field
+                          name="workplace"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.Workplace"
+                              defaultMessage="Workplace"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(WorkplaceOptions)
+                              ? WorkplaceOptions
+                              : []
+                          }
+                          value={values.workplace}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
+                      {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
+                    <select className="customize-select"
                       
                       onChange={this.handleCountryChange}>
           <option value="">Select </option>
@@ -686,11 +752,48 @@ name="departmentId"
               {item.country_name}
             </option>
           ))}
-        </select>
+        </select> */}
                       </div>
              
                     <div class="w-w47.5 flex flex-col">
-                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
+
+                    <Field
+                    name="location"
+                    label={<FormattedMessage
+                      id="app.location"
+                      defaultMessage="Location"
+                    />}
+                    isColumnWithoutNoCreate
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        this.getLocationOptions(
+                          "workplace",
+                          values.workplace
+                        )
+                      )
+                        ? this.getLocationOptions(
+                            "workplace",
+                            values.workplace
+                          )
+                        : []
+                    }
+                    value={values.location}
+                    filterOption={{
+                      filterType: "workplace",
+                      filterValue: values.workplace,
+                    }}
+                    disabled={!values.workplace}
+                    isColumn
+                    margintop={"0"}
+                    inlineLabel
+                    style={{ flexBasis: "80%" }}
+                    // value={values.roleTypeId}
+                    // width={"100%"}
+                    // isColumn
+                    // selectType="roleType"
+                     /> 
+                     {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select className="customize-select"
              
                       onChange={this.handleLocationChange}
@@ -703,7 +806,7 @@ name="departmentId"
               {item.locationName}
             </option>
           ))}
-        </select>
+        </select>  */}
                  
 
 
@@ -725,12 +828,12 @@ name="departmentId"
                      /> */}
                          <div class=" flex " >
                   <div>
-                    <StyledLabel>
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.jobtype"
                         defaultMessage="Job Type"
                       />
-                    </StyledLabel>
+                  </div>
                     <Switch
                           checked={this.state.active}
                           onChange={this.handleJobType}
@@ -741,12 +844,12 @@ name="departmentId"
                   </div>
           &nbsp;&nbsp;&nbsp;&nbsp;
                   <div>
-                    <StyledLabel>
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.category"
                         defaultMessage="Category"
                       />
-                    </StyledLabel>
+                  </div>
                     <Switch
                           checked={this.state.typeInd}
                           onChange={this.handleType}
@@ -758,11 +861,11 @@ name="departmentId"
                   </div>
              
                   <div class=" mt-3">
-                    <StyledLabel><FormattedMessage
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.employeetype"
                       defaultMessage="Employee Type"
                     />
-                    </StyledLabel>
+                  </div>
                 
                     <Radio.Group
                       name="radiogroup"
@@ -802,7 +905,7 @@ name="departmentId"
                     />}
                     isColumnWithoutNoCreate
                     component={SelectComponent}
-                    // value={values.departmentId}
+                     value={values.reportingManagerDeptId}
                     width={"100%"}
                     options={
                       Array.isArray(WorkflowOptions) ? WorkflowOptions : []

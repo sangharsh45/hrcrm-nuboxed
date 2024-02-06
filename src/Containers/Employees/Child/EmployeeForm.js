@@ -342,7 +342,9 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                   </div>
                   </div>
-                  <div>
+                
+                  <div class=" flex justify-between" >
+                  <div class=" w-[70%] flex flex-col max-sm:w-wk">
                     <Field
                       isRequired
                       name="emailId"
@@ -356,9 +358,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       inlineLabel
                       />
                   </div>
-                  <div class=" flex justify-between" >
-                  
-                    <div class="w-w47.5 max-sm:w-wk">
+                    <div class=" max-sm:w-wk">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -542,7 +542,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
 
           
                 <div class=" w-[47.5%] max-sm:w-wk ">
-                <div class=" w-full">
+                <div class=" w-full mt-2">
                     <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Time Zone</div>
                     <Field
                       name="timeZone"
@@ -560,7 +560,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                 <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] ">
+            <Listbox.Label className="block font-semibold text-[0.75rem] m-[0.1rem 0 0.02rem 0.2rem] ">
               Assigned to
             </Listbox.Label>
             <div className="relative mt-[0.1rem]">
