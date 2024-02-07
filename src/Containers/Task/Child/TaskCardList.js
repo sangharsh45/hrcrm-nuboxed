@@ -141,11 +141,11 @@ const TaskCardList = (props) => {
                           id="app.deviation"
                           defaultMessage="deviation"
                         /></div>
-        <div className="md:w-[7.2rem]"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                           id="app.assignedto"
                           defaultMessage="assignedto"
                         /></div>
-        <div className="md:w-24"><FormattedMessage
+        <div className="md:w-[6.5rem]"><FormattedMessage
                           id="app.owner"
                           defaultMessage="owner"
                         /></div>
@@ -158,7 +158,7 @@ const TaskCardList = (props) => {
         dataLength={taskListRangeByUserId.length}
         next={handleLoadMore}
       hasMore={hasMore}
-        loader={fetchingTaskListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingTaskListRangeByUserId?<div class="flex items-center" >Loading...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
       >
@@ -172,44 +172,21 @@ const TaskCardList = (props) => {
 
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
-                                style={{
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
   // <div class="rounded-full h-10 w-16 bg-red-500"></div>
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "3.1875em",
-                          backgroundColor: "red",
-                        }}
-                      ></div>
+                      <div class="rounded-[50%] h-[2.1875em] w-[3.1875em] bg-[red]"></div>
                     )}
                     {item.priority === "Medium" && (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2rem",
-                          width: "3rem",
-                          backgroundColor: "orange",
-                        }}
-                      ></div>
+                      <div class="rounded-[50%] h-[2rem] w-[3rem] bg-[orange]" ></div>
                     )}
                     {item.priority === "Low" && (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "teal",
-                        }}
-                      ></div>
+                      <div class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[teal]" ></div>
                     )}
-                    <div class=" w-1"></div>
+                    <div class=" w-2"></div>
           <div class=" flex w-[10rem] max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex justify-center  max-sm:justify-between flex-row w-full md:flex-col ">
@@ -235,10 +212,8 @@ const TaskCardList = (props) => {
                   handleSetCurrentProcessName(item)
                   // this.props.setCurrentOpportunityRecruitMentData(item);
                 }}
-                style={{
-                  cursor: "pointer",
-                  color: "#042E8A",
-                }}          
+                className="cursor-pointer text-[#042E8A]"
+                          
                >
 
                  {`${item.taskName} `} &nbsp;
@@ -250,16 +225,16 @@ const TaskCardList = (props) => {
                                 </div>
                                 <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
                        
-                       {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">End</div> */}
+                      
                        <div class="text-xs text-cardBody font-poppins"> 
                         {`${dayjs(item.endDate).format("YYYY/MM/DD")}`}</div>
                    </div>
                                 <div class="flex flex-col w-20">
-                                  {/* <StyledLabel>today-enddate</StyledLabel> */}
+                                  
                     <div class="">
                    
                     <ButtonGroup >
-          {/* {item.complitionStatus === "To Start" && ( */}
+         
           <StatusIcon
   type="To Start"
   iconType="fa-hourglass-start"
@@ -352,10 +327,10 @@ const TaskCardList = (props) => {
                         
                     <div class="flex max-sm:mt-4 w-[10rem]">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
-                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+                                    
                                     <div class="text-xs text-cardBody font-poppins mb-2">
                                     <MultiAvatar
-                                    // style={{marginBottom:"0.25rem"}}
+                                   
                   primaryTitle={item.submittedBy}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
@@ -406,11 +381,12 @@ const TaskCardList = (props) => {
              <span>
              <Tooltip overlayStyle={{ maxWidth: "400px" }} title={`Review :${item.feedbackReview}`}>
             {item.feedbackRating === 0 ? (<StarBorderIcon
-              style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
+            className=" !text-2xl text-[#eeeedd]"/>)
               : (
                 <span>
                   {item.feedbackRating}{<StarBorderIcon
-                    style={{ color: "#FFD700", fontSize: "1.5em" }} />}
+                  className=" !text-2xl text-[#FFD700]"
+                    />}
                 </span>)}
              
                 </Tooltip>
@@ -428,7 +404,8 @@ const TaskCardList = (props) => {
                                     handleTaskFeedbackDrawerModal(true);
                                     handleSetTaskNameId(item);
                                   }}
-                                  style={{  cursor: "pointer", fontSize: "1rem" }}
+                                  className="!text-base cursor-pointer"
+                                 
                                 />
                              </Tooltip>
               
@@ -496,7 +473,7 @@ const TaskCardList = (props) => {
                   handleTaskNotesDrawerModal(true);
                   handleSetTaskNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[green]"
               />
            </Tooltip>
   
@@ -504,7 +481,7 @@ const TaskCardList = (props) => {
           {/* {props.userId === item.userId && ( */}
                       <DownloadForOfflineIcon
                         // type="edit"
-                        style={{ cursor: "pointer", fontSize: "1rem" }}
+                        className="!text-base cursor-pointer"
                         onClick={() => {
                           handleSetCurrentProcessName(item)
                           handleDownloadTaskModal(true);
@@ -520,7 +497,7 @@ const TaskCardList = (props) => {
           {props.userId === item.userId && (
                       <BorderColorIcon
                         type="edit"
-                        style={{ cursor: "pointer", fontSize: "1rem" }}
+                        className="!text-base cursor-pointer"                   
                         onClick={() => {
                           props.setEditTask(item);
                           handleUpdateTaskModal(true);
@@ -545,7 +522,8 @@ const TaskCardList = (props) => {
                                 <Tooltip title="Delete">
                             <DeleteOutlined
                               type="delete"
-                              style={{ cursor: "pointer",color:"red", fontSize: "1rem" }}
+                              className="!text-base cursor-pointer text-[red]"
+                              
                             />
                             </Tooltip>
                           </StyledPopconfirm>

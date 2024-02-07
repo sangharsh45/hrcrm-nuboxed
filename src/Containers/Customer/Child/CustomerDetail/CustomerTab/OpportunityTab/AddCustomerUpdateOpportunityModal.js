@@ -11,16 +11,11 @@ const AddCustomerUpdateOpportunityModal = (props) => {
     <>
       <StyledDrawer
         title={
-          <FormattedMessage id="app.opportunity" defaultMessage="Opportunity" />
+          <FormattedMessage id="app.updateOpportunity" defaultMessage="Update Opportunity" />
         }
-        width="45%"
+        width="60%"
         visible={props.addUpdateCustomerOpportunityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
         onClose={() => props.handleUpdateCustomerOpportunityModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateCustomerOpportunityForm opportunityId={props.opportunityId} {...formProps}/> {" "}

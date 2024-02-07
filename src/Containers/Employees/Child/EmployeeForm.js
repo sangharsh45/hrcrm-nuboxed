@@ -188,6 +188,13 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
     };
 });
 
+const DepartmentOptions = props.departments.map((item) => {
+  return {
+    label: `${item.departmentName || ""}`,
+    value: item.departmentId,
+  };
+});
+
 
     const { addEmployee, addingEmployee } = props;
     const selectedOption = props.assignedToList.find((item) => item.empName === selected);
@@ -205,8 +212,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             phoneNo: "",
             location:selectedLocation,
             workplace:selectedCountry,
-            roleType:selectedRole,
-            departmentId:selectedDept,
+            // roleType:selectedRole,
+            // departmentId:selectedDept,
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
@@ -249,8 +256,8 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
               reportingManagerDeptId:values.reportingManagerDeptId,
               location:selectedLocation,
               workplace:selectedCountry,
-              roleType:selectedRole,
-              departmentId:selectedDept,
+              // roleType:selectedRole,
+              // departmentId:selectedDept,
               job_type: active ? "Full Time" : "Part Time",
               type: typeInd ? "true" : "false",
               assignedTo: selectedOption ? selectedOption.employeeId : userId,
@@ -557,7 +564,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       }
                     />
                   </div>
-                <Listbox value={selected} onChange={setSelected}>
+                {/* <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
             <Listbox.Label className="block font-semibold text-[0.75rem] m-[0.1rem 0 0.02rem 0.2rem] ">
@@ -624,10 +631,10 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             </div>
           </>
         )}
-      </Listbox>
+      </Listbox> */}
 <div class=" flex justify-between max-sm:flex-col mt-4" >
                       <div class=" w-w48 flex flex-col max-sm:w-wk">
-                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+                   {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                       <select  className="customize-select"
                       
                       onChange={handleDeptChange}>
@@ -639,21 +646,28 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
               {item.departmentName}
             </option>
           ))}
-        </select>
-                      {/* <Field
-  isRequired  // This makes the field mandatory
-  name="departmentId"
-  label={<FormattedMessage
-    id="app.department"
-    defaultMessage="Department"
-  />}
-  isColumnWithoutNoCreate
-  component={SearchSelect}
-  value={values.departmentId}
-  selectType="departmentName"
-  isColumn
-  inlineLabel
-/> */}
+        </select> */}
+          <Field
+                          name="departmentId"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.Department"
+                              defaultMessage="Department"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(DepartmentOptions)
+                              ? DepartmentOptions
+                              : []
+                          }
+                          value={values.departmentId}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
+
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                     <FastField
@@ -674,7 +688,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                   </div>
                   <div class=" flex justify-between " >
                   <div class=" w-w48 flex flex-col max-sm:w-wk">
-                  <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
+                  {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
                 
                   <select
                  
@@ -689,7 +703,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
               {item.roleType}
             </option>
           ))}
-        </select>
+        </select> */}
         </div>
         </div>
 

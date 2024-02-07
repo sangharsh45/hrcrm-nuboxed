@@ -29,7 +29,7 @@ class NotesForm extends Component {
         <br />
 
         <div class="border-spacing-2 rounded-md shadow-2xl mb-1 mt-9">
-          <div style={{ height: 200, overflow: "auto", padding: "1rem" }}>
+          <div class="h-[200] overflow-auto p-4">
             {fetchingNotesListByTaskId ? (
               <BundleLoader />
             ) : (

@@ -1,12 +1,10 @@
 import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import Highlighter from "react-highlight-words";
 import { Link } from "../../../../Components/Common";
-import moment from "moment";
+import dayjs from "dayjs";
 import InfoIcon from '@mui/icons-material/Info';
-import { StyledTable } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
@@ -18,7 +16,6 @@ import { CurrencySymbol } from "../../../../Components/Common";
 import { getOpportunityListByCustomerId,handleUpdateCustomerOpportunityModal,
   setEditCustomerOpportunity} from "../../CustomerAction";
 import { Tooltip,Button,Input,Progress } from "antd";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 const AddCustomerUpdateOpportunityModal =lazy(()=>import("../../Child/CustomerDetail/CustomerTab/OpportunityTab/AddCustomerUpdateOpportunityModal")); 
 
 
@@ -144,7 +141,7 @@ function CustomerOpportunityCardList(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.1rem]">Name</div>
         <div className=" md:w-[6.1rem]">startDate</div>
@@ -162,11 +159,11 @@ function CustomerOpportunityCardList(props) {
                 if (element.oppStage === item.oppStage) {
                   findProbability = element.probability;}
                });
-          const currentdate = moment().format("DD/MM/YYYY");
-          const date = moment(item.creationDate).format("DD/MM/YYYY");
+          const currentdate = dayjs().format("DD/MM/YYYY");
+          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
 
           const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -229,14 +226,14 @@ function CustomerOpportunityCardList(props) {
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
-                    {moment(item.startDate).format("llll")}
+                    {dayjs(item.startDate).format("DD/MM/YYYY")}
                  
                     </h4>
                   </div>
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
          
          <h4 class=" text-xs text-cardBody font-poppins">
-         {moment(item.endDate).format("llll")}
+         {dayjs(item.endDate).format("DD/MM/YYYY")}
            {/* {item.endDate} */}
       
          </h4>
@@ -334,7 +331,7 @@ width={30}
             </div>
           );
         })}
-      </OnlyWrapCard>
+      </div>
       </div>
       <AddCustomerUpdateOpportunityModal
       opportunityId={currentOpportunityId}

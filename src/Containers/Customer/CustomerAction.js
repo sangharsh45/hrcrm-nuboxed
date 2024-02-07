@@ -2201,7 +2201,7 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       .then((res) => {
         message.success("Task has been added successfully!");
         console.log(res);
-        dispatch(getCustomerActivityTimeline(customerId));
+        // dispatch(getCustomerActivityTimeline(customerId));
         dispatch({
           type: types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS,
           payload: res.data,

@@ -5,10 +5,9 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select,Button ,Popconfirm} from "antd";
@@ -37,17 +36,27 @@ import {
   handleCustomerOpportunityDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
-import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
-import CustomerContactDrawerModal from "./CustomerContactDrawerModal";
-import CustomerOpportunityDrawerModal from "./CustomerOpportunityDrawerModal";
 import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
-
+import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
+const AddCustomerDrawerModal = lazy(() =>
+  import("../../AddCustomerDrawerModal")
+);
+const AddCustomerEmailDrawerModal = lazy(() =>
+  import("../UpdateCustomer/AddCustomerEmailDrawerModal")
+);
+const AddCustomerNotesDrawerModal = lazy(() =>
+  import("../CustomerDetail/AddCustomerNotesDrawerModal")
+);
+const CustomerPulseDrawerModal = lazy(() =>
+  import("./CustomerPulseDrawerModal")
+);
+const CustomerContactDrawerModal = lazy(() =>
+  import("./CustomerContactDrawerModal")
+);
+const CustomerOpportunityDrawerModal = lazy(() =>
+  import("./CustomerOpportunityDrawerModal")
+);
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
 );
@@ -148,8 +157,8 @@ const [rowdata, setrowdata] = useState("");
     
  
          <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex  w-[88.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex  w-[88.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[18.7rem]"> 
          <FormattedMessage
                         id="app.name"
@@ -231,11 +240,11 @@ const [rowdata, setrowdata] = useState("");
       >
       
       {customerByUserId.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const countryCode = item.address[0].countryAlpha2Code
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -252,7 +261,7 @@ const [rowdata, setrowdata] = useState("");
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
+                            <div className="flex rounded-xl justify-between  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -278,10 +287,25 @@ const [rowdata, setrowdata] = useState("");
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
-         <Link
+         {/* <Link
           toUrl={`customer/${item.customerId}`}
           title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+        >{item.name}</Link>
+        
+        &nbsp;&nbsp;
+        {date === currentdate ? (
+          <span class="text-xs"
+            style={{
+              color: "tomato",
+              fontWeight: "bold",
+            }}
+          >
+            New
+          </span>
+        ) : null} */}
+                                    <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`customer/${item.customerId}`}>{item.name} </a>
+                              &nbsp;&nbsp;
         {date === currentdate ? (
           <span class="text-xs"
             style={{
@@ -572,7 +596,7 @@ const [rowdata, setrowdata] = useState("");
                     )
                 })}
                 </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       
   

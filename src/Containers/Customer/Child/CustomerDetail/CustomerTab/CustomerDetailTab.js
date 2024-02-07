@@ -24,10 +24,10 @@ import {
   handleCallActivityModal,
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
-import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
-import AddProjectDrawer from "./ProjectTab/AddProjectDrawer";
-import AddCustomerActivityModal from "../AddCustomerActivityModal";
-import CustomerActivityTable from "../CustomerActivityTable";
+const ReactCustomerSpeechModal = lazy(() => import("../ReactCustomerSpeechModal"));
+const AddProjectDrawer = lazy(() => import("./ProjectTab/AddProjectDrawer"));
+const AddCustomerActivityModal = lazy(() => import("../AddCustomerActivityModal"));
+const CustomerActivityTable = lazy(() => import("../CustomerActivityTable"));
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const AddCustomerContactModal = lazy(() =>

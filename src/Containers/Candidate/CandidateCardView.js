@@ -185,10 +185,12 @@ function handleSetCurrentCandidateId(candidateId) {
                       {/* <CardDescription> */}
                       <div>
                         <Header>
-                        <CandidateDetailsView
+                        <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`candidate/${item.candidateId}`}>{item.fullName}</a>
+                        {/* <CandidateDetailsView
             candidateId={item.candidateId}
             candidateName={item.fullName}
-          />       
+          />        */}
                         </Header> 
                         </div>
                         {/* {item.Video !== null?( */}
@@ -481,7 +483,7 @@ border-radius: 0.75rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 8rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;

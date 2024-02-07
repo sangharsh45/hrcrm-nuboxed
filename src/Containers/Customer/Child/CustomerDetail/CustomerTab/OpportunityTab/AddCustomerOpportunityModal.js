@@ -13,12 +13,8 @@ const AddOpportunityModal = (props) => {
         title={
           <FormattedMessage id="app.opportunity" defaultMessage="Opportunity" />
         }
-        width="45%"
+        width="60%"
         visible={props.addCustomerOpportunityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
         onClose={() => props.handleCustomerOpportunityModal(false)}
         footer={null}
       >

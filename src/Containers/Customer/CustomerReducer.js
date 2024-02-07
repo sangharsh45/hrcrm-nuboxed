@@ -1722,6 +1722,7 @@ export const customerReducer = (state = initialState, action) => {
                                                         case types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS:
                                                           return { ...state, addingCustomerActivityTask: false,
                                                             callActivityModal: false,
+                                                           
                                                             customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
                                                            };
                                                         case types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE:

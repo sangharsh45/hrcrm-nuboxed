@@ -1,9 +1,17 @@
 //Innoveren
-const login_url = "https://develop.tekorero.com/employeePortal";
-const base_url = "https://develop.tekorero.com/employeePortal/api/v1";
-const base_url2 = "https://develop.tekorero.com/Erp";
+// const login_url = "https://develop.tekorero.com/employeePortal";
+// const base_url = "https://develop.tekorero.com/employeePortal/api/v1";
+// const base_url2 = "https://develop.tekorero.com/Erp";
 
-const asses_url = "https://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
+// const asses_url = "https://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
+
+
+//Nubox
+const login_url = "http://hrnuboxed.azurewebsites.net/employeePortal";
+const base_url = "http://hrnuboxed.azurewebsites.net/employeePortal/api/v1";
+
+const base_url2 = "https://develop.tekorero.com/Erp";
+const asses_url = "https://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT"
 
 
 //Cell Tech

@@ -31,13 +31,13 @@ const DashboardActionLeft = (props) => {
     <>
       <div class=" flex items-center "  >
         
-        <div class="flex w-[7rem] justify-between">
+        <div class="flex w-[10rem] ">
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class=" cursor-pointer "
+        <span class=" cursor-pointer ml-2 "
           onClick={() => props.setDashboardViewType("test")}
           style={{
             color: props.viewType === "test" && "tomato",
@@ -54,7 +54,7 @@ const DashboardActionLeft = (props) => {
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class="cursor-pointer" 
+        <span class="cursor-pointer ml-2" 
         onClick={() => handleButtonClick("Tasks")} 
         style={{
           color:activeButton === "Tasks" && "tomato",
@@ -76,7 +76,7 @@ const DashboardActionLeft = (props) => {
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         onClick={() =>  handleButtonClick("Customer")} 
         style={{
           color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && viewType === "ALL" && "#444" : viewType === "ALL" && "tomato" ,
@@ -101,7 +101,7 @@ style={{ fontSize: "1rem", }}
          // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
          // overflowCount={999}
        >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         onClick={() => handleButtonClick("Accounts")} 
         style={{
           color:activeButton === "Accounts" && "tomato",
@@ -122,7 +122,7 @@ style={{ fontSize: "1rem", }}
       // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
       // overflowCount={999}
     >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         onClick={() => handleButtonClick("Order")} 
         style={{
           color:activeButton === "Order" && "tomato",
@@ -143,7 +143,7 @@ style={{ fontSize: "1rem", }}
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         onClick={() => handleButtonClick("Finance")} 
         style={{
           color:activeButton === "Finance" && "tomato",
@@ -163,7 +163,7 @@ style={{ fontSize: "1rem", }}
             // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
             // overflowCount={999}
           >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         onClick={() => handleButtonClick("Investors")} 
         style={{
           color:activeButton === "Investors" && "tomato",
