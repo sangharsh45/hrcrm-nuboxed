@@ -925,7 +925,27 @@ h1{
   background-image: linear-gradient(to right, #00B400, #00FFFF);
 }
 
-
+.ant-avatar1 {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.8rem;
+  list-style: none;
+  font-family: poppins;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background: #FF9500;
+  border: 1px solid transparent;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+}
 
 .matrix-table {
   border-collapse: collapse;

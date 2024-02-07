@@ -1,11 +1,12 @@
 import React from "react";
-import {Tooltip } from "antd";
+import {Avatar, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import TocIcon from '@mui/icons-material/Toc';
+import { MultiAvatar } from "../../../Components/UI/Elements";
 
 const TaskActionLeft = props => {
   return (
@@ -19,8 +20,9 @@ const TaskActionLeft = props => {
             color: props.viewType === "table" && "#1890ff",
             cursor:"pointer"
           }}
-        > <TocIcon  />
-        
+        ><Avatar style={{background:"#FF9500"}}>
+           <TocIcon className="text-white"  />
+           </Avatar>
         </span>
       </Tooltip>
       <Tooltip
@@ -32,7 +34,9 @@ const TaskActionLeft = props => {
             color: props.viewType === "gantt" && "#1890ff",
             cursor:"pointer"
           }}
-        > <LeaderboardIcon  />
+        > 
+        <Avatar style={{background:"#FF9500"}}><LeaderboardIcon  className="text-white"    /></Avatar>
+        
         
         </span>
       </Tooltip>
@@ -47,7 +51,7 @@ const TaskActionLeft = props => {
             cursor:"pointer"
           }}
         >
-          <FactCheckIcon />
+         <Avatar style={{background:"#FF9500"}}><FactCheckIcon  className="text-white" /></Avatar> 
         </span>
        
       </Tooltip>
