@@ -64,7 +64,6 @@ function SuppliesTable(props) {
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                   <div className="flex max-sm:w-full ">
                       <div>
-                       
                           <MultiAvatar
                             // primaryTitle={item.name}
                             imageId={item.imageId}

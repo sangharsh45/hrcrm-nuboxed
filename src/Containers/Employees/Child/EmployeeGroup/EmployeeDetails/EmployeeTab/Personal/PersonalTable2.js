@@ -120,7 +120,7 @@ class PersonalTable2 extends Component {
       </div>
    
         
-      {personal.map((item) => { 
+      {personal =="" ? "No data":personal.map((item) => { 
           const dataLoc=` Address : ${item.address &&
             item.address.length &&
             item.address[0].address1} 
