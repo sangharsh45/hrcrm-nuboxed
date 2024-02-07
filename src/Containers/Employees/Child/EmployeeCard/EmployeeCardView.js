@@ -2,6 +2,7 @@ import React, {  useEffect, useState, } from "react";
 import { MultiAvatar2, } from '../../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
+import { Link } from "../../../../Components/Common";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -114,10 +115,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
                       {/* <CardDescription> */}
                       <div class="font-semibold ">
                         <Header>
-                        <EmployeeDetailsView
+                        <Link
+          toUrl={`employee/${item.employeeId}`}
+          title={`${item.fullName}`}
+        >{item.fullName}</Link>
+                        {/* <EmployeeDetailsView
    employeeId={item.employeeId}
    fullName={item.fullName}
-          />       
+          />        */}
                         </Header> 
                         </div>
                         </div> 

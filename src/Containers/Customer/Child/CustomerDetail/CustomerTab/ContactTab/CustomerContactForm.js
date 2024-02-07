@@ -5,7 +5,6 @@ import { FormattedMessage } from "react-intl";
 import { Button, Select, Switch } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -184,8 +183,8 @@ class ContactForm extends Component {
             <Form className="form-background">
               <div class=" flex justify-between">
                 <div class=" h-full w-w47.5" >
-                  <Spacer />
-                  <div class=" flex flex-nowrap justify-between">
+                 
+                  <div class=" flex flex-nowrap justify-between mt-3">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between">
@@ -226,8 +225,8 @@ class ContactForm extends Component {
                           />
                         </div>
                       </div>
-                      <Spacer />
-                      <div class=" flex justify-between">
+                   
+                      <div class=" flex justify-between mt-3">
                         <div class=" w-2/5">
                           <FastField
                             name="middleName"
@@ -382,8 +381,8 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">
+              
+                  <div class=" flex justify-between mt-3">
                     <div class="w-full">
                       <FastField
                         type="text"
@@ -402,9 +401,9 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+              
 
-                  <div class=" flex justify-between">
+                  <div class=" flex justify-between mt-3">
                     <div class=" w-2/4">
                       <>
                         <Field
@@ -470,7 +469,7 @@ class ContactForm extends Component {
                   </div>
                 </div>
                 <div class=" h-4/6 w-w47.5">
-                  <Spacer />
+                  <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -481,7 +480,8 @@ class ContactForm extends Component {
                       />
                     )}
                   />
-                  <Spacer style={{ marginTop: "1.25em" }} />
+                  </div>
+                  <div class=" mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -492,10 +492,11 @@ class ContactForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />
+                   </div>
                 </div>
               </div>
-              <Spacer/>
-              <div class=" flex justify-end">
+           
+              <div class=" flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"

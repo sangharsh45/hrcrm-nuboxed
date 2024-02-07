@@ -22,13 +22,8 @@ const AddCustomerContactModal = (props) => {
           id="app.contact"
           defaultMessage="Contact"
         />}
-        width="55%"
+        width="60%"
         visible={addCustomerContactModal}
-        closable
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }} 
-        style={{marginTop:"5rem"}}
         onClose={() => handleCustomerContactModal(false)}
         footer={null}
       >

@@ -2,15 +2,15 @@ import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import moment from "moment";
+import dayjs from "dayjs";
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
 
 class DashboardJumpStart extends React.Component{
   constructor() {
     super();
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
+    const startDate = dayjs().startOf("month"); 
+    const endDate = dayjs();
     var today = new Date(),
     date =
       today.getFullYear() +
@@ -69,14 +69,14 @@ componentDidMount() {
 // }, [props.startDate, props.endDate, props.type]);
   
 render() {
-  const formattedDate = moment(this.props.dateOfJoining).format('YYYY-MM-DD'); // Format the date as per your requirement
+  const formattedDate = dayjs(this.props.dateOfJoining).format('DD-MM-YYYY'); // Format the date as per your requirement
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
-   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+   const startDate = `${this.state.startDate.format('DD-MM-YYYY')}T20:00:00Z`
   //   const endDate = new Date(this.state.endDate);
 
   console.log(startDate)
-  console.log(this.state.endDate.format("YYYY MM DD"))
+  console.log(this.state.endDate.format('DD-MM-YYYY'))
   return(
     <div class=" flex flex-row w-full" >
     <div class="flex w-full" >

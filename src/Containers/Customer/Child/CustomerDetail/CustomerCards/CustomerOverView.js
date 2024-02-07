@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Title, MultiAvatar } from "../../../../../Components/UI/Elements";
+import {  MultiAvatar } from "../../../../../Components/UI/Elements";
 
 class CustomerOverView extends Component {
   render() {
@@ -14,7 +14,7 @@ class CustomerOverView extends Component {
         <div class=" flex justify-between">
           <div class=" flex justify-start flex-nowrap w-wk items-center"
           >
-            <div style={{ width: "15%" }}>
+            <div class=" w-[15%]" >
               <MultiAvatar
                 primaryTitle={customer.name}
                 imageId={customer.imageId}
@@ -22,13 +22,10 @@ class CustomerOverView extends Component {
               />
             </div>
             <div class=" flex flex-col w-wk">
-              <Title
-                overflow="hidden"
-                textOverflow="ellipsis"
-                fontSize={"1.375em"}
-              >
+            <div class=" w-wk text-[#444] overflow-hidden text-lg textOverflow-ellipsis">
+  
                 {`${name || ""}`}
-              </Title>
+              </div>
             </div>
           </div>
         </div>

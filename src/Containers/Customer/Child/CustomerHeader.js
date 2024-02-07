@@ -14,9 +14,7 @@ class CustomerHeader extends Component {
       handleClear,
     } = this.props;
     return (
-      <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+      <div>
         <ActionHeader
           leftComponent={
             <CustomerActionLeft
