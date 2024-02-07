@@ -70,7 +70,7 @@ class BankTable extends Component {
       </div>
    
         
-      {bank.map((item) => { 
+      {bank =="" ? "No data":bank.map((item) => { 
         
         
                     return (

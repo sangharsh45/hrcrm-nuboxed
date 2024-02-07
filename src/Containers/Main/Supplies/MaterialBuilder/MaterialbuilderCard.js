@@ -11,49 +11,49 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 function MaterialbuilderCard (props) {
 
   useEffect(()=> {
-    props.getBuilderByProId(props.particularDiscountData.productId);
+    props.getBuilderByProId(props.particularDiscountData.suppliesId);
   },[]);
 
   const [editedFields, setEditedFields] = useState({});
-  const [editproductSupplyLinkId, setEditproductSupplyLinkId] = useState(null);
+  const [editsuppliesId, setEditsuppliesId] = useState(null);
 
-  const handleChange = (productSupplyLinkId, fieldName, value) => {
+  const handleChange = (suppliesId, fieldName, value) => {
     setEditedFields((prevFields) => ({
       ...prevFields,
-      [productSupplyLinkId]: {
-        ...prevFields[productSupplyLinkId],
+      [suppliesId]: {
+        ...prevFields[suppliesId],
         [fieldName]: value,
       },
     }));
   };
 
-  const handleEditClick = (productSupplyLinkId) => {
-    setEditproductSupplyLinkId(productSupplyLinkId);
+  const handleEditClick = (suppliesId) => {
+    setEditsuppliesId(suppliesId);
   };
-  const handleCancelClick = (productSupplyLinkId) => {
-    setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
-    setEditproductSupplyLinkId(null);
+  const handleCancelClick = (suppliesId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
+    setEditsuppliesId(null);
   };
 
-  const handleUpdateSupplies = (suppliesId,suppliesName,description,categoryName,subCategoryName, quantity,productSupplyLinkId
-    ) => {
-    const data = {
-      suppliesId: suppliesId, 
-      // productSupplyLinkId: productSupplyLinkId,
-      productId:props.particularDiscountData.productId, 
-      suppliesName:editedFields[productSupplyLinkId]?.suppliesName !== undefined ? editedFields[productSupplyLinkId].suppliesName : suppliesName,
-      description:editedFields[productSupplyLinkId]?.description !== undefined ? editedFields[productSupplyLinkId].description : description,
-      categoryName:editedFields[productSupplyLinkId]?.categoryName !== undefined ? editedFields[productSupplyLinkId].categoryName : categoryName,
-      subCategoryName: editedFields[productSupplyLinkId]?.subCategoryName !== undefined ? editedFields[productSupplyLinkId].subCategoryName : subCategoryName,                 
-      quantity: editedFields[productSupplyLinkId]?.quantity !== undefined ? editedFields[productSupplyLinkId].quantity : quantity,        
+  // const handleUpdateSupplies = (suppliesId,suppliesName,description,categoryName,subCategoryName, quantity,
+  //   ) => {
+  //   const data = {
+  //     suppliesId: suppliesId, 
+  //     // productSupplyLinkId: productSupplyLinkId,
+  //     productId:props.particularDiscountData.productId, 
+  //     suppliesName:editedFields[productSupplyLinkId]?.suppliesName !== undefined ? editedFields[productSupplyLinkId].suppliesName : suppliesName,
+  //     description:editedFields[productSupplyLinkId]?.description !== undefined ? editedFields[productSupplyLinkId].description : description,
+  //     categoryName:editedFields[productSupplyLinkId]?.categoryName !== undefined ? editedFields[productSupplyLinkId].categoryName : categoryName,
+  //     subCategoryName: editedFields[productSupplyLinkId]?.subCategoryName !== undefined ? editedFields[productSupplyLinkId].subCategoryName : subCategoryName,                 
+  //     quantity: editedFields[productSupplyLinkId]?.quantity !== undefined ? editedFields[productSupplyLinkId].quantity : quantity,        
                       
-    };
+  //   };
   
-    props.updateProSupplBuilder(data)
-      setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
-      setEditproductSupplyLinkId(null);
+  //   props.updateProSupplBuilder(data)
+  //     setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
+  //     setEditproductSupplyLinkId(null);
     
-  };
+  // };
 
 return (
     <>
@@ -109,7 +109,7 @@ return (
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
       
-      <div class=" text-xs text-cardBody font-semibold  font-poppins">
+      {/* <div class=" text-xs text-cardBody font-semibold  font-poppins">
                    {editproductSupplyLinkId === item.productSupplyLinkId ? (
                        <input
                        style={{border:"2px solid black"}}
@@ -122,10 +122,10 @@ return (
                         <span> {item.quantity}</span>
                       </div>
                     )}
-                    </div>
+                    </div> */}
   </div>
   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-    <div>
+    {/* <div>
     {editproductSupplyLinkId === item.productSupplyLinkId ? (
                         <>
                       <Button onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
@@ -144,7 +144,7 @@ return (
                         style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
                       />
                     )}
-    </div>
+    </div> */}
     <div>
       <StyledPopconfirm
                           title="Do you want to delete?"

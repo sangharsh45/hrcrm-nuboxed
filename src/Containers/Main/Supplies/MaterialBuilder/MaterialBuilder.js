@@ -51,9 +51,9 @@ function MaterialBuilder (props) {
 
                             
  <Suspense fallback={"Loading"}>
-{showCard &&
+{/* {showCard && */}
 <ProBuildSearchedCard particularDiscountData={props.particularDiscountData}/>
-}
+
 <MaterialbuilderCard particularDiscountData={props.particularDiscountData}/>
 </Suspense>
                        

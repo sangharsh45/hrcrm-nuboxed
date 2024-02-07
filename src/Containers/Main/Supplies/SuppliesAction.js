@@ -421,7 +421,7 @@ dispatch({
 export const AddMaterialBuilder = (data) => (dispatch) => {
   dispatch({ type: types.ADD_MATERIAL_BUILDER_REQUEST });
   axios
-    .post(`${base_url2}/materBuil/supplies`, data, {
+    .post(`${base_url2}/suppliesBuilder/supplies`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -441,25 +441,23 @@ export const AddMaterialBuilder = (data) => (dispatch) => {
       });
     });
 };
-export const getMaterialBuilderById = (id) => (dispatch) => {
+export const getMaterialBuilderById = (suppliesId) => (dispatch) => {
   dispatch({
     type: types.GET_MATERIAL_BUILDER_BYID_REQUEST,
   });
   axios
-    .get(`${base_url2}/mateBuilder/supplies/${id}`, {
+    .get(`${base_url2}/suppliesBuilder/supplies/${suppliesId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: types.GET_MATERIAL_BUILDER_BYID_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: types.GET_MATERIAL_BUILDER_BYID_FAILURE,
         payload: err,
