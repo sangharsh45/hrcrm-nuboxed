@@ -185,10 +185,12 @@ function handleSetCurrentCandidateId(candidateId) {
                       {/* <CardDescription> */}
                       <div>
                         <Header>
-                        <CandidateDetailsView
+                        <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`candidate/${item.candidateId}`}>{item.fullName}</a>
+                        {/* <CandidateDetailsView
             candidateId={item.candidateId}
             candidateName={item.fullName}
-          />       
+          />        */}
                         </Header> 
                         </div>
                         {/* {item.Video !== null?( */}

@@ -287,10 +287,25 @@ const [rowdata, setrowdata] = useState("");
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
-         <Link
+         {/* <Link
           toUrl={`customer/${item.customerId}`}
           title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+        >{item.name}</Link>
+        
+        &nbsp;&nbsp;
+        {date === currentdate ? (
+          <span class="text-xs"
+            style={{
+              color: "tomato",
+              fontWeight: "bold",
+            }}
+          >
+            New
+          </span>
+        ) : null} */}
+                                    <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`customer/${item.customerId}`}>{item.name} </a>
+                              &nbsp;&nbsp;
         {date === currentdate ? (
           <span class="text-xs"
             style={{

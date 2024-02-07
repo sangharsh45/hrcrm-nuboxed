@@ -34,9 +34,6 @@ console.log("data",props.rowdata.name)
         title={props.rowdata.name}
         width="60%"
         visible={props.openCETmodal}
-        destroyOnClose
-        closable
-        placement="right"
         onClose={() => {
           props.handleCETmodal(false);
         }}
