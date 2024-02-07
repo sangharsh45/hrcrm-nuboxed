@@ -205,9 +205,9 @@ const TaskApproveTable = (props) => {
             >Load More</Button>
             </FloatButton.Group>
           </div> : null}
-          <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
+          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-          <div className=" md:w-[14rem]"><FormattedMessage
+          <div className=" md:w-[10rem]"><FormattedMessage
                           id="app.type"
                           defaultMessage="type"
                         /></div>
@@ -242,45 +242,27 @@ const TaskApproveTable = (props) => {
          console.log("deviationDate",incompleteDeviationDate)
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
-                                style={{
-                                 
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[12.1rem] max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "red",
-                        }}
+                      class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[red]"
                       ></div>
                     )}
                     {item.priority === "Medium" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "orange",
-                        }}
+                      class="rounded-[50%] h-[2rem] w-[2rem] bg-[orange]"
                       ></div>
                     )}
                     {item.priority === "Low" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "teal",
-                        }}
+                      class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[teal]"
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div class=" w-[7.1rem] max-sm:w-full">
+          <div class=" flex w-[7.1rem] items-center max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
                                             {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">
@@ -296,7 +278,7 @@ const TaskApproveTable = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[10.3rem] max-sm:flex-row w-full ">
+                                <div className=" flex font-medium  items-center  md:w-[33.3rem] max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody  font-poppins max-sm:hidden"> Name </div> */}
                                     <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   
@@ -305,10 +287,7 @@ const TaskApproveTable = (props) => {
                   handleSetCurrentProcessName(item)
                   // this.props.setCurrentOpportunityRecruitMentData(item);
                 }}
-                style={{
-                  cursor: "pointer",
-                  color: "#042E8A",
-                }}          
+                className="cursor-pointer text-[#042E8A]"        
                >
 
                  {`${item.taskName} `} &nbsp;
@@ -324,7 +303,7 @@ const TaskApproveTable = (props) => {
                     <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
                                     {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Submitted By</div> */}
-                                    <div class="text-xs text-cardBody font-poppins mb-2">
+                                    <div class="text-xs text-cardBody font-poppins ">
                                     <MultiAvatar
                                     // style={{marginBottom:"0.25rem"}}
                   primaryTitle={item.submittedBy}
@@ -373,7 +352,7 @@ const TaskApproveTable = (props) => {
                    <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned On</div> */}
-                                    <div class="text-xs text-cardBody font-poppins mb-2">
+                                    <div class="text-xs text-cardBody font-poppins ">
                                     <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
                                     </div>
                                 </div>
@@ -444,7 +423,7 @@ const TaskApproveTable = (props) => {
                   handleTaskNotesDrawerModal(true);
                   handleSetTaskNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[#green]"
               />
            </Tooltip>
   
@@ -458,7 +437,7 @@ const TaskApproveTable = (props) => {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
 
 <UpdateTaskModal
           updateTaskModal={updateTaskModal}

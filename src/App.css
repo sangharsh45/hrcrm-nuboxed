@@ -620,7 +620,7 @@ padding: 0.3rem 1rem;
   display: inline-block;
 }
 
-.ant-btn-primary {
+/* .ant-btn-primary {
   color: #fff;
   height: 1.58rem;
   font-size: 0.8125em;
@@ -630,7 +630,7 @@ padding: 0.3rem 1rem;
   border-radius: 3px;
   margin-left: 0.75rem;
   box-shadow: grey 1px 2px 0px 0px;
-}
+} */
 .ant-btn-background-ghost{
   color: #fff;
   border-color: #fff;

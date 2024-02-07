@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
-import { StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -253,7 +252,7 @@ class LocationForm extends Component {
                       />
                     </div>
                   </FlexContainer> */}
-                  <StyledLabel style={{ fontWeight: "bold",marginTop:"0.5rem" }}>Functions</StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-2">Functions</div>
                   <div class=" flex ">
                     <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
@@ -365,7 +364,7 @@ class LocationForm extends Component {
                 </div>
                 <div class="h-full w-[45%] max-sm:w-wk mt-2">
                   <div class=" w-full" >
-                    <StyledLabel>Time Zone</StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Time Zone</div>
                     <Field
                       name="timeZone"
                       type="text"

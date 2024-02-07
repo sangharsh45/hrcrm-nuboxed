@@ -10,7 +10,6 @@ import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleCallNotesModal } from "../CallAction";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import {  StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
@@ -27,11 +26,10 @@ import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { getAssignedToList } from "../../Employees/EmployeeAction";
-
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -384,10 +382,10 @@ function CallForm(props) {
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 mt-3 max-sm:w-wk ">
                      
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         {/* Type */}
                         <FormattedMessage id="app.type" defaultMessage="type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
                         <Tooltip
@@ -400,9 +398,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Inbound")}
+                            className=" text-[1.375em] cursor-pointer"
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
                               color:
                               Type  === "Inbound"
                                   ? "Orange"
@@ -423,9 +420,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Outbound")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                            className=" text-[1.375em] cursor-pointer"
+                            style={{                   
                               color:
                               Type === "Outbound"
                                   ? "Orange"
@@ -446,9 +442,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Conference")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                            className=" text-[1.375em] cursor-pointer"
+                            style={{                              
                               color:
                               Type === "Conference"
                                   ? "Orange"
@@ -462,12 +457,12 @@ function CallForm(props) {
                     </div>
                     <div class=" w-1/2 mt-3">
                       
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -509,12 +504,12 @@ function CallForm(props) {
                   
                   <div class=" flex mt-3 justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                             id="app.mode"
                             defaultMessage="mode"
                           />
-                      </StyledLabel>
+                      </div>
                       <Switch
                         // style={{
                         //   marginLeft: "0.3125em"

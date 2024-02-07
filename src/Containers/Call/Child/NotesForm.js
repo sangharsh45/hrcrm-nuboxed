@@ -17,7 +17,7 @@ class NotesForm extends Component {
 // console.log(this.props.currentNameId.taskId);
     return (
       <>
-        <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
+        <div className=" bg-[#dcdcdc] h-[14.375em]">
           <NoteFile
             type={"task"}
             callId={this.props.currentNameId.callId}
@@ -30,7 +30,7 @@ class NotesForm extends Component {
         <br />
 
         <div class="border-spacing-2 rounded-md shadow-2xl mb-1 mt-9">
-          <div style={{ height: 200, overflow: "auto", padding: "1rem" }}>
+          <div class="h-[200] overflow-auto p-4">
             {fetchingNotesListByCallId ? (
               <BundleLoader />
             ) : (

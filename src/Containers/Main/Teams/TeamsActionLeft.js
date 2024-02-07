@@ -29,7 +29,7 @@ class TeamsActionLeft extends React.Component {
                     color: viewType === "table" && "#1890ff",
                   }}
                   onClick={() => setTeamsViewType("table")}>
-                  <TocIcon/>
+                  <TocIcon className="!text-2xl cursor-pointer"/>
                 </span>
               </Badge>
             </Tooltip>
@@ -44,7 +44,7 @@ class TeamsActionLeft extends React.Component {
                   color: viewType === "team" && "#1890ff",
                 }}
               >
-             <PeopleIcon/>
+             <PeopleIcon className="!text-2xl cursor-pointer"/>
               </span>
             </Badge>
             </Tooltip>
@@ -67,7 +67,7 @@ class TeamsActionLeft extends React.Component {
                 color: viewType === "client" && "#1890ff",
               }}
             >
-              <ManageAccountsIcon />
+              <ManageAccountsIcon className="!text-2xl cursor-pointer" />
             </span>
             </Badge>
           </Tooltip>

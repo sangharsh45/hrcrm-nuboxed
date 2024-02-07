@@ -13,7 +13,7 @@ class AddCallNotesDrawerModal extends Component {
       <div>
         <StyledDrawer
           title={this.props.currentNameId.callType}
-          width="64%"
+          width="60%"
           visible={this.props.addDrawerCallNotesModal}
           onClose={() => this.props.handleCallNotesDrawerModal(false)}
         >

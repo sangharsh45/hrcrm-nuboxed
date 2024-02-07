@@ -7,7 +7,7 @@ const LocationShiftDrawerTab=lazy(()=>import("./LocationShiftDrawerTab"));
 const LocationShiftDrawer = (props) => {
   const { locShiftDrawer, handleLocationShiftDrawer,  storedLoc, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
