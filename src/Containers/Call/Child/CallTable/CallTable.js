@@ -117,7 +117,7 @@ const [currentNameId, setCurrentNameId] = useState("");
         dataLength={callListRangeByUserId.length}
         next={handleLoadMore}
       hasMore={hasMore}
-        loader={fetchingCallListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCallListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
       >
@@ -140,12 +140,12 @@ const [currentNameId, setCurrentNameId] = useState("");
               <div class="flex  flex-col md:w-[8.23rem] max-sm:flex-row max-sm:justify-between w-full">
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col md:w-[6.23rem] max-sm:flex-row max-sm:justify-between w-full">
+            <div class="flex  flex-col md:w-[8.24rem] max-sm:flex-row max-sm:justify-between w-full">
             <p> {item.callPurpose}</p>
               </div>
               </div>
-              <div class="flex md:w-[21rem]">
-              <div class="flex  flex-col md:w-[5.12rem] max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex md:w-[22rem]">
+              <div class="flex  flex-col md:w-[7.12rem] max-sm:flex-row max-sm:justify-between w-full">
       
               <MultiAvatar2
                     primaryTitle={item.contactName}
@@ -157,7 +157,7 @@ const [currentNameId, setCurrentNameId] = useState("");
               
    
               </div>
-              <div class="flex  flex-col justify-center md:w-[14.35rem] max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col justify-center md:w-[11.35rem] max-sm:flex-row max-sm:justify-between w-full">
               <p> {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
               </div>
               <div class="flex  flex-col md:w-[2.2rem] max-sm:flex-row max-sm:justify-between w-full">
@@ -203,7 +203,7 @@ return (
               </div>
               </div>
               
-              <div class="flex items-center md:w-[30rem]">
+              <div class="flex items-center md:w-[29rem]">
              <div class="flex  flex-col md:w-[8.35rem] max-sm:flex-row max-sm:justify-between w-full">
              <span>
               {item.assignedTo === null ? (
@@ -251,13 +251,14 @@ return (
                   handleCallNotesDrawerModal(true);
                   handleSetCallNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[green]"
               />
            </Tooltip>
                     </div>
                     <div>
                     <Tooltip title="Delete">
-                    <DeleteOutlined  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
+                    <DeleteOutlined  type="delete" 
+                    className="!text-base cursor-pointer text-[red]"
                 onClick={() => deleteCall(item.callId, employeeId)}
               />
                 </Tooltip>

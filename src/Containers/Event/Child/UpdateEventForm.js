@@ -9,7 +9,6 @@ import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import {getAllCustomerData} from "../../Customer/CustomerAction"
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -317,7 +316,8 @@ function UpdateEventForm (props) {
                     }}
                   // defaultValue='low'
                   />
-                  <Spacer />
+                 
+                  <div class="mt-3">
                   <Field
                     isRequired
                     name="eventSubject"
@@ -338,8 +338,9 @@ function UpdateEventForm (props) {
                       // marginTop: "0.25em",
                     }}
                   />
-                  <Spacer  />
-                  <div class=" flex justify-between" >
+                  </div>
+                 
+                  <div class=" flex justify-between mt-3" >
                       <div class=" w-1/2">
                       <Field
                         isRequired
@@ -384,8 +385,8 @@ function UpdateEventForm (props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between" >
+                
+                  <div class=" flex justify-between mt-3" >
                     <div class=" w-1/2">
                       <Field
                         isRequired
@@ -445,7 +446,7 @@ function UpdateEventForm (props) {
                     </div>
                   </div>
 
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -466,7 +467,8 @@ function UpdateEventForm (props) {
                     inlineLabel
                     style={{ flexBasis: "50%" }}
                   />
-                  <Spacer />
+                  </div>
+                  <div class="mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"yy
@@ -485,8 +487,9 @@ function UpdateEventForm (props) {
                       height: "5em",
                     }}
                   />
-  <Spacer />
-                  <div>
+                  </div>
+  
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="customerId"
@@ -512,8 +515,8 @@ function UpdateEventForm (props) {
                />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -539,8 +542,8 @@ function UpdateEventForm (props) {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+                 
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunityId"
@@ -566,7 +569,7 @@ function UpdateEventForm (props) {
                />
                   )} 
                   </div>
-                  <Spacer />
+                  
                   {/* <Spacer />
                   {startDate ? (
                     <span>
@@ -586,7 +589,7 @@ function UpdateEventForm (props) {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk"   >
+                <div class=" h-full w-w47.5 max-sm:w-wk mt-3"   >
               
 
               <Field
@@ -609,7 +612,7 @@ function UpdateEventForm (props) {
                   // }}
                   inlineLabel
                 />
-                  <Spacer />
+                  
                   {/* <Field
                     name="included"
                     // label="Include"
@@ -629,8 +632,8 @@ function UpdateEventForm (props) {
                       value: employeeId,
                     }}
                   /> */}
-                     <div style={{ width: "100%" }}>
-                       <StyledLabel>Include</StyledLabel> 
+                     <div class="w-full mt-3">
+                     <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Include</div> 
   
                       <Select
                         name="included"
@@ -649,7 +652,7 @@ function UpdateEventForm (props) {
                       </Select>
   
                     </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     name="candidateId"
@@ -663,7 +666,8 @@ function UpdateEventForm (props) {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer  />
+                  </div>
+                  <div class="mt-3">
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -674,12 +678,10 @@ function UpdateEventForm (props) {
                       />
                     )}
                   />
-                  <Spacer  />
-                  <StyledLabel style={{
-                    fontWeight: "bold",
-                  }}>
+                  </div>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3 "> 
                     Set Reminder
-                  </StyledLabel>
+                  </div>
                   <div class=" flex justify-between max-sm:justify-around" >
 
                     <Switch
@@ -714,8 +716,8 @@ function UpdateEventForm (props) {
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+             
+              <div class=" flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
