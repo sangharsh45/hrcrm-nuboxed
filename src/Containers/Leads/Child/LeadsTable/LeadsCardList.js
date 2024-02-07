@@ -2,7 +2,7 @@ import React, { useEffect, useState,lazy } from "react";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
@@ -109,12 +109,12 @@ const LeadsCardList = (props) => {
         style={{overflowX:"hidden"}}
       >
         {leadsAllData.map((item) => {
-          const currentdate = moment().format("DD/MM/YYYY");
-          const date = moment(item.creationDate).format("DD/MM/YYYY");
+          const currentdate = dayjs().format("DD/MM/YYYY");
+          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
           const countryCode = item.address[0].country_alpha2_code
           console.log(countryCode)
           const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
