@@ -1,11 +1,10 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button, Switch, Tooltip } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
@@ -150,7 +149,7 @@ class AddDocumentModal extends Component {
                           {errors.documentId}
                         </p>
                       )}
-                      <Spacer />
+                    <div class=" mt-3">
                       <Field
                         name="documentTypeId"
                         selectType="documentTypeName"
@@ -166,8 +165,9 @@ class AddDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
+                      </div>
                             <div class=" flex  mt-4">
-                        <StyledLabel>Contract</StyledLabel>
+                            <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Contract</div>
                         <Switch
                           style={{ width: "6.25em", marginLeft: "0.625em" }}
                           onChange={this.handleContract}
@@ -190,7 +190,7 @@ class AddDocumentModal extends Component {
                         isColumn
                         component={InputComponent}
                       />
-                      <Spacer />
+                     <div class=" mt-3">
                       <Field
                         name="documentDescription"
                         //label="Description"
@@ -205,14 +205,15 @@ class AddDocumentModal extends Component {
                         width={"100%"}
                         component={TextareaComponent}
                       />
-
+ </div>
                       <div>
                       </div>
-                      <Spacer />
+                      <div class=" mt-3">
                       {!this.state.documentshare && this.props.testShow && (
                         <p>Will be shared with customer Owner</p>
                       )}
-                      <Spacer />
+                       </div>
+                       <div class=" mt-3">
                       {this.state.documentshare && (
                         <div class=" flex justify-between w-full ">
                           {/* {organization &&
@@ -257,14 +258,14 @@ class AddDocumentModal extends Component {
                                   />
                                 </div>
                                 <div>
-                                  <StyledLabel>
+                                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                                     {" "}
                                     <FormattedMessage
                                       id="app.level"
                                       defaultMessage="Level"
                                     />
                                     ,{/* Level */}
-                                  </StyledLabel>
+                                  </div>
                                   <div class=" flex justify-between">
                                     <ButtonGroup>
                                       <Tooltip title="Specific">
@@ -333,11 +334,12 @@ class AddDocumentModal extends Component {
                           })}
                         </div>
                       )}
+                       </div>
                     </div>
                   </div>
 
-                  <Spacer />
-                  <div class=" flex justify-end">
+                 
+                  <div class=" flex justify-end mt-3">
                     <Button
                       htmlType="submit"
                       type="primary"

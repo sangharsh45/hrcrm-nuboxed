@@ -907,6 +907,24 @@ h1{
   border-radius: 50%;
 }
 
+.ant-btn-primary {
+  color: #fff;
+  height: 1.58rem;
+  font-size: 0.8125em;
+  border-color: #fff;
+  padding: 3px 8px; 
+  color: white;
+  border-radius: 0.3rem;
+  margin-left: 0.75rem;
+  box-shadow: grey 1px 2px 0px 0px;
+  background-image: linear-gradient(to right, tomato, #ecc94b);
+  transition: background-image 0.3s ease; /* Add transition for smooth effect */
+}
+
+.ant-btn-primary:hover {
+  background-image: linear-gradient(to right, #00B400, #00FFFF);
+}
+
 
 
 .matrix-table {
@@ -974,14 +992,14 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
 
 /* ONLYWRAPCARD CODE 
 ------------------------
- <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]"> */
+ <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]"> */
 
 /* STYLEDLABEL */
 /* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> */
 
 /* CARDVIEW DESIGN CODE */
 
-/* <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+/* <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
 <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
 <div className=" md:w-[6.5rem]">
 <FormattedMessage

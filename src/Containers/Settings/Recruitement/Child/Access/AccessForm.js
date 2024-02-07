@@ -1402,7 +1402,7 @@ const onCheckAllTeamsChange = (e) => {
               </div> 
                   : null }  
 
-{props.departmentData.recruitOppsInd === true ? 
+{props.departmentData.recruitProInd === true ? 
     <div>     
             <div class=" text-clr text-base flex justify-center mt-8 font-bold">RecruitPro</div>
            

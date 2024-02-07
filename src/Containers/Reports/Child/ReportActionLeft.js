@@ -64,11 +64,11 @@ class ReportActionLeft extends React.Component {
     return (
       <div class=" flex items-center" >
 
-<div class="flex w-[12rem] justify-between">
+<div class="flex w-[12rem] ">
         <Badge
         size="small"
       >
-        <span class=" cursor-pointer "
+        <span class=" cursor-pointer ml-2 "
           > 
               <Tooltip title="My Details">
           <PersonIcon  style={{ fontSize: "1rem" }}/>
@@ -79,7 +79,7 @@ class ReportActionLeft extends React.Component {
         <Badge
         size="small"
       >
-        <span class="cursor-pointer" 
+        <span class="cursor-pointer ml-2" 
  onClick={() => handleIconClick("hrTypes")}
         >
          <Tooltip title="HR">
@@ -95,7 +95,7 @@ class ReportActionLeft extends React.Component {
         <Badge
         size="small"
       >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
           onClick={() => handleIconClick("prospectTypes")}
       
         >
@@ -115,7 +115,7 @@ style={{ fontSize: "1rem", }}
          <Badge
          size="small"
        >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
 
         >
           <Tooltip title="Customers">
@@ -130,7 +130,7 @@ style={{ fontSize: "1rem", }}
       <Badge
       size="small"
     >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
         >  <Tooltip title="Order">
           <DynamicFeedIcon
                 style={{ fontSize: "1rem", }}
@@ -146,7 +146,7 @@ style={{ fontSize: "1rem", }}
         // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
             // onClick={() => this.handleIconClick("investorTypes")}
         // onClick={() => handleButtonClick("Finance")} 
         // style={{
@@ -167,7 +167,7 @@ style={{ fontSize: "1rem", }}
             // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
             // overflowCount={999}
           >
-        <span class="cursor-pointer"
+        <span class="cursor-pointer ml-2"
          onClick={() => handleIconClick("investorTypes")}
         // onClick={() => setReportViewType("investor")} 
         // style={{

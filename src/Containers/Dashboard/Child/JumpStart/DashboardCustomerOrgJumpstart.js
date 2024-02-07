@@ -2,7 +2,7 @@ import React, {useEffect,lazy} from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {getJumpBulblist,getJumpBulblist2,
 getJumpCustomerlist,getJumpCustomerlist2,handleLeadQualifiedDrawer,handleLeadAddedDrawer,
 handleOppoAddedDrawer,handleOppoClosedDrawer
@@ -52,7 +52,7 @@ function DashboardCustomerOrgJumpstart (props){
             isLoading={props.user.fetchingJumpstartBulb}
           />
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={<FormattedMessage
               id="app.leadsAdded"
@@ -66,7 +66,7 @@ function DashboardCustomerOrgJumpstart (props){
     
           />
 
-          <JumpStartBox
+          <JumpStartBox2
             noProgress
             title={<FormattedMessage
               id="app.opportunitiesAdded"
@@ -78,7 +78,7 @@ function DashboardCustomerOrgJumpstart (props){
              isLoading={props.fetchingJumpstartCustolist}
             
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={<FormattedMessage
               id="app.opportunitiesClosed"

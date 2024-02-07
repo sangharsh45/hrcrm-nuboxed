@@ -11,12 +11,11 @@ const AddCustomerUpdateContactModal = (props) => {
     <>
       <StyledDrawer
          title={
-          <FormattedMessage id="app.contact" defaultMessage="Contact" />
+          <FormattedMessage id="app.updateContact" defaultMessage="Update Contact" />
         }
         width="60%"
         visible={props.addUpdateCustomerContactModal}
         onClose={() => props.handleUpdateCustomerContactModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateCustomerContactForm 

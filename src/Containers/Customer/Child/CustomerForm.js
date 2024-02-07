@@ -7,8 +7,6 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
-import { HeaderLabel, } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -180,7 +178,7 @@ function CustomerForm(props) {
                       </a>
                     ) : null}
                   </div>
-                  <Spacer />
+             <div class=" mt-3">
                   <Field
                     isRequired
                     name="name"
@@ -196,6 +194,7 @@ function CustomerForm(props) {
                     accounts={accounts}
                     inlineLabel
                   />
+                  </div>
                   <Field
                     name="url"
                     type="text"
@@ -206,7 +205,6 @@ function CustomerForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
                   {/* <Field
                     name="email"
                     type="text"
@@ -219,7 +217,7 @@ function CustomerForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />                   */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-3">
                     <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
@@ -256,8 +254,8 @@ function CustomerForm(props) {
                     </div>
                   </div>
 
-                  <Spacer/>
-                  <div class=" flex justify-between">
+                
+                  <div class=" flex justify-between mt-3">
                   <div class="w-w47.5 max-sm:w-w47.5">
                   <Field             
                   placeholder="Sector"        
@@ -298,7 +296,7 @@ function CustomerForm(props) {
                   </div>
 
                  
-                  <Spacer />
+                  <div class=" mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -309,11 +307,12 @@ function CustomerForm(props) {
                     isColumn
                     component={TextareaComponent}
                   />
+                     </div>
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
-                 <Spacer/>
-                 <div class=" flex justify-between mb-[0.35rem]">
+                
+                 <div class=" flex justify-between mb-[0.35rem] mt-3">
                     <div class=" h-full w-full">
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -452,18 +451,18 @@ function CustomerForm(props) {
                     </div>
                   </div>
                   
-                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                  <div class="mt-8 w-full" style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >
+                      <div class=" text-[white] text-xs" >
                   <FormattedMessage
                         id="app.corporateAddress"
                         defaultMessage="Corporate Address"
                       />
 
-                    </HeaderLabel>
+                    </div>
                   </div>
                     </div>
-                  <Spacer />
+                    <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -474,6 +473,7 @@ function CustomerForm(props) {
                       />
                     )}
                   />
+                  </div>
                    {/* <div class=" flex justify-between">
                    <div class=" w-1/2 max-sm:w-wk">
                      <Field
@@ -500,8 +500,8 @@ function CustomerForm(props) {
                
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+           
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

@@ -421,7 +421,7 @@ function NavMenu(props) {
         {/* )}  */}
         <hr/>
         {/* Talent */}
-       {user.talentAccessInd === true && user.recruitOppsInd === true &&  (
+       {user.talentAccessInd === true && user.recruitProInd === true &&  (
             <Menu.Item key="/candidate" style={{ height: "1.7rem", 
             paddingLeft: "1rem", color: selectedMenuItem === '/candidate' ? 'tomato' : '#5FB2A3' }}>
               <Link to="/candidate" onClick={() => handleSelect('/candidate')}>
@@ -445,7 +445,7 @@ function NavMenu(props) {
           )}  
         {/*Talent*/}
         {/*Requirement*/}
-        {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
+        {user.requirementAccessInd === true && user.recruitProInd === true &&  (
           <Menu.Item key="/requirement" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/requirement' ? 'tomato' : '#5FB2A3' }}>
             <Link to="/requirement " onClick={() => handleSelect('/requirement')}>
@@ -466,7 +466,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
            )}
-          {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
+          {user.requirementAccessInd === true && user.recruitProInd === true &&  (
          <Menu.Item key="/project" style={{ height: "1.7rem",
           paddingLeft: "1rem", color: selectedMenuItem === '/project' ? 'tomato' : '#5FB2A3' }}>
               <Link to="/project" onClick={() => handleSelect('/project')}>
@@ -835,7 +835,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#5F
 
 
         
-  {user.collectionAccessInd === true && user.recruitOppsInd === true &&  (
+  {user.collectionAccessInd === true && user.recruitProInd === true &&  (
 
         <Menu.Item key="/collection" style={{ height: "1.7rem",
          paddingLeft: "1rem",color: selectedMenuItem === '/collection' ? 'tomato' : '#5FB2A3' }}>
