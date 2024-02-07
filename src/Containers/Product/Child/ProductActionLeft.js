@@ -24,7 +24,7 @@ const ProductActionLeft = (props) => {
           }}
           onClick={() => props.setProductViewType("table")}
         >
-          <i class="fas fa-qrcode"></i>
+          <i class="fas fa-qrcode" className="!text-2xl cursor-pointer"></i>
         </span>
       </Tooltip>
 
@@ -41,6 +41,7 @@ const ProductActionLeft = (props) => {
 
       <Tooltip title="Suspended Product">
         <DeleteOutlined
+        className="!text-2xl cursor-pointer"
           style={{
             marginRight: "0.5rem",
             color: props.viewType === "dashboard" && "red",

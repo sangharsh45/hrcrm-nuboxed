@@ -19,33 +19,13 @@ function ProductbuilderTable (props) {
   const prosb=props.productBuilder
 
   const [selectedValue, setSelectedValue] = useState('');
-  const [selectedObject, setSelectedObject] = useState(null);
+
   const [showCard, setshowCard] = useState(false);
 
   const handleChange = (ev) => {
     setSelectedValue(ev);
-    // const foundObject = prosb.find(option => option.hsn === ev);
-    // setSelectedObject(foundObject);
       props.getSearchBuilder(ev);
       setshowCard(true)
-  };
-
-  const handleSubmit = () => {
-
-    const selectedObjdata= {
-hsn:selectedObject.hsn,
-attributeName:selectedObject.attributeName,
-categoryName:selectedObject.categoryName,
-suppliesName:selectedObject. name,
-subAttributeName:selectedObject.subAttributeName,
-subCategoryName:selectedObject.subCategoryName,
-suppliesId:selectedObject.suppliesId,
-productId:props.particularDiscountData.productId,
-quantity:selectedObject.quantity,
-    }
-    props.addProductBuilder(selectedObjdata);
-    setshowCard(true)
- 
   };
 
   return (

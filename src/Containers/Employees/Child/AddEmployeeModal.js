@@ -1,6 +1,7 @@
-import React, { lazy, Component } from "react";
-import { StyledDrawer, } from "../../../Components/UI/Antd";
+import React, { lazy, Component,Suspense } from "react";
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
+import { BundleLoader } from "../../../Components/Placeholder";
 const EmployeeForm = lazy(() => import("../Child/EmployeeForm"));
 
 class AddEmployeeModal extends Component {
@@ -21,13 +22,13 @@ class AddEmployeeModal extends Component {
           onClose={() => handleEmployeeModal(false)}
           footer={null}
         >
-          {/* <StyledTabs defaultActiveKey="1"> */}
-            {/* <TabPane tab={`Employee`} key="1"> */}
+
               <div class="mt-5 ">
+                <Suspense fallback={<BundleLoader/>}>
                 <EmployeeForm />
+                </Suspense>
               </div>
-            {/* </TabPane> */}
-          {/* </StyledTabs> */}
+
         </StyledDrawer>
       </>
     );

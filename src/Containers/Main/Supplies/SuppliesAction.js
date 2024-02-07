@@ -20,7 +20,7 @@ export const handleBrandModel = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const addSupplies = (purchase, groupId) => (dispatch) => {
+export const addSupplies = (purchase) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.ADD_SUPPLIES_REQUEST });
   axios
@@ -28,7 +28,6 @@ export const addSupplies = (purchase, groupId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getSuppliesList());
-      dispatch(getSuppliesByGroupId(groupId))
       dispatch({
         type: types.ADD_SUPPLIES_SUCCESS,
         payload: res.data,
@@ -406,6 +405,63 @@ export const getSuppliesCount = () => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_SUPPLIES_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleMaterialBuilderDrawer=(modalProps)=>(dispatch)=>{
+dispatch({
+  type: types.HANDLE_MATERIAL_BUILDER_DRAWER,
+  payload: modalProps,
+});
+};
+
+
+export const AddMaterialBuilder = (data) => (dispatch) => {
+  dispatch({ type: types.ADD_MATERIAL_BUILDER_REQUEST });
+  axios
+    .post(`${base_url2}/materBuil/supplies`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_MATERIAL_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_MATERIAL_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getMaterialBuilderById = (id) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATERIAL_BUILDER_BYID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/mateBuilder/supplies/${id}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_MATERIAL_BUILDER_BYID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MATERIAL_BUILDER_BYID_FAILURE,
         payload: err,
       });
     });

@@ -1,20 +1,9 @@
-import React, {useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip,Button } from "antd";
-import { getSearchBuilder ,removeProductBuilder,updateProSupplBuilder } from "../../ProductAction";
-import { elipsize } from "../../../../Helpers/Function/Functions";
-import { DeleteOutlined } from "@ant-design/icons";
-import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ProBuildSearchedToggle from "./ProBuildSearchedToggle";
 
 function ProBuildSearchedCard (props) {
-
-  useEffect(()=> {
-    // props.getSearchBuilder("15467");
-  },[]);
-  
 
 return (
     <>
@@ -99,10 +88,7 @@ const mapStateToProps = ({product }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getSearchBuilder ,
-            removeProductBuilder,
-            updateProSupplBuilder
-            
+               
         },
         dispatch
     );

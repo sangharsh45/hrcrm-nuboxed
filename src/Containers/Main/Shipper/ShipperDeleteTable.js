@@ -56,7 +56,7 @@ function ShipperDeleteTable(props) {
 
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 <Link
           toUrl={`shipper/${item.shipperId}`}
           title={`${item.name}`}
@@ -65,13 +65,13 @@ function ShipperDeleteTable(props) {
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.dialCode} {item.phoneNo}
 </div>
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.emailId} 
 </div>
 
@@ -80,14 +80,14 @@ function ShipperDeleteTable(props) {
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.shipByName} 
 </div>
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].state) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].street) || ""}
@@ -98,7 +98,7 @@ function ShipperDeleteTable(props) {
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {(item.addresses &&
            item.addresses.length &&
            item.addresses[0].city) ||
@@ -108,7 +108,7 @@ function ShipperDeleteTable(props) {
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {(item.addresses &&
           item.addresses.length &&
           item.addresses[0].pinCode) ||

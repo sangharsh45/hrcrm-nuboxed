@@ -31,12 +31,13 @@ class SuppliersActionLeft extends React.Component {
                         
                         }}
                         onClick={() => setSuppliersViewType("card")}>
-                               <TocIcon className="text-base cursor-pointer" />
+                               <TocIcon className="!text-2xl cursor-pointer" />
                         </div >
                 </Tooltip>
                 
                 <Tooltip title="ALL Suppliers">
-                <div class="mr-2 text-base cursor-pointer"
+                <div class="mr-2 !text-2xl cursor-pointer"
+                
                         style={{
                             // cursor: "pointer",
                             color: viewType === "all" && "#1890ff",

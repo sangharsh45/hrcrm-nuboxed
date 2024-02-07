@@ -41,16 +41,13 @@ class UpdateEmployeeForm extends Component {
 
   componentDidMount() {
    const { getCountries ,getTimeZone,getCurrencyList,getRoles,getlocation,getEmployeelist} = this.props;
-    // console.log();
     getRoles(this.props.organizationId);
     getTimeZone();
     getCurrencyList();
-    // getCountries(getCountries);
-    // getlocation(this.props.orgId);
-    // getEmployeelist();
+
 }
   handleReset = (resetForm) => {
-    this.resetForm();
+    resetForm();
   };
 handleJobType = (checked) => {
     this.setState({ active: checked });
@@ -228,52 +225,52 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
 
 
   
-      const { clearbit,setEditingEmployee } = this.props;
+      const { clearbit,currentEmployeeId } = this.props;
     return (
       <>
         <Formik
       initialValues={{
-        salutation: setEditingEmployee.salutation || "",
-        departmentId:setEditingEmployee.departmentName,
-        firstName: setEditingEmployee.firstName || "",
-        lastName: setEditingEmployee.lastName || "",
-        emailId:  setEditingEmployee.emailId || "",
-        timeZone:  setEditingEmployee.timeZone || "",
-        countryDialCode:  setEditingEmployee.countryDialCode || "",
-        countryDialCode1: setEditingEmployee.countryDialCode1 || "",
-        phoneNo:  setEditingEmployee.phoneNo || "",
+        salutation: currentEmployeeId.salutation || "",
+        departmentId:currentEmployeeId.departmentName,
+        firstName: currentEmployeeId.firstName || "",
+        lastName: currentEmployeeId.lastName || "",
+        emailId:  currentEmployeeId.emailId || "",
+        timeZone:  currentEmployeeId.timeZone || "",
+        countryDialCode:  currentEmployeeId.countryDialCode || "",
+        countryDialCode1: currentEmployeeId.countryDialCode1 || "",
+        phoneNo:  currentEmployeeId.phoneNo || "",
         // location:this.state.selectedLocation,
         // workplace:this.state.selectedCountry,
         dateOfJoining:dayjs(),
         dob:dayjs(),
-        mobileNo:  setEditingEmployee.mobileNo || "",
-        country:  setEditingEmployee.country || "",
-        workplace: setEditingEmployee.workplace || "",
-        location: setEditingEmployee.location || "",
-        designationTypeId: setEditingEmployee.designationTypeId || "",
-        departmentId:setEditingEmployee.department,
-        reportingManagerDeptId: setEditingEmployee.reportingManagerDept || "",
-        roleType: setEditingEmployee.roleType || "",
+        mobileNo:  currentEmployeeId.mobileNo || "",
+        country:  currentEmployeeId.country || "",
+        workplace: currentEmployeeId.workplace || "",
+        location: currentEmployeeId.location || "",
+        designationTypeId: currentEmployeeId.designationTypeId || "",
+        departmentId:currentEmployeeId.department,
+        reportingManagerDeptId: currentEmployeeId.reportingManagerDept || "",
+        roleType: currentEmployeeId.roleType || "",
         // roleType:this.state.selectedRole,
-        linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
-        label:  setEditingEmployee.label || "",
+        linkedinPublicUrl: currentEmployeeId.linkedinPublicUrl || "",
+        label:  currentEmployeeId.label || "",
 
         job_type: this.state.active ? "Full Time" : "Part Time",
         type: this.state.typeInd ? "true" : "false",
         employee_type: this.state.workType,
         // job_type: this.state.active,
         
-        reportingManager: setEditingEmployee.reportingManagerName || "",
+        reportingManager: currentEmployeeId.reportingManagerName || "",
      
         address: [
           {
-            addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",
-            address1: setEditingEmployee.address.length ? setEditingEmployee.address[0].address1 : "",
-            address2:  setEditingEmployee.address.length ? setEditingEmployee.address[0].address2 : "",
-            street:  setEditingEmployee.address.length ? setEditingEmployee.address[0].street : "",
-            city:  setEditingEmployee.address.length ? setEditingEmployee.address[0].city : "",
-            state:  setEditingEmployee.address.length ? setEditingEmployee.address[0].state : "",
-            postalCode:  setEditingEmployee.address.length ? setEditingEmployee.address[0].postalCode : "",  
+            addressId: currentEmployeeId.address.length ? currentEmployeeId.address[0].addressId : "",
+            address1: currentEmployeeId.address.length ? currentEmployeeId.address[0].address1 : "",
+            address2:  currentEmployeeId.address.length ? currentEmployeeId.address[0].address2 : "",
+            street:  currentEmployeeId.address.length ? currentEmployeeId.address[0].street : "",
+            city:  currentEmployeeId.address.length ? currentEmployeeId.address[0].city : "",
+            state:  currentEmployeeId.address.length ? currentEmployeeId.address[0].state : "",
+            postalCode:  currentEmployeeId.address.length ? currentEmployeeId.address[0].postalCode : "",  
           },           
         ],
 
@@ -285,38 +282,20 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         this.props.updateEmployee(
           {
             ...values,
-            // departmentId:this.state.selectedDept,
-            // location:this.state.selectedLocation,
-            // workplace:this.state.selectedCountry,
-          //    reportingManager: this.props.userDetails.userId
-          // ? this.props.userDetails.userId
-          // : "",
+         
             reportingManagerDeptId:values.reportingManagerDeptId,
-            // roleType:this.state.selectedRole,
+            
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
-            // job_type: this.state.active,
             employee_type: this.state.workType,
-            employeeId: this.props.employeeId,
+            employeeId: currentEmployeeId.employeeId,
             // assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
           },
-        this.props.employeeId,
+          currentEmployeeId.employeeId,
           () => this.handleReset(resetForm)
         );
       }}
-    //   onSubmit={(values, { resetForm }) => {
-    //     // console.log({ ...values, job_type: this.state.active });
-    //     this.props.updateEmployee({
-    //       ...values,
-    //       location:this.state.selectedLocation,
-    //       workplace:this.state.selectedCountry,
-    //       job_type: this.state.active ? "Full Time" : "Part Time",
-    //       type: this.state.typeInd ? "true" : "false",
-    //       // job_type: this.state.active,
-    //       employee_type: this.state.workType,
-    //     },"cretiondate");
-    //     resetForm();
-    //   }}
+ 
         >
           {({
             errors,
@@ -958,7 +937,6 @@ const mapStateToProps = ({ auth,role,location,currency, employee,designations,de
     userDetails: auth.userDetails,
     roles: role.roles,
     timeZone: auth.timeZone,
-    setEditingEmployee:employee.setEditingEmployee,
     organizationId: auth.userDetails.organizationId,
     orgId: auth.userDetails.organizationId,
     countries: auth.countries,

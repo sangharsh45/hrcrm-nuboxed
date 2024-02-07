@@ -58,7 +58,6 @@ class EmployeeDrawerForAdmin extends Component {
       handleEmployeeDrawerForAdmin,
       employeeDrawerVisibleForAdmin,
     } = this.props;
-    console.log(employeeDrawerVisibleForAdmin);
     return (
       <>
         <StyledDrawer
