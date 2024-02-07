@@ -13,6 +13,7 @@ import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
    import FWLogo from "../../Assets/Images/Logo_new.png";
    import FWLogo1 from "../../Assets/Images/Screenshot (251).png";
+   import FWLogo2 from "../../Assets/Images/Unboxed.jpeg";
 
 
 /**
@@ -92,9 +93,15 @@ class LoginHr extends Component {
               margin: "auto",
             }}
           >
-            <img
+            {/* <img
               className="big-logo"
               src={FWLogo}
+              style={{ width: 200 }}
+              alt="Tekorero logo"
+            /> */}
+            <img
+              className="big-logo"
+              src={FWLogo2}
               style={{ width: 200 }}
               alt="Tekorero logo"
             />
