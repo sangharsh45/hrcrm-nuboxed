@@ -16,9 +16,6 @@ class EmployeePulseDrawerModal extends Component {
       toggleViewType,
       singleEmployee,
     } = this.props;
-
-      console.log("full",this.props.employeeName)
-      console.log("full2", this.props.employeeTreeMap)
     return (
       <div>
  <StyledDrawer

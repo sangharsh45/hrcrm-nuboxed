@@ -6,7 +6,7 @@ const UpdateEmploymentForm = lazy(() =>
   import("../Employment/UpdateEmploymentForm")
 );
 
-class AddEmploymentModal extends Component {
+class UpdateEmploymentModal extends Component {
   render() {
     const {
       updateEmploymentModal,
@@ -20,12 +20,11 @@ class AddEmploymentModal extends Component {
           title={
             <FormattedMessage id="app.employment" defaultMessage="Employment" />
           }
-          width="30%"
+          width="60%"
           visible={updateEmploymentModal}
           destroyOnClose
           maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop: "3rem" }}
+
           onClose={() => handleUpdateEmploymentModal(false)}
           footer={null}
         >
@@ -38,4 +37,4 @@ class AddEmploymentModal extends Component {
   }
 }
 
-export default AddEmploymentModal;
+export default UpdateEmploymentModal;

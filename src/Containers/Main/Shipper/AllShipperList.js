@@ -60,7 +60,7 @@ function AllShipperList(props) {
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 
                         <Link
                           toUrl={`shipper/${item.shipperId}`}
@@ -79,14 +79,14 @@ Phone #
 </div>  */}
 
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {item.dialCode} {item.phoneNo}
                       </div>
 
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {item.emailId}
                       </div>
 
@@ -94,14 +94,14 @@ Phone #
 
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {item.shipByName}
                       </div>
 
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].state) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].street) || ""}
@@ -112,7 +112,7 @@ Phone #
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {(item.addresses &&
                           item.addresses.length &&
                           item.addresses[0].city) ||
@@ -122,7 +122,7 @@ Phone #
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {(item.addresses &&
                           item.addresses.length &&
                           item.addresses[0].pinCode) ||
@@ -131,7 +131,7 @@ Phone #
 
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                         {item.salesExecutive}
                       </div>
 

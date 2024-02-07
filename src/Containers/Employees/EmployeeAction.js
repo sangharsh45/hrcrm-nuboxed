@@ -80,14 +80,12 @@ export const getEmployeelist = (filter) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_FAILURE,
         payload: err,

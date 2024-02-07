@@ -9,6 +9,7 @@ import {
   deletePurchaseData,
   handleCurrencyPriceModal,
   handleBrandModel,
+  handleMaterialBuilderDrawer
 } from "./SuppliesAction";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip, Popconfirm } from "antd";
@@ -19,7 +20,10 @@ import {
 import moment from "moment";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { BundleLoader } from "../../../Components/Placeholder";
+import { MultiAvatar } from "../../../Components/UI/Elements";
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 
+const MaterialBuilderDrawer=lazy(()=>import("./MaterialBuilder/MaterialBuilderDrawer"));
 const UpdateSuppliesFormDrawer =lazy(()=>import("./UpdateSuppliesFormDrawer"));
 const TagBrandModel =lazy(()=>import("./TagBrandModel"));
 
@@ -35,7 +39,7 @@ function SuppliesTable(props) {
     setParticularDiscountData(item);
   }
 
-  const { updateSuppliesDrawer, handleUpdateSupplieDrawer } = props;
+  const { updateSuppliesDrawer, handleUpdateSupplieDrawer,materialBuildrawer,handleMaterialBuilderDrawer } = props;
 
   return (
     <>
@@ -58,6 +62,19 @@ function SuppliesTable(props) {
                 <div
                   className="flex rounded-xl justify-center bg-white mt-[0.5rem]  h-[2.75rem]  p-3">
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                  <div className="flex max-sm:w-full ">
+                      <div>
+                       
+                          <MultiAvatar
+                            // primaryTitle={item.name}
+                            imageId={item.imageId}
+                            // imageURL={item.imageURL}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                       
+                      </div>
+                      </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.hsn}
@@ -97,6 +114,19 @@ function SuppliesTable(props) {
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                     <QrCode/>
+                      </div>
+                    </div>
+                    <div class="flex flex-col w-[3%] justify-center max-sm:flex-row max-sm:w-[10%]">
+                      <div>
+                      <Tooltip title="Material Builder">
+                            <ViewQuiltIcon
+                            className="cursor-pointer text-base"
+                                onClick={() => {
+                                    props.handleMaterialBuilderDrawer(true);
+                                    handleParticularRowData(item);
+                                }}
+                            />
+                        </Tooltip>
                       </div>
                     </div>
                     <div class="flex flex-col w-[3%] justify-center max-sm:flex-row max-sm:w-[10%]">
@@ -165,6 +195,11 @@ function SuppliesTable(props) {
       updateSuppliesDrawer={updateSuppliesDrawer}
       handleUpdateSupplieDrawer={handleUpdateSupplieDrawer}
       />
+     <MaterialBuilderDrawer
+      particularDiscountData={particularDiscountData}
+      materialBuildrawer={materialBuildrawer}
+      handleMaterialBuilderDrawer={handleMaterialBuilderDrawer}
+      /> 
 </Suspense>
      
     </>
@@ -177,6 +212,7 @@ const mapStateToProps = ({ supplies, auth }) => ({
   updateSuppliesDrawer: supplies.updateSuppliesDrawer,
   addCurrencyValue: supplies.addCurrencyValue,
   addBrandModel: supplies.addBrandModel,
+  materialBuildrawer:supplies.materialBuildrawer
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -188,6 +224,7 @@ const mapDispatchToProps = (dispatch) =>
       deletePurchaseData,
       handleCurrencyPriceModal,
       handleBrandModel,
+      handleMaterialBuilderDrawer
     },
     dispatch
   );

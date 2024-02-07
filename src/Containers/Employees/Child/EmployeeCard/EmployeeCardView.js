@@ -1,18 +1,16 @@
-import React, {  useEffect, useState, } from "react";
+import React, { useState, lazy,} from "react";
 import { MultiAvatar2, } from '../../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Select } from "antd";
 import BadgeIcon from '@mui/icons-material/Badge';
 import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import styled from 'styled-components'
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getEmployeelist,
@@ -26,37 +24,18 @@ import {
     handleOnboardingEmployeeModal,
     handleNotifyDrawer
   } from "../../EmployeeAction";
-import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
-import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
-import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
-import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
-import UpdateEmployeeModal from "./UpdateEmployeeModal";
-import OpenNotifyDrawer from "./OpenNotifyDrawer";
-import StepperEmployeeModal from "./StepperEmployeeModal";
+
+const EmployeeDrawerForAdmin =lazy(()=>import("../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin"));
+const EmployeePulseDrawerModal =lazy(()=>import("../EmployeeTable/EmployeePulseDrawerModal"));
+const EmployeeDocumentDrawerModal =lazy(()=>import("./EmployeeDocumentDrawerModal"));
+const UpdateEmployeeModal =lazy(()=>import("./UpdateEmployeeModal"));
+const OpenNotifyDrawer =lazy(()=>import("./OpenNotifyDrawer"));
+const StepperEmployeeModal =lazy(()=>import("./StepperEmployeeModal"));
 
 
-const { Option } = Select;
+
 function EmployeeCardView (props) {
-  const [page, setPage] = useState(0);
-  const [storedData,setStoredData]=useState({});
-const handleStoredData=(locs)=>{
-  setStoredData(locs);
-}
-useEffect(() => {
-  props.getEmployeelist("cretiondate");
- 
-}, []);
-function handleChange(data) {
-  props.Candidatesorttype(props.userId,data);
-  
-}
 
-const [currentCandidateId, setCurrentCandidateId] = useState("");
-function handleSetCurrentCandidateId(candidateId) {
-    setCurrentCandidateId(candidateId);
-    
-    console.log(candidateId);
-  } 
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
 
 
@@ -65,18 +44,10 @@ function handleSetCurrentEmployeeId(employeeId,) {
  
 }
   if (props.fetchingEmployee) {
-    return <BundleLoader/>
-  
-    
-;
-  }
+    return <BundleLoader/>;}
+
   const {
-    fetchingEmployee,
-    type,
     user,
-    filteredData,
-    fetchingEmployeeError,
-    employees,
     handleEmployeeDrawerForAdmin,
     employeeDrawerVisibleForAdmin,
   } = props;
@@ -89,12 +60,11 @@ function handleSetCurrentEmployeeId(employeeId,) {
              
             <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
-                console.log("noOfDocPending",item.noOfDocPending)
-      
+                
                  return (
                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
                   text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
-                      <CardImage>
+                      <div class="flex">
                    <Tooltip 
                    title={item.country}
                    >
@@ -111,19 +81,16 @@ function handleSetCurrentEmployeeId(employeeId,) {
                             imgRadius={20}
                           />
                          </div>
-                      {/* <CardDescription> */}
-                      <div class="font-semibold ">
-                        <Header>
-                        <EmployeeDetailsView
-   employeeId={item.employeeId}
-   fullName={item.fullName}
-          />       
-                        </Header> 
+              
+                      <div>
+                            <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`employee/${item.employeeId}`}>{item.fullName}</a>
+                      
                         </div>
                         </div> 
         
                          
-                        </CardImage>
+                        </div>
                         
                         <div class=" flex flex-row justify-evenly  w-full items-end">
                        
@@ -202,9 +169,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
            <Tooltip 
                    title={`${item.workplace} , ${item.location}`}
                    >
-           <span class=" cursor-pointer">
+           <span>
               
-              <PlaceIcon  style={{ fontSize: "1rem", }}/>
+              <PlaceIcon  className=" !text-base cursor-pointer"/>
          
      </span>
      </Tooltip>
@@ -224,13 +191,11 @@ function handleSetCurrentEmployeeId(employeeId,) {
            {user.userUpdateInd === true || user.role === "ADMIN"  ? (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                className=" !text-base cursor-pointer"
                 onClick={() => {
-                    props.setEditEmployee(item);
-                    handleStoredData(item);
-                    props.handleUpdateEmployeeModal(true);
-                    handleSetCurrentEmployeeId(item);
-                  
+                  props.handleUpdateEmployeeModal(true); 
+                  handleSetCurrentEmployeeId(item);
+                   
                 }}
               />
             </Tooltip>
@@ -241,8 +206,6 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <BadgeIcon
                 style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
-                    // props.setEditEmployee(item);
-                    // handleStoredData(item);
                     props.handleOnboardingEmployeeModal(true);
                     handleSetCurrentEmployeeId(item);
                   
@@ -307,17 +270,15 @@ function handleSetCurrentEmployeeId(employeeId,) {
             })}
               </div>
               </div>
+
               <UpdateEmployeeModal
-                storedData={storedData}
-               singleEmployee={props.singleEmployee}
-       employeeName={currentEmployeeId}
+       currentEmployeeId={currentEmployeeId}
         updateEmployeeModal={props.updateEmployeeModal}
         handleUpdateEmployeeModal={props.handleUpdateEmployeeModal}
-        handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
       />
                <StepperEmployeeModal
                currentEmployeeId={currentEmployeeId}
-              //   storedData={storedData}
+
               //  singleEmployee={props.singleEmployee}
               //  employeeName={currentEmployeeId}
        onboardingEmployeeModal={props.onboardingEmployeeModal}
@@ -352,7 +313,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             </>
       
     
-    )
+    );
               
 }
 
@@ -394,75 +355,3 @@ const mapDispatchToProps = (dispatch) =>
   )
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeCardView)
-
-
-
-const CardImage = styled.div`
-  
-  width:200;
-  display:flex;
-  height:200
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    flex-direction:column
-  }
-`
-
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`
-
-
-const AppIcon = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "123%" }}
-  ></i>
-);
-
-const AppIcon1 = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "145%" }}
-  ></i>
-);
-
-const PulseIcon = styled(AppIcon)`
-  color: #df9697;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;
-const PulseIcon1 = styled(AppIcon1)`
-  color: green;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;

@@ -39,15 +39,14 @@ class RefurbishActionLeft extends Component {
               // iconType="book"
               // tooltipTitle="All"
               onClick={() => setProductionViewType("list")}
-            ><GridViewIcon style={{fontSize:"1.4rem"}}  /></span>
+            ><GridViewIcon className="!text-2xl cursor-pointer"  /></span>
           </Tooltip>
           {/* {user.designation === "Manager" && */}
           <Tooltip title="All Orders">
             <TocIcon
+            className="!text-2xl cursor-pointer"
               style={{
-                marginRight: "1.4rem",
                 color: viewType === "all" && "#1890ff",
-                cursor:"pointer"
               }}
               // iconType="appstore-o"
               // tooltipTitle="Supplies Library"

@@ -912,6 +912,7 @@ export const productReducer = (state = initialState, action) => {
         addingProductBuilder: false,
         addingProductBuilderError: true,
       };
+      
     case types.GET_BUILDER_BY_PRODUCT_ID_REQUEST:
       return {
         ...state,

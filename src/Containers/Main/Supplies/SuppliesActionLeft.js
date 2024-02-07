@@ -29,7 +29,7 @@ class SuppliesActionLeft extends React.Component {
         overflowCount={999}
       >
                     <TocIcon
-                    className="text-base cursor-pointer"
+                    className="!text-2xl cursor-pointer"
                         style={{
                             color: viewType === "all" && "#1890ff",
                         }}
@@ -44,7 +44,7 @@ class SuppliesActionLeft extends React.Component {
         overflowCount={999}
       >
                                         <DeleteOutlined
-                                        className="text-base cursor-pointer mr-2"
+                                        className="!text-2xl cursor-pointer"
                         style={{
                           
                             color: viewType === "dashboard" && "red",

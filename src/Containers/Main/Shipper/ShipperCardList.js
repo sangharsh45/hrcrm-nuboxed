@@ -13,7 +13,6 @@ import {
 } from "./ShipperAction";
 import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
-import { Link } from "../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
 
@@ -87,11 +86,9 @@ Name
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-<Link
-          toUrl={`shipper/${item.shipperId}`}
-          title={`${item.shipperName}`}
-        >{item.shipperName}</Link>
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+<a class=" overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`shipper/${item.shipperId}`}>{item.shipperName}</a>
 </div>
 
 </div>
@@ -104,7 +101,7 @@ Phone #
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.dialCode} {item.phoneNo}
 </div>
 
@@ -118,7 +115,7 @@ Email
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.emailId} 
 </div>
 
@@ -133,7 +130,7 @@ Ship By
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {item.shipByName} 
 </div>
 
@@ -147,7 +144,7 @@ Address
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].state) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].street) || ""}
@@ -165,7 +162,7 @@ City
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {(item.addresses &&
            item.addresses.length &&
            item.addresses[0].city) ||
@@ -182,7 +179,7 @@ PinCode
 </div>  */}
 
 
-<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+<div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 {(item.addresses &&
           item.addresses.length &&
           item.addresses[0].pinCode) ||

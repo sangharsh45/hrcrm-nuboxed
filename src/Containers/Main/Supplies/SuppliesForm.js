@@ -5,7 +5,7 @@ import { Button } from "antd";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { base_url2 } from "../../../Config/Auth";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { addSupplies } from "./SuppliesAction";
@@ -25,8 +25,8 @@ class Suppliesform extends Component {
   render() {
     const currencyType = this.props.currencies.map((item) => {
       return {
-        label: item.currencyName || "",
-        value: item.currencyName,
+        label: item.currency_name || "",
+        value: item.currency_name,
       };
     })
   
@@ -48,7 +48,6 @@ class Suppliesform extends Component {
             subCategoryName: "",
             price: 0,
             tax: 0,
-            groupId: this.props.groupId,
             userId: this.props.userId,
             currencyName: ""
           }}
@@ -58,8 +57,7 @@ class Suppliesform extends Component {
             this.props.addSupplies(
               {
                 ...values,
-              },
-              this.props.groupId
+              },  
             );
           }}
         >
@@ -78,7 +76,7 @@ class Suppliesform extends Component {
                   <div class="flex-nowrap">
                     <div class="w-[40%]">
                       <div class="mt-3">
-                      <Field name="imageId" component={Upload} />
+                      <Field name="imageId" component={PostImageUpld} />
                       </div>
                     </div>
                   </div>

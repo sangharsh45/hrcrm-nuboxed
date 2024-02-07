@@ -59,7 +59,7 @@ const ShipperActionLeft = (props) => {
           }}
           onClick={() => props.setShipperViewType("table")}
           >
-             <GridViewIcon style={{fontSize:"1.4rem"}}  />
+             <GridViewIcon className="!text-2xl cursor-pointer"  />
           </span>          
         </Badge>
       </Tooltip>
@@ -74,15 +74,15 @@ const ShipperActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
             onClick={() => props.setShipperViewType("all")}
-          >   <TocIcon style={{fontSize:"1.4rem",cursor:"pointer"}}   />
+          >   <TocIcon className="!text-2xl cursor-pointer"   />
           </span>
           </Badge>
         </Tooltip>
    )}
       <Tooltip title="Deleted Shipper">
         <DeleteOutlined
+        className="!text-2xl cursor-pointer"
           style={{
-            marginRight: "0.5rem",
             color: props.viewType === "grid" && "red",
           }}
           onClick={() => props.setShipperViewType("grid")}
@@ -98,7 +98,7 @@ const ShipperActionLeft = (props) => {
         />
       </Tooltip> */}
       {viewType === "dashboard" && (
-        <FlexContainer alignItems="center">
+        <div class="flex items-center">
           <TimeInterval
             times={dateRangeList}
             handleClick={setSelectedTimeInterval}
@@ -119,7 +119,7 @@ const ShipperActionLeft = (props) => {
               moment(date).isAfter(moment())
             }
           />
-        </FlexContainer>
+        </div>
       )}
       &nbsp;&nbsp;
       <div class="ml-[2.5rem] max-sm:w-20">
