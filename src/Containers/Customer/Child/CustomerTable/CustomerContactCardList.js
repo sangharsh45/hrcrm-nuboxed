@@ -1,16 +1,14 @@
 import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import InfiniteScroll from "react-infinite-scroll-component";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Link } from "../../../../Components/Common";
 import { ActionIcon } from "../../../../Components/Utils";
 import {
   StyledPopconfirm,
 } from "../../../../Components/UI/Antd";
 import {  Tooltip, Select } from "antd";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
+import {  MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 import {
   getContactListByCustomerId,
   setEditCustomerContact,
@@ -18,9 +16,10 @@ import {
 } from "../../CustomerAction";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import CustomerContactActiveToggle from "../CustomerDetail/CustomerTab/ContactTab/CustomerContactActiveToggle";
-
 const Option = Select;
+const CustomerContactActiveToggle = lazy(() =>
+  import("../CustomerDetail/CustomerTab/ContactTab/CustomerContactActiveToggle")
+);
 const AddCustomerUpdateContactModal = lazy(() =>
   import("../../Child/CustomerDetail/CustomerTab/ContactTab/AddCustomerUpdateContactModal")
 );
@@ -77,7 +76,7 @@ function CustomerContactCardList(props) {
     <>
       
      
-          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.5rem]">
         <FormattedMessage
@@ -123,10 +122,10 @@ function CustomerContactCardList(props) {
          PostalCode : ${
            item.address && item.address.length && item.address[0].postalCode
          } `;
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
         
                     return (
@@ -310,7 +309,7 @@ function CustomerContactCardList(props) {
                     )
                 })}
                     
-      </OnlyWrapCard>
+      </div>
 
 
       <AddCustomerUpdateContactModal

@@ -25,7 +25,6 @@ import { getTasks } from "../../../Containers/Settings/Task/TaskAction";
 import {  getTaskForRecruit,} from "../../Settings/SettingsAction"
 import { getUnits } from "../../../Containers/Settings/Unit/UnitAction";
 import { handleChooserModal } from "../../Planner/PlannerAction";
-import { StyledLabel } from "../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
@@ -448,14 +447,14 @@ function UpdateTaskForm(props) {
                 <div class=" flex justify-between  max-sm:flex-col">
                 <div class=" flex justify-between flex-col w-full">
                         
-                        <StyledLabel>
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                           {/* Priority */}
                           <FormattedMessage
                               id="app.priority"
                               defaultMessage="priority"
                             />
                           
-                        </StyledLabel>
+                        </div>
                       
                         <div class="flex">
                           <Tooltip title="High">
@@ -515,10 +514,10 @@ function UpdateTaskForm(props) {
                       </div>
                   <div class=" w-1/2 max-sm:w-wk">
                    
-                    <StyledLabel><FormattedMessage
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                               id="app.type"
                               defaultMessage="type"
-                            /></StyledLabel>
+                            /></div>
                     <Field
                       name="taskTypeId"
                       component={SelectComponent}
@@ -528,13 +527,13 @@ function UpdateTaskForm(props) {
                     />
                   </div>
                   <div class=" w-3/12 ml-2">                
-                    <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.status"
                         defaultMessage="status"
                       />
                       {/* Status */}
-                    </StyledLabel>
+                    </div>
                     <div class=" w-full">
                       <ButtonGroup>
                         <StatusIcon
@@ -614,7 +613,7 @@ function UpdateTaskForm(props) {
                 <div class="mt-3 flex justify-between">
                 {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2 max-sm:w-wk">
-                   <StyledLabel>
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                    name="taskChecklistId"
                   // selectType="contactListFilter"
@@ -634,7 +633,7 @@ function UpdateTaskForm(props) {
                    isColumn
                    inlineLabel
                  />
-                  </StyledLabel>
+                  </div>
                  </div>
                 )}
                  </div>
@@ -817,10 +816,10 @@ function UpdateTaskForm(props) {
                     <div class=" flex justify-between w-full">
                       {values.taskTypeId === "TSK52434477391272022" && (
                         <div class=" w-full">
-                          <StyledLabel><FormattedMessage
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                               id="app.complexity"
                               defaultMessage="complexity"
-                            /></StyledLabel>
+                            /></div>
                           <div>
                             <Tooltip title="Easy">
                               <Button
@@ -1084,7 +1083,7 @@ function UpdateTaskForm(props) {
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
                         <div>
-                          <StyledLabel>Set Reminder </StyledLabel>
+                        <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder </div>
                         </div>
                         <div>
                           <Switch

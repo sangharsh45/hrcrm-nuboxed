@@ -2,6 +2,7 @@ import React, { useState, lazy,} from "react";
 import { MultiAvatar2, } from '../../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
+import { Link } from "../../../../Components/Common";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -86,6 +87,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
                             <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
                             href={`employee/${item.employeeId}`}>{item.fullName}</a>
                       
+
+                      
+
                         </div>
                         </div> 
         

@@ -76,14 +76,15 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
              
-              <CardWrapper>    
+            <div class="flex flex-wrap w-full justify-center max-sm:justify-between max-sm:flex-col max-sm:items-center"> 
                   
               {props.reportingManger.map((item) => {
                 console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
-                    <CardElement>
-                      <CardImage>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
+                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col  ">
+                      <div class="w-[200] flex h-[200]">
                    <Tooltip 
                    title={item.country}
                    >
@@ -113,7 +114,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                         </div> 
         
                          
-                        </CardImage>
+                        </div>
                         
                         <div class=" flex flex-row justify-evenly  w-full items-end">
                        
@@ -227,10 +228,10 @@ function handleSetCurrentEmployeeId(employeeId,) {
                      
                      
 
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
+              </div>
               </div>
               <HandleperformanceModal
                  rowdata={rowdata}
@@ -262,139 +263,3 @@ const mapDispatchToProps = (dispatch) =>
   )
 
 export default connect(mapStateToProps, mapDispatchToProps)(PerformanceManagement)
-
-const MainWrapper = styled.div`
-  /* */
-  margin: 0px 20px;
-  @media only screen and (max-width: 600px) {
-  }
-`
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.35rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 9.5rem;
-    color: rgb(68,68,68);
-    margin: 1rem;
-    padding: 0.2rem;
-    width: 19vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: 22rem;
-    
-  }
-`
-const CardDescription = styled.div`
-  
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-const CardImage = styled.div`
-  
-  width:200;
-  display:flex;
-  height:200
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    flex-direction:column
-  }
-`
-const WithOutImage = styled.div`
-  
-  width:200px;
-  height:200px;
-  display:flex;
-    align-items: center;
-    flex-direction:column
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`
-const Desc = styled.p`
-  height: 0px;
-`
-const Price = styled.div`
-  height: 1.5em;
-  font-weight: 700;
-  font-family: Poppins;
-  font-size: 1em;
-  white-space: nowrap;
-`
-
-const AppIcon = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "123%" }}
-  ></i>
-);
-
-const AppIcon1 = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "145%" }}
-  ></i>
-);
-
-const PulseIcon = styled(AppIcon)`
-  color: #df9697;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;
-const PulseIcon1 = styled(AppIcon1)`
-  color: green;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;

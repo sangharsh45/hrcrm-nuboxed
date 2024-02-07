@@ -7,7 +7,7 @@ const TaskForm=lazy(()=>import("./TaskForm"));
 const AddTaskModal = (props) => {
   const { addTaskModal, handleTaskModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "70%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer

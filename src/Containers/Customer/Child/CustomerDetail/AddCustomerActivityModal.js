@@ -4,16 +4,15 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import CustomerCallActivityForm from "../CustomerActivity/CustomerCallActivityForm";
-import CustomerEventActivityForm from "../CustomerActivity/CustomerEventActivityForm";
-import CustomerTaskActivityForm from "../CustomerActivity/CustomerTaskActivityForm";
 
-
-const EventForm = lazy(() =>
-  import("../../../Event/Child/EventForm")
+const CustomerCallActivityForm = lazy(() =>
+  import("../CustomerActivity/CustomerCallActivityForm")
 );
-const TaskForm = lazy(() =>
-  import("../../../Task/Child/TaskForm")
+const CustomerTaskActivityForm = lazy(() =>
+  import("../CustomerActivity/CustomerTaskActivityForm")
+);
+const CustomerEventActivityForm = lazy(() =>
+  import("../CustomerActivity/CustomerEventActivityForm")
 );
 
 const TabPane = StyledTabs.TabPane;
@@ -21,7 +20,7 @@ const TabPane = StyledTabs.TabPane;
 const AddCustomerActivityModal = (props) => {
   const { callActivityModal, handleCallActivityModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -31,12 +30,7 @@ const AddCustomerActivityModal = (props) => {
         />}
         width={drawerWidth}
         visible={callActivityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleCallActivityModal(false)}
-        style={{marginTop:"5rem"}}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           {/* <CallTaskForm

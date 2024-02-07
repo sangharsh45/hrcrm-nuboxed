@@ -1,16 +1,14 @@
 import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import InfiniteScroll from "react-infinite-scroll-component";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Link } from "../../../../../../Components/Common";
 import { ActionIcon } from "../../../../../../Components/Utils";
 import {
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import {  Tooltip, Select } from "antd";
-import { OnlyWrapCard } from '../../../../../../Components/UI/Layout'
-import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
+import { MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
 import {
   getContactListByCustomerId,
   setEditCustomerContact,
@@ -18,8 +16,9 @@ import {
 } from "../../../../CustomerAction";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import AddCustomerUpdateContactModal from "./AddCustomerUpdateContactModal";
-import CustomerContactActiveToggle from "./CustomerContactActiveToggle";
+const AddCustomerUpdateContactModal = lazy(() => import("./AddCustomerUpdateContactModal"));
+const CustomerContactActiveToggle = lazy(() => import("./CustomerContactActiveToggle"));
+
 
 const Option = Select;
 
@@ -76,9 +75,9 @@ function LinkedContact(props) {
     <>
       
      
-          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.5rem]">
+        <div className=" md:w-[16.5rem]">
         <FormattedMessage
                   id="app.name"
                   defaultMessage="Name"
@@ -91,7 +90,7 @@ function LinkedContact(props) {
                   id="app.mobileNumber"
                   defaultMessage="Mobile Number"
                 /></div>
-        <div className="md:w-[7.2rem]"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.Department"
                   defaultMessage="Department"
                 /></div>
@@ -122,10 +121,10 @@ function LinkedContact(props) {
          PostalCode : ${
            item.address && item.address.length && item.address[0].postalCode
          } `;
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
         
                     return (
@@ -176,13 +175,13 @@ function LinkedContact(props) {
                                 <div class="flex">
 
                              
-                                <div className=" flex font-medium flex-col md:w-[13.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[11.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                    
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.emailId}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                <div className=" flex font-medium flex-col md:w-[9.3rem]  max-sm:flex-row w-full max-sm:justify-between">
                                 
                                   <div class="text-sm text-cardBody font-poppins">
                                   {item.countryDialCode} {item.mobileNumber}
@@ -309,7 +308,7 @@ function LinkedContact(props) {
                     )
                 })}
                     
-      </OnlyWrapCard>
+      </div>
 
 
       <AddCustomerUpdateContactModal

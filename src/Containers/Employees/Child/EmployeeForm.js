@@ -557,7 +557,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
                       }
                     />
                   </div>
-                <Listbox value={selected} onChange={setSelected}>
+                {/* <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
             <Listbox.Label className="block font-semibold text-[0.75rem] m-[0.1rem 0 0.02rem 0.2rem] ">
@@ -624,7 +624,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             </div>
           </>
         )}
-      </Listbox>
+      </Listbox> */}
 <div class=" flex justify-between max-sm:flex-col mt-4" >
                       <div class=" w-w48 flex flex-col max-sm:w-wk">
                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>

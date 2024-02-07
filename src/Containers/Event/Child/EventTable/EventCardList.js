@@ -17,11 +17,16 @@ import {
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 const UpdateEventModal = lazy(() => import("../UpdateEventModal"));
 
 function EventCardList (props) {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isCopied, setIsCopied] = useState(false);
+
+
+ 
   useEffect(() => {
     const {
       getEventListRangeByUserId,
@@ -53,8 +58,8 @@ function EventCardList (props) {
       handleUpdateEventModal,
       userDetails: { employeeId },
     } = props;
-   
-  
+
+    console.log(eventListRangeByUserId)
     return (
       <>
       <div className=' flex justify-end sticky top-28 z-auto'>
@@ -107,10 +112,17 @@ function EventCardList (props) {
         dataLength={eventListRangeByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingEventListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingEventListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
         height={"75vh"}
       >
       {eventListRangeByUserId.map((item) => { 
+            const handleCopyClick = () => {
+              const textToCopy = item.eventDescription;
+              navigator.clipboard.writeText(textToCopy)
+                .then(() => setIsCopied(true))
+                .catch((err) => console.error('Unable to copy text', err));
+               
+            };
                     return (
                         <div>
                             <div className="flex rounded-xl  mt-4 bg-white h-[2.75rem] items-center p-3"
@@ -144,7 +156,7 @@ function EventCardList (props) {
                                 </div>
                                 </div>
                                 <div class="flex  items-center md:w-[55rem]">
-                                <div className=" flex font-medium flex-col md:w-[8.23rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[8.9rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
@@ -244,33 +256,46 @@ function EventCardList (props) {
                       <div class="flex  md: max-sm:flex-row items-center justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
-                style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
+                     className="!text-base cursor-pointer text-[#eeeedd]"
+                />)
                 : (
                   <span>
                     {item.rating}{<StarBorderIcon 
-                      style={{ color: "#FFD700", fontSize: "1.5em" }} />}
+                    className="!text-base cursor-pointer text-[#FFD700]"/>}
                   </span>)}
                         </div>
                         <div>
                         {item.completionInd === false ? (
                 <CheckCircleIcon 
-               
-                  style={{
-                    color: "#eeeedd",
-                    fontSize: "1.5em"
-                  }} />
+                className="!text-base cursor-pointer text-[#eeeedd]"
+                  />
               ) : (
                 <span><CheckCircleIcon 
-                  style={{ color: "#67d239", fontSize: "1.5em" }} />
+                className="!text-base cursor-pointer text-[#67d239]"
+                 />
                 </span>
               )}
         
                         </div>
                         <div>
-                        <Tooltip title={item.eventDescription}>  
+                        {/* <Tooltip title={item.eventDescription}>  
                         <EventNoteIcon
-                        style={{ cursor: "pointer", fontSize:"1rem"}}/>
-                        </Tooltip>
+                          className="!text-base cursor-pointer"
+                       />
+                        </Tooltip> */}
+                         <Tooltip title={
+      <div>
+        {item.eventDescription}
+        <br />
+        <FileCopyIcon
+          className={`text-base cursor-pointer ${isCopied ? 'text-white' : ''}`}
+          onClick={handleCopyClick}
+        />
+        {/* {isCopied && <span className="text-green-500 ml-2">Copied!</span>} */}
+      </div>
+    }>
+      <EventNoteIcon className="text-base cursor-pointer" />
+    </Tooltip>
                     </div>
                     </div>
                     
@@ -279,7 +304,7 @@ function EventCardList (props) {
           <Tooltip title="Edit">
               <BorderColorIcon
                 type="edit"
-                style={{ cursor: "pointer", fontSize:"1rem"}}
+                className="!text-base cursor-pointer"
                 onClick={() => {
                   props.setEditEvents(item);
                   handleUpdateEventModal(true);
@@ -295,7 +320,9 @@ function EventCardList (props) {
               onConfirm={() => deleteEvent(item.eventId, employeeId)}
             >
                <Tooltip title="Delete">
-              <DeleteOutlined  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} />
+              <DeleteOutlined  type="delete"
+                className="!text-base cursor-pointer text-[red]"
+              />
               </Tooltip>
             </StyledPopconfirm>
       

@@ -2,36 +2,21 @@ import React, {useEffect,lazy} from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {
   getJumpOrderCount,
-//   getJumpInvestor2list,
-//   getJumpInvestor3list,
-//   getJumpInvestor4list,
-//   handlePitchQualifiedDrawer,
-//   handlePitchAddedDrawer,
-//   handleDealAddedDrawer,
-//   handleDealClosedDrawer
 } from "../../DashboardAction";
-// const PitchQualifiedDrawer = lazy(()=>import("./InvestorDrawer/PitchQualifiedDrawer"));
-// const PitchAddedDrawer = lazy(()=>import("./InvestorDrawer/PitchAddedDrawer"));
-// const DealsAddedDrawer =lazy(()=>import("./InvestorDrawer/DealsAddedDrawer"));
-// const DealsClosedDrawer= lazy(()=>import("./InvestorDrawer/DealsClosedDrawer"));
 
 function DashboardOrderJumpstart (props) {
  
   useEffect(()=>{
     if (props.timeRangeType === "today") {
     props.getJumpOrderCount(props.timeRangeType);
-    // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
-    // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
-    // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+    
   }
   else {
     props.getJumpOrderCount(props.timeRangeType);
-    // props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
-    // props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
-    // props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+    
   }
   },[props.timeRangeType]);
 
@@ -51,7 +36,7 @@ function DashboardOrderJumpstart (props) {
             // isLoading={props.fetchingJumpOrderCount}
           />
 
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={<FormattedMessage
                 id="app.ordersopen"
@@ -63,7 +48,7 @@ function DashboardOrderJumpstart (props) {
             // isLoading={props.fetchingJumpOrderCount}
           />
 
-          <JumpStartBox
+          <JumpStartBox2
             noProgress
             title={<FormattedMessage
                 id="app.ordersclosed"
@@ -74,7 +59,7 @@ function DashboardOrderJumpstart (props) {
             // value={ props.jumstartOrderCount.completeOrder}
             // isLoading={props.fetchingJumpOrderCount}
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={<FormattedMessage
                 id="app.orderscancelled"
