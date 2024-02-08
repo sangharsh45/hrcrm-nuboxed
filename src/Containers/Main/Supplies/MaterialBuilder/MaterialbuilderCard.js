@@ -2,58 +2,57 @@ import React, {useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
-import { getBuilderByProId,removeProductBuilder,updateProSupplBuilder } from "../../../Product/ProductAction";
-import { elipsize } from "../../../../Helpers/Function/Functions";
+import { getMaterialBuilderById,removeMaterialBuilder,updateMaterialBuilder } from "../SuppliesAction";
 import { DeleteOutlined } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function MaterialbuilderCard (props) {
 
   useEffect(()=> {
-    props.getBuilderByProId(props.particularDiscountData.suppliesId);
+    props.getMaterialBuilderById(props.particularDiscountData.suppliesId);
   },[]);
 
   const [editedFields, setEditedFields] = useState({});
-  const [editsuppliesId, setEditsuppliesId] = useState(null);
+  const [editsupplySupplyLinkId, setEditsupplySupplyLinkId] = useState(null);
 
-  const handleChange = (suppliesId, fieldName, value) => {
+  const handleChange = (supplySupplyLinkId, fieldName, value) => {
     setEditedFields((prevFields) => ({
       ...prevFields,
-      [suppliesId]: {
-        ...prevFields[suppliesId],
+      [supplySupplyLinkId]: {
+        ...prevFields[supplySupplyLinkId],
         [fieldName]: value,
       },
     }));
   };
 
-  const handleEditClick = (suppliesId) => {
-    setEditsuppliesId(suppliesId);
+  const handleEditClick = (supplySupplyLinkId) => {
+    setEditsupplySupplyLinkId(supplySupplyLinkId);
   };
-  const handleCancelClick = (suppliesId) => {
-    setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
-    setEditsuppliesId(null);
+  const handleCancelClick = (supplySupplyLinkId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [supplySupplyLinkId]: undefined }));
+    setEditsupplySupplyLinkId(null);
   };
 
-  // const handleUpdateSupplies = (suppliesId,suppliesName,description,categoryName,subCategoryName, quantity,
-  //   ) => {
-  //   const data = {
-  //     suppliesId: suppliesId, 
-  //     // productSupplyLinkId: productSupplyLinkId,
-  //     productId:props.particularDiscountData.productId, 
-  //     suppliesName:editedFields[productSupplyLinkId]?.suppliesName !== undefined ? editedFields[productSupplyLinkId].suppliesName : suppliesName,
-  //     description:editedFields[productSupplyLinkId]?.description !== undefined ? editedFields[productSupplyLinkId].description : description,
-  //     categoryName:editedFields[productSupplyLinkId]?.categoryName !== undefined ? editedFields[productSupplyLinkId].categoryName : categoryName,
-  //     subCategoryName: editedFields[productSupplyLinkId]?.subCategoryName !== undefined ? editedFields[productSupplyLinkId].subCategoryName : subCategoryName,                 
-  //     quantity: editedFields[productSupplyLinkId]?.quantity !== undefined ? editedFields[productSupplyLinkId].quantity : quantity,        
+  const handleUpdateSupplies = (supplySupplyLinkId,suppliesName,description,categoryName,subCategoryName, quantity,
+    ) => {
+    const data = {
+      supplySupplyLinkId: supplySupplyLinkId, 
+      suppliesId:props.particularDiscountData.suppliesId, 
+      suppliesName:editedFields[supplySupplyLinkId]?.suppliesName !== undefined ? editedFields[supplySupplyLinkId].suppliesName : suppliesName,
+      description:editedFields[supplySupplyLinkId]?.description !== undefined ? editedFields[supplySupplyLinkId].description : description,
+      categoryName:editedFields[supplySupplyLinkId]?.categoryName !== undefined ? editedFields[supplySupplyLinkId].categoryName : categoryName,
+      subCategoryName: editedFields[supplySupplyLinkId]?.subCategoryName !== undefined ? editedFields[supplySupplyLinkId].subCategoryName : subCategoryName,                 
+      quantity: editedFields[supplySupplyLinkId]?.quantity !== undefined ? editedFields[supplySupplyLinkId].quantity : quantity,        
                       
-  //   };
+    };
   
-  //   props.updateProSupplBuilder(data)
-  //     setEditedFields((prevFields) => ({ ...prevFields, [productSupplyLinkId]: undefined }));
-  //     setEditproductSupplyLinkId(null);
+    props.updateMaterialBuilder(data)
+      setEditedFields((prevFields) => ({ ...prevFields, [supplySupplyLinkId]: undefined }));
+      setEditsupplySupplyLinkId(null);
     
-  // };
+  };
 
 return (
     <>
@@ -63,14 +62,13 @@ return (
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[7%]">Name</div>
-        <div className=" md:w-[6.1rem]">Description</div>
         <div className=" md:w-[4.2rem] ">Category</div>
         <div className="md:w-[5.8rem]">Sub Category</div>
         <div className=" md:w-[4.2rem] ">Unit</div>
         <div className="w-12"></div>
             </div>
       
-             {props.builderbyProductId.map((item) => {
+             {props.builderMaterialbyId.map((item) => {
           return (
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "    >
@@ -80,19 +78,6 @@ return (
                               {item.suppliesName}
                             </div>
     </div>
-
-    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-    <div class=" text-xs text-cardBody font-poppins">
-    <span style={{ cursor: "pointer" }}>
-              <Tooltip title={item.description}>
-                 {elipsize(item.description || "", 70)}
-               </Tooltip>
-             </span>
-                    </div>
-    
-    </div> 
- 
     </div>
     
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -108,13 +93,13 @@ return (
                     </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-      
-      {/* <div class=" text-xs text-cardBody font-semibold  font-poppins">
-                   {editproductSupplyLinkId === item.productSupplyLinkId ? (
+      <div class=" text-xs text-cardBody font-semibold  font-poppins">
+                   {editsupplySupplyLinkId === item.supplySupplyLinkId ? (
                        <input
-                       style={{border:"2px solid black"}}
-                       value={editedFields[item.productSupplyLinkId]?.quantity !== undefined ? editedFields[item.productSupplyLinkId].quantity : item.quantity}
-                       onChange={(e) => handleChange(item.productSupplyLinkId, 'quantity', e.target.value)}
+                       class="w-8 border-2 border-black "
+                      //  style={{border:"2px solid black"}}
+                       value={editedFields[item.supplySupplyLinkId]?.quantity !== undefined ? editedFields[item.supplySupplyLinkId].quantity : item.quantity}
+                       onChange={(e) => handleChange(item.supplySupplyLinkId, 'quantity', e.target.value)}
                        />
                        
                     ) : (
@@ -122,42 +107,44 @@ return (
                         <span> {item.quantity}</span>
                       </div>
                     )}
-                    </div> */}
+                    </div>
   </div>
   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-    {/* <div>
-    {editproductSupplyLinkId === item.productSupplyLinkId ? (
+    <div>
+    {editsupplySupplyLinkId === item.supplySupplyLinkId ? (
                         <>
-                      <Button onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
+                      <Button onClick={() => handleUpdateSupplies(item.supplySupplyLinkId,item.suppliesName,item.description,item.categoryName,item.subCategoryName )}>
                         Save
                       </Button>
-                        <Button onClick={() => handleCancelClick(item.productSupplyLinkId)} style={{ marginLeft: '0.5rem' }}>
+                        <Button 
+                        className="ml-2"
+                        onClick={() => handleCancelClick(item.supplySupplyLinkId)}>
                         Cancel
                       </Button>
                       </>
                       
                     ) : (
                       <BorderColorIcon
-                        tooltipTitle="Edit"
-                        iconType="edit"
-                        onClick={() => handleEditClick(item.productSupplyLinkId)}
-                        style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
+                      className="text-[blue] flex justify-items-center justify-center text-xs cursor-pointer"
+                        onClick={() => handleEditClick(item.supplySupplyLinkId)}
+                        // style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
                       />
                     )}
-    </div> */}
+    </div>
     <div>
       <StyledPopconfirm
                           title="Do you want to delete?"
-                          onConfirm={() => props.removeProductBuilder({active:false},item.productSupplyLinkId)}
+                          onConfirm={() => props.removeMaterialBuilder({active:false},item.supplySupplyLinkId)}
                           >
                      <Tooltip title="Delete">
-                          <DeleteOutlined
-                            type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                          <DeleteIcon
+                          className="text-base cursor-pointer text-[red]"
+                           
+                            // style={{
+                            //   cursor: "pointer",
+                            //   color: "red",
+                            //   fontSize: "1rem",
+                            // }}
                           />
                        </Tooltip>
                        </StyledPopconfirm>
@@ -175,17 +162,16 @@ return (
 );
 }
 
-const mapStateToProps = ({product }) => ({
-    builderbyProductId: product.builderbyProductId,
-    fetchingBuilderByProductId: product.fetchingBuilderByProductId
+const mapStateToProps = ({supplies }) => ({
+  builderMaterialbyId: supplies.builderMaterialbyId,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getBuilderByProId,
-            removeProductBuilder,
-            updateProSupplBuilder
+            getMaterialBuilderById,
+            removeMaterialBuilder,
+            updateMaterialBuilder
             
         },
         dispatch

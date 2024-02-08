@@ -1,10 +1,12 @@
 import React, { useState, useEffect,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getProductbuilder,addProductBuilder,getSearchBuilder } from "../../../Product/ProductAction";
+import { getProductbuilder } from "../../../Product/ProductAction";
 import {  Select } from "../../../../Components/UI/Elements";
+import {getSearchedMaterialBuilder} from "../SuppliesAction";
+
 const MaterialbuilderCard =lazy(()=>import("./MaterialbuilderCard"));
-const ProBuildSearchedCard =lazy(()=>import("../../../Product/Child/ProductTable/ProBuildSearchedCard"));
+const MaterialBuilderSearchedCard =lazy(()=>import("./MaterialBuilderSearchedCard"));
 
 const { Option } = Select;
 
@@ -23,7 +25,7 @@ function MaterialBuilder (props) {
 
   const handleChange = (ev) => {
     setSelectedValue(ev);
-      props.getSearchBuilder(ev);
+      props.getSearchedMaterialBuilder(ev);
       setshowCard(true)
   };
 
@@ -51,9 +53,9 @@ function MaterialBuilder (props) {
 
                             
  <Suspense fallback={"Loading"}>
-{/* {showCard && */}
-<ProBuildSearchedCard particularDiscountData={props.particularDiscountData}/>
-
+{showCard &&
+<MaterialBuilderSearchedCard particularDiscountData={props.particularDiscountData} searchedMaterialBuilders={props.searchedMaterialBuilders}/>
+}
 <MaterialbuilderCard particularDiscountData={props.particularDiscountData}/>
 </Suspense>
                        
@@ -61,19 +63,19 @@ function MaterialBuilder (props) {
 );
 }
 
-const mapStateToProps = ({product }) => ({
+const mapStateToProps = ({product, supplies}) => ({
     productBuilder: product.productBuilder,
     fetchingProductBuilder: product.fetchingProductBuilder,
     addingProductBuilder:product.addingProductBuilder,
-    addedProBuilder:product.addedProBuilder
+    addedProBuilder:product.addedProBuilder,
+    searchedMaterialBuilders: supplies.searchedMaterialBuilders,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getProductbuilder,
-            addProductBuilder,
-            getSearchBuilder,
+            getSearchedMaterialBuilder,
         },
         dispatch
     );

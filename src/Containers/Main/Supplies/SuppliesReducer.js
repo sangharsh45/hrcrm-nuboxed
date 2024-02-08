@@ -69,13 +69,24 @@ const initialState = {
     suppliesCount:{},
 
     materialBuildrawer:false,
+
     addingMaterialBuilder: false,
-    addedMateriBuilder:{},
+    // addedMateriBuilder:{},
     addingMaterialBuilderError:false,
+
     fetchingMaterialBuilderbyId: false,
     builderMaterialbyId:[],
     fetchingMaterialBuilderbyIdError: false,
 
+    fetchingSearchedMaterialBuilders: false,
+    fetchingSearchedMaterialBuildersError:false,
+    searchedMaterialBuilders:[],
+
+    removingMaterialBuilder: false,
+    removingMaterialBuilderError:false,
+
+    updatingMaterialBuilder: false,
+    updatingMaterialBuilderError:false,
 };
 
 export const suppliesReducer = (state = initialState, action) => {
@@ -348,8 +359,8 @@ export const suppliesReducer = (state = initialState, action) => {
                             return {
                               ...state,
                               addingMaterialBuilder: false,
-                              addedMateriBuilder:action.payload,
-                              builderMaterialbyId:[action.payload,...state.builderMaterialbyId]
+                            //   addedMateriBuilder:action.payload,
+                            builderMaterialbyId:[action.payload,...state.builderMaterialbyId]
                             };
                           case types.ADD_MATERIAL_BUILDER_FAILURE:
                             return {
@@ -376,6 +387,54 @@ export const suppliesReducer = (state = initialState, action) => {
         fetchingMaterialBuilderbyId: false,
         fetchingMaterialBuilderbyIdError: true,
       };
+
+      case types.GET_SEARCH_MATERIAL_BUILDER_REQUEST:
+        return { ...state, fetchingSearchedMaterialBuilders: true };
+      case types.GET_SEARCH_MATERIAL_BUILDER_SUCCESS:
+        return { ...state, 
+          fetchingSearchedMaterialBuilders: false,
+          searchedMaterialBuilders: action.payload,
+        };
+      case types.GET_SEARCH_MATERIAL_BUILDER_FAILURE:
+        return {
+          ...state,
+          fetchingSearchedMaterialBuilders: false,
+          fetchingSearchedMaterialBuildersError: true,
+        };
+
+        case types.REMOVE_MATERIAL_BUILDER_REQUEST:
+            return { ...state, removingMaterialBuilder: true };
+          case types.REMOVE_MATERIAL_BUILDER_SUCCESS:
+            return {
+              ...state,
+              removingMaterialBuilder: false,
+              builderMaterialbyId: state.builderMaterialbyId.filter(
+                (item) => item.supplySupplyLinkId !== action.payload.supplySupplyLinkId
+              ),
+            };
+          case types.REMOVE_MATERIAL_BUILDER_FAILURE:
+            return {
+              ...state,
+              removingMaterialBuilder: false,
+              removingMaterialBuilderError: true,
+            };  
+    
+            case types.UPDATE_MATERIAL_BUILDER_REQUEST:
+              return { ...state, updatingMaterialBuilder: true };
+            case types.UPDATE_MATERIAL_BUILDER_SUCCESS:
+              return {
+                ...state,
+                updatingMaterialBuilder: false,
+                builderMaterialbyId:[action.payload, ...state.builderMaterialbyId],
+         
+              };
+            case types.UPDATE_MATERIAL_BUILDER_FAILURE:
+              return {
+                ...state,
+                updatingMaterialBuilder: false,
+                updatingMaterialBuilderError: true,
+              };
+    
         default:
             return state;
     }

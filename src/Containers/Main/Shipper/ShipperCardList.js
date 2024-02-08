@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from "redux";
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import { Tooltip, Popconfirm } from "antd";
@@ -87,8 +88,10 @@ Name
 
 
 <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-<a class=" overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
-                            href={`shipper/${item.shipperId}`}>{item.shipperName}</a>
+                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  
+                      to={`shipper/${item.shipperId}`} title={item.shipperName}>
+      {item.fullName}
+    </Link>
 </div>
 
 </div>

@@ -3,7 +3,6 @@ import { MultiAvatar2, } from '../../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-// import { Link } from "../../../../Components/Common";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -26,7 +25,7 @@ import {
     handleOnboardingEmployeeModal,
     handleNotifyDrawer
   } from "../../EmployeeAction";
-
+import { Link } from 'react-router-dom';
 const EmployeeDrawerForAdmin =lazy(()=>import("../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin"));
 const EmployeePulseDrawerModal =lazy(()=>import("../EmployeeTable/EmployeePulseDrawerModal"));
 const EmployeeDocumentDrawerModal =lazy(()=>import("./EmployeeDocumentDrawerModal"));
@@ -85,11 +84,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
                          </div>
               
                       <div>
-                            <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
-                            href={`employee/${item.employeeId}`}>{item.fullName}</a>
+                            {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`employee/${item.employeeId}`}>{item.fullName}</a> */}
                       
 
-                      
+                      <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  
+                      to={`/employee/${item.employeeId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>
 
                         </div>
                         </div> 

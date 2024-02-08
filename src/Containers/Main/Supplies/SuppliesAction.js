@@ -464,3 +464,73 @@ export const getMaterialBuilderById = (suppliesId) => (dispatch) => {
       });
     });
 };
+
+export const getSearchedMaterialBuilder = (hsn) => (dispatch) => {
+  dispatch({
+    type: types.GET_SEARCH_MATERIAL_BUILDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/supplies/suppliesList/${hsn}`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_SEARCH_MATERIAL_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_SEARCH_MATERIAL_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const removeMaterialBuilder = (data,supplySupplyLinkId) => (dispatch) => {
+  dispatch({
+    type: types.REMOVE_MATERIAL_BUILDER_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/MTEductionBuilder/supplies/${supplySupplyLinkId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.REMOVE_MATERIAL_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_MATERIAL_BUILDER_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+
+export const updateMaterialBuilder = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_MATERIAL_BUILDER_REQUEST });
+  axios
+      .post(`${base_url2}/mytductionBuilder/supplies`, data, {
+    headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_MATERIAL_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.UPDATE_MATERIAL_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};

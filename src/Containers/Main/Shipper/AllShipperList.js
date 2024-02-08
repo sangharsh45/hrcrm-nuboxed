@@ -13,7 +13,7 @@ import {
 } from "./ShipperAction";
 import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
-import { Link } from "../../../Components/Common";
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
 
 function AllShipperList(props) {
@@ -62,8 +62,8 @@ function AllShipperList(props) {
 
                       <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 
-                        <Link
-                          toUrl={`shipper/${item.shipperId}`}
+                        <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"
+                          to={`shipper/${item.shipperId}`}
                           title={`${item.shipperName}`}
                         >{item.shipperName}</Link>
 

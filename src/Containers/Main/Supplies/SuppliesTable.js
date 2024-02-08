@@ -46,6 +46,7 @@ function SuppliesTable(props) {
       <div className=" flex justify-end sticky top-28 z-auto">
       <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[1rem]"></div>
             <div className=" md:w-[6.1rem]">HSN</div>
             <div className=" md:w-[5.1rem]">Name</div>
             <div className=" md:w-[6.2rem] ">Category</div>
@@ -62,9 +63,11 @@ function SuppliesTable(props) {
                 <div
                   className="flex rounded-xl justify-center bg-white mt-[0.5rem]  h-[2.75rem]  p-3">
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
-                  <div className="flex max-sm:w-full ">
+                  <div className=" flex font-medium flex-col w-[17rem]   max-sm:w-full">
+                    <div className="flex max-sm:w-full ">
                       <div>
-                          <MultiAvatar
+                       
+                         <MultiAvatar
                             // primaryTitle={item.name}
                             imageId={item.imageId}
                             // imageURL={item.imageURL}
@@ -73,12 +76,18 @@ function SuppliesTable(props) {
                           />
                        
                       </div>
-                      </div>
-                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      <div class="w-[4%]"></div>
+
+                      <div class="max-sm:w-full md:flex items-center">
+                     
+                      <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.hsn}
                       </div>
                     </div>
+                      </div>
+                    </div>
+                  </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.name}
