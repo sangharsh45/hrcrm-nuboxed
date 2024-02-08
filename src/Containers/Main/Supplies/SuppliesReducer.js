@@ -425,8 +425,14 @@ export const suppliesReducer = (state = initialState, action) => {
               return {
                 ...state,
                 updatingMaterialBuilder: false,
-                builderMaterialbyId:[action.payload, ...state.builderMaterialbyId],
-         
+                builderMaterialbyId: state.builderMaterialbyId.map((item) => {
+                    if (item.linkSuppliesId === action.payload.linkSuppliesId) {
+                      return action.payload;
+                    } else {
+                      return item;
+                    }
+                  }),
+
               };
             case types.UPDATE_MATERIAL_BUILDER_FAILURE:
               return {

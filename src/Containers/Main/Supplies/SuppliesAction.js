@@ -491,7 +491,7 @@ export const removeMaterialBuilder = (data,supplySupplyLinkId) => (dispatch) => 
     type: types.REMOVE_MATERIAL_BUILDER_REQUEST,
   });
   axios
-    .put(`${base_url2}/MTEductionBuilder/supplies/${supplySupplyLinkId}`, data, {
+    .put(`${base_url2}/suppliesBuilder/supplies/${supplySupplyLinkId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -516,7 +516,7 @@ export const removeMaterialBuilder = (data,supplySupplyLinkId) => (dispatch) => 
 export const updateMaterialBuilder = (data) => (dispatch) => {
   dispatch({ type: types.UPDATE_MATERIAL_BUILDER_REQUEST });
   axios
-      .post(`${base_url2}/mytductionBuilder/supplies`, data, {
+      .post(`${base_url2}/suppliesBuilder/supplies`, data, {
     headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
