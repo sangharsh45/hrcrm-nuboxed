@@ -5,7 +5,7 @@ import { Button } from "antd";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { base_url2 } from "../../../Config/Auth";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import EditUpload from "../../../Components/Forms/Edit/EditUpload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { updateSupplies } from "./SuppliesAction";
@@ -18,6 +18,13 @@ const SuppliesSchema = Yup.object().shape({
   hsn: Yup.string().required("Input needed!"),
 });
 class UpdateSuppliesForm extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      newimageId:"",
+    };
+  }
 
   componentDidMount() {
     this.props.getCurrency()
@@ -29,7 +36,11 @@ class UpdateSuppliesForm extends Component {
         value: item.currencyName,
       };
     })
-    console.log(this.props.groupId)
+   
+    const setImage = (imageId) => {
+      this.setState({newimageId:imageId});
+    };
+
     return (
       <>
         <Formik
@@ -39,7 +50,7 @@ class UpdateSuppliesForm extends Component {
             category: "",
             categoryName: this.props.particularDiscountData.categoryName || "",
             description:this.props.particularDiscountData.description || "",
-            imageId: "",
+            imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
             name:this.props.particularDiscountData.name || "",
             hsn:this.props.particularDiscountData.hsn || "",
             subAttribute: "",
@@ -63,6 +74,7 @@ class UpdateSuppliesForm extends Component {
             this.props.updateSupplies(
               {
                 ...values,
+                imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
               },
               this.props.particularDiscountData.suppliesId
             );
@@ -83,7 +95,13 @@ class UpdateSuppliesForm extends Component {
                   <div class="flex-nowrap">
                     <div class="w-[40%]">
                       <div class="mt-3">
-                      <Field name="imageId" component={Upload} />
+                      <EditUpload
+                    imageId={this.props.particularDiscountData.imageId}
+                    imgWidth={100}
+                    imgHeight={100}
+                    getImage={setImage}
+                  />
+                     
                     </div>
                     </div>
                   </div>

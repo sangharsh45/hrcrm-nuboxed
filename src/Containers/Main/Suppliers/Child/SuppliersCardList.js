@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import {getSuppliersList,emptysUPPLIERS } from "../SuppliersAction"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
+import { Link } from 'react-router-dom';
 
 function SuppliersCardList(props) {
   useEffect(() => {
@@ -79,8 +80,11 @@ return(
  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-<a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
-                            href={`supplier/${item.supplierId}`}>{item.name}</a>
+  <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"
+                          to={`supplier/${item.supplierId}`}
+                          title={`${item.shipperName}`}
+                        >{item.name}</Link>
+
 </div>
 
 </div>
