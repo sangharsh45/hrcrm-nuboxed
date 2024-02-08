@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import { Link } from "../../../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
@@ -44,10 +44,13 @@ function LinkedDealTable(props) {
       render(name, item, ) {
         return (
           <>
-           <Link
+           <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`/opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+  </Link> 
+           {/* <Link
               toUrl={`/opportunity/${item.opportunityId}`}
               title={`${item.opportunityName || ""} `}
-            />
+            /> */}
            
           </>
         );

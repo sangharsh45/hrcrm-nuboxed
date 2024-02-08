@@ -8,8 +8,9 @@ import OpportunitySelectStages from "../OpportunityTable/OpportunitySelectStages
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import { Link } from 'react-router-dom';
 import { Tooltip, Select, Menu, Dropdown, Progress ,Popconfirm} from "antd";
-import { CurrencySymbol,Link } from "../../../../Components/Common";
+import { CurrencySymbol, } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { MultiAvatar, MultiAvatar2,  } from "../../../../Components/UI/Elements";
@@ -154,11 +155,14 @@ function OpportunityCardList(props) {
           <div class="flex flex-col basis-[100%] overflow-hidden">
           
             <div class="font-semibold text-[#337df4] cursor-pointer text-sm " >
-          <Link
+            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>
+          {/* <Link
 toUrl={`opportunity/${item.opportunityId}`}
 title={`${item.opportunityName}`}>
 {item.opportunityName}
-</Link>
+</Link> */}
           </div> 
           </div>
         </div>
