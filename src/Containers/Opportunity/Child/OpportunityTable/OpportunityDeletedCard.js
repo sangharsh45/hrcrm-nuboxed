@@ -4,7 +4,8 @@ import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import { Tooltip, Menu, Dropdown, Progress } from "antd";
-import { CurrencySymbol,Link } from "../../../../Components/Common";
+import { CurrencySymbol, } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import moment from "moment";
 import {
   MultiAvatar,
@@ -59,11 +60,9 @@ function OpportunityDeletedCard(props) {
                       <div class="flex items-center justify-between ">
                       <div>Name</div>
                         <Header>
-                        <Link
-          toUrl={`opportunity/${item.opportunityId}`}
-          title={`${item.opportunityName}`}>
-         {item.opportunityName}
-         </Link>
+                        <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>
                         </Header> 
                        
                

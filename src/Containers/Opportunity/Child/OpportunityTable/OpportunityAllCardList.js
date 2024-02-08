@@ -6,7 +6,8 @@ import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { Tooltip, Menu, Dropdown, Progress } from "antd";
-import { CurrencySymbol,Link } from "../../../../Components/Common";
+import { CurrencySymbol, } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import moment from "moment";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LockIcon from "@mui/icons-material/Lock";
@@ -129,11 +130,9 @@ function OpportunityAllCardList(props) {
         
                                           <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                               
-                                          <Link
-        toUrl={`opportunity/${item.opportunityId}`}
-        title={`${item.opportunityName}`}>
-       {item.opportunityName}
-       </Link>&nbsp;&nbsp;
+                                          <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>&nbsp;&nbsp;
      
                                           </div>
 </div>

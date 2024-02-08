@@ -16,7 +16,7 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import {
   updateOwnercustomerById,
   handleCustomerDrawerModal,
@@ -173,11 +173,16 @@ function InvestorTeamCardList(props) {
                                             Name
                                             </h4> */}
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
-                                                
+
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`investor/${item.investorId}`} title={item.name}>
+      {item.name}
+  </Link>  
+{/*                                                 
          <Link
           toUrl={`investor/${item.investorId}`}
           title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+        >{item.name}</Link> */}
+        &nbsp;&nbsp;
         {date === currentdate ? (
           <span
             style={{
