@@ -38,9 +38,10 @@ const DashboardActionLeft = (props) => {
         // overflowCount={999}
       >
         <span class=" cursor-pointer ml-2 "
-          onClick={() => props.setDashboardViewType("test")}
+                onClick={() => handleButtonClick("test")} 
+          // onClick={() => props.setDashboardViewType("test")}
           style={{
-            color: props.viewType === "test" && "tomato",
+            color: activeButton === "test" && "tomato",
   
           }}> 
               <Tooltip title="My Details">

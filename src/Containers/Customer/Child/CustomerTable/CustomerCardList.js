@@ -17,7 +17,7 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import {
   getCustomerListByUserId,
   handleUpdateCustomerModal,
@@ -287,10 +287,9 @@ const [rowdata, setrowdata] = useState("");
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
-         {/* <Link
-          toUrl={`customer/${item.customerId}`}
-          title={`${item.name}`}
-        >{item.name}</Link>
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`customer/${item.customerId}`} title={item.name}>
+      {item.name}
+    </Link>
         
         &nbsp;&nbsp;
         {date === currentdate ? (
@@ -302,8 +301,8 @@ const [rowdata, setrowdata] = useState("");
           >
             New
           </span>
-        ) : null} */}
-                                    <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+        ) : null} 
+                                    {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
                             href={`customer/${item.customerId}`}>{item.name} </a>
                               &nbsp;&nbsp;
         {date === currentdate ? (
@@ -316,7 +315,7 @@ const [rowdata, setrowdata] = useState("");
             New
           </span>
         ) : null}
-       
+        */}
                                             </h4>
                                             </div>
                                         </Tooltip>

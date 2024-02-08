@@ -28,7 +28,7 @@ const OrdersDashTab=lazy(()=>import("./OrdersDashTab"));
 const DashboardFinanceJumpstart= lazy(()=>import("./Child/JumpStart/DashboardFinanceJumpstart"));
 const FinanceDashTab=lazy(()=>import("./FinanceDashTab"));
 class Dashboard extends Component {
-  state = { visible: false,activeButton:null };
+  state = { visible: false,activeButton:"test" };
 
    handleButtonClick=(buttonName)=>{
     this.setState({activeButton:buttonName});
@@ -147,7 +147,7 @@ class Dashboard extends Component {
      <div class="w-[47%] max-sm:w-wk">
      <div class=" flex flex-col display-block" >
        <div class=" flex justify-between" >
-       {viewType==="test" && (
+       {this.state.activeButton ==="test" && (
             <TodoDashboardTab
             viewType={viewType}
             />)}

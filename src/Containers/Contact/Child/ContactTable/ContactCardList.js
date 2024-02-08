@@ -2,8 +2,8 @@ import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import moment from "moment";
-import { Link } from "../../../../Components/Common";
+import dayjs from "dayjs";
+import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
@@ -176,10 +176,10 @@ function ContactCardList(props) {
         
       {filterData.map((item) => { 
         
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${item.address &&
             item.address.length &&
@@ -219,11 +219,14 @@ function ContactCardList(props) {
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
                                           
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-         <Link
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`contact/${item.contactId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>                                               
+         {/* <Link
           toUrl={`contact/${item.contactId}`}
           title={`${item.fullName}`}
-        >{item.fullName}</Link>&nbsp;&nbsp;
+        >{item.fullName}</Link> */}
+        &nbsp;&nbsp;
         {date === currentdate ? (
           <span class="text-xs"
             style={{

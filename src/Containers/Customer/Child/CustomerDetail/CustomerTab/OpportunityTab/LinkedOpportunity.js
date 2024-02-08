@@ -2,7 +2,7 @@ import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Highlighter from "react-highlight-words";
-import { Link } from "../../../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import dayjs from "dayjs";
 import InfoIcon from '@mui/icons-material/Info';
 import {
@@ -437,11 +437,14 @@ function OpportunityTable(props) {
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col ">
                                           
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-         <Link
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`/opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>                                     
+         {/* <Link
           toUrl={`/opportunity/${item.opportunityId}`}
           title={`${item.opportunityName || ""} `}
-        >{item.opportunityName}</Link>&nbsp;&nbsp;
+        >{item.opportunityName}</Link> */}
+        &nbsp;&nbsp;
         {date === currentdate ? (
           <span class="text-xs"
             style={{
