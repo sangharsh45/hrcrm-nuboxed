@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import moment from "moment";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
@@ -188,11 +188,14 @@ function ContactTeamCardList(props) {
                                             Name
                                             </div> */}
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-         <Link
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`contact/${item.contactId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>                                  
+         {/* <Link
           toUrl={`contact/${item.contactId}`}
           title={`${item.fullName}`}
-        >{item.fullName}</Link>&nbsp;&nbsp;
+        >{item.fullName}</Link> */}
+        &nbsp;&nbsp;
         {date === currentdate ? (
           <span class="text-xs"
             style={{
