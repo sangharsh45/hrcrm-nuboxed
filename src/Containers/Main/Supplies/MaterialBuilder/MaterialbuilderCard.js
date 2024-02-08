@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
 import { getMaterialBuilderById,removeMaterialBuilder,updateMaterialBuilder } from "../SuppliesAction";
-import { DeleteOutlined } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,42 +14,46 @@ function MaterialbuilderCard (props) {
   },[]);
 
   const [editedFields, setEditedFields] = useState({});
-  const [editsupplySupplyLinkId, setEditsupplySupplyLinkId] = useState(null);
+  const [editlinkSuppliesId, setEditlinkSuppliesId] = useState(null);
 
-  const handleChange = (supplySupplyLinkId, fieldName, value) => {
+  const handleChange = (linkSuppliesId, fieldName, value) => {
     setEditedFields((prevFields) => ({
       ...prevFields,
-      [supplySupplyLinkId]: {
-        ...prevFields[supplySupplyLinkId],
+      [linkSuppliesId]: {
+        ...prevFields[linkSuppliesId],
         [fieldName]: value,
       },
     }));
+    console.log("linn1",linkSuppliesId)
+  };
+  
+  const handleEditClick = (linkSuppliesId,) => 
+  {
+    setEditlinkSuppliesId(linkSuppliesId);
+  };
+  const handleCancelClick = (linkSuppliesId) => {
+    setEditedFields((prevFields) => ({ ...prevFields, [linkSuppliesId]: undefined }));
+    setEditlinkSuppliesId(null);
   };
 
-  const handleEditClick = (supplySupplyLinkId) => {
-    setEditsupplySupplyLinkId(supplySupplyLinkId);
-  };
-  const handleCancelClick = (supplySupplyLinkId) => {
-    setEditedFields((prevFields) => ({ ...prevFields, [supplySupplyLinkId]: undefined }));
-    setEditsupplySupplyLinkId(null);
-  };
-
-  const handleUpdateSupplies = (supplySupplyLinkId,suppliesName,description,categoryName,subCategoryName, quantity,
+  const handleUpdateSupplies = (linkSuppliesId,supplySupplyLinkId,suppliesName,description,categoryName,subCategoryName,quantity,
     ) => {
+      console.log("linn",linkSuppliesId,supplySupplyLinkId)
     const data = {
+      linkSuppliesId:linkSuppliesId,
       supplySupplyLinkId: supplySupplyLinkId, 
-      suppliesId:props.particularDiscountData.suppliesId, 
-      suppliesName:editedFields[supplySupplyLinkId]?.suppliesName !== undefined ? editedFields[supplySupplyLinkId].suppliesName : suppliesName,
-      description:editedFields[supplySupplyLinkId]?.description !== undefined ? editedFields[supplySupplyLinkId].description : description,
-      categoryName:editedFields[supplySupplyLinkId]?.categoryName !== undefined ? editedFields[supplySupplyLinkId].categoryName : categoryName,
-      subCategoryName: editedFields[supplySupplyLinkId]?.subCategoryName !== undefined ? editedFields[supplySupplyLinkId].subCategoryName : subCategoryName,                 
-      quantity: editedFields[supplySupplyLinkId]?.quantity !== undefined ? editedFields[supplySupplyLinkId].quantity : quantity,        
-                      
+      suppliesName:editedFields[linkSuppliesId]?.suppliesName !== undefined ? editedFields[linkSuppliesId].suppliesName : suppliesName,
+      description:editedFields[linkSuppliesId]?.description !== undefined ? editedFields[linkSuppliesId].description : description,
+      categoryName:editedFields[linkSuppliesId]?.categoryName !== undefined ? editedFields[linkSuppliesId].categoryName : categoryName,
+      subCategoryName: editedFields[linkSuppliesId]?.subCategoryName !== undefined ? editedFields[linkSuppliesId].subCategoryName : subCategoryName,                 
+      quantity: editedFields[linkSuppliesId]?.quantity !== undefined ? editedFields[linkSuppliesId].quantity : quantity,     
+      suppliesId:props.particularDiscountData.suppliesId,    
+                     
     };
   
     props.updateMaterialBuilder(data)
-      setEditedFields((prevFields) => ({ ...prevFields, [supplySupplyLinkId]: undefined }));
-      setEditsupplySupplyLinkId(null);
+      setEditedFields((prevFields) => ({ ...prevFields, [linkSuppliesId]: undefined }));
+      setEditlinkSuppliesId(null);
     
   };
 
@@ -94,12 +97,12 @@ return (
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
       <div class=" text-xs text-cardBody font-semibold  font-poppins">
-                   {editsupplySupplyLinkId === item.supplySupplyLinkId ? (
+                   {editlinkSuppliesId === item.linkSuppliesId ? (
                        <input
                        class="w-8 border-2 border-black "
                       //  style={{border:"2px solid black"}}
-                       value={editedFields[item.supplySupplyLinkId]?.quantity !== undefined ? editedFields[item.supplySupplyLinkId].quantity : item.quantity}
-                       onChange={(e) => handleChange(item.supplySupplyLinkId, 'quantity', e.target.value)}
+                       value={editedFields[item.linkSuppliesId]?.quantity !== undefined ? editedFields[item.linkSuppliesId].quantity : item.quantity}
+                       onChange={(e) => handleChange(item.linkSuppliesId, 'quantity', e.target.value)}
                        />
                        
                     ) : (
@@ -111,14 +114,14 @@ return (
   </div>
   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
     <div>
-    {editsupplySupplyLinkId === item.supplySupplyLinkId ? (
+    {editlinkSuppliesId === item.linkSuppliesId ? (
                         <>
-                      <Button onClick={() => handleUpdateSupplies(item.supplySupplyLinkId,item.suppliesName,item.description,item.categoryName,item.subCategoryName )}>
+                      <Button onClick={() => handleUpdateSupplies(item.linkSuppliesId,item.supplySupplyLinkId,item.suppliesName,item.description,item.categoryName,item.subCategoryName)}>
                         Save
                       </Button>
                         <Button 
                         className="ml-2"
-                        onClick={() => handleCancelClick(item.supplySupplyLinkId)}>
+                        onClick={() => handleCancelClick(item.linkSuppliesId)}>
                         Cancel
                       </Button>
                       </>
@@ -126,7 +129,7 @@ return (
                     ) : (
                       <BorderColorIcon
                       className="text-[blue] flex justify-items-center justify-center text-xs cursor-pointer"
-                        onClick={() => handleEditClick(item.supplySupplyLinkId)}
+                        onClick={() => handleEditClick(item.linkSuppliesId)}
                         // style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
                       />
                     )}
