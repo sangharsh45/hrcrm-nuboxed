@@ -7,7 +7,8 @@ import { FormattedMessage } from "react-intl";
 import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip,  Menu, Dropdown, Progress } from "antd";
-import { CurrencySymbol, Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
+import { CurrencySymbol, } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
@@ -123,12 +124,15 @@ function DealCardList(props) {
                   >
                     <div 
                       class="font-semibold text-[#337df4] cursor-pointer text-sm ">
-                      <Link
+                                                               <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`dealDetails/${item.invOpportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>
+                      {/* <Link
                         toUrl={`dealDetails/${item.invOpportunityId}`}
                         title={`${item.opportunityName}`}
                       >
                         {item.opportunityName}
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>
