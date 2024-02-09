@@ -222,7 +222,7 @@ function UpdateInvestorForm (props) {
                  </div>
                  <div class=" flex justify-between">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="investorCategoryId"
                             label={
                               <FormattedMessage
@@ -236,6 +236,7 @@ function UpdateInvestorForm (props) {
                             options={
                               Array.isArray(investorType) ? investorType : []
                             }
+                            defaultValue={RowData.investorId}
                           />
                     </div>
                     </div> 

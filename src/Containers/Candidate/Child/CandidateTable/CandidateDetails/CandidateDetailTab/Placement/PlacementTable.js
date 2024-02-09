@@ -1,6 +1,5 @@
 import React, { Component} from "react";
 import { connect } from "react-redux";
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import RecruitmentStages from "../../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentStages";
 import { bindActionCreators } from "redux";
 import PlacementDetails from "./PlacementDetails"
@@ -8,7 +7,7 @@ import {  Menu,Dropdown,Button,
   Progress,Tooltip,Input } from "antd";
   import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-import moment from "moment";
+import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 import {
    getPlacement,
@@ -128,7 +127,7 @@ class PlacementTable extends Component {
     return (
       <>
    <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+   <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[10.5rem]">Job ID</div>
        <div className=" md:w-[8.1rem]">Requirement</div>
@@ -196,7 +195,7 @@ class PlacementTable extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            <span>{` ${moment(item.avilableDate).format("ll")}`}</span>
+                            <span>{` ${dayjs(item.avilableDate).format("DD/MM/YYYY")}`}</span>
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
@@ -253,7 +252,7 @@ class PlacementTable extends Component {
                               Billing
                             </div> */}
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            <span>{` ${moment(item.endDate).format("ll")}`}</span>
+                            <span>{` ${dayjs(item.endDate).format("DD/MM/YYYY")}`}</span>
                             </div>
                           </div>
                     
@@ -327,7 +326,7 @@ class PlacementTable extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
 
         {/* {true && (

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {getInvestorTimeline} from "../../../InvestorAction";
 
 const InvestorTimeline = (props) => {
@@ -14,13 +14,13 @@ const InvestorTimeline = (props) => {
   console.log(props.investorDetails.investorId)
   return (
     <>
-      <div className="mt-4">
+      <div className="mt-4 ml-2">
         <Timeline>
           {InvestorStatus &&
             InvestorStatus.map((status, i) => (
               <Timeline.Item key={i}>
               <div>
-              <div>{status.category} {status.activityType} {moment.utc(status.startDate).format('ll')}</div>
+              <div>{status.category} {status.activityType} {dayjs(status.endDate).format('DD/MM/YYYY')}</div>
          
               </div>
               <div>

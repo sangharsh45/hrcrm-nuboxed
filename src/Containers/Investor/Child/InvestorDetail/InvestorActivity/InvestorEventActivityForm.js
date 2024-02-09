@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { getAssignedToList } from "../../../../Employees/EmployeeAction";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import dayjs from "dayjs";
 import { Spacer } from "../../../../../Components/UI/Elements";
@@ -57,12 +58,13 @@ function InvestorEventActivityForm (props) {
   };
   useEffect(()=> {
    props.getEvents();
+   props.getAssignedToList(props.orgId);
    props.getAllCustomerData(userId)
   },[])
   
-    const employeesData =props.sales.map((item) => {
+    const employeesData =props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -98,10 +100,10 @@ function InvestorEventActivityForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName, fullName,empName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
       addingEvent,
@@ -478,7 +480,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -486,7 +488,7 @@ const {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -496,7 +498,7 @@ const {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -547,7 +549,7 @@ const {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -695,13 +697,15 @@ const {
       </>
     );
 }
-const mapStateToProps = ({ auth, event,customer, opportunity, events, candidate }) => ({
+const mapStateToProps = ({ auth, event,customer,employee, opportunity, events, candidate }) => ({
   addingEvent: event.addingEvent,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   sales: opportunity.sales,
+  orgId: auth.userDetails.organizationId,
+  assignedToList:employee.assignedToList,
   user: auth.userDetails,
   deletingEvent: event.deleteEvent,
   events: events.events,
@@ -714,6 +718,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       addinvestActivityEvent,
       deleteEvent,
+      getAssignedToList,
       updateEvent,
       handleChooserModal,
       handleEventModal,

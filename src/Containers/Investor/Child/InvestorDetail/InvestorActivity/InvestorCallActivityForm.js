@@ -19,6 +19,7 @@ import {
   deleteCall,
   handleCallModal,
 } from "../../../../Call/CallAction";
+import { getAssignedToList } from "../../../../Employees/EmployeeAction";
 import {addInvestActivityCall} from "../../../InvestorAction"
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
@@ -95,6 +96,7 @@ function InvestorCallActivityForm(props) {
   };
   useEffect(() => {
     props.getAllSalesList();
+    props.getAssignedToList(props.orgId);
     props.getAllCustomerData(props.userId)
     // props.getOpportunityListByCustomerId(props.customer.customerId);
     // props.getContactListByCustomerId(props.customer.customerId);
@@ -134,16 +136,16 @@ function InvestorCallActivityForm(props) {
         value: item.customerId,
       };
     });
-    const employeesData = props.sales.map((item) => {
+    const employeesData = props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
   
 
     const {
-      user: { userId, firstName, middleName, fullName, lastName, timeZone },
+      user: { userId, firstName, middleName,empName, fullName, lastName, timeZone },
       isEditing,
       prefillCall,
       addingCall,
@@ -152,6 +154,7 @@ function InvestorCallActivityForm(props) {
       addInvestActivityCall,
       startDate,
       endDate,
+      
       startTime,
       endTime,
       defaultContacts,
@@ -169,7 +172,7 @@ function InvestorCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.sales.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    console.log("bn",selectedOption,selected)
    return (
       <>
@@ -629,7 +632,7 @@ function InvestorCallActivityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -637,7 +640,7 @@ function InvestorCallActivityForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -647,7 +650,7 @@ function InvestorCallActivityForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -698,7 +701,7 @@ function InvestorCallActivityForm(props) {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -835,6 +838,7 @@ function InvestorCallActivityForm(props) {
 
 const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate }) => ({
   addingCall: call.addingCall,
+  assignedToList:employee.assignedToList,
   allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
@@ -854,6 +858,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addInvestActivityCall,
+      getAssignedToList,
       getAllCustomerData,
       handleChooserModal,
       getAllSalesList,

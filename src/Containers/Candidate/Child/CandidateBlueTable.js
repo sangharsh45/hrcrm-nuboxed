@@ -22,12 +22,11 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction";
 import { getRoles } from "../../Settings/Category/Role/RoleAction";
 import { CurrencySymbol } from "../../../Components/Common";
+import { Link } from 'react-router-dom';
 const SkillsLoadMore = lazy(() => import("./CandidateTable/SkillsLoadMore"));
 const StatusToggle = lazy(() => import("./CandidateTable/StatusToggle"));
 const UpdateCandidateModal = lazy(() => import("./UpdateCandidate/UpdateCandidateModal"));
-const CandidateDetailsView = lazy(() =>
-  import("./CandidateTable/CandidateDetails/CandidateDetailsView")
-);
+
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -225,10 +224,13 @@ function CandidateBlueTable(props) {
         console.log(date, currentdate, currentdate === date);
         return (
           <>
-            <CandidateDetailsView
+                    <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`candidate/${item.candidateId}`} title={item.candidateName}>
+      {item.fullName}
+    </Link>
+            {/* <CandidateDetailsView
               candidateId={item.candidateId}
               candidateName={fullName}
-            />
+            /> */}
             &nbsp;&nbsp;
             {date === currentdate ? (
               <span

@@ -1,15 +1,14 @@
-import React, { useEffect, useState,useMemo,lazy } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { StyledTable } from '../../../../Components/UI/Antd';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import { Link } from "../../../../Components/Common";
-import { Tooltip,Button,Input,Avatar } from "antd";
+import { Link } from 'react-router-dom';
+import { Button,Input, } from "antd";
 import SearchIcon from '@mui/icons-material/Search';
 import {getProjectsTeamListById,
   getCandidateTotalBilling} from "../../ProjectsAction"
 import Highlighter from 'react-highlight-words';
-import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { MultiAvatar } from "../../../../Components/UI/Elements";
 const ButtonGroup = Button.Group;
@@ -134,10 +133,13 @@ function ProjectsTeamTable (props)  {
           return (
             
             <>
-             <Link
+  <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`/hour/candidate/hour-details/project/${item.candidateId}/${item.projectId}`} title={item.candidateName}>
+      {item.candidateName}
+    </Link>
+             {/* <Link
                 toUrl={`/hour/candidate/hour-details/project/${item.candidateId}/${item.projectId}`}
                 title={`${item.candidateName || ""} `}
-              />
+              /> */}
              
             </>
           ); 
