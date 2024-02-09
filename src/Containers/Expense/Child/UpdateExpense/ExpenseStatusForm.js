@@ -19,12 +19,30 @@ const ExpenseStatusForm = (props) => {
           {expenseStatus &&
             expenseStatus.map((status, i) => (
               <Timeline.Item key={i}>
-                  {status.approvedStatus === 'Approved' ? (
-                  ` ${dayjs(status.createdOn).format('DD/MM/YYYY')} Approved By ${status.employeeName} on ${dayjs(status.approvedDate).format('DD/MM/YYYY')}`
-                ) : status.approvedStatus === 'Pending' ? (
-                  `Pending With ${status.employeeName}.`
-                ) : null}
-              </Timeline.Item>
+              {`${status.approvedStatus} by ${status.employeeName}`}
+              <br />
+              {status.createdOn ? (
+                `Sent on ${dayjs(status.createdOn).format("DD-MM-YYYY")}`
+              ) : (
+                "Yet to be approved"
+              )}
+               ||
+              &nbsp;&nbsp;
+              {status.approvedDate ? (
+                `Approved on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`
+              ) : (
+                "Yet to be approved"
+              )}
+              
+                          
+                          </Timeline.Item>
+              // <Timeline.Item key={i}>
+              //     {status.approvedStatus === 'Approved' ? (
+              //     ` ${dayjs(status.createdOn).format('DD/MM/YYYY')} Approved By ${status.employeeName} on ${dayjs(status.approvedDate).format('DD/MM/YYYY')}`
+              //   ) : status.approvedStatus === 'Pending' ? (
+              //     `Pending With ${status.employeeName}.`
+              //   ) : null}
+              // </Timeline.Item>
             ))}
           {/* <Timeline.Item
             dot={<ClockCircleOutlined className="timeline-clock-icon" style={{ color: 'red' }} />}

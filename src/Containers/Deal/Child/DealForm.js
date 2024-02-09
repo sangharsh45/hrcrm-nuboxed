@@ -7,6 +7,7 @@ import { FormattedMessage } from "react-intl";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import {getCurrency} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { Button, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
@@ -44,6 +45,7 @@ const OpportunitySchema = Yup.object().shape({
 });
 function DealForm(props) {
   useEffect(() => {
+    props.getCurrency();
     props.getRecruiterName();
     props.getAllEmployeelist();
     props.getSources(props.orgId);
@@ -117,21 +119,40 @@ function DealForm(props) {
     };
   });
 
+  const sortedCurrency =props.currencies.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
+
 
   const customerNameOption = props.investorData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
+    // .sort((a, b) => {
+    //   const libraryNameA = a.name && a.name.toLowerCase();
+    //   const libraryNameB = b.name && b.name.toLowerCase();
+    //   if (libraryNameA < libraryNameB) {
+    //     return -1;
+    //   }
+    //   if (libraryNameA > libraryNameB) {
+    //     return 1;
+    //   }
 
-      // names must be equal
-      return 0;
-    })
+    //   // names must be equal
+    //   return 0;
+    // })
     .map((item) => {
       return {
         label: `${item.name || ""}`,
@@ -207,7 +228,7 @@ function DealForm(props) {
           source:"",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
-        // validationSchema={OpportunitySchema}
+       validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           console.log(values);
@@ -391,7 +412,7 @@ function DealForm(props) {
                     />
                   </div>
                   <div class="  w-w47.5 max-sm:w-wk">
-                    <Field
+                  <Field
                       name="currency"
                       isColumnWithoutNoCreate
                       defaultValue={{
@@ -400,15 +421,19 @@ function DealForm(props) {
                       label={
                         <FormattedMessage
                           id="app.currency"
-                          defaultMessage="currency"
+                          defaultMessage="Currency"
                         />
                       }
                       width="100%"
                       isColumn
-                      selectType="currencyName"
-                      value={values.currencyName}
+                      // selectType="currencyName"
                       isRequired
-                      component={SearchSelect}
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
                     />
                   </div>
                 </div>
@@ -782,6 +807,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       createDeals,
+      getCurrency,
       getdealsContactdata,
       getRecruiterName,
       getAllEmployeelist,

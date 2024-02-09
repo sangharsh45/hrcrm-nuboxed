@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
+import {getCurrency} from "../../../Auth/AuthAction"
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { updateOpportunity, getAllSalesList } from "../../OpportunityAction";
@@ -41,10 +41,10 @@ function UpdateOpportunityForm (props) {
     props.getOppLinkedStages(props.orgId);
     props. getCrm();
     props.getAllEmployeelist();
-    props.getCurrencyList();
+    props.getCurrency();
   },[]);
 
-  const sortedCurrency =props.currencyList.sort((a, b) => {
+  const sortedCurrency =props.currencies.sort((a, b) => {
     const nameA = a.currency_name.toLowerCase();
     const nameB = b.currency_name.toLowerCase();
     // Compare department names
@@ -698,7 +698,7 @@ const mapStateToProps = ({ auth, opportunity,currency, customer,leads, contact,i
   crmAllData:leads.crmAllData,
   orgId: auth.userDetails.organizationId,
   allEmployeeList:investor.allEmployeeList,
-  currencyList: currency.currencyList,
+  currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -712,7 +712,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getCrm,
       getAllEmployeelist,
-      getCurrencyList
+      getCurrency
     },
     dispatch
   );

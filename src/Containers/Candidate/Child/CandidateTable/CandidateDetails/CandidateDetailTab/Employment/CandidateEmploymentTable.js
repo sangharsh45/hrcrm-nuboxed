@@ -11,10 +11,9 @@ import {
   deleteCandidateEmploymentTable,
 } from "../../../../../CandidateAction";
 import {  Tooltip } from "antd";
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import styled from "styled-components";
 import DownloadIcon from '@mui/icons-material/Download';
-import moment from "moment";
+import dayjs from "dayjs";
 import { base_url } from "../../../../../../../Config/Auth";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
 const UpdateCandidateEmploymentModal = lazy(()=>import("../Employment/UpdateCandidateEmploymentModal"));
@@ -68,7 +67,7 @@ class CandidateEmploymentTable extends Component {
         dataIndex: "startDate",
         width: "12%",
         render: (name, item, i) => {
-          return <span>{moment(item.startDate).format("LL")}</span>;
+          return <span>{dayjs(item.startDate).format("DD/MM/YYYY")}</span>;
         },
       },
       {
@@ -77,7 +76,7 @@ class CandidateEmploymentTable extends Component {
         dataIndex: "endDate",
         width: "12%",
         render: (name, item, i) => {
-          return <span>{moment(item.endDate).format("LL")}</span>;
+          return <span>{dayjs(item.endDate).format("DD/MM/YYYY")}</span>;
         },
       },
       //combine and show salary +curr+type
@@ -172,7 +171,7 @@ class CandidateEmploymentTable extends Component {
     return (
       <>
      <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+     <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[10.5rem]">Company Name</div>
        <div className=" md:w-[8.1rem]">Designation</div>
@@ -218,7 +217,7 @@ class CandidateEmploymentTable extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            {moment(item.startDate).format("LL")}
+                            {dayjs(item.startDate).format("DD/MM/YYYY")}
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -227,7 +226,7 @@ class CandidateEmploymentTable extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            {moment(item.endDate).format("LL")}
+                            {dayjs(item.endDate).format("DD/MM/YYYY")}
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -289,7 +288,7 @@ class CandidateEmploymentTable extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
 
         {/* <StyledTable

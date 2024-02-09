@@ -2,9 +2,8 @@ import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DownloadIcon from '@mui/icons-material/Download';
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import moment from "moment";
+import dayjs from "dayjs";
 import {  Tooltip } from "antd";
 import {
   getCandidateTrainingDetails,
@@ -41,7 +40,7 @@ class CandidateTrainingTable extends Component {
     return (
       <>
          <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[10.5rem]">Course Name</div>
        <div className=" md:w-[8.1rem] ">Start Date</div>
@@ -78,7 +77,7 @@ class CandidateTrainingTable extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            {moment(item.startDate).format("LL")}
+                            {dayjs(item.startDate).format("DD/MM/YYYY")}
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[15.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -87,7 +86,7 @@ class CandidateTrainingTable extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            {moment(item.endDate).format("LL")}
+                            {dayjs(item.endDate).format("DD/MM/YYYY")}
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -150,7 +149,7 @@ class CandidateTrainingTable extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
         {/* {emailCredential && ( */}
         {/* <StyledTable

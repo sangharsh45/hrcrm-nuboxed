@@ -28,6 +28,7 @@ import {
     emptyCandidate
     
   } from "../Candidate/CandidateAction";
+  import { Link } from 'react-router-dom';
  import{getCountries} from "./../Auth/AuthAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -50,7 +51,7 @@ const UpdateCandidateResumeModal = lazy(() =>
   import("./Child/CandidateTable/UpdateCandidateResumeModal")
 );
 
-const CandidateDetailsView =lazy(()=>import("../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
+
 const UpdateCandidateModal = lazy(() =>
   import("./Child/UpdateCandidate/UpdateCandidateModal")
 );
@@ -185,8 +186,11 @@ function handleSetCurrentCandidateId(candidateId) {
                       {/* <CardDescription> */}
                       <div>
                         <Header>
-                        <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
-                            href={`candidate/${item.candidateId}`}>{item.fullName}</a>
+                        <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`candidate/${item.candidateId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>
+                        {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`candidate/${item.candidateId}`}>{item.fullName}</a> */}
                         {/* <CandidateDetailsView
             candidateId={item.candidateId}
             candidateName={item.fullName}

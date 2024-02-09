@@ -6,7 +6,6 @@ import {
 } from "../../../../../../../Components/UI/Antd";
 import {  Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import {getBankDetails, handleUpdateBankModal, setEditBank, deleteBankTable } from "../../../../../CandidateAction";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
@@ -45,7 +44,7 @@ class BankTable extends Component {
     return (
       <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[10.1rem]">Account Holder</div>
         <div className=" md:w-[9.1rem]">Bank Name</div>
@@ -186,7 +185,7 @@ class BankTable extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
         {/* <StyledTable
           columns={columns}

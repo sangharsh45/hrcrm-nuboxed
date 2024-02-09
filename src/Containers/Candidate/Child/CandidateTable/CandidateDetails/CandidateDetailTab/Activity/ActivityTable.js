@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input} from "antd";
-import moment from "moment";
-import {  Tooltip } from "antd";
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
+import dayjs from "dayjs";
 import { getActivityListByCandidateId } from "../../../../../CandidateAction";
 import Highlighter from "react-highlight-words";
 import { CheckCircleOutlined, FileDoneOutlined, PhoneOutlined, ScheduleOutlined, SearchOutlined } from "@ant-design/icons";
@@ -129,7 +127,7 @@ class LinkedCandidateActivity extends Component {
     return (
       <>
            <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+           <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[10.5rem]">Type</div>
        <div className=" md:w-[8.1rem]">Topic</div>
@@ -186,7 +184,7 @@ class LinkedCandidateActivity extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            <span>{` ${moment(item.startDate).format("lll")}`}</span>
+                            <span>{` ${dayjs(item.startDate).format("DD/MM/YYYY")}`}</span>
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -195,7 +193,7 @@ class LinkedCandidateActivity extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                            <span>{` ${moment(item.endDate).format("lll")}`}</span>
+                            <span>{` ${dayjs(item.endDate).format("DD/MM/YYYY")}`}</span>
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
@@ -247,7 +245,7 @@ class LinkedCandidateActivity extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
         {/* <StyledTable
           pagination={false}
@@ -314,12 +312,12 @@ export default connect(
 //     dataIndex: "startDate",
 //     defaultSortOrder: "descend",
 //     render: (name, item, i) => {
-//       return <span>{` ${moment(item.startDate).format("lll")}`}</span>;
+//       return <span>{` ${dayjs(item.startDate).format("lll")}`}</span>;
 //     },
 //     sorter: (a, b) => {
 //       var startDateA = a.startDate;
 //       var startDateB = b.startDate;
-//       return moment.utc(startDateA).diff(moment.utc(startDateB));
+//       return dayjs.utc(startDateA).diff(dayjs.utc(startDateB));
 //     },
 //   },
 //   {
@@ -327,13 +325,13 @@ export default connect(
 //     width: "20%",
 //     dataIndex: "endDate",
 //     render: (name, item, i) => {
-//       return <span>{` ${moment(item.endDate).format("lll")}`}</span>;
+//       return <span>{` ${dayjs(item.endDate).format("lll")}`}</span>;
 //     },
 //     onFilter: (value, record) => record.endDate.indexOf(value) === 0,
 //     sorter: (a, b) => {
 //       var endDateA = a.endDate;
 //       var endDateB = b.endDate;
-//       return moment.utc(endDateA).diff(moment.utc(endDateB));
+//       return dayjs.utc(endDateA).diff(dayjs.utc(endDateB));
 //     },
 //   },
 //   {

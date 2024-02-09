@@ -6,6 +6,7 @@ import { getTasks } from "../../../../../Containers/Settings/Task/TaskAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FastField } from "formik";
 import dayjs from "dayjs";
+import { getAssignedToList } from "../../../../Employees/EmployeeAction";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Spacer } from "../../../../../Components/UI/Elements";
@@ -140,6 +141,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
   useEffect(()=> {
       props.getTaskForStages();
+      props.getAssignedToList(props.orgId);
       props.getAllCustomerData(userId)
     props.getTaskForRecruit(props.orgId);
     props.getCustomerTask(props.orgId);
@@ -199,9 +201,9 @@ const [priority,setpriority]=useState(props.selectedTask
       employeeId,
       taskTypeId,
     } = props;
-    const employeesData = props.sales.map((item) => {
+    const employeesData = props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -223,7 +225,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.sales.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
 
     return (
       <>
@@ -1087,7 +1089,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1095,7 +1097,7 @@ const [priority,setpriority]=useState(props.selectedTask
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -1105,7 +1107,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -1334,6 +1336,7 @@ const mapStateToProps = ({
   candidate,
 }) => ({
   addingTask: task.addingTask,
+  assignedToList:employee.assignedToList,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
   allCustomerData:customer.allCustomerData,
@@ -1369,7 +1372,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerTask,
       getTaskForRecruit,
       deleteTask,
-    
+      getAssignedToList,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,

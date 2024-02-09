@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
+import {getCurrency} from "../../../Auth/AuthAction"
 import {getAllEmployeelist} from "../../../Investor/InvestorAction"
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
@@ -36,6 +37,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
 function UpdateDealForm (props) {
   useEffect(()=> {
     props.getAllEmployeelist();
+    props.getCurrency();
     props.getInvestorData(props.userId);
     props.getContactData(props.userId);
     props.getDealLinkedStages(props.orgId);
@@ -81,19 +83,19 @@ function UpdateDealForm (props) {
     });
 
     const customerNameOption = props.investorData
-      .sort((a, b) => {
-        const libraryNameA = a.name && a.name.toLowerCase();
-        const libraryNameB = b.name && b.name.toLowerCase();
-        if (libraryNameA < libraryNameB) {
-          return -1;
-        }
-        if (libraryNameA > libraryNameB) {
-          return 1;
-        }
+      // .sort((a, b) => {
+      //   const libraryNameA = a.name && a.name.toLowerCase();
+      //   const libraryNameB = b.name && b.name.toLowerCase();
+      //   if (libraryNameA < libraryNameB) {
+      //     return -1;
+      //   }
+      //   if (libraryNameA > libraryNameB) {
+      //     return 1;
+      //   }
 
-        // names must be equal
-        return 0;
-      })
+      //   // names must be equal
+      //   return 0;
+      // })
       .map((item) => {
         return {
           label: `${item.name || ""}`,
@@ -120,6 +122,24 @@ function UpdateDealForm (props) {
 
       return contactOptions;
     };
+    const sortedCurrency =props.currencies.sort((a, b) => {
+      const nameA = a.currency_name.toLowerCase();
+      const nameB = b.currency_name.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const currencyNameOption = sortedCurrency.map((item) => {
+      return {
+        label: `${item.currency_name}`,
+        value: item.currency_id,
+      };
+    });
 
     const WorkflowOptions = props.dealLinkWorkflow.map((item) => {
       return {
@@ -349,24 +369,29 @@ function UpdateDealForm (props) {
                       </div>
                     </div>
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <Field
-                        name="currency"
-                        isColumnWithoutNoCreate
-                        // label="currencyName"
-                        label={
-                          <FormattedMessage
+                    <Field
+                      name="currency"
+                      isColumnWithoutNoCreate
+                      defaultValue={{
+                        value: props.user.currency,
+                      }}
+                      label={
+                        <FormattedMessage
                           id="app.currency"
-                          defaultMessage="currency"
+                          defaultMessage="Currency"
                         />
-                        }
-                        isColumn
-                        defaultValue={{
-                          value: props.user.currency,
-                        }}
-                        selectType="currencyName"
-                        isRequired
-                        component={SearchSelect}
-                      />
+                      }
+                      width="100%"
+                      isColumn
+                      // selectType="currencyName"
+                      isRequired
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
+                    />
 
                       
                     </div>
@@ -603,6 +628,7 @@ function UpdateDealForm (props) {
 
 const mapStateToProps = ({ auth,deal,investor, opportunity, customer, contact }) => ({
   user: auth.userDetails,
+  currencies: auth.currencies,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -621,6 +647,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateDeal,
+      getCurrency,
       getAllEmployeelist,
       getDealLinkedWorkflow,
       getDealLinkedStages,

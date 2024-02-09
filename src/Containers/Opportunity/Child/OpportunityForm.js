@@ -19,7 +19,7 @@ import {
   getOppLinkedStages,
 } from "../OpportunityAction";
 import { getCrm} from "../../Leads/LeadsAction";
-import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
+import {getCurrency} from "../../Auth/AuthAction"
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
@@ -50,13 +50,13 @@ function OpportunityForm(props) {
      props.getOppLinkedWorkflow(props.orgId);
      props.getCrm();
      props.getAllEmployeelist();
-     props.getCurrencyList();
+     props.getCurrency();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
 
-  const sortedCurrency =props.currencyList.sort((a, b) => {
+  const sortedCurrency =props.currencies.sort((a, b) => {
     const nameA = a.currency_name.toLowerCase();
     const nameB = b.currency_name.toLowerCase();
     // Compare department names
@@ -760,7 +760,7 @@ const mapStateToProps = ({ auth, opportunity,currency,investor, contact, custome
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName,
   allEmployeeList:investor.allEmployeeList,
-  currencyList: currency.currencyList,
+  currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -774,7 +774,7 @@ const mapDispatchToProps = (dispatch) =>
       getOppLinkedStages,
       getCrm,
       getAllEmployeelist,
-      getCurrencyList
+      getCurrency
     },
     dispatch
   );

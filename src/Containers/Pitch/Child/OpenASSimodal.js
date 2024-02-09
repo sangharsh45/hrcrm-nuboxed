@@ -22,9 +22,6 @@ console.log("data",props.rowdata.name)
         title={props.rowdata.firstName}
         width="60%"
         visible={props.openASSImodal}
-        destroyOnClose
-        closable
-        placement="right"
         onClose={() => {
           props.handleAssimodal(false);
         }}

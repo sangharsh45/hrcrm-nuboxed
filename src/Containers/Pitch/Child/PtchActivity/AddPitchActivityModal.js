@@ -28,12 +28,8 @@ const AddPitchActivityModal = (props) => {
         />}
         width={drawerWidth}
         visible={addPitchactivityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handlePitchActivityModal(false)}
-        style={{marginTop:"3rem"}}
-        footer={null}
+
       >
         <Suspense fallback={<BundleLoader />}>
           {/* <CallTaskForm

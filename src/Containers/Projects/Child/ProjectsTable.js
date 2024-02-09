@@ -6,6 +6,7 @@ import moment from "moment";
 import {
   MultiAvatar2,
 } from "../../../Components/UI/Elements";
+import { Link } from 'react-router-dom';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
@@ -24,7 +25,6 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 const UpdateProjectsModal =lazy(()=> import('./UpdateProject/UpdateProjectsModal'));
 const AddInvoiceProjectsModal =lazy(()=> import('./ProjectsDetail/AddInvoiceProjectsModal'));
-const ProjectsDetailsView =lazy(()=> import('./ProjectsDetail/ProjectsDetailsView'));
 
 
 function ProjectsTable(props) {
@@ -180,10 +180,13 @@ function ProjectsTable(props) {
                                 <div class="flex">
                                     <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
                                     <>
-             <ProjectsDetailsView
+                                    <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`projects/${item.projectId}`} title={item.projectName}>
+      {item.projectName}
+    </Link>
+             {/* <ProjectsDetailsView
                projectId={item.projectId}
                projectName={item.projectName}
-             />
+             /> */}
              &nbsp;&nbsp;
              {date === currentdate ? (
                <span

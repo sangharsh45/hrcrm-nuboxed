@@ -8,6 +8,7 @@ import {
   SearchOutlined,
   UpCircleOutlined,
 } from "@ant-design/icons";
+import { Link } from 'react-router-dom';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
@@ -54,9 +55,7 @@ const UpdateCandidateResumeModal = lazy(() =>
 const UpdateCandidateModal = lazy(() =>
   import("../UpdateCandidate/UpdateCandidateModal")
 );
-const CandidateDetailsView = lazy(() =>
-  import("./CandidateDetails/CandidateDetailsView")
-);
+
 
 function CandidateDollarTable(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -319,10 +318,13 @@ width:"1%"
         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
         return (
           <>
-            <CandidateDetailsView
+          <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`candidate/${item.candidateId}`} title={item.candidateName}>
+      {item.fullName}
+    </Link>
+            {/* <CandidateDetailsView
               candidateId={item.candidateId}
               candidateName={item.fullName}
-            />
+            /> */}
             &nbsp;&nbsp;
             {date === currentdate ? <span className="blink">New</span> : null}
           </>
