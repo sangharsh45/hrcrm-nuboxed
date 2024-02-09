@@ -76,7 +76,7 @@ const PitchCardList = (props) => {
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[7.5rem]"></div>
+        <div className=" md:w-[8.5rem]"></div>
         <div className=" md:w-[7.1rem] "><FormattedMessage
                   id="app.phoneno#"
                   defaultMessage="phone #"
@@ -89,7 +89,7 @@ const PitchCardList = (props) => {
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-        <div className="md:w-[7.1rem]"><FormattedMessage
+        <div className="md:w-[7.12rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
@@ -142,7 +142,7 @@ const PitchCardList = (props) => {
                                 // }}
                                 >
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[15rem]   max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -268,7 +268,7 @@ const PitchCardList = (props) => {
 </div>
 
                        </div>
-                       <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                   {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
