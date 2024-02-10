@@ -3,7 +3,6 @@ import React, { useEffect, useState ,lazy} from "react";
 import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
@@ -14,13 +13,14 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
     getAllPitch
 } from "../PitchAction";
-import ReactCountryFlag from 'react-country-flag';
+import dayjs from "dayjs";
 import AddchartIcon from '@mui/icons-material/Addchart';  
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BundleLoader } from "../../../Components/Placeholder";
+import CountryFlag1 from "../../Settings/Category/Country/CountryFlag1";
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
 const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
 const StatusPitchToggle =lazy(()=>import("../Child/StatusPitchToggle"));
@@ -70,8 +70,8 @@ const PitchAllCardList = (props) => {
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[6.5rem]"></div>
-        <div className=" md:w-[8.1rem] "><FormattedMessage
+        <div className=" md:w-[8.5rem]"></div>
+        <div className=" md:w-[7.1rem] "><FormattedMessage
                   id="app.phoneno#"
                   defaultMessage="phoneno#"
                 /></div>
@@ -79,7 +79,7 @@ const PitchAllCardList = (props) => {
                   id="app.country"
                   defaultMessage="country"
                 /></div>
-        <div className="md:w-[13.1rem]"><FormattedMessage
+        <div className="md:w-[17.1rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
                 /></div>
@@ -87,11 +87,11 @@ const PitchAllCardList = (props) => {
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
-        <div className="md:w-[6.2rem]"><FormattedMessage
+        <div className="md:w-[3.2rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-[4.3rem]"><FormattedMessage
+        <div className="md:w-[9.8rem]"><FormattedMessage
                   id="app.qualify"
                   defaultMessage="qualify"
                 /></div>
@@ -106,11 +106,11 @@ const PitchAllCardList = (props) => {
         height={"75vh"}
       >
    {props.allPitchData.map((item) => { 
- const currentdate = moment().format("DD/MM/YYYY");
- const date = moment(item.creationDate).format("DD/MM/YYYY");
-       
+ const currentdate = dayjs().format("DD/MM/YYYY");
+ const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+ const countryCode = item.address[0].country_alpha2_code   
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -137,7 +137,7 @@ const PitchAllCardList = (props) => {
                                 >
                                      <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-[13.5rem]   max-sm:w-full">
-                                <div className="flex max-sm:w-full"> 
+                                <div className="flex max-sm:w-full items-center"> 
 <div>
 <SubTitle>
             <MultiAvatar
@@ -262,16 +262,9 @@ const PitchAllCardList = (props) => {
 
                                   {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
                                   <div class=" text-[0.82rem] text-cardBody font-poppins">
-                                    <ReactCountryFlag
-                          countryCode={item.countryAlpha2Code}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                        />
-                        &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
+                                  <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
                                     </div>
                               </div>
                               </div>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import { MultiAvatar,MultiAvatar2, SubTitle } from "../../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
@@ -51,28 +51,28 @@ const DealsAllCardList = (props) => {
   return (
     <>
   <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-    <div className=" flex  w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+    <div className=" flex  w-[98%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[10.1rem]"><FormattedMessage
+        <div className=" md:w-[6.1rem]"><FormattedMessage
                   id="app.investor"
                   defaultMessage="investor"
                 /></div>
-        <div className=" md:w-[12.2rem] "><FormattedMessage
+        <div className=" md:w-[17.2rem] "><FormattedMessage
                   id="app.sponsor"
                   defaultMessage="sponsor"
                 /></div>
-        <div className="md:w-[12.1rem]"><FormattedMessage
+        <div className="md:w-[10.1rem]"><FormattedMessage
                   id="app.startdate"
                   defaultMessage="startdate"
                 /></div>
-        <div className="md:w-[8.5rem]"><FormattedMessage
+        <div className="md:w-[7.5rem]"><FormattedMessage
                   id="app.value"
                   defaultMessage="Value"
                 /></div>
-        <div className="md:w-[6.2rem]"><FormattedMessage
+        <div className="md:w-[4.2rem]"><FormattedMessage
                   id="app.stages"
                   defaultMessage="stages"
                 /></div> 
@@ -80,12 +80,10 @@ const DealsAllCardList = (props) => {
                   id="app.assignto"
                   defaultMessage="Assign To"
                 /></div>
-        <div className="md:w-[5.3rem]"><FormattedMessage
+        <div className="md:w-[]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-[0.8rem]"></div>
-        <div className="w-12"></div>
 
       </div>
       <InfiniteScroll
@@ -102,11 +100,11 @@ const DealsAllCardList = (props) => {
            findProbability = element.probability;
          }
        });
- const currentdate = moment().format("DD/MM/YYYY");
- const date = moment(item.creationDate).format("DD/MM/YYYY");
+ const currentdate = dayjs().format("DD/MM/YYYY");
+ const date = dayjs(item.creationDate).format("DD/MM/YYYY");
        
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -126,14 +124,14 @@ const DealsAllCardList = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-1"
+                            <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-1"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
                                 >
                                      <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
-                                <div className="flex max-sm:w-full"> 
+                                <div className="flex max-sm:w-full items-center"> 
 <div>
 <SubTitle>
             <MultiAvatar
@@ -210,7 +208,7 @@ imgHeight={"1.8em"}
 
 
 <div class=" text-sm justify-center text-cardBody font-poppins">
-{moment(item.startDate).format("ll")}
+{dayjs(item.startDate).format("DD/MM/YYYY")}
 </div>
 </div>
 

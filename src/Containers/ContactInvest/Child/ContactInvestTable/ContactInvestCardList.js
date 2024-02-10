@@ -2,7 +2,7 @@ import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -90,8 +90,8 @@ function ContactInvestCardList(props) {
       
 
       <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-          <div className=" flex  w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[15.1rem]"><FormattedMessage
+          <div className=" flex  justify-between w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[15.12rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
@@ -103,7 +103,7 @@ function ContactInvestCardList(props) {
                   id="app.designation"
                   defaultMessage="designation"
                 /></div>
-        <div className="md:w-[9.1rem]"><FormattedMessage
+        <div className="md:w-[10.3rem]"><FormattedMessage
                   id="app.department"
                   defaultMessage="department"
                 /></div>
@@ -119,7 +119,7 @@ function ContactInvestCardList(props) {
                   id="app.source"
                   defaultMessage="source"
                 /></div>
-        <div className="md:w-[4.2rem]"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
@@ -136,10 +136,10 @@ function ContactInvestCardList(props) {
        
       {filterData.map((item) => { 
         
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${item.address &&
             item.address.length &&
@@ -158,7 +158,7 @@ function ContactInvestCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-3"
+                            <div className="flex rounded-xl justify-between  mt-2 bg-white h-11 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -212,7 +212,7 @@ function ContactInvestCardList(props) {
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[7.3rem] ">
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[9.5rem] ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}

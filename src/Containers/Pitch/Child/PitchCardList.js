@@ -3,7 +3,7 @@ import React, { useEffect, useState,lazy} from "react";
 import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -28,6 +28,7 @@ import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CountryFlag1 from "../../Settings/Category/Country/CountryFlag1";
 const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
 const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
@@ -112,11 +113,11 @@ const PitchCardList = (props) => {
         height={"75vh"}
       >
    {props.pitchData.map((item) => { 
- const currentdate = moment().format("DD/MM/YYYY");
- const date = moment(item.creationDate).format("DD/MM/YYYY");
-       
+ const currentdate = dayjs().format("DD/MM/YYYY");
+ const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+ const countryCode = item.address[0].country_alpha2_code  
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -143,7 +144,7 @@ const PitchCardList = (props) => {
                                 >
                                      <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
-                                <div className="flex max-sm:w-full"> 
+                                <div className="flex max-sm:w-full items-center"> 
 <div>
 <SubTitle>
             <MultiAvatar
@@ -273,21 +274,14 @@ const PitchCardList = (props) => {
 
                                   {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
                                   <div class=" text-[0.82rem] text-cardBody font-poppins">
-                                    <ReactCountryFlag
-                          countryCode={item.countryAlpha2Code}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                        />
-                        &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
+                                  <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
                                     </div>
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 ">
-                       <div className=" flex font-medium flex-col  md:w-[11.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col  md:w-[13.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
                            <div className="text-[0.82rem] text-cardBody font-poppins">
                            {item.companyName || "Not Available"}

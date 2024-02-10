@@ -5,9 +5,8 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
-import moment from "moment";
+import dayjs from "dayjs";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select, } from "antd";
 
@@ -102,14 +101,14 @@ function InvestorAllCardList(props) {
     <>
   
   <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-        <div className=" flex  w-[91%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" flex justify-between  w-[91%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.4rem]">Name</div>
-        <div className=" md:w-[13.1rem]">Sector</div>
-        <div className=" md:w-[6.2rem] ">Country</div>
+        <div className=" md:w-[12.12rem]">Sector</div>
+        <div className=" md:w-[9.2rem] ">Country</div>
         <div className="md:w-[7.12rem]"># Deals</div>
         <div className="md:w-[8.2rem]">Pipeline Value</div>
         <div className="md:w-[7.3rem]">Assigned to</div>
-        <div className="md:w-[8.21rem]">Owner</div>
+        <div className="md:w-[9.21rem]">Owner</div>
         <div className="md:w-[6.34rem]">Source</div>
         {/* <div className="w-12">Action</div> */}
 
@@ -123,10 +122,10 @@ function InvestorAllCardList(props) {
       >
         
       {allInvestorsbyId.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -143,10 +142,8 @@ function InvestorAllCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-3"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
+                            <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-3"
+                                
                                 >
                                      <div class="flex">
                                 <div className=" flex font-medium  md:w-[12.8rem] max-sm:flex-row w-full ">
