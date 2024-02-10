@@ -12,6 +12,7 @@ import FWLogo1 from "../../../../Assets/Images/Im.jpg";
 import FWLogo2 from "../../../../Assets/Images/Hr.jpg";
 import FWLogo3 from "../../../../Assets/Images/Recruitpro.jpg";
 import FWLogo4 from "../../../../Assets/Images/elearning.jpg";
+import FWLogo5 from "../../../../Assets/Images/payment.jpg";
 const SingleModuleList = lazy(() =>
   import("./SingleModuleList")
 );
@@ -295,7 +296,7 @@ const handleCrmClick = (checked) => {
           >
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "27rem", marginTop: "0.625em" }}>
+              <MainWrapper style={{ height: "29rem", marginTop: "0.625em" }}>
               <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
@@ -333,7 +334,34 @@ const handleCrmClick = (checked) => {
                     </div>
                     </div>
                     </div>
-                  
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo5}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+              <div class=" text-sm font-semibold ">Accounting</div>
+                    <div   class="  ml-2">
+                    <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleErpClick(!erpStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
+                        <Switch
+                              onChange={() => {}}
+                        //  onChange={this.props.handleErpClick}
+                          style={{ width: "4em" }}
+                          checked={erpStatus || props.moduleList.erpInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </div>
+                    </div>
                     <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
                     <img
               className="big-logo"
