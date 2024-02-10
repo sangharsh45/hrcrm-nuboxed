@@ -2099,6 +2099,25 @@ export const distributorReducer = (state = initialState, action) => {
         updatingOrderStep1: false,
         updatingOrderStep1Error: true,
       };
+
+      case types.REMOVE_ORDER_ACC_REQUEST:
+        return { ...state, removingOrderAcc: true };
+      case types.REMOVE_ORDER_ACC_SUCCESS:
+        return {
+          ...state,
+          removingOrderAcc: false,
+          distributorOrder: state.distributorOrder.filter(
+            (item) => item.orderId !== action.payload.orderId
+          ),
+        };
+      case types.REMOVE_ORDER_ACC_FAILURE:
+        return {
+          ...state,
+          removingOrderAcc: false,
+          removingOrderAccError: true,
+        };  
+
+
     default:
       return state;
   }

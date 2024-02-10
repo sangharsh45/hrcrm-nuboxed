@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip, Button, } from "antd";
 import { getAllShipper } from "../../../../Shipper/ShipperAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
   getDispatchList,
@@ -30,7 +30,7 @@ function DispatchTable(props) {
 
 
   function handleDatePickerCahnge(date, dateString) {
-    setdispatchDate(moment(dateString).format("YYYY-MM-DD"))
+    setdispatchDate(dayjs(dateString).format("DD/MM/YYYY"));
   }
 
   const [rowData, setRowData] = useState({})
@@ -59,57 +59,52 @@ function DispatchTable(props) {
           </div>
 
           {props.allDispatchList.map((item) => {
-            const currentdate = moment().format("DD/MM/YYYY");
-            const date = moment(item.createAt).format("DD/MM/YYYY");
+            const currentdate = dayjs().format("DD/MM/YYYY");
+            const date = dayjs(item.createAt).format("DD/MM/YYYY");
             return (
               <div>
                 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
                   <div class="flex">
 
                     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-                        <span
+                      <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                        <div
                           onClick={() => {
                             handleRowData(item);
                             props.handlePickupDateModal(true);
                           }}
-                        >{item.newOrderNo}</span>&nbsp;&nbsp;
+                        >{item.newOrderNo}</div>&nbsp;&nbsp;
                         {date === currentdate ? (
-                          <span class="text-xs"
-                            style={{
-                              color: "tomato",
-                              fontWeight: "bold",
-                            }}
-                          >
+                          <div class="text-xs font-bold text-[tomato]">
                             New
-                          </span>
+                          </div>
                         ) : null}
-                      </h4>
+                      </div>
                     </div>
 
 
                   </div>
 
                   <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
 
                       {item.distributorName}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.contactPersonName}
-                    </h4>
+                    </div>
                   </div>
 
 
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.dispatchPhoneCount}/{item.phoneReceiveCount}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.dispatchInspectionInd === 0 ?
                         <Button
                           onClick={() => props.updateDispatchInspectionButton({ dispatchInspectionInd: 1 }, item.orderPhoneId, props.locationDetailsId)}
@@ -128,24 +123,24 @@ function DispatchTable(props) {
                               Pause
                             </Button> :
                             null}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.dispatchInspectionInd === 0 || item.dispatchInspectionInd === 1 ?
                         null : <DispatchPackedToggle
                           locationDetailsId={props.locationDetailsId}
                           item={item}
                         />}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.unloadingAddresses && item.unloadingAddresses[0].city || ""}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {/* {item.dispatchInspectionInd === 4 && !item.newAwbNo ? */}
 
                       <Button type="primary"
@@ -155,36 +150,36 @@ function DispatchTable(props) {
                         }}>Create AWB</Button>
                       {/* : item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
                       } */}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.shipperName === "null" ? "" : item.shipperName}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-                      {item.pickUp === "null" ? "" : moment(item.pickUp).format("DD-MM-YYYY")}
-                    </h4>
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.pickUp === "null" ? "" : dayjs(item.pickUp).format("DD-MM-YYYY")}
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.newAwbNo === "null" ? "" : item.newAwbNo}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.status === "null" ? "" : item.status}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.dispatchInspectionInd === 4 && item.newAwbNo &&
                         <DispatchValidationToggle
                           locationDetailsId={props.locationDetailsId}
                           item={item}
                         />}
-                    </h4>
+                    </div>
                   </div>
                   <div class="flex md:items-center">
 
@@ -205,9 +200,9 @@ function DispatchTable(props) {
 
                     {/* <div>
                    <Tooltip title={item.salesExecutiveEmail}>
-               <span>
+               <div>
                  <i class="far fa-envelope"></i>
-               </span>
+               </div>
              </Tooltip>
                         </div> */}
                   </div>
@@ -293,7 +288,7 @@ export default withRouter(
 //               // style={{ height: "19px" }}
 //               size="small"
 //             >
-//               <span
+//               <div
 //                 onClick={() => handleDispatch(item.dispatchId)}
 //                 style={{
 //                   cursor: "pointer",
@@ -305,16 +300,16 @@ export default withRouter(
 //                 {`${item.dispatchId} `} &nbsp;
 
 //                 {date === currentdate ? (
-//                   <span
+//                   <div
 //                     style={{
 //                       color: "tomato",
 //                       fontWeight: "bold",
 //                     }}
 //                   >
 //                     New
-//                   </span>
+//                   </div>
 //                 ) : null}
-//               </span>
+//               </div>
 //             </Badge>
 //           </>
 //         ),
@@ -370,14 +365,14 @@ export default withRouter(
 //           }}
 //         />
 //       ) : (
-//         <span
+//         <div
 //           onClick={() => {
 //             props.handlePickupDateModal(true);
 //             props.setEditInventory(item);
 //           }}
 //         >
 //           <i class="far fa-calendar-alt" />
-//         </span>
+//         </div>
 //       );
 //     },
 //   },
@@ -424,7 +419,7 @@ export default withRouter(
 //                 : null,
 //           },
 //         },
-//         children: <span>{item.billToLocationName}</span>,
+//         children: <div>{item.billToLocationName}</div>,
 //       };
 //     },
 //   },
@@ -443,7 +438,7 @@ export default withRouter(
 //                 : null,
 //           },
 //         },
-//         children: <span>{item.pickedByName}</span>,
+//         children: <div>{item.pickedByName}</div>,
 //       };
 //     },
 //   },
@@ -464,9 +459,9 @@ export default withRouter(
 //         children: (
 //           <>
 //             {item.receivedDate === null ? "" :
-//               <span>
+//               <div>
 //                 {moment(item.receivedDate).format("DD/MM/YY")} &nbsp;&nbsp;
-//               </span>
+//               </div>
 //             }
 //           </>
 //         ),
@@ -503,7 +498,7 @@ export default withRouter(
 //                 : null,
 //           },
 //         },
-//         children: <span>{item.deliveryStatus}</span>,
+//         children: <div>{item.deliveryStatus}</div>,
 //       };
 //     },
 //   },
@@ -522,7 +517,7 @@ export default withRouter(
 //                 : null,
 //           },
 //         },
-//         children: <span>{item.receivedByName}</span>,
+//         children: <div>{item.receivedByName}</div>,
 //       };
 //     },
 //   },
@@ -534,7 +529,7 @@ export default withRouter(
 //       //debugger
 //       return item.pickUpInd === false ? (
 //         <Tooltip title="Update Dispatch ID">
-//           <span
+//           <div
 //             style={{
 //               cursor: "pointer",
 //               fontSize: "12px",
@@ -547,7 +542,7 @@ export default withRouter(
 //             }}
 //           >
 //             <i class="far fa-share-square"></i>
-//           </span>
+//           </div>
 //         </Tooltip>
 //       ) : null;
 //     },
@@ -560,7 +555,7 @@ export default withRouter(
 //       //debugger
 //       return (
 //         <Tooltip title="Shipper">
-//           <span
+//           <div
 //             style={{ cursor: "pointer", fontSize: "12px" }}
 //             onClick={() => {
 //               handleShipper(item.dispatchId);
@@ -568,7 +563,7 @@ export default withRouter(
 //             }}
 //           >
 //             <i class="fas fa-shopping-basket"></i>
-//           </span>
+//           </div>
 //         </Tooltip>
 //       );
 //     },
@@ -755,23 +750,23 @@ export default withRouter(
 //         const date = moment(item.createAt).format("DD/MM/YYYY");
 //         return (
 //           <>
-//             <span
+//             <div
 //               style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
 //               onClick={() => {
 //                 handleRowData(item);
 //                 props.handlePickupDateModal(true);
 //               }}
-//             >{item.newOrderNo}</span>
+//             >{item.newOrderNo}</div>
 //             &nbsp;&nbsp;
 //             {date === currentdate ? (
-//               <span
+//               <div
 //                 style={{
 //                   color: "tomato",
 //                   fontWeight: "bold",
 //                 }}
 //               >
 //                 New
-//               </span>
+//               </div>
 //             ) : null}
 //           </>
 //         );
@@ -922,7 +917,7 @@ export default withRouter(
 //     //   render: (_, record) => {
 //     //     const editable = isEditing(record);
 //     //     return editable ? (
-//     //       <span>
+//     //       <div>
 //     //         <Typography.Link
 //     //           onClick={() =>
 //     //             save(record.orderPhoneId)
@@ -936,7 +931,7 @@ export default withRouter(
 //     //         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
 //     //           <a>Cancel</a>
 //     //         </Popconfirm>
-//     //       </span>
+//     //       </div>
 //     //     ) :
 //     //       record.dispatchInspectionInd === 4 ?
 //     //         <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
@@ -1104,7 +1099,7 @@ export default withRouter(
 // //               // style={{ height: "19px" }}
 // //               size="small"
 // //             >
-// //               <span
+// //               <div
 // //                 onClick={() => handleDispatch(item.dispatchId)}
 // //                 style={{
 // //                   cursor: "pointer",
@@ -1116,16 +1111,16 @@ export default withRouter(
 // //                 {`${item.dispatchId} `} &nbsp;
 
 // //                 {date === currentdate ? (
-// //                   <span
+// //                   <div
 // //                     style={{
 // //                       color: "tomato",
 // //                       fontWeight: "bold",
 // //                     }}
 // //                   >
 // //                     New
-// //                   </span>
+// //                   </div>
 // //                 ) : null}
-// //               </span>
+// //               </div>
 // //             </Badge>
 // //           </>
 // //         ),
@@ -1181,14 +1176,14 @@ export default withRouter(
 // //           }}
 // //         />
 // //       ) : (
-// //         <span
+// //         <div
 // //           onClick={() => {
 // //             props.handlePickupDateModal(true);
 // //             props.setEditInventory(item);
 // //           }}
 // //         >
 // //           <i class="far fa-calendar-alt" />
-// //         </span>
+// //         </div>
 // //       );
 // //     },
 // //   },
@@ -1235,7 +1230,7 @@ export default withRouter(
 // //                 : null,
 // //           },
 // //         },
-// //         children: <span>{item.billToLocationName}</span>,
+// //         children: <div>{item.billToLocationName}</div>,
 // //       };
 // //     },
 // //   },
@@ -1254,7 +1249,7 @@ export default withRouter(
 // //                 : null,
 // //           },
 // //         },
-// //         children: <span>{item.pickedByName}</span>,
+// //         children: <div>{item.pickedByName}</div>,
 // //       };
 // //     },
 // //   },
@@ -1275,9 +1270,9 @@ export default withRouter(
 // //         children: (
 // //           <>
 // //             {item.receivedDate === null ? "" :
-// //               <span>
+// //               <div>
 // //                 {moment(item.receivedDate).format("DD/MM/YY")} &nbsp;&nbsp;
-// //               </span>
+// //               </div>
 // //             }
 // //           </>
 // //         ),
@@ -1314,7 +1309,7 @@ export default withRouter(
 // //                 : null,
 // //           },
 // //         },
-// //         children: <span>{item.deliveryStatus}</span>,
+// //         children: <div>{item.deliveryStatus}</div>,
 // //       };
 // //     },
 // //   },
@@ -1333,7 +1328,7 @@ export default withRouter(
 // //                 : null,
 // //           },
 // //         },
-// //         children: <span>{item.receivedByName}</span>,
+// //         children: <div>{item.receivedByName}</div>,
 // //       };
 // //     },
 // //   },
@@ -1345,7 +1340,7 @@ export default withRouter(
 // //       //debugger
 // //       return item.pickUpInd === false ? (
 // //         <Tooltip title="Update Dispatch ID">
-// //           <span
+// //           <div
 // //             style={{
 // //               cursor: "pointer",
 // //               fontSize: "12px",
@@ -1358,7 +1353,7 @@ export default withRouter(
 // //             }}
 // //           >
 // //             <i class="far fa-share-square"></i>
-// //           </span>
+// //           </div>
 // //         </Tooltip>
 // //       ) : null;
 // //     },
@@ -1371,7 +1366,7 @@ export default withRouter(
 // //       //debugger
 // //       return (
 // //         <Tooltip title="Shipper">
-// //           <span
+// //           <div
 // //             style={{ cursor: "pointer", fontSize: "12px" }}
 // //             onClick={() => {
 // //               handleShipper(item.dispatchId);
@@ -1379,7 +1374,7 @@ export default withRouter(
 // //             }}
 // //           >
 // //             <i class="fas fa-shopping-basket"></i>
-// //           </span>
+// //           </div>
 // //         </Tooltip>
 // //       );
 // //     },

@@ -1,5 +1,5 @@
-import { Button, Popconfirm, Switch, DatePicker, Space, Typography, Input, Form, message } from "antd";
-import moment from "moment";
+import { Popconfirm, DatePicker, Typography, Input, Form, message } from "antd";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -24,7 +24,7 @@ function OrderPaymentTable(props) {
     const isEditing = (record) => record.paymentId === editingKey;
 
     function handleDatePickerCahnge(date, dateString) {
-        setdeliveryDate(moment(dateString).format("YYYY-MM-DD"))
+        setdeliveryDate(dayjs(dateString).format('YYYY-MM-DD'))
     }
     const EditableCell = ({
         editing,
@@ -43,13 +43,13 @@ function OrderPaymentTable(props) {
                 {editing && inputType !== "picker" ? (
                     <Form.Item
                         name={dataIndex}
-                        style={{
-                            margin: 0,
-                        }}
+                        // style={{
+                        //     margin: 0,
+                        // }}
                         rules={[
                             {
                                 required: true,
-                                message: `Please Input ${title}!`,
+                                message: `Input required ${title}!`,
                             },
                         ]}
                     >
@@ -86,7 +86,7 @@ function OrderPaymentTable(props) {
                 console.log(item)
                 newData.splice(index, 1, { ...item, deliveryDate, ...row });
                 const a = newData[index];
-                let newEndDate = moment(a.date).format("YYYY-MM-DD");
+                let newEndDate =dayjs(a.date).format('YYYY-MM-DD');
 
                 props.updateOrderPayment(
                     {
@@ -140,7 +140,7 @@ function OrderPaymentTable(props) {
             dataIndex: "date",
             render: (name, item, i) => {
                 return (
-                    <>{moment(item.date).format("DD-MM-YY")}</>
+                    <>{dayjs(item.date).format("DD-MM-YY")}</>
                 );
             }
         },
@@ -172,7 +172,7 @@ function OrderPaymentTable(props) {
             width:"18%",
             render: (text, item) => {
                 const approvedname = item.approveByName;
-                const approvedDate = moment(item.approveDate).format("ll");
+                const approvedDate =dayjs(item.approveDate).format('YYYY-MM-DD');
                 return (
                   <>
                      {item.approveByFinanceInd===true ?(
@@ -221,7 +221,7 @@ function OrderPaymentTable(props) {
                
                     <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
                      {record.approveByFinanceInd===false && (
-                        <BorderColorOutlined style={{fontSize:"0.9rem"}} />
+                        <BorderColorOutlined  className="text-base"/>
                      )}
                     </Typography.Link>
                 
@@ -272,7 +272,7 @@ function OrderPaymentTable(props) {
 }
 
 
-const mapStateToProps = ({ distributor, auth }) => ({
+const mapStateToProps = ({ distributor, }) => ({
     paymentHistory: distributor.paymentHistory,
     fetchingPaymentHistory: distributor.fetchingPaymentHistory
 });

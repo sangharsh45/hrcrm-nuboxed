@@ -1,3 +1,237 @@
+// import React, { useState, useEffect,lazy ,Suspense} from "react";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import { StyledTable } from "../../../../../Components/UI/Antd";
+// import { getPhonelistById, handlePhoneNotesOrderModal, updateQCStatus } from "../../AccountAction";
+// import * as Yup from "yup";
+// import { Button, Tooltip } from "antd";
+// import { SubTitle } from "../../../../../Components/UI/Elements";
+// import ButtonGroup from "antd/lib/button/button-group";
+// import NoteAltIcon from '@mui/icons-material/NoteAlt';
+// import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+// import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
+// import { BundleLoader } from "../../../../../Components/Placeholder";
+// const PhoneNotesOrderModal =lazy(()=>import("./PhoneNotesOrderModal"));
+// const AccountPhoneTaskTable =lazy(()=>import("./AccountPhoneTaskTable"));
+// const AddingSpareList =lazy(()=>import("./AddingSpareList"));
+// const QRCodeModal =lazy(()=>import("../../../../../Components/UI/Elements/QRCodeModal"));
+
+// function DistributorPauseForm(props) {
+//     useEffect(() => {
+//         props.getPhonelistById(props.particularRowData.orderId)
+//     }, [])
+
+//     const [RowData, setRowData] = useState({});
+//     function handleSetRowData(item) {
+//         setRowData(item);
+//     }
+//     const [expand, setExpand] = useState(false);
+//     const [spares, setspares] = useState(false);
+//     const [phoneId, setphoneId] = useState("");
+
+//     function handleExpand(phoneId) {
+//         setExpand(!expand);
+//         setspares(false)
+//         setphoneId(phoneId);
+//     }
+//     function hanldeSpare(phoneId) {
+//         setspares(!spares);
+//         setExpand(false)
+//         setphoneId(phoneId);
+//     }
+
+//     function StatusIcon({ type, size, indStatus, iconType, tooltip, status, id, onClick, phoneId }) {
+//         const start = type;
+//         console.log(start);
+//         //////debugger;
+//         if (status === type) {
+//             size = "30px";
+//         } else {
+//             size = "16px";
+//         }
+//         return (
+//             <Tooltip title={tooltip}>
+//                 <Button
+//                     ghost={status !== type}
+//                     style={{
+//                         padding: "6px",
+//                         borderColor: "transparent",
+//                         color: indStatus === type ? "orange" : "grey",
+//                     }}
+//                     onClick={onClick}
+//                 >
+//                     <i className={`fas ${iconType}`} style={{ fontSize: "1rem" }}></i>
+//                 </Button>
+//             </Tooltip>
+//         );
+//     }
+ 
+//     if(props.fetchingNoofTecnician){
+//         return <BundleLoader/>
+//         }
+//     return (
+//         <>
+//             <div className=' flex justify-end sticky  z-auto'>
+//             <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+//                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
+//                         <div className="w-8"></div>
+//                         <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.OEM"
+//                         defaultMessage="OEM"
+//                      /></div>
+//                                 <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.model"
+//                         defaultMessage="Model"
+//                      /></div>
+//                         <div className="md:w-[8.12rem]"><FormattedMessage
+//                         id="app.IMEI"
+//                         defaultMessage="IMEI"
+//                       /></div>
+//                        <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.os"
+//                         defaultMessage="OS"
+//                      /></div>
+//                        <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.gb"
+//                         defaultMessage="GB"
+//                      /></div>
+//                      <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.color"
+//                         defaultMessage="Color"
+//                      /></div>
+//                        <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.condition"
+//                         defaultMessage="Condition"
+//                      /></div>
+//                       <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.expectedprice"
+//                         defaultMessage="Expected Price"
+//                      /></div>
+//                        <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.totalhours"
+//                         defaultMessage="Total Hours"
+//                      /></div>
+//                       <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.totalcost"
+//                         defaultMessage="Total Cost"
+//                      /></div>
+//                      <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.finalprice"
+//                         defaultMessage="Final Price"
+//                      /></div>
+//                          <div className=" md:w-[8.1rem]"><FormattedMessage
+//                         id="app.qc"
+//                         defaultMessage="QC"
+//                      /></div>
+//                         <div className=" md:w-[8.1rem]"></div>
+//                     </div>
+//                     {props.technicianByID.map((item) => {
+//                         return (
+//                             <div>
+//                                 <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 " >
+//                                     <div class="flex">
+//                                         <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full  ">
+//                                         <span
+//                              onClick={() => handleRowdata(item)}
+//                              style={{
+//                                  textDecoration: "underline",
+//                                  color: show && item.technicianId === row.technicianId ? "rgb(225 158 14)" : "#0f6ace",
+//                                 cursor: "pointer"
+//                             }}
+//                          >
+//                             {item.technicianName}
+//                          </span>
+//                                         </div>
+
+//                                         <div className=" flex font-medium   md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+//                                             <div class=" text-xs text-cardBody font-poppins">
+                                               
+//                                             </div>
+
+//                                         </div>
+//                                         <div className=" flex font-medium   md:w-[8.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+//                                             <div class=" text-xs text-cardBody font-poppins">
+//                                                 {item.totalPhone}
+//                                             </div>
+
+//                                         </div>
+
+//                                         <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+//                    <div>
+//                    <Tooltip title={<FormattedMessage
+//                                                     id="app.rating"
+//                                                     defaultMessage="Rating"
+//                                                 />}>
+//                                                     <StarBorderIcon
+                                                    
+//                                                         className="!text-base cursor-pointer" />
+//                                                 </Tooltip>
+
+//                         </div>
+//                         <div>
+//                         <Tooltip title={<FormattedMessage
+//                                                     id="app.Notes"
+//                                                     defaultMessage="Notes"
+//                                                 />}>
+//                                                     <NoteAltIcon
+//                                                      className="!text-base cursor-pointer"
+//                                                          />
+//                                                 </Tooltip>
+
+//                         </div>
+//             </div>      
+//             <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+//                    <div>
+//                    <Tooltip title={<FormattedMessage
+//                                                     id="app.delete"
+//                                                     defaultMessage="Detele"
+//                                                 />}>
+//                                                     <DeleteIcon
+//                                                     className="!text-base cursor-pointer text-[red]"
+//                                                     onClick={()=>{props.removeOrderAcc(item.orderId)}}
+//                                                         />
+//                                                 </Tooltip>
+
+//                         </div>   
+//             </div>            
+//                                     </div>
+
+//                                 </div>
+//                             </div>
+//                         )
+//                     })}
+//                 </div>
+                
+//             </div>
+//             {show && <QCPhoneListByTechnician row={row} orderPhoneId={props.rowData.orderPhoneId} />}
+//         </>
+//     )
+// }
+
+
+// const mapStateToProps = ({ auth, refurbish }) => ({
+//     technicianByID: refurbish.technicianByID,
+//     fetchingNoofTecnician: refurbish.fetchingNoofTecnician
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//     bindActionCreators(
+//         {
+//             getPhonelistById
+//         },
+//         dispatch
+//     );
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(DistributorPauseForm);
+
+
+
+
+
+
 import React, { useState, useEffect,lazy ,Suspense} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

@@ -2781,3 +2781,29 @@ export const updateOrderPayment = (data, paymentId) => (
       });
     });
 };
+
+export const removeOrderAcc = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.REMOVE_ORDER_ACC_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/order/delete/${orderId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.REMOVE_ORDER_ACC_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.REMOVE_ORDER_ACC_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
