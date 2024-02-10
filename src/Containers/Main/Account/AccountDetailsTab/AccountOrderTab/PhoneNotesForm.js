@@ -21,7 +21,7 @@ class PhoneNotesForm extends Component {
                 <div style={{ backgroundColor: "#dcdcdc", height: "275px" }}>
                     <NoteForm
                         type={"distributor"}
-                        orderId={this.props.particularRowData.orderId}
+                        orderId={this.props.RowData.orderId}
                     // callback={() =>
                     //     this.props.getNotesInOrder(this.props.particularRowData.orderId)
                     // }

@@ -19,7 +19,7 @@ const PhoneNotesOrderModal = (props) => {
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <PhoneNotesForm RowData={props.RowData} />
+                    <PhoneNotesForm RowData={RowData} />
                 </Suspense>
             </StyledDrawer>
         </>
