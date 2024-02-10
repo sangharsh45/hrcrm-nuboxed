@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getProductRepurbish } from "../../../InventoryAction";
-import { OnlyWrapCard } from '../../../../../../Components/UI/Layout';
 import { FormattedMessage } from "react-intl";
 
 const CatalogueInventoryTable = (props) => {
@@ -21,7 +20,7 @@ const CatalogueInventoryTable = (props) => {
     return (
         <>
               <div className=' flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+              <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className="md:w-[5.2rem]"> <FormattedMessage id="app.name" defaultMessage="Name" /></div>
@@ -41,47 +40,47 @@ const CatalogueInventoryTable = (props) => {
        <div class="flex">
    
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+    <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
     {item.name}
-                            </h4>
+                            </div>
     </div>
  
  
     </div>
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                       
                       {item.categoryName}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                       
                       {item.subCategoryName}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.attributeName} 
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
      {item.subAttributeName}
-                    </h4>
+                    </div>
     </div>
 
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.unit}
-             </h4>
+             </div>
     </div>
 </div>
 </div>
           );
         })}
   
-              </OnlyWrapCard>
+              </div>
               </div>
    
         </>

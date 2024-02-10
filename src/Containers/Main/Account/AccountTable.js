@@ -93,7 +93,7 @@ function AccountTable(props) {
             dataLength={props.allDistributors.length}
             next={handleLoadMore}
             hasMore={hasMore}
-            loader={props.fetchingAllDistributors ? <h4 style={{ textAlign: 'center' }}>Loading...</h4> : null}
+            loader={props.fetchingAllDistributors ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
             height={"75vh"}
           >
 
@@ -125,10 +125,10 @@ function AccountTable(props) {
 
                         <Tooltip>
                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
                               <Link
                                 toUrl={`distributor/${item.distributorId}`}
@@ -145,7 +145,7 @@ function AccountTable(props) {
                                 </span>
                               ) : null}
 
-                            </h4>
+                            </div>
                           </div>
                         </Tooltip>
 
@@ -153,17 +153,17 @@ function AccountTable(props) {
 
                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.dialCode} {item.phoneNo}
-                        </h4>
+                        </div>
 
                       </div>
 
                     </div>
 
                     <div className=" flex font-medium flex-col md:w-[8.55rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.url}
@@ -171,7 +171,7 @@ function AccountTable(props) {
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-[7.24rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.clientName}
@@ -180,7 +180,7 @@ function AccountTable(props) {
                     </div>
 
                     <div className=" flex font-medium flex-col md:w-[10.23rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.payment}
@@ -192,27 +192,27 @@ function AccountTable(props) {
 
                       <div className=" flex font-medium flex-col  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.countryValue}
-                        </h4>
+                        </div>
 
                       </div>
                       <div className=" flex font-medium flex-col  md:w-[15.25rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {dataLoc}
-                        </h4>
+                        </div>
 
                       </div>
 
                       <div className=" flex font-medium flex-col  md:w-[6.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.address && item.address.length && item.address[0].postalCode}
-                        </h4>
+                        </div>
 
                       </div>
                     </div>
@@ -221,8 +221,8 @@ function AccountTable(props) {
 
 
 
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                      <div class=" text-xs text-cardBody font-poppins">
                         <Tooltip title="Edit">
                           <BorderColorIcon
                              className=" !text-base cursor-pointer text-[gray]"
@@ -234,7 +234,7 @@ function AccountTable(props) {
                           />
 
                         </Tooltip>
-                      </h4>
+                      </div>
 
 
                     </div>

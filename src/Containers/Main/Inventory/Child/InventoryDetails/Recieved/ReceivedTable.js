@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip, Button, } from "antd";
@@ -12,13 +12,13 @@ import {
   updateInspection,
   handleInventoryReceivedNoteOrderModal
 } from "../../../InventoryAction";
-import moment from "moment";
-import DeliveryDateModal from "./DeliveryDateModal";
+import dayjs from "dayjs";
 import { withRouter } from "react-router";
-import OpenReceivedOrderIdModal from "./OpenReceivedOrderIdModal";
-import { OnlyWrapCard } from '../../../../../../Components/UI/Layout';
 import { FormattedMessage } from "react-intl";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
+
+const DeliveryDateModal =lazy(()=>import("./DeliveryDateModal")); 
+const OpenReceivedOrderIdModal =lazy(()=>import("./OpenReceivedOrderIdModal"));
 
 const ReceivedTable = (props) => {
 
@@ -41,7 +41,7 @@ const ReceivedTable = (props) => {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=""></div>
             <div className=" md:w-[12.5rem]"><FormattedMessage id="app.order" defaultMessage="Order #" /></div>
@@ -56,52 +56,47 @@ const ReceivedTable = (props) => {
           </div>
 
           {props.allReceivedUser.map((item) => {
-            const currentdate = moment().format("DD/MM/YYYY");
-            const date = moment(item.createAt).format("DD/MM/YYYY");
+            const currentdate = dayjs().format("DD/MM/YYYY");
+            const date = dayjs(item.createAt).format("DD/MM/YYYY");
             return (
               <div>
                 <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
                   <div class="flex">
 
                     <div className=" flex font-medium flex-col md:w-[12.1rem] max-sm:w-full  ">
-                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
-                        <span
+                      <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
+                        <div
                           onClick={() => {
                             handleRowData(item);
                             props.handleReceivedOrderIdModal(true);
                           }}
-                        >{item.newOrderNo}</span>&nbsp;&nbsp;
+                        >{item.newOrderNo}</div>&nbsp;&nbsp;
                         {date === currentdate ? (
-                          <span class="text-xs"
-                            style={{
-                              color: "tomato",
-                              fontWeight: "bold",
-                            }}
-                          >
+                          <div class="text-xs font-bold text-[tomato]">
                             New
-                          </span>
+                          </div>
                         ) : null}
-                      </h4>
+                      </div>
                     </div>
 
                     <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                         {item.awbNo}
-                      </h4>
+                      </div>
 
                     </div>
 
                   </div>
 
                   <div className=" flex font-medium flex-col md:w-[12.51rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
 
                       {item.distributorName}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[5.22rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                     
                       <MultiAvatar
             primaryTitle={item.contactPersonName}
@@ -109,11 +104,11 @@ const ReceivedTable = (props) => {
             imgWidth={"1.8rem"}
             imgHeight={"1.8rem"}
           />
-                    </h4>
+                    </div>
                   </div>
 
                   <div className=" flex font-medium flex-col md:w-[4.21rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       
                       <MultiAvatar
             primaryTitle={item.startInspectionUserName}
@@ -121,37 +116,38 @@ const ReceivedTable = (props) => {
             imgWidth={"1.8rem"}
             imgHeight={"1.8rem"}
           />
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[4.22rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.phoneReceiveCount}/{item.phoneCount}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[7.24rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {` ${item.dialCode1 || ""} ${item.mobileNo || ""} `}
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[10.24rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
                   </div>
                   <div className=" flex font-medium flex-col md:w-[8.23rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.inspectionInd === 0 ?
                         <Button
-                        className="w-28"
+                        type="primary"
+                        className="w-28 text-base"
                           onClick={() => props.updateInspection({
                             inspectionInd: 1,
                             startInspectionUser: props.userId,
-                            startInspectionDate: moment()
+                            startInspectionDate: dayjs()
                           }, item.orderPhoneId, props.locationDetailsId)}
-                          style={{ backgroundColor: "#33ad33", color: "white", fontWeight: "500" }}>
+                         >
                           Start Inspection
                         </Button>
                         : item.inspectionInd === 2 ?
                           <Button
-                            style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white", fontWeight: "500" }}
+                          className="cursor-pointer text-base"
                             onClick={() => {
                               handleRowData(item)
                               props.handleDeliveryDateModal(true);
@@ -161,13 +157,12 @@ const ReceivedTable = (props) => {
                           </Button> :
                           item.inspectionInd === 1 ?
                             <Button
-                            className="w-28"
-                              style={{ fontWeight: "500", color: "white" }}
-                              onClick={handlePauseResume}
-                              type="primary">
+                            className="w-28 text-base"
+                            type="primary"
+                              onClick={handlePauseResume}>
                               {pause ? "Resume Inspection" : "Pause Inspection"}
                             </Button> : <b>Store locator</b>}
-                    </h4>
+                    </div>
                   </div>
                   <div class="flex md:items-center">
 
@@ -176,7 +171,7 @@ const ReceivedTable = (props) => {
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
-                          style={{ cursor: "pointer", fontSize: "1rem" }}
+                        className="!text-base cursor-pointer"
                           onClick={() => {
                             handleRowData(item);
                             props.handleInventoryReceivedNoteOrderModal(true);
@@ -188,9 +183,9 @@ const ReceivedTable = (props) => {
 
                     {/* <div>
                    <Tooltip title={item.salesExecutiveEmail}>
-               <span>
+               <div>
                  <i class="far fa-envelope"></i>
-               </span>
+               </div>
              </Tooltip>
                         </div> */}
                   </div>
@@ -200,7 +195,7 @@ const ReceivedTable = (props) => {
             );
           })}
 
-        </OnlyWrapCard>
+        </div>
       </div>
 
       <DeliveryDateModal
@@ -310,23 +305,23 @@ export default withRouter(
 //         const date = moment(item.createAt).format("DD/MM/YYYY");
 //         return (
 //           <>
-//             <span
+//             <div
 //               style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
 //               onClick={() => {
 //                 handleRowData(item);
 //                 props.handleReceivedOrderIdModal(true);
 //               }}
-//             >{item.newOrderNo}</span>
+//             >{item.newOrderNo}</div>
 //             &nbsp;&nbsp;
 //             {date === currentdate ? (
-//               <span
+//               <div
 //                 style={{
 //                   color: "tomato",
 //                   fontWeight: "bold",
 //                 }}
 //               >
 //                 New
-//               </span>
+//               </div>
 //             ) : null}
 //           </>
 //         );

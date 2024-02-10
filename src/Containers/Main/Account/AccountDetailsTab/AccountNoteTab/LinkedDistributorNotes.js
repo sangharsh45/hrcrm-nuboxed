@@ -18,7 +18,7 @@ class LinkedDistributorNotes extends Component {
 
         return (
             <>
-                <div style={{ backgroundColor: "#dcdcdc", height: "275px" }}>
+                <div className="bg-[#dcdcdc] h-[275px]">
                     <NoteForm
                         type={"distributor"}
                         distributorId={this.props.distributorDistributorId}
@@ -30,7 +30,7 @@ class LinkedDistributorNotes extends Component {
                 <br />
 
                 <BorderBox>
-                    <div style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
+                    <div className="h-200 overflow-auto p-2">
                         {fetchingNotesListByDistributorId ? (
                             <BundleLoader />
                         ) : (
@@ -39,7 +39,7 @@ class LinkedDistributorNotes extends Component {
                                     notesListByDistributorId.map((item, index) => (
                                         <Timeline.Item
                                             key={index}
-                                            style={{ paddingBottom: "10px" }}
+                                            className="pb-[10px]" 
                                         >
                                             <SingleNote {...item} userId={this.props.userId} />
                                         </Timeline.Item>

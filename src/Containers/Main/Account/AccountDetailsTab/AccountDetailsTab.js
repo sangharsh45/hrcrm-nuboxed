@@ -58,9 +58,9 @@ function AccountDetailsTab(props) {
                                 >
                                     <span >
                                     <DynamicFeedIcon
-                style={{ fontSize: "1rem" }}
+                className="!text-base cursor-pointer"
               />
-                                        <span style={{ marginLeft: "0.25em" }}>Order</span>
+                                        <span class="ml-1">Order</span>
                                     </span>
                                 </Badge>
                                 {activeKey === "1" && (
@@ -72,11 +72,7 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleLinkDistributorOrderConfigureModal(true);
                                                 }}
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                    fontSize:"1rem"
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -95,7 +91,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span onClick={() => handleOrderCreateClick(false)}>
                                     <i class="fas fa-shopping-bag"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Order 1</span>
+                                    <span class="ml-1">Order 1</span>
                                 </span>
                                 {activeKey === "2" && (
                                     <>
@@ -184,11 +180,7 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleDistributorContactModal(true);
                                                 }}
-                                                size="14px"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -206,7 +198,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="fab fa-connectdevelop"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Activity</span>
+                                    <span class="ml-1">Activity</span>
                                 </span>
                                 {activeKey === "4" && (
                                     <>
@@ -217,12 +209,7 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleDistributorActivityModal(true);
                                                 }}
-                                                size="14px"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                }}
-
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -241,7 +228,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i className="fa fa-sticky-note" aria-hidden="true"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Notes</span>
+                                    <span class="ml-1">Notes</span>
                                 </span>
                             </>
                         }
@@ -257,7 +244,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="fas fa-history"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>History</span>
+                                    <span class="ml-1">History</span>
                                 </span>
                             </>
                         }
@@ -273,7 +260,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="far fa-file"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Documents</span>
+                                    <span class="ml-1">Documents</span>
                                 </span>
                                 {activeKey === "6" && (
                                     <>
@@ -286,11 +273,7 @@ function AccountDetailsTab(props) {
                                                         true
                                                     )
                                                 }
-                                                size="0.875em"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "0.25em",
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>

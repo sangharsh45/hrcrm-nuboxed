@@ -167,9 +167,7 @@ function DistributorPaidForm(props) {
                       width={"100%"}
                       component={SelectComponent}
                       options={Array.isArray(payOption) ? payOption : []}
-                      style={{
-                        borderRight: "0.18em solid red",
-                      }}
+
                     />
                   </div>
                 </div>
