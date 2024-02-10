@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState,useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
@@ -77,8 +77,15 @@ function NavMenu(props) {
   //   fetchMenuTranslations();
   // }, [props.selectedLanguage]);
   const [selectedMenuItem, setSelectedMenuItem] = useState("/dashboard");
+  useEffect(() => {
+    const storedMenuItem = localStorage.getItem('selectedMenuItem');
+    if (storedMenuItem) {
+      setSelectedMenuItem(storedMenuItem);
+    }
+  }, []);
   const handleSelect = (menuItemKey) => {
     setSelectedMenuItem(menuItemKey);
+    localStorage.setItem('selectedMenuItem', menuItemKey);
     // Additional logic for handling selection
   };
 
@@ -98,6 +105,7 @@ function NavMenu(props) {
         theme="dark"
         style={{ background: "#38445E", fontFamily: "Poppins", }}
         inlineCollapsed={props.collapsed}
+        selectedKeys={[selectedMenuItem]}
       >
         {/* dashboard */}
         {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && user.dashboardAccessInd === true && (

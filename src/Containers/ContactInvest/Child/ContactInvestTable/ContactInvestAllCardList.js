@@ -2,7 +2,7 @@ import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -102,7 +102,7 @@ function ContactInvestAllCardList(props) {
 
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[92%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[14.1rem]"><FormattedMessage
+        <div className=" md:w-[15.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
@@ -110,11 +110,11 @@ function ContactInvestAllCardList(props) {
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-        <div className=" md:w-[7.6rem] "><FormattedMessage
+        <div className=" md:w-[8.6rem] "><FormattedMessage
                   id="app.designation"
                   defaultMessage="designation"
                 /></div>
-        <div className="md:w-[9.1rem]"><FormattedMessage
+        <div className="md:w-[10.3rem]"><FormattedMessage
                   id="app.department"
                   defaultMessage="department"
                 /></div>
@@ -147,10 +147,10 @@ function ContactInvestAllCardList(props) {
        
       {props.allContactInvestData.map((item) => { 
         
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${item.address &&
             item.address.length &&
@@ -226,7 +226,7 @@ function ContactInvestAllCardList(props) {
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[7.3rem] ">
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[9.5rem] ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}
@@ -283,7 +283,7 @@ function ContactInvestAllCardList(props) {
           </Tooltip>
 
                    </div>
-                                <div class="flex flex-col md: w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                                <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (

@@ -7,7 +7,7 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { Tooltip, Menu, Dropdown, Progress } from "antd";
 import { CurrencySymbol } from "../../../../Components/Common";
 import { Link } from 'react-router-dom';
-import moment from "moment";
+import dayjs from "dayjs";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LockIcon from "@mui/icons-material/Lock";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -138,7 +138,7 @@ function DealWonCard(props) {
                       // }}
                     >
                       <div class="flex ">
-                      <div className=" flex font-medium  md:w-[13.1rem] max-sm:flex-row w-full ">
+                      <div className=" flex font-medium  md:w-[13.1rem] max-sm:flex-row w-full  items-center">
                                 <div>
             <MultiAvatar
               primaryTitle={item.opportunityName}
@@ -219,7 +219,7 @@ function DealWonCard(props) {
                                     {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
 
                                     <div class=" text-sm justify-center text-cardBody font-poppins">
-                                    {moment(item.startDate).format("ll")}
+                                    {dayjs(item.startDate).format("DD/MM/YYYY")}
                                     </div>
                                 </div>
                              

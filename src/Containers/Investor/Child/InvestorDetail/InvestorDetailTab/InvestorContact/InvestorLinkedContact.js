@@ -6,7 +6,6 @@ import { Tooltip, Button, Input } from "antd";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -16,9 +15,8 @@ import { Link } from 'react-router-dom';
 import { ActionIcon } from "../../../../../../Components/Utils";
 import styled from "styled-components";
 import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../../../InvestorAction";
-import { OnlyWrapCard } from "../../../../../../Components/UI/Layout";
 import { MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
 
 const InvestorUpdateContactModal = lazy(() =>
   import("../InvestorContact/InvestorUpdateContactModal")
@@ -175,31 +173,31 @@ class InvestorLinkedContact extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
-       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-          <div className=" md:w-[13.5rem]">
+          <div className=" md:w-[18.5rem]">
         <FormattedMessage
                   id="app.name"
                   defaultMessage="Name"
                 /></div>
-        <div className=" md:w-[8.1rem]"><FormattedMessage
+        <div className=" md:w-[13.1rem]"><FormattedMessage
                   id="app.Email"
                   defaultMessage="Email"
                 /></div>
-        <div className="md:w-[10.1rem]"><FormattedMessage
+        <div className="md:w-[8.1rem]"><FormattedMessage
                   id="app.mobile"
                   defaultMessage="Mobile #"
                 /></div>
-        <div className="md:w-[7.2rem]"><FormattedMessage
+        <div className="md:w-[9.2rem]"><FormattedMessage
                   id="app.Department"
                   defaultMessage="Department"
                 /></div>
-                     <div className="md:w-[7.2rem]"><FormattedMessage
+                     <div className="md:w-[8rem]"><FormattedMessage
                   id="app.Designation"
                   defaultMessage="Designation"
                 /></div>
         
-        <div className="w-[10.2rem]"></div>
+        <div className="w-[5.2rem]"></div>
 
       </div>
    
@@ -221,10 +219,10 @@ class InvestorLinkedContact extends Component {
            PostalCode : ${
              item.address && item.address.length && item.address[0].postalCode
            } `;
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
         
                     return (
@@ -247,7 +245,7 @@ class InvestorLinkedContact extends Component {
           &nbsp;
           <div class="max-sm:w-full">
                                         <Tooltip>
-                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[12rem]">
                                           
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                             <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`/contact/${item.contactId}`} title={item.fullName}>
@@ -284,7 +282,7 @@ class InvestorLinkedContact extends Component {
                                          {item.emailId}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                <div className=" flex font-medium flex-col md:w-[7.3rem]  max-sm:flex-row w-full max-sm:justify-between">
                                 
                                   <div class="text-sm text-cardBody font-poppins">
                                   {item.countryDialCode} {item.mobileNumber}
@@ -311,9 +309,7 @@ class InvestorLinkedContact extends Component {
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
               <span
-                style={{
-                  cursor: "pointer",
-                }}
+                className="!text-base cursor-pointer"
               >
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
               </span>
@@ -328,7 +324,7 @@ class InvestorLinkedContact extends Component {
                                     <Tooltip title="LinkedIn">
               <span
                 //type="edit"
-                style={{ cursor: "pointer" }}
+                className="!text-base cursor-pointer"
                 onClick={() => {}}
               >
                 {" "}
@@ -346,13 +342,13 @@ class InvestorLinkedContact extends Component {
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     <Tooltip title="Edit">
               <span
-                style={{ cursor: "pointer" }}
+                
                 onClick={() => {
                   this.handleRowData(item);
                  handleUpdateInvestorContactModal(true);
                 }}
               >
-                <BorderColorIcon style={{ fontSize: "0.8rem", }} />
+                <BorderColorIcon className="!text-base cursor-pointer" />
               </span>
             </Tooltip>
 
@@ -397,7 +393,7 @@ class InvestorLinkedContact extends Component {
                     )
                 })}
                     
-      </OnlyWrapCard>
+      </div>
         <InvestorUpdateContactModal
            currentRowData={this.state.currentRowData}
           invstrContactUpdateModal={invstrContactUpdateModal}

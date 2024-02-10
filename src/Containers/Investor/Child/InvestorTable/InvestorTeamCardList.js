@@ -5,9 +5,8 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
-import moment from "moment";
+import dayjs from "dayjs";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select } from "antd";
 
@@ -125,10 +124,10 @@ function InvestorTeamCardList(props) {
       >
         
       {teamInvestor.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
