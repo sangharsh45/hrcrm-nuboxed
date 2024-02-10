@@ -30,7 +30,7 @@ class SingleModuleList extends Component {
     console.log("35l",this.props)
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <div class=" w-full cursor-pointer mt-4">
+      <div class=" w-full cursor-pointer mt-8">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
