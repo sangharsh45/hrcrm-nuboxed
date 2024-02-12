@@ -727,8 +727,8 @@ class SearchSelect extends Component {
     }  
     if (selectType === "currencyName") {
       options = currencies.map((item, i) => ({
-          value: item.currencyName,
-          label: item.currencyName,
+          value: item.currency_name,
+          label: item.currency_name,
           color: "#FF8B00",
         }));
     }
