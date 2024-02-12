@@ -22,7 +22,7 @@ const CallLeadsTable = (props) => {
             callTimeline.map((status, i) => (
               <Timeline.Item key={i}>
                 <div>
-                <div>{status.category} - {status.activityType} on {dayjs(status.endDate).format('DD/MM/YYYY')}</div>
+                <div>{status.category} - {status.activityType} on {dayjs(status.startDate).format('DD/MM/YYYY')}</div>
            
                 </div>
                 <div>

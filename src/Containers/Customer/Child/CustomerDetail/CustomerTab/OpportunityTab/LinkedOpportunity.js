@@ -382,11 +382,11 @@ function OpportunityTable(props) {
     <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[3rem]">Name</div>
-        <div className=" md:w-[4.1rem]">Start Date</div>
+        <div className=" md:w-[5.1rem]">Start Date</div>
         <div className=" md:w-[4.2rem] ">End Date</div>
         <div className="md:w-[4.2rem]">Value</div>
         <div className="md:w-[4.5rem]">Status</div>
-        <div className="md:w-[3.8rem]">Sponsor</div> 
+        <div className="md:w-[1.8rem]">Sponsor</div> 
         <div className="w-[9rem]"></div>
 
       </div>
@@ -429,7 +429,7 @@ function OpportunityTable(props) {
                 className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
-                <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full items-center"> 
           &nbsp;
           <div class="max-sm:w-full">

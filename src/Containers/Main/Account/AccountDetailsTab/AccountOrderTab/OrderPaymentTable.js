@@ -55,7 +55,7 @@ function OrderPaymentTable(props) {
       orderId: props.particularRowData.orderId
     };
   
-    props.updateOrderPayment(data,indentId)
+    props.updateOrderPayment(data,paymentId)
       setEditedFields((prevFields) => ({ ...prevFields, [paymentId]: undefined }));
       setEditpaymentId(null);
     
@@ -120,12 +120,7 @@ return (
    
                     </div>
     </div>
-    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <div class=" text-xs text-cardBody font-poppins">
-                      
-                      {item.paymentAmount}
-                    </div>
-    </div>
+
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
     <div class=" text-xs text-cardBody font-poppins">
                       

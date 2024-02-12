@@ -27,7 +27,6 @@ const TaskForm = lazy(() =>
 const TabPane = StyledTabs.TabPane;
 
 function  OpenCETmodal(props)  {
-console.log("data",props.rowdata.name)
   return (
     <>
       <StyledDrawer

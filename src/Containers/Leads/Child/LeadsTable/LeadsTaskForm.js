@@ -22,7 +22,6 @@ import {
   handleTaskModal,
   getCustomerTask,
   getProjectTaskList,
-
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
@@ -42,7 +41,7 @@ import Upload from "../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
 
 const { Option } = Select;
 
