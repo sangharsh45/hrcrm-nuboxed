@@ -233,6 +233,8 @@ export const handleCreateAWB = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+export const setInventoryDetailViewType = (inventoryViewType) => (dispatch) =>
+  dispatch({ type: types.SET_INVENTORY_DETAIL_VIEW_TYPE, payload: inventoryViewType });
 
 export const handleAddAWB = (modalProps) => (dispatch) => {
   dispatch({
