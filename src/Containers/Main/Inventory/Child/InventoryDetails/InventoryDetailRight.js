@@ -1,24 +1,47 @@
-import React, { Component, lazy } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
+import InventoryMaterialTab from "./InventoryMaterialTab/InventoryMaterialTab";
+import InventoryProductionTab from "./InventoryProductionTab/InventoryProductionTab";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 const InventoryDetailTab = lazy(() =>
   import("./InventoryDetailTab/InventoryDetailTab")
 );
 
-class InventoryDetailRight extends Component {
-  render() {
-    return (
-      <div class=" w-full" >
-        <InventoryDetailTab
-          inventory={this.props.inventory}
-          tabData={this.props.tabData}
-        />
-      </div>
-    );
-  }
+function InventoryDetailRight(props) {
+  return (
+    <>
+      <Suspense fallback={<BundleLoader />}>
+        {props.inventoryViewType === "repair" ? (
+          <div class=" w-full" >
+            <InventoryDetailTab
+              inventory={this.props.inventory}
+              tabData={this.props.tabData}
+            />
+          </div>
+        ) : props.inventoryViewType === "material" ? (
+          <div class=" w-full" >
+            <InventoryMaterialTab
+              inventory={this.props.inventory}
+              tabData={this.props.tabData}
+            />
+          </div>
+        ) : props.inventoryViewType === "production" ? (
+          <div class=" w-full" >
+            <InventoryProductionTab
+              inventory={this.props.inventory}
+              tabData={this.props.tabData}
+            />
+          </div>
+        ) : null}
+      </Suspense>
+    </>
+
+  );
 }
-const mapStateToProps = ({}) => ({});
+
+const mapStateToProps = ({ }) => ({});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default withRouter(

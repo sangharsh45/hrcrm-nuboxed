@@ -76,7 +76,7 @@ export const getSupplierBySupplierId = (supplierId) => (dispatch) => {
     type: types.GET_SUPPLIER_BY_SUPPLIER_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplier/${supplierId}`,{
+    .get(`${base_url2}/supplier/${supplierId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -144,11 +144,15 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.LINK_PURCHASE_SUPPLIERS_REQUEST });
   axios
-    .post(`${base_url}/purchase/supplier/supplies`, data, {})
+    .post(`${base_url2}/po/createPo`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
-      dispatch(getGeneratorSuppliersList(supplierId, "material"));
-      dispatch(getGeneratorCatalogueSuppliersList(supplierId, "catalogue"))
+      dispatch(getGeneratorSuppliersList(res));
+      dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.LINK_PURCHASE_SUPPLIERS_SUCCESS,
         payload: res.data,
@@ -167,12 +171,17 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
 
 //get purchase to cart table
 
-export const getGeneratorSuppliersList = (supplierId) => (dispatch) => {
+export const getGeneratorSuppliersList = (poSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_GENERATOR_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/product/supplier/${supplierId}/material`, {})
+    .get(`${base_url2}/po/poSupplierDetails/${poSupplierDetailsId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -251,7 +260,12 @@ export const getPurchaseSuppliersList = (supplierId) => (dispatch) => {
     type: types.GET_PURCHASE_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/supplier/${supplierId}`, {})
+    .get(`${base_url2}/po/poSupplierList/${supplierId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1132,6 +1146,6 @@ export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
 
 export const emptysUPPLIERS = () => (dispatch) => {
   dispatch({
-    type: types.EMPTY_SUPPLIER_LIST, 
+    type: types.EMPTY_SUPPLIER_LIST,
   });
 };

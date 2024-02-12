@@ -143,6 +143,8 @@ const initialState = {
   fetchingShipperDetailsListError: false,
   shipperDetailsList: [],
 
+  inventoryViewType: "repair",
+
   //delivery date
   addDeliverDate: false,
   setEditingReceivedDetails: {},
@@ -210,6 +212,9 @@ export const inventoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SET_INVENTORY_VIEW_TYPE:
       return { ...state, viewType: action.payload };
+
+    case types.SET_INVENTORY_DETAIL_VIEW_TYPE:
+      return { ...state, inventoryViewType: action.payload };
 
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };

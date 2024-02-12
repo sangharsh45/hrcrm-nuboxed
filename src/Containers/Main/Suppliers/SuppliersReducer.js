@@ -77,7 +77,7 @@ const initialState = {
   fetchingSupplierListError: false,
   supplierList: [],
 
-
+  pOSupplierDetailsId: "",
 
   addLinkSuppliersOrderConfigureModal: false,
 
@@ -330,8 +330,9 @@ export const suppliersReducer = (state = initialState, action) => {
     case types.ADD_SUPPLIERS_REQUEST:
       return { ...state, addingSuppliers: true };
     case types.ADD_SUPPLIERS_SUCCESS:
-      return { ...state, addingSuppliers: false, addSuppliersModal: false,
-        supplierList:[action.payload,...state.supplierList]
+      return {
+        ...state, addingSuppliers: false, addSuppliersModal: false,
+        supplierList: [action.payload, ...state.supplierList]
       };
     case types.ADD_SUPPLIERS_FAILURE:
       return {
@@ -347,7 +348,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingSupplierList: false,
-        supplierList:[...state.supplierList,...action.payload]
+        supplierList: [...state.supplierList, ...action.payload]
       };
     case types.GET_SUPPLIERS_LIST_FAILURE:
       return {
@@ -392,8 +393,8 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         addingPurchaseSuppliers: false,
-        addLinkSuppliersOrderConfigureModal: false,
-        addSupplierPurchaseCatalogueModal: false,
+        pOSupplierDetailsId: action.payload,
+
       };
     case types.LINK_PURCHASE_SUPPLIERS_FAILURE:
       return {
@@ -1120,10 +1121,10 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingPoDetailsListError: true,
       };
 
-      case types.EMPTY_SUPPLIER_LIST:
-        return { ...state, supplierList: [] };
-      
-    
+    case types.EMPTY_SUPPLIER_LIST:
+      return { ...state, supplierList: [] };
+
+
 
     default:
       return state;

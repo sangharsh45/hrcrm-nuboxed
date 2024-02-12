@@ -1,12 +1,13 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getInventoryById } from "../../InventoryAction";
+import { getInventoryById, setInventoryDetailViewType } from "../../InventoryAction";
 import { MainWrapper } from "../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-const InventoryDetailHeader =lazy(()=>import("./InventoryDetailHeader"));
-const InventoryDetailRight =lazy(()=>import("./InventoryDetailRight"));
+const InventoryDetailHeader = lazy(() => import("./InventoryDetailHeader"));
+const InventoryDetailRight = lazy(() => import("./InventoryDetailRight"));
+
 
 function InventoryDetail(props) {
   const [tabData, setTabData] = useState("1");
@@ -25,10 +26,18 @@ function InventoryDetail(props) {
     setTabData("1");
   }
 
-  const { inventory = { inventory }, fetchingInventoryById } = props;
+  const {
+    inventory = { inventory },
+    fetchingInventoryById,
+    inventoryViewType,
+    setInventoryDetailViewType } = props;
   return (
     <>
-      <InventoryDetailHeader inventory={inventory} handleResetTab={handleResetTab} />
+      <InventoryDetailHeader
+        setInventoryDetailViewType={setInventoryDetailViewType}
+        inventoryViewType={inventoryViewType}
+        inventory={inventory}
+        handleResetTab={handleResetTab} />
       {fetchingInventoryById ? (
         <MainWrapper>
           <BundleLoader />
@@ -41,9 +50,11 @@ function InventoryDetail(props) {
                 <InventoryDetailLeft inventory={inventory} />
               </div> */}
               <div class=" w-full" >
-                <InventoryDetailRight inventory={inventory} 
-                tabData={tabData}
-                 />
+                <InventoryDetailRight
+                  inventoryViewType={inventoryViewType}
+                  inventory={inventory}
+                  tabData={tabData}
+                />
               </div>
             </div>
           </Suspense>
@@ -55,11 +66,13 @@ function InventoryDetail(props) {
 const mapStateToProps = ({ inventory }) => ({
   fetchingInventoryById: inventory.fetchingInventoryById,
   inventory: inventory.inventoryDetailById,
+  inventoryViewType: inventory.inventoryViewType
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getInventoryById,
+      setInventoryDetailViewType
     },
     dispatch
   );
