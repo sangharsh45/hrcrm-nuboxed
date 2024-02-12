@@ -529,7 +529,7 @@ props.getAllEmployeelist();
     );
 }
 
-const mapStateToProps = ({ auth,investor, leads,employee,pitch,source }) => ({
+const mapStateToProps = ({ auth,investor, leads,employee,pitch }) => ({
     addingPitch: pitch.addingPitch,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,

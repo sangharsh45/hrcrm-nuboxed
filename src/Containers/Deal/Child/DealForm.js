@@ -9,7 +9,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import {getCurrency} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,message } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -31,7 +31,7 @@ import {createDeals,  getAllDealStages,
   getDealLinkedWorkflow,
   getDealLinkedStages
 } from "../DealAction";
-
+import Swal from 'sweetalert2'
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -41,7 +41,6 @@ const OpportunitySchema = Yup.object().shape({
   oppWorkflow: Yup.string().required("Input needed!"),
   currency: Yup.string().required("Input needed!"),
   oppStage: Yup.string().required("Input needed!"),
-  customerId:Yup.string().required("Input needed!"),
 });
 function DealForm(props) {
   useEffect(() => {
@@ -176,7 +175,13 @@ function DealForm(props) {
   });
   const [text, setText] = useState("");
   function handletext(e) {
+  //   if (e.target.value.length === 10) {
+  //     window.alert(
+  //         "Description shouldn't exceed 10 characters"
+  //     );
+  // }
     setText(e.target.value);
+
   }
   const {
     transcript,
@@ -302,7 +307,7 @@ function DealForm(props) {
           console.log(`${finalEndTime}${timeEndPart}`);
 
           let newEndTime = `${finalEndTime}${timeEndPart}`;
-
+          if(text.length <= 150) {
           props.createDeals(
             {
               ...values,
@@ -315,6 +320,12 @@ function DealForm(props) {
             props.customerId,
             resetForm()
           );
+          }else {
+            Swal.fire({
+              icon: "error",
+              text: "Description shouldn't exceed more than 150 characters !",
+            });
+        }
         }}
       >
         {({
@@ -476,6 +487,7 @@ function DealForm(props) {
                   </div>
                   <div>
                     <textarea
+               
                       name="description"
                       className="textarea"
                       type="text"
@@ -617,7 +629,6 @@ function DealForm(props) {
                               />
                             }
                             isColumnWithoutNoCreate
-                            selectType="sourceName"
                             component={SelectComponent}
                     options={
                       Array.isArray(SourceOptions)

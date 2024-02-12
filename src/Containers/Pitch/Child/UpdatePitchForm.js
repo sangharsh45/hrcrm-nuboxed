@@ -35,7 +35,6 @@ function UpdatePitchForm (props) {
   };
   useEffect (()=>{
     props.getAllEmployeelist();
-    props.getSources(props.orgId)
   },[])
  
 
@@ -50,12 +49,7 @@ function UpdatePitchForm (props) {
       updateLeads,
       setClearbitData,
     } = props;
-    const SourceOptions = props.sources.map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.sourceId,
-      };
-    });
+
     const [defaultOption, setDefaultOption] = useState(props.setEditingPitch.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
@@ -68,7 +62,7 @@ function UpdatePitchForm (props) {
             url: props.setEditingPitch.url || "",
             sectorId: props.setEditingPitch.sectorId  ,
             
-            source: props.setEditingPitch.source  ,
+            source: props.setEditingPitch.source || "" ,
 
             vatNo:props.setEditingPitch.vatNo  ,
             email: props.setEditingPitch.email || "",
@@ -346,29 +340,26 @@ function UpdatePitchForm (props) {
                       />
                     </div> */}
                     <div class="w-full">
-                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
-                        <Field
+                  
+                        <FastField
                           name="source"
-                          isColumnWithoutNoCreate
                           label={
                             <FormattedMessage
                             id="app.source"
                             defaultMessage="source"
                           />
                           }
-                          component={SelectComponent}
-                          options={
-                            Array.isArray(SourceOptions)
-                              ? SourceOptions
-                              : []
-                          }
-                          value={values.source}
+                          isColumnWithoutNoCreate
+                          selectType="sourceName"
+                          component={SearchSelect}
+                          defaultValue={{
+                            label:props.setEditingPitch.source,
+                          }}
+                          value={values.sourceId}
                           isColumn
-                          margintop={"0"}
                           inlineLabel
                         />
-                      </div>
-        
+
            </div>
                 </div>
                  </div>
@@ -493,10 +484,9 @@ function UpdatePitchForm (props) {
   
 }
 
-const mapStateToProps = ({ auth,investor, leads,employee,source,pitch }) => ({
+const mapStateToProps = ({ auth,investor, leads,employee,pitch }) => ({
     setEditingPitch: leads.setEditingPitch,
     updateLeadsById: leads.updateLeadsById,
-    sources: source.sources,
     updatePitchById:pitch.updatePitchById,
     updateLeadsByIdError: leads.updateLeadsByIdError,
     user: auth.userDetails,
