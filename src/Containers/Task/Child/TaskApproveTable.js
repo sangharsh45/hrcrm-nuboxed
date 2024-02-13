@@ -48,17 +48,19 @@ const TaskApproveTable = (props) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [page, setPage] = useState(0);
+
   useEffect(() => {
     setPage(page + 1);
     props.getAprrovalTaskTable(props.employeeId,page);
-    // props.getProviderCustomerData(props.provider.serviceId, page);
   }, []);
   const handleLoadMore = () => {
     setTimeout(() => {
       setPage(page + 1);
       props.getAprrovalTaskTable(props.employeeId,page);
-      // props.getProviderCustomerData(props.provider.serviceId, page);
     }, 100);
+  };
+  const handleLoadPrevious = () => {
+    setPage(page - 1); // Decrease current page when "Load Previous" button is clicked
   };
   function handleSetTaskNameId(item) {
     setCurrentNameId(item);
@@ -68,109 +70,10 @@ const TaskApproveTable = (props) => {
      console.log(item);
    }
   
-
-  const handleIconClick = (data) => {
-    setData(data);
-  };
-
-  const handleNotesClick = (data1) => {
-    setData1(data1);
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-
-        <Button
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Search
-        </Button>
-        <Button
-          onClick={() => handleReset(clearFilters)}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Reset
-        </Button>
-        <Button
-          type="link"
-          size="small"
-          onClick={() => {
-            confirm({ closeDropdown: false });
-            setSearchText(selectedKeys[0]);
-            setSearchedColumn(dataIndex);
-          }}
-        >
-          Filter
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        type="search"
-        style={{ color: filtered ? "#1890ff" : undefined }}
-      />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
-
+const itemsPerPage=props.pageCount;
+const startIndex = page * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+console.log("pgggg",startIndex,endIndex)
   const {
     fetchingApproveTaskTable,
     fetchingApproveTaskTableError,
@@ -189,7 +92,7 @@ const TaskApproveTable = (props) => {
 
   return (
     <>
-      {page < props.noOfPages ?
+      {endIndex < approvalTaskTable.length &&
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
             <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
             <Button
@@ -204,7 +107,8 @@ const TaskApproveTable = (props) => {
               onClick={() => handleLoadMore()}
             >Load More</Button>
             </FloatButton.Group>
-          </div> : null}
+          </div>}
+
           <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
           <div className=" md:w-[10rem]"><FormattedMessage
@@ -459,10 +363,10 @@ handleSetTaskNameId={handleSetTaskNameId}
 
 />
 
+</>
+);
+   
 
-      {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
-    </>
-  );
 };
   const mapStateToProps = ({ auth, task, opportunity }) => ({
     userDetails: auth.userDetails,
@@ -472,10 +376,10 @@ handleSetTaskNameId={handleSetTaskNameId}
     employeeId: auth.userDetails.employeeId,
     addDrawerTaskProjectModal: task.addDrawerTaskProjectModal,
     updateTaskModal: task.updateTaskModal,
-    noOfPages: task.approvalTaskTable.length && task.approvalTaskTable[0].noOfPages || "",
+    pageCount: task.approvalTaskTable.length && task.approvalTaskTable[0].pageCount || "",
     fetchingApproveTaskTable: task.fetchingApproveTaskTable,
     fetchingApproveTaskTableError: task.fetchingApproveTaskTableError,
-
+noOfPages:task.approvalTaskTable.length && task.approvalTaskTable[0].noOfPages
   });
   
   const mapDispatchToProps = (dispatch) =>

@@ -796,9 +796,7 @@ export const TaskReducer = (state = initialState, action) => {
                 ...state,
                 fetchingApproveTaskTable: false,
                 // tableProvider: action.payload,
-                approvalTaskTable: [
-                  ...state.approvalTaskTable,
-                  ...action.payload],
+                approvalTaskTable: [...state.approvalTaskTable,...action.payload],
               };
               case types.GET_APPROVAL_TASK_TABLE_FAILURE:
                 return {
