@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { ImageGradient } from "./styled";
-import { Title, Spacer } from "../../Components/UI/Elements";
+import { Title } from "../../Components/UI/Elements";
 // import LoginBackground from "../../Assets/Images/login-background1.jpg";
-import TimeToConnectImage from "../../Assets/Images/BusinessLeaders.jpg";
-import DashboardImage from "../../Assets/Images/BusinessLeaders.jpg";
+// import TimeToConnectImage from "../../Assets/Images/BusinessLeaders.jpg";
+// import DashboardImage from "../../Assets/Images/BusinessLeaders.jpg";
 import { Carousel } from "antd";
 class RandomImageScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screenshot: DashboardImage,
+     // screenshot: DashboardImage,
     };
   }
   componentDidMount() {
@@ -20,11 +20,11 @@ class RandomImageScreen extends Component {
     let randomNumber = getRandomInt(3);
     if (randomNumber <= 1) {
       this.setState({
-        screenshot: DashboardImage,
+        //screenshot: DashboardImage,
       });
     } else if (randomNumber === 2) {
       this.setState({
-        screenshot: TimeToConnectImage,
+       // screenshot: TimeToConnectImage,
       });
     }
   }
@@ -73,7 +73,7 @@ class RandomImageScreen extends Component {
                 marginTop: "0em",
               }}
             >
-              <img src={TimeToConnectImage} className="login_image"></img>
+              {/* <img src={TimeToConnectImage} className="login_image"></img> */}
             </div>
           </Title>
 
@@ -115,8 +115,8 @@ class RandomImageScreen extends Component {
                 </div>
               </div>
 
-              <Spacer />
-              <div>
+             
+              <div class="mt-3">
                 Do send your feedback on improving the experience, email us on
                 support@tekorero.com
               </div>

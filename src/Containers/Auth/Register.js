@@ -18,7 +18,7 @@ import SearchSelect from "../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../Components/Forms/Formik/SelectComponent";
 import { register, getTimeZone, getCurrency } from "./AuthAction";
-import FWLogo from "../../Assets/Images/Axis_logo_Big.png";
+// import FWLogo from "../../Assets/Images/Axis_logo_Big.png";
 import { Radio } from "antd";
 import { StyledLabel } from "../../Components/UI/Elements";
 
@@ -221,11 +221,11 @@ class Register extends Component {
           <AuthContainer
             style={{ backgroundColor: "#F5F5F5", flexDirection: "column" }}
           >
-            <img
+            {/* <img
               className="big-logo"
               src={FWLogo}
               style={{ marginTop: 15, width: "12.5em" }}
-            />
+            /> */}
             <br />
             <FormWrapper style={{ height: "auto" }}>
               {registeringSuccess ? (
