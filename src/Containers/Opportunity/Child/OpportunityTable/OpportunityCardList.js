@@ -130,7 +130,7 @@ function OpportunityCardList(props) {
                 height={"87vh"}
             >
 
-<div class="flex  justify-center flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
+<div class="flex  flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
     {opportunityByUserId.map((item) => {
                  
                  var findProbability = item.probability;
@@ -139,8 +139,8 @@ function OpportunityCardList(props) {
                        findProbability = element.probability;}
                     });
                  return (
-                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[8rem] 
-                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col  ">
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
+                  text-[#444444] m-3 p-1 w-[16vw] flex flex-col  ">
         <div class="flex items-center flex-nowrap h-[2.81em]">
           <div class=" flex basis-[15%] mr-[0.2rem]" >
             <MultiAvatar
@@ -176,10 +176,20 @@ title={`${item.opportunityName}`}>
           </div>
           <div>
           <div class="font-medium text-[0.9375em] -mb-[0.18em]">
-            
+          {item.contactName && (
+              <div class="overflow-hidden text-ellipsis cursor-pointer text-[0.9375em] flex items-center">
+                {item.contactName || ""}
+              </div>
+            )}
             &nbsp;&nbsp;
-            {<CurrencySymbol currencyType={item.currency} />}
-            &nbsp;{  item.proposalAmount || ""}
+            
+          </div>
+          </div>
+          </div>
+          <div className="flex ">
+        
+          <div>
+          <div class="font-medium text-[0.9375em] -mb-[0.18em]">
           </div>
           </div>
           </div>
@@ -240,6 +250,10 @@ width={30}
 </Dropdown>
 </span>
 </div>
+<div>
+{<CurrencySymbol currencyType={item.currency} />}
+            &nbsp;{  item.proposalAmount || ""}
+  </div>
 <span>
 <MultiAvatar2
 primaryTitle={item.assignedTo}

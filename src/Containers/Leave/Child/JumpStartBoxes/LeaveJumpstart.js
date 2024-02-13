@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 
 class LeaveJumpstart extends React.Component {
   render() {
@@ -30,7 +30,7 @@ class LeaveJumpstart extends React.Component {
                 </div>
 
                 <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox
+                <JumpStartBox1
                 // bgColor="#0073a8"
                 stringValue
                 noProgress
@@ -40,7 +40,7 @@ class LeaveJumpstart extends React.Component {
                 </div>
 
                 <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox
+                <JumpStartBox2
                 // bgColor="#0093d7"
                 // title="Pending"
                 title="Approved"
@@ -51,7 +51,7 @@ class LeaveJumpstart extends React.Component {
                 </div>
 
                 <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox   
+                <JumpStartBox3
                 // bgColor="#24b9fe"
                 title="Leave Balance"
                 stringValue

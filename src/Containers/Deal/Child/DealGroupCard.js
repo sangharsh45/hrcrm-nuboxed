@@ -22,6 +22,7 @@ const DealGroupCard = (props) => {
     currencyType,
     handleDelete,
     invOpportunityId,
+    investorName,
     user
   } = props;
   return (
@@ -52,6 +53,9 @@ const DealGroupCard = (props) => {
             >
               {primaryTitle || ""}
             </Title>
+            <div class="text-xs">
+              {investorName}
+            </div>
             <SubTitle>
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
