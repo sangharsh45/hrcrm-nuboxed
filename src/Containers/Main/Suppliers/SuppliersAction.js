@@ -212,7 +212,7 @@ export const movePoToInventory = (data, distributorId) => (dispatch) => {
     type: types.MOVE_TO_INVENTORY_REQUEST,
   });
   axios
-    .post(`${base_url2}/orderInventoryLocationLink/save`, data, {
+    .post(`${base_url2}/poInventoryLocationLink/save`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

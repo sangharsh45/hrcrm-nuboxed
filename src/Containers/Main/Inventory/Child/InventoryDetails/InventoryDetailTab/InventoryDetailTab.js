@@ -1,18 +1,22 @@
-import React, { lazy, PureComponent, Suspense } from "react";
+import React, { Component, lazy, PureComponent, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { PlusOutlined } from "@ant-design/icons";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
+import { Spacer } from "../../../../../../Components/UI/Elements";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
+import { Tooltip } from "antd";
 import { withRouter } from "react-router";
 import {
   handleAddDispatchModal,
   handleAddOutputReasonModal,
 } from "../../../InventoryAction";
-import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import { FormattedMessage } from "react-intl";
+import ReceivedTable from "../Recieved/ReceivedTable";
 
-const ReceivedTable = lazy(() =>
-import( "../Recieved/ReceivedTable"));
+// const InventoryOutputForm = lazy(() => import("../Output/InventoryOutputForm"));
+// const InventoryOutputTable = lazy(() =>
+//   import("../Output/InventoryOutputTable")
+// );
 const InventoryConsumptionForm = lazy(() =>
   import("../Consumption/InventoryConsumptionForm")
 );
@@ -20,10 +24,15 @@ const InventoryConsumptionTable = lazy(() =>
   import("../Consumption/InventoryConsumptionTable")
 );
 const DispatchTable = lazy(() => import("../Dispatch/DispatchTable"));
-const CatalogueInventoryTable = lazy(() =>
-  import("../CatalogueInventory/CatalogueInventoryTable")
-);
-
+// const AddDispatchModal = lazy(() =>
+//   import("../Dispatch/AddDispatch/AddDispatchModal")
+// );
+// const AddOutputReasonModal = lazy(() =>
+//   import("../Output/AddReason/AddReasonModal")
+// );
+// const InventoryOutputReportsTable = lazy(() =>
+//   import("../Output/InventoryOutputReportsTable")
+// );
 const TabPane = StyledTabs.TabPane;
 class InventoryDetailTab extends PureComponent {
   constructor(props) {
@@ -38,6 +47,7 @@ class InventoryDetailTab extends PureComponent {
     };
   }
   componentDidMount() {
+    // alert(this.props.tabData);
     console.log(this.props.tabData.typeOf);
     this.setState({ activeKey: this.props.tabData });
   }
@@ -73,6 +83,13 @@ class InventoryDetailTab extends PureComponent {
   render() {
     const { activeKey } = this.state;
     const { user } = this.props;
+    // const {
+    //   history,
+    //   match: {
+    //     params: { inventoryId, data, emailId, organizationId },
+    //   },
+    // } = this.props;
+    console.log(this.props.match);
 
     return (
       <>
@@ -88,9 +105,7 @@ class InventoryDetailTab extends PureComponent {
                   {/* <span
                   //    onClick={() => this.handleOrderCreateClick(false)}
                   > */}
-                  <i class="fas fa-satellite-dish"></i>&nbsp; 
-                  <FormattedMessage id="app.receive" defaultMessage="Receive" />
-                   
+                  <i class="fas fa-satellite-dish"></i>&nbsp;Receive
                   {/* </span> */}
                   {/* {activeKey === "1" && (
                  
@@ -111,9 +126,8 @@ class InventoryDetailTab extends PureComponent {
                   //    onClick={() => this.handleOrderCreateClick(false)}
                   > */}
                   {/* <i class="fas fa-cookie-bite"></i> */}
-                  <i class="fab fa-linode"></i>  &nbsp;
-                  <FormattedMessage id="app.materials" defaultMessage="Materials" /> 
-               
+                  <i class="fab fa-linode"></i>  &nbsp; Materials
+
                   {/* </span> */}
                   {/* {activeKey === "1" && (
                  
@@ -130,18 +144,16 @@ class InventoryDetailTab extends PureComponent {
                   <InventoryConsumptionForm />
                 ) : null}
 
-              <div class=" mt-3"> <InventoryConsumptionTable /></div>
-               
+                <Spacer />
+                <InventoryConsumptionTable />
               </Suspense>
             </TabPane>
             <TabPane
               tab={
                 <>
                   <span>
-                    <i class="far fa-share-square"></i>&nbsp;
-                    <FormattedMessage id="app.dispatch" defaultMessage="Dispatch" />
-                    
-             
+                    <i class="far fa-share-square"></i>&nbsp;Dispatch
+
                   </span>
                   {/* {activeKey === "2" && (
                     <>
@@ -162,37 +174,7 @@ class InventoryDetailTab extends PureComponent {
                 <DispatchTable />
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <>
-                  <span>
-                  <ViewInArIcon
-                  className="text-base"
-              // style={{ fontSize: "large" }}
-            />&nbsp;
-                 <FormattedMessage id="app.catalogue" defaultMessage="Catalogue" />
-            
-             
-                  </span>
-                  {/* {activeKey === "2" && (
-                    <>
-                      <Tooltip title="Dispatch">
-                        <PlusOutlined
-                          onClick={() => this.props.handleAddDispatchModal(true)}
-                          size="14px"
-                          style={{ verticalAlign: "center", marginLeft: "5px" }}
-                        />
-                      </Tooltip>{" "}
-                    </>
-                  )} */}
-                </>
-              }
-              key="4"
-            >
-              <Suspense fallback={"Loading..."}>
-                <CatalogueInventoryTable />
-              </Suspense>
-            </TabPane>
+
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={"Loading..."}>
@@ -226,7 +208,7 @@ const mapDispatchToProps = (dispatch) =>
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(InventoryDetailTab)
-  
+
 );
 
 
