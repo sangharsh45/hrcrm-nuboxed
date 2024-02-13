@@ -138,12 +138,9 @@ function DealCardList(props) {
                 </div>
                 <div className="flex justify-around">
                   <div>
-                    {item.customer && (
-                      <div class="overflow-hidden text-ellipsis cursor-pointer text-sm flex items-center"
-                        
-                        // onClick={handleSecondaryTitleClick || null}
-                      >
-                        {item.customer || ""}
+                    {item.investor && (
+                      <div class="overflow-hidden text-ellipsis cursor-pointer text-sm flex items-center">
+                        {item.investor || ""}
                       </div>
                     )}
                   </div>

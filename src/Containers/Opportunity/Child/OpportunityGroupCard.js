@@ -23,12 +23,15 @@ const BussinessCard = (props) => {
     handleWon,
     handleConfirm,
     handleDelete,
-    user
+    user,
+    customerName,
+    contactName
   } = props;
   
   return (
-    <FlexContainer flexDirection="column" style={{ borderRadius: 3 }}>
-      <MainWrapper>
+    <div class="flex-col rounded-[3px]">
+      <MainWrapper style={{height:"6rem"}}>
+      {/* <div class="rounded bg-white m-1 p-1 overflow-auto h-24 border-[0.0625rem] border-[#eee]-600 w-full"> */}
         <FlexContainer
           alignItems="center"
           flexWrap="no-wrap"
@@ -54,12 +57,19 @@ const BussinessCard = (props) => {
             >
               {primaryTitle || ""}
             </Title>
+            <div class="text-xs">
+              {customerName || ""} 
+              </div>
+              <div class="text-xs">          
+              {contactName || ""} 
+              </div>
             <SubTitle>
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
              
               &nbsp;             
               {secondaryTitle || ""} 
+             
               <Popconfirm
   title="Change status to Won?"
   onConfirm={() => handleWon(opportunityId)}
@@ -129,8 +139,9 @@ const BussinessCard = (props) => {
 
         <SubTitle style={{ color: "#337df4", fontSize: "0.75em" }}>
         </SubTitle>
+      {/* </div> */}
       </MainWrapper>
-    </FlexContainer>
+    </div>
   );
 };
 export default BussinessCard;

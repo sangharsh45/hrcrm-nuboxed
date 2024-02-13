@@ -28,6 +28,8 @@ class StageColumns1 extends Component {
               primaryTitle={`${elipsize(opportunity.opportunityName, 60)}`} 
               secondaryTitle={`${opportunity.proposalAmount} `}
               currencyType={opportunity.currency}
+              customerName={opportunity.customer}
+              contactName={opportunity.contactName}
               user={this.props.user}
               handleClick={() =>
                 history.push({

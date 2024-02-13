@@ -16,8 +16,8 @@ const AddCustomerModal = (props) => {
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.customer"
-          defaultMessage="Customer"
+          id="app.prospect"
+          defaultMessage="Prospect"
         />}
         width={drawerWidth}
         visible={props.addCustomerModal}
