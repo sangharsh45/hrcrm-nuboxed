@@ -4,10 +4,10 @@ import { LOGOUT } from "../Containers/Auth/AuthTypes";
  *  All of application reducers import goes here...
  */
 import { authReducer } from "../Containers/Auth/AuthReducer";
+import { brandmodelReducer } from "../Containers/Settings/Category/Brand&Model/BrandModelReducer";
 import { pitchReducer } from "../Containers/Pitch/PitchReducer";
 import { messageReducer } from "../Containers/LiveMessages/MessageReducer";
 import { dashboardReducer } from "../Containers/Dashboard/DashboardReducer";
-import { brandmodelReducer } from "../Containers/Settings/Category/Brand&Model/BrandModelReducer"
 import { plannerReducer } from "../Containers/Planner/PlannerReducer";
 import { settingsReducer } from "../Containers/Settings/SettingsReducer";
 import { refurbishReducer } from "../Containers/Main/Refurbish/RefurbishReducer";
@@ -143,6 +143,7 @@ const appReducer = combineReducers({
   leads: leadsReducer,
   level: levelsReducer,
   stream: streamsReducer,
+  brandmodel: brandmodelReducer,
   unit: unitsReducer,
   program: programsReducer,
   countrys: countryReducer,
@@ -160,19 +161,6 @@ const appReducer = combineReducers({
   order: orderReducer,
   shipBy: shipByReducer,
   catgCustomer: catgCustomerReducer,
-  brandmodel: brandmodelReducer,
-  distributor: distributorReducer,
-  suppliers: suppliersReducer,
-  collection: collectionReducer,
-  product: productReducer,
-  refurbish: refurbishReducer,
-  investorList:investorListReducer,
-  procurement:procurementReducer,
-  payments:catgPaymentReducer,
-  itemTask:itemTaskReducer,
-  module:moduleReducer,
-  kpi:kpiReducer,
-  currency:currencyReducer,
 });
 
 const rootReducer = (state, action) => {

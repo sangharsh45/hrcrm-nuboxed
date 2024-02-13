@@ -5,9 +5,8 @@ import { setSuppliersViewType } from "./SuppliersAction";
 import SuppliersHeader from "../../Main/Suppliers/SuppliersHeader";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { getSuppliersList, getAllSuppliersList } from "./SuppliersAction";
-
-const SuppliersCardList =lazy(()=>import("./Child/SuppliersCardList"));
-const AllSuppliersCardList=lazy(()=>import("./Child/AllSuppliersCardList"));
+const SuppliersCardList = lazy(() => import("./Child/SuppliersCardList"));
+const AllSuppliersCardList = lazy(() => import("./Child/AllSuppliersCardList"));
 class Suppliers extends Component {
   state = { currentData: "" };
 
@@ -29,11 +28,11 @@ class Suppliers extends Component {
         <Suspense fallback={<BundleLoader />}>
           {this.props.viewType === "card" ? (
             <SuppliersCardList />
-          ) 
-          : this.props.viewType==="all" ? (
-            <AllSuppliersCardList/>
           )
-          :null}
+            : this.props.viewType === "all" ? (
+              <AllSuppliersCardList />
+            )
+              : null}
         </Suspense>
       </React.Fragment>
     );

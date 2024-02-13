@@ -1,4 +1,4 @@
-import React, { Component, Suspense,lazy } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
@@ -6,29 +6,11 @@ import { connect } from "react-redux";
 import PaymentIcon from '@mui/icons-material/Payment';
 import SourceIcon from '@mui/icons-material/Source';
 import FactoryIcon from '@mui/icons-material/Factory';
-import { FormattedMessage } from "react-intl";
-const Payment = lazy(() =>
-  import("./Payment/Payment")
-);
-const Sectors = lazy(() =>
-  import("../Sectors/Sectors")
-);
-const Source = lazy(() =>
-  import("./Source/Source")
-);
-const ShipBy = lazy(() =>
-  import("./ShipBy/ShipBy")
-);
-const Customer = lazy(() =>
-  import("./Customer/Customer")
-);
-const BrandModel = lazy(() =>
-  import("./Brand&Model/BrandModel")
-);
-const Vat = lazy(() =>
-  import("./Vat/Vat")
-);
-
+import Sectors from "../Sectors/Sectors";
+import Source from "./Source/Source";
+import ShipBy from "./ShipBy/ShipBy"
+import Customer from "./Customer/Customer";
+import BrandModel from "./Brand&Model/BrandModel";
 const TabPane = StyledTabs.TabPane;
 
 class CustomerSectorTab extends Component {
@@ -50,19 +32,19 @@ class CustomerSectorTab extends Component {
   renderTabContent = (key) => {
     switch (key) {
       case "0":
-        return    <Sectors />;
+        return <Sectors />;
       case "1":
-        return  <Source />;
+        return <Source />;
       case "2":
-        return     <ShipBy />;
+        return <ShipBy />;
       case "3":
-        return    <Customer />;
-        case "4":
-          return        <BrandModel />;
-          case "5":
-            return            <Vat />;
-            case "6":
-              return              <Payment />;
+        return <Customer />;
+      case "4":
+        return <BrandModel />;
+      // case "5":
+      //   return <Vat />;
+      // case "6":
+      //   return <Payment />;
       default:
         return null;
     }
@@ -71,10 +53,10 @@ class CustomerSectorTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-         <div class="flex flex-nowrap" >
+        <div class="flex flex-nowrap" >
           <div class=" w-[70%]" >
             <TabsWrapper>
-            <StyledTabs
+              <StyledTabs
                 defaultActiveKey={activeKey}
                 onChange={this.handleTabChange}
               >
@@ -82,7 +64,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <FactoryIcon />
-                      <span class=" ml-[0.25em]">
+                      <span style={{ marginLeft: "0.25em" }}>
                         Sector
                       </span>
                     </>
@@ -97,7 +79,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span style={{ marginLeft: "0.25em" }}>
                         Source
                       </span>
                     </>
@@ -112,23 +94,23 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span style={{ marginLeft: "0.25em" }}>
                         Ship By
                       </span>
                     </>
                   }
                   key="2"
                 >
-                  {/* <Suspense>
+                  <Suspense>
                     <ShipBy />
-                  </Suspense> */}
+                  </Suspense>
                 </TabPane>
                 <TabPane
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
-                      Type
+                      <span style={{ marginLeft: "0.25em" }}>
+                        Customer
                       </span>
                     </>
                   }
@@ -166,24 +148,25 @@ class CustomerSectorTab extends Component {
                   key="5"
                 >
                   <Suspense>
-                    <Vat />
+                    <Customer />
                   </Suspense>
                 </TabPane>
                 <TabPane
                   tab={
                     <>
-                      <PaymentIcon />
-                      <span class=" ml-[0.25em]">
-                      <FormattedMessage id="app.payment" defaultMessage="Payment" />
+                      <SourceIcon />
+                      <span style={{ marginLeft: "0.25em" }}>
+                        BrandModel
                       </span>
                     </>
                   }
-                  key="6"
+                  key="4"
                 >
-                  {/* <Suspense>
-                    <Payment />
-                  </Suspense> */}
+                  <Suspense>
+                    <BrandModel />
+                  </Suspense>
                 </TabPane>
+
               </StyledTabs>
               <Suspense fallback={<div>Loading...</div>}>
                 {this.renderTabContent(activeKey)}

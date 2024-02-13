@@ -298,6 +298,34 @@ export const getReceivedUserList = (locationDetailsId) => (dispatch) => {
     });
 };
 
+//get material receive table data
+
+export const getMaterialReceivedList = (locationDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATERIAL_RECEIVED_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/orderInventoryLocationLink/getPolist/${locationDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVED_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVED_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const handleFileDamagedModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_FILE_DAMAGED_MODAL,

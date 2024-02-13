@@ -33,6 +33,10 @@ const initialState = {
   updatingValidationInRecive: false,
   updatingValidationInReciveError: false,
 
+  fetchingMaterialReceivedList: false,
+  fetchingMaterialReceivedListError: false,
+  materialReceivedata: [],
+
   //output table
   fetchingAllInventoryOutput: false,
   fetchingAllInventoryOutputError: false,
@@ -253,6 +257,23 @@ export const inventoryReducer = (state = initialState, action) => {
         fetchingInventoryList: false,
         fetchingInventoryListError: true,
       };
+
+    case types.GET_MATERIAL_RECEIVED_LIST_REQUEST:
+      return { ...state, fetchingMaterialReceivedList: true };
+    case types.GET_MATERIAL_RECEIVED_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceivedList: false,
+        materialReceivedata: action.payload,
+      };
+    case types.GET_MATERIAL_RECEIVED_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceivedList: false,
+        fetchingMaterialReceivedListError: true,
+
+      };
+
 
     //inventory by id
     case types.GET_INVENTORY_BY_ID_REQUEST:
