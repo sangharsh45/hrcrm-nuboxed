@@ -34,8 +34,8 @@ function InventoryDetail(props) {
   return (
     <>
       <InventoryDetailHeader
-        setInventoryDetailViewType={setInventoryDetailViewType}
-        inventoryViewType={inventoryViewType}
+        // setInventoryDetailViewType={setInventoryDetailViewType}
+        // inventoryViewType={inventoryViewType}
         inventory={inventory}
         handleResetTab={handleResetTab} />
       {fetchingInventoryById ? (
@@ -46,12 +46,9 @@ function InventoryDetail(props) {
         <div class=" flex ">
           <Suspense fallback={"Loading..."}>
             <div class=" flex flex-no-wrap w-full" >
-              {/* <div style={{ width: "22%" }}>
-                <InventoryDetailLeft inventory={inventory} />
-              </div> */}
               <div class=" w-full" >
                 <InventoryDetailRight
-                  inventoryViewType={inventoryViewType}
+                  // inventoryViewType={inventoryViewType}
                   inventory={inventory}
                   tabData={tabData}
                 />

@@ -10,10 +10,35 @@ const AddedSuppliesTable = (props) => {
     }, [])
     const columns = [
         {
-            title: "Name"
+            title: "Name",
+            dataIndex: "suppliesFullName",
+            width: "20%"
         },
         {
-            title: "Unit"
+            title: "Category",
+            dataIndex: "categoryName",
+            width: "15%"
+        },
+        {
+            title: "Sub-category",
+            dataIndex: "subCategoryName",
+            width: "15%"
+        },
+        {
+            title: "Attribute",
+            dataIndex: "attributeName",
+            width: "15%"
+        },
+        {
+            title: "Sub-attribute",
+            dataIndex: "subAttributeName",
+            width: "15%"
+        },
+
+        {
+            title: "Unit",
+            dataIndex: "unit",
+            width: "15%"
         }
     ]
     return (

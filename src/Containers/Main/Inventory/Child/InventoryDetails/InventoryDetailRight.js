@@ -12,7 +12,12 @@ const InventoryDetailTab = lazy(() =>
 function InventoryDetailRight(props) {
   return (
     <>
-      <Suspense fallback={<BundleLoader />}>
+      hello
+      {/* <Suspense fallback={<BundleLoader />}>
+        <InventoryDetailTab
+          inventory={this.props.inventory}
+          tabData={this.props.tabData}
+        />
         {props.inventoryViewType === "repair" ? (
           <div class=" w-full" >
             <InventoryDetailTab
@@ -35,7 +40,7 @@ function InventoryDetailRight(props) {
             />
           </div>
         ) : null}
-      </Suspense>
+      </Suspense> */}
     </>
 
   );

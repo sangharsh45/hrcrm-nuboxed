@@ -2,6 +2,7 @@ import * as types from "./SuppliersActionType";
 import { base_url, base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
+import { message } from "antd";
 
 export const setSuppliersViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_SUPPLIERS_VIEW_TYPE, payload: viewType });
@@ -108,6 +109,14 @@ export const handleLinkSuppliersOrderConfigureModal = (modalProps) => (
   });
 };
 
+export const handlePoLocationModal = (modalProps) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.HANDLE_PO_LOCATION_MODAL,
+    payload: modalProps,
+  });
+};
 export const handleLinkSuppleirCatalogueModal = (modalProps) => (
   dispatch
 ) => {
@@ -140,7 +149,7 @@ export const setClearbitPurchaseProductData = (data) => (dispatch) => {
  *  add supplies to supplier
  */
 
-export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
+export const linkPurchaseToSuppliers = (data, poSupplierDetailsId, supplierId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.LINK_PURCHASE_SUPPLIERS_REQUEST });
   axios
@@ -151,7 +160,7 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getGeneratorSuppliersList(res));
+      dispatch(getGeneratorSuppliersList(poSupplierDetailsId));
       dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.LINK_PURCHASE_SUPPLIERS_SUCCESS,
@@ -193,6 +202,36 @@ export const getGeneratorSuppliersList = (poSupplierDetailsId) => (dispatch) => 
       console.log(err);
       dispatch({
         type: types.GET_GENERATOR_SUPPLIERS_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const movePoToInventory = (data, distributorId) => (dispatch) => {
+  dispatch({
+    type: types.MOVE_TO_INVENTORY_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/orderInventoryLocationLink/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorOrderByDistributorId(distributorId,0))
+      window.location.reload()
+      dispatch({
+        type: types.MOVE_TO_INVENTORY_SUCCESS,
+        payload: res.data,
+      });
+
+      message.success("Po has moved to inventory !!")
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.MOVE_TO_INVENTORY_FAILURE,
         payload: err,
       });
     });
