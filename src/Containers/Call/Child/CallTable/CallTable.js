@@ -170,11 +170,8 @@ const [currentNameId, setCurrentNameId] = useState("");
                 >
                     {item.included &&
                   item.included.map((candidate, i) => {
-                     const data1 = candidate.empName
-                     .slice(0,2)
-                    //  .split("")[0]
-                     .toUpperCase();
-                   console.log("datas", data1);
+                    
+                    const data1 = candidate.empName ? candidate.empName.slice(0, 2).toUpperCase() : "No data"
                     return (
                       <Tooltip title={candidate.empName} key={i}>
                       <Avatar style={{ backgroundColor: "#f56a00" }}>

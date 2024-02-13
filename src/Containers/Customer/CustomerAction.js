@@ -3,7 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url,base_url2 } from "../../Config/Auth";
 import { message } from "antd";
-
+import Swal from 'sweetalert2'
 
 
 
@@ -660,7 +660,7 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      dispatch(getOpportunityRecord(userId));
+      // dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestContacts(userId, startDate, endDate));
       // dispatch(getContactListByCustomerId(customerId));
 
@@ -669,6 +669,12 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
         payload: res.data,
       });
       // cb && cb();
+      Swal.fire({
+        icon: 'error',
+        title: res.data.message,
+        // showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);

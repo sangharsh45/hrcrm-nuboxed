@@ -168,8 +168,8 @@ class ContactForm extends Component {
                 whatsapp: this.state.whatsapp ? "Different" : "Same",
               },
               this.props.userId,
-              () => this.handleReset(resetForm)
             );
+            this.handleReset(resetForm)
           }}
         >
           {({

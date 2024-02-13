@@ -381,13 +381,13 @@ function OpportunityTable(props) {
     <div className=' flex justify-end sticky top-28 z-auto'>
     <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[3rem]">Name</div>
+        <div className=" md:w-[16rem]">Name</div>
         <div className=" md:w-[5.1rem]">Start Date</div>
         <div className=" md:w-[4.2rem] ">End Date</div>
         <div className="md:w-[4.2rem]">Value</div>
-        <div className="md:w-[4.5rem]">Status</div>
+        <div className="md:w-[5.5rem]">Status</div>
         <div className="md:w-[1.8rem]">Sponsor</div> 
-        <div className="w-[9rem]"></div>
+        <div className="w-[7rem]"></div>
 
       </div>
 
@@ -429,7 +429,7 @@ function OpportunityTable(props) {
                 className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
-                <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                <div className=" flex font-medium flex-col md:w-[15rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full items-center"> 
           &nbsp;
           <div class="max-sm:w-full">
@@ -464,14 +464,14 @@ function OpportunityTable(props) {
                                 </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
                     {dayjs(item.startDate).format("DD/MM/YYYY")}
                  
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col  md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
          
          <h4 class=" text-xs text-cardBody font-poppins">
          {dayjs(item.endDate).format("DD/MM/YYYY")}
@@ -481,7 +481,7 @@ function OpportunityTable(props) {
        </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium justify-center flex-col  md:w-[8.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium justify-center flex-col  md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
                     <span>
@@ -491,7 +491,7 @@ function OpportunityTable(props) {
                  
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
          
          <h4 class=" text-xs text-cardBody font-poppins">
          <Tooltip title={item.oppStage}>
@@ -512,7 +512,7 @@ width={30}
        </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-14 max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
                     <Tooltip title={item.contactName}>
@@ -533,7 +533,7 @@ width={30}
                 </div>
               
                 <div class="flex md:items-center ">
-                  <div className=" flex font-medium flex-col md:w-[5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins">
                       <Tooltip title={item.description}>
            
@@ -547,7 +547,7 @@ width={30}
           </Tooltip>
                     </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[5rem]  max-sm:flex-row w-full max-sm:justify-between">
+                  <div className=" flex font-medium flex-col md:w-[2rem]  max-sm:flex-row w-full max-sm:justify-between">
                   <Tooltip title="Edit">
              {user.opportunityUpdateInd ===true && (
           <BorderColorIcon 
