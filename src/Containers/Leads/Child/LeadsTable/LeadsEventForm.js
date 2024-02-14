@@ -255,23 +255,23 @@ const {
                     endTime: 0,
                     assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  handleCallback
+                  () => handleCallback(resetForm)
                 )
               : addLeadsActivityEvent(
                   {
                     ...values,
                     leadsId:props.rowdata.leadsId,
                     ownerIds: userId === userId ? [userId] : [],
-                    startDate: `${newStartDate}T20:00:00Z`,
-                  endDate: `${newEndDate}T20:00:00Z`,
+                    startDate: `${newStartDate}T${newStartTime}`,
+                    endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
                     endTime: 0,
                     remindInd: reminder ? true : false,
                     assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  handleCallback
+                  resetForm()
                 );
-            !isEditing && resetForm();
+            
           }}
         >
           {({

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field, FieldArray, FastField,setFieldValue  } from "formik";
 import * as Yup from "yup";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
@@ -23,7 +23,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 const LeadsSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
   email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  // phoneNumber:Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  phoneNumber:Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function LeadsForm (props) {
@@ -59,7 +59,7 @@ props. getCrm();
           // enableReinitialize
           initialValues={{
             partnerName: "",
-            
+            source: "",
             url: "",
             sectorId: "",
             email: "",
@@ -76,6 +76,7 @@ props. getCrm();
             lastName:"",
             proposalValue:"",
             opportunityName:"",
+            countryDialCode:"",
             address: [
               {
                 address1: "",
@@ -97,9 +98,21 @@ props. getCrm();
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
-          () =>{ handleReset(resetForm);
-              }
             );
+            resetForm()
+  //           setFieldValue("sectorId", "");
+
+  // // Reset address fields
+  // setFieldValue("address", [
+  //   {
+  //     address1: "",
+  //     address2: "",
+  //     street: "",
+  //     city: "",
+  //     state: "",
+  //     postalCode: "",
+  //   },
+  // ]);
           }}
         >
           {({

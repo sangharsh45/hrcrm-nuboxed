@@ -227,7 +227,7 @@ function CallForm(props) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
-   console.log("bn",selectedOption,selected)
+
    return (
       <>
         <Formik
@@ -634,7 +634,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="timeZone"
+                        defaultMessage="time Zone"
                       />
                     }
                     selectType="timeZone"

@@ -1274,9 +1274,36 @@ export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
     });
 };
 
+
+export const updatePreferLang = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_PREFERED_LANG_REQUEST });
+  axios
+    .put(
+      `${base_url}/employee/update/preferedLanguage`,{ ...data },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      // dispatch(getUserDetails());
+      dispatch({
+        type: types.UPDATE_PREFERED_LANG_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.UPDATE_PREFERED_LANG_FAILURE,
+        payload: err,
+      });
+    });
 export const handleActionDrawerModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_ACTION_DRAWER_MODAL,
     payload: modalProps,
   });
+
 };
