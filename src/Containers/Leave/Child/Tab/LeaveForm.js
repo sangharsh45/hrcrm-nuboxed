@@ -6,7 +6,6 @@ import { Button,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import {  StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
@@ -187,7 +186,7 @@ console.log(this.state.firstCase)
                                         </Radio.Group> */}
 
                   
-                  <div class="mt-3 flex justify-between w-[100%]">
+                  <div class="mt-3 flex flex-col justify-between w-[100%]">
                     <div class="w-[47%]">
                       <Field
                         isRequired
@@ -210,31 +209,7 @@ console.log(this.state.firstCase)
 
                      
                     </div>
-                    <div>
-                    {/* <StyledLabel><FormattedMessage
-                      id="app.employeetype"
-                      defaultMessage="Employee Type"
-                    />
-                    </StyledLabel> */}
-                    
-                  </div>
-                  <div class=" w-3/12 max-sm:w-wk ml-4"
-                      style={{
-                       
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <StyledLabel> Half Day</StyledLabel>
-                      <Switch
-                         onChange={this.radioClick}
-                        checked={this.state.isAccepted}
-                        checkedChildren="Yes"
-                        unCheckedChildren="No"
-                      />
-                      
-                    </div>
-                  {this.state.isAccepted?(
-                   <div style={{ width: "47%" }}>
+                    <div style={{ width: "47%" }}>
                    <Field
                      isRequired
                      name="endDate"
@@ -266,26 +241,52 @@ console.log(this.state.firstCase)
                      }}
                    />
                  </div>
-                 
-                  ):(
-                    <div class=" flex items-center h-16 flex-row-reverse mr-4  max-sm:w-wk"
+                    <div>
+                    {/* <StyledLabel><FormattedMessage
+                      id="app.employeetype"
+                      defaultMessage="Employee Type"
+                    />
+                    </StyledLabel> */}
+                    
+                  </div>
+                  <div class="flex flex-row">
+                  <div class=" w-3/12 max-sm:w-wk ml-4"
                       style={{
                        
                         fontWeight: "bold",
                       }}
                     >
-                      
+                      <StyledLabel> Half Day</StyledLabel>
                       <Switch
-                         onChange={this.handleSwitchChange}
-                        checked={this.state.firstCase}
-                        checkedChildren="1st hlf"
-                        unCheckedChildren="2nd hlf"
+                         onChange={this.radioClick}
+                        checked={this.state.isAccepted}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
                       />
                       
                     </div>
-                  )}
+                  {this.state.isAccepted?(
+                <div class=" flex items-center h-16 flex-row-reverse mr-4  max-sm:w-wk"
+                style={{
+                 
+                  fontWeight: "bold",
+                }}
+              >
                 
-  
+                <Switch
+                   onChange={this.handleSwitchChange}
+                  checked={this.state.firstCase}
+                  checkedChildren="1st hlf"
+                  unCheckedChildren="2nd hlf"
+                />
+                
+              </div>
+                 
+                
+                 
+                  ): null}
+                
+                </div>
                     
                     
          

@@ -1273,3 +1273,10 @@ export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
       });
     });
 };
+
+export const handleActionDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACTION_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
