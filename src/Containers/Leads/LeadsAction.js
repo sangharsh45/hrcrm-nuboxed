@@ -36,7 +36,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     });
   
     axios
-      .post(`${base_url}/leads`, leads, {
+      .post(`${base_url}/leads/jk`, leads, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -1220,7 +1220,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           type: types.ADD_LEADS_ACTIVITY_CALL_SUCCESS,
           payload: res.data,
         });
-        // cb();
+        cb();
       })
       .catch((err) => {
         console.log(err);
@@ -1228,7 +1228,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           type: types.ADD_LEADS_ACTIVITY_CALL_FAILURE,
           payload: err,
         });
-        // cb();
+        cb();
       });
   };
 

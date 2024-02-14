@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect } from 'react';
 import { Timeline } from 'antd';
 import { connect } from 'react-redux';

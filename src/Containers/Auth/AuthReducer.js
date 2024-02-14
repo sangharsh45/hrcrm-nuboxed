@@ -126,6 +126,9 @@ const initialState = {
 
   settingPassword: false, 
   settingPasswordError: false,
+
+  updatingPreferedLang: false, 
+  updatingPreferedLangError: false, 
 };
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -240,8 +243,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingUserDetails: false,
-        userDetails:
-          action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
+        // userDetails:
+        //   action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
       };
     case types.GET_USER_DETAILS_FAILURE:
       return {
@@ -878,7 +881,15 @@ export const authReducer = (state = initialState, action) => {
                       };
 
 
-
+                      case types.UPDATE_PREFERED_LANG_REQUEST:
+                        return { ...state, updatingPreferedLang: true };
+                      case types.UPDATE_PREFERED_LANG_SUCCESS:
+                        return {
+                          ...state, updatingPreferedLang: false,
+                          userDetails:action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
+                        };
+                      case types.UPDATE_PREFERED_LANG_FAILURE:
+                        return { ...state, updatingPreferedLang: false, updatingPreferedLangError: true };
     default:
       return state;
   }

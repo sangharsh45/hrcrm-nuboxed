@@ -398,11 +398,11 @@ export const inputEmployeeDataSearch = (name) => (dispatch) => {
       },
     })
     .then((res) => {
-      message.success(res.data);
-      if (res.data.employeeId) {
-        console.log(res.data);
-        // dispatch(getAllLatestContactsForLazyLoading(res.data));
-      }
+      // message.success(res.data);
+      // if (res.data.employeeId) {
+      //   console.log(res.data);
+      //   // dispatch(getAllLatestContactsForLazyLoading(res.data));
+      // }
 
       dispatch({
         type: types.INPUT_EMPLOYEE_SEARCH_DATA_SUCCESS,

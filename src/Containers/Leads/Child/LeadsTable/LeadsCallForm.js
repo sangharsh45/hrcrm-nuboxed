@@ -327,25 +327,12 @@ function LeadsCallForm(props) {
                   endTime: 0,
                   assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
-                 handleCallback
+                () => handleCallback(resetForm)
               )
-              : addLeadsActivityCall(
-                {
-                  ...values,
-                  ...values,
-                  callCategory: category,
-                  callType: Type,
-                  leadsId:props.rowdata.leadsId,
-                  startDate: `${newStartDate}T20:00:00Z`,
-                  endDate: `${newEndDate}T20:00:00Z`,
-    
-                  startTime: 0,
-                  endTime: 0,
-                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
-                },
-                handleCallback
-              );
-          !isEditing && resetForm();
+              : addLeadsActivityCall(testVal,
+               resetForm()
+               );
+         
           }}
         >
           {({

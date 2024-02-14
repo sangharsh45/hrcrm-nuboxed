@@ -34,6 +34,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
@@ -48,20 +50,35 @@ const TaskApproveTable = (props) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [page, setPage] = useState(0);
-
+  const [hasMore, setHasMore] = useState(true);
+  
   useEffect(() => {
     setPage(page + 1);
     props.getAprrovalTaskTable(props.employeeId,page);
   }, []);
+
   const handleLoadMore = () => {
+    const taskPageMapd = props.approvalTaskTable && props.approvalTaskTable.length && props.approvalTaskTable[0].pageCount
     setTimeout(() => {
-      setPage(page + 1);
-      props.getAprrovalTaskTable(props.employeeId,page);
+      const {
+        getAprrovalTaskTable,
+        userDetails: { employeeId },
+      } = props;
+
+      if  (props.approvalTaskTable)
+      {
+        if (page < taskPageMapd) {
+          setPage(page + 1);
+          getAprrovalTaskTable(employeeId,page);
+      }
+      if (page === taskPageMapd){
+        setHasMore(false)
+      }
+    }
+      
     }, 100);
   };
-  const handleLoadPrevious = () => {
-    setPage(page - 1); // Decrease current page when "Load Previous" button is clicked
-  };
+
   function handleSetTaskNameId(item) {
     setCurrentNameId(item);
   }
@@ -70,10 +87,7 @@ const TaskApproveTable = (props) => {
      console.log(item);
    }
   
-const itemsPerPage=props.pageCount;
-const startIndex = page * itemsPerPage;
-const endIndex = startIndex + itemsPerPage;
-// console.log("pgggg",startIndex,endIndex)
+
   const {
     fetchingApproveTaskTable,
     fetchingApproveTaskTableError,
@@ -92,23 +106,7 @@ const endIndex = startIndex + itemsPerPage;
 
   return (
     <>
-      {endIndex < approvalTaskTable.length &&
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
-            <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
-            <Button
-              style={{
-                color: "#1f92e2",
-                fontWeight: "600",
-                fontSize: "15px",
-                padding: "4px 12px",
-                boxShadow: "0px 0px 5px 2px #d2e2ed",
-                borderRadius: "22px"
-              }}
-              onClick={() => handleLoadMore()}
-            >Load More</Button>
-            </FloatButton.Group>
-          </div>}
-
+      
           <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
           <div className=" md:w-[10rem]"><FormattedMessage
@@ -135,6 +133,14 @@ const endIndex = startIndex + itemsPerPage;
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>
 </div>
+<InfiniteScroll
+        dataLength={approvalTaskTable.length}
+        next={handleLoadMore}
+      hasMore={hasMore}
+        loader={fetchingApproveTaskTable?<div class="flex items-center" >Loading...</div>:null}
+        height={"75vh"}
+        endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+      >
           {approvalTaskTable.map((item) => { 
         const currentDate = moment();
         const completionDate = moment(item.completionDate);
@@ -341,6 +347,7 @@ const endIndex = startIndex + itemsPerPage;
 
                     )
                 })}
+                    </InfiniteScroll>
       </div>
 
 <UpdateTaskModal

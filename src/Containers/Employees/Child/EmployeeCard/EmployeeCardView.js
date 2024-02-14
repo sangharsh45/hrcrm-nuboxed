@@ -57,7 +57,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             <>
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
-             
+             {props.employees=="Data not Found" ? "Data not Found" :
             <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
                 
@@ -275,6 +275,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                  )  
             })}
               </div>
+}
               </div>
 
               <UpdateEmployeeModal
