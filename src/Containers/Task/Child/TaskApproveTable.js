@@ -73,7 +73,7 @@ const TaskApproveTable = (props) => {
 const itemsPerPage=props.pageCount;
 const startIndex = page * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
-console.log("pgggg",startIndex,endIndex)
+// console.log("pgggg",startIndex,endIndex)
   const {
     fetchingApproveTaskTable,
     fetchingApproveTaskTableError,
