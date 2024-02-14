@@ -1,21 +1,23 @@
 import React, { Component } from "react";
-import { Button,Switch } from "antd";
+import { Button,Switch,Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
+import {getDepartmentwiserUser} from "../../../Settings/SettingsAction"
+import {getDepartments} from "../../../Settings/Department/DepartmentAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
 import {getTimeZone} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
- import { updateEmployee } from "../../EmployeeAction";
+ import { updateEmployee, } from "../../EmployeeAction";
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-
+const { Option } = Select;
 
 class UpdateEmployeeForm extends Component {
   constructor(props) {
@@ -25,7 +27,8 @@ class UpdateEmployeeForm extends Component {
       checked: true,
       typeInd:false,
       role:[],
-      
+      reportingManager:"",
+      department:"",
       selectedRole:"",
       selectedCountry: '',
       selectedDept:"",
@@ -40,9 +43,11 @@ class UpdateEmployeeForm extends Component {
   
 
   componentDidMount() {
-   const { getCountries ,getTimeZone,getCurrencyList,getRoles,getlocation,getEmployeelist} = this.props;
+   const { getCountries ,getEmployeelist,getDepartments,getTimeZone,getCurrencyList,getRoles,getlocation,} = this.props;
     getRoles(this.props.organizationId);
     getTimeZone();
+    // getEmployeelist("cretiondate");
+    getDepartments();
     getCurrencyList();
 
 }
@@ -78,6 +83,13 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   
     return locationOptions;
   }
+ handleDepartment = (val) => {
+  this.setState({ department: val });
+    this.props.getDepartmentwiserUser(val);
+}
+handlereportingManager = (val) => {
+  this.setState({ reportingManager: val });
+}
   handleDeptChange = (event) => {
     const selectedDept = event.target.value;
     const filteredRoles = this.props.roles.filter((item) => item.departmentId === selectedDept);
@@ -160,6 +172,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   }
 
   render() {
+    const { user, reportingManager, department, selectedRow, dueDate } = this.state;
     const timeZoneOption = this.props.timeZone.map((item) => {
       return {
         label: item.zone_name
@@ -282,8 +295,14 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         this.props.updateEmployee(
           {
             ...values,
+            // workplace: currentEmployeeId.country_name ,
+            // location: currentEmployeeId.locationDetailsId ,
+            reportingManagerDeptId:department,
+            reportingManager:reportingManager,
+            // roleType: currentEmployeeId.departmentId,
+            // departmentId:currentEmployeeId.roleTypeId,
          
-            reportingManagerDeptId:values.reportingManagerDeptId,
+           
             
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
@@ -866,52 +885,27 @@ name="departmentId"
                   <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
                   <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
-                  <Field
-                    name="reportingManagerDeptId"
-                    label={<FormattedMessage
-                      id="app.department"
-                      defaultMessage="Department"
-                    />}
-                    isColumnWithoutNoCreate
-                    component={SelectComponent}
-                     value={values.reportingManagerDeptId}
-                    width={"100%"}
-                    options={
-                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
-                    }
-                    isColumn
-                    inlineLabel
-                     />
+                      <Select
+                            className="w-[250px]"
+                            value={department}
+                            onChange={(value) => this.handleDepartment(value)}
+                        >
+                            {this.props.departments.map((a) => {
+                                return <Option value={a.departmentId}>{a.departmentName}</Option>;
+                            })}
+                        </Select>
                      </div>
                   
                      <div class="w-w47.5 max-sm:w-wk">
-                     <Field
-                    name="reportingManager"
-                    isColumnWithoutNoCreate
-                    label={<FormattedMessage
-                      id="app.reportingManager"
-                      defaultMessage="Reporting Manager"
-                    />}
-                    component={SelectComponent}
-                    options={
-                      Array.isArray(
-                        this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
-                      )
-                        ? this.getEmployeesbyDepartment(
-                            "reportingManagerDeptId",
-                            values.reportingManagerDeptId
-                          )
-                        : []
-                    }
-                    isColumn
-                    value={values.reportingManager}
-                    filterOption={{
-                      filterType: "reportingManagerDeptId",
-                      filterValue: values.reportingManagerDeptId,
-                    }}
-                    disabled={!values.reportingManagerDeptId}
-                    inlineLabel
-                   />
+                     <Select
+                        className="w-[250px]"
+                        value={reportingManager}
+                        onChange={(value) => this.handlereportingManager(value)}
+                    >
+                        {this.props.departmentwiseUser.map((a) => {
+                            return <Option value={a.employeeId}>{a.empName}</Option>;
+                        })}
+                    </Select> 
               </div>
               </div>
                 </div>
@@ -933,7 +927,7 @@ name="departmentId"
     );
   }
 }
-const mapStateToProps = ({ auth,role,location,currency, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,settings,location,currency, employee,designations,departments }) => ({
     userDetails: auth.userDetails,
     roles: role.roles,
     timeZone: auth.timeZone,
@@ -945,6 +939,7 @@ const mapStateToProps = ({ auth,role,location,currency, employee,designations,de
     departmentId:departments.departmentId,
     designationTypeId:designations.designationTypeId,
     employees:employee.employees,
+    departmentwiseUser:settings.departmentwiseUser,
     departments: departments.departments,
     currencyList: currency.currencyList,
   });
@@ -953,12 +948,14 @@ const mapStateToProps = ({ auth,role,location,currency, employee,designations,de
         updateEmployee,
         getTimeZone,
         getCurrencyList,
+        getDepartments,
+        getDepartmentwiserUser,
+        // getEmployeelist,
     //    getCountries,
     //    getDesignations,
         // getDepartments,
         getRoles,
-    //     getlocation,
-    //     getEmployeelist,
+
     }, dispatch);
     export default connect(mapStateToProps, mapDispatchToProps)(UpdateEmployeeForm);
 

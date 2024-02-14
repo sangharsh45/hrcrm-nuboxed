@@ -117,7 +117,7 @@ style={{ fontSize: "1rem", }}
         </span>
         </Badge>
     )}
-{user.imInd === true  && (
+{user.erpInd === true  && (
       <Badge
       size="small"
       // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}

@@ -65,6 +65,7 @@ const AddPurchaseOrder = (props) => {
                         {
                             ...values,
                         },
+                        props.poSupplierDetailsId,
                         props.supplier.supplierId
                     );
                     resetForm();
@@ -199,7 +200,7 @@ const AddPurchaseOrder = (props) => {
 const mapStateToProps = ({ suppliers, auth, supplies }) => ({
     userId: auth.userDetails.userId,
     purchaseList: supplies.purchaseList,
-    poSupplierDetailsId: suppliers.poSupplierDetailsId,
+    poSupplierDetailsId: suppliers.pOSupplierDetailsId,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     linkPurchaseToSuppliers,

@@ -78,20 +78,17 @@ function EventCardList (props) {
                   id="app.start"
                   defaultMessage="start"
                 /></div>
-        <div className=" md:w-[8.43rem] "><FormattedMessage
+        <div className=" md:w-[13.43rem] "><FormattedMessage
                   id="app.end"
                   defaultMessage="end"
                 /></div>
-        <div className="md:w-[9.7rem]"><FormattedMessage
-                  id="app.team"
-                  defaultMessage="team"
-                /></div>
+     
         <div className="md:w-[6.32rem]"><FormattedMessage
                   id="app.include"
                   defaultMessage="include"
                 /></div>
      
-        <div className="md:w-[6.15rem]"><FormattedMessage
+        <div className="md:w-[8.15rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
@@ -162,10 +159,10 @@ function EventCardList (props) {
                                     {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[10.32rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[5.32rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
-                                    {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
+                                    {` ${dayjs(item.endDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[9.32rem] max-sm:flex-row  w-full">

@@ -128,17 +128,17 @@ function ContactCardList(props) {
       
      
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" flex justify-between w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.5rem]">
         <FormattedMessage
                   id="app.name"
                   defaultMessage="Name"
                 /></div>
-        <div className=" md:w-[11.1rem]"><FormattedMessage
+        <div className=" md:w-[13.1rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="Company"
                 /></div>
-        <div className=" md:w-[8.1rem]"><FormattedMessage
+        <div className=" md:w-[9.1rem]"><FormattedMessage
                   id="app.designation"
                   defaultMessage="Designation"
                 /></div>
@@ -252,7 +252,7 @@ function ContactCardList(props) {
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                    
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}

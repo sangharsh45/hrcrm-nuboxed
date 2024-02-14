@@ -386,7 +386,7 @@ imgHeight={"1.8em"}
             />
           }
         >
-            {user.opportunityUpdateInd ===true && user.crmInd === true && (
+            {user.opportunityUpdateInd ===true && user.crmInd === true &&  (
               
             <span
             className=" !text-base cursor-pointer text-[grey]"
@@ -406,7 +406,7 @@ imgHeight={"1.8em"}
             onConfirm={() => deleteOpportunityData(item.opportunityId)}
           >
            
-             {user.opportunityDeleteInd ===true && user.crmInd === true && (
+             {user.opportunityDeleteInd ===true && user.crmInd === true &&  (
             <DeleteOutlined
             type="delete" className=" !text-base cursor-pointer text-[red]" />
              )}

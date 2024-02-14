@@ -11,13 +11,7 @@ const CompletedTaskTypeDrawer = (props) => {
         title= {`${props.particularTaskName.name}`}
         width="60%"
         visible={props.completedtaskDrwr}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem"}}
         onClose={()  => props.handleCompletedTaskTypeDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
 <CompletedTaskTypeDrawerTable particularTaskName={props.particularTaskName}/>

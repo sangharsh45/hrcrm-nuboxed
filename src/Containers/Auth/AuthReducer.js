@@ -23,6 +23,8 @@ const initialState = {
   linkingOrgDocsPrivate: false,
   linkingOrgDocsPrivateError: false,
 
+  addDrawerActionModal:false,
+
   addingOrganization:false,
   addingOrganizationError:false,
 
@@ -879,6 +881,9 @@ export const authReducer = (state = initialState, action) => {
                         fetchingOrganization: false,
                         fetchingOrganizationError: true,
                       };
+
+                      case types.HANDLE_ACTION_DRAWER_MODAL:
+                        return { ...state, addDrawerActionModal: action.payload };
 
 
                       case types.UPDATE_PREFERED_LANG_REQUEST:

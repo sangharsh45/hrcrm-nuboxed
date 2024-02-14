@@ -16,11 +16,8 @@ const AddLeavesModal = (props) => {
           defaultMessage="Apply for Leaves"
         />}
         width={drawerWidth}
-        visible={addLeaveModal}
-        maskClosable={false}
-        destroyOnClose      
+        visible={addLeaveModal}    
         onClose={() => handleLeavesModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <LeaveForm {...formProps} />

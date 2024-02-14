@@ -1274,6 +1274,7 @@ export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
     });
 };
 
+
 export const updatePreferLang = (data) => (dispatch) => {
   dispatch({ type: types.UPDATE_PREFERED_LANG_REQUEST });
   axios
@@ -1299,4 +1300,10 @@ export const updatePreferLang = (data) => (dispatch) => {
         payload: err,
       });
     });
+export const handleActionDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACTION_DRAWER_MODAL,
+    payload: modalProps,
+  });
+
 };

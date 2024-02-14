@@ -8,7 +8,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import PeopleIcon from '@mui/icons-material/People';
-import { Input, Tooltip, } from "antd";
+import { Input, Tooltip,Avatar } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Badge } from "antd";
 import {
@@ -122,7 +122,8 @@ const ContactActionLeft = (props) => {
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <AccountBalanceIcon />
+           <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+             <AccountBalanceIcon className="text-white" /></Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -146,7 +147,9 @@ const ContactActionLeft = (props) => {
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-         <PeopleIcon/>
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+         <PeopleIcon className="text-white"/>
+         </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -171,7 +174,9 @@ const ContactActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-           ALL
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+          <label className="text-white"> ALL</label>
+           </Avatar>
           </span>
         </Badge>
       </Tooltip>

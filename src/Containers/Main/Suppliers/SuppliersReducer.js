@@ -94,6 +94,9 @@ const initialState = {
   fetchingGeneratorSupplierListError: false,
   generatorSuppliers: [],
 
+  moveToInventory: false,
+  moveToInventoryError: false,
+
   addSupplierSubscriptionModal: false,
 
   fetchingPurchaseSupplierList: false,
@@ -126,6 +129,8 @@ const initialState = {
   feedbacks: [],
 
   addSuppliersActivityModal: false,
+
+  addlocationInPo: false,
 
   addingSuppliersActivityCall: false,
   addingSuppliersActivityCallError: false,
@@ -379,6 +384,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         addLinkSuppliersOrderConfigureModal: action.payload,
+        generatorSuppliers: []
       };
 
     case types.SET_CLEARBIT_PURCHASE_DATA:
@@ -422,6 +428,20 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingGeneratorSupplierListError: true,
       };
 
+    case types.MOVE_TO_INVENTORY_REQUEST:
+      return { ...state, moveToInventory: true };
+    case types.MOVE_TO_INVENTORY_SUCCESS:
+      return {
+        ...state,
+        moveToInventory: false,
+      };
+    case types.MOVE_TO_INVENTORY_FAILURE:
+      return {
+        ...state,
+        moveToInventory: false,
+        moveToInventoryError: true,
+      };
+
     case types.GET_GENERATOR_CATALOGUE_SUPPLIERS_LIST_REQUEST:
       return { ...state, fetchingGeneratorCatalogueSupplierList: true };
     case types.GET_GENERATOR_CATALOGUE_SUPPLIERS_LIST_SUCCESS:
@@ -439,6 +459,9 @@ export const suppliersReducer = (state = initialState, action) => {
 
     case types.HANDLE_SUPPLIERS_SUBSCRIPTION_MODAL:
       return { ...state, addSupplierSubscriptionModal: action.payload };
+
+    case types.HANDLE_PO_LOCATION_MODAL:
+      return { ...state, addlocationInPo: action.payload };
 
     case types.GET_PURCHASE_SUPPLIERS_LIST_REQUEST:
       return { ...state, fetchingPurchaseSupplierList: true };
