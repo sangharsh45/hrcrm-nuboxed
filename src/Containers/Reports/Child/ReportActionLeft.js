@@ -76,6 +76,7 @@ class ReportActionLeft extends React.Component {
         
         </span>
         </Badge>
+        {user.hrInd === true  && (
         <Badge
         size="small"
       >
@@ -90,8 +91,8 @@ class ReportActionLeft extends React.Component {
               </Tooltip>
         </span>
   </Badge>
-       
-    {/* {user.crmInd === true && ( */}
+          )} 
+    {user.crmInd === true && (
         <Badge
         size="small"
       >
@@ -107,11 +108,11 @@ style={{ fontSize: "1rem", }}
 </Tooltip>        
         </span>
         </Badge>
-{/* )} */}
+ )} 
        
 
    
-    {/* {user.erpInd === true && ( */}
+    {user.erpInd === true && (
          <Badge
          size="small"
        >
@@ -125,8 +126,8 @@ style={{ fontSize: "1rem", }}
           </Tooltip>
         </span>
         </Badge>
-
-{/* {user.imInd === true  && ( */}
+  )}
+{user.erpInd === true  && (
       <Badge
       size="small"
     >
@@ -138,9 +139,9 @@ style={{ fontSize: "1rem", }}
            </Tooltip>
         </span>
         </Badge>
-{/* )} */}
+ )} 
    
-    {/* {user.erpInd === true && ( */}
+    {user.erpInd === true && (
         <Badge
         size="small"
         // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -160,8 +161,8 @@ style={{ fontSize: "1rem", }}
           
         </span>
         </Badge>
-    {/* )} */}
-        {/* {user.imInd === true  && ( */}
+     )} 
+        {user.imInd === true  && (
             <Badge
             size="small"
             // count={(props.reportViewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -183,7 +184,7 @@ style={{ fontSize: "1rem" ,}}
 </Tooltip>       
         </span>
         </Badge>
-{/* )} */}
+ )} 
     
    </div>
           {user.department === "Management" && (
