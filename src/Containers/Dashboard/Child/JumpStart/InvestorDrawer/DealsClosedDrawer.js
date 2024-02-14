@@ -13,15 +13,9 @@ const DealsClosedDrawer = (props) => {
           id="app.dealsClosed"
           defaultMessage="Deals Closed"
         />}
-        width="45%"
+        width="60%"
         visible={props.openDealClosed}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ top: 40 }}
         onClose={()  => props.handleDealClosedDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
         <DealClosedTable/>

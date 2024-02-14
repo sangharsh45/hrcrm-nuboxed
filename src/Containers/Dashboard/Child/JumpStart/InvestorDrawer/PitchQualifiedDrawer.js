@@ -13,15 +13,9 @@ const PitchQualifiedDrawer = (props) => {
     id="app.pitchQualified"
     defaultMessage="Pitch Qualified"
   />}
-        width="45%"
+        width="60%"
         visible={props.openPitchQualified}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ top: 40 }}
         onClose={()  => props.handlePitchQualifiedDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
         <PitchQualifiedTable/>
