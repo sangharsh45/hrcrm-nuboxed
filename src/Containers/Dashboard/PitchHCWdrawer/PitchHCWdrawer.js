@@ -14,15 +14,10 @@ const PitchHCWdrawer = (props) => {
           defaultMessage="Pitch HCW"
         />}
       
-        width="45%"
+        width="60%"
         visible={props.openPitchHCWdrawer}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ top: 40 }}
         onClose={()  => props.handlePitchHCWdrawer(false)}
-        footer={null}
+
       >
         <Suspense fallback={<BundleLoader />}>
 <PitchHCWDrawerTab/>
