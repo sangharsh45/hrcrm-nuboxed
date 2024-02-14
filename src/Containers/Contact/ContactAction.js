@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import Swal from "sweetalert2";
+import { message } from "antd";
 import { getContactListByOpportunityId } from "../Opportunity/OpportunityAction";
 /**
  * contact modal action
@@ -627,6 +628,7 @@ export const inputContactDataSearch = (name) => (dispatch) => {
       });
     })
     .catch((err) => {
+      message.error("Contact list is empty");
       dispatch({
         type: types.INPUT_CONTACT_SEARCH_DATA_FAILURE,
         payload: err,

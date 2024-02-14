@@ -133,7 +133,7 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" flex justify-between w-[94.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[17.6rem]">Name</div>
         <div className=" md:w-[5.1rem]">Sector</div>
         <div className=" md:w-[5.8rem] ">Country</div>
@@ -177,7 +177,7 @@ const [rowdata, setrowdata] = useState("");
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col w-[17rem]   max-sm:w-full">
+                                   <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
                                    <div className="flex max-sm:w-full">
                       <div>
                         <SubTitle>
@@ -221,7 +221,7 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
-                                <div className=" flex font-medium flex-col items-center  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col items-center  md:w-[8rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                    
                                     <h4 class=" text-xs text-cardBody font-poppins">   
