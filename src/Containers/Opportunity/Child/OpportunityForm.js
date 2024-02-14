@@ -18,6 +18,7 @@ import {
   getOppLinkedWorkflow,
   getOppLinkedStages,
 } from "../OpportunityAction";
+import {getAssignedToList} from "../../Employees/EmployeeAction"
 import { getCrm} from "../../Leads/LeadsAction";
 import {getCurrency} from "../../Auth/AuthAction"
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
@@ -49,6 +50,7 @@ function OpportunityForm(props) {
      props.getOppLinkedStages(props.orgId);
      props.getOppLinkedWorkflow(props.orgId);
      props.getCrm();
+     props.getAssignedToList(props.orgId);
      props.getAllEmployeelist();
      props.getCurrency();
   }, []);
@@ -165,7 +167,7 @@ function OpportunityForm(props) {
       };
     });
 
-const AllEmplo = props.allEmployeeList.map((item) => {
+const AllEmplo = props.assignedToList.map((item) => {
   return {
     label: `${item.empName || ""}`,
     value: item.employeeId,
@@ -188,9 +190,10 @@ const AllEmplo = props.allEmployeeList.map((item) => {
   }
 
   const {
-    user: { userId },
+    user: { userId,empName, },
     addingOpportunity,
     startDate,
+    employeeId,
     endDate,
   } = props;
   const selectedOption = props.crmAllData.find((item) => item.empName === selected);
@@ -215,7 +218,7 @@ const AllEmplo = props.allEmployeeList.map((item) => {
           oppInnitiative: "",
           oppStage: "",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
-          include:"",
+          included: [],
         }}
         validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
@@ -544,23 +547,23 @@ const AllEmplo = props.allEmployeeList.map((item) => {
 
        <div class=" mt-2">
        <Field
-                    name="include"
-                    isColumnWithoutNoCreate
+                    name="included"
+                    // label="Include"
                     label={
                       <FormattedMessage
                         id="app.include"
-                        defaultMessage="Include"
+                        defaultMessage="include"
                       />
                     }
+                    mode
+                    placeholder="Select"
                     component={SelectComponent}
-                    options={
-                      Array.isArray(AllEmplo)
-                        ? AllEmplo
-                        : []
-                    }
-                    isColumn
-                    value={values.employeeId}
-                    inlineLabel
+                    options={Array.isArray(AllEmplo) ? AllEmplo : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${empName || ""} `,
+                      value: employeeId,
+                    }}
                   />
         </div>        
 <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">
@@ -738,7 +741,7 @@ const AllEmplo = props.allEmployeeList.map((item) => {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity,currency,investor, contact, customer,leads }) => ({
+const mapStateToProps = ({ auth, opportunity,employee,currency,investor, contact, customer,leads }) => ({
   user: auth.userDetails,
   crmAllData:leads.crmAllData,
   userId: auth.userDetails.userId,
@@ -760,6 +763,7 @@ const mapStateToProps = ({ auth, opportunity,currency,investor, contact, custome
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName,
   allEmployeeList:investor.allEmployeeList,
+  assignedToList:employee.assignedToList,
   currencies: auth.currencies,
 });
 
@@ -774,6 +778,7 @@ const mapDispatchToProps = (dispatch) =>
       getOppLinkedStages,
       getCrm,
       getAllEmployeelist,
+      getAssignedToList,
       getCurrency
     },
     dispatch

@@ -17,7 +17,7 @@ import {
   NavbarWrapper,
 } from "../../Components/UI/Layout";
 import { Select } from "antd";
-import { updateUserById } from "../Auth/AuthAction";
+import { updateUserById,handleActionDrawerModal } from "../Auth/AuthAction";
 import { setLanguage } from "../../Language/LanguageAction";
 import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
 import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
@@ -28,6 +28,7 @@ import { BundleLoader } from "../../Components/Placeholder";
 import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
 import { getPresentNotifications } from "../Notification/NotificationAction";
 import { MultiAvatar } from "../../Components/UI/Elements";
+import AddActionModal from "./AddActionModal";
 const NavMenu = lazy(() =>
   import("./NavMenu")
 );
@@ -534,7 +535,14 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
+                  <div class=" text-[blue] font-base cursor-pointer "
+                   onClick={() => {
+                    // handleRowData(item);
+                    props.handleActionDrawerModal(true);
+                 
+                  }}
+                  >Action Required</div>
+                  <div class=" text-white bg-mainclr h-[1.75rem] ml-8 mr-3 max-sm:hidden"
                     style={{
                       border: "1px solid tomato",
                       borderRadius: "5px",
@@ -835,7 +843,11 @@ function MainApp(props) {
           </LayoutWrapper>
         </LayoutWrapper>
       </ThemeProvider>
-
+      <AddActionModal
+        // rowdata={rowdata}
+        addDrawerActionModal={props.addDrawerActionModal}
+        handleActionDrawerModal={props.handleActionDrawerModal}
+      />
       <LiveMesssageModal
         addMessageModal={props.addMessageModal}
         handleMessageModal={props.handleMessageModal}
@@ -872,6 +884,7 @@ const mapStateToProps = ({
   language: language.language,
   user: auth.userDetails,
   userDetails: auth.userDetails,
+  addDrawerActionModal:auth.addDrawerActionModal,
   addMessageModal: opportunity.addMessageModal,
   // employeeId: auth.userDetails.employeeId,
   userId: auth.userDetails.employeeId,
@@ -915,6 +928,7 @@ const mapDispatchToProps = (dispatch) =>
       setLanguage,
       getOpportunityRecord,
       handleMessageModal,
+      handleActionDrawerModal,
     },
     dispatch
   );

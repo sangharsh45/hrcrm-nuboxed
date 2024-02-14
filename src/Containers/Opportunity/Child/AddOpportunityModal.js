@@ -16,10 +16,7 @@ const AddOpportunityModal = (props) => {
         />}
         width="60%"
         visible={addOpportunityModal}
-        maskClosable={false}
-        destroyOnClose
         onClose={() => handleOpportunityModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <OpportunityForm {...formProps}/>

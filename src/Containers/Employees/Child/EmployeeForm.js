@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip,Switch } from "antd";
+import { Button, Tooltip,Switch,Select } from "antd";
 import { FormattedMessage } from "react-intl";
-import { Listbox, } from '@headlessui/react'
+import {getDepartmentwiserUser} from "../../Settings/SettingsAction"
 import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries,getTimeZone} from "../../Auth/AuthAction"
@@ -20,11 +20,13 @@ import {getRoles} from "../../Settings/Category/Role/RoleAction"
 import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-
+const { Option } = Select;
 
 function EmployeeForm (props) {
 
   const [active,setActive]=useState(false);
+  const [department, setDepartment] = useState("");
+  const [reportingManager, setreportingManager] = useState("")
   const [checked,setChecked]=useState(true);
   const [typeInd,setTypeInd]=useState(false);
   const [selectedDept,setSelectedDept]=useState("");
@@ -62,6 +64,14 @@ function EmployeeForm (props) {
     };
   });
 
+  const handleDepartment = (val) => {
+    setDepartment(val)
+    props.getDepartmentwiserUser(val);
+}
+
+const handlereportingManager = (val) => {
+  setreportingManager(val)
+}
   const handleDeptChange = (event) => {
     const selectedDept = event.target.value;
     const filteredRoles = props.roles.filter((item) => item.departmentId === selectedDept);
@@ -161,11 +171,12 @@ const currencyNameOption = sortedCurrency.map((item) => {
 });
 
   useEffect(()=>{
-    const { getCountries ,getTimeZone,getCurrencyList,getAssignedToList,getRoles,getlocation,} = props;
+    const { getCountries ,getDepartments,getTimeZone,getCurrencyList,getAssignedToList,getRoles,getlocation,} = props;
     getRoles(props.organizationId);
     getCountries(getCountries);
     getlocation(props.orgId);
     getCurrencyList();
+    getDepartments();
     getAssignedToList(props.orgId)
     getTimeZone();
 },[]);
@@ -246,7 +257,7 @@ const countryNameOption = props.countries.map((item) => {
             emailId: "",
             countryDialCode: "",
             countryDialCode1: "",
-            reportingManagerDeptId:"",
+           
             phoneNo: "",
             // location:selectedLocation,
             // workplace:selectedCountry,
@@ -269,7 +280,7 @@ const countryNameOption = props.countries.map((item) => {
             type: typeInd ? "true" : "false",
             employee_type: workType,
             // job_type: active,
-            reportingManager:"",
+         
             // reportingManager: props.userDetails.userId
             //   ? props.userDetails.userId
             //   : "",
@@ -291,7 +302,8 @@ const countryNameOption = props.countries.map((item) => {
           onSubmit={(values, { resetForm }) => {
             props.addEmployee({
               ...values,
-              reportingManagerDeptId:values.reportingManagerDeptId,
+              reportingManagerDeptId:department,
+            reportingManager:reportingManager,
               // location:selectedLocation,
               // workplace:selectedCountry,
               // roleType:selectedRole,
@@ -1001,52 +1013,27 @@ const countryNameOption = props.countries.map((item) => {
 
                   <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
-                      <Field
-                    name="reportingManagerDeptId"
-                    label={<FormattedMessage
-                      id="app.department"
-                      defaultMessage="Department"
-                    />}
-                    isColumnWithoutNoCreate
-                    component={SelectComponent}
-                     value={values.reportingManagerDeptId}
-                    width={"100%"}
-                    options={
-                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
-                    }
-                    isColumn
-                    inlineLabel
-                     />
+                      <Select
+                    className="w-[250px]"
+                        value={department}
+                        onChange={(value) => handleDepartment(value)}
+                    >
+                        {props.departments.map((a) => {
+                            return <Option value={a.departmentId}>{a.departmentName}</Option>;
+                        })}
+                    </Select>
                      </div>
                     
                      <div class="w-w48  max-sm:w-wk">
-                     <Field
-                    name="reportingManager"
-                    isColumnWithoutNoCreate
-                    label={<FormattedMessage
-                      id="app.reportingManager"
-                      defaultMessage="Reporting Manager"
-                    />}
-                    component={SelectComponent}
-                    options={
-                      Array.isArray(
-                        getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
-                      )
-                        ? getEmployeesbyDepartment(
-                            "reportingManagerDeptId",
-                            values.reportingManagerDeptId
-                          )
-                        : []
-                    }
-                    isColumn
-                    value={values.reportingManager}
-                    filterOption={{
-                      filterType: "reportingManagerDeptId",
-                      filterValue: values.reportingManagerDeptId,
-                    }}
-                    disabled={!values.reportingManagerDeptId}
-                    inlineLabel
-                   />
+                     <Select
+                        className="w-[250px]"
+                        value={reportingManager}
+                        onChange={(value) => handlereportingManager(value)}
+                    >
+                        {props.departmentwiseUser.map((a) => {
+                            return <Option value={a.employeeId}>{a.empName}</Option>;
+                        })}
+                    </Select> 
 
               </div>
               </div>
@@ -1070,7 +1057,7 @@ const countryNameOption = props.countries.map((item) => {
     );
   
 }
-const mapStateToProps = ({ auth,role,location,currency, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,location,currency,settings, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
   currencyList: currency.currencyList,
@@ -1086,6 +1073,7 @@ const mapStateToProps = ({ auth,role,location,currency, employee,designations,de
   designationTypeId:designations.designationTypeId,
   employees:employee.employees,
   departments: departments.departments,
+  departmentwiseUser:settings.departmentwiseUser,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
@@ -1093,6 +1081,7 @@ const mapDispatchToProps = (dispatch) =>
      getCountries,
      getDesignations,
       getDepartments,
+      getDepartmentwiserUser,
       getRoles,
       getlocation,
       getCurrencyList,

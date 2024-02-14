@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Button, Switch,Select } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import {getAllCustomerData} from "../../Customer/CustomerAction"
@@ -42,7 +43,7 @@ function UpdateEventForm (props) {
   //   };
   // }
   const includeOption = props.setEditingEvents.included===null?[]: props.setEditingEvents.included.map((item) => {
-    return item.employeeId
+    return item.fullName
   })
   const [includeNames, setInclude] = useState(includeOption);
  function  handleCallback ()  {
@@ -57,6 +58,7 @@ function UpdateEventForm (props) {
   useEffect(()=> {
 
     props.getAllCustomerData(props.userId)
+    props.getAssignedToList(props.orgId);
     props.getAllOpportunityData(props.userId)
     props.getFilteredEmailContact(props.userId);
    },[])
@@ -64,7 +66,7 @@ function UpdateEventForm (props) {
   useEffect(() => {
     console.log("helo")
     const includeOption = props.setEditingEvents.included===null?[]: props.setEditingEvents.included.map((item) => {
-      return item.employeeId
+      return item.fullName
     })
 
     
@@ -125,9 +127,9 @@ function UpdateEventForm (props) {
         value: item.customerId,
       };
     });
-    const employeeOption = props.employees.map((item) => {
+    const employeeOption = props.assignedToList.map((item) => {
       return {
-        label: item.fullName,
+        label: item.empName,
         value: item.employeeId,
       };
     });
@@ -644,9 +646,9 @@ function UpdateEventForm (props) {
                         onChange={handleChangeInclude}
                       >
   
-                        {props.employees.map((item, i) => {
+                        {props.assignedToList.map((item, i) => {
                           return (
-                            <Option value={item.employeeId}>{item.fullName}</Option>
+                            <Option value={item.employeeId}>{item.empName}</Option>
                           )
                         })}
                       </Select>
@@ -744,11 +746,13 @@ const mapStateToProps = ({ auth, event,opportunity,candidate, employee, customer
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  orgId: auth.userDetails.organizationId,
   userId:auth.userDetails.userId,
   filteredContact: candidate.filteredContact,
   setEditingEvents: event.setEditingEvents,
   allOpportunityData:opportunity.allOpportunityData,
   employees: employee.employees,
+  assignedToList:employee.assignedToList,
   events: events.events,
 });
 
@@ -757,6 +761,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllCustomerData,
       getAllOpportunityData,
+      getAssignedToList,
       updateEvent,
       handleChooserModal,
       handleEventModal,
