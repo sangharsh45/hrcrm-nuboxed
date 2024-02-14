@@ -773,6 +773,7 @@ export const inputCustomerDataSearch = (name) => (dispatch) => {
       });
     })
     .catch((err) => {
+      message.error("Customer list is empty");
       dispatch({
         type: types.INPUT_CUSTOMER_SEARCH_DATA_FAILURE,
         payload: err,

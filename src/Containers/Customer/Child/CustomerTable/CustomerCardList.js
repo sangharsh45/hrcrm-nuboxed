@@ -158,7 +158,7 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-        <div className=" flex  w-[88.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" flex  w-[90.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[18.7rem]"> 
          <FormattedMessage
                         id="app.name"
@@ -437,8 +437,8 @@ const [rowdata, setrowdata] = useState("");
                        <Button type="primary">
                      <span class="text-sm" >
                      <FormattedMessage
-                        id="app.convertAsCustomer"
-                        defaultMessage="Convert as Customer"
+                        id="app.addascustomer"
+                        defaultMessage="Add as Customer"
                       />
                      
                       
@@ -504,7 +504,7 @@ const [rowdata, setrowdata] = useState("");
                   handleCustomerContactDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", cursor: "pointer", }}
+                style={{color:"#709ab3", fontSize: "1rem", cursor: "pointer", }}
               />
            </Tooltip>
                         </div>
@@ -516,7 +516,7 @@ const [rowdata, setrowdata] = useState("");
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{  cursor: "pointer", fontSize: "1rem" }}
+                style={{color:"#AF5910",  cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
 
@@ -542,7 +542,7 @@ const [rowdata, setrowdata] = useState("");
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                style={{ color: "#4bc076", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
 
@@ -553,7 +553,7 @@ const [rowdata, setrowdata] = useState("");
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
-<LocationOnIcon   style={{
+<LocationOnIcon   style={{color:"#960A0A",
     cursor: "pointer",
     fontSize: "1rem"
   }}/>
@@ -564,7 +564,7 @@ const [rowdata, setrowdata] = useState("");
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
+                style={{ cursor: "pointer",fontSize: "1rem",color: "tomato", }}
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);

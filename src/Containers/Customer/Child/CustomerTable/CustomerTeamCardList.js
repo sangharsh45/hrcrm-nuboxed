@@ -136,12 +136,12 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[8.1rem]">Sector</div>
-        <div className=" md:w-[6.8rem] ">Country</div>
+        <div className=" flex justify-between w-[94.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[14.1rem]">Name</div>
+        <div className=" md:w-[6.12rem]">Sector</div>
+        <div className=" md:w-[8.8rem] ">Country</div>
         <div className="md:w-[5.9rem]"># Opportunity</div>
-        <div className="md:w-[6.8rem]">Pipeline</div>
+        <div className="md:w-[8.81rem]">Pipeline</div>
         <div className="md:w-[6.9rem]">Weighted</div>
         <div className="md:w-[5.2rem]">Assigned to</div>
         <div className="md:w-[11.3rem]">Owner</div>
