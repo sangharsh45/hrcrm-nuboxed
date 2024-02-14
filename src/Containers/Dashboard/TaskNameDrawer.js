@@ -9,15 +9,9 @@ const TaskNameDrawer = (props) => {
     <>
       <StyledDrawer
         title= {`${props.particularTaskName.name}`}
-        width="60%"
+        width="70%"
         visible={props.taskNameDrwr}
-        maskClosable={false}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem"}}
         onClose={()  => props.handleTaskNameDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
 <TaskNameDrawerTable particularTaskName={props.particularTaskName}/>
