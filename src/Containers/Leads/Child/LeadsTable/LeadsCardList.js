@@ -85,14 +85,14 @@ const LeadsCardList = (props) => {
 
    return (
     <>
-     <div className=' flex justify-end sticky top-28 z-auto'>
+     <div className=' flex  justify-center  sticky top-28 z-auto'>
      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12.1rem]">Name</div>
         <div className=" md:w-[9.1rem]"></div>
         <div className=" md:w-[7.2rem] ">Phone #</div>
-        <div className="md:w-[10.8rem]">Country</div>
-        <div className="md:w-[10.5rem]">Company</div>
+        <div className="md:w-[9.8rem]">Country</div>
+        <div className="md:w-[11.5rem]">Company</div>
         <div className="md:w-[6.8rem]">Sector</div> 
         <div className="md:w-[8.2rem]">Assigned to</div>
         <div className="md:w-[4.5rem]">Owner</div>
@@ -139,7 +139,7 @@ const LeadsCardList = (props) => {
           return (
             <div>
               <div
-                className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-[0.5rem] h-11 items-center p-3"
               >
                 <div class="flex ">
                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
@@ -202,7 +202,7 @@ const LeadsCardList = (props) => {
                     </div>
                     <div>
                       <ButtonGroup>
-                        <RoleButton
+                        <RoleButton1
                           type="Warm"
                           iconType="	fas fa-burn"
                           // tooltip="Warm"
@@ -222,7 +222,7 @@ const LeadsCardList = (props) => {
                     </div>
                     <div>
                       <ButtonGroup>
-                        <RoleButton
+                        <RoleButton2
                           type="Cold"
                           iconType="far fa-snowflake"
                           // tooltip="Cold"
@@ -303,7 +303,7 @@ const LeadsCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex md:items-center ">
-                  <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[7.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins">
                       <span>
                       {item.assignedTo === null ? (
@@ -346,7 +346,7 @@ const LeadsCardList = (props) => {
                             props.handleLeadsConfirmationModal(true);
                          
                           }}
-                          className=" !text-base cursor-pointer "
+                          className="!text-base cursor-pointer text-[blue]"
                         />
                       </Tooltip>
                      
@@ -375,7 +375,7 @@ const LeadsCardList = (props) => {
                         }
                       >
                         <AddchartIcon
-                          className=" !text-base cursor-pointer "
+                         className="!text-base cursor-pointer text-blue-500"
                           onClick={() => {
                                 handleRowData(item);
                             props.handleCETmodal(true);
@@ -391,7 +391,7 @@ const LeadsCardList = (props) => {
                       <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                             className=" !text-base cursor-pointer text-[gray]"
+                           className="!text-base cursor-pointer text-[tomato]"
                             onClick={() => {
                               props.setEditLeads(item);
                               handleUpdateLeadsModal(true);
@@ -428,7 +428,7 @@ const LeadsCardList = (props) => {
                          
                         >
                           <LocationOnIcon
-                             className=" !text-base cursor-pointer"
+                             className="!text-base cursor-pointer text-[#960a0a]"
                           />
                         </span>
                       </Tooltip>
@@ -437,7 +437,7 @@ const LeadsCardList = (props) => {
                       <Tooltip title={item.email}>
                         <MailOutlineIcon
                           type="mail"
-                          className=" !text-base cursor-pointer"
+                          className="!text-base cursor-pointer text-green-400"
                           onClick={() => {
                             handleSetCurrentLeadsId(item);
                             props.handleLeadsEmailDrawerModal(true);
@@ -535,7 +535,55 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
         style={{
           padding: "0.37em",
           borderColor: "transparent",
-          color: role === type ? "#1890ff" : "grey",
+          color: role === type ? "red" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton1({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "orange" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton2({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "blue" : "grey",
         }}
         ghost={role !== type}
         onClick={onClick}
