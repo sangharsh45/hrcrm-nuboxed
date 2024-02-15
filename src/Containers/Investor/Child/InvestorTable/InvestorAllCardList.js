@@ -339,7 +339,7 @@ function InvestorAllCardList(props) {
             <span className="  cursor-pointer"
               
             >
-            <LocationOnIcon   className=" !text-base cursor-pointer"/>
+            <LocationOnIcon   className=" !text-base cursor-pointer text-[#960a0a]"/>
             </span>
           </Tooltip>
           </div>
@@ -357,7 +357,7 @@ function InvestorAllCardList(props) {
             {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-               className=" !text-base cursor-pointer text-[grey]"
+               className=" !text-base cursor-pointer text-[tomato]"
                
                 onClick={() => {
                     handleUpdateInvestorModal(true);

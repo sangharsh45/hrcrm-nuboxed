@@ -8,7 +8,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from "dayjs";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component"; 
 import { Tooltip, Select, } from "antd";
 
 import {
@@ -381,7 +381,7 @@ function InvestorCardList(props) {
           
             <Tooltip title="Investor Contact">
               <LocationCityIcon
-              className=" !text-2xl cursor-pointer p-1"
+              className=" !text-2xl cursor-pointer p-1 text-blue-500 "
                 onClick={() => {
                   handleInvestorContModal(true);
                     handleCurrentRowData(item);
@@ -398,7 +398,7 @@ function InvestorCardList(props) {
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span class="cursor-pointer">
-            <LocationOnIcon   className=" !text-base cursor-pointer"/>
+            <LocationOnIcon   className=" !text-base cursor-pointer text-[#960a0a]"/>
             </span>
           </Tooltip>
           </div>
@@ -415,7 +415,7 @@ function InvestorCardList(props) {
             <div>
             {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
             <Tooltip title="Edit">
-              <BorderColorIcon className=" !text-base cursor-pointer text-[grey]"
+              <BorderColorIcon className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                     handleUpdateInvestorModal(true);
                     handleCurrentRowData(item);
