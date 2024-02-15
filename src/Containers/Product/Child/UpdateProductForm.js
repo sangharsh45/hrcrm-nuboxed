@@ -7,7 +7,7 @@ import { base_url2 } from "../../../Config/Auth";
 import * as Yup from "yup";
 import { Spacer} from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { updateProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -102,15 +102,13 @@ class Productform extends Component {
             <Form>
              <div class="flex justify-between">
              <div class="h-full w-[45%]">
-             <div class="flex-nowrap">
-                  <div class="w-[40%]" >
-                      <Field name="imageId" component={Upload} />
-                    </div>
-                  </div>
 
-                  <div class="mt-4">
-                 
-                 <Field
+                  <div class=" flex  flex-nowrap">
+                    <div> <Field name="imageId" component={PostImageUpld} /></div>
+                    <div>  
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
+                        <Field
                    name="articleNo"
                    label="Article #"
                    placeholder="Article No"
@@ -119,7 +117,21 @@ class Productform extends Component {
                    inlineLabel
                    component={InputComponent}
                  />
-</div>
+                        </div>
+                        <div class=" w-1/2 max-sm:w-full">
+                        <Field
+                    name="name"
+                    label="Name"
+                    isColumn
+                    width={"100%"}
+                    inlineLabel
+                    component={InputComponent}
+                  />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
 <div class="flex justify-between mt-4">
 <div class="w-[48%]">
                   <Field
@@ -162,22 +174,7 @@ class Productform extends Component {
                   />
 </div>
 </div>
-<div class="mt-4">
-                  
-                  <Field
-                    name="name"
-                    label="Name"
-                    isColumn
-                    width={"100%"}
-                    inlineLabel
-                    component={InputComponent}
-                    style={{
-                      flexBasis: "80%",
-                      height: "29px",
-                      marginTop: "0px",
-                    }}
-                  />
-                  </div>
+
                   <div class="flex justify-between mt-4">
        
 

@@ -16,9 +16,7 @@ import {
     handlePriceDrawer
 } from "../../ProductAction";
 import ProductPublishToggle from "./ProductPublishToggle";
-import {
-    EditOutlined,
-} from "@ant-design/icons";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import { Tooltip } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -97,11 +95,7 @@ function ProductCardList(props) {
              {products.map((item) => {
           return (
 <div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-    // style={{
-    //     borderBottom: "3px dotted #515050"
-    // }}
-    >
+<div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 ">
        <div class="flex">
        <div className=" flex font-medium flex-col md:w-[5.1rem] max-sm:w-full  ">
        <SubTitle>
@@ -113,9 +107,9 @@ function ProductCardList(props) {
                                 imgRadius={20}
                             />
                         ) : (
-                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                            <div class="font-bold text-xs" >
                                 No Image
-                            </span>
+                            </div>
                         )}
                     </SubTitle>
         </div>
@@ -173,7 +167,7 @@ function ProductCardList(props) {
                    <div>
                    <Tooltip title="Add Price">
                             <EuroIcon
-                            style={{cursor:"pointer",fontSize:"1rem" }}
+                            className="!text-base cursor-pointer text-[blue]"
                                 onClick={() => {
                                     props.handlePriceDrawer(true);
                                     handleParticularRowData(item);
@@ -185,7 +179,7 @@ function ProductCardList(props) {
                    <div>
                    <Tooltip title="Product Builder">
                             <ViewQuiltIcon
-                            style={{cursor:"pointer",fontSize:"1rem" }}
+                            className="!text-base cursor-pointer text-[#4bc076]"
                                 onClick={() => {
                                     props.handleProductBuilderDrawer(true);
                                     handleParticularRowData(item);
@@ -197,8 +191,8 @@ function ProductCardList(props) {
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div class=" text-xs text-cardBody font-poppins">
 <Tooltip title="Edit">
-                                        <EditOutlined
-                                    style={{ cursor: "pointer", fontSize: "12px" }}
+                                        <BorderColorIcon
+                                        className="!text-base cursor-pointer text-[tomato]"
                                             onClick={() => {
                                                 props.setEditProducts(item);
                                                 handleUpdateProductModal(true);

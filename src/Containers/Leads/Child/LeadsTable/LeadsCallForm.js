@@ -9,7 +9,6 @@ import * as Yup from "yup";
 import{getAllOpportunityData} from "../../../Opportunity/OpportunityAction"
 import { getFilteredEmailContact } from "../../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
@@ -27,13 +26,11 @@ import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { getAssignedToList } from "../../../Employees/EmployeeAction";
-import CandidateClearbit from "../../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox} from '@headlessui/react'
+
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -73,7 +70,7 @@ function LeadsCallForm(props) {
   
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
   const[reminder,setReminder] =useState(true)
-  console.log("category",category);
+
   const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
   function handleCategoryChange (data)  {
@@ -110,61 +107,14 @@ function LeadsCallForm(props) {
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
 
-    const {
-      handleCallNotesModal
-
-    } = props;
-
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
-
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
+ 
     const employeesData = props.assignedToList.map((item) => {
       return {
         label: `${item.empName}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.allOpportunityData.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
-
-    const ContactData = props.filteredContact.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
-    // console.log(this.state.category);
+   
     const {
       user: { userId, firstName, empName,middleName, fullName, lastName, timeZone },
       isEditing,
@@ -186,14 +136,12 @@ function LeadsCallForm(props) {
       updatingCall,
       defaultOpportunities,
     } = props;
-    console.log(defaultAccounts);
-    console.log(defaultContacts);
+
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
-   console.log("bn",selectedOption,selected)
-   console.log(props.rowdata)
+
    return (
       <>
         <Formik
@@ -349,14 +297,13 @@ function LeadsCallForm(props) {
               <div class=" flex justify-around max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
-                    <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
-                      <StyledLabel>
-                        {/* Type */}
+                    <div class=" w-2/6 max-sm:w-wk mt-4">
+
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
+                       
                         <FormattedMessage id="app.type" defaultMessage="Type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
-                        {/* <Tooltip title="Inbound"> */}
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -366,12 +313,10 @@ function LeadsCallForm(props) {
                           }
                         >
                           <div
+                          class="text-xl cursor-pointer"
                             onClick={() => handleTypeChange("Inbound")}
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
-                              color:
-                              Type  === "Inbound"
+                              color: Type  === "Inbound"
                                   ? "Orange"
                                   : null,
                             }}
@@ -379,7 +324,7 @@ function LeadsCallForm(props) {
                             <i className="fas fa-sign-in-alt"></i>
                           </div>
                         </Tooltip>
-                        {/* <Tooltip title="Outbound"> */}
+     
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -389,10 +334,10 @@ function LeadsCallForm(props) {
                           }
                         >
                           <div
+                          class="text-xl cursor-pointer"
                             onClick={() => handleTypeChange("Outbound")}
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                             
                               color:
                               Type === "Outbound"
                                   ? "Orange"
@@ -402,7 +347,7 @@ function LeadsCallForm(props) {
                             <i className="fas fa-sign-out-alt"></i>
                           </div>
                         </Tooltip>
-                        {/* <Tooltip title="Conference"> */}
+   
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -412,10 +357,10 @@ function LeadsCallForm(props) {
                           }
                         >
                           <div
+                          class="text-xl cursor-pointer"
                             onClick={() => handleTypeChange("Conference")}
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                             
                               color:
                               Type === "Conference"
                                   ? "Orange"
@@ -427,14 +372,14 @@ function LeadsCallForm(props) {
                         </Tooltip>
                       </div>
                     </div>
-                    <div class=" w-1/2">
-                      <Spacer />
-                      <StyledLabel>
+                    <div class=" w-1/2 mt-4">
+                
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="Category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -448,7 +393,7 @@ function LeadsCallForm(props) {
                             category === "New" ? "white" : "black",
                           }}
                         >
-                          {/* New */}
+                         
                           <FormattedMessage id="app.new" defaultMessage="New" />
                         </Button>
                         <Button
@@ -464,7 +409,7 @@ function LeadsCallForm(props) {
                                 : "black",
                           }}
                         >
-                          {/* Follow up */}
+                   
                           <FormattedMessage
                             id="app.followup"
                             defaultMessage="Follow up"
@@ -473,16 +418,13 @@ function LeadsCallForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
+        
+                  <div class=" flex justify-between items-end max-sm:flex-col mt-4" >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       Mode
-                      </StyledLabel>
+                      </div>
                       <Switch
-                        // style={{
-                        //   marginLeft: "0.3125em"
-                        // }}
                         name="mode"
                         checkedChildren="Audio"
                         unCheckedChildren="Video"
@@ -512,15 +454,12 @@ function LeadsCallForm(props) {
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
-                        style={{ flexBasis: "30%" }}
                         isColumn
                       />
                     </div>
                   </div>
                   <Field
-                    // isRequired
                     name="callPurpose"
-                    // label="Topic"
                     label={
                       <FormattedMessage
                         id="app.subject"
@@ -532,21 +471,19 @@ function LeadsCallForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+                  <div class="mt-4">
                   <Field
                     name="startDate"
-                    // label="Date"
-                    label={
-                      <FormattedMessage id="app.date" defaultMessage="Date" />
-                    }
+                    label={<FormattedMessage id="app.date" defaultMessage="Date" />}
                     component={DatePicker}
                     isColumn
                     width={"100%"}
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+                  </div>
+                  
+                  <div class=" flex justify-between max-sm:flex-col mt-4">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -563,9 +500,6 @@ function LeadsCallForm(props) {
                         use12Hours
                         value={values.startTime}
                         inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
                       />
                     </div>
                     <div class=" w-2/5 max-sm:w-wk">
@@ -583,14 +517,11 @@ function LeadsCallForm(props) {
                         isRequired
                         isColumn
                         value={values.endTime}
-                        // inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
+                       
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <div class="mt-4">
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -609,38 +540,9 @@ function LeadsCallForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  {/* {startDate ? (
-                    <span>
-                      {dayjs(startDate).isBefore(dayjs()) && (
-                        <span>
-                          <b>
-                            <FormattedMessage
-                              id="app.thiscalloccursinthepast!"
-                              defaultMessage="This Call occurs in the past !"
-                            />
-                          </b>
-                        </span>
-                      )}
-                    </span>
-                  ) : (
-                    <span>
-                      {dayjs(values.startDate).isBefore(dayjs()) && (
-                        <span>
-                          <b>
-                            {" "}
-                            <FormattedMessage
-                              id="app.thiscalloccursinthepast!"
-                              defaultMessage="This Call occurs in the past !"
-                            />
-                          </b>
-                        </span>
-                      )}
-                    </span>
-                  )} */}
+                  </div>
                 </div>
-                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
-                >
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk ">
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
@@ -707,7 +609,7 @@ function LeadsCallForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+                    <div class="mt-4">
                   <Field
                     name="included"
                     // label="Include"
@@ -727,9 +629,9 @@ function LeadsCallForm(props) {
                       value: employeeId,
                     }}
                   />
-                 
+                  </div>  
                
-                  <Spacer/>
+            
                   {/* <div >
                   <Field
                     disabled="true"
@@ -750,9 +652,9 @@ function LeadsCallForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer /> */}
+                */}
                   <div>
-                    <div class=" w-full"><Field
+                    <div class=" w-full mt-4"><Field
                       name="callDescription"
                       // label="Notes"
                       label={
@@ -765,7 +667,7 @@ function LeadsCallForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+            
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
@@ -809,8 +711,7 @@ function LeadsCallForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+              <div class=" flex justify-end mt-4">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -828,7 +729,6 @@ function LeadsCallForm(props) {
                         htmlType="submit"
                         Loading={deletingCall}
                       >
-                        {/* Delete */}
                         <FormattedMessage
                           id="app.delete"
                           defaultMessage="Delete"
