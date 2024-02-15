@@ -109,7 +109,7 @@ const JumpStartDetail = ({
     >
       <div>
         {icon ? (
-          <h3 >
+          <div >
             {title || "N/A"}{" "}
             <Tooltip title={tooltipData}>
               <InfoIcon>
@@ -119,9 +119,9 @@ const JumpStartDetail = ({
                 />
               </InfoIcon>
             </Tooltip>
-          </h3>
+          </div>
         ) : (
-            <h3 class=" font-poppins">{title || "N/A"}</h3>
+            <div class=" font-semibold">{title || "N/A"}</div>
           )}
 
         {isLoading ? (

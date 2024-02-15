@@ -94,14 +94,9 @@ class AddDocumentModal extends Component {
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="55%"
+          width="60%"
           visible={documentUploadModal}
-          destroyOnClose
-          maskClosable={false}
-          style={{ marginTop: "5rem" }}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.handleClose()}
-          footer={null}
         >
           <Suspense fallback={""}>
             <Formik

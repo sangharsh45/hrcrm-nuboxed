@@ -592,6 +592,8 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         addingDocumentByCustomerId: false,
         addingDocumentByCustomerIdError: false,
+        documentsByCustomerId:[action.payload,...state.documentsByCustomerId]
+        
       };
     case types.ADD_CUSTOMER_DOCUMENT_FAILURE:
       return {
@@ -703,6 +705,7 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         addingCustomerOpportunity: false,
         addCustomerOpportunityModal: false,
+        opportunityByCustomerId:[action.payload,...state.opportunityByCustomerId]
         // clearbit: null,
       };
     case types.ADD_CUSTOMER_OPPORTUNITY_FAILURE:

@@ -235,7 +235,7 @@ const [rowdata, setrowdata] = useState("");
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCustomers?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
       
@@ -285,7 +285,7 @@ const [rowdata, setrowdata] = useState("");
                       <div class="max-sm:w-full md:flex items-center">
                       <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                             <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`customer/${item.customerId}`} title={item.name}>
       {item.name}
@@ -293,12 +293,8 @@ const [rowdata, setrowdata] = useState("");
         
         &nbsp;&nbsp;
         {date === currentdate ? (
-          <span class="text-xs"
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
-          >
+    <span class="text-xs text-[tomato] font-bold"
+    >
             New
           </span>
         ) : null} 
@@ -316,7 +312,7 @@ const [rowdata, setrowdata] = useState("");
           </span>
         ) : null}
         */}
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                       </div>
@@ -325,42 +321,42 @@ const [rowdata, setrowdata] = useState("");
                                     <div className=" flex font-medium  items-center  md:w-[5.24rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
 
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           <div class=" text-xs text-cardBody font-poppins">   
                            {item.phoneNumber}
-                           </h4>
+                           </div>
                        
                        </div>
                                 <div className=" flex font-medium  items-center  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
 
                                 <div className=" flex font-medium  items-center  md:w-[6.215rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                          
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           <div class=" text-xs text-cardBody font-poppins">   
                            {item.source}
-                           </h4>
+                           </div>
                        
                        </div> 
                                 <div className=" flex font-medium flex-col justify-center md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                    <h4 class=" text-sm text-cardBody font-poppins">
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                    <div class=" text-sm text-cardBody font-poppins">
                                     <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
                       {countryCode}
-                                    </h4>
+                                    </div>
                                 </div>
                                 </div>
                              
                                 <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
@@ -368,7 +364,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[5.82rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -384,7 +380,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div> */}
                                 <div className=" flex font-medium items-center  flex-col md:w-[3rem] max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
@@ -412,7 +408,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div class="flex md:items-center"> 
                                 <div className=" flex font-medium items-center flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between max-sm:mb-2 ">
                        
-                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                       {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
               <MultiAvatar
@@ -424,9 +420,9 @@ const [rowdata, setrowdata] = useState("");
               />
             </span>
                    </div>
-                   <div className=" flex font-medium justify-center flex-col w-[11.1rem] max-sm:flex-row  ">
+                   <div className=" flex font-medium justify-center flex-col w-[9.1rem] max-sm:flex-row  ">
                        
-                       <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                       <div class=" text-sm text-cardBody font-poppins"></div>
                        <Popconfirm
   title="Change status to Account?"
   onConfirm={() => handleConfirm(item.customerId)}
@@ -460,7 +456,8 @@ const [rowdata, setrowdata] = useState("");
                   {" "}
                   <a href={`https://${item.url}`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green",fontSize: "1rem", }}
+                                   className=" !text-base cursor-pointer text-[green]"
+
                     />
                   </a>
                 </span>
@@ -484,10 +481,9 @@ const [rowdata, setrowdata] = useState("");
               }}
             >
               {" "}
-              {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
-               cursor: "pointer",
-                fontSize: "1rem",
-                color: "#df9697"}}/>}
+              {user.pulseAccessInd === true && <MonitorHeartIcon  
+               className=" !text-base cursor-pointer text-[#df9697]"
+                />}
             </span> 
                         </div>
                         <div>
@@ -500,23 +496,25 @@ const [rowdata, setrowdata] = useState("");
                         <div>
                         <Tooltip title="Contact">
        <ContactsIcon
+               className=" !text-base cursor-pointer text-[#709ab3]"
                 onClick={() => {
                   handleCustomerContactDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{color:"#709ab3", fontSize: "1rem", cursor: "pointer", }}
+               
               />
            </Tooltip>
                         </div>
                         <div>
                         <Tooltip title="Opportunity">
        <LightbulbIcon
+        className=" !text-base cursor-pointer text-[#AF5910]"
                 onClick={() => {
                   handleCustomerOpportunityDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{color:"#AF5910",  cursor: "pointer", fontSize: "1rem" }}
+               
               />
            </Tooltip>
 
@@ -526,23 +524,25 @@ const [rowdata, setrowdata] = useState("");
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
+               className=" !text-base cursor-pointer text-[#df9697]"
                 onClick={() => {
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", cursor: "pointer", color: "#df9697"}}
+
               />
            </Tooltip>
                         </div>
                         <div>
                         <Tooltip title="Notes">
        <NoteAltIcon
+         className=" !text-base cursor-pointer text-[#4bc076]"
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "#4bc076", cursor: "pointer", fontSize: "1rem" }}
+               
               />
            </Tooltip>
 
@@ -553,10 +553,10 @@ const [rowdata, setrowdata] = useState("");
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
-<LocationOnIcon   style={{color:"#960A0A",
-    cursor: "pointer",
-    fontSize: "1rem"
-  }}/>
+<LocationOnIcon  
+
+
+/>
 
 </Tooltip>
 </div>
@@ -564,7 +564,8 @@ const [rowdata, setrowdata] = useState("");
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem",color: "tomato", }}
+               className=" !text-base cursor-pointer text-[tomato]"
+               
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);

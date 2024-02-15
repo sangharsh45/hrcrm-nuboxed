@@ -146,7 +146,7 @@ const [rowdata, setrowdata] = useState("");
         dataLength={allCustomers.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllCustomerList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllCustomerList?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
       
@@ -193,7 +193,7 @@ const [rowdata, setrowdata] = useState("");
                       <div class="w-full flex items-center">
                       <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -210,7 +210,7 @@ const [rowdata, setrowdata] = useState("");
           </span>
         ) : null}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                       </div>
@@ -219,16 +219,16 @@ const [rowdata, setrowdata] = useState("");
                                 <div className=" flex font-medium  ">
                            
                                    
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
                                 <div className=" flex font-medium  ">
                                   
 
                                     
-                                    <h4 class=" text-sm text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -239,7 +239,7 @@ const [rowdata, setrowdata] = useState("");
                         />
                         &nbsp;
                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
+                                    </div>
                                 </div>
                                 </div>
                                 <div class="flex justify-between items-center w-wk ">
@@ -305,7 +305,7 @@ const [rowdata, setrowdata] = useState("");
                                
                  
                        
-                       <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                       <div class=" text-sm text-cardBody font-poppins"></div>
                        <Popconfirm
   title="Change status to Account?"
   onConfirm={() => handleConfirm(item.customerId)}

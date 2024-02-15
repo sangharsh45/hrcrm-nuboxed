@@ -82,7 +82,7 @@ class DashboardDetails extends Component {
                         tooltipTitle="Add"
                         handleIconClick={() => handleCandidateBankModal(true)}
                         size="1em"
-                        style={{ marginLeft: 10, verticalAlign: "center" }}
+                       
                       /> */}
                     </>
                   )}
@@ -118,7 +118,7 @@ class DashboardDetails extends Component {
                         tooltipTitle="Add"
                         handleIconClick={() => handleCandidateBankModal(true)}
                         size="1em"
-                        style={{ marginLeft: 10, verticalAlign: "center" }}
+                     
                       /> */}
                     </>
                   )}

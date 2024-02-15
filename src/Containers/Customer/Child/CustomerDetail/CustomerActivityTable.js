@@ -14,16 +14,22 @@ const CustomerActivityTable = (props) => {
   }, []);
 
   const { customerActivityTimeline, ratingValue } = props;
+  const currentDate = dayjs().format("DD/MM/YYYY");
   return (
     <>
         <div className="mt-4 ml-4">
         <Timeline>
           {customerActivityTimeline &&
-            customerActivityTimeline.map((status, i) => (
-              <Timeline.Item key={i}>
-                <div>
-                <div>
-                  {status.category} {status.activityType} Completed by {dayjs(status.endDate).format('DD/MM/YYYY')}
+            customerActivityTimeline.map((status, i) => (       
+              <Timeline.Item key={i}>               
+                <div>               
+                <div>                
+                
+{currentDate === dayjs(status.creationDate).format("DD/MM/YYYY") ? (
+                      <span className="text-xs text-[tomato] font-bold">
+                        New
+                      </span>
+                    ) : null}    {status.category} {status.activityType} Completed by {dayjs(status.endDate).format('DD/MM/YYYY')}
                   </div>
            
                 </div>

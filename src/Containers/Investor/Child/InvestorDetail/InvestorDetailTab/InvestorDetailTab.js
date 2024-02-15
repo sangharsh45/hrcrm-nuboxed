@@ -2,6 +2,7 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import AddchartIcon from '@mui/icons-material/Addchart'; 
 import { FormattedMessage } from "react-intl";
 import { PlusOutlined } from "@ant-design/icons";
@@ -30,7 +31,7 @@ class InvestorDetailTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: "2",
+      activeKey: "1",
       contactPopover: false,
       partnerPopover: false,
       quotProPopover: false,
@@ -98,7 +99,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
     return (
       <>
         <TabsWrapper>
-          <StyledTabs defaultActiveKey="2" onChange={this.handleTabChange}>
+          <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
             {/* <TabPane
               tab={
                 <>
@@ -300,6 +301,52 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
 investorDetails={this.props.investorDetails}
                 />
               </Suspense>
+            </TabPane>
+
+            <TabPane
+              tab={
+                <>
+                  <CurrencyExchangeIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.Deals"
+                        defaultMessage="Deals"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                  {/* {activeKey === "4" && (
+                    <>
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                         onClick={() => handleActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                    </>
+                  )} */}
+                
+                </>
+              }
+              key="4"
+            >
+              {/* <Suspense fallback={"Loading ..."}>
+                {" "}
+                <InvestorTimeLine
+
+investorDetails={this.props.investorDetails}
+                />
+              </Suspense> */}
             </TabPane>
             {/* <TabPane
               tab={

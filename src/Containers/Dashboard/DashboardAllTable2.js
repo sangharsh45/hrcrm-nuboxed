@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Tooltip,Input,Button,Badge, } from "antd";
 import Highlighter from 'react-highlight-words';
-import moment from "moment";
+import dayjs from "dayjs";
 import { StyledTable } from "../../Components/UI/Antd";
 import SchoolIcon from '@mui/icons-material/School';
 import {
@@ -265,8 +265,8 @@ function DashboardAllTable2(props) {
        // dataIndex: "sponserName",
        // ...getColumnSearchProps('sponserName'),
        render: (text, item) => {
-        // const lastRequirementOn = moment(item.lastRequirementOn ).format("ll");
-        const diff = Math.abs(moment().diff(moment(item.creationDate), 'days'));
+        // const lastRequirementOn = dayjs(item.lastRequirementOn ).format("ll");
+        const diff = Math.abs(dayjs().diff(dayjs(item.creationDate), 'days'));
         const date = diff + 1
         return <>
           {item.creationDate === null ? "No Data" :
@@ -292,7 +292,7 @@ function DashboardAllTable2(props) {
     //         renderCell: (cellValues,row) => {
     //            console.log("cell",cellValues)
     //             const data=cellValues.row
-    //             const diff = Math.abs(moment().diff(moment(data.creationDate), 'days'));
+    //             const diff = Math.abs(dayjs().diff(dayjs(data.creationDate), 'days'));
               
     //                    return (
     //                      <>
@@ -335,11 +335,11 @@ function DashboardAllTable2(props) {
      },
       width: "10%",
       render: (text, item) => {
-       const creationDate = moment(item.creationDate).format("ll");
+       const creationDate = dayjs(item.creationDate).format("DD/MM/YYYY");
        return <>
        {item.creationDate === null ? "No Data" :
          <span>
-           {moment(item.creationDate).format("l")}
+           {dayjs(item.creationDate).format("DD/MM/YYYY")}
          </span>
        }
      </>

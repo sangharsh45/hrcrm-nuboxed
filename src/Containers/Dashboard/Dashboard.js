@@ -105,7 +105,7 @@ class Dashboard extends Component {
              (
               <DashboardJumpstart />
           )}
-             <div style={{ width: "-webkit-fill-available" }}>
+             <div class=" w-wk" >
              <div class=" flex flex-col display-block" >
        <div class=" flex justify-between" >
        {this.state.activeButton==="Tasks" ? (
