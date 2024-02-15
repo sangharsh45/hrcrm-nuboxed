@@ -233,9 +233,13 @@ export const handleCreateAWB = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const setInventoryDetailViewType = (inventoryViewType) => (dispatch) =>
-  dispatch({ type: types.SET_INVENTORY_DETAIL_VIEW_TYPE, payload: inventoryViewType });
 
+export const setInventoryDetailViewType = (viewType1) => (dispatch) => {
+  dispatch({
+    type: types.SET_INVENTORY_DETAIL_VIEW_TYPE,
+    payload: viewType1,
+  });
+};
 export const handleAddAWB = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_ADD_AWB_MODAL,
@@ -1251,6 +1255,31 @@ export const getProductRepurbish = (locationDetailsId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_PRODUCT_REFURBISH_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getMaterialReceiveData = (locationDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATERIAL_RECEIVE_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/orderInventoryLocationLink/getPolist/${locationDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVE_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVE_DATA_FAILURE,
         payload: err,
       });
     });

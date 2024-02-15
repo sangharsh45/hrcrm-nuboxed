@@ -5,6 +5,9 @@ import { getInventoryById, setInventoryDetailViewType } from "../../InventoryAct
 import { MainWrapper } from "../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../../Components/Placeholder";
+import InventoryDetailTab from "./InventoryDetailTab/InventoryDetailTab";
+import InventoryMaterialTab from "./InventoryMaterialTab/InventoryMaterialTab";
+import InventoryProductionTab from "./InventoryProductionTab/InventoryProductionTab";
 const InventoryDetailHeader = lazy(() => import("./InventoryDetailHeader"));
 const InventoryDetailRight = lazy(() => import("./InventoryDetailRight"));
 
@@ -29,13 +32,13 @@ function InventoryDetail(props) {
   const {
     inventory = { inventory },
     fetchingInventoryById,
-    inventoryViewType,
+    viewType1,
     setInventoryDetailViewType } = props;
   return (
     <>
       <InventoryDetailHeader
-        // setInventoryDetailViewType={setInventoryDetailViewType}
-        // inventoryViewType={inventoryViewType}
+        setInventoryDetailViewType={setInventoryDetailViewType}
+        viewType1={viewType1}
         inventory={inventory}
         handleResetTab={handleResetTab} />
       {fetchingInventoryById ? (
@@ -47,11 +50,22 @@ function InventoryDetail(props) {
           <Suspense fallback={"Loading..."}>
             <div class=" flex flex-no-wrap w-full" >
               <div class=" w-full" >
-                <InventoryDetailRight
-                  // inventoryViewType={inventoryViewType}
+                {/* <InventoryDetailRight
+                  viewType1={viewType1}
                   inventory={inventory}
                   tabData={tabData}
-                />
+                /> */}
+                {props.viewType1 === "repair" ? (
+                  <InventoryDetailTab
+                    viewType1={viewType1}
+                    inventory={inventory}
+                    tabData={tabData}
+                  />
+                ) : props.viewType1 === "material" ? (
+                  <InventoryMaterialTab inventory={inventory} />
+                ) : props.viewType1 === "production" ? (
+                  <InventoryProductionTab />
+                ) : null}
               </div>
             </div>
           </Suspense>
@@ -63,7 +77,7 @@ function InventoryDetail(props) {
 const mapStateToProps = ({ inventory }) => ({
   fetchingInventoryById: inventory.fetchingInventoryById,
   inventory: inventory.inventoryDetailById,
-  inventoryViewType: inventory.inventoryViewType
+  viewType1: inventory.viewType1
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

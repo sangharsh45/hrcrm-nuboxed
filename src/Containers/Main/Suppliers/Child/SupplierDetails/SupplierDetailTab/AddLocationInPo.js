@@ -36,11 +36,9 @@ function AddLocationInPo(props) {
                     locationId: "",
                     userId: props.userId,
                     supplierId: props.supplierId,
-                    orderPhoneId: props.rowData.poSupplierDetailsId
+                    poSupplierDetailsId: props.rowData.poSupplierDetailsId
                 }}
                 onSubmit={(values, { resetForm }) => {
-                    //debugger;
-                    console.log(values);
                     props.movePoToInventory({
                         ...values,
                     },
@@ -72,7 +70,9 @@ function AddLocationInPo(props) {
                                 />
                             </div>
                             <div class="flex justify-end mt-2">
-                                <Button type="primary" htmlType="submit">
+                                <Button
+                                    type="primary"
+                                    htmlType="submit">
                                     Submit
                                 </Button>
                             </div>

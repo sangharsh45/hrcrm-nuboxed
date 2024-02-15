@@ -72,6 +72,10 @@ const initialState = {
   fetchingTeamInvestorError: false,
   teamInvestor:[],
 
+  fetchingInvestorDealsData: false,
+  fetchingInvestorDealsDataError: false,
+  investorDealsData:[],
+
   addDrawerInvestorNotesModal:false,
 
   fetchingDocumentsByInvestorId: false,
@@ -552,6 +556,24 @@ export const investorReducer = (state = initialState, action) => {
 
                       case types.HANDLE_INVESTOR_CONT_MODAL:
                         return { ...state, addDrawerInvestorContactModal: action.payload }; 
+
+
+                        case types.GET_INVESTOR_DEALS_DATA_REQUEST:
+
+                        return { ...state, fetchingInvestorDealsData: true };
+                      case types.GET_INVESTOR_DEALS_DATA_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingInvestorDealsData: false,
+                          investorDealsData: action.payload,
+                        };
+                      case types.GET_INVESTOR_DEALS_DATA_FAILURE:
+                        return {
+                          ...state,
+                          fetchingInvestorDealsData: false,
+                          fetchingInvestorDealsDataError: true,
+                        };
+
 default:
       return state;
   }

@@ -6,10 +6,22 @@ import styled from 'styled-components'
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import EmployeeTreeMap from "./EmployeeTreeMap";
 import EmployeeDocumentView from "./EmployeeDrawer/EmployeeDocumentView";
-
-
-
+import { StyledTabs } from "../../../../Components/UI/Antd";
+import { TabsWrapper } from "../../../../Components/UI/Layout";
+import ContactsIcon from '@mui/icons-material/Contacts';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+const TabPane = StyledTabs.TabPane;
 class EmployeePulseDrawerModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeKey: "1",
+    };
+  }
+  handleTabChange = (key) => {
+    this.setState({ activeKey: key });
+
+  };
   render() {
     const {
       singleEmployee: { employeeId, middleName, lastName,candidateId },
@@ -28,7 +40,7 @@ class EmployeePulseDrawerModal extends Component {
           <Suspense fallback={<BundleLoader />}>
       
         
-          <EmployeeDocumentView
+          {/* <EmployeeDocumentView
            employeeId={employeeId}
            documentsByEmployeeId={this.props.documentsByEmployeeId}
           //candidate={candidate}
@@ -36,8 +48,106 @@ class EmployeePulseDrawerModal extends Component {
 
           <EmployeeTreeMap
           employeeTreeMap={this.props.employeeTreeMap}
+          /> */}
+           <TabsWrapper>
+          <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
+            
+            <TabPane
+              tab={
+                <>
+                  <span>
+ <ContactsIcon style={{fontSize:"1.1rem"}}/>
+                    <span class=" ml-1">
+                      Performance Mangement
+                    </span>
+                  </span>
+                  {/* {activeKey === "1" && (
+                    <>
+                      <Tooltip 
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                      >
+                      
+                          <PlusOutlined
+                            type="plus"
+                           
+                            tooltiptitle={
+                              <FormattedMessage
+                                id="app.Create"
+                                defaultMessage="Create"
+                              />
+                            }
+                            onClick={() => {
+                              handleInvestorContactModal(true);
+                            }}
+                            size="0.875em"
+                          />
+                       
+                      </Tooltip>
+                    </>
+                  )} */}
+                </>
+              }
+              key="1"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                
+              </Suspense>
+            </TabPane>
+
+           
+
+            <TabPane
+              tab={
+                <>
+                  <InsertDriveFileIcon 
+                  style={{fontSize:"1.1rem"}}
+                  />
+                  <span class=" ml-1">
+                    360 View
+                    
+                  </span>
+                  {/* {activeKey === "2" && (
+                    <>
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.uploaddocument"
+                            defaultMessage="Upload Document"
+                          />
+                        }
+                        onClick={() => handleInvestorDocumentUploadModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                    </>
+                  )} */}
+                </>
+              }
+              key="2"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <EmployeeTreeMap
+          employeeTreeMap={this.props.employeeTreeMap}
           />
+              </Suspense>
+            </TabPane>
+            
+
+           
           
+          </StyledTabs>
+        </TabsWrapper>
         </Suspense>
          
         </StyledDrawer>
