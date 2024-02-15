@@ -1295,15 +1295,18 @@ export const updatePreferLang = (data) => (dispatch) => {
       });
     })
     .catch((err) => {
+      console.log(err.response);
       dispatch({
         type: types.UPDATE_PREFERED_LANG_FAILURE,
         payload: err,
       });
     });
-export const handleActionDrawerModal = (modalProps) => (dispatch) => {
-  dispatch({
-    type: types.HANDLE_ACTION_DRAWER_MODAL,
-    payload: modalProps,
-  });
-
 };
+
+export const handleActionDrawerModal = (modalProps) => (dispatch) => {
+      dispatch({
+        type: types.HANDLE_ACTION_DRAWER_MODAL,
+        payload: modalProps,
+      });
+    
+    };
