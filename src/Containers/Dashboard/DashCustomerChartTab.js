@@ -38,7 +38,7 @@ class DashCustomerChartTab extends Component {
                 <>
                   {/* <ListAltIcon style={{fontSize:"1.1rem"}}/> */}
                  
-               <span class=" ml-1"><FormattedMessage
+               <span class=" ml-1 font-semibold"><FormattedMessage
               id="app.leadsAdded"
               defaultMessage="Leads Added"
             /></span>
@@ -60,7 +60,7 @@ class DashCustomerChartTab extends Component {
                 <>
                   {/* <EventAvailableIcon style={{fontSize:"1.1rem"}}/> */}
 
-                  <span class=" ml-1"><FormattedMessage
+                  <span class=" ml-1 font-semibold"><FormattedMessage
               id="app.contactsAdded"
               defaultMessage="Contacts Added"
             /></span>

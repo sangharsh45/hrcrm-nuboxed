@@ -2,7 +2,12 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
+import { MainWrapper } from "../../Components/UI/Elements";
+import { FlexContainer } from "../../Components/UI/Layout";
 import {setDashboardViewType} from "./DashboardAction";
+import DashboardCustomerTab from "./DashboardCustomerTab";
+import FunnelChart from "./FunnelChart";
+import FunnelChartAll from "./FunnelChartAll";
 const DashboardJumpstartAll= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardJumpstartAll"));
 const DashboardJumpstart= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardJumpStart"));
 const DashboardBulbJumpstart= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardBulbJumpstart"));
@@ -93,6 +98,9 @@ class Dashboard extends Component {
              : 
                this.state.activeButton==="Tasks" ?
              (<DashboardTaskOrganizationJumpstart/>)
+             : 
+             this.state.activeButton==="RecruitPro" ?
+           (<DashboardJumpstartAll/>)
              : this.state.activeButton==="Investors" ?
              (<DashboardInvestorsOrgJumpstart/>)
              :viewType==="ALL" || this.state.activeButton==="Customer" ?
@@ -112,6 +120,8 @@ class Dashboard extends Component {
        <TaskOrganizationTab/>)
        :this.state.activeButton==="Investors" ?(
         <InvestorsPitchTab/>)
+        :this.state.activeButton==="RecruitPro" ?(
+          <StackedClosureChartAll/>)
         :this.state.activeButton==="Order" ?(
           <OrdersDashTab/>)
           :this.state.activeButton==="Finance" ?(
@@ -133,6 +143,8 @@ class Dashboard extends Component {
                    <StackedClosureChartAll/> )
                    :this.state.activeButton==="Investors" ?
                    (<DashInvestorsChartTab/>)
+                   :this.state.activeButton==="RecruitPro" ?
+                   (<DashboardDetailsTab viewType={viewType}/>)
                    : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
             
            
@@ -158,10 +170,29 @@ class Dashboard extends Component {
              {this.state.activeButton==="Tasks"&&
        <GantChartTab/>
              }
+                  {this.state.activeButton==="RecruitPro"&&
+       <FunnelChartAll/>
+             }
+                  {/* {this.state.activeButton==="RecruitPro"&&
+       <GantChartTab/>
+             } */}
 
 {viewType==="ALL"  &&
        <FunnelTab/>
              }
+   
+      </div>
+
+         <div class=" flex justify-between" >
+      
+         
+                  {this.state.activeButton==="RecruitPro"&&
+      <DashboardCustomerTab
+      viewType={viewType}
+      />
+             }
+
+
    
       </div>
       
@@ -171,6 +202,8 @@ class Dashboard extends Component {
     </div>
     </div>
     </Suspense>
+
+
  
       </React.Fragment>
     );
