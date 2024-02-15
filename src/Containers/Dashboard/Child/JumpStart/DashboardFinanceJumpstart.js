@@ -5,8 +5,6 @@ import { bindActionCreators } from "redux";
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 
 function DashboardFinanceJumpstart (props) {
- 
-
 
     const { openPitchQualified,handlePitchQualifiedDrawer,openPitchAdded,handlePitchAddedDrawer,
       openDealAdded,handleDealAddedDrawer,openDealClosed,handleDealClosedDrawer
@@ -65,22 +63,7 @@ function DashboardFinanceJumpstart (props) {
         </div>
       </div>
 
-      {/* <PitchQualifiedDrawer
-      openPitchQualified={openPitchQualified}
-      handlePitchQualifiedDrawer={handlePitchQualifiedDrawer}
-      />
-       <PitchAddedDrawer
-      openPitchAdded={openPitchAdded}
-      handlePitchAddedDrawer={handlePitchAddedDrawer}
-      />
-      <DealsAddedDrawer 
-     openDealAdded={openDealAdded}
-     handleDealAddedDrawer={handleDealAddedDrawer}
-    />
-    <DealsClosedDrawer 
-     openDealClosed={openDealClosed}
-     handleDealClosedDrawer={handleDealClosedDrawer}
-    /> */}
+ 
       </>
      
     );
