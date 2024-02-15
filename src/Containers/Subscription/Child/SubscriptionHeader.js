@@ -1,26 +1,24 @@
 import React, { Component,lazy} from "react";
 import { ActionHeader } from "../../../Components/Utils";
-
-
+import SubscriptionActionRight from "./SubscriptionActionRight";
+import SubscriptionActionLeft from "./SubscriptionActionLeft";
 class SubscriptionHeader extends Component {
   render() {
     const {
-      handleLeadsModal,
-      viewType,
-      setLeadsViewType,
-      handleChange,
-      currentData,
-      handleClear,
+      createSubscriptiondrawer,
+      handleCreateSubscriptionDrawer
     } = this.props;
     return (
       <div>
         <ActionHeader
           leftComponent={
-         <div>Hii Left</div>
+        <SubscriptionActionLeft/>
           }
           rightComponent={
-           
-            <div>Hii Right</div>
+            <SubscriptionActionRight
+            createSubscriptiondrawer={createSubscriptiondrawer}
+            handleCreateSubscriptionDrawer={handleCreateSubscriptionDrawer}
+            />
           }
         />
       </div>
