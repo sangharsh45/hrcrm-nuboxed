@@ -143,7 +143,7 @@ const initialState = {
   fetchingShipperDetailsListError: false,
   shipperDetailsList: [],
 
-  inventoryViewType: "repair",
+  viewType1: "repair",
 
   //delivery date
   addDeliverDate: false,
@@ -206,6 +206,10 @@ const initialState = {
   fetchingRefurbishProduct: false,
   fetchingRefurbishProductError: false,
   refurbishProduct: [],
+
+  fetchingMaterialReceiveData: false,
+  fetchingMaterialReceiveDataError: false,
+  materialReceiveData: []
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -214,7 +218,10 @@ export const inventoryReducer = (state = initialState, action) => {
       return { ...state, viewType: action.payload };
 
     case types.SET_INVENTORY_DETAIL_VIEW_TYPE:
-      return { ...state, inventoryViewType: action.payload };
+      return {
+        ...state,
+        viewType1: action.payload
+      };
 
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };
@@ -1027,6 +1034,22 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         fetchingRefurbishProduct: false,
         fetchingRefurbishProductError: true,
+      };
+
+    case types.GET_MATERIAL_RECEIVE_DATA_REQUEST:
+      return { ...state, fetchingMaterialReceiveData: true };
+    case types.GET_MATERIAL_RECEIVE_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceiveData: false,
+        materialReceiveData: action.payload
+      };
+    case types.GET_MATERIAL_RECEIVE_DATA_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceiveData: false,
+        fetchingMaterialReceiveDataError: true,
+
       };
 
     default:
