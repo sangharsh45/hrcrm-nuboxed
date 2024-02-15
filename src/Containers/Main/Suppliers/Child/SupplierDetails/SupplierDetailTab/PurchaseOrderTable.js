@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { getPurchaseSuppliersList, handlePoLocationModal } from "../../../SuppliersAction"
 import { Button } from 'antd';
 import PoLocationModal from "./PoLocationModal";
+import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 
 function PurchaseOrderTable(props) {
     useEffect(() => {
@@ -18,7 +19,7 @@ function PurchaseOrderTable(props) {
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-                    <div className=" flex justify-between w-[62.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                    <div className=" flex justify-between w-[56.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[23.1rem]">
                             <FormattedMessage
                                 id="app.po"
@@ -52,19 +53,22 @@ function PurchaseOrderTable(props) {
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                {/* {item.dialCode} {item.phoneNo} */}
-                                                {item.userName}
+                                                <MultiAvatar
+                                                    primaryTitle={item.userName}
+                                                    imgWidth={"1.8rem"}
+                                                    imgHeight={"1.8rem"}
+                                                />
                                             </div>
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                {/* {item.dialCode} {item.phoneNo} */}
-                                                {/* {item.locat} */}
+
+                                                {item.locationName}
                                             </div>
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <Button
+                                                {item.locationName === null ? <Button
                                                     type="primary"
                                                     onClick={() => {
                                                         handleRowData(item)
@@ -75,7 +79,7 @@ function PurchaseOrderTable(props) {
                                                         id="app.movetoinventory"
                                                         defaultMessage="Move To Inventory"
                                                     />
-                                                </Button>
+                                                </Button> : null}
                                             </div>
                                         </div>
                                     </div>

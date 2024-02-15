@@ -149,7 +149,7 @@ export const setClearbitPurchaseProductData = (data) => (dispatch) => {
  *  add supplies to supplier
  */
 
-export const linkPurchaseToSuppliers = (data, poSupplierDetailsId, supplierId) => (dispatch) => {
+export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.LINK_PURCHASE_SUPPLIERS_REQUEST });
   axios
@@ -160,7 +160,7 @@ export const linkPurchaseToSuppliers = (data, poSupplierDetailsId, supplierId) =
     })
     .then((res) => {
       console.log(res);
-      dispatch(getGeneratorSuppliersList(poSupplierDetailsId));
+      dispatch(getGeneratorSuppliersList(res.data));
       dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.LINK_PURCHASE_SUPPLIERS_SUCCESS,
@@ -218,9 +218,6 @@ export const movePoToInventory = (data, distributorId) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
-      // dispatch(getDistributorOrderByDistributorId(distributorId,0))
-      window.location.reload()
       dispatch({
         type: types.MOVE_TO_INVENTORY_SUCCESS,
         payload: res.data,

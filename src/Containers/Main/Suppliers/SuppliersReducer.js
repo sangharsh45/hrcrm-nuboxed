@@ -384,7 +384,8 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         addLinkSuppliersOrderConfigureModal: action.payload,
-        generatorSuppliers: []
+        generatorSuppliers: [],
+        pOSupplierDetailsId: ""
       };
 
     case types.SET_CLEARBIT_PURCHASE_DATA:
@@ -434,6 +435,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         moveToInventory: false,
+        addlocationInPo: false
       };
     case types.MOVE_TO_INVENTORY_FAILURE:
       return {

@@ -65,7 +65,6 @@ const AddPurchaseOrder = (props) => {
                         {
                             ...values,
                         },
-                        props.poSupplierDetailsId,
                         props.supplier.supplierId
                     );
                     resetForm();
