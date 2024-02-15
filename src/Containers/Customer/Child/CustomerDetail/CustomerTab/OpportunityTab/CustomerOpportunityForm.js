@@ -8,8 +8,7 @@ import * as Yup from "yup";
 import {getCurrencyList} from "../../../../../Settings/Category/Currency/CurrencyAction"
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { addCustomerOpportunity } from "../../../../CustomerAction";
-import {
-  getAllSalesList, getWorkflow, getStages,
+import { getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -34,7 +33,6 @@ function CustomerOpportunityForm(props) {
   };
 
   useEffect(() => {
-    props.getAllSalesList();
     props.getCurrencyList();
     props.getWorkflow(props.orgId);
     props.getStages(props.orgId);
@@ -621,7 +619,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addCustomerOpportunity,
-      getAllSalesList,
       getCurrencyList,
       getWorkflow,
       getStages, 

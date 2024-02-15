@@ -17,7 +17,7 @@
    handleAddJobDetailtModal
   
  } from "../DashboardAction";
- import moment from "moment";
+ import dayjs from "dayjs";
  import SchoolIcon from '@mui/icons-material/School';
  import AccountBoxIcon from '@mui/icons-material/AccountBox';
  import {getCandidateRequirement} from "../../Opportunity/OpportunityAction"
@@ -239,11 +239,11 @@ const AddJobDetailModal = lazy(() => import("../Child/AddJobDetailModal"));
      },
       width: "10%",
       render: (text, item) => {
-       const creationDate = moment(item.creationDate).format("ll");
+       const creationDate = dayjs(item.creationDate).format("DD/MM/YYYY");
        return <>
        {item.creationDate === null ? "No Data" :
          <span>
-           {moment(item.creationDate).format("l")}
+           {dayjs(item.creationDate).format("DD/MM/YYYY")}
          </span>
        }
      </>

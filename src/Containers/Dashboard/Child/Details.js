@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Formik, Form, Field, } from "formik";
 import {  getDetailsList } from "../../Dashboard/DashboardAction";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import moment from "moment";
+import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 
 
@@ -16,7 +16,7 @@ this.props.getDetailsList(this.props.item.recruitmentId);
  
   render() {
      const diff = Math.abs(
-      moment(this.props.detail.availableDate).diff(moment(this.props.detail.creationDate), "months")
+      dayjs(this.props.detail.availableDate).diff(dayjs(this.props.detail.creationDate), "months")
     );
     const date = diff + 0;
     console.log(date)

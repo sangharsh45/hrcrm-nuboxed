@@ -557,8 +557,8 @@ export const addCustomerOpportunity = (opportunity,userId, cb) => (
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      dispatch(getOpportunityListByCustomerId(customerId));
-      dispatch(getOpportunityRecord(userId));
+      // dispatch(getOpportunityListByCustomerId(customerId));
+      // dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestOpportunities(userId, startDate, endDate));
       // dispatch(getOpportunitiesByPrice(userId));
       dispatch({
@@ -651,19 +651,13 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(
-      //   linkContactsToOpportunity(opportunityId, { contactIds: [res.data] }, cb)
-      // );
       const startDate = dayjs()
         .startOf("month")
         .toISOString();
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getOpportunityRecord(userId));
-      // dispatch(getLatestContacts(userId, startDate, endDate));
-      // dispatch(getContactListByCustomerId(customerId));
-
+ 
       dispatch({
         type: types.ADD_CUSTOMER_CONTACT_SUCCESS,
         payload: res.data,
@@ -1096,7 +1090,6 @@ export const putCustomerContactToggle = (data, contactId) => (dispatch) => {
     })
 
     .then((res) => {
-      //dispatch(getContactListByCustomerId(customerId))
       console.log(res);
       dispatch({
         type: types.PUT_CUSTO_CONTACT_TOGGLE_SUCCESS,
@@ -2139,7 +2132,7 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
         message.success("Call has been added successfully!");
         ////debugger;
         console.log(res);
-         dispatch(getCustomerActivityTimeline(customerId));
+        //  dispatch(getCustomerActivityTimeline(customerId));
         dispatch({
           type: types.ADD_CUSTOMER_ACTIVITY_CALL_SUCCESS,
           payload: res.data,
@@ -2173,7 +2166,7 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       .then((res) => {
         message.success("Meeting has been added successfully!");
         console.log(res);
-        dispatch(getCustomerActivityTimeline(customerId));
+        // dispatch(getCustomerActivityTimeline(customerId));
         // dispatch(getEventListRangeByUserId(userId,0));
         dispatch({
           type: types.ADD_CUSTOMER_ACTIVITY_EVENT_SUCCESS,

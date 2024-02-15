@@ -59,7 +59,7 @@ class TaskDashboardTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">
+               <span class=" ml-1 font-semibold">
                <FormattedMessage
                 id="app.openTasks"
                 defaultMessage="Open Tasks"
@@ -85,7 +85,7 @@ class TaskDashboardTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">
+               <span class=" ml-1 font-semibold">
                <FormattedMessage
                 id="app.completedTasks"
                 defaultMessage="Completed Tasks"
@@ -112,7 +112,7 @@ class TaskDashboardTab extends Component {
                 <>
                   <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
 
-                  <span class=" ml-1">
+                  <span class=" ml-1 font-semibold">
                   <FormattedMessage
                 id="app.events"
                 defaultMessage="Events"

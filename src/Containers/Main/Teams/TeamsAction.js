@@ -130,7 +130,7 @@ export const getTeamList = (userId) => (dispatch) => {
     type: types.GET_TEAM_REQUEST,
   });
   axios
-    .get(`${base_url}/team/${userId}`, {
+    .get(`${base_url}/team/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

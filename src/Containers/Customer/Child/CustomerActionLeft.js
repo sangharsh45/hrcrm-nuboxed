@@ -5,8 +5,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import PeopleIcon from '@mui/icons-material/People';
 import {getCustomerListByUserId} from "../CustomerAction"
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Button, Tooltip, Badge } from "antd";
-import LanguageIcon from '@mui/icons-material/Language';
+import { Tooltip, Badge ,Avatar} from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -105,7 +104,9 @@ function  handleFilterChange(data){
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <TocIcon />
+             <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <TocIcon className="text-white" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -122,7 +123,9 @@ function  handleFilterChange(data){
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <GridViewIcon />
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <GridViewIcon className="text-white"/>
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -140,7 +143,9 @@ function  handleFilterChange(data){
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-           <PeopleIcon/>
+             <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+           <PeopleIcon className="text-white"/>
+           </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -159,10 +164,12 @@ function  handleFilterChange(data){
               color: props.viewType === "all" && "#1890ff",
             }}
           >
+               <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
                <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
+                      </Avatar>
            
           </span>
         </Badge>

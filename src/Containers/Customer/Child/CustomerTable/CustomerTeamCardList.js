@@ -152,7 +152,7 @@ const [rowdata, setrowdata] = useState("");
         dataLength={teamCustomer.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingTeamCustomer?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingTeamCustomer?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
       
@@ -201,24 +201,20 @@ const [rowdata, setrowdata] = useState("");
                       <div class="max-sm:w-full md:flex items-center">
                       <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                             <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`customer/${item.customerId}`} title={item.name}>
       {item.name}
     </Link>
-        &nbsp;&nbsp;
+    &nbsp;&nbsp;
         {date === currentdate ? (
-          <span class="text-xs"
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
-          >
+    <span class="text-xs text-[tomato] font-bold"
+    >
             New
           </span>
         ) : null}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                       </div>
@@ -226,17 +222,17 @@ const [rowdata, setrowdata] = useState("");
                                     </div> 
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                    <h4 class=" text-sm text-cardBody font-poppins">
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                    <div class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -247,11 +243,11 @@ const [rowdata, setrowdata] = useState("");
                         />
                         &nbsp;
                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
+                                    </div>
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
@@ -259,7 +255,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -267,7 +263,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.weight}
@@ -275,7 +271,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium items-center  flex-col md:w-72 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
@@ -296,7 +292,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div class="flex md:items-center"> 
                                 <div className=" flex font-medium items-center flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
-                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                       {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
               <MultiAvatar
@@ -310,7 +306,7 @@ const [rowdata, setrowdata] = useState("");
                    </div>
                    <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
-                       <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                       <div class=" text-sm text-cardBody font-poppins"></div>
                        <Popconfirm
   title="Change status to Account?"
   onConfirm={() => handleConfirm(item.customerId)}
@@ -335,7 +331,8 @@ const [rowdata, setrowdata] = useState("");
                   {" "}
                   <a href={`https://${item.url}`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green",fontSize: "1rem", }}
+                     className=" !text-base cursor-pointer text-[green]"
+            
                     />
                   </a>
                 </span>
@@ -359,10 +356,9 @@ const [rowdata, setrowdata] = useState("");
               }}
             >
               {" "}
-              {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
-                cursor: "pointer",
-                fontSize: "1rem",
-                color: "#df9697"}}/>}
+              {user.pulseAccessInd === true && <MonitorHeartIcon  
+               className=" !text-base cursor-pointer text-[#df9697]"
+                />}
             </span> 
                         </div>
                         <div>
@@ -374,23 +370,25 @@ const [rowdata, setrowdata] = useState("");
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
+         className=" !text-base cursor-pointer text-[#df9697]"
                 onClick={() => {
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", color: "#df9697" }}
+             
               />
            </Tooltip>
                         </div>
                         <div>
                         <Tooltip title="Notes">
        <NoteAltIcon
+          className=" !text-base cursor-pointer text-[#4bc076]"
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+             
               />
            </Tooltip>
 
@@ -401,10 +399,9 @@ const [rowdata, setrowdata] = useState("");
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
-<LocationOnIcon   style={{
-    cursor: "pointer",
-    fontSize: "1rem"
-  }}/>
+<LocationOnIcon   
+ className=" !text-base cursor-pointer text-[#960A0A]"
+  />
 
 </Tooltip>
 </div>
@@ -412,7 +409,7 @@ const [rowdata, setrowdata] = useState("");
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
+                className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);
