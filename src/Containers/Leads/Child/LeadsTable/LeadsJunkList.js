@@ -128,11 +128,11 @@ const LeadsJunkList = (props) => {
                                       {item.name}
                                      &nbsp;&nbsp;
                                      {date === currentdate ? (
-    <span class="text-xs text-[tomato] font-bold" 
+    <div class="text-xs text-[tomato] font-bold" 
       
     >
       New
-    </span>
+    </div>
   ) : null}   
 
  
@@ -144,26 +144,6 @@ const LeadsJunkList = (props) => {
                           </div>
 
                           <div class="flex flex-row items-center md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between">
-
-<div>
-<ButtonGroup>
-<RoleButton
-type="Warm"
-iconType="	fas fa-burn"
-// tooltip="Warm"
-tooltip={<FormattedMessage
-id="app.warm"
-defaultMessage="Warm"
-/>}
-role={item.type}
-onClick={() =>{
-const typ="Warm"
-props.updateTypeForLead(item.leadsId,typ)
-}}
-/>
-</ButtonGroup>
-</div>    
-
 
 <div>
 <ButtonGroup>
@@ -182,6 +162,27 @@ props.updateTypeForLead(item.leadsId,typ)
 }}
 />
 </ButtonGroup>
+</div>    
+
+
+<div>
+<ButtonGroup>
+<RoleButton
+type="Warm"
+iconType="	fas fa-burn"
+// tooltip="Warm"
+tooltip={<FormattedMessage
+id="app.warm"
+defaultMessage="Warm"
+/>}
+role={item.type}
+onClick={() =>{
+const typ="Warm"
+props.updateTypeForLead(item.leadsId,typ)
+}}
+/>
+</ButtonGroup>
+
 </div>
 <div>
 <ButtonGroup>
@@ -235,7 +236,7 @@ props.updateTypeForLead(item.leadsId,typ)
                  <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
               {item.url !== null ? (
         <Tooltip title={item.url}>
-          <span
+          <div
             //type="edit"
             class="cursor-pointer"
             onClick={() => {}}
@@ -246,7 +247,7 @@ props.updateTypeForLead(item.leadsId,typ)
                 className=" !text-base cursor-pointer text-green-800"
               />
             </a>
-          </span>
+          </div>
         </Tooltip>
       ) : null}
                   </div>
@@ -262,7 +263,7 @@ props.updateTypeForLead(item.leadsId,typ)
 
                               <div class=" text-[0.82rem] text-cardBody font-poppins">
                               
-                              <span>
+                              <div>
         {item.assignedTo === null ? (
           "None"
         ) : (
@@ -272,13 +273,13 @@ props.updateTypeForLead(item.leadsId,typ)
             imgHeight={"1.8em"}
           />
         )}
-      </span>
+      </div>
        
                               </div>
                           </div>
                           <div className=" flex font-medium flex-col justify-center md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                  
-                 <span>
+                 <div>
         <MultiAvatar
           primaryTitle={item.ownerName}
           imageId={item.ownerImageId}
@@ -286,7 +287,7 @@ props.updateTypeForLead(item.leadsId,typ)
           imgWidth={"1.8rem"}
           imgHeight={"1.8rem"}
         />
-      </span>
+      </div>
              </div>
              <div className=" flex font-medium items-center  md:w-32 max-sm:flex-row w-full  ">
                               <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -305,7 +306,7 @@ Resinstate
                           <div>
       <Tooltip title="Edit">
         <BorderColorIcon
-         className=" !text-base cursor-pointer"
+          className="!text-base cursor-pointer text-[tomato]"
           onClick={() => {
             props.setEditLeads(item);
             handleUpdateLeadsModal(true);
@@ -337,18 +338,18 @@ Resinstate
               <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
                 <div>
               <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-      <span className=" cursor-pointer"
+      <div className=""
        
       >
-      <LocationOnIcon  className=" !text-base cursor-pointer"/>
-      </span>
+      <LocationOnIcon  className="!text-base cursor-pointer text-[#960a0a]"/>
+      </div>
     </Tooltip>
     </div>
     <div>
     <Tooltip title={item.email}>
         <MailOutlineIcon
           type="mail"
-          className=" !text-base cursor-pointer"
+          className="!text-base cursor-pointer text-green-400"
           onClick={() => {
             handleSetCurrentLeadsId(item);
             props.handleLeadsEmailDrawerModal(true);

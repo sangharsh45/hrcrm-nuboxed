@@ -6,7 +6,7 @@ import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, {  } from 'react-speech-recognition';
 import PeopleIcon from '@mui/icons-material/People';
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Input, Tooltip,Tag,Badge } from "antd";
+import { Input, Tooltip,Tag,Badge,Avatar } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import {inputLeadsDataSearch,ClearReducerDataOfLead,getLeads,getLeadsRecords,getLeadsTeamRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
@@ -74,7 +74,9 @@ const LeadsActionLeft = (props) => {
            color: props.viewType === "card" && "#1890ff",
           }}
         >
-        <TocIcon />
+          <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+             <TocIcon className="text-white" /></Avatar>
+     
         </span>
         </Badge>
       </Tooltip>
@@ -96,7 +98,9 @@ const LeadsActionLeft = (props) => {
            color: props.viewType === "teams" && "#1890ff",
           }}
         >
-       <PeopleIcon/>
+          <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+             <PeopleIcon className="text-white" /></Avatar>
+       
         </span>
         </Badge>
       </Tooltip>
@@ -115,7 +119,9 @@ const LeadsActionLeft = (props) => {
            color: props.viewType === "all" && "#1890ff",
           }}
         >
-        ALL
+           <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+             <div className="text-white">ALL</div></Avatar>
+        
         </span>
         </Badge>
       </Tooltip>
