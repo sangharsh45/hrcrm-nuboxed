@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ProBuildSearchedToggle from "./ProBuildSearchedToggle";
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 
 function ProBuildSearchedCard (props) {
 
@@ -23,13 +24,34 @@ return (
              {props.searchedBuilders.map((item) => {
           return (
 <div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "    >
-       <div class="flex">
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
+<div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "    >
+<div className=" flex font-medium flex-col w-[10rem]   max-sm:w-full">
+                    <div className="flex max-sm:w-full ">
+                      <div>
+                       
+                         <MultiAvatar
+                            // primaryTitle={item.name}
+                            imageId={item.imageId}
+                            // imageURL={item.imageURL}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                       
+                      </div>
+                      <div class="w-[4%]"></div>
+
+                      <div class="max-sm:w-full md:flex items-center">
+                     
+                      <div className=" flex font-medium flex-col md:w-[7.1rem] max-sm:w-full  ">
     <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.name}
                             </div>
     </div>
+                      </div>
+                    </div>
+                  </div>
+       <div class="flex">
+    
 
     {/* <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 

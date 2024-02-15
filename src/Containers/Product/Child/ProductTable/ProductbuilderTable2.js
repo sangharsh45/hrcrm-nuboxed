@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
 import { getBuilderByProId,removeProductBuilder,updateProSupplBuilder } from "../../ProductAction";
-import { elipsize } from "../../../../Helpers/Function/Functions";
-import { DeleteOutlined } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 
 function ProductbuilderTable2 (props) {
 
@@ -63,7 +63,6 @@ return (
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[7%]">Name</div>
-        <div className=" md:w-[6.1rem]">Description</div>
         <div className=" md:w-[4.2rem] ">Category</div>
         <div className="md:w-[5.8rem]">Sub Category</div>
         <div className=" md:w-[4.2rem] ">Unit</div>
@@ -73,28 +72,33 @@ return (
              {props.builderbyProductId.map((item) => {
           return (
 <div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "    >
-       <div class="flex">
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
+<div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "    >
+<div className=" flex font-medium flex-col w-[10rem]   max-sm:w-full">
+                    <div className="flex max-sm:w-full ">
+                      <div>
+                       
+                         <MultiAvatar
+                            // primaryTitle={item.name}
+                            imageId={item.imageId}
+                            // imageURL={item.imageURL}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                       
+                      </div>
+                      <div class="w-[4%]"></div>
+
+                      <div class="max-sm:w-full md:flex items-center">
+                     
+                      <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
     <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.suppliesName}
                             </div>
     </div>
-
-    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-    <div class=" text-xs text-cardBody font-poppins">
-    <span style={{ cursor: "pointer" }}>
-              <Tooltip title={item.description}>
-                 {elipsize(item.description || "", 70)}
-               </Tooltip>
-             </span>
+                      </div>
                     </div>
-    
-    </div> 
- 
-    </div>
-    
+                  </div>
+
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
     <div class=" text-xs text-cardBody font-poppins">
                       
@@ -112,36 +116,41 @@ return (
       <div class=" text-xs text-cardBody font-semibold  font-poppins">
                    {editproductSupplyLinkId === item.productSupplyLinkId ? (
                        <input
-                       style={{border:"2px solid black"}}
+                       class="border-[2px] border-black w-12"
+                      //  style={{border:"2px solid black"}}
                        value={editedFields[item.productSupplyLinkId]?.quantity !== undefined ? editedFields[item.productSupplyLinkId].quantity : item.quantity}
                        onChange={(e) => handleChange(item.productSupplyLinkId, 'quantity', e.target.value)}
                        />
                        
                     ) : (
                       <div className="font-normal text-sm text-cardBody font-poppins">
-                        <span> {item.quantity}</span>
+                        <div> {item.quantity}</div>
                       </div>
                     )}
                     </div>
   </div>
-  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-    <div>
+  <div class="flex flex-col w-24 max-sm:flex-row max-sm:w-[10%]">
+    <div class="flex">
     {editproductSupplyLinkId === item.productSupplyLinkId ? (
                         <>
-                      <Button onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
+                      <Button 
+                      type="primary"
+                      onClick={() => handleUpdateSupplies(item.productSupplyLinkId,item.hsn, item.name, item.description,item.categoryName, item.subCategoryName )}>
                         Save
                       </Button>
-                        <Button onClick={() => handleCancelClick(item.productSupplyLinkId)} style={{ marginLeft: '0.5rem' }}>
+                        <Button 
+                         type="primary"
+                        onClick={() => handleCancelClick(item.productSupplyLinkId)} className="ml-[0.5rem]">
                         Cancel
                       </Button>
                       </>
                       
                     ) : (
                       <BorderColorIcon
+                      className="!text-base cursor-pointer text-[tomato] flex justify-center items-center mt-1 ml-1"
                         tooltipTitle="Edit"
                         iconType="edit"
                         onClick={() => handleEditClick(item.productSupplyLinkId)}
-                        style={{ color: 'blue', display: 'flex', justifyItems: 'center', justifyContent: 'center', fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.25rem' }}
                       />
                     )}
     </div>
@@ -151,13 +160,8 @@ return (
                           onConfirm={() => props.removeProductBuilder({active:false},item.productSupplyLinkId)}
                           >
                      <Tooltip title="Delete">
-                          <DeleteOutlined
-                            type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                          <DeleteIcon
+                           className="!text-base cursor-pointer text-[red]"
                           />
                        </Tooltip>
                        </StyledPopconfirm>
@@ -221,11 +225,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProductbuilderTable2
 //         width: "20%",
 //         render: (name, item, i) => {
 //           return (
-//             <span style={{ cursor: "pointer" }}>
+//             <div style={{ cursor: "pointer" }}>
 //               <Tooltip title={item.description}>
 //                 {elipsize(item.description || "", 70)}
 //               </Tooltip>
-//             </span>
+//             </div>
 //           );
 //         },
 //       },

@@ -307,7 +307,7 @@ function DealForm(props) {
           console.log(`${finalEndTime}${timeEndPart}`);
 
           let newEndTime = `${finalEndTime}${timeEndPart}`;
-          if(text.length <= 150) {
+          
           props.createDeals(
             {
               ...values,
@@ -320,12 +320,6 @@ function DealForm(props) {
             props.customerId,
             resetForm()
           );
-          }else {
-            Swal.fire({
-              icon: "error",
-              text: "Description shouldn't exceed more than 150 characters !",
-            });
-        }
         }}
       >
         {({
@@ -451,7 +445,7 @@ function DealForm(props) {
                 <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                   <FormattedMessage
                           id="app.description"
-                          defaultMessage="description"
+                          defaultMessage="Description (up to 150 characters)"
                         /></div>
                 <div>
                   <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy,Suspense } from "react";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -7,6 +7,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { MultiAvatar } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -23,17 +24,16 @@ import {
   emptyLeads,
 } from "../../../Leads/LeadsAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ReactCountryFlag from "react-country-flag";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
 import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
-import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
-import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenCETmodal from "./OpenCETmodal";
-import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
-import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
+import { BundleLoader } from "../../../../Components/Placeholder";
+const UpdateLeadsModal =lazy(()=>import("../UpdateLeads/UpdateLeadsModal"));
+const AddLeadsEmailDrawerModal =lazy(()=>import("../UpdateLeads/AddLeadsEmailDrawerModal"));
+const BorderColorIcon =lazy(()=>import("@mui/icons-material/BorderColor"));
+const OpenCETmodal =lazy(()=>import("./OpenCETmodal"));
+const AddLeadsNotesDrawerModal =lazy(()=>import("../AddLeadsNotesDrawerModal"));
 
 const ButtonGroup = Button.Group;
 
@@ -426,6 +426,7 @@ const LeadsAllCardList = (props) => {
          </InfiniteScroll>
       </div>
       </div>
+      <Suspense fallback={<BundleLoader/>}>
       <UpdateLeadsModal
         item={currentLeadsId}
         updateLeadsModal={updateLeadsModal}
@@ -440,8 +441,6 @@ const LeadsAllCardList = (props) => {
       />
       <OpenCETmodal
         rowdata={rowdata}
-        // item={currentLeadsId}
-        // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
         openCETmodal={props.openCETmodal}
         handleCETmodal={props.handleCETmodal}
       />
@@ -450,6 +449,7 @@ const LeadsAllCardList = (props) => {
         addDrawerLeadsNotesModal={props.addDrawerLeadsNotesModal}
         handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
       />
+      </Suspense>
     </>
   );
 };

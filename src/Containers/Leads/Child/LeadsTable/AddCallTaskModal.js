@@ -3,12 +3,11 @@ import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
-import { handleLeadCallModal } from "../../LeadsAction";
 import { FormattedMessage } from "react-intl";
-import LeadsCallForm from "./LeadsCallForm";
-import LeadsEventForm from "./LeadsEventForm";
-import LeadsTaskForm from "./LeadsTaskForm";
 
+const LeadsCallForm = lazy(() => import("./LeadsCallForm"));
+const LeadsEventForm = lazy(() =>import("./LeadsEventForm"));
+const LeadsTaskForm = lazy(() => import("./LeadsTaskForm"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -16,7 +15,7 @@ const AddCallTaskModal = (props) => {
   const { addCallTaskModal, handleLeadCallModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
   const drawerWidth = isSmallScreen ? "90%" : "55%";
-  console.log("rowdata",props.rowdata)
+
   return (
     <>
       <StyledDrawer
@@ -30,9 +29,6 @@ const AddCallTaskModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          {/* <CallTaskForm
-          rowdata={props.rowdata}
-          /> */}
           <LeadsActivityTab   rowdata={props.rowdata}/>
 
         </Suspense>

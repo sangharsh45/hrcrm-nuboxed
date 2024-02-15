@@ -1,9 +1,8 @@
 import React,{useState} from "react";
-import { Switch,  Popconfirm,message } from "antd";
+import { Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addProductBuilder } from "../../ProductAction";
-import axios from "axios";
 
 function ProBuildSearchedToggle (props) {
     // const [paymentCollection, setPaymentCollection] = React.useState(false)
@@ -64,6 +63,7 @@ function ProBuildSearchedToggle (props) {
                         subCategoryName:props.item.subCategoryName,
                         suppliesId:props.item.suppliesId,
                         quantity:props.item.quantity,
+                        imageId:props.item.imageId,
                     },);
       }
     };

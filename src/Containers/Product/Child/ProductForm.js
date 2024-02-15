@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button,  } from "antd";
+import { Formik, Form, Field,FastField } from "formik";
 import { base_url2 } from "../../../Config/Auth";
-import { StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { addProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -170,13 +169,12 @@ class Productform extends Component {
             <Form>
             <div class="flex justify-between">
               <div class="h-full w-[45%]">
-                <div class="flex-nowrap">
-                  <div class="w-[40%]" >
-                    <Field name="imageId" component={Upload} />
-                  </div>
-                </div>
-                <div class="mt-4">
-                <Field
+                <div class=" flex  flex-nowrap">
+                    <div> <FastField name="imageId" component={PostImageUpld} /></div>
+                    <div>  
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
+                        <Field
                   name="articleNo"
                   label="Article #"
                   placeholder="Article No"
@@ -186,7 +184,22 @@ class Productform extends Component {
                   component={InputComponent}
                   
                 />
-                </div>
+                        </div>
+                        <div class=" w-1/2 max-sm:w-full">
+                        <Field
+                  name="name"
+                  label="Name"
+                  isColumn
+                  width={"100%"}
+                  inlineLabel
+                  component={InputComponent}
+                  
+                />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+       
                 <div class="flex justify-between mt-4">
                  <div class="w-[48%]">
                 <Field
@@ -220,17 +233,6 @@ class Productform extends Component {
                 </div>
                 </div>
 
-                <div class="mt-3">
-                <Field
-                  name="name"
-                  label="Name"
-                  isColumn
-                  width={"100%"}
-                  inlineLabel
-                  component={InputComponent}
-                  
-                />
-                </div>
                 <div class="flex justify-between mt-5">
                 <div class="w-[48%]">
                     <Field
