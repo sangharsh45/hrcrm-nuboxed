@@ -309,7 +309,7 @@ class InvestorLinkedContact extends Component {
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
               <span
-                className="!text-base cursor-pointer"
+                className="!text-base cursor-pointer text-[#960a0a]"
               >
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
               </span>
@@ -348,7 +348,7 @@ class InvestorLinkedContact extends Component {
                  handleUpdateInvestorContactModal(true);
                 }}
               >
-                <BorderColorIcon className="!text-base cursor-pointer" />
+                <BorderColorIcon className="!text-base cursor-pointer text-[tomato]" />
               </span>
             </Tooltip>
 
