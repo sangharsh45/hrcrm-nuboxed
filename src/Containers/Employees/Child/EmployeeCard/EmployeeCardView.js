@@ -10,7 +10,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import PhoneIcon from '@mui/icons-material/Phone';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getEmployeelist,
@@ -58,12 +58,13 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
              {props.employees=="Data not Found" ? "Data not Found" :
-            <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
+            <div class="flex flex-wrap justify-center w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
-                
+                const tooltipContent = `${item.workplace}, ${item.location}`;
+                const showTooltip = tooltipContent.trim() !== ''; 
                  return (
-                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
-                  text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
+                  text-[#444444] m-3 p-1 w-[15rem] flex flex-col  ">
                       <div class="flex">
                    <Tooltip 
                    title={item.country}
@@ -113,15 +114,15 @@ function handleSetCurrentEmployeeId(employeeId,) {
           
                       </div> 
                    
-                       <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
-          <div class=" font-normal text-xs  mt-2 text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
-          <div class=" font-normal text-xs mt-2 text-cardBody font-poppins ">Reports To:    <span>
+                       <div class=" font-normal text-xs text-cardBody font-poppins mt-1 "><PhoneIcon  className="!text-base cursor-pointer text-[grey]"/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
+          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins "><DraftsIcon  className="!text-base cursor-pointer text-green-400" /> {item.emailId}</div>
+          <div class=" font-normal text-xs mt-1 text-cardBody font-poppins ">Reports To:    <span>
           {item.reportingManagerName 
                         ? `${item.reportingManagerName}`
-                        : "Not Assigned"}
+                        : <label class="text-[red]" >Not Assigned</label>}
                       </span>
          </div>
-          <div class=" flex flex-row justify-evenly mt-[0.5rem] w-full items-end">
+          <div class=" flex flex-row justify-between mt-[0.5rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
        
           <span class=" cursor-pointer"
@@ -133,6 +134,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </span>
    
            </div>
+           <div class="flex">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span class=" cursor-pointer"
          
@@ -145,14 +147,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
               }}
             >
                <Tooltip title="Pulse">
-              <MonitorHeartIcon  style={{ fontSize: "1rem", color: "#df9697" }}/>
+              <MonitorHeartIcon className="!text-base cursor-pointer text-[#df9697]" />
               </Tooltip>
      </span>
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
             {/* {user.userAccessPlusInd === true ?( */}
           <span
-              style={{ cursor: "pointer" }}
+              className=" cursor-pointer"
               onClick={() => {
                
                 props.handleEmployeeDocumentDrawerModal(true);
@@ -165,27 +167,27 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 overflowCount={999}
               > 
                   <Tooltip title="Required Documents">
-              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+              <InsertDriveFileIcon  className="!text-base cursor-pointer"/>
               </Tooltip>
               </Badge>
      </span>
             {/* ):null} */}
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
-           <Tooltip 
-                   title={`${item.workplace} , ${item.location}`}
-                   >
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+           <Tooltip title={showTooltip ? tooltipContent : 'Not available'}>
+                   {/* title={`${item.workplace} , ${item.location}`}
+                   > */}
            <span>
               
-              <PlaceIcon  className=" !text-base cursor-pointer"/>
+              <PlaceIcon  className=" !text-base cursor-pointer text-[#960a0a]"/>
          
      </span>
      </Tooltip>
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
            <Tooltip title="Assign as Admin">
            <CircleNotificationsIcon
-           style={{ cursor: "pointer",fontSize: "1rem" }}
+          className=" !text-base cursor-pointer text-[gold]"
            onClick={() => {
             handleSetCurrentEmployeeId(item);
             props.handleNotifyDrawer(true);
@@ -193,11 +195,23 @@ function handleSetCurrentEmployeeId(employeeId,) {
            />
            </Tooltip>
             </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
+          
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+            <Tooltip title="Onboarding">
+              <BadgeIcon   className=" !text-base cursor-pointer text-[#709ab3]"
+                onClick={() => {
+                    props.handleOnboardingEmployeeModal(true);
+                    handleSetCurrentEmployeeId(item);
+                  
+                }}
+              />
+            </Tooltip>
+           </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
            {user.userUpdateInd === true || user.role === "ADMIN"  ? (
             <Tooltip title="Edit">
               <BorderColorIcon
-                className=" !text-base cursor-pointer"
+                className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                   props.handleUpdateEmployeeModal(true); 
                   handleSetCurrentEmployeeId(item);
@@ -207,17 +221,6 @@ function handleSetCurrentEmployeeId(employeeId,) {
             </Tooltip>
             ):null}
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
-            <Tooltip title="Onboarding">
-              <BadgeIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
-                onClick={() => {
-                    props.handleOnboardingEmployeeModal(true);
-                    handleSetCurrentEmployeeId(item);
-                  
-                }}
-              />
-            </Tooltip>
            </div>
            </div>
          
