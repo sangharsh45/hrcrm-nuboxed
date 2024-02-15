@@ -136,7 +136,7 @@ const JumpStartDetail = ({
             <MyLoader />{" "}
           </span>
         ) : (
-            <h2 class="text-2xl" >
+            <div class="text-2xl" >
               {isLevelTextInputOpen ? (
                 <>
                   <Select
@@ -201,7 +201,7 @@ const JumpStartDetail = ({
               )
                 // )
               }
-            </h2>
+            </div>
           )}
       </div>
     </JumpStartWrapper>

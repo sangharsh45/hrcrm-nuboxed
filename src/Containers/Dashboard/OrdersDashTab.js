@@ -35,7 +35,7 @@ class OrdersDashTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1"><FormattedMessage
+               <span class=" ml-1 font-semibold"><FormattedMessage
               id="app.Orders"
               defaultMessage="Orders"
             /></span>
