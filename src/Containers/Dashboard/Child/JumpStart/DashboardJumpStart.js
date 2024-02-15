@@ -107,7 +107,7 @@ render() {
             title={
               <FormattedMessage
                 id="app.avHoursThisMonth"
-                defaultMessage="AV hours this month"
+                defaultMessage="Average work hours"
               />
             }
             // title="AV hours this month  "

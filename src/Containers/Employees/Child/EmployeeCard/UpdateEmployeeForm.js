@@ -6,9 +6,10 @@ import { bindActionCreators } from "redux";
 import { Radio } from "antd";
 import {getDepartmentwiserUser} from "../../../Settings/SettingsAction"
 import {getDepartments} from "../../../Settings/Department/DepartmentAction";
+import { getlocation } from "../../../Event/Child/Location/LocationAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
-import {getTimeZone} from "../../../Auth/AuthAction"
+import {getTimeZone,getCountries} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
  import { updateEmployee, } from "../../EmployeeAction";
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
@@ -46,7 +47,8 @@ class UpdateEmployeeForm extends Component {
    const { getCountries ,getEmployeelist,getDepartments,getTimeZone,getCurrencyList,getRoles,getlocation,} = this.props;
     getRoles(this.props.organizationId);
     getTimeZone();
-    // getEmployeelist("cretiondate");
+    getCountries(getCountries);
+    getlocation(this.props.orgId);
     getDepartments();
     getCurrencyList();
 
@@ -950,8 +952,9 @@ const mapStateToProps = ({ auth,role,settings,location,currency, employee,design
         getCurrencyList,
         getDepartments,
         getDepartmentwiserUser,
+        getlocation,
         // getEmployeelist,
-    //    getCountries,
+        getCountries,
     //    getDesignations,
         // getDepartments,
         getRoles,
