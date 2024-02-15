@@ -1,11 +1,20 @@
-import React from "react";
+import React,{lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import SubscriptionHeader from "./Child/SubscriptionHeader";
+
+// const CreateSubscriptionDrawer =lazy(()=>import("./Child/CreateSubscriptionDrawer"));
 
 function Subscription (props) {
 
     return (
         <>
+        <SubscriptionHeader/>
+        {/* <CreateSubscriptionDrawer
+          addEmployeeModal={addEmployeeModal}
+          handleEmployeeModal={handleEmployeeModal}
+        /> */}
+
         <div class="font-bold text-lg">
             Subscription
         </div>
@@ -13,7 +22,7 @@ function Subscription (props) {
     )
 };
 
-const mapStateToProps = ({  }) => ({
+const mapStateToProps = ({ subscription }) => ({
 
   });
   const mapDispatchToProps = (dispatch) =>

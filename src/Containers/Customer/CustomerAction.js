@@ -667,7 +667,7 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
         icon: 'error',
         title: res.data.message,
         // showConfirmButton: false,
-        timer: 1500
+        // timer: 1500
       })
     })
     .catch((err) => {

@@ -164,11 +164,11 @@ const LeadsCardList = (props) => {
                               {item.name}
                               &nbsp;&nbsp;
                               {date === currentdate ? (
-                                <span class="text-xs text-[tomato] font-bold"
+                                <div class="text-xs text-[tomato] font-bold"
                                   
                                 >
                                   New
-                                </span>
+                                </div>
                               ) : null}
                             </div>
                           </div>
@@ -281,7 +281,7 @@ const LeadsCardList = (props) => {
                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
-                        <span class="cursor-pointer"
+                        <div class="cursor-pointer"
                           onClick={() => {}}
                         >
                           {" "}
@@ -290,7 +290,7 @@ const LeadsCardList = (props) => {
                                className=" !text-base cursor-pointer text-green-800"
                             />
                           </a>
-                        </span>
+                        </div>
                       </Tooltip>
                     ) : null}
                   </div>
@@ -305,7 +305,7 @@ const LeadsCardList = (props) => {
                 <div class="flex md:items-center ">
                   <div className=" flex font-medium flex-col md:w-[7.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins">
-                      <span>
+                      <div>
                       {item.assignedTo === null ? (
                 "Not available"
               ) : (
@@ -322,11 +322,11 @@ const LeadsCardList = (props) => {
                         )}
                         </>
               )}
-                      </span>
+                      </div>
                     </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-16  max-sm:flex-row w-full max-sm:justify-between">
-                    <span>
+                    <div>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
                         imageId={item.ownerImageId}
@@ -334,7 +334,7 @@ const LeadsCardList = (props) => {
                         imgWidth={"1.8rem"}
                         imgHeight={"1.8rem"}
                       />
-                    </span>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins"></div>
@@ -424,13 +424,13 @@ const LeadsCardList = (props) => {
                         overlayStyle={{ maxWidth: "300px" }}
                         title={dataLoc}
                       >
-                        <span class="cursor-pointer"
+                        <div class="cursor-pointer"
                          
                         >
                           <LocationOnIcon
                              className="!text-base cursor-pointer text-[#960a0a]"
                           />
-                        </span>
+                        </div>
                       </Tooltip>
                     </div>
                     <div>

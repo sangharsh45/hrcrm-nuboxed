@@ -74,7 +74,7 @@ const LeadsAllCardList = (props) => {
 
   return (
     <>
-     <div className=' flex justify-end sticky top-28 z-auto'>
+     <div className=' flex justify-center sticky top-28 z-auto'>
      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
       <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
       <div className=" md:w-[12.12rem]">Name</div>
@@ -83,7 +83,7 @@ const LeadsAllCardList = (props) => {
         <div className="md:w-[9.8rem]">Country</div>
         <div className="md:w-[10.5rem]">Company</div>
         <div className="md:w-[7.8rem]">Sector</div> 
-        <div className="md:w-[7.81rem]">Assigned to</div>
+        <div className="md:w-[6rem]">Assigned to</div>
         <div className="md:w-[5.5rem]">Owner</div>
         <div className="md:w-[3.3rem]">Qualify</div>
         <div className="w-12"></div>
@@ -126,7 +126,7 @@ const LeadsAllCardList = (props) => {
           return (
             <div>
               <div
-                className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-2 h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
@@ -152,11 +152,11 @@ const LeadsAllCardList = (props) => {
                               {item.name}
                               &nbsp;&nbsp;
                               {date === currentdate ? (
-                                <span class="text-xs text-[tomato] font-bold"
+                                <div class="text-xs text-[tomato] font-bold"
                                   
                                 >
                                   New
-                                </span>
+                                </div>
                               ) : null}
                             </div>
                           </div>
@@ -167,6 +167,28 @@ const LeadsAllCardList = (props) => {
 
                   <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
                     <div>
+                      
+                    </div>
+                    <ButtonGroup>
+                        <RoleButton
+                          type="Hot"
+                          iconType="fas fa-mug-hot"
+                         
+                          tooltip={
+                            <FormattedMessage
+                              id="app.hot"
+                              defaultMessage="Hot"
+                            />
+                          }
+                          role={item.type}
+                          onClick={() => {
+                            const typ = "Hot";
+                            props.updateTypeForLead(item.leadsId, typ);
+                          }}
+                        />
+                      </ButtonGroup>
+                    <div>
+                 
                       <ButtonGroup>
                         <RoleButton
                           type="Warm"
@@ -181,27 +203,6 @@ const LeadsAllCardList = (props) => {
                           role={item.type}
                           onClick={() => {
                             const typ = "Warm";
-                            props.updateTypeForLead(item.leadsId, typ);
-                          }}
-                        />
-                      </ButtonGroup>
-                    </div>
-
-                    <div>
-                      <ButtonGroup>
-                        <RoleButton
-                          type="Hot"
-                          iconType="fas fa-mug-hot"
-                         
-                          tooltip={
-                            <FormattedMessage
-                              id="app.hot"
-                              defaultMessage="Hot"
-                            />
-                          }
-                          role={item.type}
-                          onClick={() => {
-                            const typ = "Hot";
                             props.updateTypeForLead(item.leadsId, typ);
                           }}
                         />
@@ -258,7 +259,7 @@ const LeadsAllCardList = (props) => {
                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
-                        <span
+                        <div
                        
                        class="cursor-pointer"
                           onClick={() => {}}
@@ -269,7 +270,7 @@ const LeadsAllCardList = (props) => {
                                className=" !text-base cursor-pointer text-[green]"
                             />
                           </a>
-                        </span>
+                        </div>
                       </Tooltip>
                     ) : null}
                   </div>
@@ -282,11 +283,11 @@ const LeadsAllCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex md:items-center ">
-                  <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                   
 
                     <div class=" text-xs text-cardBody font-poppins">
-                      <span>
+                      <div>
                         {item.assignedTo === null ? (
                           "None"
                         ) : (
@@ -296,13 +297,13 @@ const LeadsAllCardList = (props) => {
                             imgHeight={"1.8rem"}
                           />
                         )}
-                      </span>
+                      </div>
                     </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                  <div className=" flex font-medium flex-col md:w-16  max-sm:flex-row w-full max-sm:justify-between">
                    
 
-                    <span>
+                    <div>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
                         imageId={item.ownerImageId}
@@ -310,7 +311,7 @@ const LeadsAllCardList = (props) => {
                         imgWidth={"1.8rem"}
                         imgHeight={"1.8rem"}
                       />
-                    </span>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
@@ -324,15 +325,16 @@ const LeadsAllCardList = (props) => {
                       />
                     </div>
                   </div>
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
+                        className="!text-base cursor-pointer text-green-800"
                           onClick={() => {
                             handleLeadsNotesDrawerModal(true);
                             handleRowData(item);
                           }}
-                          className=" !text-base cursor-pointer text-[green]"
+                          
                         />
                       </Tooltip>
                     </div>
@@ -346,7 +348,7 @@ const LeadsAllCardList = (props) => {
                         }
                       >
                         <AddchartIcon
-                         className=" !text-base cursor-pointer "
+                        className="!text-base cursor-pointer text-blue-500"
                           onClick={() => {
                             props.handleCETmodal(true);
                             handleRowData(item);
@@ -356,12 +358,12 @@ const LeadsAllCardList = (props) => {
                     </div>
                   </div>
 
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     {user.leadsUpdateInd === true && user.crmInd === true && (
                       <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                            className=" !text-base cursor-pointer text-[gray]"
+                            className="!text-base cursor-pointer text-[tomato]"
                             onClick={() => {
                               props.setEditLeads(item);
                               handleUpdateLeadsModal(true);
@@ -394,20 +396,20 @@ const LeadsAllCardList = (props) => {
                         overlayStyle={{ maxWidth: "300px" }}
                         title={dataLoc}
                       >
-                        <span
-                          className=" cursor-pointer"
+                        <div
+                          
                         >
                           <LocationOnIcon
-                            className=" !text-base cursor-pointer "
+                            className="!text-base cursor-pointer text-[#960a0a]"
                           />
-                        </span>
+                        </div>
                       </Tooltip>
                     </div>
                     <div>
                       <Tooltip title={item.email}>
                         <MailOutlineIcon
                           type="mail"
-                          className=" !text-base cursor-pointer "
+                          className="!text-base cursor-pointer text-green-400"
                           onClick={() => {
                             handleSetCurrentLeadsId(item);
                             props.handleLeadsEmailDrawerModal(true);
@@ -416,7 +418,7 @@ const LeadsAllCardList = (props) => {
                       </Tooltip>{" "}
                     </div>
                   </div>
-                  <div class="w-[2%]"></div>
+           
                 </div>
               </div>
             </div>
