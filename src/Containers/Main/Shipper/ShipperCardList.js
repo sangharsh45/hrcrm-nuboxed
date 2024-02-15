@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from "redux";
-import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
-import { Tooltip, Popconfirm } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Tooltip, Popconfirm,Switch } from "antd";
 import {
   getShipperByUserId,
   setEditShipper,
@@ -12,10 +12,12 @@ import {
   handleShipperActivityTableModal,
   deleteShipperData,
 } from "./ShipperAction";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
+
 
 function ShipperCardList(props) {
   useEffect(() => {
@@ -59,26 +61,21 @@ return(
         <div className="md:w-[7.8rem]"><FormattedMessage id="app.address" defaultMessage="Address"/></div>
         <div className="md:w-[7.9rem]"><FormattedMessage id="app.city" defaultMessage="City"/></div>
         <div className="md:w-[5.2rem]"><FormattedMessage id="app.pinCode" defaultMessage="Pin Code"/></div>
-        <div className="w-[3.8rem]"></div>
+        <div className="md:w-[4.24rem]">API</div>
         </div>
         <InfiniteScroll
         dataLength={props.shipperByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={props.fetchingShipperByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingShipperByUserId?<div className="flex items-center" >Loading...</div>:null}
         height={"75vh"}
       >
 {props.shipperByUserId.map((item) => {
   return (
     <>
-     <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3"
-           
-                  style={{
-                    // borderBottom: "3px dotted #515050"
-                  }}
-                >
- <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
- <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+     <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3">
+ <div class=" flex flex-row items-center justify-evenly w-wk max-sm:flex-col">
+ <div className=" flex font-medium  md:w-[12.1rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -95,7 +92,7 @@ Name
 </div>
 
 </div>
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[6.2rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -109,7 +106,7 @@ Phone #
 </div>
 
 </div>
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[14.3rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -124,7 +121,7 @@ Email
 
 </div>
 
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[11.12rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -138,7 +135,7 @@ Ship By
 </div>
 
 </div>
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[11.31rem] max-sm:justify-between w-full max-sm:flex-row ">
 {/* 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -156,7 +153,7 @@ Address
 </div>
 
 </div>
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[11.21rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -173,7 +170,7 @@ City
 </div>
 
 </div>
-<div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+<div className=" flex font-medium  md:w-[11.45rem] max-sm:justify-between w-full max-sm:flex-row ">
 
 {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
@@ -190,11 +187,21 @@ PinCode
 </div>
 
 </div>
-<div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+<div>
+<Switch
+                          className="toggle-clr"
+                          //checked={item.productionInd}
+                          isLoading={true}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+</div>
+<div class="flex flex-col w-[3%] ml-1 max-sm:flex-row max-sm:w-[10%]">
  <div>
 <Tooltip title="Edit">
-            <EditOutlined
-              style={{ cursor: "pointer" }}
+            <BorderColorIcon
+            className=" !text-base cursor-pointer text-[tomato]"
+              
               onClick={() => {
                 props.setEditShipper(item);
                 handleRowData(item);
@@ -210,8 +217,8 @@ PinCode
              onConfirm={() => props.deleteShipperData(item.shipperId)}
             >
               <DeleteOutlined
-
-                style={{ cursor: "pointer", color: "red" }}
+className=" !text-base cursor-pointer text-[red]"
+               
               />
             </Popconfirm>
             </div>

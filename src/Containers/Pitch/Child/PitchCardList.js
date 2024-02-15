@@ -71,7 +71,7 @@ const PitchCardList = (props) => {
 
   return (
     <>
-  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+  <div class="rounded-lg m-5 p-2 w-[97%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.1rem]"><FormattedMessage
                   id="app.name"
@@ -222,7 +222,7 @@ const PitchCardList = (props) => {
 </ButtonGroup>
 </div>
 <div><ButtonGroup>
-<RoleButton
+<RoleButton1
  type="Warm"
  iconType="	fas fa-burn"
  // tooltip="Warm"
@@ -239,7 +239,7 @@ const PitchCardList = (props) => {
 </ButtonGroup></div>
      <div>
 <ButtonGroup>
-<RoleButton
+<RoleButton2
  type="Cold"
  iconType="far fa-snowflake"
  // tooltip="Cold"
@@ -570,7 +570,55 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
         style={{
           padding: "0.37em",
           borderColor: "transparent",
-          color: role === type ? "#1890ff" : "grey",
+          color: role === type ? "red" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton1({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "orange" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton2({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "blue" : "grey",
         }}
         ghost={role !== type}
         onClick={onClick}
