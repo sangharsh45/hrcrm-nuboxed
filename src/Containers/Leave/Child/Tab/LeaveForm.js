@@ -256,7 +256,7 @@ console.log(this.state.firstCase)
                         fontWeight: "bold",
                       }}
                     >
-                      <StyledLabel> Half Day</StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> Half Day</div>
                       <Switch
                          onChange={this.radioClick}
                         checked={this.state.isAccepted}
