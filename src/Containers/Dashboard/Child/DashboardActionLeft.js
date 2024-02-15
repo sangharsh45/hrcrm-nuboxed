@@ -1,4 +1,4 @@
-import { Badge, Popover,Tooltip } from "antd";
+import { Badge, Popover,Tooltip,Avatar } from "antd";
 import React, {  } from "react";
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { StyledRangePicker } from "../../../Components/UI/Antd";
@@ -8,6 +8,7 @@ import {
   setTimeRangeReport,
   setDashboardViewType
 } from "../DashboardAction";
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import PersonIcon from '@mui/icons-material/Person';
 import { bindActionCreators } from "redux";
 import TimeInterval from "../../../Utils/TimeInterval";
@@ -45,7 +46,9 @@ const DashboardActionLeft = (props) => {
   
           }}> 
               <Tooltip title="My Details">
-          <PersonIcon  style={{ fontSize: "1rem" }}/>
+              <Avatar style={{ background: activeButton === "test" ? "#f279ab" : "#4bc076" }}>
+          <PersonIcon className="text-white"   />
+          </Avatar>
           </Tooltip>
         
         </span>
@@ -63,10 +66,11 @@ const DashboardActionLeft = (props) => {
         }}
         >
          <Tooltip title="Task">
-             
-     <FactCheckIcon
-                style={{ fontSize: "1rem", }}
+         <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>     
+     <FactCheckIcon className="text-white"
+               
               />
+                  </Avatar>
               </Tooltip>
         </span>
   </Badge>
@@ -85,10 +89,12 @@ const DashboardActionLeft = (props) => {
         }}
         >
           <Tooltip title="Prospects">
-          <ApartmentIcon
+          <Avatar style={{ background: activeButton === "Customer" ? "#f279ab" : "#4bc076" }}>     
+          <ApartmentIcon  className="text-white"
 
-style={{ fontSize: "1rem", }}
+
 />
+</Avatar>
 </Tooltip>        
         </span>
         </Badge>
@@ -110,9 +116,11 @@ style={{ fontSize: "1rem", }}
         }}
         >
           <Tooltip title="Customers">
-          <AcUnitIcon
-                style={{ fontSize: "1rem", }}
+          <Avatar style={{ background: activeButton === "Accounts" ? "#f279ab" : "#4bc076" }}>     
+          <AcUnitIcon className="text-white"
+                
               />
+                </Avatar>
           </Tooltip>
         </span>
         </Badge>
@@ -130,9 +138,11 @@ style={{ fontSize: "1rem", }}
     
         }}
         >  <Tooltip title="Order">
-          <DynamicFeedIcon
-                style={{ fontSize: "1rem", }}
+            <Avatar style={{ background: activeButton === "Order" ? "#f279ab" : "#4bc076" }}>     
+          <DynamicFeedIcon className="text-white"
+               
               />
+               </Avatar>
            </Tooltip>
         </span>
         </Badge>
@@ -152,7 +162,9 @@ style={{ fontSize: "1rem", }}
         }}
         >
            <Tooltip title="Finance">
-          <ReceiptIcon  style={{ fontSize: "1rem" ,}}/>
+           <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
+          <ReceiptIcon  className="text-white"/>
+          </Avatar>
           </Tooltip>
           
         </span>
@@ -172,19 +184,42 @@ style={{ fontSize: "1rem", }}
         }}
         >  
         <Tooltip title="Investors">
-          <LocationCityIcon
-
-style={{ fontSize: "1rem" ,}}
+        <Avatar style={{ background: activeButton === "Investors" ? "#f279ab" : "#4bc076" }}>     
+          <LocationCityIcon className="text-white"
 />
+</Avatar>
 </Tooltip>       
         </span>
         </Badge>
 )}
+
+{/* {user.imInd === true  && ( */}
+            <Badge
+            size="small"
+            // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+            // overflowCount={999}
+          >
+        <span class="cursor-pointer ml-2"
+        onClick={() => handleButtonClick("RecruitPro")} 
+        style={{
+          color:activeButton === "RecruitPro" && "tomato",
+    
+        }}
+        >  
+        <Tooltip title="RecruitPro">
+        <Avatar style={{ background: activeButton === "RecruitPro" ? "#f279ab" : "#4bc076" }}>     
+          <RecentActorsIcon className="text-white"
+/>
+</Avatar>
+</Tooltip>       
+        </span>
+        </Badge>
+{/* )} */}
     
    </div>
    
       <>
-      <div class="ml-2">
+      <div class="ml-[9rem]">
     <TimeInterval
     style={{fontSize:"0.67"}}
           times={dateRangeList}

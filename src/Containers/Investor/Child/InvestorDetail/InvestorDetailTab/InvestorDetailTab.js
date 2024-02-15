@@ -2,6 +2,7 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import AddchartIcon from '@mui/icons-material/Addchart'; 
 import { FormattedMessage } from "react-intl";
 import { PlusOutlined } from "@ant-design/icons";
@@ -13,8 +14,11 @@ import {getContactListByInvestorId,handleInvestorContactModal,
   handleInvestorDocumentUploadModal,
   handleActivityModal
 } from "../../../InvestorAction";
+import {handleDealModal}from "../../../../Deal/DealAction";
 import InvestorActivityModal from "../InvestorActivity/InvestorActivityModal";
 import InvestorTimeLine from "../InvestorActivity/InvestorTimeLine";
+import CreateDealModal from "../../../../Deal/Child/CreateDealModal";
+import InvestorDeals from "./InvestorDeals";
 const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
 const InvestorLinkedDocuments =lazy(()=>import("./InvestorDoc/InvestorLinkedDocuments"));
 const AddInvestorContactModal=lazy(()=>import("./InvestorContact/AddInvestorContactModal"));
@@ -30,7 +34,7 @@ class InvestorDetailTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: "2",
+      activeKey: "1",
       contactPopover: false,
       partnerPopover: false,
       quotProPopover: false,
@@ -79,6 +83,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
       handleInvestorDocumentUploadModal,
       handleActivityModal,
       opendocumentUploadModal,
+      opencreateDealModal,
       investorActivityModal,
       handleCustomerReactSpeechModal,
       addCustomerSpeechModal,
@@ -93,12 +98,13 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
       getOpportunityListByCustomerId,
       addInvoiceModal,
       handleInvoiceModal,
+      handleDealModal,
     } = this.props;
 
     return (
       <>
         <TabsWrapper>
-          <StyledTabs defaultActiveKey="2" onChange={this.handleTabChange}>
+          <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
             {/* <TabPane
               tab={
                 <>
@@ -301,6 +307,58 @@ investorDetails={this.props.investorDetails}
                 />
               </Suspense>
             </TabPane>
+
+            <TabPane
+              tab={
+                <>
+                  <CurrencyExchangeIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.Deals"
+                        defaultMessage="Deals"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                  {activeKey === "4" && (
+                    <>
+                    <Tooltip 
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                      >
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                         onClick={() => handleDealModal(true)}
+                        size="0.875em"
+                       
+                      />
+                      </Tooltip>
+                    </>
+                  )}
+                
+                </>
+              }
+              key="4"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <InvestorDeals
+
+investorDetails={this.props.investorDetails}
+                />
+              </Suspense>
+            </TabPane>
             {/* <TabPane
               tab={
                 <>
@@ -389,6 +447,9 @@ investorDetails={this.props.investorDetails}
             opendocumentUploadModal={opendocumentUploadModal}
             handleInvestorDocumentUploadModal={handleInvestorDocumentUploadModal}
           />
+          <CreateDealModal 
+                       opencreateDealModal={opencreateDealModal}
+                       handleDealModal={handleDealModal}/>
              <InvestorActivityModal
             
               customerId={this.props. customerId }
@@ -433,18 +494,20 @@ investorDetails={this.props.investorDetails}
     );
   }
 }
-const mapStateToProps = ({ auth, investor, contact, opportunity }) => ({
+const mapStateToProps = ({ auth, investor, contact, opportunity,deal }) => ({
   opendocumentUploadModal: investor.opendocumentUploadModal,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   investorActivityModal:investor.investorActivityModal,
 contactsbyInvestorId:investor.contactsbyInvestorId,
+opencreateDealModal:deal.opencreateDealModal
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleInvestorDocumentUploadModal,
       handleActivityModal,
+      handleDealModal,
       handleInvestorContactModal,
       // handleCustomerOpportunityModal,
 getContactListByInvestorId,

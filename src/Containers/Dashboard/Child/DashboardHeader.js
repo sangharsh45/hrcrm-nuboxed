@@ -5,9 +5,7 @@ const DashboardActionRight=lazy(() => import("./DashboardActionRight"));
 class DashboardHeader extends Component {
   render() {
     return (
-      <div style={{position: "sticky",
-      top: "3.35rem",
-      zIndex: "998"}}>
+      <div>
         <ActionHeader
            leftComponent={<DashboardActionLeft 
             viewType={this.props.viewType}

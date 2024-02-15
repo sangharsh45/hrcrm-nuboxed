@@ -1,14 +1,13 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, {  useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { getFilteredEmailContact } from "../../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -27,19 +26,14 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { getAssignedToList } from "../../../Employees/EmployeeAction";
 import { getEvents } from "../../../Settings/Event/EventAction";
-import CandidateClearbit from "../../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { Listbox } from '@headlessui/react'
 
 // yup validation scheme for creating a opportunity
 const EventSchema = Yup.object().shape({
   eventTypeId: Yup.string().required("Select event type"),
   eventSubject: Yup.string().required("This field is required !"),
   timeZone: Yup.string().required("Input required !"),
-  // endDate: Yup.string()
-  //   .nullable()
-  //   .required("Input required !"),
   startTime: Yup.string().nullable().required("Input required !"),
   endTime: Yup.string().nullable().required("Input required !"),
   startDate: Yup.string().nullable().required("Input required !"),
@@ -71,43 +65,11 @@ function LeadsEventForm (props) {
     const employeesData =props.assignedToList.map((item) => {
       return {
         label: `${item.empName}`,
-        // label: `${item.salutation || ""} ${item.firstName ||
-        //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.allOpportunityData.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
-    const ContactData = props.filteredContact.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
+    
+  
 const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
@@ -287,7 +249,7 @@ const {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+            <div class="mt-4">
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -302,6 +264,8 @@ const {
                     isColumn
                     inlineLabel
                   />
+                  </div>
+                  <div class="mt-4">
                   <Field
                     isRequired
                     name="eventSubject"
@@ -317,9 +281,10 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+                 
                   <div>
-                    <div class=" flex justify-between">
+                    <div class=" flex justify-between mt-4">
                       <div class=" w-1/2">
                         <Field
                           isRequired
@@ -335,9 +300,6 @@ const {
                           component={DatePicker}
                           value={values.startDate}
                           inlineLabel
-                          style={{
-                            width: "100%",
-                          }}
                         />
                       </div>
                       <div class=" w-5/12">
@@ -356,9 +318,7 @@ const {
                           use12Hours
                           value={values.startTime}
                           inlineLabel
-                          style={{
-                            width: "100%",
-                          }}
+                         
                         />
                       </div>
                     </div>
@@ -380,9 +340,7 @@ const {
                         value={values.endDate || values.startDate}
                         defaultValue={dayjs("2015-01-01")}
                         inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
+                       
                         disabledDate={(currentDate) => {
                           if (values.startDate) {
                             if (
@@ -402,7 +360,7 @@ const {
                       <Field
                         isRequired
                         name="endTime"
-                        //label="End Time"
+                       
                         label={
                           <FormattedMessage
                             id="app.endtime"
@@ -414,9 +372,6 @@ const {
                         use12Hours
                         value={values.endTime}
                         inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
                       />
                     </div>
                   </div>
@@ -438,8 +393,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+           
                   
                     {/* <Field
                       name="employeesId"
@@ -491,16 +445,16 @@ const {
                       {({ selected, active }) => (
                         <>
                           <div className="flex items-center">
-                            <span
+                            <div
                               className={`ml-3 block truncate ${
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
                               {item.empName}
-                            </span>
+                            </div>
                           </div>
                           {selected && (
-                            <span
+                            <div
                               className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
                                 active ? "text-white" : "text-indigo-600"
                               }`}
@@ -519,7 +473,7 @@ const {
                                   clipRule="evenodd"
                                 />
                               </svg>
-                            </span>
+                            </div>
                           )}
                         </>
                       )}
@@ -531,7 +485,7 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+                      <div class="mt-4">
                   <Field
                     name="included"
                     // label="Include"
@@ -551,9 +505,9 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
+                  </div>
                 
-                  <Spacer />
+                  
                   {/* <Field
                     disabled="true"
                     isRequired
@@ -586,8 +540,8 @@ const {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+                <div class=" h-full w-w47.5 max-sm:w-wk mt-4">
+                <div class="mt-4">
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -598,7 +552,8 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+                  </div>
+                  <div class="mt-4">
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -610,7 +565,8 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+                  
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
@@ -653,8 +609,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+        
+              <div class="flex justify-end mt-4">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

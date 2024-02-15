@@ -68,7 +68,7 @@ class TodoDashboardTab extends Component {
                 count={this.props.todosCount.todo}
                 overflowCount={999}
               > 
-               <span class=" ml-1">
+               <span class=" ml-1 font-semibold">
                <FormattedMessage
                 id="app.toDo"
                 defaultMessage="ToDo"
@@ -97,7 +97,7 @@ class TodoDashboardTab extends Component {
                   <DnsIcon 
                    style={{fontSize:"1.1rem"}}
                   />
-                    <span class=" ml-1">
+                    <span class=" ml-1 font-semibold">
                     <FormattedMessage
                 id="app.openRequirements"
                 defaultMessage="Open Requirements"

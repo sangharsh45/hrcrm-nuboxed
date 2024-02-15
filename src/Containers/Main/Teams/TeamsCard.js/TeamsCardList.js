@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import {  Select } from "antd"
 import {getTeamList} from "../TeamsAction"
-import moment from "moment";
 const Option = Select;
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);

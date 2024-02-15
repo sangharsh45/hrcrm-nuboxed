@@ -34,6 +34,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CategoryIcon from '@mui/icons-material/Category'
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 
 const SubMenu = Menu.SubMenu;
 
@@ -739,6 +740,19 @@ function NavMenu(props) {
           </Link>
         </Menu.Item>
         )}
+        <Menu.Item key="/subscription" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/subscription' ? 'tomato' : '#4bc076' }}>
+          <Link to="/subscription" onClick={() => handleSelect('/subscription')}>
+            <SubscriptionsIcon
+              style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage
+              id="app.subscription"
+              defaultMessage="Subscription"
+            />
+            </span>
+          </Link>
+        </Menu.Item>
         <hr />
         {user.refurbishWorkshopInd === true && user.erpInd === true && (
 

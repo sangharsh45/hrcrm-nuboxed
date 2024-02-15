@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
-import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../Components/UI/Elements";
 import "jspdf-autotable";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -22,7 +22,6 @@ import {
   handleAssimodal,
   handlePitchConvertModal
 } from "../PitchAction";
-import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
@@ -71,13 +70,13 @@ const PitchCardList = (props) => {
 
   return (
     <>
-  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+  <div class="rounded-lg m-5 p-2 w-[97%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[13.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[8.5rem]"></div>
+        <div className=" md:w-[5.5rem]"></div>
         <div className=" md:w-[7.1rem] "><FormattedMessage
                   id="app.phoneno#"
                   defaultMessage="phone #"
@@ -86,19 +85,19 @@ const PitchCardList = (props) => {
                   id="app.country"
                   defaultMessage="country"
                 /></div>
-        <div className="md:w-[13.1rem]"><FormattedMessage
+        <div className="md:w-[13.12rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-        <div className="md:w-[7.12rem]"><FormattedMessage
+        <div className="md:w-[5.12rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
-        <div className="md:w-[9.2rem]"><FormattedMessage
+        <div className="md:w-[3.2rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-[4.3rem]"><FormattedMessage
+        <div className="md:w-[10.3rem]"><FormattedMessage
                   id="app.qualify"
                   defaultMessage="qualify"
                 /></div>
@@ -138,15 +137,13 @@ const PitchCardList = (props) => {
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-1"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
+                                
                                 >
                                      <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full items-center"> 
 <div>
-<SubTitle>
+
             <MultiAvatar
               primaryTitle={item.name}
               imageId={item.imageId}
@@ -154,7 +151,7 @@ const PitchCardList = (props) => {
               imgWidth={"1.8em"}
               imgHeight={"1.8em"}
             />
-          </SubTitle>
+          
 </div>
                                    <div class="w-[4%]">
 
@@ -180,12 +177,7 @@ const PitchCardList = (props) => {
                                                {/* </Link> */}
                                                &nbsp;&nbsp;
                                                {date === currentdate ? (
-                                                 <span
-                                                   style={{
-                                                     color: "tomato",
-                                                     fontWeight: "bold",
-                                                   }}
-                                                 >
+                                                 <span class="text-[tomato] font-bold" >
                                                    New
                                                  </span>
                                                ) : null}
@@ -222,7 +214,7 @@ const PitchCardList = (props) => {
 </ButtonGroup>
 </div>
 <div><ButtonGroup>
-<RoleButton
+<RoleButton1
  type="Warm"
  iconType="	fas fa-burn"
  // tooltip="Warm"
@@ -239,7 +231,7 @@ const PitchCardList = (props) => {
 </ButtonGroup></div>
      <div>
 <ButtonGroup>
-<RoleButton
+<RoleButton2
  type="Cold"
  iconType="far fa-snowflake"
  // tooltip="Cold"
@@ -291,15 +283,15 @@ const PitchCardList = (props) => {
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
-                <span
+                <span className=" cursor-pointer"
                   //type="edit"
-                  style={{ cursor: "pointer" }}
+                 
                   onClick={() => {}}
                 >
                   {" "}
                   <a href={`item.url`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
+                    className="!text-base cursor-pointer text-[green]"
                     />
                   </a>
                 </span>
@@ -345,7 +337,7 @@ const PitchCardList = (props) => {
              
                                     </div>
                                 </div>
-     <div className=" flex font-medium flex-col md:w-[3.5rem]  max-sm:flex-row w-full max-sm:justify-between">
+     <div className=" flex font-medium flex-col md:w-[5.5rem]  max-sm:flex-row w-full max-sm:justify-between">
                        
                        {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
@@ -361,7 +353,7 @@ const PitchCardList = (props) => {
                    </div>
                                
                          
-                   <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
+                   <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
@@ -375,11 +367,7 @@ const PitchCardList = (props) => {
                             props.handlePitchConvertModal(true);
                          
                           }}
-                          style={{
-                            // color: "green",
-                            cursor: "pointer",
-                            fontSize: "1.5rem",
-                          }}
+                          className="!text-base cursor-pointer text-[blue]"
                         />
                       </Tooltip>
 {/* <StatusPitchToggle
@@ -397,7 +385,7 @@ const PitchCardList = (props) => {
                   props.handlePitchNotesDrawerModal(true);
                   handleSetCurrentLeadsId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[green]"
               />
            </Tooltip>
 
@@ -409,7 +397,8 @@ const PitchCardList = (props) => {
         }
       >
 <AddchartIcon
-style={{fontSize: "1rem",cursor: 'pointer',}}
+className="!text-base cursor-pointer text-blue-500"
+
 onClick={()=>{
   props.handleAssimodal(true)
   handleRowData(item)
@@ -426,7 +415,7 @@ onClick={()=>{
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{  color: "grey",cursor: "pointer",fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                    props.setEditPitch(item);
                    props.handleUpdatePitchModal(true);
@@ -448,7 +437,8 @@ onClick={()=>{
              {user.imInd === true  &&  user.plantDeleteInd === true && ( 
             <DeleteOutlined
               type="delete"
-              style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
+              className="!text-base text-[red] cursor-pointer"
+              
             />
              )} 
              </Tooltip>
@@ -464,10 +454,7 @@ onClick={()=>{
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span class="cursor-pointer" >
-            <LocationOnIcon   style={{
-                cursor: "pointer",
-                fontSize: "1rem"
-              }}/>
+            <LocationOnIcon   className="!text-base cursor-pointer text-[#960a0a]"/>
             </span>
           </Tooltip>
           </div>
@@ -475,7 +462,7 @@ onClick={()=>{
           <Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize:"1rem"  }}
+                className="!text-base cursor-pointer text-green-400"
                 // onClick={() => {
                 //   handleSetCurrentLeadsId(item);
                 //   props.handleLeadsEmailDrawerModal(true);
@@ -570,7 +557,55 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
         style={{
           padding: "0.37em",
           borderColor: "transparent",
-          color: role === type ? "#1890ff" : "grey",
+          color: role === type ? "red" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton1({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "orange" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}
+function RoleButton2({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "blue" : "grey",
         }}
         ghost={role !== type}
         onClick={onClick}

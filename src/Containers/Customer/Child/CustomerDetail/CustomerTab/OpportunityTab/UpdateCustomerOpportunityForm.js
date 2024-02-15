@@ -14,8 +14,9 @@ import { SelectComponent } from "../../../../../../Components/Forms/Formik/Selec
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import { Listbox } from '@headlessui/react'
+import { getCrm} from "../../../../../Leads/LeadsAction";
 import {
-  getAllSalesList, getWorkflow, getStages,
+ getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";
 /**
  * yup validation scheme for creating a opportunity
@@ -29,8 +30,8 @@ const OpportunitySchema = Yup.object().shape({
 function UpdateCustomerOpportunityForm(props) {
 
   useEffect(() => {
+    props.getCrm();
    props.getCurrencyList();
-    props.getAllSalesList();
     props.getWorkflow(props.orgId);
     props.getStages(props.orgId);
   }, []);
@@ -381,20 +382,24 @@ console.log("hh",customerId)
                 </div>
                 <div class=" h-full w-[47.5%]"
                 >
-                                <Listbox value={selected} onChange={setSelected}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
+                <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
+            >
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
               <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -402,7 +407,7 @@ console.log("hh",customerId)
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -412,7 +417,7 @@ console.log("hh",customerId)
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -444,9 +449,9 @@ console.log("hh",customerId)
                 </Listbox.Options>
               )}
             </div>
-        </>
-      )}
-    </Listbox>
+          </>
+        )}
+      </Listbox>
                   {/* <Field
                     name="salesUserIds"
                     // selectType="employee"
@@ -602,7 +607,7 @@ console.log("hh",customerId)
     );
   }
 
-const mapStateToProps = ({ auth, opportunity,currency, contact, customer }) => ({
+const mapStateToProps = ({ auth,leads, opportunity,currency, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   currencyList: currency.currencyList,
@@ -614,9 +619,11 @@ const mapStateToProps = ({ auth, opportunity,currency, contact, customer }) => (
   updatingCustomerOpportunityError: customer.updatingCustomerOpportunity,
   setEditingCustomerOpportunity: customer.setEditingCustomerOpportunity,
   workflow: opportunity.workflow,
+  fullName: auth.userDetails.fullName,
   stages: opportunity.stages,
   orgId: auth.userDetails.organizationId,
   sales: opportunity.sales,
+  crmAllData:leads.crmAllData,
 
 
 });
@@ -625,7 +632,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateCustomerOpportunity,
-      getAllSalesList,
+      getCrm,
       getCurrencyList,
       getWorkflow,
       getStages,

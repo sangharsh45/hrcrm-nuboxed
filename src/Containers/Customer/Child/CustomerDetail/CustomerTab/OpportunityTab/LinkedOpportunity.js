@@ -466,34 +466,34 @@ function OpportunityTable(props) {
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
          
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                     {dayjs(item.startDate).format("DD/MM/YYYY")}
                  
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col  md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
          
-         <h4 class=" text-xs text-cardBody font-poppins">
+         <div class=" text-xs text-cardBody font-poppins">
          {dayjs(item.endDate).format("DD/MM/YYYY")}
            {/* {item.endDate} */}
       
-         </h4>
+         </div>
        </div>
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium justify-center flex-col  md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
          
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                     <span>
             <CurrencySymbol currencyType={item.currency} />
             &nbsp;&nbsp;{item.proposalAmount}
           </span>
                  
-                    </h4>
+                    </div>
                   </div>
                   <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between ">
          
-         <h4 class=" text-xs text-cardBody font-poppins">
+         <div class=" text-xs text-cardBody font-poppins">
          <Tooltip title={item.oppStage}>
 {" "}
 <Progress
@@ -508,13 +508,13 @@ width={30}
   
 </Tooltip>
       
-         </h4>
+         </div>
        </div>
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-14 max-sm:flex-row w-full max-sm:justify-between ">
          
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                     <Tooltip title={item.contactName}>
               <span>
                 <MultiAvatar
@@ -527,7 +527,7 @@ width={30}
               </span>
             </Tooltip>
                  
-                    </h4>
+                    </div>
                   </div>
       
                 </div>
@@ -551,9 +551,7 @@ width={30}
                   <Tooltip title="Edit">
              {user.opportunityUpdateInd ===true && (
           <BorderColorIcon 
-          
-              type="edit"
-              style={{ cursor: "pointer",fontSize:"1rem" }}
+          className=" !text-base cursor-pointer text-[tomato]"
               onClick={() => {
                 props.setEditCustomerOpportunity(item);
                 handleUpdateCustomerOpportunityModal(true);

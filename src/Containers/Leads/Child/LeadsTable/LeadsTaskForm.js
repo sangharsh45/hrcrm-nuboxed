@@ -530,21 +530,19 @@ const [priority,setpriority]=useState(props.selectedTask
                
                       <div class=" flex justify-between flex-col w-full">
                         
-                          <StyledLabel>
-                            {/* Priority */}
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                             <FormattedMessage
                               id="app.priority"
                               defaultMessage="Priority"
-                            />
-                            
-                          </StyledLabel>
+                            /> 
+                          </div>
                         
                           <div class="flex">
                             <Tooltip title="High">
                               <Button
+                              // className="w-["
                                 type="primary"
                                  shape="circle"
-                                // icon={<ExclamationCircleOutlined />}
                                 onClick={() => handleButtonClick("High")}
                                 style={{
                                   backgroundColor:
@@ -1329,16 +1327,17 @@ const [priority,setpriority]=useState(props.selectedTask
                 
                  
                   
-                  <Spacer />
-                  <div class=" flex justify-between">
+
+                  <div class="flex justify-between mt-4">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
                           <div>
-                            <StyledLabel>Set Reminder </StyledLabel>
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
+                            Set Reminder </div>
                           </div>
                           <div>
-                            {/* <FlexContainer justifyContent="space-between"> */}
+                      
                             <Switch
                               onChange={handleReminderChange}
                               checked={reminder}
