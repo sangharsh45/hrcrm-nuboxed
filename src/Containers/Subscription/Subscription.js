@@ -2,18 +2,21 @@ import React,{lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SubscriptionHeader from "./Child/SubscriptionHeader";
-
-// const CreateSubscriptionDrawer =lazy(()=>import("./Child/CreateSubscriptionDrawer"));
+import {handleCreateSubscriptionDrawer} from "./SubscriptionAction";
+const CreateSubscriptionDrawer =lazy(()=>import("./Child/CreateSubscriptionDrawer"));
 
 function Subscription (props) {
 
     return (
         <>
-        <SubscriptionHeader/>
-        {/* <CreateSubscriptionDrawer
-          addEmployeeModal={addEmployeeModal}
-          handleEmployeeModal={handleEmployeeModal}
-        /> */}
+        <SubscriptionHeader 
+          createSubscriptiondrawer={props.createSubscriptiondrawer}
+          handleCreateSubscriptionDrawer={props.handleCreateSubscriptionDrawer}
+          />
+        <CreateSubscriptionDrawer
+          createSubscriptiondrawer={props.createSubscriptiondrawer}
+          handleCreateSubscriptionDrawer={props.handleCreateSubscriptionDrawer}
+        />
 
         <div class="font-bold text-lg">
             Subscription
@@ -23,12 +26,12 @@ function Subscription (props) {
 };
 
 const mapStateToProps = ({ subscription }) => ({
-
+  createSubscriptiondrawer:subscription.createSubscriptiondrawer
   });
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
       {
-  
+        handleCreateSubscriptionDrawer
       },
       dispatch
     );
