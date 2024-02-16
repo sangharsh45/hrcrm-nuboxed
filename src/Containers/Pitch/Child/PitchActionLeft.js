@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { } from 'react-speech-recognition';
-import { Input, Tooltip,Badge } from "antd";
+import { Input, Tooltip,Badge,Avatar } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import {getPitchRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
 import { FormattedMessage } from "react-intl";
@@ -77,7 +77,9 @@ const PitchActionLeft = (props) => {
            color: props.viewType === "card" && "#1890ff",
           }}
         >
+          <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
         <TocIcon />
+        </Avatar>
         </span>
         </Badge>
       </Tooltip>
@@ -100,7 +102,9 @@ const PitchActionLeft = (props) => {
            color: props.viewType === "teams" && "#1890ff",
           }}
         >
+          <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
          <PeopleIcon/>
+         </Avatar>
         </span>
         </Badge>
       </Tooltip>
@@ -118,11 +122,12 @@ const PitchActionLeft = (props) => {
            color: props.viewType === "all" && "#1890ff",
           }}
         >
+           <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
-        
+        </Avatar>
         </span>
         </Badge>
       </Tooltip>

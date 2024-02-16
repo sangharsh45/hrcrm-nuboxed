@@ -1,37 +1,46 @@
-import React,{lazy} from "react";
+import React,{lazy,Suspense} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import SubscriptionHeader from "./Child/SubscriptionHeader";
-// import {handleCreateSubscriptionDrawer} from "./SubscriptionAction";
-// const CreateSubscriptionDrawer =lazy(()=>import("./Child/CreateSubscriptionDrawer"));
+import ProductionHeader from "./Child/ProductionHeader";
+import {handleCreateProduction,setProductionViewType} from "./ProductionAction";
+import { BundleLoader } from "../../Components/Placeholder";
+const CreateProductionDrawer =lazy(()=>import("./Child/CreateProductionDrawer"));
+const ProductionCardView=lazy(()=>import("./Child/ProductionCardView"));
 
 function Production (props) {
 
     return (
         <>
-        {/* <SubscriptionHeader 
-          createSubscriptiondrawer={props.createSubscriptiondrawer}
-          handleCreateSubscriptionDrawer={props.handleCreateSubscriptionDrawer}
+        <ProductionHeader 
+         viewType={props.viewType}
+          openProductiondrawer={props.openProductiondrawer}
+          handleCreateProduction={props.handleCreateProduction}
           />
-        <CreateSubscriptionDrawer
-          createSubscriptiondrawer={props.createSubscriptiondrawer}
-          handleCreateSubscriptionDrawer={props.handleCreateSubscriptionDrawer}
-        /> */}
+        <CreateProductionDrawer
+          openProductiondrawer={props.openProductiondrawer}
+          handleCreateProduction={props.handleCreateProduction}
+        />
 
-        <div class="font-bold text-lg">
-        Production
-        </div>
+<Suspense fallback={<BundleLoader/>}>
+<ProductionCardView
+           viewType={props.viewType}
+        />
+  
+</Suspense>
+       
         </>
     )
 };
 
-const mapStateToProps = ({ subscription }) => ({
-//   createSubscriptiondrawer:subscription.createSubscriptiondrawer
+const mapStateToProps = ({ production }) => ({
+  openProductiondrawer:production.openProductiondrawer,
+  viewType:production.viewType
   });
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
       {
-        // handleCreateSubscriptionDrawer
+        handleCreateProduction,
+        setProductionViewType
       },
       dispatch
     );

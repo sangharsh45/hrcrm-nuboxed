@@ -247,6 +247,10 @@ const initialState = {
   fetchingSearchedBuildersError:false,
   searchedBuilders:[],
 
+  fetchingAllProducts: false, 
+  fetchingAllProductsError:false,
+  productAlls:[],
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -1037,6 +1041,12 @@ export const productReducer = (state = initialState, action) => {
                   fetchingSearchedBuildersError: true,
                 };
 
+                case types.GET_ALL_PRODUCT_LIST_REQUEST:
+                  return { ...state, fetchingAllProducts: true, fetchingAllProductsError: false };
+                case types.GET_ALL_PRODUCT_LIST_SUCCESS:
+                  return { ...state, fetchingAllProducts: false, productAlls: action.payload };
+                case types.GET_ALL_PRODUCT_LIST_FAILURE:
+                  return { ...state, fetchingAllProducts: false, fetchingAllProductsError: true };
 
     default:
       return state;

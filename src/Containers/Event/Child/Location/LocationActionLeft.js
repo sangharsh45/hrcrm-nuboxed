@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import TocIcon from '@mui/icons-material/Toc';
 import { FormattedMessage } from "react-intl";
-import { Badge, Tooltip } from "antd";
+import { Badge, Tooltip,Avatar } from "antd";
 import {getLocationRecords} from "./LocationAction";
 
 const LocationActionLeft = (props) => {
@@ -31,7 +31,9 @@ const LocationActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",            
             }}
           >
-            <TocIcon style={{fontSize:"1.4rem"}}  />
+             <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <TocIcon className="text-white" />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
@@ -50,10 +52,11 @@ const LocationActionLeft = (props) => {
               color: props.viewType === "map" && "#1890ff",
             }}
           >
-            
+            <Avatar style={{ background: props.viewType === "map" ? "#f279ab" : "#4bc076" }}>
             <LanguageIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
           </Badge>
       </Tooltip>

@@ -2,21 +2,21 @@ import React, { useEffect, useState,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  Select, Tooltip } from "antd"
-import {getTeamList} from "../TeamsAction"
+import {getTeamteamsList} from "./TeamsAction"
 import { FormattedMessage } from "react-intl";
-import { MultiAvatar2 } from "../../../../Components/UI/Elements";
+import { MultiAvatar2 } from "../../../Components/UI/Elements";
 const Option = Select;
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
 }
 
-function TeamsCardList(props) {
+function TeamsList(props) {
 
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
- props.getTeamList(props.userId);
+ props.getTeamteamsList(props.teamLead);
   }, []);
 
 
@@ -65,7 +65,7 @@ function TeamsCardList(props) {
 </div>
 
 
-{props.teamList.map((item) => { 
+{props.teamteamsList.map((item) => { 
 const firstTeamMember = item.teamMemberIds && item.teamMemberIds.length > 0 ? item.teamMemberIds[0] : null;
 const empName = firstTeamMember ? firstTeamMember.empName : null;
 console.log(empName)
@@ -144,16 +144,16 @@ const mapStateToProps = ({
   auth,
   teams
 }) => ({
-  teamList:teams.teamList,
-  userId:auth.userDetails.userId,
+    teamteamsList:teams.teamteamsList,
+    teamLead:auth.userDetails.userId,
   
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getTeamList
+        getTeamteamsList
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(TeamsCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamsList);
 

@@ -2,12 +2,12 @@ import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { Tooltip, Badge,Avatar } from "antd";
+import { Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import GridViewIcon from '@mui/icons-material/GridView';
 
 
-const SubscriptionActionLeft = (props) => {
+const ProductionActionLeft = (props) => {
 
   // useEffect(()=>{
   //   props.getCountries();
@@ -16,7 +16,7 @@ const SubscriptionActionLeft = (props) => {
  
   return (
     <div class=" flex items-center">
-      <Tooltip
+      {/* <Tooltip
         title={<FormattedMessage id="app.tileView" defaultMessage="Tile View" />}
       > 
        <Badge
@@ -35,15 +35,10 @@ const SubscriptionActionLeft = (props) => {
             //   color: props.viewType === "tile" && "#1890ff",
             // }}
           >
-            <Avatar 
-            style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}
-            >
-            <GridViewIcon className="text-white"/>
-            </Avatar>
-
+            <GridViewIcon />
           </span>
           </Badge> 
-      </Tooltip>
+      </Tooltip> */}
         
     </div>
   );
@@ -62,5 +57,5 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SubscriptionActionLeft)
+  connect(mapStateToProps, mapDispatchToProps)(ProductionActionLeft)
 );
