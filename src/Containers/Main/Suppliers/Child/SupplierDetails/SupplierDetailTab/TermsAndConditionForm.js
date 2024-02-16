@@ -29,9 +29,10 @@ function TermsAndConditionForm(props) {
                 onSubmit={(values, { resetForm }) => {
                     props.addTermsnCondition({
                         ...values,
+                        userId: props.userId,
                         poSupplierDetailsId: props.poSupplierDetailsId
                     },
-                        props.supplierId
+                        props.poSupplierDetailsId
                     );
                 }}
             >
@@ -162,7 +163,7 @@ function TermsAndConditionForm(props) {
                                     component={TextareaComponent}
                                 />
                             </div>
-                            <div class="w-[32%] mt-3">
+                            <div class="w-[32%] mt-3.7rem">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
@@ -181,7 +182,8 @@ function TermsAndConditionForm(props) {
     );
 }
 const mapStateToProps = ({ suppliers, plant, auth }) => ({
-    termsnconditionofpo: suppliers.termsnconditionofpo
+    termsnconditionofpo: suppliers.termsnconditionofpo,
+    userId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>
