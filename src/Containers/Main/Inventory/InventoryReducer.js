@@ -11,6 +11,8 @@ const initialState = {
   fetchingInventoryListError: false,
   inventory: [],
 
+  addMaterialReceived: false,
+
   addAwbNo: false,
   addingpickupdate: false,
   addingpickupdateError: false,
@@ -47,6 +49,8 @@ const initialState = {
   addingInventoryConsumption: false,
   addingInventoryConsumptionError: false,
 
+  updatingReceivedDamagedUnit: false,
+  updatingReceivedDamagedUnitError: false,
   //edit
   setEditingInventory: {},
   //received
@@ -211,6 +215,10 @@ const initialState = {
   fetchingMaterialReceiveDataError: false,
   materialReceiveData: [],
 
+  fetchingMaterialReceiveDetailData: false,
+  fetchingMaterialReceiveDetailDataError: true,
+  receivedDetailData: [],
+
   fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError:false,
   productionDispatchByLocsId:[],
 };
@@ -228,6 +236,9 @@ export const inventoryReducer = (state = initialState, action) => {
 
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };
+
+    case types.HANDLE_MATERIAL_RECEIVED_MODAL:
+      return { ...state, addMaterialReceived: action.payload };
 
     //add Inventory
 
@@ -1054,14 +1065,47 @@ export const inventoryReducer = (state = initialState, action) => {
         fetchingMaterialReceiveDataError: true,
       };
 
-      case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
-        return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
-      case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
-        return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
-      case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
-        return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
-  
-       
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_REQUEST:
+      return { ...state, fetchingMaterialReceiveDetailData: true };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        receivedDetailData: action.payload
+      };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        fetchingMaterialReceiveDetailDataError: true,
+
+      };
+
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_REQUEST:
+      return { ...state, updatingReceivedDamagedUnit: true };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_SUCCESS:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+      };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_FAILURE:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+        updatingReceivedDamagedUnitError: true,
+      };
+
+    
+    
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
+            return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
+            return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
+            return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
+      
+
+
     default:
       return state;
   }

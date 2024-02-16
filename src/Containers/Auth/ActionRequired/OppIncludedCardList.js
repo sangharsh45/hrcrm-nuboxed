@@ -103,7 +103,7 @@ function OppIncludedCardList(props) {
                 dataLength={opportunityIncluded.length}
                 next={handleLoadMore}
                 hasMore={hasMore}
-                loader={fetchingOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+                loader={fetchingOpportunity?<div style={{ textAlign: 'center' }}>Loading...</div> :null}
                 height={"87vh"}
             >
 

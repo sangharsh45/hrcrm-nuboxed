@@ -65,7 +65,7 @@ const DashboardActionLeft = (props) => {
           
         }}
         >
-         <Tooltip title="Task">
+         <Tooltip title="Tasks">
          <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>     
      <FactCheckIcon className="text-white"
                
@@ -88,7 +88,7 @@ const DashboardActionLeft = (props) => {
        
         }}
         >
-          <Tooltip title="Prospects">
+          <Tooltip title="Prospect">
           <Avatar style={{ background: activeButton === "Customer" ? "#f279ab" : "#4bc076" }}>     
           <ApartmentIcon  className="text-white"
 
@@ -115,7 +115,7 @@ const DashboardActionLeft = (props) => {
           
         }}
         >
-          <Tooltip title="Customers">
+          <Tooltip title="Customer">
           <Avatar style={{ background: activeButton === "Accounts" ? "#f279ab" : "#4bc076" }}>     
           <AcUnitIcon className="text-white"
                 
@@ -137,7 +137,7 @@ const DashboardActionLeft = (props) => {
           color:activeButton === "Order" && "tomato",
     
         }}
-        >  <Tooltip title="Order">
+        >  <Tooltip title="Orders">
             <Avatar style={{ background: activeButton === "Order" ? "#f279ab" : "#4bc076" }}>     
           <DynamicFeedIcon className="text-white"
                

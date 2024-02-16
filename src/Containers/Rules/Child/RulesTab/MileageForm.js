@@ -152,7 +152,7 @@ function MileageForm(props) {
                     Update
                   </Button>
                 </FlexContainer>
-                <h4>Updated on {moment(props.mileageData && props.mileageData.length && props.mileageData[0].updationDate).format("ll")} by {props.mileageData && props.mileageData.length && props.mileageData[0].name}</h4>
+                <div>Updated on {moment(props.mileageData && props.mileageData.length && props.mileageData[0].updationDate).format("ll")} by {props.mileageData && props.mileageData.length && props.mileageData[0].name}</div>
 
                 <Spacer />
                

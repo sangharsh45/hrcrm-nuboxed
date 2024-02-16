@@ -90,7 +90,7 @@ function AllCustomerForm(props) {
                 </div>
                
               </div>
-              <h4>Updated on {dayjs(props.scheduler && props.scheduler.length && props.scheduler[0].updationDate).format("ll")} by {props.scheduler && props.scheduler.length && props.scheduler[0].name}</h4>             
+              <div>Updated on {dayjs(props.scheduler && props.scheduler.length && props.scheduler[0].updationDate).format("ll")} by {props.scheduler && props.scheduler.length && props.scheduler[0].name}</div>             
             </MainWrapper>
           </Form>
         )}

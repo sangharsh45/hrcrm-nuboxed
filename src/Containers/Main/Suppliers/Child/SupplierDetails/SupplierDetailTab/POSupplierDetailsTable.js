@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { getPurchaseOrderDetailsList, updatePriceOfPoItem } from "../../../SuppliersAction"
-import { BorderAllRounded } from "@mui/icons-material";
+import { BorderAllRounded, BorderColorOutlined } from "@mui/icons-material";
 import { Button, Input } from "antd";
 
 function PoSupplierDetailsTable(props) {
@@ -13,12 +13,20 @@ function PoSupplierDetailsTable(props) {
 
     const [price, setPrice] = useState("")
     const [edit, setEdit] = useState(false)
+    const [row, setRow] = useState({})
+
+    const handleRowData = (item) => {
+        setRow(item)
+    }
 
     const handlePrice = () => {
         setEdit(!edit)
     }
     const handleInputPrice = (val) => {
         setPrice(val)
+    }
+    const handleCallback = () => {
+        setEdit(false)
     }
     return (
         <>
@@ -118,24 +126,28 @@ function PoSupplierDetailsTable(props) {
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
 
-                                                {edit ?
+                                                {edit && row.suppliesId === item.suppliesId ?
                                                     <>
                                                         <Input
-                                                            value="price"
+                                                            value={price}
                                                             type="text"
                                                             placeholder="Enter Price"
                                                             onChange={(e) => handleInputPrice(e.target.value)}
                                                         />
                                                         <Button
+                                                            type="primary"
                                                             onClick={() => props.updatePriceOfPoItem({
                                                                 price: price,
+                                                                supplierId: props.supplierId,
+                                                                userId: props.userId,
+                                                                suppliesId: item.suppliesId,
                                                                 poSupplierDetailsId: props.poSupplierDetailsId
-                                                            })}
+                                                            }, handleCallback())}
                                                         >Add</Button>
                                                         <Button onClick={handlePrice}>Cancel</Button>
                                                     </>
                                                     : <span>
-                                                        {/* {item.price} */}
+                                                        {item.price}
                                                     </span>
                                                 }
 
@@ -143,9 +155,10 @@ function PoSupplierDetailsTable(props) {
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <BorderAllRounded
+                                                <BorderColorOutlined
                                                     onClick={() => {
-                                                        props.handlePrice()
+                                                        handlePrice()
+                                                        handleRowData(item)
                                                     }}
                                                 />
                                             </div>
@@ -162,7 +175,8 @@ function PoSupplierDetailsTable(props) {
     )
 }
 const mapStateToProps = ({ suppliers, auth }) => ({
-    poDetails: suppliers.poDetails
+    poDetails: suppliers.poDetails,
+    userId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

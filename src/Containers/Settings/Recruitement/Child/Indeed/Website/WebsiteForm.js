@@ -172,7 +172,7 @@ const { Option } = Select;
                       </FlexContainer>
               </div>
               </div>   
-              <h4>Updated on {dayjs(props.website && props.website.length && props.website[0].lastUpdatedOn).format("ll")} by {props.website && props.website.length && props.website[0].name}</h4>
+              <div>Updated on {dayjs(props.website && props.website.length && props.website[0].lastUpdatedOn).format("ll")} by {props.website && props.website.length && props.website[0].name}</div>
               <Spacer style={{ marginTop: "1.25em" }} />
 
               <FlexContainer justifyContent="flex-end">

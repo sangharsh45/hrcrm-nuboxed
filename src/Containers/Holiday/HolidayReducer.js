@@ -6,6 +6,14 @@ const initialState = {
   fetchingHoliday: false,
   fetchingHolidayError: false,
   holidays: [],
+
+  fetchingHolidayYear: false,
+  fetchingHolidayYearError: false,
+  holidaysYear:[],
+
+  addingapplyoffer: false,
+  addingapplyofferError: false,
+
   updatingHoliday: false,
   updatingHolidayError: false,
 
@@ -46,6 +54,16 @@ export const holidayReducer = (state = initialState, action) => {
         fetchingHolidayError: true,
       };
 
+      case types.GET_HOLIDAYYEAR_REQUEST:
+        return { ...state, fetchingHolidayYear: true };
+      case types.GET_HOLIDAYYEAR_SUCCESS:
+        return { ...state, fetchingHolidayYear: false, holidaysYear: action.payload };
+      case types.GET_HOLIDAYYEAR_FAILURE:
+        return {
+          ...state,
+          fetchingHolidayYear: false,
+          fetchingHolidayYearError: true,
+        };
       
     case types.GET_PLANNER_HOLIDAY_REQUEST:
       return { ...state, fetchingPlannerHoliday: true };
@@ -98,6 +116,21 @@ export const holidayReducer = (state = initialState, action) => {
         //     fetchingHolidayByCountryYear: false,
         //     fetchingHolidayByCountryYearError: true,
         //   };
+
+        case types.ADD_APPLY_OFFER_REQUEST:
+          return { ...state, addingapplyoffer: true };
+        case types.ADD_APPLY_OFFER_SUCCESS:
+          return {
+            ...state,
+            addingapplyoffer: false,
+            // clickTaskDrawerModal:false
+          };
+        case types.ADD_APPLY_OFFER_FAILURE:
+          return {
+            ...state,
+            addingapplyoffer: false,
+            addingapplyofferError: true,
+          };
 
 
     default:

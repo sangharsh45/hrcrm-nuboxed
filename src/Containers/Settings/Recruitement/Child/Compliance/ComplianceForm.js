@@ -72,7 +72,7 @@ function ComplianceForm(props) {
           </Popconfirm>
         </div>
       </FlexContainer>
-      <h4>Updated on {dayjs(props.gdprCompliance.lastUpdatedOn).format("ll")} by {props.gdprCompliance.name}</h4>
+      <div>Updated on {dayjs(props.gdprCompliance.lastUpdatedOn).format("ll")} by {props.gdprCompliance.name}</div>
     </MainWrapper>
   );
 }

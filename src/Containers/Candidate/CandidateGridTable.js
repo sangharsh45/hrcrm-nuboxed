@@ -967,7 +967,7 @@ function CandidateGridTable(props) {
                 dataLength={props.candidateByUserId.length}
                 next={handleLoadMore}
                 hasMore={true}
-                // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
+                // loader={<div style={{ textAlign: 'center' }}>Loading...</div>}
                 endMessage={
                     <p style={{ textAlign: 'center' }}>
                         <b>Yay! You have seen it all</b>

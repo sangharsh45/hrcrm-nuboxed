@@ -185,11 +185,11 @@ function General(props) {
                   </div>
 
                 </div>
-                <h4 class="mt-4">
+                <div class="mt-4">
                   Updated on{" "}
                   {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
                   {props.requirementDuration.ownerName}
-                </h4>
+                </div>
 
                 <div class=" flex justify-end mt-[1.25em]" >
                   <Button

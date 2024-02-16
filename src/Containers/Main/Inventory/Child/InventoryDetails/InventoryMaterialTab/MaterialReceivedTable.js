@@ -2,18 +2,24 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-    getMaterialReceiveData
+    getMaterialReceiveData,
+    handleMaterialReceived
 } from "../../../InventoryAction";
 import dayjs from "dayjs";
 import { withRouter } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
+import ReceivedDetailModal from "./ReceivedDetailModal";
 
 const MaterialReceivedTable = (props) => {
     useEffect(() => {
         props.getMaterialReceiveData(props.locationDetailsId)
     }, [])
 
+    const [row, setRow] = useState({})
+    const handleRow = (item) => {
+        setRow(item)
+    }
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
@@ -35,10 +41,10 @@ const MaterialReceivedTable = (props) => {
                                         <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
                                             <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
                                                 <div
-                                                //   onClick={() => {
-                                                //     handleRowData(item);
-                                                //     props.handleReceivedOrderIdModal(true);
-                                                //   }}
+                                                    onClick={() => {
+                                                        handleRow(item);
+                                                        props.handleMaterialReceived(true);
+                                                    }}
                                                 >{item.poSupplierDetailsId}</div>
                                                 {date === currentdate ? (
                                                     <div class="text-xs font-bold text-[tomato]">
@@ -59,18 +65,6 @@ const MaterialReceivedTable = (props) => {
                                         </div>
 
                                     </div>
-                                    {/* <div className=" flex font-medium flex-col md:w-[5.22rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
-                    
-                      <MultiAvatar
-            primaryTitle={item.contactPersonName}
-            imageId={item.imageId}
-            imgWidth={"1.8rem"}
-            imgHeight={"1.8rem"}
-          />
-                    </div>
-                  </div> */}
-
                                 </div>
                             </div>
                         );
@@ -78,7 +72,11 @@ const MaterialReceivedTable = (props) => {
 
                 </div>
             </div>
-
+            <ReceivedDetailModal
+                row={row}
+                handleMaterialReceived={props.handleMaterialReceived}
+                addMaterialReceived={props.addMaterialReceived}
+            />
         </>
     );
 }
@@ -87,13 +85,15 @@ const MaterialReceivedTable = (props) => {
 const mapStateToProps = ({ inventory, auth }) => ({
     userId: auth.userDetails.userId,
     locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
-    materialReceiveData: inventory.materialReceiveData
+    materialReceiveData: inventory.materialReceiveData,
+    addMaterialReceived: inventory.addMaterialReceived
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getMaterialReceiveData
+            getMaterialReceiveData,
+            handleMaterialReceived
         },
         dispatch
     );

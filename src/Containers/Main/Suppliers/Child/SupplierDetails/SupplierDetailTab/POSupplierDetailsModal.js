@@ -8,8 +8,8 @@ const POSupplierDetailsModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title="Items"
-                width="60%"
+                title="Details"
+                width="70%"
                 visible={addPoListmModal}
                 closable
                 destroyOnClose
@@ -17,7 +17,9 @@ const POSupplierDetailsModal = (props) => {
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <POSupplierDetailsTable poSupplierDetailsId={props.rowData.poSupplierDetailsId} />
+                    <POSupplierDetailsTable
+                        supplierId={props.supplierId}
+                        poSupplierDetailsId={props.rowData.poSupplierDetailsId} />
                 </Suspense>
             </StyledDrawer>
         </>

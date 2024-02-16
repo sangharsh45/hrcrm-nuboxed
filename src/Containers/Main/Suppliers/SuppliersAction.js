@@ -1136,20 +1136,19 @@ export const updatePriceOfPoItem = (data) => (dispatch) => {
     });
 };
 
-export const addTermsnCondition = (data, suppliesId, supplierId) => (dispatch) => {
+export const addTermsnCondition = (data, poSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.ADD_TERMS_N_CONDITION_REQUEST,
   });
   axios
-    .post(`${base_url2}/cdf`, data,
+    .post(`${base_url2}/po/termAndCondition`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliesList(supplierId))
+      dispatch(getTermsnConditionOfPo(poSupplierDetailsId))
       dispatch({
         type: types.ADD_TERMS_N_CONDITION_SUCCESS,
         payload: res.data,
@@ -1164,12 +1163,12 @@ export const addTermsnCondition = (data, suppliesId, supplierId) => (dispatch) =
     });
 };
 
-export const getTermsnConditionOfPo = (pOSupplierDetailsId) => (dispatch) => {
+export const getTermsnConditionOfPo = (poSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_TERMS_AND_CONDITION_OF_PO_REQUEST,
   });
   axios
-    .get(`${base_url2}/po/termsncondition/${pOSupplierDetailsId}`, {
+    .get(`${base_url2}/po/termAndCondition/${poSupplierDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1195,7 +1194,7 @@ export const getPurchaseOrderDetailsList = (pOSupplierDetailsId) => (dispatch) =
     type: types.GET_PURCHASE_ORDER_DETAILS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/po/poSupplierDetail/${pOSupplierDetailsId}`, {
+    .get(`${base_url2}/po/poSupplierDetails/${pOSupplierDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

@@ -1,15 +1,14 @@
 import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
+import { Button,Select } from "antd";
 import {getCurrency} from "../../../Auth/AuthAction"
+import {getAssignedToList} from "../../../Employees/EmployeeAction"
 import {getAllEmployeelist} from "../../../Investor/InvestorAction"
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
@@ -21,6 +20,7 @@ import {
   getDealLinkedStages
 } from "../../DealAction";
 import { Listbox } from "@headlessui/react";
+const { Option } = Select;
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -37,6 +37,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
 function UpdateDealForm (props) {
   useEffect(()=> {
     props.getAllEmployeelist();
+    props.getAssignedToList(props.orgId);
     props.getCurrency();
     props.getInvestorData(props.userId);
     props.getContactData(props.userId);
@@ -73,6 +74,27 @@ function UpdateDealForm (props) {
         }));
 
     return StagesOptions;
+  }
+  useEffect(() => {
+    console.log("helo")
+    const includeOption = props.currentItem.include===null?[]: props.currentItem.include.map((item) => {
+      return item.empName
+    })
+
+    
+   
+    setInclude(includeOption)
+    console.log("test", includeOption)
+  
+  }, [props.currentItem]);
+  console.log(includeNames)
+
+  const includeOption = props.currentItem.include===null?[]: props.currentItem.include.map((item) => {
+    return item.empName
+  })
+  const [includeNames, setInclude] = useState(includeOption);
+  function handleChangeInclude(value) {
+    setInclude(value)
   }
 
     const allEmplo = props.allEmployeeList.map((item) => {
@@ -172,7 +194,7 @@ function UpdateDealForm (props) {
             salesUserIds: selectedOption ? selectedOption.employeeId:props.currentItem.salesUserIds,
             investorId: props.currentItem.investorId || "",
             contactId: props.currentItem.contactId || "",
-            include:props.currentItem.include || ""
+            included: includeNames,
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -252,6 +274,7 @@ function UpdateDealForm (props) {
             props.updateDeal(
               {
                 ...values,
+                included: includeNames,
                 invOpportunityId: props.currentItem.invOpportunityId,
                 orgId: props.organizationId,
                 investorId: props.investorId,
@@ -468,7 +491,23 @@ function UpdateDealForm (props) {
       )}
     </Listbox>
     <div>
-<Field
+    <label class=" text-[#444] font-bold text-[0.75rem]" >Include</label>
+    <Select
+                        name="included"
+                        mode="multiple"
+                        style={{ width: '100%' }}
+                        placeholder="Select"
+                        defaultValue={includeNames}
+                        onChange={handleChangeInclude}
+                      >
+  
+                        {props.assignedToList.map((item, i) => {
+                          return (
+                            <Option value={item.employeeId}>{item.empName}</Option>
+                          )
+                        })}
+                      </Select>
+{/* <Field
                     name="include"
                     isColumnWithoutNoCreate
                     label={
@@ -486,7 +525,7 @@ function UpdateDealForm (props) {
                     isColumn
                     value={values.employeeId}
                     inlineLabel
-                  />
+                  /> */}
   </div>
 
                   <Field
@@ -626,10 +665,11 @@ function UpdateDealForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth,deal,investor, opportunity, customer, contact }) => ({
+const mapStateToProps = ({ auth,deal,investor,employee, opportunity, customer, contact }) => ({
   user: auth.userDetails,
   currencies: auth.currencies,
   allEmployeeList:investor.allEmployeeList,
+  assignedToList:employee.assignedToList,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
   setEditingOpportunity: opportunity.setEditingOpportunity,
@@ -649,6 +689,7 @@ const mapDispatchToProps = (dispatch) =>
       updateDeal,
       getCurrency,
       getAllEmployeelist,
+      getAssignedToList,
       getDealLinkedWorkflow,
       getDealLinkedStages,
       getContactData,

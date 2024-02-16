@@ -75,7 +75,7 @@ function TaskNameDrawerTable (props) {
         dataLength={props.taskInameDrwr.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={props.fetchingTaskNamedrwr?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingTaskNamedrwr?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
       {props.taskInameDrwr.map((item) => { 
@@ -129,14 +129,14 @@ function TaskNameDrawerTable (props) {
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
         {item.taskName}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                               

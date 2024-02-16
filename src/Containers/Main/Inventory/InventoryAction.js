@@ -1285,6 +1285,62 @@ export const getMaterialReceiveData = (locationDetailsId) => (dispatch) => {
     });
 };
 
+export const handleMaterialReceived = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_MATERIAL_RECEIVED_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getMaterialReceivedDetailData = (pOSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATERIAL_RECEIVE_DETAIL_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/inventory/poSupplierDetails/${pOSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVE_DETAIL_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MATERIAL_RECEIVE_DETAIL_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateReceivedDamagedUnit = (data,poSupplierDetailsId,suppliesId) => (dispatch) => {
+  dispatch({ type: types.UPDATE_RECEIVED_DAMAGED_UNIT_REQUEST });
+  axios
+    .put(`${base_url2}/po/updateUnitAndInd/${poSupplierDetailsId}/${suppliesId} `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_RECEIVED_DAMAGED_UNIT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_RECEIVED_DAMAGED_UNIT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 
 export const getDispatchProductionsbyLocId = (locationDetailsId,pageNo) => (dispatch) => {
   dispatch({

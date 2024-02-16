@@ -221,7 +221,7 @@ class Project extends Component {
                     />
                   </Button>
                 </FlexContainer>
-                <h4>Updated on {dayjs(this.props.projectsData && this.props.projectsData.length && this.props.projectsData[0].updationDate).format("ll")} by {this.props.projectsData && this.props.projectsData.length && this.props.projectsData[0].name}</h4>
+                <div>Updated on {dayjs(this.props.projectsData && this.props.projectsData.length && this.props.projectsData[0].updationDate).format("ll")} by {this.props.projectsData && this.props.projectsData.length && this.props.projectsData[0].name}</div>
               </>
             )}
           </MainWrapper>

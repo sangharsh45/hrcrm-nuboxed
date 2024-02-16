@@ -56,20 +56,20 @@ class MileageRejectedStatusCard extends React.Component {
 
                                    
                                         <Tooltip >
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
-                                            </h4>
-                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            </div>
+                                            <div class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
                                             <div onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
-                                            </h4>
+                                            </div>
 
                                         </Tooltip>
                                         <div className=" flex font-medium flex-col w-max ">
-                                    <h4 class=" text-xs text-cardBody font-poppins"></h4>
+                                    <div class=" text-xs text-cardBody font-poppins"></div>
 
                                     <div class=" text-xs text-cardBody font-poppins">
          
@@ -92,13 +92,13 @@ class MileageRejectedStatusCard extends React.Component {
 
                                 <div className=" flex font-medium flex-col  w-52 ml-1 ">
                            
-                                    <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins"> Voucher Date </div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         
                                     
                                     {dayjs(item.voucherDate).format("MMM Do YY")}
 
-                                    </h4>
+                                    </div>
                                     <div class="flex flex-col w-[4%]">
                 
                 <div >
@@ -120,10 +120,10 @@ class MileageRejectedStatusCard extends React.Component {
                                 <div className=" flex font-medium flex-col w-36 ">
                                   
 
-                                    <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">Amount</div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         € {item.amount}
-                                    </h4>
+                                    </div>
                                 </div>
                      
                                

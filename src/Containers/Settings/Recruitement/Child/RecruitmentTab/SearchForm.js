@@ -294,7 +294,7 @@ function SearchForm(props) {
                
       </div>
     </FlexContainer>
-    <h4>Updated on {dayjs(props.permissionAccess.lastUpdatedOn).format("ll")} by {props.permissionAccess.name}</h4> 
+    <div>Updated on {dayjs(props.permissionAccess.lastUpdatedOn).format("ll")} by {props.permissionAccess.name}</div> 
  
   </MainWrapper>
   );

@@ -27,7 +27,7 @@ class DashCustomerChartTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <TabsWrapper1>
+        <TabsWrapper1 style={{height:"20rem"}}>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
