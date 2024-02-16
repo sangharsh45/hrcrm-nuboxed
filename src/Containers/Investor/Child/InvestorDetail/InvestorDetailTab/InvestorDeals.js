@@ -43,28 +43,28 @@ const InvestorDeals = (props) => {
 //   if (fetchingAllDealsData) {
 //     return <BundleLoader />;
 //   }
-
+console.log(props.investorDealsData)
   return (
     <>
   <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     <div className=" flex  w-[98%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]"><FormattedMessage
+        <div className=" md:w-[15rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[6.1rem]"><FormattedMessage
+        <div className=" md:w-[13.1rem]"><FormattedMessage
                   id="app.investor"
                   defaultMessage="investor"
                 /></div>
-        <div className=" md:w-[17.2rem] "><FormattedMessage
+        <div className=" md:w-[13.2rem] "><FormattedMessage
                   id="app.sponsor"
                   defaultMessage="sponsor"
                 /></div>
-        <div className="md:w-[10.1rem]"><FormattedMessage
+        <div className="md:w-[8.1rem]"><FormattedMessage
                   id="app.startdate"
                   defaultMessage="startdate"
                 /></div>
-        <div className="md:w-[7.5rem]"><FormattedMessage
+        <div className="md:w-[5.5rem]"><FormattedMessage
                   id="app.value"
                   defaultMessage="Value"
                 /></div>
@@ -76,7 +76,7 @@ const InvestorDeals = (props) => {
                   id="app.assignto"
                   defaultMessage="Assign To"
                 /></div>
-        <div className="md:w-[]"><FormattedMessage
+        <div className="md:w-[5.2rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
@@ -89,7 +89,7 @@ const InvestorDeals = (props) => {
         loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       > */}
-   {/* {props.investorDealsData.map((item) => { 
+   {props.investorDealsData.map((item) => { 
        var findProbability = item.probability;
        item.stageList.forEach((element) => {
          if (element.oppStage === item.oppStage) {
@@ -120,16 +120,12 @@ const InvestorDeals = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-1"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
-                                >
-                                     <div class="flex justify-between">
+                            <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-1" >
+                                     
                                 <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full items-center"> 
 <div>
-<SubTitle>
+
             <MultiAvatar
               primaryTitle={item.opportunityName}
               imageId={item.imageId}
@@ -137,7 +133,7 @@ const InvestorDeals = (props) => {
               imgWidth={"1.8em"}
               imgHeight={"1.8em"}
             />
-          </SubTitle>
+         
 </div>
                                    <div class="w-[4%]">
 
@@ -167,7 +163,7 @@ const InvestorDeals = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 <div class=" text-sm text-cardBody font-poppins">   
 <Link to ="/investor">
@@ -176,7 +172,7 @@ const InvestorDeals = (props) => {
 </div>
 </div>
 
-<div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+<div className=" flex font-medium flex-col md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 <div class=" text-sm text-cardBody font-poppins">
@@ -193,9 +189,9 @@ imgHeight={"1.8em"}
 </SubTitle>
 </div>
 </div>
-</div>
-<div class="flex">
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+<div className=" flex font-medium flex-col md:w-[5.3rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 <div class=" text-sm justify-center text-cardBody font-poppins">
@@ -203,7 +199,7 @@ imgHeight={"1.8em"}
 </div>
 </div>
 
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+<div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 <div class=" text-sm text-cardBody font-poppins text-center">
@@ -213,7 +209,7 @@ imgHeight={"1.8em"}
 
 </div>
 </div>
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+<div className=" flex font-medium flex-col md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 <div class=" text-sm text-cardBody font-poppins text-center">
@@ -249,7 +245,7 @@ strokeColor={"#005075"}
 
 </div>
 </div>
-<div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+<div className=" flex font-medium flex-col md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 <div class=" text-sm text-cardBody font-poppins">
@@ -275,7 +271,7 @@ imgHeight={"1.8rem"}
 
 </div>
 </div>
-<div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+<div className=" flex font-medium flex-col md:w-[5.1rem] max-sm:flex-row w-full mb-1 max-sm:justify-between ">
 
 
 
@@ -291,14 +287,14 @@ imgHeight={"1.8rem"}
 </span>
 </Tooltip>
 </div>
-</div>
+
                       </div>
                             </div>
                          
 
 
                     )
-                })} */}
+                })}
                   {/* </InfiniteScroll> */}
       </div>
       
@@ -306,8 +302,8 @@ imgHeight={"1.8rem"}
   );
 };
 
-const mapStateToProps = ({ auth, leads,deal, sector,pitch }) => ({
-    investorDealsData:deal.investorDealsData,
+const mapStateToProps = ({ auth, leads,investor, sector,pitch }) => ({
+investorDealsData:investor.investorDealsData,
 user: auth.userDetails,
 userId: auth.userDetails.userId,
   
