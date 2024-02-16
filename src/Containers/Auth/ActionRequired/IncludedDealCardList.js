@@ -8,63 +8,41 @@ import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip,  Menu, Dropdown, Progress } from "antd";
 import { Link } from 'react-router-dom';
-import { CurrencySymbol, } from "../../../../Components/Common";
+import { CurrencySymbol, } from "../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
-import { StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import {
   MultiAvatar,
   MultiAvatar2,
- } from "../../../../Components/UI/Elements";
-import {
-  getRecruiterList,
-  setEditOpportunity,
-  getOpportunityInitiativeSKillDetails,
-  updateOwneroppById,
+ } from "../../../Components/UI/Elements";
 
-  handleOpportunityDrawerModal,
-  getAllRecruitmentByOppId,
-  getAllRecruitmentPositionByOppId,
-  getAllRecruitmentAvgTimeByOppId,
-  getAllRecruitmentPositionFilledByOppId,
-  getAllRecruitmentDetailsByOppId,
-  LinkClosedOpportunity,
-  getOpportunitySKill,
-  lostStatusRecruit,
-  LinkStageOpportunity,
-  getOpportunityForecast,
-} from "../../../Opportunity/OpportunityAction";
 import {
-  getDealListbyUserId,
-  handleUpdateDealModal,
-  emptyDeals,
-  handleDealsNotesDrawerModal,
-  LinkStageDeal,
-  sendToWon,
-  deleteDealsData
-} from "../../DealAction";
-const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
-const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
-const DealSelectStages =lazy(()=>import("./DealSelectStages"));
+    getIncludedDealsList,
+    getDealsIncludedCount,
+    emptyIncludedDeals
+} from "../AuthAction";
+const DealSelectStages =lazy(()=>import("../../Deal/Child/DealTable/DealSelectStages"));
 
-function DealCardList(props) {
+function IncludedDealCardList(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     if (props.role === "USER" && user.department === "Recruiter") {
-      props.getRecruiterList(props.recruiterId);
+    //   props.getRecruiterList(props.recruiterId);
     } else {
-      props.getDealListbyUserId(props.userId, page);
+      props.getIncludedDealsList(props.userId, page);
+      props.getDealsIncludedCount(props.userId)
       setPage(page + 1);
     }
   }, []);
 
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getDealListbyUserId(props.userId, page);
+    props.getIncludedDealsList(props.userId, page);
   };
 
   useEffect(() => {
-    return () => props.emptyDeals();
+    return () => props.emptyIncludedDeals();
   }, []);
 
   const [currentItem, setCurrentItem] = useState("");
@@ -75,7 +53,7 @@ function DealCardList(props) {
 
   const {
     user,
-    dealsByuserId,
+    dealsIncluded,
     handleUpdateDealModal,
     openupdateDealModal,
     deleteDealsData,
@@ -86,7 +64,7 @@ function DealCardList(props) {
   return (
     <>
       <InfiniteScroll
-        dataLength={dealsByuserId.length}
+        dataLength={dealsIncluded.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={
@@ -94,11 +72,11 @@ function DealCardList(props) {
             <div class="flex justify-center">Loading...</div>
           ) : null
         }
-        height={"87vh"}
+        height={"75vh"}
       >
         <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
 
-          {dealsByuserId.map((item) => {
+          {dealsIncluded.map((item) => {
             var findProbability = item.probability;
             item.stageList.forEach((element) => {
               if (element.oppStage === item.oppStage) {
@@ -106,11 +84,11 @@ function DealCardList(props) {
               }
             });
             return (
-              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
-              text-[#444444] m-3 p-1 w-[15vw] flex flex-col  ">
-                <div class=" flex  flex-nowrap items-center h-[2.81em]"
+              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[7rem] 
+              text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
+                <div class=" flex flex-no-wrap items-center h-[2.81em]"
                 >
-                  <div class=" mr-[0.2rem] flex basis-[15%]">
+                  <div class=" mr-[0.2rem]  basis-[15%]">
                     <MultiAvatar
                       primaryTitle={item.opportunityName}
                       imageId={item.imageId}
@@ -120,7 +98,7 @@ function DealCardList(props) {
                     />
                   </div>
                   &nbsp;
-                  <div class=" flex flex-col basis-[100%] overflow-hidden"
+                  <div class=" flex flex-col basis-[83%] overflow-hidden"
                   >
                     <div 
                       class="font-semibold text-[#337df4] cursor-pointer text-sm ">
@@ -145,7 +123,7 @@ function DealCardList(props) {
                     )}
                   </div>
                   <div>
-                    <div class="font-medium text-[0.9375em] -mb-[0.18em]"
+                    <div class="font-medium text-sm -mb-[0.18em]"
                      
                     >
                       &nbsp;&nbsp;
@@ -154,14 +132,7 @@ function DealCardList(props) {
                     </div>
                   </div>
                 </div>
-                <div className="flex ">
-        
-        <div>
-        <div class="font-medium text-[0.9375em] -mb-[0.18em]">
-        </div>
-        </div>
-        </div>
-                <div className="flex justify-around mt-4">
+                <div className="flex justify-around">
                   <div>
                     <span>
                       <Dropdown
@@ -220,8 +191,8 @@ function DealCardList(props) {
                   </span>
                 </div>
 
-                <div class="w-full p-2 -mt-[0.18em]">
-                  <div class="flex justify-between w-wk mt-1">
+                <div class="w-full pl-[0.5em] -mt-[0.18em]">
+                  <div class="flex justify-between w-wk">
                     <div>
                       {item.approveInd && item.opportunityOwner ? (
                         <>
@@ -383,96 +354,26 @@ function DealCardList(props) {
         </div>
       </InfiniteScroll>
 
-      <UpdateDealModal
-        currentItem={currentItem}
-        openupdateDealModal={openupdateDealModal}
-        handleUpdateDealModal={handleUpdateDealModal}
-        handleSetCurrentItem={handleSetCurrentItem}
-      />
-      <AddDealsNotesDrawerModal
-        currentItem={currentItem}
-        addDrawerDealsNotesModal={props.addDrawerDealsNotesModal}
-        handleDealsNotesDrawerModal={props.handleDealsNotesDrawerModal}
-        handleSetCurrentItem={handleSetCurrentItem}
-      />
-      {/*
-<AddOpportunityDrawerModal
- opportunityData={currentItem}
-opportunityForecast={props.opportunityForecast}
-opportunityInitiativesSkillsDetails={props.opportunityInitiativesSkillsDetails}
- handleSetCurrentItem={handleSetCurrentItem}
- 
- fetchingOpportunitySkills={props.fetchingOpportunitySkills}
- item={currentItem}
- opportunitySkills={props.opportunitySkills}
-allRecruitmentDetailsByOppId={props.allRecruitmentDetailsByOppId}
-             allRecruitmentByOppId={props.allRecruitmentByOppId}
-             allRecruitmentPositionFilledByOppId={props.allRecruitmentPositionFilledByOppId}
-             allRecruitmentAvgTimeByOppId={props.allRecruitmentAvgTimeByOppId}
-             allRecruitmentPositionByOppId={props.allRecruitmentPositionByOppId}
-               handleOpportunityDrawerModal={props.handleOpportunityDrawerModal}
-               addDrawerOpportunityModal={props.addDrawerOpportunityModal}
-      /> */}
+  
+
     </>
   );
 }
 
 const mapStateToProps = ({ auth, deal, opportunity }) => ({
-  dealsByuserId: deal.dealsByuserId,
+    dealsIncluded: auth.dealsIncluded,
   userId: auth.userDetails.userId,
+  dealsIncludedCount:auth.dealsIncludedCount,
   user: auth.userDetails,
-  role: auth.userDetails.role,
-  opportunitySkills: opportunity.opportunitySkills,
-  recruiterName: opportunity.recruiterName,
-  recruiterList: opportunity.recruiterList,
-  fetchingRecruiterList: opportunity.fetchingRecruiterList,
-  fetchingRecruiterListError: opportunity.fetchingRecruiterListError,
-  fetchingDeal: deal.fetchingDeal,
-  fetchingDealError: deal.fetchingDealError,
-  fetchingAllOpportunities: opportunity.fetchingAllOpportunities,
-  opportunityId: opportunity.opportunityId,
-  openupdateDealModal: deal.openupdateDealModal,
-  recruiterId: auth.userDetails.userId,
-  addDrawerOpportunityModal: opportunity.addDrawerOpportunityModal,
-  allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
-  allRecruitmentAvgTimeByOppId: opportunity.allRecruitmentAvgTimeByOppId,
-  opportunityInitiativesSkillsDetails:
-    opportunity.opportunityInitiativesSkillsDetails,
-  allRecruitmentPositionFilledByOppId:
-    opportunity.allRecruitmentPositionFilledByOppId,
-  addDrawerDealsNotesModal: deal.addDrawerDealsNotesModal,
-  opportunityForecast: opportunity.opportunityForecast,
-  allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
-  allRecruitmentDetailsByOppId: opportunity.allRecruitmentDetailsByOppId,
-  fetchingOpportunitySkills: opportunity.fetchingOpportunitySkills,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDealListbyUserId,
+        getIncludedDealsList,
+        getDealsIncludedCount,
+        emptyIncludedDeals,
 
-      getOpportunityInitiativeSKillDetails,
-      getRecruiterList,
-      getOpportunitySKill,
-      getOpportunityForecast,
-      handleUpdateDealModal,
-      handleOpportunityDrawerModal,
-      handleDealsNotesDrawerModal,
-      setEditOpportunity,
-      deleteDealsData,
-      updateOwneroppById,
-      getAllRecruitmentByOppId,
-      getAllRecruitmentPositionByOppId,
-      getAllRecruitmentAvgTimeByOppId,
-      getAllRecruitmentPositionFilledByOppId,
-      getAllRecruitmentDetailsByOppId,
-      LinkClosedOpportunity,
-      sendToWon,
-      lostStatusRecruit,
-      LinkStageOpportunity,
-      emptyDeals,
-      LinkStageDeal,
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(DealCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(IncludedDealCardList);

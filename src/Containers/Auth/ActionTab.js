@@ -1,9 +1,12 @@
+import { Badge } from "antd";
 import React, { Component, lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
+import IncludedDealCardList from "./ActionRequired/IncludedDealCardList";
+import OppIncludedCardList from "./ActionRequired/OppIncludedCardList";
 // const LeadHotTable=lazy(()=>import("./LeadHotTable"));
 // const LeadColdTable=lazy(()=>import("./LeadColdTable"));
 // const LeadWarmTable=lazy(()=>import("./LeadWarmTable"));
@@ -25,7 +28,7 @@ class ActionTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <TabsWrapper1 style={{ height:"23vh"}}>
+        <TabsWrapper1 style={{ height:"100vh"}}>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
@@ -37,10 +40,12 @@ class ActionTab extends Component {
                  
                  
                <span class=" ml-1">
+               <Badge count={this.props.oppIncludedCount.OpportunityCount} overflowCount={999}>
                <FormattedMessage
           id="app.Opportunity"
           defaultMessage="Opportunity"
         />
+        </Badge>
                 </span>
               
 
@@ -54,7 +59,7 @@ class ActionTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-           {/* <LeadHotTable/> */}
+           <OppIncludedCardList/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -63,10 +68,12 @@ class ActionTab extends Component {
                   
                  
                <span class=" ml-1">
+               <Badge count={this.props.dealsIncludedCount.InvestorOppCount} overflowCount={999}>
                <FormattedMessage
-          id="app.Customer"
-          defaultMessage="Customer"
+          id="app.Deals"
+          defaultMessage="Deals"
         />
+          </Badge>
                 </span>
               
 
@@ -80,6 +87,32 @@ class ActionTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
+            <IncludedDealCardList/>
+              </Suspense>
+            </TabPane>
+            <TabPane
+              tab={
+                <>
+                  
+                 
+               <span class=" ml-1">
+               <FormattedMessage
+          id="app.Task"
+          defaultMessage="Task"
+        />
+                </span>
+              
+
+                  {activeKey === "3" && (
+                    <>
+                    </>
+                  )}
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
             {/* <LeadColdTable/> */}
               </Suspense>
             </TabPane>
@@ -90,8 +123,9 @@ class ActionTab extends Component {
     );
   }
 }
-const mapStateToProps = ({dashboard}) => ({
-
+const mapStateToProps = ({dashboard,auth}) => ({
+  oppIncludedCount:auth.oppIncludedCount,
+  dealsIncludedCount:auth.dealsIncludedCount,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
