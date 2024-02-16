@@ -11,6 +11,8 @@ const initialState = {
   fetchingInventoryListError: false,
   inventory: [],
 
+  addMaterialReceived: false,
+
   addAwbNo: false,
   addingpickupdate: false,
   addingpickupdateError: false,
@@ -47,6 +49,8 @@ const initialState = {
   addingInventoryConsumption: false,
   addingInventoryConsumptionError: false,
 
+  updatingReceivedDamagedUnit: false,
+  updatingReceivedDamagedUnitError: false,
   //edit
   setEditingInventory: {},
   //received
@@ -209,7 +213,11 @@ const initialState = {
 
   fetchingMaterialReceiveData: false,
   fetchingMaterialReceiveDataError: false,
-  materialReceiveData: []
+  materialReceiveData: [],
+
+  fetchingMaterialReceiveDetailData: false,
+  fetchingMaterialReceiveDetailDataError: true,
+  receivedDetailData: []
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -225,6 +233,9 @@ export const inventoryReducer = (state = initialState, action) => {
 
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };
+
+    case types.HANDLE_MATERIAL_RECEIVED_MODAL:
+      return { ...state, addMaterialReceived: action.payload };
 
     //add Inventory
 
@@ -1049,9 +1060,37 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         fetchingMaterialReceiveData: false,
         fetchingMaterialReceiveDataError: true,
+      };
+
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_REQUEST:
+      return { ...state, fetchingMaterialReceiveDetailData: true };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        receivedDetailData: action.payload
+      };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        fetchingMaterialReceiveDetailDataError: true,
 
       };
 
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_REQUEST:
+      return { ...state, updatingReceivedDamagedUnit: true };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_SUCCESS:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+      };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_FAILURE:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+        updatingReceivedDamagedUnitError: true,
+      };
     default:
       return state;
   }
