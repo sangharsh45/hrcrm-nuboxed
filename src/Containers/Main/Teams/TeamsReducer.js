@@ -9,6 +9,10 @@ const initialState = {
   fetchingEmployeeListError: false ,
   teamEmployeeList:[],
 
+  fetchingteamsTeam: false,
+  fetchingteamsTeamError: false,
+  teamteamsList:[],
+
   updatingAssignedValue: false,
    updatingAssignedValueError: false, 
 
@@ -173,6 +177,22 @@ export const teamsReducer = (state = initialState, action) => {
         fetchingTeam: false,
         fetchingTeamError: true,
       };
+
+      case types.GET_TEAMTEAM_REQUEST:
+      return { ...state, fetchingteamsTeam: true };
+    case types.GET_TEAMTEAM_SUCCESS:
+      return {
+        ...state,
+        fetchingteamsTeam: false,
+        teamteamsList: action.payload,
+      };
+    case types.GET_TEAMTEAM_FAILURE:
+      return {
+        ...state,
+        fetchingteamsTeam: false,
+        fetchingteamsTeamError: true,
+      };
+
 
     case types.GET_TEAM_BY_TEAM_ID_REQUEST:
       return { ...state, fetchingTeamByTeamId: true };

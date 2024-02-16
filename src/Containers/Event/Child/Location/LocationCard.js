@@ -5,9 +5,9 @@ import { getlocation, handleLocationShiftDrawer,
   handleUpdateLocationDrawer,
   handleLocationCustomerDrawer,
   handleLocationSupplierDrawer,
-  deleteLocation } from "./LocationAction";
+  deleteLocation,addingLocationToggle } from "./LocationAction";
 import styled from "styled-components";
-import { Switch, Tooltip } from "antd";
+import { Popconfirm, Switch, Tooltip } from "antd";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -23,6 +23,17 @@ const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
 const LocationCard = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
+  const [refurbish,Setrefurbish]=useState(props.showLocation.productionInd)
+  const handleRefurbishClick = (checked) => {
+    Setrefurbish(checked);
+    let data = {
+      value: checked,
+     
+      orgId: props.orgId,
+      type: "production  ",
+    };
+    props.addingLocationToggle(data);
+  };
   useEffect(() => {
     props.getlocation(props.orgId);
   }, []);
@@ -97,13 +108,21 @@ const handleLoadMore = () => {
                      
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleRefurbishClick(!refurbish)}
+                        // onCancel={handleCrmCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
                         <Switch
                           className="toggle-clr"
-                          checked={item.productionInd}
+                          checked={refurbish || item.productionInd}
                           isLoading={true}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
+                        </Popconfirm>
                       </div>
                     </div>
                     <div className=" flex font-medium flex-row md:w-[7.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
@@ -308,7 +327,8 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateLocationDrawer,
       deleteLocation,
       handleLocationCustomerDrawer,
-      handleLocationSupplierDrawer
+      handleLocationSupplierDrawer,
+      addingLocationToggle
     },
     dispatch
   );

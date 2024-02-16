@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { handleTeamsModal, setTeamsViewType } from "./TeamsAction";
+const TeamsList =lazy(()=> import('./TeamsList'));
 const PerformanceManagement =lazy(()=> import('./PerformanceManagement'));
 const TeamsHeader =lazy(()=> import('./TeamsHeader'));
 const TeamsModal =lazy(()=> import('./TeamsModal'));
@@ -36,6 +37,8 @@ class Teams extends Component {
         <Suspense fallback={<BundleLoader />}>
         {  viewType === "table" ?
          <TeamsCardList/>
+         :viewType==="teams" ?
+         <TeamsList/> 
  
   :viewType==="client" ?
  <PerformanceManagement/> 

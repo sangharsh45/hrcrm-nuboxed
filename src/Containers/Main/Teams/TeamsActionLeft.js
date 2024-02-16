@@ -38,10 +38,10 @@ class TeamsActionLeft extends React.Component {
             <Tooltip title="Teams">
             <Badge size="small">
               <span
-                onClick={() => setTeamsViewType("team")}
+                onClick={() => setTeamsViewType("teams")}
                 style={{
                   marginRight: "0.5rem",
-                  color: viewType === "team" && "#1890ff",
+                  color: viewType === "teams" && "#1890ff",
                 }}
               >
              <PeopleIcon className="!text-2xl cursor-pointer"/>
