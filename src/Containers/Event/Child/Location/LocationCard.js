@@ -15,6 +15,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
+import RefurbishToggle from "./RefurbishToggle";
 const LocationCustomerDrawer = lazy(() => import("./LocationCustomerDrawer"));
 const LocationSupplierDrawer = lazy(() => import("./LocationSupplierDrawer"));
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
@@ -108,7 +109,7 @@ const handleLoadMore = () => {
                      
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                      <Popconfirm
+                      {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={() => handleRefurbishClick(!refurbish)}
                         // onCancel={handleCrmCancel}
@@ -122,7 +123,10 @@ const handleLoadMore = () => {
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                        </Popconfirm>
+                        </Popconfirm> */}
+                        <RefurbishToggle
+                        locationDetailsId={item.locationDetailsId}
+                        />
                       </div>
                     </div>
                     <div className=" flex font-medium flex-row md:w-[7.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
