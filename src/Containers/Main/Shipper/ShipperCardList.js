@@ -50,7 +50,7 @@ function ShipperCardList(props) {
 
 
   return (
-<>
+    <>
       <div className=' flex justify-end sticky top-28 z-auto'>
         <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
@@ -77,10 +77,6 @@ function ShipperCardList(props) {
                     <div class=" flex flex-row items-center justify-evenly w-wk max-sm:flex-col">
                       <div className=" flex font-medium  md:w-[12.1rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-                        style={{
-                          // borderBottom: "3px dotted #515050"
-                        }}
-                  >
                         <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                           <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
@@ -233,60 +229,58 @@ PinCode
 
 
                         </div>
-
-
-
-
                       </div>
-                    </>
-                    )
+                    </div>
+                  </div>
+                </>
+              )
             })}
-                  </InfiniteScroll>
-                </div >
+          </InfiniteScroll>
+        </div >
       </div>
-        <UpdateShipperModal
-          rowdata={rowdata}
-          shipperId={currentShipperId}
-          updateShipperModal={updateShipperModal}
-          handleSetCurrentShipperId={handleSetCurrentShipperId}
-          handleUpdateShipperModal={handleUpdateShipperModal}
-        />
-        <AddShipperOrderModal
-          addShipperOrderModal={props.addShipperOrderModal}
-          handleShipperOrderModal={props.handleShipperOrderModal}
-          shipperId={currentShipperId}
-          handleSetCurrentShipperId={handleSetCurrentShipperId}
-        />
-        {/* <AddShipperActivityModal
+      <UpdateShipperModal
+        rowdata={rowdata}
+        shipperId={currentShipperId}
+        updateShipperModal={updateShipperModal}
+        handleSetCurrentShipperId={handleSetCurrentShipperId}
+        handleUpdateShipperModal={handleUpdateShipperModal}
+      />
+      <AddShipperOrderModal
+        addShipperOrderModal={props.addShipperOrderModal}
+        handleShipperOrderModal={props.handleShipperOrderModal}
+        shipperId={currentShipperId}
+        handleSetCurrentShipperId={handleSetCurrentShipperId}
+      />
+      {/* <AddShipperActivityModal
         addShipperActivityTableModal={props.addShipperActivityTableModal}
         handleShipperActivityTableModal={props.handleShipperActivityTableModal}
         shipperId={currentShipperId}
         handleSetCurrentShipperId={handleSetCurrentShipperId}
       /> */}
-      </>
-      )
+    </>
+  )
 }
-      const mapStateToProps = ({shipper, auth}) => ({
-        shipperByUserId: shipper.shipperByUserId,
-      userId: auth.userDetails.userId,
-      fetchingShipperByUserId: shipper.fetchingShipperByUserId,
-      fetchingShipperByUserIdError: shipper.fetchingShipperByUserIdError,
-      updateShipperModal: shipper.updateShipperModal,
-      addShipperActivityTableModal: shipper.addShipperActivityTableModal,
-      addShipperOrderModal: shipper.addShipperOrderModal,
+const mapStateToProps = ({ shipper, auth }) => ({
+  shipperByUserId: shipper.shipperByUserId,
+  userId: auth.userDetails.userId,
+  fetchingShipperByUserId: shipper.fetchingShipperByUserId,
+  fetchingShipperByUserIdError: shipper.fetchingShipperByUserIdError,
+  updateShipperModal: shipper.updateShipperModal,
+  addShipperActivityTableModal: shipper.addShipperActivityTableModal,
+  addShipperOrderModal: shipper.addShipperOrderModal,
 });
 
 const mapDispatchToProps = (dispatch) =>
-      bindActionCreators(
-      {
-        handleUpdateShipperModal,
-        handleShipperActivityTableModal,
-        handleShipperOrderModal,
-        deleteShipperData,
-        getShipperByUserId,
-        setEditShipper,
+  bindActionCreators(
+    {
+      handleUpdateShipperModal,
+      handleShipperActivityTableModal,
+      handleShipperOrderModal,
+      deleteShipperData,
+      getShipperByUserId,
+      setEditShipper,
     },
-      dispatch
-      );
+    dispatch
+  );
 
-      export default connect(mapStateToProps, mapDispatchToProps)(ShipperCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(ShipperCardList);
