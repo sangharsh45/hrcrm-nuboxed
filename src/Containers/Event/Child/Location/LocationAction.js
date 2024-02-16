@@ -266,7 +266,7 @@ export const setLocationViewType = (viewType) => (dispatch) => {
       });
   }; 
 
-  export const addingLocationToggle = (data) => (dispatch) => {
+  export const addingLocationToggle = (data,orgId) => (dispatch) => {
     //console.log(permissions, userId);
    // const userId = getState().auth.userDetails.userId;
     dispatch({
@@ -281,7 +281,7 @@ export const setLocationViewType = (viewType) => (dispatch) => {
   
       .then((res) => {
         console.log(res);
-       // dispatch(getDepartments())
+       dispatch(getlocation(orgId))
         dispatch({
           type: types.ADDING_LOCATION_TOGGLE_SUCCESS,
           payload: res.data,
