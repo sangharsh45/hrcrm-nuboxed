@@ -134,22 +134,22 @@ style={{width:"6rem",height:"6rem"}}
 
   
                                     
-                                          {/* <h4 class=" text-sm text-cardBody font-poppins">
+                                          {/* <div class=" text-sm text-cardBody font-poppins">
                                            ID
-                                          </h4> */}
-                                          <h4 class=" text-xs  text-cardBody font-poppins cursor-pointer">
+                                          </div> */}
+                                          <div class=" text-xs  text-cardBody font-poppins cursor-pointer">
                                               
                                           {/* <div onClick={() => { this.handleExpand(item.voucherId) 
               this.props.handleMileageVoucherIdDrwer(true)}}>
      
-       </div> */} {item.expenseId}                       </h4>
+       </div> */} {item.expenseId}                       </div>
 
                                      
                             
                               </div>
                               <div className=" flex font-medium flex-col  w-[10.31rem] ">
                          
-                         {/* <h4 class=" text-sm text-cardBody font-poppins"> Type </h4> */}
+                         {/* <div class=" text-sm text-cardBody font-poppins"> Type </div> */}
                          {editStates[index] ? (
             // <input
             //   type="text"
@@ -169,14 +169,14 @@ style={{width:"6rem",height:"6rem"}}
   ))}
 </select>
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.expenseType}
-                         </h4>
+                         </div>
                            )}
                      </div>
                               <div className=" flex font-medium flex-col w-[7.8rem] ">
                          
-                                  {/* <h4 class=" text-sm text-cardBody font-poppins">Date </h4> */}
+                                  {/* <div class=" text-sm text-cardBody font-poppins">Date </div> */}
                                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.expenseDate)} 
@@ -186,16 +186,16 @@ style={{width:"6rem",height:"6rem"}}
     style={{ border: "1px solid lightgrey",boxShadow:"0 0.01em 0.01em ",margin:"0.25rem",height:"1.4rem" }}
   />
 ) : (
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       
                                   
                                   {dayjs(item.expenseDate).format("MMM Do YY")}
 
-                                  </h4>
+                                  </div>
                                   )}
                               </div>
                               <div className="flex font-medium flex-col w-[5.12rem]">
-                              {/* <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4> */}
+                              {/* <div class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </div> */}
                               {editStates[index] ? (
             <input
               type="text"
@@ -204,15 +204,15 @@ style={{width:"6rem",height:"6rem"}}
               style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.clientName}
-                         </h4>
+                         </div>
           )}
           </div>
                          <div className=" flex font-medium flex-col w-[7.5rem] ">
 
                                 
-                                  {/* <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4> */}
+                                  {/* <div class=" text-sm text-cardBody font-poppins">Particulars</div> */}
                                   {editStates[index] ? (
                                   <input
               type="text"
@@ -222,9 +222,9 @@ style={{width:"6rem",height:"6rem"}}
             />
           ) : (
         
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                        {item.particular}
-                                  </h4>
+                                  </div>
           )}
      
                               </div>
@@ -233,7 +233,7 @@ style={{width:"6rem",height:"6rem"}}
                               <div className=" flex font-medium flex-col w-20 ">
 
 
-                                {/* <h4 class=" text-sm text-cardBody font-poppins">Amount</h4> */}
+                                {/* <div class=" text-sm text-cardBody font-poppins">Amount</div> */}
                                 {editStates[index] ? (
                                   <input
               type="text"
@@ -244,9 +244,9 @@ style={{width:"6rem",height:"6rem"}}
           ) : (
                                                                
           
-                                <h4 class=" text-xs text-cardBody font-poppins">
+                                <div class=" text-xs text-cardBody font-poppins">
                                     {item.amount}   {item.currency}
-                                </h4>
+                                </div>
           )}
                             </div> 
 
@@ -254,7 +254,7 @@ style={{width:"6rem",height:"6rem"}}
                      <div className=" flex font-medium flex-col w-[4.13rem] ">
 
 
-{/* <h4 class=" text-sm text-cardBody font-poppins">Curency</h4> */}
+{/* <div class=" text-sm text-cardBody font-poppins">Curency</div> */}
 {editStates[index] ? (
   <input
 type="text"

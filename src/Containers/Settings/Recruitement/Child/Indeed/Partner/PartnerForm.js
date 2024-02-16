@@ -167,7 +167,7 @@ const { Option } = Select;
                       </FlexContainer>
               </div>
               </div>  
-              <h4>Updated on {dayjs(props.partner && props.partner.length && props.partner[0].lastUpdatedOn).format("ll")} by {props.partner && props.partner.length && props.partner[0].name}</h4> 
+              <div>Updated on {dayjs(props.partner && props.partner.length && props.partner[0].lastUpdatedOn).format("ll")} by {props.partner && props.partner.length && props.partner[0].name}</div> 
               <Spacer style={{ marginTop: "1.25em" }} />
               <FlexContainer justifyContent="flex-end">
                 <Button 

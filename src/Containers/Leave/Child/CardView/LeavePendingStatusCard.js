@@ -69,9 +69,9 @@ function LeavePendingStatusCard(props) {
                           {item.reason}
                         </div>
                         {/* <div className=" flex font-medium flex-col w-24 ">
-                        <h4 class=" text-base text-cardBody font-poppins">
+                        <div class=" text-base text-cardBody font-poppins">
                           Status
-                        </h4>
+                        </div>
 
                        
                       </div> */}

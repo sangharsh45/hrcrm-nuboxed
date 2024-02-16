@@ -289,7 +289,7 @@ function Notifications(props) {
                   </div> */}
                 </div>
               </div>
-              <h4 class=" mt-4">Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
+              <div class=" mt-4">Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</div>
             </Form>
           </MainWrapper>
         )}

@@ -213,7 +213,7 @@ const Certification = ({
           </div>
         </MainWrapper>
       </div>
-      <h4>
+      <div>
         Updated on{" "}
         {moment(
           certifications &&
@@ -224,7 +224,7 @@ const Certification = ({
         {certifications &&
           certifications.length &&
           certifications[0].updatedName}
-      </h4>
+      </div>
     </>
   );
 };
@@ -526,7 +526,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Certification);
 //             </div>
 //           </MainWrapper>
 //         </div>
-//         <h4>Updated on {moment(this.props.certifications && this.props.certifications.length && this.props.certifications[0].updationDate).format("ll")} by {this.props.certifications && this.props.certifications.length && this.props.certifications[0].updatedname}</h4>
+//         <div>Updated on {moment(this.props.certifications && this.props.certifications.length && this.props.certifications[0].updationDate).format("ll")} by {this.props.certifications && this.props.certifications.length && this.props.certifications[0].updatedname}</div>
 //       </>
 //     );
 //   }

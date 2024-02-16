@@ -897,11 +897,11 @@ const NotificationAccess = (props) => {
                 </div>
               </FlexContainer>
 
-              <h4>
+              <div>
                 Updated on{" "}
                 {dayjs(props.notificationAcces.lastUpdatedOn).format("ll")} by{" "}
                 {props.notificationAcces.name}
-              </h4>
+              </div>
 
               <FlexContainer justifyContent="flex-end">
                 <Button

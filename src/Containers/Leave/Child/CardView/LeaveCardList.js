@@ -136,7 +136,7 @@ function LeaveCardList (props) {
                     </div>
  
      <div className=" flex font-medium flex-col md:w-48 max-sm:justify-between w-full max-sm:flex-row ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins">Status</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins">Status</div> */}
 
                                     <div class=" text-base text-cardBody font-poppins">
                                     {item.status === "Approved" && (

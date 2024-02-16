@@ -73,7 +73,7 @@ function RemoteTeamForm(props) {
         </div>
       </FlexContainer> 
     <Spacer />
-      <h4>Updated on {dayjs(props.remoteAccess.lastUpdatedOn).format("ll")} by {props.remoteAccess.name}</h4>
+      <div>Updated on {dayjs(props.remoteAccess.lastUpdatedOn).format("ll")} by {props.remoteAccess.name}</div>
     </MainWrapper>
   );
 }
