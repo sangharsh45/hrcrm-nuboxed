@@ -6,11 +6,12 @@ import {addingLocationToggle } from "./LocationAction";
 
 function RefurbishToggle(props) {
   const [refurbish,Setrefurbish]=React.useState(false);
+  const value = refurbish || props.productionInd; 
   function handleRefurbishClick(item) {
     props.addingLocationToggle(
       {
-        locationDetailsId:props.locationDetailsId,
-        value: false,
+        locationId:props.locationDetailsId,
+        value: value,
         type: "production"
       },
       props.locationDetailsId,
@@ -29,7 +30,9 @@ function RefurbishToggle(props) {
           cancelText="Cancel"
         >
           <Switch
-            // checked={props.paymentCollection || paymentCollection}
+            checked={refurbish || props.productionInd}
+           //checked={refurbish}
+           onChange={(checked) => Setrefurbish(checked)}
             isLoading={true}
             checkedChildren="Yes"
             unCheckedChildren="No"

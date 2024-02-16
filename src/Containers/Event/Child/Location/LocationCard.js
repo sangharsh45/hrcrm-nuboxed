@@ -126,6 +126,7 @@ const handleLoadMore = () => {
                         </Popconfirm> */}
                         <RefurbishToggle
                         locationDetailsId={item.locationDetailsId}
+                        productionInd={item.productionInd}
                         />
                       </div>
                     </div>
