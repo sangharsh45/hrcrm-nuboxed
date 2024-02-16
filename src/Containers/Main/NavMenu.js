@@ -35,6 +35,7 @@ import CategoryIcon from '@mui/icons-material/Category'
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 const SubMenu = Menu.SubMenu;
 
@@ -771,6 +772,19 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
+        <Menu.Item key="/production" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/production' ? 'tomato' : '#4bc076' }}>
+          <Link to="/production" onClick={() => handleSelect('/production')}>
+            <ProductionQuantityLimitsIcon
+              style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage
+              id="app.production"
+              defaultMessage="Production"
+            />
+            </span>
+          </Link>
+        </Menu.Item>
         {user.materialAccessInd === true && user.erpInd === true && (
 
           <Menu.Item key="/supplies" style={{ height: "1.7rem",
