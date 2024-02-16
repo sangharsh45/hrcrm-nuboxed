@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
+import { addapplyOffer } from "../HolidayAction";
 import styled from "styled-components";
 import { Button, DatePicker, Switch } from "antd";
 import { TextInput, } from "../../../Components/UI/Elements";
@@ -18,7 +19,7 @@ class SingleHoliday extends Component {
       color: "red",
       currentStage: "",
       fields: {},
-      date: this.props.holidays.date,
+      date: this.props.holidaysYear.date,
       holidayType: false,
       
     };
@@ -31,6 +32,15 @@ class SingleHoliday extends Component {
         [name]: value,
       },
     });
+  };
+  handleUpdateBrokarage = (holidayId, year, countryId) => {
+    const data = {
+      holidayId: holidayId,
+      year: year,
+      countryId: countryId
+    };
+
+    this.props.addapplyOffer(data, holidayId);
   };
   onChangeDatePicker = (date, dateString) => {
     console.log(date, dateString);
@@ -45,11 +55,11 @@ class SingleHoliday extends Component {
   };
   render() {
     console.log(this.state.fields);
-    const { holidays } = this.props;
-    console.log(holidays);
+    const { holidaysYear } = this.props;
+    console.log(holidaysYear);
 
     const {
-      holidays: { holidayName, date, holidayType, holidayId,handleDeleteHoliday },
+      holidaysYear: { holidayName, date, holidayType,countryId,year, holidayId,handleDeleteHoliday },
     } = this.props;
 
     return (
@@ -102,9 +112,15 @@ class SingleHoliday extends Component {
             // fontWeight: "normal",
           }}
           >
-            <Button 
-            type="primary"
-            >Apply</Button>
+            
+            <Button
+  type="primary"
+    onClick={() => this.handleUpdateBrokarage(holidayId, year,countryId)}
+    
+  >
+    Apply
+   
+  </Button>
             {/* <Popconfirm
               title="Do you wish to change Status ? "
               okText="Yes"
@@ -236,7 +252,7 @@ const mapStateToProps = ({ auth }) => ({
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
-  
+    addapplyOffer
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(SingleHoliday);
 

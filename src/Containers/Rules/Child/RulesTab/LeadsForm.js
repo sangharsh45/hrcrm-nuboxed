@@ -44,7 +44,7 @@ country:props.countryId,
           maximumLeaves: props.leaveData.maximumLeaves || "",
           carryForward: props.leaveData.carryForward || "",
           mileageRate:props.leaveData.mileageRate || "",
-
+          maxOpsnlHoliday:props.leaveData.maxOpsnlHoliday ||"",
           leavesCappedTimesAnnualy: props.leaveData.leavesCappedTimesAnnualy || "",
           // organizationId: props.organizationId,
         }}
@@ -137,6 +137,22 @@ country:props.countryId,
                 //   height: "2.0625em",
                 // }}
                 />
+ <div class=" mt-4">
+<Field
+                  isRequired
+                  name="maxOpsnlHoliday"
+                  // label="Max leaves (in days)"
+                  label={<div class="w-60">Maximum optional holiday(in days)</div>}
+                  width={"10%"}
+                  component={InputComponent}
+                  inlineLabel
+                // style={{
+                //   flexBasis: "80%",
+                //   marginTop: "0.25em",
+                //   height: "2.0625em",
+                // }}
+                />
+</div>
 </div>
                 {/* <FlexContainer justifyContent="space-between">
                   <div style={{ width: "50%", marginTop: "0.625em" }}>
