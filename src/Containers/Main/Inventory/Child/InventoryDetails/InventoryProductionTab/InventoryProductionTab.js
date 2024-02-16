@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
+const CreateProductionCard =lazy(()=> import("../../../../../Production/Child/CreateProductionCard"));
+const ProductionDispatchCard=lazy(()=>import("./ProductionDispatchCard"));
 
 const TabPane = StyledTabs.TabPane;
 class InventoryProductionTab extends PureComponent {
@@ -37,8 +39,9 @@ class InventoryProductionTab extends PureComponent {
                             }
                             key="1"
                         >
-                            {" "}
+                         
                             <Suspense fallback={"Loading..."}>
+                            <CreateProductionCard/>
                             </Suspense>
                         </TabPane>
                         <TabPane
@@ -51,7 +54,7 @@ class InventoryProductionTab extends PureComponent {
                         >
                             {" "}
                             <Suspense fallback={"Loading..."}>
-
+<ProductionDispatchCard/>
                             </Suspense>
                         </TabPane>
 

@@ -1284,3 +1284,31 @@ export const getMaterialReceiveData = (locationDetailsId) => (dispatch) => {
       });
     });
 };
+
+
+export const getDispatchProductionsbyLocId = (locationDetailsId,pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/production/product/transferList/${locationDetailsId}/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE,
+        payload: err,
+      });
+    });
+};

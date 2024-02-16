@@ -48,7 +48,12 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
       type: types.GET_SEARCH_PRODOCTION_REQUEST,
     });
     axios
-      .get(`${base_url2}/product/productName/${name}`)
+      .get(`${base_url2}/product/productName/${name}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
       .then((res) => {
         console.log(res);
         dispatch({
@@ -60,6 +65,34 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
         console.log(err);
         dispatch({
           type: types.GET_SEARCH_PRODOCTION_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getProductionsbyLocId = (locationDetailsId,pageNo) => (dispatch) => {
+    dispatch({
+      type: types.GET_PRODUCTION_BYLOC_ID_REQUEST,
+    });
+    axios
+      // .get(`${base_url2}/product`,
+      .get(`${base_url2}/production/product/${locationDetailsId}/${pageNo}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PRODUCTION_BYLOC_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_PRODUCTION_BYLOC_ID_FAILURE,
           payload: err,
         });
       });

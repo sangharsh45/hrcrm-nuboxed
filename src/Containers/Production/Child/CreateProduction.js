@@ -5,7 +5,7 @@ import { getAllProductList } from "../../Product/ProductAction";
 import {  Select } from "../../../Components/UI/Elements";
 import {getSearchedProduction} from "../ProductionAction";
 
-// const ProductbuilderTable2 =lazy(()=>import("../../Product/Child/ProductTable/ProductbuilderTable2"));
+const CreateProductionCard =lazy(()=>import("./CreateProductionCard"));
 const ProductionSearchedCard =lazy(()=>import("./ProductionSearchedCard"));
 
 const { Option } = Select;
@@ -63,7 +63,7 @@ function CreateProduction (props) {
 {showCard &&
  <ProductionSearchedCard handleRowItem={handleRowItem} rowData={rowData}/> 
 }
-{/* <ProductbuilderTable2 particularDiscountData={props.particularDiscountData}/> */}
+<CreateProductionCard/>
 </Suspense>
 
     </>
