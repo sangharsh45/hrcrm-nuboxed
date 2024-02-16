@@ -10,7 +10,7 @@ import SpeechRecognition, {
 import PeopleIcon from '@mui/icons-material/People';
 import { Input,Tooltip, } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Badge } from "antd";
+import { Badge,Avatar } from "antd";
 import {
   getContactInvest,
   getTeamContactInvest,
@@ -106,7 +106,9 @@ const ContactInvestActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
             <AccountBalanceIcon className=" text-base cursor-pointer" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -129,7 +131,9 @@ const ContactInvestActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
    <FormattedMessage id="app.all" defaultMessage="All" />
+   </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -153,7 +157,9 @@ const ContactInvestActionLeft = (props) => {
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
+             <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
            <PeopleIcon className=" text-base cursor-pointer"/>
+           </Avatar>
           </span>
         </Badge>
       </Tooltip>
