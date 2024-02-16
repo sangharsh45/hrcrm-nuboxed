@@ -172,7 +172,21 @@ const initialState = {
                                                 fetchingLocationRecordsError: true,
                                               };
 
-                                                                                   
+                                              case types.ADDING_LOCATION_TOGGLE_REQUEST:
+                                                return { ...state, addingLocationToggle: true };
+                                              case types.ADDING_LOCATION_TOGGLE_SUCCESS:
+                                                return {
+                                                  ...state,
+                                                  addingLocationToggle: false,
+                                                  showLocation: action.payload
+                                                }
+                                              case types.ADDING_LOCATION_TOGGLE_FAILURE:
+                                                return {
+                                                  ...state,
+                                                  addingLocationToggle: false,
+                                                  addingLocationToggleError: true,
+                                                };
+                                                                                  
                                       
         default:
     return state;

@@ -151,6 +151,34 @@ export const getTeamList = (userId) => (dispatch) => {
     });
 };
 
+export const getTeamteamsList = (teamLead) => (dispatch) => {
+  dispatch({
+    type: types.GET_TEAMTEAM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/team/teamLead/${teamLead}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TEAMTEAM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TEAMTEAM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+
 export const getTeamByTeamId = (teamId) => (dispatch) => {
   dispatch({
     type: types.GET_TEAM_BY_TEAM_ID_REQUEST,
