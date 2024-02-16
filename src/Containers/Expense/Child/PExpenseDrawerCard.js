@@ -126,22 +126,22 @@ style={{width:"3rem",height:"3rem"}}
 )}
 </div>   
                               <div className=" flex font-medium flex-col w-[2rem] ">
-                                          <h4 class=" text-sm text-cardBody font-poppins">
+                                          <div class=" text-sm text-cardBody font-poppins">
                                            ID
-                                          </h4>
-                                          <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                          </div>
+                                          <div class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                               
        <Tooltip title={item.expenseId}>
          
          <QuestionMarkIcon style={{fontSize:"1rem"}}/>
-         </Tooltip>                        </h4>
+         </Tooltip>                        </div>
 
                                      
                             
                               </div>
                               <div className=" flex font-medium flex-col  w-20 ">
                          
-                         <h4 class=" text-sm text-cardBody font-poppins"> Type </h4>
+                         <div class=" text-sm text-cardBody font-poppins"> Type </div>
                          {editStates[index] ? (
             <select
   className="input-field"
@@ -155,14 +155,14 @@ style={{width:"3rem",height:"3rem"}}
   ))}
 </select>
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.expenseType}
-                         </h4>
+                         </div>
                            )}
                      </div>
                               <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
                          
-                                  <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
+                                  <div class=" text-sm text-cardBody font-poppins">Date </div>
                                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.expenseDate)} 
@@ -172,16 +172,16 @@ style={{width:"3rem",height:"3rem"}}
     style={{ border: "1px solid grey" }}
   />
 ) : (
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       
                                   
                                   {dayjs(item.expenseDate).format("MMM Do YY")}
 
-                                  </h4>
+                                  </div>
                                   )}
                               </div>
                               <div className="flex font-medium flex-col w-32">
-                              <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4>
+                              <div class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </div>
                               {editStates[index] ? (
             <input
               type="text"
@@ -190,15 +190,15 @@ style={{width:"3rem",height:"3rem"}}
               style={{ border: "1px solid grey" }}
             />
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.clientName}
-                         </h4>
+                         </div>
           )}
           </div>
                          <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
 
                                 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4>
+                                  <div class=" text-sm text-cardBody font-poppins">Particulars</div>
                                   {editStates[index] ? (
                                   <input
               type="text"
@@ -208,9 +208,9 @@ style={{width:"3rem",height:"3rem"}}
             />
           ) : (
         
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                        {item.particular}
-                                  </h4>
+                                  </div>
           )}
      
                               </div>
@@ -219,7 +219,7 @@ style={{width:"3rem",height:"3rem"}}
                               <div className=" flex font-medium flex-col w-20 ">
 
 
-                                <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                <div class=" text-sm text-cardBody font-poppins">Amount</div>
                                 {editStates[index] ? (
                                   <input
               type="text"
@@ -230,9 +230,9 @@ style={{width:"3rem",height:"3rem"}}
           ) : (
                                                                
           
-                                <h4 class=" text-xs text-cardBody font-poppins">
+                                <div class=" text-xs text-cardBody font-poppins">
                                     {item.amount}
-                                </h4>
+                                </div>
           )}
                             </div> 
 
@@ -240,7 +240,7 @@ style={{width:"3rem",height:"3rem"}}
                      <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
 
 
-<h4 class=" text-sm text-cardBody font-poppins">Curency</h4>
+<div class=" text-sm text-cardBody font-poppins">Curency</div>
 {editStates[index] ? (
   <input
 type="text"
@@ -251,9 +251,9 @@ style={{ border: "1px solid grey" }}
 ) : (
                                
 
-<h4 class=" text-xs text-cardBody font-poppins">
+<div class=" text-xs text-cardBody font-poppins">
    {item.currency}
-</h4>
+</div>
 )}
 </div> 
 

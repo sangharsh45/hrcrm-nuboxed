@@ -91,7 +91,7 @@ function MonsterForm(props) {
             </div>
               </div>
             </div>
-            <h4>Updated on {dayjs(props.monster.lastUpdatedOn).format("ll")} by {props.monster.name}</h4>
+            <div>Updated on {dayjs(props.monster.lastUpdatedOn).format("ll")} by {props.monster.name}</div>
             <FlexContainer justifyContent="flex-end">
               <Button
                 type="primary"

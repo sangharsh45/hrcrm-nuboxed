@@ -176,7 +176,7 @@ country:props.countryId,
                   </Button>
                 </div>
                 
-                <h4>Updated on {moment(props.leaveData.updationDate).format("ll")} by {props.leaveData.updatedBy}</h4> 
+                <div>Updated on {moment(props.leaveData.updationDate).format("ll")} by {props.leaveData.updatedBy}</div> 
            
               </div>
             </div>

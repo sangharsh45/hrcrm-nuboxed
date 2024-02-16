@@ -61,11 +61,11 @@ function Weekend(props) {
       {renderSwitch("friday")}
       {renderSwitch("saturday")}
       
-      <h4>
+      <div>
         Updated on{" "}
         {moment(props.weekendAccess.updationDate).format("ll")} by{" "}
         {props.weekendAccess.updatedBy}
-      </h4>
+      </div>
     </MainWrapper>
   );
 }

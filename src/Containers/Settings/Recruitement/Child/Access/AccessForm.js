@@ -1577,7 +1577,7 @@ const onCheckAllTeamsChange = (e) => {
               </div> 
              : null }  
                
-              <h4 class="mt-2">Updated on {moment(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
+              <div class="mt-2">Updated on {moment(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</div>
               
               <div class=" flex justify-end" >
               <FloatButton.Group  >

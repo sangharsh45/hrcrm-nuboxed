@@ -264,7 +264,7 @@ class Program extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </FlexContainer>
-        <h4>Updated on {moment(this.props.programs && this.props.programs.length && this.props.programs[0].updationDate).format("ll")} by {this.props.programs && this.props.programs.length && this.props.programs[0].name}</h4>
+        <div>Updated on {moment(this.props.programs && this.props.programs.length && this.props.programs[0].updationDate).format("ll")} by {this.props.programs && this.props.programs.length && this.props.programs[0].name}</div>
       </>
     );
   }

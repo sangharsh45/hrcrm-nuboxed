@@ -192,11 +192,11 @@ const handleDeptChange = (event) => {
                   {/* Update */}
                 </Button>
               </div>
-              <h4 class="mt-4">
+              <div class="mt-4">
                 Updated on{" "}
                 {moment(props.distributionAutomation.updationDate).format("ll")} by{" "}
                 {props.distributionAutomation.updatedBy}
-              </h4>
+              </div>
         </Form>
       </MainWrapper>
         )}

@@ -216,13 +216,13 @@ const Library = ({
           </div>
         </MainWrapper>
       </div>
-      <h4>
+      <div>
         Updated on{" "}
         {moment(
           librarys && librarys.length && librarys[0].updationDate
         ).format("ll")}{" "}
         by {librarys && librarys.length && librarys[0].updatedName}
-      </h4>
+      </div>
     </>
   );
 };
@@ -523,7 +523,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Library);
 //                   )}
                    
 //               </MainWrapper>
-//               {/* <h4>Updated on {dayjs(props.librarys && props.librarys.length && props.librarys[0].updationDate).format("ll")} by {props.librarys && props.librarys.length && props.librarys[0].name}</h4>              */}
+//               {/* <div>Updated on {dayjs(props.librarys && props.librarys.length && props.librarys[0].updationDate).format("ll")} by {props.librarys && props.librarys.length && props.librarys[0].name}</div>              */}
 //             </div>
           
 //           </MainWrapper>
@@ -547,7 +547,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Library);
 //             </FlexContainer>
 //           </MainWrapper> */}
 //         </div>
-//         <h4>Updated on {moment(this.props.librarys && this.props.librarys.length && this.props.librarys[0].updationDate).format("ll")} by {this.props.librarys && this.props.librarys.length && this.props.librarys[0].updatedName}</h4>
+//         <div>Updated on {moment(this.props.librarys && this.props.librarys.length && this.props.librarys[0].updationDate).format("ll")} by {this.props.librarys && this.props.librarys.length && this.props.librarys[0].updatedName}</div>
 //       </>
 //     );
 //   }

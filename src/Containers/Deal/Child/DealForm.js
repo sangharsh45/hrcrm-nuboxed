@@ -12,7 +12,7 @@ import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { Button, Tooltip,message } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
+import {getAssignedToList} from "../../Employees/EmployeeAction"
 import {
   getRecruiterName,
   getInitiative,
@@ -47,6 +47,7 @@ function DealForm(props) {
     props.getCurrency();
     props.getRecruiterName();
     props.getAllEmployeelist();
+    props.getAssignedToList(props.orgId);
     props.getSources(props.orgId);
     props.getdealsContactdata(props.userId);
     props.getInvestorData(props.userId)
@@ -115,6 +116,13 @@ function DealForm(props) {
     return {
       label: `${item.workflowName || ""}`,
       value: item.investorOppWorkflowId,
+    };
+  });
+
+  const AllEmplo = props.assignedToList.map((item) => {
+    return {
+      label: `${item.empName || ""}`,
+      value: item.employeeId,
     };
   });
 
@@ -195,7 +203,7 @@ function DealForm(props) {
   }
 
   const {
-    user: { userId },
+    user: { userId,empName },
     creatingDeal,
     employeeId,
     salesUserIds,
@@ -231,6 +239,7 @@ function DealForm(props) {
           oppInnitiative: "",
           oppStage: "",
           source:"",
+          included:[],
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
        validationSchema={OpportunitySchema}
@@ -566,23 +575,23 @@ function DealForm(props) {
       </Listbox>
 <div>
 <Field
-                    name="include"
-                    isColumnWithoutNoCreate
+                    name="included"
+                    // label="Include"
                     label={
                       <FormattedMessage
                         id="app.include"
-                        defaultMessage="Include"
+                        defaultMessage="include"
                       />
                     }
+                    mode
+                    placeholder="Select"
                     component={SelectComponent}
-                    options={
-                      Array.isArray(allEmplo)
-                        ? allEmplo
-                        : []
-                    }
-                    isColumn
-                    value={values.employeeId}
-                    inlineLabel
+                    options={Array.isArray(AllEmplo) ? AllEmplo : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${empName || ""} `,
+                      value: employeeId,
+                    }}
                   />
   </div>
                 
@@ -777,7 +786,7 @@ function DealForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, contact, customer }) => ({
+const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings,employee, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -805,6 +814,7 @@ const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, cont
   fullName: auth.userDetails.fullName,
   sources: source.sources,
   creatingDeal:deal.creatingDeal,
+  assignedToList:employee.assignedToList,
   // opportunitySkills:opportunity.opportunitySkills
 });
 
@@ -820,7 +830,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getInvestorData,
       getInitiative,
-      // getOpportunitySKill
+      getAssignedToList,
       // getWorkflow,
       getStages,
       getSources,

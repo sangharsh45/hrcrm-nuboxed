@@ -202,7 +202,7 @@ function ProjectsAllTable(props) {
                                     </div>
 
                                     <div className=" flex font-medium   md:w-[26.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <h4 class=" text-xs text-cardBody font-poppins">
+                                        <div class=" text-xs text-cardBody font-poppins">
                                         <span>
             {item.customerName === null ? (
                 ""
@@ -214,14 +214,14 @@ function ProjectsAllTable(props) {
                 />
                 )}
             </span>
-                                        </h4>
+                                        </div>
 
                                     </div>
                                     <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                                        <h4 class=" text-sm text-cardBody font-poppins">
+                                        <div class=" text-sm text-cardBody font-poppins">
                                         <span>
                  <MultiAvatar2
                   primaryTitle={item.creatorName}
@@ -229,7 +229,7 @@ function ProjectsAllTable(props) {
                   imgHeight={"1.8em"}
                 />
             </span>
-                                        </h4>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">

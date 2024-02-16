@@ -132,18 +132,18 @@ function DistributorColletcionArchive(props) {
                     <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
       
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                         {item.orderSourceName}
-                      </h4>
+                      </div>
 
                     </div>
 
                     <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
       
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                         {item.orderId}
-                      </h4>
+                      </div>
 
                     </div>
 
@@ -180,17 +180,17 @@ function DistributorColletcionArchive(props) {
                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
                       
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        <div class=" text-xs text-cardBody font-poppins">
                           {` ${moment(item.paymentDate).format("ll")}`}
-                        </h4>
+                        </div>
 
                       </div>
                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
                       
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.paymentAmount} &nbsp; {item.orderCurrencyName}
-                        </h4>
+                        </div>
 
                       </div>
                     </div>
@@ -198,19 +198,19 @@ function DistributorColletcionArchive(props) {
                       <div className=" flex font-medium flex-col  md:w-[5.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                        
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        <div class=" text-xs text-cardBody font-poppins">
                           {/* {item.paymentMode} */}
-                        </h4>
+                        </div>
 
                       </div>
                       <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
         
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        <div class=" text-xs text-cardBody font-poppins">
                          {user.collectionApproveInd === true && (
                           <DistributorPaymentToggle paymentId={item.paymentId} orderPaymentType={item.orderPaymentType}/>
                          )}
-                        </h4>
+                        </div>
 
                       </div>
                     </div>
@@ -218,7 +218,7 @@ function DistributorColletcionArchive(props) {
                       <div className=" flex font-medium flex-col  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
         
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        <div class=" text-xs text-cardBody font-poppins">
                         <span>
                       <MultiAvatar
                         primaryTitle={item.salesExecutive}
@@ -226,7 +226,7 @@ function DistributorColletcionArchive(props) {
                         imgHeight={"1.8rem"}
                       />
                     </span>
-                        </h4>
+                        </div>
 
                       </div>
 
