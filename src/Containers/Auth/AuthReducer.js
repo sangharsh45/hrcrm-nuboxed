@@ -32,6 +32,10 @@ const initialState = {
   editingOrganizationDetailsError: false,
   organizationDetails:{},
 
+  fetchingIncludedOpportunity: false,
+  fetchingIncludedOpportunityError: false,
+  opportunityIncluded:[],
+
   fetchingRepositoryDocuments: false,
   fetchingRepositoryDocumentsError: false,
   repositoryData:[],
@@ -54,6 +58,10 @@ const initialState = {
   fetchingTimeZoneError: false,
   timeZone: [],
 
+  fetchingIncludedDeals: false,
+  fetchingIncludedDealsError: false,
+  dealsIncluded:[],
+
   fetchingOrganization: false,
   fetchingOrganizationError: false,
   organizationDetailsList:[],
@@ -66,6 +74,10 @@ const initialState = {
   fetchingCountries: false,
   fetchingCountriesError: false,
   countries: [],
+
+  fetchingActionRequiredCount: false,
+  fetchingActionRequiredCountError: false,
+  actionCount: [],
 
   addOrganizationModal:false,
 
@@ -88,6 +100,14 @@ const initialState = {
   fetchingEventsListByUserId: false,
   fetchingEventsListByUserIdError: false,
   eventsListByUserId: [],
+
+  fetchingOpportunityIncludedCount: false,
+  fetchingOpportunityIncludedCountError: false,
+  oppIncludedCount:{},
+
+  fetchingDealsIncludedCount: false,
+  fetchingDealsIncludedCountError: false,
+  dealsIncludedCount:{},
 
   fetchingLeavesByUserId: false,
   fetchingLeavesByUserIdError: false,
@@ -882,6 +902,29 @@ export const authReducer = (state = initialState, action) => {
                         fetchingOrganizationError: true,
                       };
 
+
+                      case types.GET_ACTION_REQUIRED_COUNT_REQUEST:
+                        return { ...state, fetchingActionRequiredCount: true };
+                      case types.GET_ACTION_REQUIRED_COUNT_SUCCESS:
+                        return { ...state, fetchingActionRequiredCount: false, actionCount: action.payload };
+                      case types.GET_ACTION_REQUIRED_COUNT_FAILURE:
+                        return {
+                          ...state,
+                          fetchingActionRequiredCount: false,
+                          fetchingActionRequiredCountError: true,
+                        };
+
+
+                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_REQUEST:
+                          return { ...state, fetchingOpportunityIncludedCount: true };
+                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_SUCCESS:
+                          return { ...state, fetchingOpportunityIncludedCount: false, oppIncludedCount: action.payload };
+                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_FAILURE:
+                          return {
+                            ...state,
+                              fetchingOpportunityIncludedCount: false,
+                              fetchingOpportunityIncludedCountError: true,
+                          };
                       case types.HANDLE_ACTION_DRAWER_MODAL:
                         return { ...state, addDrawerActionModal: action.payload };
 
@@ -895,6 +938,66 @@ export const authReducer = (state = initialState, action) => {
                         };
                       case types.UPDATE_PREFERED_LANG_FAILURE:
                         return { ...state, updatingPreferedLang: false, updatingPreferedLangError: true };
+
+
+                        case types.GET_INCLUDED_OPPORTUNITY_REQUEST:
+                          return { ...state, fetchingIncludedOpportunity: true };
+                        case types.GET_INCLUDED_OPPORTUNITY_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingIncludedOpportunity: false,
+                            // opportunityByUserId: action.payload,
+                    
+                            opportunityIncluded: [
+                              ...state.opportunityIncluded,
+                              ...action.payload],
+                          };
+                        case types.GET_INCLUDED_OPPORTUNITY_FAILURE:
+                          return {
+                            ...state,
+                            fetchingIncludedOpportunity: false,
+                            fetchingIncludedOpportunityError: true,
+                          };
+
+                          case types.EMPTY_INCLUDED_OPPORTUNITY_LIST:
+                            return { ...state, opportunityIncluded: [] }; 
+
+
+                            case types.GET_DEALS_INCLUDED_COUNT_REQUEST:
+                              return { ...state, fetchingDealsIncludedCount: true };
+                            case types.GET_DEALS_INCLUDED_COUNT_SUCCESS:
+                              return { ...state, fetchingDealsIncludedCount: false, dealsIncludedCount: action.payload };
+                            case types.GET_DEALS_INCLUDED_COUNT_FAILURE:
+                              return {
+                                ...state,
+                                fetchingDealsIncludedCount: false,
+                                fetchingDealsIncludedCountError: true,
+                              };
+
+                              case types.GET_INCLUDED_DEALS_REQUEST:
+                                return { ...state, fetchingIncludedDeals: true };
+                              case types.GET_INCLUDED_DEALS_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingIncludedDeals: false,
+                                  // opportunityByUserId: action.payload,
+                          
+                                  dealsIncluded: [
+                                    ...state.dealsIncluded,
+                                    ...action.payload],
+                                };
+                              case types.GET_INCLUDED_DEALS_FAILURE:
+                                return {
+                                  ...state,
+                                  fetchingIncludedDeals: false,
+                                  fetchingIncludedDealsError: true,
+                                };
+
+
+                                case types.EMPTY_INCLUDED_DEALS_LIST:
+                                  return { ...state, dealsIncluded: [] }; 
+      
+                          
     default:
       return state;
   }

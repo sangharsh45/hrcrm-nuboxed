@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { Tooltip, Badge } from "antd";
+import { Tooltip, Badge ,Avatar} from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -53,7 +53,11 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
-            <LightbulbIcon style={{color:"rgb(214, 144, 149)"}} />
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <LightbulbIcon className="text-white"
+            // style={{color:"rgb(214, 144, 149)"}}
+             />
+            </Avatar>
           </span>
         </Tooltip>
       </Badge>
@@ -77,7 +81,9 @@ const DealActionLeft = (props) => {
             tooltipTitle="Stage View"
             onClick={() => props.setDealViewType("stage")}
           >
-           <TableOutlined/>
+              <Avatar style={{ background: props.viewType === "stage" ? "#f279ab" : "#4bc076" }}>
+           <TableOutlined className="text-white"/>
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -106,7 +112,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
-            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+            <Avatar style={{ background: props.viewType === "won" ? "#f279ab" : "#4bc076" }}>
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" className="text-white" />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
@@ -134,7 +142,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
-            <LockOpenIcon />
+            <Avatar style={{ background: props.viewType === "close" ? "#f279ab" : "#4bc076" }}>
+            <LockOpenIcon className="text-white" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -161,7 +171,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
-            <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+            <Avatar style={{ background: props.viewType === "lost" ? "#f279ab" : "#4bc076" }}>
+            <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" className="text-white" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -193,7 +205,9 @@ const DealActionLeft = (props) => {
             tooltipTitle="Teams"
             onClick={() => props.setDealViewType("teams")}
           >
-         <PeopleIcon/>
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+         <PeopleIcon className="text-white"/>
+         </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -219,10 +233,12 @@ const DealActionLeft = (props) => {
             tooltipTitle="All"
             onClick={() => props.setDealViewType("all")}
           >
+            <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
+                      </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -253,7 +269,12 @@ const DealActionLeft = (props) => {
               //color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
-            <DeleteIcon />
+                <Avatar 
+                // style={{ 
+                //   background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}
+                  >
+            <DeleteIcon className="text-white" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>

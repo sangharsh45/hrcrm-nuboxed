@@ -68,7 +68,11 @@ function CallForm(props) {
 
   
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
-  const[reminder,setReminder] =useState(true)
+  const[reminder,setReminder] =useState(true);
+  const [places, setPlaces] = useState(Array.from({ length: 1 }, (_, placeIndex) => ({
+    startTime:"",
+    timeTo:"",
+  })));
   console.log("category",category);
   const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
@@ -199,6 +203,37 @@ function CallForm(props) {
         value: item.employeeId,
       };
     });
+
+    const handleChange = (value, placeIndex) => {
+      console.log(value)
+      console.log(placeIndex+1)
+      const updatedPlaces = [...places];
+      updatedPlaces[placeIndex] = {
+        address1: value,
+        country: '',
+        state: '',
+        city:"",
+        pinCode:"",
+        street:"",
+        sequenceNo:placeIndex+1,
+        // latLng: null,
+        latitude: 0, 
+        longitude: 0, 
+        numberOfCars: updatedPlaces[placeIndex].numberOfCars,
+        carList: updatedPlaces[placeIndex].carList,
+        loadingDate: updatedPlaces[placeIndex].loadingDate,
+        // loadingHours: updatedPlaces[placeIndex].loadingHours,
+        startTime:updatedPlaces[placeIndex].startTime,
+        timeTo:updatedPlaces[placeIndex].timeTo
+      };
+      setPlaces(updatedPlaces);
+    };
+
+    const handleStartTimeChange = (event, placeIndex) => {
+      const updatedPlaces = [...places];
+      updatedPlaces[placeIndex].startTime = event.target.value;
+      setPlaces(updatedPlaces);
+    };
     // console.log(this.state.category);
     const {
       user: { userId, firstName,empName, middleName, fullName, lastName, timeZone },
@@ -341,8 +376,8 @@ function CallForm(props) {
               callType: Type,
               startDate: `${newStartDate}T${newStartTime}`,
               endDate: `${newEndDate}T${newEndTime}`,
-
-              startTime: 0,
+              startTime: values.startTime?values.startTime:null,
+              // startTime: 0,
               endTime: 0,
               assignedTo: selectedOption ? selectedOption.employeeId:userId,
             };
@@ -353,10 +388,10 @@ function CallForm(props) {
                   ...values,
                   callCategory: category,
                   callType: Type,
-
+                  startTime: values.startTime?values.startTime:null,
                   startDate: `${newStartDate}T20:00:00Z`,
                   endDate: `${newEndDate}T20:00:00Z`,
-                  startTime: 0,
+                  // startTime: 0,
                   endTime: 0,
                   assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
@@ -582,7 +617,15 @@ function CallForm(props) {
                   </div>
                   <div class=" flex mt-3 justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
-                      <Field
+                    <input
+        type="time"
+        id="startTime"
+        name="startTime"
+        // value={startTime}
+        value={places.startTime}
+        onChange={(e) => handleStartTimeChange(e,  'startTime')}
+      />
+                      {/* <Field
                         name="startTime"
                         // label="Start Time"
                         label={
@@ -600,7 +643,7 @@ function CallForm(props) {
                         style={{
                           width: "100%",
                         }}
-                      />
+                      /> */}
                     </div>
                     <div class=" w-2/5 max-sm:w-wk">
                       <Field

@@ -1310,3 +1310,146 @@ export const handleActionDrawerModal = (modalProps) => (dispatch) => {
       });
     
     };
+
+    export const getActionRequiredCount = (userId) => (dispatch) => {
+      dispatch({
+        type: types.GET_ACTION_REQUIRED_COUNT_REQUEST,
+      });
+      axios
+        .get(`${base_url}/opportunity/action-required/record/today/${userId}`,{
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_ACTION_REQUIRED_COUNT_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch({
+            type: types.GET_ACTION_REQUIRED_COUNT_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    export const getOpportunityIncludedCount = (userId) => (dispatch) => {
+      dispatch({
+        type: types.GET_OPPORTUNITY_INCLUDED_COUNT_REQUEST,
+      });
+      axios
+        .get(`${base_url}/opportunity/included/record/count/${userId}`,{
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_OPPORTUNITY_INCLUDED_COUNT_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch({
+            type: types.GET_OPPORTUNITY_INCLUDED_COUNT_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    export const getIncludedOpportunityList = (userId,pageNo) => (dispatch) => {
+      dispatch({
+        type: types.GET_INCLUDED_OPPORTUNITY_REQUEST,
+      });
+      axios
+        .get(`${base_url}/opportunity/included/user/${userId}/${pageNo}`, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_INCLUDED_OPPORTUNITY_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: types.GET_INCLUDED_OPPORTUNITY_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    export const emptyIncludedOpportunity = () => (dispatch) => {
+      dispatch({
+        type: types.EMPTY_INCLUDED_OPPORTUNITY_LIST, 
+      });
+    };
+
+    export const emptyIncludedDeals = () => (dispatch) => {
+      dispatch({
+        type: types.EMPTY_INCLUDED_DEALS_LIST, 
+      });
+    };
+
+    export const getDealsIncludedCount = (userId) => (dispatch) => {
+      dispatch({
+        type: types.GET_DEALS_INCLUDED_COUNT_REQUEST,
+      });
+      axios
+        .get(`${base_url}/investorOpportunity/included/record/count/${userId}`,{
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_DEALS_INCLUDED_COUNT_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch({
+            type: types.GET_DEALS_INCLUDED_COUNT_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    
+    export const getIncludedDealsList = (userId,pageNo) => (dispatch) => {
+      dispatch({
+        type: types.GET_INCLUDED_DEALS_REQUEST,
+      });
+      axios
+        .get(`${base_url}/investorOpportunity/included/user/${userId}/${pageNo}`, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_INCLUDED_DEALS_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: types.GET_INCLUDED_DEALS_FAILURE,
+            payload: err,
+          });
+        });
+    };

@@ -17,7 +17,7 @@ import {
   NavbarWrapper,
 } from "../../Components/UI/Layout";
 import { Select } from "antd";
-import { updateUserById,handleActionDrawerModal } from "../Auth/AuthAction";
+import { updateUserById,handleActionDrawerModal,getActionRequiredCount } from "../Auth/AuthAction";
 import { setLanguage } from "../../Language/LanguageAction";
 import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
 import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
@@ -246,6 +246,7 @@ function MainApp(props) {
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
+    props.getActionRequiredCount(props.userId)
   }, []);
 
 
@@ -537,13 +538,13 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div class=" text-[blue] font-base cursor-pointer "
-                   onClick={() => {
-                    // handleRowData(item);
-                    props.handleActionDrawerModal(true);
-                 
-                  }}
-                  >Action Required</div>
+                  <div  class=" text-base cursor-pointer font-semibold text-[blue]"
+                      onClick={() => {
+                        // handleRowData(item);
+                        props.handleActionDrawerModal(true);
+                     
+                      }}
+            >Action Required {props.actionCount.ActionRecordCount}</div>
                   <div class=" text-white bg-mainclr h-[1.75rem] ml-8 mr-3 max-sm:hidden"
                     style={{
                       border: "1px solid tomato",
@@ -921,6 +922,7 @@ const mapStateToProps = ({
   addCandidateResumeModal: candidate.addCandidateResumeModal,
   addCallModal: call.addCallModal,
   user: auth.userDetails,
+  actionCount:auth.actionCount,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -932,6 +934,7 @@ const mapDispatchToProps = (dispatch) =>
       handleCallModal,
       setLanguage,
       getOpportunityRecord,
+      getActionRequiredCount,
       handleMessageModal,
       handleActionDrawerModal,
     },
