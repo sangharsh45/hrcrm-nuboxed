@@ -71,7 +71,7 @@ const DashboardActionLeft = (props) => {
                
               />
                   </Avatar>
-              </Tooltip>customer
+              </Tooltip>
         </span>
   </Badge>
        
