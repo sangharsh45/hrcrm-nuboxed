@@ -1284,3 +1284,29 @@ export const getSearchBuilder = (hsn) => (dispatch) => {
       });
     });
 };
+
+export const getAllProductList = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_PRODUCT_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/product/all-product`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },})
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
