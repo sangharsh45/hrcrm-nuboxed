@@ -217,7 +217,10 @@ const initialState = {
 
   fetchingMaterialReceiveDetailData: false,
   fetchingMaterialReceiveDetailDataError: true,
-  receivedDetailData: []
+  receivedDetailData: [],
+
+  fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError:false,
+  productionDispatchByLocsId:[],
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -1091,6 +1094,18 @@ export const inventoryReducer = (state = initialState, action) => {
         updatingReceivedDamagedUnit: false,
         updatingReceivedDamagedUnitError: true,
       };
+
+    
+    
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
+            return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
+            return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
+          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
+            return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
+      
+
+
     default:
       return state;
   }

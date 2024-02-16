@@ -9,22 +9,11 @@ const initialState = {
 
     fetchingSearchedProduction: false,
     fetchingSearchedProductionError:false,
-    searchedProduction:[
-        {
-            cate:"etetr",
-            subcate:"hkore",
-            parto:"re1",
-            partt:"rewf",
-            prodId:"pd24535",
-        },
-        {
-            cate:"retewe",
-            subcate:"mbnh",
-            parto:"5454",
-            partt:"iy56",
-            prodId:"pd78565",
-        }
-    ]
+    searchedProduction:[],
+
+    fetchingProductionLocId: false, fetchingProductionLocIdError:false,
+    productionByLocsId:[],
+
 };
 export const productionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -64,6 +53,14 @@ export const productionReducer = (state = initialState, action) => {
                   fetchingSearchedProduction: false,
                   fetchingSearchedProductionError: true,
                 };
+
+                case types.GET_PRODUCTION_BYLOC_ID_REQUEST:
+                  return { ...state, fetchingProductionLocId: true, fetchingProductionLocIdError: false };
+                case types.GET_PRODUCTION_BYLOC_ID_SUCCESS:
+                  return { ...state, fetchingProductionLocId: false, productionByLocsId: action.payload };
+                case types.GET_PRODUCTION_BYLOC_ID_FAILURE:
+                  return { ...state, fetchingProductionLocId: false, fetchingProductionLocIdError: true };
+            
 
     default:
       return state;
