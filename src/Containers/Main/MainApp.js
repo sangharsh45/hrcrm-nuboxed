@@ -234,6 +234,7 @@ const Plant =lazy(()=>import("../Plant/Plant"));
 const PlantDetail =lazy(()=>import("../Plant/Child/PlantDetail/PlantDetail"));
 const Procurement =lazy(()=>import("../Procurement/Procurement"));
 const Subscription=lazy(()=>import("../Subscription/Subscription"));
+const Production=lazy(()=>import("../Production/Production"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -836,6 +837,7 @@ function MainApp(props) {
                       <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
                       <Route exact path="/product" component={Product} />
                       <Route exact path="/subscription" component={Subscription}/>
+                      <Route exact path="/production" component={Production}/>
                       
                       <Route path="**" component={PageNotFound} />
                     </Switch>
