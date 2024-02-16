@@ -178,7 +178,15 @@ const initialState = {
                                                 return {
                                                   ...state,
                                                   addingLocationToggle: false,
-                                                  showLocation: action.payload
+                                                  showLocation: state.showLocation.map((item) =>{
+                                                    if (item.locationDetailsId
+                                                      === action.payload.locationDetailsId
+                                                    ) {
+                                                      return action.payload;
+                                                    } else {
+                                                      return item;
+                                                    } 
+                                                  })
                                                 }
                                               case types.ADDING_LOCATION_TOGGLE_FAILURE:
                                                 return {
