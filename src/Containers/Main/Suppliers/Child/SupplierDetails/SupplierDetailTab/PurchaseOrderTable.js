@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { getPurchaseSuppliersList, handlePoLocationModal } from "../../../SuppliersAction"
-import { Button } from 'antd';
+import {
+    getPurchaseSuppliersList,
+    handlePoLocationModal,
+    handlePoListModal,
+    handleTermsnConditionModal
+} from "../../../SuppliersAction"
+import { Button, Tooltip } from 'antd';
 import PoLocationModal from "./PoLocationModal";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
+import POSupplierDetailsModal from "./POSupplierDetailsModal";
+import { TerminalSharp } from "@mui/icons-material";
+import TermsnConditionModal from "./TermsnConditionModal";
 
 function PurchaseOrderTable(props) {
     useEffect(() => {
@@ -35,6 +43,12 @@ function PurchaseOrderTable(props) {
                                 id="app.location"
                                 defaultMessage="Location" />
                         </div>
+                        <div className=" md:w-[14.1rem]">
+
+                        </div>
+                        <div className=" md:w-[14.1rem]">
+
+                        </div>
 
                     </div>
                     {props.purchaseList.map((item) => {
@@ -44,11 +58,15 @@ function PurchaseOrderTable(props) {
                                     <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                {/* <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"
-                                                    to={`supplier/${item.poSupplierDetailsId}`}
-                                                    title={`${item.shipperName}`}
-                                                >{item.poSupplierDetailsId}</Link> */}
-                                                {item.poSupplierDetailsId}
+                                                <span
+                                                    class=" text-sky-700 cursor-pointer"
+                                                    onClick={() => {
+                                                        handleRowData(item)
+                                                        props.handlePoListModal(true)
+                                                    }}>
+                                                    {item.poSupplierDetailsId}
+                                                </span>
+
                                             </div>
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
@@ -82,6 +100,18 @@ function PurchaseOrderTable(props) {
                                                 </Button> : null}
                                             </div>
                                         </div>
+                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                            <div class=" cursor-pointer font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                <Tooltip title="Terms and condition">
+                                                    <TerminalSharp
+                                                        onClick={() => {
+                                                            handleRowData(item)
+                                                            props.handleTermsnConditionModal(true)
+                                                        }}
+                                                    />
+                                                </Tooltip>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -95,20 +125,35 @@ function PurchaseOrderTable(props) {
                 addlocationInPo={props.addlocationInPo}
                 handlePoLocationModal={props.handlePoLocationModal}
             />
+            <POSupplierDetailsModal
+                supplierId={props.supplier.supplierId}
+                rowData={rowData}
+                addPoListmModal={props.addPoListmModal}
+                handlePoListModal={props.handlePoListModal}
+            />
+            <TermsnConditionModal
+                rowData={rowData}
+                addTermsnCondition={props.addTermsnCondition}
+                handleTermsnConditionModal={props.handleTermsnConditionModal}
+            />
         </>
     )
 }
 const mapStateToProps = ({ suppliers, auth }) => ({
     purchaseList: suppliers.purchaseList,
     userId: auth.userDetails.userId,
-    addlocationInPo: suppliers.addlocationInPo
+    addlocationInPo: suppliers.addlocationInPo,
+    addPoListmModal: suppliers.addPoListmModal,
+    addTermsnCondition: suppliers.addTermsnCondition
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getPurchaseSuppliersList,
-            handlePoLocationModal
+            handlePoLocationModal,
+            handlePoListModal,
+            handleTermsnConditionModal
         },
         dispatch
     );

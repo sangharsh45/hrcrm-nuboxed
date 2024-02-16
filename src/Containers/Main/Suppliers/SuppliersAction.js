@@ -1111,59 +1111,95 @@ export const setEditSupplierSupplies = (name) => (dispatch) => {
   });
 };
 
-export const updateSupplierSupplies = (data, supplierId) => (dispatch) => {
+export const updatePriceOfPoItem = (data) => (dispatch) => {
   dispatch({
-    type: types.UPDATE_SUPPLIER_SUPPLIES_REQUEST,
+    type: types.UPDATE_PRICE_OF_PO_ITEM_REQUEST,
   });
   axios
-    .post(`${base_url}/supplier/supplies/price`, data)
+    .put(`${base_url2}/po/updatePrice`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliesList(supplierId))
-      dispatch(getProductList(supplierId))
       dispatch({
-        type: types.UPDATE_SUPPLIER_SUPPLIES_SUCCESS,
+        type: types.UPDATE_PRICE_OF_PO_ITEM_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.UPDATE_SUPPLIER_SUPPLIES_FAILURE,
+        type: types.UPDATE_PRICE_OF_PO_ITEM_FAILURE,
         payload: err,
       });
     });
 };
 
-export const updateInStockSupplies = (data, suppliesId, supplierId) => (dispatch) => {
+export const addTermsnCondition = (data, suppliesId, supplierId) => (dispatch) => {
   dispatch({
-    type: types.UPDATE_INSTOCK_SUPPLIES_REQUEST,
+    type: types.ADD_TERMS_N_CONDITION_REQUEST,
   });
   axios
-    .put(`${base_url}/supplier/supplierSuppliesInd/${suppliesId}/${supplierId}`, data)
+    .post(`${base_url2}/cdf`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch(getSuppliesList(supplierId))
       dispatch({
-        type: types.UPDATE_INSTOCK_SUPPLIES_SUCCESS,
+        type: types.ADD_TERMS_N_CONDITION_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.UPDATE_INSTOCK_SUPPLIES_FAILURE,
+        type: types.ADD_TERMS_N_CONDITION_FAILURE,
         payload: err,
       });
     });
 };
 
-export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
+export const getTermsnConditionOfPo = (pOSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TERMS_AND_CONDITION_OF_PO_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/termsncondition/${pOSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TERMS_AND_CONDITION_OF_PO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TERMS_AND_CONDITION_OF_PO_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getPurchaseOrderDetailsList = (pOSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_PURCHASE_ORDER_DETAILS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/supplies/${purchaseId}`, {})
+    .get(`${base_url2}/po/poSupplierDetail/${pOSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1183,5 +1219,19 @@ export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
 export const emptysUPPLIERS = () => (dispatch) => {
   dispatch({
     type: types.EMPTY_SUPPLIER_LIST,
+  });
+};
+
+export const handlePoListModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PO_LIST_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleTermsnConditionModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TERMS_CONDITION_MODAL,
+    payload: modalProps,
   });
 };
