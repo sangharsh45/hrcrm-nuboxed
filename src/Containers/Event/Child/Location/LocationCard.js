@@ -23,12 +23,12 @@ const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
 const LocationCard = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
-  const [refurbish,Setrefurbish]=useState(props.showLocation.productionInd)
+  const [refurbish,Setrefurbish]=useState(props.showLocation.productionInd,)
   const handleRefurbishClick = (checked) => {
     Setrefurbish(checked);
     let data = {
       value: checked,
-     
+      //locationDetailsId:locationDetailsId,
       orgId: props.orgId,
       type: "production  ",
     };
