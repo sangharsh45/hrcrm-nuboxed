@@ -25,6 +25,7 @@ import {
     handleNotifyDrawer
   } from "../../EmployeeAction";
 import { Link } from 'react-router-dom';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { elipsize } from "../../../../Helpers/Function/Functions";
 const EmployeeDrawerForAdmin =lazy(()=>import("../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin"));
 const EmployeePulseDrawerModal =lazy(()=>import("../EmployeeTable/EmployeePulseDrawerModal"));
@@ -38,7 +39,7 @@ const StepperEmployeeModal =lazy(()=>import("./StepperEmployeeModal"));
 function EmployeeCardView (props) {
 
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
-
+  const [isCopied, setIsCopied] = useState(false);
 
 function handleSetCurrentEmployeeId(employeeId,) {
   setCurrentEmployeeId(employeeId,);
@@ -61,6 +62,22 @@ function handleSetCurrentEmployeeId(employeeId,) {
              {props.employees=="Data not Found" ? "Data not Found" :
             <div class="flex flex-wrap justify-center w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
+               
+                const handleCopyClick = () => {
+                  const emailElement = document.createElement('textarea');
+                  emailElement.value = item.emailId || "";
+                  document.body.appendChild(emailElement);
+                  emailElement.select();
+                  document.execCommand('copy');
+                  document.body.removeChild(emailElement);
+              
+                  setIsCopied(true);
+              
+                  // Reset the copied state after a short delay
+                  setTimeout(() => {
+                    setIsCopied(false);
+                  }, 1500);
+                };
                 const tooltipContent = `${item.workplace}, ${item.location}`;
                 const showTooltip = tooltipContent.trim() !== ''; 
                  return (
@@ -117,8 +134,13 @@ function handleSetCurrentEmployeeId(employeeId,) {
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-1 "><PhoneIcon  className="!text-base cursor-pointer text-[grey]"/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
           <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins "><DraftsIcon  className="!text-base cursor-pointer text-green-400" /> 
-          
+          <Tooltip title={item.emailId}>
           {elipsize(item.emailId || "", 25)}
+          </Tooltip>
+          <ContentCopyIcon
+        className={`!text-base cursor-pointer ${isCopied ? 'text-blue-400' : 'text-gray-400'}`}
+        onClick={handleCopyClick}
+      />
           </div>
           <div class=" font-normal text-xs mt-1 text-cardBody font-poppins ">Reports To:    <span>
           {item.reportingManagerName 

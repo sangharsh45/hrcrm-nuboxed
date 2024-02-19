@@ -1006,7 +1006,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
      )}  */}
         <hr />
         {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
-        { user.teamsAccessInd === true &&  (
+        { user.teamsAccessInd === true &&  user.hrInd === true || user.role === "ADMIN" ? (
                
                <Menu.Item key="/teams" style={{height:"1.7rem",
                paddingLeft:"1rem", color: selectedMenuItem === '/teams' ? 'tomato' : '#4bc076'}}>
@@ -1021,9 +1021,9 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
                    </span>
                  </Link> 
                 </Menu.Item>
-                )} 
+                ):null} 
 
-        {user.userCreateInd === true || user.role === "ADMIN" ? (
+        {user.userAccessInd === true && user.hrInd === true  || user.role === "ADMIN" ? (
 
           <Menu.Item key="/employees" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/employees' ? 'tomato' : '#4bc076' }}>
@@ -1057,7 +1057,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
             </span>
           </Link>
         </Menu.Item> */}
-        {user.locationAccessInd === true && (
+        {user.locationAccessInd === true && user.hrInd === true && (
 
           <Menu.Item key="/location" style={{ height: "1.7rem",
            paddingLeft: "1rem",color: selectedMenuItem === '/location' ? 'tomato' : '#4bc076' }}>
