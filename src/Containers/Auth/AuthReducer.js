@@ -265,8 +265,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingUserDetails: false,
-        // userDetails:
-        //   action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
+        userDetails:
+          action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
       };
     case types.GET_USER_DETAILS_FAILURE:
       return {

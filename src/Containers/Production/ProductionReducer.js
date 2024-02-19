@@ -14,6 +14,8 @@ const initialState = {
     fetchingProductionLocId: false, fetchingProductionLocIdError:false,
     productionByLocsId:[],
 
+    
+
 };
 export const productionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -61,6 +63,23 @@ export const productionReducer = (state = initialState, action) => {
                 case types.GET_PRODUCTION_BYLOC_ID_FAILURE:
                   return { ...state, fetchingProductionLocId: false, fetchingProductionLocIdError: true };
             
+                  case types.REMOVE_PRODUCTION_REQUEST:
+                    return { ...state, removingProduction: true };
+                  case types.REMOVE_PRODUCTION_SUCCESS:
+                    return {
+                      ...state,
+                      removingProduction: false,
+                      productionByLocsId: state.productionByLocsId.filter(
+                        (item) => item.productId !== action.payload.productId
+                      ),
+                    };
+                  case types.REMOVE_PRODUCTION_FAILURE:
+                    return {
+                      ...state,
+                      removingProduction: false,
+                      removingProductionError: true,
+                    };  
+
 
     default:
       return state;
