@@ -1317,7 +1317,7 @@ export const getMaterialReceivedDetailData = (pOSupplierDetailsId) => (dispatch)
     });
 };
 
-export const updateReceivedDamagedUnit = (data,poSupplierDetailsId,suppliesId) => (dispatch) => {
+export const updateReceivedDamagedUnit = (data, poSupplierDetailsId, suppliesId) => (dispatch) => {
   dispatch({ type: types.UPDATE_RECEIVED_DAMAGED_UNIT_REQUEST });
   axios
     .put(`${base_url2}/po/updateUnitAndInd/${poSupplierDetailsId}/${suppliesId} `, data, {
@@ -1342,7 +1342,7 @@ export const updateReceivedDamagedUnit = (data,poSupplierDetailsId,suppliesId) =
 };
 
 
-export const getDispatchProductionsbyLocId = (locationDetailsId,pageNo) => (dispatch) => {
+export const getDispatchProductionsbyLocId = (locationDetailsId, pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST,
   });
@@ -1364,6 +1364,91 @@ export const getDispatchProductionsbyLocId = (locationDetailsId,pageNo) => (disp
       console.log(err.response);
       dispatch({
         type: types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const generateGrnForPo = (data) => (dispatch) => {
+  dispatch({
+    type: types.GENERATE_GRN_FOR_PO_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/po/createGrn`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GENERATE_GRN_FOR_PO_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Grn has created !!")
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GENERATE_GRN_FOR_PO_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handlegrnlistmodal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_GRN_LIST_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getGrnListOfaPoInStock = (locationId) => (dispatch) => {
+  dispatch({
+    type: types.GET_GRN_LIST_OF_A_PO_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/getPoStockItemlist/${locationId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_GRN_LIST_OF_A_PO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_GRN_LIST_OF_A_PO_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const trnasferGrnItemToStock = (data, poSupplierSuppliesId, poSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.TRANSFER_PO_GRN_TO_STOCK_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/po/updateStock/${poSupplierSuppliesId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getMaterialReceivedDetailData(poSupplierDetailsId))
+      dispatch({
+        type: types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Moved to stock !!")
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.TRANSFER_PO_GRN_TO_STOCK_FAILURE,
         payload: err,
       });
     });

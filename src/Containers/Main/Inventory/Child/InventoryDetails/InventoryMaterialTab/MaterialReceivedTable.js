@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     getMaterialReceiveData,
-    handleMaterialReceived
+    handleMaterialReceived,
+    handlegrnlistmodal
 } from "../../../InventoryAction";
 import dayjs from "dayjs";
 import { withRouter } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 import ReceivedDetailModal from "./ReceivedDetailModal";
+import { ListAltOutlined } from "@mui/icons-material";
+import GrnListOfPOModal from "./GrnListOfPOModal";
 
 const MaterialReceivedTable = (props) => {
     useEffect(() => {
@@ -32,7 +35,7 @@ const MaterialReceivedTable = (props) => {
 
                     {props.materialReceiveData.map((item) => {
                         const currentdate = dayjs().format("DD/MM/YYYY");
-                        const date = dayjs(item.createAt).format("DD/MM/YYYY");
+                        const date = dayjs(item.creationDate).format("DD/MM/YYYY");
                         return (
                             <div>
                                 <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
@@ -45,7 +48,7 @@ const MaterialReceivedTable = (props) => {
                                                         handleRow(item);
                                                         props.handleMaterialReceived(true);
                                                     }}
-                                                >{item.poSupplierDetailsId}</div>
+                                                >{item.newPoNumber}</div>
                                                 {date === currentdate ? (
                                                     <div class="text-xs font-bold text-[tomato]">
                                                         New
@@ -65,7 +68,19 @@ const MaterialReceivedTable = (props) => {
                                         </div>
 
                                     </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            <ListAltOutlined
+                                                onClick={() => {
+                                                    handleRow(item);
+                                                    props.handlegrnlistmodal(true)
+                                                }}
+                                            />
+                                        </div>
+
+                                    </div>
                                 </div>
+
                             </div>
                         );
                     })}
@@ -77,6 +92,11 @@ const MaterialReceivedTable = (props) => {
                 handleMaterialReceived={props.handleMaterialReceived}
                 addMaterialReceived={props.addMaterialReceived}
             />
+            <GrnListOfPOModal
+                handlegrnlistmodal={props.handlegrnlistmodal}
+                showGrnListOfPo={props.showGrnListOfPo}
+                row={row}
+            />
         </>
     );
 }
@@ -86,14 +106,16 @@ const mapStateToProps = ({ inventory, auth }) => ({
     userId: auth.userDetails.userId,
     locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
     materialReceiveData: inventory.materialReceiveData,
-    addMaterialReceived: inventory.addMaterialReceived
+    addMaterialReceived: inventory.addMaterialReceived,
+    showGrnListOfPo: inventory.showGrnListOfPo
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getMaterialReceiveData,
-            handleMaterialReceived
+            handleMaterialReceived,
+            handlegrnlistmodal
         },
         dispatch
     );

@@ -207,7 +207,7 @@ export const getGeneratorSuppliersList = (poSupplierDetailsId) => (dispatch) => 
     });
 };
 
-export const movePoToInventory = (data, distributorId) => (dispatch) => {
+export const movePoToInventory = (data, supplierId) => (dispatch) => {
   dispatch({
     type: types.MOVE_TO_INVENTORY_REQUEST,
   });
@@ -218,6 +218,7 @@ export const movePoToInventory = (data, distributorId) => (dispatch) => {
       },
     })
     .then((res) => {
+      dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.MOVE_TO_INVENTORY_SUCCESS,
         payload: res.data,
@@ -1234,3 +1235,6 @@ export const handleTermsnConditionModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+
+

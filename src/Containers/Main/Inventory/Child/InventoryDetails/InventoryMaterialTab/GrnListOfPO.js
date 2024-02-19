@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import { FormattedMessage } from "react-intl";
-import { getGrnListOfaPoInStock } from "../../../InventoryAction"
+import { getMaterialReceivedDetailData, generateGrnForPo } from "../../../InventoryAction"
+import TransferToStock from "./TransferToStock";
 
 const GrnListOfPO = (props) => {
     useEffect(() => {
-        props.getGrnListOfaPoInStock(props.locationDetailsId)
+        props.getMaterialReceivedDetailData(props.row.poSupplierDetailsId)
     }, [])
 
+    const [row, setRow] = useState({})
+    const handleRow = (item) => {
+        setRow(item)
+    }
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
@@ -17,17 +22,16 @@ const GrnListOfPO = (props) => {
                     <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=""></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.po" defaultMessage="PO #" /></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.grn" defaultMessage="Grn #" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.price" defaultMessage="Price" /></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.unit" defaultMessage="Unit" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.received" defaultMessage="Receive" /></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.damage" defaultMessage="Damage" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.remark" defaultMessage="Remark" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.grn" defaultMessage="Grn #" /></div>
                         <div className=""></div>
                     </div>
 
-                    {/* {props.poGrnList.map((item) => {
+                    {props.receivedDetailData.map((item) => {
 
                         return (
                             <div>
@@ -70,11 +74,19 @@ const GrnListOfPO = (props) => {
                                             {item.grnNumber}
                                         </div>
                                     </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            <TransferToStock
+                                                poSupplierSuppliesId={item.poSupplierSuppliesId}
+                                                poSupplierDetailsId={props.row.poSupplierDetailsId}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
                         );
-                    })} */}
+                    })}
                 </div>
             </div>
         </>
@@ -85,13 +97,14 @@ const GrnListOfPO = (props) => {
 const mapStateToProps = ({ inventory, auth }) => ({
     userId: auth.userDetails.userId,
     locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
-    poGrnList: inventory.poGrnList
+    receivedDetailData: inventory.receivedDetailData
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getGrnListOfaPoInStock
+            getMaterialReceivedDetailData,
+            generateGrnForPo
         },
         dispatch
     );

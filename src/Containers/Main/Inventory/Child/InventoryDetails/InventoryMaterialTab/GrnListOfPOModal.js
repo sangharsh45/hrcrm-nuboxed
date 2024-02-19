@@ -1,28 +1,31 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import ReceivedDetailCard from "./ReceivedDetailCard";
+import GrnListOfPO from "./GrnListOfPO";
+// import ReceivedDetailCard from "./ReceivedDetailCard";
+// const OpenReceivedOrderIdForm = lazy(() => import("./OpenReceivedOrderIdForm.js"));
 
-class ReceivedDetailModal extends Component {
+
+class GrnListOfPOModal extends Component {
     render() {
         const {
-            addMaterialReceived,
-            handleMaterialReceived,
+            showGrnListOfPo,
+            handlegrnlistmodal,
             ...formProps
         } = this.props;
         return (
             <>
                 <StyledDrawer
-                    title={`Po Details - ${this.props.row.newPoNumber}`}
+                    title={`Grn List - ${this.props.row.newPoNumber}`}
                     width="70%"
-                    visible={addMaterialReceived}
+                    visible={showGrnListOfPo}
                     destroyOnClose
                     maskClosable={false}
-                    onClose={() => handleMaterialReceived(false)}
+                    onClose={() => handlegrnlistmodal(false)}
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <ReceivedDetailCard row={this.props.row} />
+                        <GrnListOfPO row={this.props.row} />
                     </Suspense>
                 </StyledDrawer>
             </>
@@ -30,4 +33,4 @@ class ReceivedDetailModal extends Component {
     }
 }
 
-export default ReceivedDetailModal;
+export default GrnListOfPOModal;
