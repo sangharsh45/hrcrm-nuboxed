@@ -5,7 +5,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { withRouter } from "react-router-dom";
 import { inputEmployeeDataSearch,getEmployeelist,ClearReducerDataOfEmployee, getRecords } from "../EmployeeAction";
-import {  Input, Tooltip, Badge } from "antd";
+import {  Input, Tooltip, Badge,Avatar } from "antd";
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, {  } from 'react-speech-recognition';
 import { FormattedMessage } from "react-intl";
@@ -81,7 +81,9 @@ const EmployeesActionLeft = (props) => {
               color: props.viewType === "tile" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <GridViewIcon />
+            </Avatar>
           </span>
           </Badge> 
       </Tooltip>
@@ -123,7 +125,9 @@ const EmployeesActionLeft = (props) => {
               color: props.viewType === "table" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
             <TocIcon />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>

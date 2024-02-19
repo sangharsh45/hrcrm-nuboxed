@@ -25,6 +25,7 @@ import {
     handleNotifyDrawer
   } from "../../EmployeeAction";
 import { Link } from 'react-router-dom';
+import { elipsize } from "../../../../Helpers/Function/Functions";
 const EmployeeDrawerForAdmin =lazy(()=>import("../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin"));
 const EmployeePulseDrawerModal =lazy(()=>import("../EmployeeTable/EmployeePulseDrawerModal"));
 const EmployeeDocumentDrawerModal =lazy(()=>import("./EmployeeDocumentDrawerModal"));
@@ -103,7 +104,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                        
                         {/* <div class=" text-sm text-cardBody font-medium font-poppins">Department   </div> */}
                       <div class=" font-normal text-xs text-cardBody font-poppins">{item.department === null ? "Not Available" :item.department}</div>
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType  === null ? "Not Available" :item.roleType}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleTypeName  === null ? "Not Available" :item.roleTypeName}</div>
           
                    
                       
@@ -115,7 +116,10 @@ function handleSetCurrentEmployeeId(employeeId,) {
                       </div> 
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-1 "><PhoneIcon  className="!text-base cursor-pointer text-[grey]"/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
-          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins "><DraftsIcon  className="!text-base cursor-pointer text-green-400" /> {item.emailId}</div>
+          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins "><DraftsIcon  className="!text-base cursor-pointer text-green-400" /> 
+          
+          {elipsize(item.emailId || "", 25)}
+          </div>
           <div class=" font-normal text-xs mt-1 text-cardBody font-poppins ">Reports To:    <span>
           {item.reportingManagerName 
                         ? `${item.reportingManagerName}`
@@ -129,7 +133,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             >
               
-              {item.location}
+              {item.locationName}
          
      </span>
    

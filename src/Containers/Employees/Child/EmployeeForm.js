@@ -20,6 +20,7 @@ import {getRoles} from "../../Settings/Category/Role/RoleAction"
 import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 const { Option } = Select;
 
 function EmployeeForm (props) {
@@ -331,7 +332,8 @@ const countryNameOption = props.countries.map((item) => {
                 <div class=" w-[47.5%] max-sm:w-wk">
                  
                   <div class=" flex flex-nowrap justify-between mt-3" >
-                  <FastField name="imageId" component={Upload} />
+                  {/* <FastField name="imageId" component={Upload} /> */}
+                  <FastField name="imageId" component={PostImageUpld} />
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
                     {/* <div class=" w-1/3 max-sm:w-full">
@@ -878,7 +880,7 @@ const countryNameOption = props.countries.map((item) => {
                     isColumn
                     margintop={"0"}
                     inlineLabel
-                    style={{ flexBasis: "80%" }}
+                   
                     // value={values.roleTypeId}
                     // width={"100%"}
                     // isColumn
@@ -921,16 +923,13 @@ const countryNameOption = props.countries.map((item) => {
                          <div class=" flex " >
                   <div>
                     <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
-                      <FormattedMessage
-                        id="app.jobtype"
-                        defaultMessage="Job Type"
-                      />
+                    Job Type
                     </div>
                     <Switch
                           checked={active}
                           onChange={handleJobType}
-                          checkedChildren="Full Time"
-                          unCheckedChildren="Part Time"
+                          checkedChildren="Part Time"
+                          unCheckedChildren="Full Time"
                         />
                     {/* <ButtonGroup name="job_type">
                       <StatusIcon
