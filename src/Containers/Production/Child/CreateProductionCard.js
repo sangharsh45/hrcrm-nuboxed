@@ -75,7 +75,7 @@ function CreateProductionCard(props) {
     <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
     <div class=" text-xs text-cardBody font-poppins">
-                        {item.name} 
+                        {item.productName} 
                     </div>
     
     </div> 

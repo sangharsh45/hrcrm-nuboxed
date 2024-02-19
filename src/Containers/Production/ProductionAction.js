@@ -97,3 +97,29 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
         });
       });
   };
+
+  export const moveProduction = () => (dispatch) => {
+    dispatch({
+      type: types.REMOVE_PRODUCTION_REQUEST,
+    });
+    axios
+      .put(`${base_url2}/production/moveToInventory`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.REMOVE_PRODUCTION_SUCCESS,
+          payload: res.data,
+        });
+        // message.success("Confirmation Successfull");
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.REMOVE_PRODUCTION_FAILURE,
+          payload: err,
+        });
+        // message.error("Something went wrong");
+      });
+  };
