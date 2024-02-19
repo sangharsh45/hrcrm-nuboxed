@@ -35,10 +35,15 @@ const initialState = {
   updatingValidationInRecive: false,
   updatingValidationInReciveError: false,
 
+  transferingPoGrnToStock: false,
+  transferingPoGrnToStockError: false,
   //output table
   fetchingAllInventoryOutput: false,
   fetchingAllInventoryOutputError: false,
   allInventoryOutput: [],
+
+  generatingGrnForPo: false,
+  generatingGrnForPoError: false,
 
   //consumption table
   fetchingAllInventoryConsumption: false,
@@ -219,8 +224,14 @@ const initialState = {
   fetchingMaterialReceiveDetailDataError: true,
   receivedDetailData: [],
 
-  fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError:false,
-  productionDispatchByLocsId:[],
+  fetchingGrnListOfAPo: false,
+  fetchingGrnListOfAPoError: true,
+  poGrnList: [],
+
+  showGrnListOfPo: false,
+
+  fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: false,
+  productionDispatchByLocsId: [],
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -1087,6 +1098,10 @@ export const inventoryReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingReceivedDamagedUnit: false,
+        receivedDetailData: state.receivedDetailData.map((item) =>
+          item.suppliesId === action.payload.suppliesId
+            ? action.payload : item
+        ),
       };
     case types.UPDATE_RECEIVED_DAMAGED_UNIT_FAILURE:
       return {
@@ -1095,16 +1110,62 @@ export const inventoryReducer = (state = initialState, action) => {
         updatingReceivedDamagedUnitError: true,
       };
 
-    
-    
-          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
-            return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
-          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
-            return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
-          case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
-            return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
-      
 
+
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
+      return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
+      return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
+      return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
+
+    case types.GENERATE_GRN_FOR_PO_REQUEST:
+      return { ...state, generatingGrnForPo: true };
+    case types.GENERATE_GRN_FOR_PO_SUCCESS:
+      return {
+        ...state,
+        generatingGrnForPo: false,
+        addMaterialReceived: false
+      };
+    case types.GENERATE_GRN_FOR_PO_FAILURE:
+      return {
+        ...state,
+        generatingGrnForPo: false,
+        generatingGrnForPoError: true,
+      };
+
+    case types.HANDLE_GRN_LIST_MODAL:
+      return { ...state, showGrnListOfPo: action.payload };
+
+    case types.GET_GRN_LIST_OF_A_PO_REQUEST:
+      return { ...state, fetchingGrnListOfAPo: true };
+    case types.GET_GRN_LIST_OF_A_PO_SUCCESS:
+      return {
+        ...state,
+        fetchingGrnListOfAPo: false,
+        poGrnList: action.payload
+      };
+    case types.GET_GRN_LIST_OF_A_PO_FAILURE:
+      return {
+        ...state,
+        fetchingGrnListOfAPo: false,
+        fetchingGrnListOfAPoError: true,
+
+      };
+
+    case types.TRANSFER_PO_GRN_TO_STOCK_REQUEST:
+      return { ...state, transferingPoGrnToStock: true };
+    case types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS:
+      return {
+        ...state,
+        transferingPoGrnToStock: false,
+      };
+    case types.TRANSFER_PO_GRN_TO_STOCK_FAILURE:
+      return {
+        ...state,
+        transferingPoGrnToStock: false,
+        transferingPoGrnToStockError: true,
+      };
 
     default:
       return state;

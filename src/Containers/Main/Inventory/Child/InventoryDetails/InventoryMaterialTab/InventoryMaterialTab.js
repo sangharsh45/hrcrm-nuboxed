@@ -5,6 +5,7 @@ import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import MaterialReceivedTable from "./MaterialReceivedTable";
+import MaterialStockTable from "./MaterialStockTable";
 
 const TabPane = StyledTabs.TabPane;
 class InventoryMaterialTab extends PureComponent {
@@ -56,7 +57,7 @@ class InventoryMaterialTab extends PureComponent {
                             key="2"
                         >
                             <Suspense fallback={"Loading..."}>
-
+                                <MaterialStockTable />
                             </Suspense>
                         </TabPane>
 

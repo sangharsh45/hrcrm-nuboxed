@@ -9,6 +9,7 @@ import {
     handleTermsnConditionModal
 } from "../../../SuppliersAction"
 import { Button, Tooltip } from 'antd';
+import dayjs from "dayjs";
 import PoLocationModal from "./PoLocationModal";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 import POSupplierDetailsModal from "./POSupplierDetailsModal";
@@ -52,6 +53,8 @@ function PurchaseOrderTable(props) {
 
                     </div>
                     {props.purchaseList.map((item) => {
+                        const currentdate = dayjs().format("DD/MM/YYYY");
+                        const date = dayjs(item.creationDate).format("DD/MM/YYYY");
                         return (
                             <>
                                 <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3" >
@@ -64,8 +67,13 @@ function PurchaseOrderTable(props) {
                                                         handleRowData(item)
                                                         props.handlePoListModal(true)
                                                     }}>
-                                                    {item.poSupplierDetailsId}
+                                                    {item.newPoNumber}
                                                 </span>
+                                                {date === currentdate ? (
+                                                    <div class="text-xs font-bold text-[tomato]">
+                                                        New
+                                                    </div>
+                                                ) : null}
 
                                             </div>
                                         </div>
