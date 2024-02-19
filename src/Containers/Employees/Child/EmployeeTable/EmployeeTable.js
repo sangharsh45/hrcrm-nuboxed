@@ -245,7 +245,7 @@ function EmployeeTable(props) {
       title: (
         <FormattedMessage id="app.role" defaultMessage="Role" />
       ),
-      dataIndex: "roleType",
+      dataIndex: "roleTypeName",
       width: "12%",
       defaultSortOrder: "descend",
       sorter: (a, b) => a.role - b.role,

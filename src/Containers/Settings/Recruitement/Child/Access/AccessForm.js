@@ -1183,7 +1183,7 @@ const onCheckAllTeamsChange = (e) => {
          
               
             <div  >
-                  <div class="text-sm font-semibold">Customer</div>
+                  <div class="text-sm font-semibold">Prospect</div>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>

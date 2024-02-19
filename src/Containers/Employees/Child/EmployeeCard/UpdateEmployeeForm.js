@@ -17,6 +17,7 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
+import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 const { Option } = Select;
 
 class UpdateEmployeeForm extends Component {
@@ -114,7 +115,7 @@ class UpdateEmployeeForm extends Component {
           }
         })
         .map((option) => ({
-          label: option.roleType || "",
+          label: option.roleTypeName || "",
           value: option.roleTypeId,
         }));
 
@@ -263,7 +264,7 @@ class UpdateEmployeeForm extends Component {
             designationTypeId: currentEmployeeId.designationTypeId || "",
             departmentId: currentEmployeeId.department,
             reportingManagerDeptId: currentEmployeeId.reportingManagerDept || "",
-            roleType: currentEmployeeId.roleType || "",
+            roleTypeName: currentEmployeeId.roleTypeName || "",
             // roleType:this.state.selectedRole,
             linkedinPublicUrl: currentEmployeeId.linkedinPublicUrl || "",
             label: currentEmployeeId.label || "",
@@ -331,7 +332,8 @@ class UpdateEmployeeForm extends Component {
                   <div class="  w-[47.5%] max-sm:w-wk">
 
                     <div class=" flex flex-nowrap justify-between mt-3" >
-                      <FastField name="imageId" component={Upload} />
+                      {/* <FastField name="imageId" component={Upload} /> */}
+                      <FastField name="imageId" component={PostImageUpld} />
                       <div>
                         <div class=" flex justify-between max-sm:flex-col" >
                           {/* <div class=" w-1/3 max-sm:w-full">
@@ -682,7 +684,7 @@ name="departmentId"
                     </div>
                     <div class=" w-w48 max-sm:w-wk">
                       <Field
-                        name="roleType"
+                        name="roleTypeName"
                         label={<FormattedMessage
                           id="app.role"
                           defaultMessage="Role"
@@ -702,7 +704,7 @@ name="departmentId"
                             )
                             : []
                         }
-                        value={values.roleType}
+                        value={values.roleTypeName}
                         filterOption={{
                           filterType: "departmentId",
                           filterValue: values.departmentId,
