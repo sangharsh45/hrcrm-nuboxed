@@ -40,6 +40,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 const SubMenu = Menu.SubMenu;
 
 
@@ -90,7 +92,18 @@ function NavMenu (props) {
     fetchMenuTranslations();
   }, [props.selectedLanguage]);
 
- 
+  const [selectedMenuItem, setSelectedMenuItem] = useState("/dashboard");
+  useEffect(() => {
+    const storedMenuItem = localStorage.getItem('selectedMenuItem');
+    if (storedMenuItem) {
+      setSelectedMenuItem(storedMenuItem);
+    }
+  }, []);
+  const handleSelect = (menuItemKey) => {
+    setSelectedMenuItem(menuItemKey);
+    localStorage.setItem('selectedMenuItem', menuItemKey);
+    // Additional logic for handling selection
+  };
     console.log("Oppo", props.opportunityRecord);
     const { user } = props;
     let path = window.location.href.split("/")[3];
@@ -107,14 +120,17 @@ function NavMenu (props) {
         mode="inline"
         // theme={props.theme}
         theme="dark"
-        style={{ background: "#38445E", fontFamily: "Poppins" }}
+        style={{ background: "#38445E", fontFamily: "Poppins", }}
         inlineCollapsed={props.collapsed}
+        selectedKeys={[selectedMenuItem]}
       >
         {/* dashboard */}
         {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && user.dashboardAccessInd === true && (
 
-          <Menu.Item key="/dashboard" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/dashboard">
+          <Menu.Item key="/dashboard" style={{ height: "1.7rem", 
+          paddingLeft: "1rem" ,
+          color: selectedMenuItem === '/dashboard' ? 'tomato' : '#4bc076',}}>
+            <Link to="/dashboard" onClick={() => handleSelect('/dashboard')}>
               <DashboardIcon
 
                 style={{ fontSize: "large" }}
@@ -135,8 +151,9 @@ function NavMenu (props) {
         )}
       
         {user.imInd === true && user.basicAccessInd === true && (
-          <Menu.Item key="/planner" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/planner">
+          <Menu.Item key="/planner" style={{ height: "1.7rem", 
+          paddingLeft: "1rem",color: selectedMenuItem === '/planner' ? 'tomato' : '#4bc076', }}>
+            <Link to="/planner" onClick={() => handleSelect('/planner')}>
               {/* <Icon type="calendar" style={{ color: "white" }} /> */}
               <CalendarMonthIcon
                 style={{ fontSize: "large" }}
@@ -154,8 +171,9 @@ function NavMenu (props) {
 
         
         {user.basicAccessInd === true && (
-          <Menu.Item key="/call" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/call">
+          <Menu.Item key="/call" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/call' ? 'tomato' : '#4bc076', }}>
+            <Link to="/call" onClick={() => handleSelect('/call')}>
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
               <VolumeUpIcon
                 // icon={solid("phone-volume")}
@@ -175,8 +193,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.basicAccessInd === true && (
-          <Menu.Item key="task" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/Task">
+          <Menu.Item key="task" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/Task' ? 'tomato' : '#4bc076' }}>
+            <Link to="/Task" onClick={() => handleSelect('/Task')}>
               {/* <Icon type="file-done" /> */}
               <FactCheckIcon
                 style={{ fontSize: "large" }}
@@ -195,8 +214,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.basicAccessInd === true && (
-          <Menu.Item key="event" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/Event">
+          <Menu.Item key="/event" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/event' ? 'tomato' : '#4bc076' }}>
+            <Link to="/event" onClick={() => handleSelect('/event')}>
               {/* <Icon type="schedule" /> */}
               <EventAvailableIcon
                 style={{ fontSize: "large" }}
@@ -219,8 +239,9 @@ function NavMenu (props) {
         )}
 
         {user.basicAccessInd === true && (
-          <Menu.Item key="/reports" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/reports">
+          <Menu.Item key="/reports" style={{ height: "1.7rem", 
+          paddingLeft: "1rem",color: selectedMenuItem === '/reports' ? 'tomato' : '#4bc076' }}>
+            <Link to="/reports"onClick={() => handleSelect('/reports')}>
               <PictureAsPdfIcon
                 style={{ fontSize: "large" }}
               />
@@ -238,8 +259,9 @@ function NavMenu (props) {
 
         <hr />
         {user.leadsAccessInd === true && user.crmInd === true && (
-          <Menu.Item key="/leads" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/Leads">
+          <Menu.Item key="/leads" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/leads' ? 'tomato' : '#4bc076' }}>
+            <Link to="/leads" onClick={() => handleSelect('/leads')}>
               <GroupsIcon
 
                 style={{ fontSize: "large" }}
@@ -259,8 +281,9 @@ function NavMenu (props) {
         )}
 
         {user.opportunityAccessInd === true && user.crmInd === true && (
-          <Menu.Item key="/opportunity" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/opportunity">
+          <Menu.Item key="/opportunity" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/opportunity' ? 'tomato' : '#4bc076' }}>
+            <Link to="/opportunity" onClick={() => handleSelect('/opportunity')}>
             <LightbulbIcon
                 style={{ fontSize: "large" }}
               />
@@ -281,8 +304,9 @@ function NavMenu (props) {
 
 
         {user.contactAccessInd === true && user.crmInd === true && (
-          <Menu.Item key="/contact" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/contact">
+          <Menu.Item key="/contact" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/contact' ? 'tomato' : '#4bc076' }}>
+            <Link to="/contact" onClick={() => handleSelect('/contact')}>
 
               <ContactsIcon
                 style={{ fontSize: "large" }}
@@ -303,8 +327,9 @@ function NavMenu (props) {
 
         {/* Customer */}
         {user.customerAccessInd === true && user.crmInd === true && (
-          <Menu.Item key="/customer" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/customer">
+          <Menu.Item key="/customer" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/customer' ? 'tomato' : '#4bc076' }}>
+            <Link to="/customer" onClick={() => handleSelect('/customer')}>
 
               <ApartmentIcon
 
@@ -324,8 +349,9 @@ function NavMenu (props) {
         )}
         <hr />
         {user.imInd === true && user.pitchAccessInd === true && (
-          <Menu.Item key="/pitch " style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/pitch">
+          <Menu.Item key="/pitch " style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/pitch' ? 'tomato' : '#4bc076' }}>
+            <Link to="/pitch" onClick={() => handleSelect('/pitch')}>
               <FilePresentIcon
                 style={{ fontSize: "large" }}
               />
@@ -342,8 +368,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.imInd === true && user.dealAccessInd === true && (
-          <Menu.Item key="/deal " style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/deal">
+          <Menu.Item key="/deal " style={{ height: "1.7rem", 
+          paddingLeft: "1rem",  color: selectedMenuItem === '/deal' ? 'tomato' : '#4bc076' }}>
+            <Link to="/deal" onClick={() => handleSelect('/deal')}>
               <CurrencyExchangeIcon
                 style={{ fontSize: "large" }}
               />
@@ -359,8 +386,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.imInd === true && user.investorContactAccessInd === true && (
-          <Menu.Item key="/contactInvest" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/contactInvest">
+          <Menu.Item key="/contactInvest" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/contactInvest' ? 'tomato' : '#4bc076' }}>
+            <Link to="/contactInvest"  onClick={() => handleSelect('/contactInvest')}>
               <PermContactCalendarIcon
                 style={{ fontSize: "large" }}
               />
@@ -376,8 +404,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.imInd === true && user.investorAccessInd === true && (
-          <Menu.Item key="/investor" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/investor">
+          <Menu.Item key="/investor" style={{ height: "1.7rem", 
+          paddingLeft: "1rem",color: selectedMenuItem === '/investor' ? 'tomato' : '#4bc076' }}>
+            <Link to="/investor" onClick={() => handleSelect('/investor')}>
 
               <LocationCityIcon
 
@@ -417,16 +446,17 @@ function NavMenu (props) {
         {/* )}  */}
         <hr/>
         {/* Talent */}
-       {user.talentAccessInd === true && user.recruitOppsInd === true &&  (
-            <Menu.Item key="/candidate" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-              <Link to="/candidate">
+       {user.talentAccessInd === true && user.recruitProInd === true &&  (
+            <Menu.Item key="/candidate" style={{ height: "1.7rem", 
+            paddingLeft: "1rem", color: selectedMenuItem === '/candidate' ? 'tomato' : '#4bc076' }}>
+              <Link to="/candidate" onClick={() => handleSelect('/candidate')}>
           
                 <PortraitIcon
             
                   style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
-                 <FormattedMessage id="app.candidate" defaultMessage="Candidate" />
+                 <FormattedMessage id="app.talent" defaultMessage="Talent" />
               
                   {/* {translatedMenuItems[10]} */}
                   &nbsp;&nbsp;&nbsp;
@@ -440,9 +470,10 @@ function NavMenu (props) {
           )}  
         {/*Talent*/}
         {/*Requirement*/}
-        {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
-          <Menu.Item key="/requirement" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/requirement">
+        {user.requirementAccessInd === true && user.recruitProInd === true &&  (
+          <Menu.Item key="/requirement" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/requirement' ? 'tomato' : '#4bc076' }}>
+            <Link to="/requirement " onClick={() => handleSelect('/requirement')}>
 
               <RecentActorsIcon
                 style={{ fontSize: "large" }} />
@@ -460,9 +491,10 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
            )}
-          {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
-         <Menu.Item key="/project" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-              <Link to="/project">
+          {user.requirementAccessInd === true && user.recruitProInd === true &&  (
+         <Menu.Item key="/project" style={{ height: "1.7rem",
+          paddingLeft: "1rem", color: selectedMenuItem === '/project' ? 'tomato' : '#4bc076' }}>
+              <Link to="/project" onClick={() => handleSelect('/project')}>
                 <LightbulbIcon
                   style={{ fontSize: "large" }}
                 />
@@ -478,8 +510,9 @@ function NavMenu (props) {
         {/* )} */}
         {/*Demand*/}
         {user.userType === "USER" && user.department === "Customer" && (
-          <Menu.Item key="/demand" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/demand">
+          <Menu.Item key="/demand" style={{ height: "1.7rem", 
+          paddingLeft: "1rem", color: selectedMenuItem === '/demand' ? 'tomato' : '#4bc076' }}>
+            <Link to="/demand" onClick={() => handleSelect('/demand')}>
               <ContactsIcon
 
                 style={{ fontSize: "large" }} />
@@ -505,8 +538,9 @@ function NavMenu (props) {
         {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
         {user.publishAccessInd === true && (
-          <Menu.Item key="/publish" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/publish">
+          <Menu.Item key="/publish" style={{ height: "1.7rem", 
+          paddingLeft: "1rem",color: selectedMenuItem === '/publish' ? 'tomato' : '#4bc076' }}>
+            <Link to="/publish" onClick={() => handleSelect('/publish')}>
 
               <CellTowerIcon />
             </Link>
@@ -580,9 +614,10 @@ function NavMenu (props) {
         <hr />
         {/* Accessment */}
 
-        {user.recruitOppsInd === true && (
-            <Menu.Item key="/accessment" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-              <Link to="/Accessment">
+        {user.eLearningInd === true && user.assessmentAccessInd === true &&  (
+            <Menu.Item key="/accessment" style={{ height: "1.7rem",
+             paddingLeft: "1rem", color: selectedMenuItem === '/accessment' ? 'tomato' : '#4bc076' }}>
+              <Link to="/Accessment" onClick={() => handleSelect('/accessment')}>
                 <ComputerIcon
 
                     style={{ fontSize: "large" }}
@@ -598,9 +633,10 @@ function NavMenu (props) {
             </Menu.Item>
           )}
 
-        {user.recruitOppsInd === true && (
-            <Menu.Item key="/course" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-              <Link to="/Course">
+        {user.eLearningInd === true && user.courseAccessInd === true && (
+            <Menu.Item key="/course" style={{ height: "1.7rem",
+             paddingLeft: "1rem",color: selectedMenuItem === '/course' ? 'tomato' : '#4bc076' }}>
+              <Link to="/Course" onClick={() => handleSelect('/course')}>
                 <NewspaperIcon
 
                   style={{ fontSize: "large" }}
@@ -616,9 +652,10 @@ function NavMenu (props) {
             </Menu.Item>
           )}
         {/* Program */}
-        {user.recruitOppsInd === true && (
-            <Menu.Item key="/program" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-              <Link to="/Program">
+        {user.eLearningInd === true && user.programAccessInd === true && (
+            <Menu.Item key="/program" style={{ height: "1.7rem",
+             paddingLeft: "1rem", color: selectedMenuItem === '/program' ? 'tomato' : '#4bc076' }}>
+              <Link to="/Program" onClick={() => handleSelect('/program')}>
                 <LibraryBooksIcon
 
                    style={{ fontSize: "large" }}
@@ -673,8 +710,9 @@ function NavMenu (props) {
            */}
         {user.orderAccessInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/order" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/order">
+          <Menu.Item key="/order" style={{ height: "1.7rem", 
+          paddingLeft: "1rem",color: selectedMenuItem === '/order' ? 'tomato' : '#4bc076' }}>
+            <Link to="/order"  onClick={() => handleSelect('/order')}>
               <DynamicFeedIcon
                 style={{ fontSize: "large" }}
               />
@@ -689,8 +727,9 @@ function NavMenu (props) {
 
         {user.accountAccessInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/account" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/account">
+          <Menu.Item key="/account" style={{ height: "1.7rem", 
+          paddingLeft: "1rem", color: selectedMenuItem === '/account' ? 'tomato' : '#4bc076' }}>
+            <Link to="/account"  onClick={() => handleSelect('/account')}>
               <AcUnitIcon
                 style={{ fontSize: "large" }}
               />
@@ -703,8 +742,9 @@ function NavMenu (props) {
           </Menu.Item>
         )}
         {user.catalogAccessInd === true && user.erpInd === true && (
-        <Menu.Item key="/product" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/product">
+        <Menu.Item key="/product" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/product' ? 'tomato' : '#4bc076' }}>
+          <Link to="/product" onClick={() => handleSelect('/product')}>
             <ViewInArIcon
               style={{ fontSize: "large" }}
             />
@@ -716,11 +756,25 @@ function NavMenu (props) {
           </Link>
         </Menu.Item>
         )}
+        <Menu.Item key="/subscription" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/subscription' ? 'tomato' : '#4bc076' }}>
+          <Link to="/subscription" onClick={() => handleSelect('/subscription')}>
+            <SubscriptionsIcon
+              style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage
+              id="app.subscription"
+              defaultMessage="Subscription"
+            />
+            </span>
+          </Link>
+        </Menu.Item>
         <hr />
         {user.refurbishWorkshopInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/refurbish" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/refurbish">
+          <Menu.Item key="/refurbish" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/refurbish' ? 'tomato' : '#4bc076' }}>
+            <Link to="/refurbish" onClick={() => handleSelect('/refurbish')}>
               <OnDeviceTrainingIcon
                 style={{ fontSize: "large" }}
               />
@@ -733,10 +787,24 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
         )}
+        <Menu.Item key="/production" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/production' ? 'tomato' : '#4bc076' }}>
+          <Link to="/production" onClick={() => handleSelect('/production')}>
+            <ProductionQuantityLimitsIcon
+              style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage
+              id="app.production"
+              defaultMessage="Production"
+            />
+            </span>
+          </Link>
+        </Menu.Item>
         {user.materialAccessInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/supplies" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/supplies">
+          <Menu.Item key="/supplies" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/supplies' ? 'tomato' : '#4bc076' }}>
+            <Link to="/supplies" onClick={() => handleSelect('/supplies')} >
               <CategoryIcon
                 style={{ fontSize: "large" }}
               />
@@ -750,8 +818,9 @@ function NavMenu (props) {
         )}
          {/* {user.materialAccessInd === true && user.erpInd === true && ( */}
 
-<Menu.Item key="/suppliers" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-  <Link to="/suppliers">
+<Menu.Item key="/suppliers" style={{ height: "1.7rem", 
+paddingLeft: "1rem" , color: selectedMenuItem === '/suppliers' ? 'tomato' : '#4bc076'}}>
+  <Link to="/suppliers" onClick={() => handleSelect('/suppliers')}>
     <CategoryIcon
       style={{ fontSize: "large" }}
     />
@@ -764,8 +833,9 @@ function NavMenu (props) {
 </Menu.Item>
 {/* )} */}
 
-<Menu.Item key="/procurement" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/procurement">
+<Menu.Item key="/procurement" style={{ height: "1.7rem", 
+paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4bc076' }}>
+            <Link to="/procurement" onClick={() => handleSelect('/procurement')}>
               <CrisisAlertIcon
                 style={{ fontSize: "large" }}
               />
@@ -779,8 +849,9 @@ function NavMenu (props) {
         <hr />
         {user.inventoryAccessInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/inventory " style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/inventory">
+          <Menu.Item key="/inventory " style={{ height: "1.7rem", 
+          paddingLeft: "1rem", color: selectedMenuItem === '/inventory' ? 'tomato' : '#4bc076' }}>
+            <Link to="/inventory" onClick={() => handleSelect('/inventory')}>
               <InventoryIcon
                 style={{ fontSize: "large" }}
               />
@@ -795,8 +866,9 @@ function NavMenu (props) {
 
         {user.shipperAccessInd === true && user.erpInd === true && (
 
-          <Menu.Item key="/shipper" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/shipper">
+          <Menu.Item key="/shipper" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/shipper' ? 'tomato' : '#4bc076' }}>
+            <Link to="/shipper" onClick={() => handleSelect('/shipper')}>
               <LocalShippingIcon
                 style={{ fontSize: "large" }}
               />
@@ -814,10 +886,11 @@ function NavMenu (props) {
 
 
         
-  {user.collectionAccessInd === true && user.recruitOppsInd === true &&  (
+  {user.collectionAccessInd === true && user.recruitProInd === true &&  (
 
-        <Menu.Item key="/collection" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/collection">
+        <Menu.Item key="/collection" style={{ height: "1.7rem",
+         paddingLeft: "1rem",color: selectedMenuItem === '/collection' ? 'tomato' : '#4bc076' }}>
+          <Link to="/collection" onClick={() => handleSelect('/collection')} >
             <ReceiptIcon style={{ fontSize: "large" }} />
             <span class="text-white text-ls ml-1">
             <FormattedMessage 
@@ -868,8 +941,9 @@ function NavMenu (props) {
         </Menu.Item> */}
         <hr />
         {user.leaveAccessInd === true   && ( 
-        <Menu.Item key="/report" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/leave">
+        <Menu.Item key="/report" style={{ height: "1.7rem", 
+        paddingLeft: "1rem", color: selectedMenuItem === '/report' ? 'tomato' : '#4bc076' }}>
+          <Link to="/leave" onClick={() => handleSelect('/report')}>
             <i class="fas fa-luggage-cart"></i>
             <span class="text-white text-ls ml-1"><FormattedMessage
               id="app.leaves"
@@ -885,8 +959,9 @@ function NavMenu (props) {
         </Menu.Item>
        )} 
         {user.mileageAccessInd === true   && ( 
-        <Menu.Item key="/mileage" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/mileage">
+        <Menu.Item key="/mileage" style={{ height: "1.7rem", 
+        paddingLeft: "1rem", color: selectedMenuItem === '/mileage' ? 'tomato' : '#4bc076' }}>
+          <Link to="/mileage" onClick={() => handleSelect('/mileage')}>
 
             <i class="fas fa-tachometer-alt"></i>
             <span class="text-white text-ls ml-[0.3rem]"><FormattedMessage
@@ -903,8 +978,9 @@ function NavMenu (props) {
         </Menu.Item>
         )}
      {user.expenseAccessInd === true   && ( 
-        <Menu.Item key="/expense" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/expense">
+        <Menu.Item key="/expense" style={{ height: "1.7rem",
+         paddingLeft: "1rem", color: selectedMenuItem === '/expense' ? 'tomato' : '#4bc076' }}>
+          <Link to="/expense" onClick={() => handleSelect('/expense')}>
             <ReceiptIcon
               style={{ fontSize: "large" }}
             />
@@ -924,8 +1000,9 @@ function NavMenu (props) {
 
 
 {user.holidayAccessInd === true   && ( 
-        <Menu.Item key="/holiday" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-          <Link to="/holiday">
+        <Menu.Item key="/holiday" style={{ height: "1.7rem", 
+        paddingLeft: "1rem",color: selectedMenuItem === '/holiday' ? 'tomato' : '#4bc076' }}>
+          <Link to="/holiday" onClick={() => handleSelect('/holiday')}>
 
             <i class="fas fa-holly-berry"></i>
             &nbsp;
@@ -944,10 +1021,11 @@ function NavMenu (props) {
      )}  */}
         <hr />
         {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
-        { user.teamsAccessInd === true &&  (
+        { user.teamsAccessInd === true &&  user.hrInd === true || user.role === "ADMIN" ? (
                
-               <Menu.Item key="/teams" style={{height:"1.7rem",paddingLeft:"1rem"}}>
-                <Link to="/teams">
+               <Menu.Item key="/teams" style={{height:"1.7rem",
+               paddingLeft:"1rem", color: selectedMenuItem === '/teams' ? 'tomato' : '#4bc076'}}>
+                <Link to="/teams" onClick={() => handleSelect('/teams')}>
                  <GroupsIcon
                 style={{ fontSize: "large" }}
                   />
@@ -958,12 +1036,13 @@ function NavMenu (props) {
                    </span>
                  </Link> 
                 </Menu.Item>
-                )} 
+                ):null} 
 
-        {user.userCreateInd === true || user.role === "ADMIN" ? (
+        {user.userAccessInd === true && user.hrInd === true  || user.role === "ADMIN" ? (
 
-          <Menu.Item key="/employees" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/Employees">
+          <Menu.Item key="/employees" style={{ height: "1.7rem",
+           paddingLeft: "1rem", color: selectedMenuItem === '/employees' ? 'tomato' : '#4bc076' }}>
+            <Link to="/Employees" onClick={() => handleSelect('/employees')}>
               <GroupsIcon
 
                 style={{ fontSize: "large" }}
@@ -993,10 +1072,11 @@ function NavMenu (props) {
             </span>
           </Link>
         </Menu.Item> */}
-        {user.locationAccessInd === true && (
+        {user.locationAccessInd === true && user.hrInd === true && (
 
-          <Menu.Item key="/location" style={{ height: "1.7rem", paddingLeft: "1rem" }}>
-            <Link to="/location">
+          <Menu.Item key="/location" style={{ height: "1.7rem",
+           paddingLeft: "1rem",color: selectedMenuItem === '/location' ? 'tomato' : '#4bc076' }}>
+            <Link to="/location" onClick={() => handleSelect('/location')}>
               <LocationOnIcon
                 style={{ fontSize: "large" }}
               />

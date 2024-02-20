@@ -17,9 +17,6 @@ import dayjs from "dayjs";
 const CustomerWhiteTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerWhiteTable"));
 const CustomerBlueTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerBlueTable"));
 const CustomerTeamCardList =lazy(()=> import("./Child/CustomerTable/CustomerTeamCardList"));
-const CustomerMobileCardList =lazy(()=> import("./Child/CustomerTable/CustomerMobileCardList"));
-const CustomerAllMobileCardList =lazy(()=> import("./Child/CustomerTable/CustomerAllMobileCardList"));
-const CustomerMobileTeamCardList =lazy(()=> import("./Child/CustomerTable/CustomerMobileTeamCardList"));
 const CustomerMapView =lazy(()=> import("./CustomerMapView"));
 const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
@@ -116,25 +113,19 @@ class Customer extends Component {
           <CustomerMapView/>:
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
-             this.props.viewType === "table" ?(isMobile ?
-              <CustomerMobileCardList
-              filter={this.state.filter}
-              currentUser={this.state.currentUser} />:
+             this.props.viewType === "table" ?(
              <CustomerCardList
              filter={this.state.filter}
              currentUser={this.state.currentUser} 
              /> ):
           this.props.viewType==="map"?
           <CustomerMap/>:
-          this.props.viewType==="all" ?(isMobile ?
-            <CustomerAllMobileCardList
-            filter={this.state.filter}
-            currentUser={this.state.currentUser} />:
+          this.props.viewType==="all" ?(
             <CustomerAllCardList 
             filter={this.state.filter}
              currentUser={this.state.currentUser} 
             />)
-            :this.props.viewType==="teams" ? (isMobile ?<CustomerMobileTeamCardList/>:<CustomerTeamCardList/>)
+            :this.props.viewType==="teams" ? (<CustomerTeamCardList/>)
             : null} 
         </Suspense> 
         {/* <FloatButton.Group

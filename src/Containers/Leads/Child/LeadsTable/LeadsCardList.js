@@ -41,6 +41,7 @@ const ButtonGroup = Button.Group;
 const LeadsCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     setPage(page + 1);
     props.getLeads(props.userId, page,"creationdate");
@@ -49,7 +50,15 @@ const LeadsCardList = (props) => {
   useEffect(() => {
     return () => props.emptyLeads();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState("");
 
@@ -82,6 +91,395 @@ const LeadsCardList = (props) => {
     leadsAllData,
     user,
   } = props;
+  if (isMobile){
+    return (
+      <>
+       <div className=' flex justify-end sticky top-28 z-auto'>
+       <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      
+        <InfiniteScroll
+          dataLength={leadsAllData.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+          height={"59vh"}
+        >
+          {leadsAllData.map((item) => {
+            const currentdate = dayjs().format("DD/MM/YYYY");
+            const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+            const countryCode = item.address[0].country_alpha2_code
+            const diff = Math.abs(
+              dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+                 Street : ${
+                   item.address && item.address.length && item.address[0].street
+                 }   
+                State : ${
+                  item.address && item.address.length && item.address[0].state
+                }
+               Country : ${
+                 (item.address &&
+                   item.address.length &&
+                   item.address[0].country) ||
+                 ""
+               } 
+                 PostalCode : ${
+                   item.address &&
+                   item.address.length &&
+                   item.address[0].postalCode
+                 } `;
+            return (
+              <div>
+                <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                      <div className="flex max-sm:w-full ">
+                        <div>
+                         
+                            <MultiAvatar
+                              primaryTitle={item.name}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                         
+                        </div>
+                        <div class="w-[4%]"></div>
+  
+                        <div class="w-full flex items-center">
+                          <Tooltip>
+                            <div class="max-sm:w-full justify-between flex md:flex-col">
+                              <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                                {item.name}
+                                &nbsp;&nbsp;
+                                {date === currentdate ? (
+                                  <span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span>
+                                ) : null}
+                              </h4>
+                            </div>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Warm"
+                            iconType="	fas fa-burn"
+                            tooltip={
+                              <FormattedMessage
+                                id="app.warm"
+                                defaultMessage="Warm"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Warm";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+  
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Hot"
+                            iconType="fas fa-mug-hot"
+                            // tooltip="Hot"
+                            tooltip={
+                              <FormattedMessage
+                                id="app.hot"
+                                defaultMessage="Hot"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Hot";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Cold"
+                            iconType="far fa-snowflake"
+                            // tooltip="Cold"
+                            tooltip={
+                              <FormattedMessage
+                                id="app.cold"
+                                defaultMessage="Cold"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Cold";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center w-full ">
+                    <div className=" flex font-medium f ">
+                    
+                      <h4 class=" text-xs text-cardBody font-poppins">
+                        {item.countryDialCode && item.phoneNumber
+                          ? `${item.countryDialCode} ${item.phoneNumber}`
+                          : "Not Available"}
+                        
+                      </h4>
+                    </div>
+                    <div className=" flex font-medium ">
+                     
+                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium flex-col  ">
+                     
+                      <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                        {item.companyName || "Not Available"}
+                      </h4>
+                    </div>
+                    <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
+                      {item.url !== null ? (
+                        <Tooltip title={item.url}>
+                          <span
+                            //type="edit"
+                            class="cursor-pointer"
+                            onClick={() => {}}
+                          >
+                            {" "}
+                            <a href={`https://www.${item.url}`} target="_blank">
+                              <OpenInBrowserIcon
+                                className=" !text-base cursor-pointer text-green-800"
+                              />
+                            </a>
+                          </span>
+                        </Tooltip>
+                      ) : null}
+                    </div>
+  
+                    <div className=" flex font-medium flex-col ">
+                     
+                      <h4 class=" text-xs text-cardBody font-poppins">
+                        {item.sector}
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium   ">
+                      
+  
+                      <div class=" text-xs text-cardBody font-poppins">
+                      <div>
+                      {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
+                          <MultiAvatar
+                            primaryTitle={item.assignedTo}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                        )}
+                        </>
+              )}
+                      </div>
+                      </div>
+                    </div>
+                    <div className=" flex font-medium  ">
+                     
+  
+                      <span>
+                        <MultiAvatar
+                          primaryTitle={item.ownerName}
+                          imageId={item.ownerImageId}
+                          imageURL={item.imageURL}
+                          imgWidth={"1.8rem"}
+                          imgHeight={"1.8rem"}
+                        />
+                      </span>
+                    </div>
+                  
+                    <div className=" flex font-medium  ">
+                     
+  
+                      <div class=" text-xs text-cardBody font-poppins"></div>
+                      <div>
+                      <Tooltip title="Qualify? Lead will move to Customer section!">
+                          <ConnectWithoutContactIcon
+                            onClick={() => {
+                              handleRowData(item);
+                              props.handleLeadsConfirmationModal(true);
+                           
+                            }}
+                            className="!text-base cursor-pointer text-[blue]"
+                          />
+                        </Tooltip>
+                        
+                      </div>
+                    </div>
+                    
+                      <div>
+                        <Tooltip title="Notes">
+                          <NoteAltIcon
+                            onClick={() => {
+                              handleRowData(item);
+                              handleLeadsNotesDrawerModal(true);
+                           
+                            }}
+                            className=" !text-base cursor-pointer text-green-800"
+                          />
+                        </Tooltip>
+                      </div>
+                      <div>
+                        <Tooltip
+                          title={
+                            <FormattedMessage
+                              id="app.activity"
+                              defaultMessage="Activity"
+                            />
+                          }
+                        >
+                          <AddchartIcon
+                            className="!text-base cursor-pointer text-blue-500"
+                            onClick={() => {
+                                  handleRowData(item);
+                              props.handleCETmodal(true);
+                          
+                            }}
+                          />
+                        </Tooltip>
+                      </div>
+                    
+  
+                    
+                      {user.leadsUpdateInd === true && user.crmInd === true && (
+                        <div>
+                          <Tooltip title="Edit">
+                            <BorderColorIcon
+                              className="!text-base cursor-pointer text-[tomato]"
+                              onClick={() => {
+                                props.setEditLeads(item);
+                                handleUpdateLeadsModal(true);
+                                handleSetCurrentLeadsId(item);
+                              }}
+                            />
+                          </Tooltip>
+                        </div>
+                      )}
+                      {user.leadsDeleteInd === true && user.crmInd === true && (
+                        <div>
+                          <StyledPopconfirm
+                            title="Do you want to delete?"
+                            onConfirm={() => deleteLeadsData(item.leadsId)}
+                          >
+                            
+                            <DeleteOutlined
+                              type="delete"
+                              className=" !text-base cursor-pointer text-[red]"
+                            />
+                         
+                          </StyledPopconfirm>
+                        </div>
+                      )}
+                      <div></div>
+                    
+                   
+                      <div>
+                        <Tooltip
+                          overlayStyle={{ maxWidth: "300px" }}
+                          title={dataLoc}
+                        >
+                          <span class="cursor-pointer"
+                           
+                          >
+                            <LocationOnIcon
+                             className="!text-base cursor-pointer text-[#960a0a]"
+                            />
+                          </span>
+                        </Tooltip>
+                      </div>
+                      <div>
+                        <Tooltip title={item.email}>
+                          <MailOutlineIcon
+                            type="mail"
+                            className="!text-base cursor-pointer text-green-400"
+                            onClick={() => {
+                              handleSetCurrentLeadsId(item);
+                              props.handleLeadsEmailDrawerModal(true);
+                            }}
+                          />
+                        </Tooltip>{" "}
+                      </div>
+                    
+                   
+                   
+                  </div>
+                </div>
+              </div>
+              // </div>
+            );
+          })}
+           </InfiniteScroll>
+        </div>
+        </div>
+        <UpdateLeadsModal
+          item={currentLeadsId}
+          updateLeadsModal={updateLeadsModal}
+          handleUpdateLeadsModal={handleUpdateLeadsModal}
+          handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+        />
+        <AddLeadsEmailDrawerModal
+          item={currentLeadsId}
+          handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+          addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
+          handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
+        />
+        <OpenCETmodal
+          rowdata={rowdata}       
+          openCETmodal={props.openCETmodal}
+          handleCETmodal={props.handleCETmodal}
+        />
+        <AddLeadsNotesDrawerModal
+          rowdata={rowdata}
+          addDrawerLeadsNotesModal={props.addDrawerLeadsNotesModal}
+          handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
+        />
+            <AddConfirmLedsStatusModal
+             rowdata={rowdata}
+             handleRowData={handleRowData}
+             addLeadsConfirmationModal={props.addLeadsConfirmationModal}
+             handleLeadsConfirmationModal={props.handleLeadsConfirmationModal}
+             />
+      </>
+    );
+  }
+
 
    return (
     <>

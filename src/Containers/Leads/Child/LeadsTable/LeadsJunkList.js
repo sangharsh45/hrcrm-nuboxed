@@ -34,11 +34,19 @@ const LeadsJunkList = (props) => {
 
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     props.getJunkedLeads(props.userId);
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [currentLeadsId, setCurrentLeadsId] = useState("");
 
   function handleSetCurrentLeadsId(item) {
@@ -53,6 +61,333 @@ const LeadsJunkList = (props) => {
       setPage(page + 1);
       props.getJunkedLeads(props.userId);
 };
+if (isMobile){
+  return (
+    <>
+ <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+ 
+      <InfiniteScroll
+        dataLength={junkedLeadsData.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingJunkedLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
+      {junkedLeadsData.map((item) => { 
+         const currentdate = moment().format("DD/MM/YYYY");
+         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const countryCode = item.address[0].country_alpha2_code
+         const diff = Math.abs(
+            moment().diff(moment(item.lastRequirementOn), "days")
+          );
+          const dataLoc = ` Address : ${
+            item.address && item.address.length && item.address[0].address1
+          } 
+               Street : ${
+                 item.address && item.address.length && item.address[0].street
+               }   
+              State : ${
+                item.address && item.address.length && item.address[0].state
+              }
+             Country : ${
+               (item.address && item.address.length && item.address[0].country) ||
+               ""
+             } 
+               PostalCode : ${
+                 item.address && item.address.length && item.address[0].postalCode
+               } `;
+                    return (
+                      <div>
+                    <div
+                className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+              >
+                              <div class="flex justify-between items-center w-wk ">
+                          <div className=" flex font-medium flex-col w-[13rem]   max-sm:w-full">
+                          <div className="flex max-sm:w-full"> 
+<div>
+
+      <MultiAvatar
+        primaryTitle={item.name}
+        imageId={item.imageId}
+        imageURL={item.imageURL}
+        imgWidth={"1.8em"}
+        imgHeight={"1.8em"}
+      />
+    
+</div>
+                             <div class="w-[4%]">
+
+                             </div>
+
+                                  <div class="max-sm:w-full" >
+                                  <Tooltip>
+                                    <div class="max-sm:w-full justify-between flex md:flex-col">
+                                     
+                                      <h4 class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
+                                      {item.name}
+                                     &nbsp;&nbsp;
+                                     {date === currentdate ? (
+    <span
+    class="text-xs text-[tomato] font-bold"
+    >
+      New
+    </span>
+  ) : null}   
+
+ 
+                                      </h4>
+                                      </div>
+                                  </Tooltip>
+                                  </div>
+                                  </div>
+                          </div>
+
+                          <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+
+<div>
+<ButtonGroup>
+<RoleButton
+type="Warm"
+iconType="	fas fa-burn"
+// tooltip="Warm"
+tooltip={<FormattedMessage
+id="app.warm"
+defaultMessage="Warm"
+/>}
+role={item.type}
+onClick={() =>{
+const typ="Warm"
+props.updateTypeForLead(item.leadsId,typ)
+}}
+/>
+</ButtonGroup>
+</div>    
+
+
+<div>
+<ButtonGroup>
+<RoleButton
+type="Hot"
+iconType="fas fa-mug-hot"
+// tooltip="Hot"
+tooltip={<FormattedMessage
+id="app.hot"
+defaultMessage="Hot"
+/>}
+role={item.type}
+onClick={() =>{
+const typ="Hot"
+props.updateTypeForLead(item.leadsId,typ)
+}}
+/>
+</ButtonGroup>
+</div>
+<div>
+<ButtonGroup>
+<RoleButton
+type="Cold"
+iconType="far fa-snowflake"
+// tooltip="Cold"
+tooltip={<FormattedMessage
+id="app.cold"
+defaultMessage="Cold"
+/>}
+role={item.type}
+onClick={() => {
+const typ="Cold"
+props.updateTypeForLead(item.leadsId,typ)
+}}
+/>
+</ButtonGroup>
+</div>
+</div>  
+</div>
+<div class="flex justify-between items-center w-wk "> 
+                          <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                     <h4 class=" text-[0.82rem] text-cardBody font-poppins">  
+                     {item.countryDialCode && item.phoneNumber ? (
+`${item.countryDialCode} ${item.phoneNumber}`
+) : (
+"Not Available"
+)} 
+                    
+                     </h4>
+                 </div>
+                 <div className=" flex font-medium flex-col justify-center md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                            <h4 class=" text-[0.82rem] text-cardBody font-poppins">
+                            <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                            </h4>
+                        </div>
+               
+                 </div>
+                 <div class="flex justify-between items-center w-wk "> 
+                 <div className=" flex font-medium flex-col justify-center  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+                     <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
+                     <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
+{item.companyName || "Not Available"}
+</Link>
+
+                     </h4>
+                 </div>
+                 <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+              {item.url !== null ? (
+        <Tooltip title={item.url}>
+          <span
+            //type="edit"
+            style={{ cursor: "pointer" }}
+            onClick={() => {}}
+          >
+            {" "}
+            <a href={`https://www.${item.url}`} target="_blank">
+              <OpenInBrowserIcon
+                className=" !text-base cursor-pointer text-green-800"
+              />
+            </a>
+          </span>
+        </Tooltip>
+      ) : null}
+                  </div>
+                 
+                          <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                              <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
+                              {item.sector}
+                              </h4>
+                          </div>
+                          </div>
+                          <div class="flex justify-between items-center w-wk "> 
+                          <div className=" flex font-medium flex-col justify-center md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+
+                              <div class=" text-[0.82rem] text-cardBody font-poppins">
+                              
+                              <div>
+                      {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
+                          <MultiAvatar
+                            primaryTitle={item.assignedTo}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                        )}
+                        </>
+              )}
+                      </div>
+       
+                              </div>
+                          </div>
+                          <div className=" flex font-medium flex-col justify-center md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                 
+                 <span>
+        <MultiAvatar
+          primaryTitle={item.ownerName}
+          imageId={item.ownerImageId}
+          imageURL={item.imageURL}
+          imgWidth={"1.8rem"}
+          imgHeight={"1.8rem"}
+        />
+      </span>
+             </div>
+             <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                              <div class=" text-[0.75rem] text-cardBody font-poppins">
+
+                              </div>
+                              <div>
+<Button type="primary"
+onClick={()=>{props.reInstateJunkLeads(item.leadsId)}}
+>
+Resinstate
+</Button>
+</div>
+                          </div>
+                         
+                          <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                          <div>
+      <Tooltip title="Edit">
+        <BorderColorIcon
+        className="!text-base cursor-pointer text-[tomato]"
+          onClick={() => {
+            props.setEditLeads(item);
+            handleUpdateLeadsModal(true);
+            handleSetCurrentLeadsId(item);
+              
+          }}
+        />
+      </Tooltip>
+  
+      </div>
+                  <div>
+                  <StyledPopconfirm
+      title="Do you want to delete?"
+      onConfirm={() => deleteLeadsData(item.leadsId)}
+    >
+      <DeleteOutlined
+        type="delete"
+        className=" !text-base cursor-pointer text-[red]"
+      />
+    </StyledPopconfirm>
+                  </div>
+                  <div>
+      
+
+              </div>
+              </div>
+              <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
+                <div>
+              <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+      <span
+        style={{
+          cursor: "pointer",
+        }}
+      >
+      <LocationOnIcon    className="!text-base cursor-pointer text-[#960a0a]"/>
+      </span>
+    </Tooltip>
+    </div>
+    <div>
+    <Tooltip title={item.email}>
+        <MailOutlineIcon
+          type="mail"
+          className="!text-base cursor-pointer text-green-400"
+          onClick={() => {
+            handleSetCurrentLeadsId(item);
+            props.handleLeadsEmailDrawerModal(true);
+          }}
+        />
+      </Tooltip> </div>
+     
+                </div>  
+                <div class="w-[2%]"></div> 
+                </div>  
+                </div>
+                      </div>
+                    )
+                })}
+                </InfiniteScroll>
+      </div>
+      <UpdateLeadsModal
+        item={currentLeadsId}
+        updateLeadsModal={updateLeadsModal}
+        handleUpdateLeadsModal={handleUpdateLeadsModal}
+        handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+      />
+      <AddLeadsEmailDrawerModal
+        item={currentLeadsId}
+        handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+        addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
+        handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
+      />
+    </>
+  );
+}
+
+
   return (
     <>
   <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">

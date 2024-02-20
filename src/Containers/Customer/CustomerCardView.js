@@ -196,7 +196,7 @@ class CustomerCardView extends Component {
             )
           }
         </GroupView> */}
-
+<div class="flex flex-col max-sm:flex-col">
         <GroupView
           groupTitle="ALL"
           isFetching={fetchinglatestCustomer}
@@ -207,7 +207,7 @@ class CustomerCardView extends Component {
         >
           {(isViewAll) =>
             !isViewAll ? (
-              <div class=" flex">
+              <div class=" flex max-sm:flex-col">
                 {latestCustomer &&
                   latestCustomer.slice(0, 5).map((customer, i) => {
                     return (
@@ -243,6 +243,7 @@ class CustomerCardView extends Component {
             )
           }
         </GroupView>
+        </div>
         </div>
         <AddCustomerDrawerModal />
         < UpdateCustomerDrawerModal

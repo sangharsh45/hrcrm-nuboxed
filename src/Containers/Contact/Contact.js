@@ -13,9 +13,6 @@ import {
   getFilterContactList
 } from "./ContactAction";
 const ContactTeamCardList = lazy(() => import("./Child/ContactTable/ContactTeamCardList"));
-const ContactMobileCardList = lazy(() => import("./Child/ContactTable/ContactMobileCardList"));
-const ContactMobileTeamCardList = lazy(() => import("./Child/ContactTable/ContactMobileTeamCardList"));
-const ContactAllMobileCardList = lazy(() => import("./Child/ContactTable/ContactAllMobileCardList"));
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
 const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
@@ -138,32 +135,19 @@ const filterData = filteredData.filter(item =>
       />
       <Suspense fallback={<BundleLoader />}>
         {props.viewType === "table" ?(
-        isMobile ? ( 
-           <ContactMobileCardList
-           currentUser={currentUser} 
-        filter={filter}
-         filterData={filterData} />
-        ) : (
+        
         <ContactCardList
            
         currentUser={currentUser} 
         filter={filter}
          filterData={filterData}
-         />)) :
+         />) :
          props.viewType ==="all" ?(
-          isMobile ? ( 
-             <ContactAllMobileCardList
-             currentUser={currentUser} 
-          filter={filter}
-           filterData={filterData} />
-          ) :( <ContactAllCardList/>))
+         
+             <ContactAllCardList/>)
          :viewType==="teams" ?(
-          isMobile ? ( 
-             <ContactMobileTeamCardList
-             currentUser={currentUser} 
-          filter={filter}
-           filterData={filterData} />
-          ) : ( <ContactTeamCardList/>))
+         
+          <ContactTeamCardList/>)
 
         : null}
       </Suspense>

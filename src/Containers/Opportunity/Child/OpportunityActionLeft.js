@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { Tooltip, Badge } from "antd";
+import { Tooltip, Badge ,Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -80,7 +80,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
-            <LightbulbIcon style={{ color: "rgb(14, 149, 144)"}}/>
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <LightbulbIcon />
+            </Avatar>
           </span>
         </Tooltip>
       </Badge>
@@ -106,7 +108,9 @@ const OpportunityActionLeft = (props) => {
             // tooltipTitle="Stage View"
             onClick={() => props.setOpportunityViewType("stage")}
           >
+             <Avatar style={{ background: props.viewType === "stage" ? "#f279ab" : "#4bc076" }}>
            <TableOutlined/>
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -129,7 +133,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "won" ? "#f279ab" : "#4bc076" }}>
             <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
@@ -153,7 +159,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "close" ? "#f279ab" : "#4bc076" }}>
             <LockOpenIcon />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -176,7 +184,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "lost" ? "#f279ab" : "#4bc076" }}>
             <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -198,7 +208,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
             <PeopleIcon/>
+            </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -221,7 +233,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
            ALL
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -255,7 +269,9 @@ const OpportunityActionLeft = (props) => {
               color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
+             <Avatar style={{ background: props.viewType === "dashboard" ? "#f279ab" : "#4bc076" }}>
             <DeleteIcon />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
