@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 import IncludedDealCardList from "./ActionRequired/IncludedDealCardList";
+import IncludedTaskCardList from "./ActionRequired/IncludedTaskCardList";
 import OppIncludedCardList from "./ActionRequired/OppIncludedCardList";
 // const LeadHotTable=lazy(()=>import("./LeadHotTable"));
 // const LeadColdTable=lazy(()=>import("./LeadColdTable"));
@@ -38,16 +39,16 @@ class ActionTab extends Component {
               tab={
                 <>
                  
-                 
+                 <Badge count={this.props.oppIncludedCount.OpportunityCount} overflowCount={999}>
                <span class=" ml-1">
-               <Badge count={this.props.oppIncludedCount.OpportunityCount} overflowCount={999}>
+              
                <FormattedMessage
           id="app.Opportunity"
           defaultMessage="Opportunity"
         />
-        </Badge>
+   
                 </span>
-              
+                </Badge>
 
                   {activeKey === "1" && (
                     <>
@@ -66,16 +67,16 @@ class ActionTab extends Component {
               tab={
                 <>
                   
-                 
+                  <Badge count={this.props.dealsIncludedCount.InvestorOppCount} overflowCount={999}>
                <span class=" ml-1">
-               <Badge count={this.props.dealsIncludedCount.InvestorOppCount} overflowCount={999}>
+            
                <FormattedMessage
           id="app.Deals"
           defaultMessage="Deals"
         />
-          </Badge>
+        
                 </span>
-              
+                </Badge>
 
                   {activeKey === "2" && (
                     <>
@@ -94,14 +95,14 @@ class ActionTab extends Component {
               tab={
                 <>
                   
-                 
+                  <Badge count={this.props.taskIncludedCount.TaskCount} overflowCount={999}>
                <span class=" ml-1">
                <FormattedMessage
           id="app.Task"
           defaultMessage="Task"
         />
                 </span>
-              
+              </Badge>
 
                   {activeKey === "3" && (
                     <>
@@ -113,7 +114,7 @@ class ActionTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-            {/* <LeadColdTable/> */}
+            <IncludedTaskCardList/>
               </Suspense>
             </TabPane>
          
@@ -126,6 +127,7 @@ class ActionTab extends Component {
 const mapStateToProps = ({dashboard,auth}) => ({
   oppIncludedCount:auth.oppIncludedCount,
   dealsIncludedCount:auth.dealsIncludedCount,
+  taskIncludedCount:auth.taskIncludedCount,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {

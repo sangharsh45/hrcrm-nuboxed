@@ -58,6 +58,10 @@ const initialState = {
   fetchingTimeZoneError: false,
   timeZone: [],
 
+  fetchingTaskIncludedCount: false,
+  fetchingTaskIncludedCountError: false,
+  taskIncludedCount:{},
+
   fetchingIncludedDeals: false,
   fetchingIncludedDealsError: false,
   dealsIncluded:[],
@@ -70,6 +74,10 @@ const initialState = {
   fetchingCurrency: false,
   fetchingCurrencyError: false,
   currencies: [],
+
+  fetchingIncludedTask: false,
+  fetchingIncludedTaskError: false,
+  taskIncluded:[],
 
   fetchingCountries: false,
   fetchingCountriesError: false,
@@ -974,6 +982,18 @@ export const authReducer = (state = initialState, action) => {
                                 fetchingDealsIncludedCountError: true,
                               };
 
+
+                              case types.GET_TASK_INCLUDED_COUNT_REQUEST:
+                                return { ...state, fetchingTaskIncludedCount: true };
+                              case types.GET_TASK_INCLUDED_COUNT_SUCCESS:
+                                return { ...state, fetchingTaskIncludedCount: false, taskIncludedCount: action.payload };
+                              case types.GET_TASK_INCLUDED_COUNT_FAILURE:
+                                return {
+                                  ...state,
+                                  fetchingTaskIncludedCount: false,
+                                  fetchingTaskIncludedCountError: true,
+                                };
+
                               case types.GET_INCLUDED_DEALS_REQUEST:
                                 return { ...state, fetchingIncludedDeals: true };
                               case types.GET_INCLUDED_DEALS_SUCCESS:
@@ -996,6 +1016,31 @@ export const authReducer = (state = initialState, action) => {
 
                                 case types.EMPTY_INCLUDED_DEALS_LIST:
                                   return { ...state, dealsIncluded: [] }; 
+
+                                  case types.EMPTY_INCLUDED_TASK_LIST:
+                                    return { ...state, taskIncluded: [] }; 
+  
+
+
+
+                                  case types.GET_INCLUDED_TASK_REQUEST:
+                                    return { ...state, fetchingIncludedTask: true };
+                                  case types.GET_INCLUDED_TASK_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingIncludedTask: false,
+                                      // opportunityByUserId: action.payload,
+                              
+                                      taskIncluded: [
+                                        ...state.taskIncluded,
+                                        ...action.payload],
+                                    };
+                                  case types.GET_INCLUDED_TASK_FAILURE:
+                                    return {
+                                      ...state,
+                                      fetchingIncludedTask: false,
+                                      fetchingIncludedTaskError: true,
+                                    };
       
                           
     default:
