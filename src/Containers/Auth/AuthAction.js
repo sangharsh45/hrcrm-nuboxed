@@ -1401,6 +1401,12 @@ export const handleActionDrawerModal = (modalProps) => (dispatch) => {
       });
     };
 
+    export const emptyIncludedTask = () => (dispatch) => {
+      dispatch({
+        type: types.EMPTY_INCLUDED_TASK_LIST, 
+      });
+    };
+
     export const getDealsIncludedCount = (userId) => (dispatch) => {
       dispatch({
         type: types.GET_DEALS_INCLUDED_COUNT_REQUEST,
@@ -1428,6 +1434,33 @@ export const handleActionDrawerModal = (modalProps) => (dispatch) => {
     };
 
     
+    export const getTaskIncludedCount = (userId) => (dispatch) => {
+      dispatch({
+        type: types.GET_TASK_INCLUDED_COUNT_REQUEST,
+      });
+      axios
+        .get(`${base_url}/task/included/record/count/${userId}`,{
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_TASK_INCLUDED_COUNT_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch({
+            type: types.GET_TASK_INCLUDED_COUNT_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    
     export const getIncludedDealsList = (userId,pageNo) => (dispatch) => {
       dispatch({
         type: types.GET_INCLUDED_DEALS_REQUEST,
@@ -1449,6 +1482,32 @@ export const handleActionDrawerModal = (modalProps) => (dispatch) => {
           console.log(err.response);
           dispatch({
             type: types.GET_INCLUDED_DEALS_FAILURE,
+            payload: err,
+          });
+        });
+    };
+
+    export const getIncludedTaskList = (userId,pageNo) => (dispatch) => {
+      dispatch({
+        type: types.GET_INCLUDED_TASK_REQUEST,
+      });
+      axios
+        .get(`${base_url}/task/included/user/${userId}/${pageNo}`, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch({
+            type: types.GET_INCLUDED_TASK_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch({
+            type: types.GET_INCLUDED_TASK_FAILURE,
             payload: err,
           });
         });
