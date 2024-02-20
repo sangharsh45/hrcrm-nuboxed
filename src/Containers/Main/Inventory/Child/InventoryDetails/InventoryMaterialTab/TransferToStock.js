@@ -11,22 +11,23 @@ function TransferToStock(props) {
             grnReceivedInd: true,
             grnStockInd: true,
             poSupplierSuppliesId: props.poSupplierSuppliesId
-        }, props.poSupplierDetailsId
+        },
+            props.poSupplierSuppliesId
         )
     };
     return (
         <>
             <div>
                 <Popconfirm
-                    title="Received ?"
+                    title="Do you want to transfer to stock ?"
                     onCancel={null}
                     onConfirm={onChange}
                     okText="Yes"
                     cancelText="No"
                 >
                     <Switch
-                        disabled={props.poReceivedInd}
-                        checked={props.poReceivedInd}
+                        disabled={props.grnStockInd}
+                        checked={props.grnStockInd}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                     />

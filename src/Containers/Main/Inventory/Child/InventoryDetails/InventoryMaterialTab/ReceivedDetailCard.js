@@ -268,8 +268,10 @@ const ReceivedDetailCard = (props) => {
                     type='primary'
                     onClick={() => props.generateGrnForPo({
                         createGrnNo: result,
-                        grnNumber: "",
-                        grnReceivedInd: true
+                        grnId: "",
+                        grnReceivedInd: true,
+                        poSupplierDetailsId: props.row.poSupplierDetailsId,
+                        userId: props.userId
                     })}
                 >
                     Generate Grn
@@ -278,8 +280,9 @@ const ReceivedDetailCard = (props) => {
         </>
     )
 }
-const mapStateToProps = ({ inventory }) => ({
-    receivedDetailData: inventory.receivedDetailData
+const mapStateToProps = ({ inventory, auth }) => ({
+    receivedDetailData: inventory.receivedDetailData,
+    userId: auth.userDetails.userId,
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators({

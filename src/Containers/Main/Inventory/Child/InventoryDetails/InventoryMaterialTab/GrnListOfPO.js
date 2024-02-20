@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import { FormattedMessage } from "react-intl";
-import { getMaterialReceivedDetailData, generateGrnForPo } from "../../../InventoryAction"
+import { getMaterialReceivedDetailData } from "../../../InventoryAction"
 import TransferToStock from "./TransferToStock";
 
 const GrnListOfPO = (props) => {
@@ -17,7 +17,7 @@ const GrnListOfPO = (props) => {
     }
     return (
         <>
-            <div className=' flex justify-end sticky top-28 z-auto'>
+            <div className=' flex justify-end sticky z-auto'>
                 <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=""></div>
@@ -77,6 +77,7 @@ const GrnListOfPO = (props) => {
                                     <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                         <div class=" text-xs text-cardBody font-poppins">
                                             <TransferToStock
+                                                grnStockInd={item.grnStockInd}
                                                 poSupplierSuppliesId={item.poSupplierSuppliesId}
                                                 poSupplierDetailsId={props.row.poSupplierDetailsId}
                                             />
@@ -104,7 +105,6 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getMaterialReceivedDetailData,
-            generateGrnForPo
         },
         dispatch
     );

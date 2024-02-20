@@ -1427,18 +1427,18 @@ export const getGrnListOfaPoInStock = (locationId) => (dispatch) => {
     });
 };
 
-export const trnasferGrnItemToStock = (data, poSupplierSuppliesId, poSupplierDetailsId) => (dispatch) => {
+export const trnasferGrnItemToStock = (data, poSupplierSuppliesId) => (dispatch) => {
   dispatch({
     type: types.TRANSFER_PO_GRN_TO_STOCK_REQUEST,
   });
   axios
-    .post(`${base_url2}/po/updateStock/${poSupplierSuppliesId}`, data, {
+    .put(`${base_url2}/po/updateStock/${poSupplierSuppliesId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
-      dispatch(getMaterialReceivedDetailData(poSupplierDetailsId))
+      // dispatch(getMaterialReceivedDetailData(poSupplierDetailsId))
       dispatch({
         type: types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS,
         payload: res.data,

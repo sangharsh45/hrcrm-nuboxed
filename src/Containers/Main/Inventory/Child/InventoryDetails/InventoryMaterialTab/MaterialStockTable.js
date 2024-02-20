@@ -27,8 +27,7 @@ const GrnListOfPO = (props) => {
                         <div className=""></div>
                     </div>
 
-                    {/* {props.poGrnList.map((item) => {
-
+                    {props.poGrnList.map((item) => {
                         return (
                             <div>
                                 <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
@@ -39,11 +38,22 @@ const GrnListOfPO = (props) => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="flex">
+                                        <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
+                                            <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins ">
+                                                {item.newPoNumber}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.grnNumber}
+                                        </div>
+                                    </div>
                                     <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                         <div class=" text-xs text-cardBody font-poppins">
                                             {item.price}
                                         </div>
-
                                     </div>
                                     <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                         <div class=" text-xs text-cardBody font-poppins">
@@ -65,16 +75,12 @@ const GrnListOfPO = (props) => {
                                             {item.remark}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.grnNumber}
-                                        </div>
-                                    </div>
+
                                 </div>
 
                             </div>
                         );
-                    })} */}
+                    })}
                 </div>
             </div>
         </>
