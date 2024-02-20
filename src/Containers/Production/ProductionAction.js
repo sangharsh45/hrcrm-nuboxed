@@ -98,12 +98,12 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
       });
   };
 
-  export const moveProduction = () => (dispatch) => {
+  export const moveProduction = (data) => (dispatch) => {
     dispatch({
       type: types.REMOVE_PRODUCTION_REQUEST,
     });
     axios
-      .put(`${base_url2}/production/moveToInventory`, {
+      .put(`${base_url2}/production/moveToInventory`,data, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

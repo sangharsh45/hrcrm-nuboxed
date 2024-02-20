@@ -6,6 +6,7 @@ import { Tooltip } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import EuroIcon from '@mui/icons-material/Euro';
+import MoveToggleProduction from "./MoveToggleProduction";
 import {getProductionsbyLocId} from "../ProductionAction"
 
 function CreateProductionCard(props) {
@@ -100,6 +101,12 @@ function CreateProductionCard(props) {
 
         <div class=" text-xs text-cardBody font-semibold  font-poppins">
                {item.attributeName}
+             </div>
+    </div>
+    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
+        <MoveToggleProduction item={item}/>
              </div>
     </div>
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
