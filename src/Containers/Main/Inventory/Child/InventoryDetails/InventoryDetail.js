@@ -55,7 +55,7 @@ function InventoryDetail(props) {
                   inventory={inventory}
                   tabData={tabData}
                 /> */}
-                {props.viewType1 === "repair" ? (
+                {props.viewType1 === "repair" && props.orderCreatRepairInd ? (
                   <InventoryDetailTab
                     viewType1={viewType1}
                     inventory={inventory}
@@ -63,7 +63,7 @@ function InventoryDetail(props) {
                   />
                 ) : props.viewType1 === "material" ? (
                   <InventoryMaterialTab inventory={inventory} />
-                ) : props.viewType1 === "production" ? (
+                ) : props.viewType1 === "production" && props.orderCreatProductionInd ? (
                   <InventoryProductionTab />
                 ) : null}
               </div>
@@ -74,10 +74,12 @@ function InventoryDetail(props) {
     </>
   );
 }
-const mapStateToProps = ({ inventory }) => ({
+const mapStateToProps = ({ inventory, auth }) => ({
   fetchingInventoryById: inventory.fetchingInventoryById,
   inventory: inventory.inventoryDetailById,
-  viewType1: inventory.viewType1
+  viewType1: inventory.viewType1,
+  orderCreatProductionInd: auth.userDetails.orderCreatProductionInd,
+  orderCreatRepairInd: auth.userDetails.orderCreatRepairInd,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
