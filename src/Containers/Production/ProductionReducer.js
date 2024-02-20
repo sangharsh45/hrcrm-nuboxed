@@ -33,7 +33,7 @@ export const productionReducer = (state = initialState, action) => {
                 return {
                   ...state,
                   creatingProductionLink: false,
-                  productionLink: [action.payload]
+                  productionByLocsId:[action.payload,...state.productionByLocsId]
                 };
               case types.CREATE_PRODUCTION_LINK_FAILURE:
                 return {
@@ -70,7 +70,7 @@ export const productionReducer = (state = initialState, action) => {
                       ...state,
                       removingProduction: false,
                       productionByLocsId: state.productionByLocsId.filter(
-                        (item) => item.productId !== action.payload.productId
+                        (item) => item.productionProductId !== action.payload.productionProductId
                       ),
                     };
                   case types.REMOVE_PRODUCTION_FAILURE:

@@ -2,9 +2,10 @@ import React,{useState} from "react";
 import { Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createProductionLink } from "../ProductionAction";
+import { moveProduction } from "../ProductionAction";
+import dayjs from "dayjs";
 
-function ProductionSearchedToggle (props) {
+function MoveToggleProduction (props) {
 
     const [checked, setChecked] = useState(false);
 
@@ -12,14 +13,17 @@ function ProductionSearchedToggle (props) {
       setChecked(prevChecked => !prevChecked);
 
       if (!checked) {
-        props.createProductionLink(
+        const currentDate = dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+
+        props.moveProduction(
                     {
-                      
-                        productName:props.item.name,
-                        productId:props.item.productId,
-                        quantity:props.item.quantity,
+                       
+                        manufactureId:props.item.manufactureId,
+                        moveToInventoryDate:currentDate,
+                        moveToInventoryInd:true,
                         locationDetailsId:props.locationId,
-                        userId:props.userId
+                     
+                  
                     },);
       }
     };
@@ -41,8 +45,8 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            createProductionLink
+            moveProduction
         },
         dispatch
     );
-export default connect(mapStateToProps, mapDispatchToProps)(ProductionSearchedToggle);
+export default connect(mapStateToProps, mapDispatchToProps)(MoveToggleProduction);
