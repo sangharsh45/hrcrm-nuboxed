@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {  Select } from "antd";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import {
   getAllContact,
   handleUpdateContactModal,
@@ -33,6 +32,7 @@ const UpdateContactModal = lazy(() =>
 function ContactAllCardList(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -52,6 +52,16 @@ function ContactAllCardList(props) {
     })
     props.getAllContact(page,"creationdate");
     setPage(page + 1);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   useEffect(()=>{
@@ -103,12 +113,337 @@ function ContactAllCardList(props) {
 //  if(fetchingContacts){
 //   return <BundleLoader/>
 //  }
+if (isMobile) {
+return (
+  <>
+    
+   
+    <div class="rounded-lg  p-2 w-full overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      
+        <InfiniteScroll
+      dataLength={allContacts.length}
+      next={handleLoadMore}
+      hasMore={hasMore}
+      loader={fetchingAllContacts?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+      height={"75vh"}
+    >
+      
+    {/* {allContacts.map((item) => { 
+      
+       const currentdate = moment().format("DD/MM/YYYY");
+       const date = moment(item.creationDate).format("DD/MM/YYYY");
+       const diff = Math.abs(
+          moment().diff(moment(item.lastRequirementOn), "days")
+        );
+        const dataLoc = ` Address : ${item.address &&
+          item.address.length &&
+          item.address[0].address1} 
+         Street : ${item.address &&
+          item.address.length &&
+          item.address[0].street}   
+        State : ${item.address && item.address.length && item.address[0].state}
+        City : ${item.address && item.address.length && item.address[0].city}
+       Country : ${(item.address &&
+            item.address.length &&
+            item.address[0].country) ||
+          ""} 
+         PostalCode : ${item.address &&
+          item.address.length &&
+          item.address[0].postalCode} `;
+                  return (
+                      <div>
+                            <div
+              className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+            >
+                                   
+                              <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full"> 
+<div>
+                              <SubTitle>
+          <MultiAvatar2
+            primaryTitle={item.firstName}
+            imageId={item.imageId}
+            imageURL={item.imageURL}
+            imgWidth={"1.8em"}
+            imgHeight={"1.8em"}
+          />
+        </SubTitle></div>
+        &nbsp;
+        <div class="max-sm:w-full">
+                                      <Tooltip>
+                                        <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
+                                          <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                              
+       <Link
+        toUrl={`contact/${item.contactId}`}
+        title={`${item.fullName}`}
+      >{item.fullName}</Link>&nbsp;&nbsp;
+      {date === currentdate ? (
+        <span class="text-xs"
+          style={{
+            color: "tomato",
+            fontWeight: "bold",
+          }}
+        >
+          New
+        </span>
+      ) : null}
+     
+                                          </div>
+                                          </div>
+                                      </Tooltip>
+                                      </div>
+                                      </div>
+                              </div>
+                              <div class="flex">
+
+                              <div className=" flex font-medium flex-col  md:w-48 max-sm:flex-row w-full max-sm:justify-between ">
+                                  
+                                  <div class=" text-sm text-cardBody font-poppins">   
+                                  {item.tagWithCompany}
+                                  </div>
+                              </div>
+                              <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                             
+                                  <div class="text-sm text-cardBody font-poppins">
+                                       {item.designation}
+                                  </div>
+                              </div>
+                              <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
+                              
+                                <div class="text-sm text-cardBody font-poppins">
+                                     {item.department}
+                                </div>
+                            </div>
+                            </div>
+                            <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+
+<div className="text-sm text-cardBody font-poppins text-center">
+  {item.oppNo}
+</div>
+</div>
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                    
+
+                                  <div class=" text-sm text-cardBody font-poppins text-center">
+                                  {item.totalProposalValue}
+
+                                  </div>
+                              </div>
+                              <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+             
+
+                                  <div class="text-sm text-cardBody font-poppins">
+
+                                  {item.thirdPartyAccessInd 
+  ? `${item.thirdPartyAccessInd}`
+  : 'Not Provided'}
+
+                                  </div>
+                              </div>
+                              <div class="flex md:items-center">
+                              <div className="flex font-medium  md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                     
+
+
+                 
+            <Tooltip title={item.ownerName}>
+              <div class="max-sm:flex justify-end">
+          <SubTitle>
+            <MultiAvatar
+              primaryTitle={item.ownerName}
+              imageId={item.ownerImageId}
+              imageURL={item.imageURL}
+              imgWidth={"1.8rem"}
+              imgHeight={"1.8rem"}
+            />
+          </SubTitle>
+          </div>
+        </Tooltip>
+
+                 </div>
+                 <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                  <div>
+                  <Tooltip title="Notes">
+     <NoteAltIcon
+              onClick={() => {
+                handleContactNotesDrawerModal(true);
+                handleSetCurrentContact(item);
+              }}
+              style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+            />
+         </Tooltip>
+         </div>
+         <div>
+         <Tooltip title="Pulse">
+     <MonitorHeartIcon
+              onClick={() => {
+                handleContactPulseDrawerModal(true);
+                handleSetCurrentContact(item);
+              }}
+              style={{ fontSize: "0.8rem", color: "#df9697" }}
+            />
+         </Tooltip>
+
+</div>
+          </div>
+                              <div class="flex flex-col  max-sm:flex-row w-[40%] max-sm:justify-evenly items-center">
+                  <div class="rounded-full bg-white w-5 h-5 cursor-pointer md:mt-4">
+                  <Tooltip title={item.mobileNo} >
+          {item.doNotCallInd !== true && (
+            <span class=" mr-2 text-xs cursor-pointer"
+              onClick={() => {
+                props.handleDonotCallModal(true);
+                handleSetCurrentContactId(item);
+              }}
+            >
+             <PhoneInTalkIcon style={{fontSize:"0.8rem"}}/>
+            </span>
+          )}
+          {item.doNotCallInd === true && (
+            <span class=" mr-2 text-xs cursor-pointer"
+              onClick={() => {
+                props.handleDonotCallModal(true);
+                handleSetCurrentContactId(item);
+              }}
+            >
+              <PhoneDisabledIcon/>
+            </span>
+          )}
+        </Tooltip>
+                      </div>
+                      <div class=" max-sm:flex justify-end max-sm:w-full">
+                      <Tooltip title={item.emailId}>
+         
+          <MailOutlineIcon
+            type="mail"
+            style={{ cursor: "pointer",fontSize:"0.8rem" }}
+            onClick={() => {
+              props.getContactById(item.contactId);
+              props.handleContactEmailDrawerModal(true);
+            }}
+          />
+         </Tooltip>
+                      </div>
+
+                    &nbsp;&nbsp;
+                      <div>
+                      <span
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              handleSetCurrentContactId(item);
+              props.handleContactPulseDrawerModal(true);
+            }}
+          >{user.pulseAccessInd === true && (
+            <MonitorHeartIcon style={{fontSize:"0.8rem" ,color: "#df9697"}}/>
+          )}
+          </span>
+                      </div>
+                      <div>
+          
+
+                  </div>
+                  </div>
+                  <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                    <div>
+                  <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+          <span
+            style={{
+
+              cursor: "pointer",
+            }}
+          >
+          <LocationOnIcon   style={{
+              cursor: "pointer",
+              fontSize: "0.8rem"
+            }}/>
+          </span>
+        </Tooltip>
+        </div>
+  
+            {user.contactUpdateInd === true &&  user.crmInd === true && (
+          <div>
+         
+          <Tooltip title="Edit">
+            <BorderColorIcon
+              style={{ cursor: "pointer",fontSize: "0.8rem", color: "grey", }}
+              onClick={() => {
+                props.setEditContact(item);
+                handleUpdateContactModal(true);
+                handleSetCurrentContactId(item);
+                
+              }}
+            />
+          </Tooltip>
+    
+          </div>
+            )}
+                    </div>    
+                   <div class="w-[1%]"></div>
+                    </div>
+                          </div>
+                      </div>
+
+
+                  )
+              })} */}
+                    </InfiniteScroll>
+    </div>
+
+
+    <UpdateContactModal
+      contactData={currentContactId}
+      // fullName={currentContactId}
+      updateContactModal={updateContactModal}
+      handleUpdateContactModal={handleUpdateContactModal}
+      handleSetCurrentContactId={handleSetCurrentContactId}
+    />
+     <AddContactNotesDrawerModal
+      contactData={currentContact}
+      // fullName={currentContactId}
+      addDrawerContactNotesModal={addDrawerContactNotesModal}
+      handleContactNotesDrawerModal={handleContactNotesDrawerModal}
+      handleSetCurrentContact={handleSetCurrentContact}
+    />
+       <AddContactPulseDrawerModal
+      contactData={currentContact}
+      // fullName={currentContactId}
+      addDrawerContactPulseModal={addDrawerContactPulseModal}
+      handleContactPulseDrawerModal={handleContactPulseDrawerModal}
+      handleSetCurrentContact={handleSetCurrentContact}
+    />
+    <AddContactEmailDrawerModal
+      // item={currentContactId}
+      contactData={currentContactId}
+      addDrawerContactEmailModal={props.addDrawerContactEmailModal}
+      handleContactEmailDrawerModal={props.handleContactEmailDrawerModal}
+    />
+    <ReactContactSpeechModal
+      // item={currentContactId}
+      contactData={currentContactId}
+      handleContactReactSpeechModal={handleContactReactSpeechModal}
+      addContactSpeechModal={addContactSpeechModal}
+      handleSetCurrentContactId={handleSetCurrentContactId}
+    />
+    {/* <AddDonotCallModal
+      addDonotCallModal={props.addDonotCallModal}
+      contactId={currentContactId}
+      handleDonotCallModal={props.handleDonotCallModal}
+    /> */}
+    <AddContactDrawerModal
+      item={currentContactId}
+      addDrawerContactModal={props.addDrawerContactModal}
+      handleContactDrawerModal={props.handleContactDrawerModal}
+    />
+  </>
+);
+  }
 
   return (
     <>
       
      
-          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
         <div className=" md:w-40">Company</div>
@@ -125,7 +460,7 @@ function ContactAllCardList(props) {
         dataLength={allContacts.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllContacts?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
         
@@ -388,7 +723,7 @@ function ContactAllCardList(props) {
                     )
                 })} */}
                       </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
 
 
       <UpdateContactModal

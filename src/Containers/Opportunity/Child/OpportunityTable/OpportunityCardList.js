@@ -5,7 +5,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component"
 import { FormattedMessage } from "react-intl";
 import OpportunitySelectStages from "../OpportunityTable/OpportunitySelectStages"
-import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { Link } from 'react-router-dom';
@@ -126,11 +125,11 @@ function OpportunityCardList(props) {
                 dataLength={opportunityByUserId.length}
                 next={handleLoadMore}
                 hasMore={hasMore}
-                loader={fetchingOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+                loader={fetchingOpportunity?<div style={{ textAlign: 'center' }}>Loading...</div> :null}
                 height={"87vh"}
             >
 
-<div class="flex  flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
+<div class="flex justify-center  flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
     {opportunityByUserId.map((item) => {
                  
                  var findProbability = item.probability;
@@ -139,8 +138,8 @@ function OpportunityCardList(props) {
                        findProbability = element.probability;}
                     });
                  return (
-                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
-                  text-[#444444] m-3 p-1 w-[15vw] flex flex-col  ">
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] justify-center shadow-[#aaa] h-[9rem] 
+                  text-[#444444] m-2 p-1 w-[16vw] flex flex-col max-sm:w-full max-sm:m-[0.15rem]  ">
         <div class="flex items-center flex-nowrap h-[2.81em]">
           <div class=" flex basis-[15%] mr-[0.2rem]" >
             <MultiAvatar

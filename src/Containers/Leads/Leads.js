@@ -6,14 +6,10 @@ import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, } from "./LeadsAction";
 const LeadsHeader=lazy(()=>import ("./Child/LeadsHeader"));
 const AddLeadsModal=lazy(()=>import ("./Child/AddLeadsModal"));
-const LeadsAllMobileCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllMobileCardList"));
-const LeadsJunkMobileList = lazy(()=>import("./Child/LeadsTable/LeadsJunkMobileList"));
 const LeadsTeamCardList = lazy(()=>import("./Child/LeadsTable/LeadsTeamCardList"));
-const LeadsMobileCard = lazy(()=>import("./Child/LeadsTable/LeadsMobileCard"));
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 const LeadsAllCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllCardList"));
-const LeadsTeamMobileCardList = lazy(()=>import("./Child/LeadsTable/LeadsTeamMobileCardList"));
 
 class Leads extends Component {
 
@@ -88,10 +84,10 @@ class Leads extends Component {
         {/* <LeadsTable/>  */}
         <Suspense fallback={<BundleLoader />}>
           {viewType==="card" ? (
-  isMobile ? <LeadsMobileCard /> :<LeadsCardList  filter={this.state.filter}/>
-          ):viewType==="list" ? (isMobile ?<LeadsJunkMobileList/>:<LeadsJunkList/>)
-        :viewType==="all" ? (isMobile ?<LeadsAllMobileCardList/>:<LeadsAllCardList/>)
-        :viewType==="teams" ? (isMobile ?<LeadsTeamMobileCardList/>:<LeadsTeamCardList/>)
+  <LeadsCardList  filter={this.state.filter}/>
+          ):viewType==="list" ? (<LeadsJunkList/>)
+        :viewType==="all" ? (<LeadsAllCardList/>)
+        :viewType==="teams" ? (<LeadsTeamCardList/>)
         
         :null}
        

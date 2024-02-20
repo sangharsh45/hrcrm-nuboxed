@@ -15,7 +15,6 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
 } from "../../../../Components/UI/Elements";
 import { Link } from 'react-router-dom';
 import {
@@ -71,6 +70,7 @@ function CustomerCardList(props) {
   const [hasMore, setHasMore] = useState(true);
  
   const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -99,7 +99,15 @@ function CustomerCardList(props) {
     return () => props.emptyCustomer();
   }, []);
 
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
 const [rowdata, setrowdata] = useState("");
   const [currentCustomerId, setCurrentCustomerId] = useState("");
@@ -151,6 +159,338 @@ const [rowdata, setrowdata] = useState("");
   // if (fetchingCustomers) {
   //   return <BundleLoader />;
   // }
+  if (isMobile){
+    return (
+      <>
+      
+   
+           <div className=' flex justify-end sticky top-28 z-auto'>
+           <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          
+          <InfiniteScroll
+          dataLength={customerByUserId.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingCustomers?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+          height={"75vh"}
+        >
+        
+        {customerByUserId.map((item) => { 
+           const currentdate = dayjs().format("DD/MM/YYYY");
+           const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+           const countryCode = item.address[0].countryAlpha2Code
+           const diff = Math.abs(
+              dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+             Street : ${
+               item.address && item.address.length && item.address[0].street
+             }   
+            State : ${item.address && item.address.length && item.address[0].state}
+           Country : ${
+             (item.address && item.address.length && item.address[0].country) || ""
+           } 
+             PostalCode : ${
+               item.address && item.address.length && item.address[0].postalCode
+             } `;
+                      return (
+                          <div>
+                              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                                   <div class="flex justify-between items-center w-wk ">
+                                     <div className=" flex font-medium ">
+                                     <div className="flex ">
+                        <div>
+                        
+                            <MultiAvatar
+                              primaryTitle={item.name}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                         
+                        </div>
+                      
+                        <div class="w-full flex items-center">
+                        <Tooltip>
+                                            <div >
+                                              <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                  
+           <Link
+            toUrl={`customer/${item.customerId}`}
+            title={`${item.name}`}
+          >{item.name}</Link>&nbsp;&nbsp;
+          {date === currentdate ? (
+            <span class="text-xs text-[tomato] font-bold"
+            >
+              New
+            </span>
+          ) : null}
+         
+                                              </div>
+                                              </div>
+                                          </Tooltip>
+                        </div>
+                      </div>
+                                      </div> 
+                                  <div className=" flex font-medium    ">
+                             
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                      <div class=" text-xs text-cardBody font-poppins">   
+                                      {item.sector}
+                                      </div>
+                                  
+                                  </div> 
+                                  <div className=" flex font-medium ">
+                                    
+  
+                                      {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                      <div class=" text-sm text-cardBody font-poppins">
+                                      <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="flex justify-between items-center w-wk ">
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.oppNo}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.totalProposalValue}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.weight}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      
+  
+                                      <div class=" text-xs text-cardBody font-poppins">
+                                      
+                                      <span>
+                                    {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
+                <MultiAvatar2
+                  primaryTitle={item.assignedTo}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              )}
+              </>
+              )}
+            </span>
+               
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                         
+                         {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+  
+                         <span>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imageURL={item.imageURL}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </span>
+                     </div>
+                     </div>
+                     <div class="flex justify-between items-center w-wk ">
+                         
+                     <div className=" flex font-medium  ">
+                         
+                         <div class=" text-sm text-cardBody font-poppins"></div>
+                         <Popconfirm
+    title="Change status to Account?"
+    onConfirm={() => handleConfirm(item.customerId)}
+    okText="Yes"
+    cancelText="No"
+  >
+                         <Button type="primary">
+                       <span class="text-sm" >
+                       <FormattedMessage
+                          id="app.convertAsCustomer"
+                          defaultMessage="Convert as Customer"
+                        />
+                       
+                        
+                        </span>
+                          </Button>
+                          </Popconfirm>
+                     </div>
+                     
+                    
+                                  <div>
+                                  <Tooltip title={item.url}>
+                {item.url !== "" ? (
+                  <span
+                    //type="edit"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {}}
+                  >
+                    {" "}
+                    <a href={`https://${item.url}`} target="_blank">
+                      <ExploreIcon
+                       className=" !text-base cursor-pointer text-[green]"
+                      />
+                    </a>
+                  </span>
+                )
+                :<div class=" w-3">
+                        
+                </div>
+                }
+              </Tooltip>
+          
+              </div>
+                          <div>
+                          <span
+                style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+                onClick={() => {
+                  props.getCustomerDetailsById(item.customerId);
+                  props.getCustomerKeySkill(item.customerId);
+                  //   this.props.getCustomerDocument(item.customerId );
+  
+                  props.handleCustomerDrawerModal(item, true);
+                }}
+              >
+                {" "}
+                {user.pulseAccessInd === true && <MonitorHeartIcon  className=" !text-base cursor-pointer text-[#df9697]"/>}
+              </span> 
+                          </div>
+                          <div>
+              
+  
+                      </div>
+                      
+                    
+                          <div>
+                          <Tooltip title="Pulse">
+         <MonitorHeartIcon
+                  onClick={() => {
+                    handleCustomerPulseDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#df9697]"
+                />
+             </Tooltip>
+                          </div>
+                          <div>
+                          <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleCustomerNotesDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                    handleRowData(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#4bc076]"
+                />
+             </Tooltip>
+  
+                      </div>
+                     
+                
+                    
+                      <div >
+                      <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+  
+  <LocationOnIcon    className=" !text-base cursor-pointer text-[red]"/>
+  
+  </Tooltip>
+  </div>
+  <div>
+  {props.user.customerUpdateInd === true && user.crmInd === true && (
+              <Tooltip title="Edit">
+                <BorderColorIcon
+                 className=" !text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                      props.setEditCustomer(item);
+                      handleUpdateCustomerModal(true);
+                      handleSetCurrentCustomerId(item.customerId);
+                    
+                  }}
+                />
+              </Tooltip>
+              )}
+  
+  </div>
+             
+  
+                        </div>
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+                  </InfiniteScroll>
+        </div>
+        </div>
+        
+    
+        <AddCustomerDrawerModal
+          addDrawerCustomerModal={props.addDrawerCustomerModal}
+          handleCustomerDrawerModal={props.handleCustomerDrawerModal}
+        />
+  
+        <UpdateCustomerModal
+          customerId={currentCustomerId}
+          updateCustomerModal={updateCustomerModal}
+          handleUpdateCustomerModal={handleUpdateCustomerModal}
+          handleSetCurrentCustomerId={handleSetCurrentCustomerId}
+        />
+           <CustomerPulseDrawerModal
+      customer={currentCustomer}
+          addDrawerCustomerPulseModal={addDrawerCustomerPulseModal}
+          handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+        <AddCustomerEmailDrawerModal
+          // contactById={props.contactById}
+          addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
+          handleCustomerEmailDrawerModal={props.handleCustomerEmailDrawerModal}
+        />
+  
+        
+  <AddCustomerNotesDrawerModal
+          customer={currentCustomer}
+          rowdata={rowdata}
+          addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
+          handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+      </>
+    );
+  }
+
+
 
   return (
     <>
@@ -158,7 +498,7 @@ const [rowdata, setrowdata] = useState("");
  
          <div className=' flex justify-end sticky top-28 z-auto'>
          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-        <div className=" flex  w-[90.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" flex  w-[92.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[18.7rem]"> 
          <FormattedMessage
                         id="app.name"
@@ -221,7 +561,7 @@ const [rowdata, setrowdata] = useState("");
                       />
    
           </div>
-        <div className="md:w-[11.8rem]">
+        <div className="md:w-[10.8rem]">
         <FormattedMessage
                         id="app.owner"
                         defaultMessage="Owner"
@@ -270,7 +610,7 @@ const [rowdata, setrowdata] = useState("");
                                    <div className=" flex font-medium flex-col w-[18rem]   max-sm:w-full">
                                    <div className="flex max-sm:w-full">
                       <div>
-                        <SubTitle>
+                       
                           <MultiAvatar
                             primaryTitle={item.name}
                             imageId={item.imageId}
@@ -278,7 +618,7 @@ const [rowdata, setrowdata] = useState("");
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
-                        </SubTitle>
+                        
                       </div>
                       <div class="w-[4%]"></div>
 
@@ -554,7 +894,7 @@ const [rowdata, setrowdata] = useState("");
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
 <LocationOnIcon  
-
+className=" !text-base cursor-pointer text-[#960A0A]"
 
 />
 

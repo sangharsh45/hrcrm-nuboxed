@@ -80,7 +80,7 @@ function OpportunityCloseCard(props) {
                  return (
 
                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[16rem] 
-                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col  ">
+                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col max-sm:w-wk  ">
 
                       <div class="flex items-center justify-between ">
                       <div>Name</div>

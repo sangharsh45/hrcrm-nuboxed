@@ -8,9 +8,6 @@ import {
 } from "./OpportunityAction";
 const OpportunityBoard = lazy(() => import("./Child/OpportunityBoard"));
 const OpportunityWonCard = lazy(() => import("./Child/OpportunityTable/OpportunityWonCard"));
-const OpportunityAllMobileCardList = lazy(() => import("./Child/OpportunityTable/OpportunityAllMobileCardList"));
-const OpportunityLostMobileCard = lazy(() => import("./Child/OpportunityTable/OpportunityLostMobileCard"));
-const OpportunityMobileWonCard = lazy(() => import("./Child/OpportunityTable/OpportunityMobileWonCard"));
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
@@ -84,7 +81,7 @@ class Opportunity extends Component {
                     <OpportunityCloseCard/>
                      :
              this.props.viewType === "lost" ?
-             (isMobile ?  <OpportunityLostMobileCard/> :   <OpportunityLostCard/> )
+             (  <OpportunityLostCard/> )
                     // <OpportunitylostTable/>
                     :
                     this.props.viewType === "Map" ?
@@ -92,10 +89,10 @@ class Opportunity extends Component {
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
              this.props.viewType === "won" ?
-             (isMobile ? <OpportunityMobileWonCard /> :  <OpportunityWonCard/> )
+             ( <OpportunityWonCard/> )
              // <OpportunitylostTable/>
             : this.props.viewType==="all" ? 
-            (isMobile ?  <OpportunityAllMobileCardList/> :   <OpportunityAllCardList/> )
+            (   <OpportunityAllCardList/> )
              : null}
         </Suspense>
       </React.Fragment>
