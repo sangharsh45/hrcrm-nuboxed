@@ -24,6 +24,9 @@ const initialState = {
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
 
+  addWorkflowEmployee: false,
+  addWorkflowEmployeeError: false,
+
   onboardingEmployeeModal:false,
 
   fetchingFilterEmployee: false,
@@ -886,6 +889,31 @@ case types.GET_ADMIN_USER_FAILURE:
                 return { ...state, 
                   fetchingUserStageList: false, 
                   fetchingUserStageListError: true };
+
+
+
+                  case types.ADD_WORKFLOW_EMPLOYEE_REQUEST:
+                    return { ...state, addWorkflowEmployee: true };
+                  case types.ADD_WORKFLOW_EMPLOYEE_SUCCESS:
+                    return {
+                      ...state,
+                      addWorkflowEmployee: false,
+                      // onboardingEmployeeModal: false,
+                      // employees: state.employees.map((item) => {
+                      //   if (item.employeeId === action.payload.employeeId) {
+                      //     return action.payload;
+                      //   } else {
+                      //     return item;
+                      //   }
+                      // }),
+                    };
+                  case types.ADD_WORKFLOW_EMPLOYEE_FAILURE:
+                    return {
+                      ...state,
+                      // onboardingEmployeeModal:false,
+                      addWorkflowEmployee: false,
+                      addWorkflowEmployeeError: true,
+                    };
 
 
     default:

@@ -49,7 +49,8 @@ export const sectorsReducer = (state = initialState, action) => {
     return {
       ...state,
       addingSectors: false,
-      sectors: [...state.sectors, action.payload],
+      sectors:[action.payload,...state.sectors]
+      // sectors: [...state.sectors, action.payload],
       
     };
   case types.ADD_SECTORS_FAILURE:
