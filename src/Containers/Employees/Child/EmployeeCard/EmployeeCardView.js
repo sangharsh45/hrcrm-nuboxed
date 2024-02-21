@@ -60,7 +60,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
              {props.employees=="Data not Found" ? "Data not Found" :
-            <div class="flex flex-wrap justify-center w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
+            <div class="flex flex-wrap  w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
               {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
                
                 const handleCopyClick = () => {
@@ -82,7 +82,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 const showTooltip = tooltipContent.trim() !== ''; 
                  return (
                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
-                  text-[#444444] m-3 p-1 w-[15rem] flex flex-col  ">
+                  text-[#444444] my-3 p-1 ml-3 w-[16rem] flex flex-col  ">
                       <div class="flex">
                    <Tooltip 
                    title={item.country}

@@ -1237,3 +1237,28 @@ export const getUserStageList = (employeeId) => (dispatch) => {
     });
 };
 
+export const addEmployeeWorkflow = (employeeId,data) => (dispatch) => {
+  dispatch({ type: types.ADD_WORKFLOW_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/add/workflow/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data);
+      console.log(res);
+      dispatch({
+        type: types.ADD_WORKFLOW_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_WORKFLOW_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+

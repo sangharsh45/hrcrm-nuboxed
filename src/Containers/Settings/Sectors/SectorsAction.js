@@ -49,7 +49,7 @@ export const addSectors = (sectors, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getSectors());
+        // dispatch(getSectors());
         {res.data.message?  
           message.success(res.data.message):
         message.success("Sector has been added successfully!");
