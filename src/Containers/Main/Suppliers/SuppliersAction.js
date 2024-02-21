@@ -1259,7 +1259,7 @@ export const addCurrencyInPo = (data, poSupplierDetailsId) => (dispatch) => {
     type: types.ADD_CURRENCY_IN_PO_REQUEST,
   });
   axios
-    .post(`${base_url2}/po/updateCurrency/${poSupplierDetailsId}`, data,
+    .put(`${base_url2}/po/updateCurrency/${poSupplierDetailsId}`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
