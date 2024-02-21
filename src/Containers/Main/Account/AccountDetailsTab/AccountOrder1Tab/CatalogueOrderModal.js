@@ -4,7 +4,7 @@ import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
-import AddOrderForm from "./AddOrderForm";
+import AccountOrder1Stepper from "./AccountOrder1Stepper";
 
 const TabPane = StyledTabs.TabPane;
 class CatalogueOrderModal extends Component {
@@ -24,7 +24,7 @@ class CatalogueOrderModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <AddOrderForm />
+                        <AccountOrder1Stepper />
                     </Suspense>
                 </StyledDrawer>
             </div>

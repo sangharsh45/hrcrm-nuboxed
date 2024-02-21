@@ -1396,7 +1396,6 @@ export const generateGrnForPo = (data) => (dispatch) => {
         type: types.GENERATE_GRN_FOR_PO_SUCCESS,
         payload: res.data,
       });
-      message.success("Grn has created !!")
     })
     .catch((err) => {
       console.log(err);
@@ -1460,7 +1459,6 @@ export const trnasferGrnItemToStock = (data, poSupplierSuppliesId) => (dispatch)
         type: types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS,
         payload: res.data,
       });
-      message.success("Moved to stock !!")
     })
     .catch((err) => {
       console.log(err);
@@ -1476,4 +1474,60 @@ export const handleReceivedUnit = (modalProps) => (dispatch) => {
     type: types.HANDLE_RECEIVED_UNIT_MODAL,
     payload: modalProps,
   });
+};
+
+export const getReceivedUnitOfAnItem = (locationId) => (dispatch) => {
+  dispatch({
+    type: types.GET_RECEIVED_UNIT_OF_AN_ITEM_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po//${locationId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_RECEIVED_UNIT_OF_AN_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_RECEIVED_UNIT_OF_AN_ITEM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updatePartIdOfAnItem = (data, poSupplierSuppliesId) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_PART_ID_OF_AN_ITEM_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/po/part/${poSupplierSuppliesId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch({
+        type: types.UPDATE_PART_ID_OF_AN_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PART_ID_OF_AN_ITEM_FAILURE,
+        payload: err,
+      });
+    });
 };

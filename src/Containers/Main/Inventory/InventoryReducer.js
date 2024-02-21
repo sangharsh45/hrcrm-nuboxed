@@ -223,12 +223,19 @@ const initialState = {
   materialReceiveData: [],
 
   fetchingMaterialReceiveDetailData: false,
-  fetchingMaterialReceiveDetailDataError: true,
+  fetchingMaterialReceiveDetailDataError: false,
   receivedDetailData: [],
 
   fetchingGrnListOfAPo: false,
-  fetchingGrnListOfAPoError: true,
+  fetchingGrnListOfAPoError: false,
   poGrnList: [],
+
+  updatingPartIdOfAnItem: false,
+  updatingPartIdOfAnItemError: false,
+
+  fetchingReceivedUnitOfAnItem: false,
+  fetchingReceivedUnitOfAnItemError: false,
+  reciveUnitData: [],
 
   showGrnListOfPo: false,
 
@@ -1173,6 +1180,40 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         transferingPoGrnToStock: false,
         transferingPoGrnToStockError: true,
+      };
+
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_REQUEST:
+      return { ...state, fetchingReceivedUnitOfAnItem: true };
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_SUCCESS:
+      return {
+        ...state,
+        fetchingReceivedUnitOfAnItem: false,
+        reciveUnitData: action.payload
+      };
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_FAILURE:
+      return {
+        ...state,
+        fetchingReceivedUnitOfAnItem: false,
+        fetchingReceivedUnitOfAnItemError: true,
+
+      };
+
+    case types.UPDATE_PART_ID_OF_AN_ITEM_REQUEST:
+      return { ...state, updatingPartIdOfAnItem: true };
+    case types.UPDATE_PART_ID_OF_AN_ITEM_SUCCESS:
+      return {
+        ...state,
+        updatingPartIdOfAnItem: false,
+        reciveUnitData: state.reciveUnitData.map((item) =>
+          item.poSupplierSuppliesId === action.payload.poSupplierSuppliesId
+            ? action.payload : item
+        ),
+      };
+    case types.UPDATE_PART_ID_OF_AN_ITEM_FAILURE:
+      return {
+        ...state,
+        updatingPartIdOfAnItem: false,
+        updatingPartIdOfAnItemError: true,
       };
 
     default:
