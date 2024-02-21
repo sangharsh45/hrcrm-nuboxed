@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
  import { getProcessForOnboarding } from '../../../Settings/SettingsAction';
 import { Field } from 'formik';
-import {addOnboardingEmployee} from "../../../Employees/EmployeeAction"
+import {addOnboardingEmployee,getUserStageList} from "../../../Employees/EmployeeAction"
 import { FormattedMessage } from 'react-intl';
 import { SelectComponent } from '../../../../Components/Forms/Formik/SelectComponent';
 
@@ -14,6 +14,7 @@ const OnBoardingEmployeeForm = (props) => {
   const [selectedWork, setSelectedWork] = useState("");
   useEffect(() => {
     props.getProcessForOnboarding(props.orgId);
+    props.getUserStageList(props.employeeName.employeeId);
   }, []);
 
   const { onboardingProcess, ratingValue } = props;
@@ -49,17 +50,19 @@ const OnBoardingEmployeeForm = (props) => {
             direction="vertical"
             current={1}
             items={[
-                {
-                    title:<FormattedMessage
-                        id="app.ordercreated"
-                        defaultMessage="Order Created"
-                       />,
-                    status: <FormattedMessage
-                    id="app.progress"
-                    defaultMessage="progress"
-                   />,
-                 
-                },
+              {
+              //   title:<FormattedMessage
+              //       id="app.ordercreated"
+              //       defaultMessage="Order Created"
+              //      />,
+              //   status: <FormattedMessage
+              //   id="app.progress"
+              //   defaultMessage="progress"
+              //  />,
+                description: <>
+                    <b> {props.userStageList.userName}</b>
+                </>
+            },
                 {
                     title: 'Advance Payment',
                   
@@ -116,6 +119,7 @@ const OnBoardingEmployeeForm = (props) => {
 const mapStateToProps = ({ settings, employee,auth }) => ({
   orgId: auth.userDetails && auth.userDetails.organizationId,
   onboardingProcess: settings.onboardingProcess,
+  userStageList:employee.userStageList,
   setEditingEmployee:employee.setEditingEmployee,
 });
 
@@ -124,6 +128,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getProcessForOnboarding,
       addOnboardingEmployee,
+      getUserStageList,
     },
     dispatch
   );

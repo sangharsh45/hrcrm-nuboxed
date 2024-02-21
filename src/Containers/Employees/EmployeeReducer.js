@@ -94,9 +94,17 @@ const initialState = {
   fetchingEmployeeInputSearchDataError: false,
   inputData: [],
 
+  fetchingUserStageList: false, 
+  fetchingUserStageListError: false,
+  userStageList:[],
+
   fetchingAllDocumentsByEmployeeId: false,
   fetchingAllDocumentsByEmployeeIdError: false,
   allDocumentsByEmployeeId:[],
+
+  fetchingUserKpi: false, 
+  fetchingUserKpiError: false,
+  userKpiList:[],
 
   userAdmin:false,
   userAdminError:false,
@@ -181,10 +189,10 @@ export const EmployeeReducer = (state = initialState, action) => {
       return { ...state, fetchingEmployee: true };
     case types.GET_EMPLOYEE_LIST_SUCCESS:
       return { ...state, fetchingEmployee: false,
-        //  employees: action.payload 
-        employees: [
-          ...state.employees,
-          ...action.payload],
+         employees: action.payload 
+        // employees: [
+        //   ...state.employees,
+        //   ...action.payload],
         };
     case types.GET_EMPLOYEE_LIST_FAILURE:
       return { ...state, fetchingEmployee: false, fetchingEmployeeError: true };
@@ -857,6 +865,27 @@ case types.GET_ADMIN_USER_FAILURE:
           return { ...state, deletingEmployeeData: false, deletingEmployeeDataError: false };
 
 
+
+          case types.GET_USER_KPI_LIST_REQUEST:
+            return { ...state, fetchingUserKpi: true };
+          case types.GET_USER_KPI_LIST_SUCCESS:
+            return { ...state, fetchingUserKpi: false, 
+              userKpiList: action.payload };
+          case types.GET_USER_KPI_LIST_FAILURE:
+            return { ...state, 
+              fetchingUserKpi: false, 
+              fetchingUserKpiError: true };
+
+
+              case types.GET_USER_STAGE_LIST_REQUEST:
+                return { ...state, fetchingUserStageList: true };
+              case types.GET_USER_STAGE_LIST_SUCCESS:
+                return { ...state, fetchingUserStageList: false, 
+                  userStageList: action.payload };
+              case types.GET_USER_STAGE_LIST_FAILURE:
+                return { ...state, 
+                  fetchingUserStageList: false, 
+                  fetchingUserStageListError: true };
 
 
     default:
