@@ -6,30 +6,42 @@ import {
     getPurchaseSuppliersList,
     handlePoLocationModal,
     handlePoListModal,
-    handleTermsnConditionModal
+    handleTermsnConditionModal,
+    addCurrencyInPo
 } from "../../../SuppliersAction"
-import { Button, Tooltip } from 'antd';
+import { Button, Select, Tooltip } from 'antd';
 import dayjs from "dayjs";
 import PoLocationModal from "./PoLocationModal";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 import POSupplierDetailsModal from "./POSupplierDetailsModal";
-import { TerminalSharp } from "@mui/icons-material";
+import { BorderColorRounded, TerminalSharp } from "@mui/icons-material";
 import TermsnConditionModal from "./TermsnConditionModal";
+import { getCurrency } from "../../../../../Auth/AuthAction";
+const { Option } = Select;
 
 function PurchaseOrderTable(props) {
     useEffect(() => {
+        props.getCurrency()
         props.getPurchaseSuppliersList(props.supplier.supplierId);
     }, []);
     const [rowData, setRowData] = useState({})
     const handleRowData = (item) => {
         setRowData(item)
     }
+    const [currency, setCurrency] = useState("")
+    const [showIcon, setShowIcon] = useState(false)
+    const handleCurrencyField = () => {
+        setShowIcon(!showIcon)
+    }
+    const handleChangeCurrency = (val) => {
+        setCurrency(val)
+    }
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-                    <div className=" flex justify-between w-[56.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[23.1rem]">
+                    <div className=" flex justify-between w-[90.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[30.1rem]">
                             <FormattedMessage
                                 id="app.po"
                                 defaultMessage="PO#"
@@ -45,9 +57,22 @@ function PurchaseOrderTable(props) {
                                 defaultMessage="Location" />
                         </div>
                         <div className=" md:w-[14.1rem]">
-
+                            <FormattedMessage
+                                id="app.value"
+                                defaultMessage="Value" />
                         </div>
                         <div className=" md:w-[14.1rem]">
+                            <FormattedMessage
+                                id="app.currency"
+                                defaultMessage="Currency" />
+                        </div>
+                        <div className=" md:w-[5.1rem]">
+
+                        </div>
+                        <div className=" md:w-[12.1rem]">
+
+                        </div>
+                        <div className=" md:w-[5.1rem]">
 
                         </div>
 
@@ -59,7 +84,7 @@ function PurchaseOrderTable(props) {
                             <>
                                 <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3" >
                                     <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                        <div className=" flex font-medium flex-col md:w-36 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                                                 <span
                                                     class=" text-sky-700 cursor-pointer"
@@ -94,6 +119,51 @@ function PurchaseOrderTable(props) {
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+
+                                                {item.poValue}
+                                            </div>
+                                        </div>
+                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                {showIcon && rowData.poSupplierDetailsId === item.poSupplierDetailsId ?
+                                                    <Select
+                                                        value={currency}
+                                                        onChange={(value) =>
+                                                            handleChangeCurrency(value)
+                                                        }
+                                                    // placeholder={`select`}
+                                                    >
+                                                        {props.currencies.map((a) => {
+                                                            return <Option value={a.currency_name}>{a.currency_name}</Option>;
+                                                        })}
+                                                    </Select> :
+                                                    item.currency}
+                                            </div>
+                                        </div>
+                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                <Tooltip title="Update Currency">
+                                                    {showIcon && rowData.poSupplierDetailsId === item.poSupplierDetailsId ?
+                                                        <div>
+                                                            <Button onClick={() => {
+                                                                props.addCurrencyInPo({
+                                                                    poCurrency: currency
+                                                                })
+                                                            }}>Add</Button>
+                                                            <Button onClick={handleCurrencyField}>Cancel</Button>
+                                                        </div> :
+                                                        <BorderColorRounded
+                                                            onClick={() => {
+                                                                handleRowData(item);
+                                                                handleCurrencyField()
+                                                            }}
+                                                        />
+                                                    }
+                                                </Tooltip>
+                                            </div>
+                                        </div>
+                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
                                                 {item.locationName === null ? <Button
                                                     type="primary"
                                                     onClick={() => {
@@ -108,7 +178,7 @@ function PurchaseOrderTable(props) {
                                                 </Button> : null}
                                             </div>
                                         </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                        <div className=" flex font-medium flex-col md:w-20 max-sm:justify-between w-full max-sm:flex-row ">
                                             <div class=" cursor-pointer font-normal text-[0.85rem] text-cardBody font-poppins">
                                                 <Tooltip title="Terms and condition">
                                                     <TerminalSharp
@@ -152,7 +222,8 @@ const mapStateToProps = ({ suppliers, auth }) => ({
     userId: auth.userDetails.userId,
     addlocationInPo: suppliers.addlocationInPo,
     addPoListmModal: suppliers.addPoListmModal,
-    addTermsnCondition: suppliers.addTermsnCondition
+    addTermsnCondition: suppliers.addTermsnCondition,
+    currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -161,7 +232,9 @@ const mapDispatchToProps = (dispatch) =>
             getPurchaseSuppliersList,
             handlePoLocationModal,
             handlePoListModal,
-            handleTermsnConditionModal
+            handleTermsnConditionModal,
+            getCurrency,
+            addCurrencyInPo
         },
         dispatch
     );

@@ -8,29 +8,21 @@ import TransferToStock from "./TransferToStock";
 import { InsertEmoticonOutlined, ListAltRounded } from "@mui/icons-material";
 import ItemWiseReceivedModal from "./ItemWiseReceivedModal";
 
-const GrnListOfPO = (props) => {
+const ReceivedUnitList = (props) => {
     useEffect(() => {
         props.getMaterialReceivedDetailData(props.row.poSupplierDetailsId)
     }, [])
 
-    const [row, setRow] = useState({})
-    const handleRow = (item) => {
-        setRow(item)
-    }
     return (
         <>
             <div className=' flex justify-end sticky z-auto'>
                 <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=""></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.price" defaultMessage="Price" /></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.unit" defaultMessage="Unit" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.received" defaultMessage="Receive" /></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.damage" defaultMessage="Damage" /></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.final" defaultMessage="Final" /></div>
-                        <div className=" md:w-[22.12rem]"><FormattedMessage id="app.remark" defaultMessage="Remark" /></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.grn" defaultMessage="Grn #" /></div>
+
                         <div className=""></div>
                     </div>
 
@@ -135,5 +127,5 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(GrnListOfPO)
+    connect(mapStateToProps, mapDispatchToProps)(ReceivedUnitList)
 );

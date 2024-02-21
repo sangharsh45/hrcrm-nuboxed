@@ -8,7 +8,7 @@ const POSupplierDetailsModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title="Details"
+                title={`PO Details - ${props.rowData.newPoNumber}`}
                 width="70%"
                 visible={addPoListmModal}
                 closable

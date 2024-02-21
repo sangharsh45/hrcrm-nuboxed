@@ -4,27 +4,23 @@ import { FormattedMessage } from "react-intl";
 class SupplierDetailView extends Component {
   render() {
     const {
-        supplier: { phoneNo, emailId, shipByName },
+      supplier: { phoneNo, emailId, shipByName },
       toggleViewType,
     } = this.props;
 
     return (
       <>
-        <ShipperItemRow 
-         label={
-          <FormattedMessage id="app.phoneNo" defaultMessage="Phone #" />
-        }
-        value={phoneNo} />
-        <ShipperItemRow 
-     label={
-      <FormattedMessage id="app.email" defaultMessage="Email" />
-    }
-        value={emailId} />
-        <ShipperItemRow 
-        label={
-          <FormattedMessage id="app.shipBy" defaultMessage="Ship By" />
-        }
-        value={shipByName} />
+        <ShipperItemRow
+          label={
+            <FormattedMessage id="app.phoneNo" defaultMessage="Phone #" />
+          }
+          value={phoneNo} />
+        <ShipperItemRow
+          label={
+            <FormattedMessage id="app.email" defaultMessage="Email" />
+          }
+          value={emailId} />
+
       </>
     );
   }
@@ -38,7 +34,7 @@ const ShipperItemRow = ({ label, value }) => {
         {label}
       </div>
       <div
-      class=" whitespace-nowrap overflow-hidden text-ellipsis w-[61%]">
+        class=" whitespace-nowrap overflow-hidden text-ellipsis w-[61%]">
         {value}
       </div>
     </div>

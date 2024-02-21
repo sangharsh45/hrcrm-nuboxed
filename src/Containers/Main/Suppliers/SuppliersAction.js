@@ -3,6 +3,7 @@ import { base_url, base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
+import Swal from "sweetalert2";
 
 export const setSuppliersViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_SUPPLIERS_VIEW_TYPE, payload: viewType });
@@ -1083,7 +1084,12 @@ export const updateSupplierContact = (data, contactPersonId) => (dispatch) => {
     .put(`${base_url}/contactPerson/${contactPersonId}`, data)
     .then((res) => {
       console.log(res);
-      // dispatch(getDistributorsByUserId(userId));
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.UPDATE_SUPPLIER_CONTACT_SUCCESS,
         payload: res.data,
@@ -1123,6 +1129,12 @@ export const updatePriceOfPoItem = (data) => (dispatch) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.UPDATE_PRICE_OF_PO_ITEM_SUCCESS,
         payload: res.data,
@@ -1149,6 +1161,12 @@ export const addTermsnCondition = (data, poSupplierDetailsId) => (dispatch) => {
         },
       })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(getTermsnConditionOfPo(poSupplierDetailsId))
       dispatch({
         type: types.ADD_TERMS_N_CONDITION_SUCCESS,
@@ -1236,5 +1254,34 @@ export const handleTermsnConditionModal = (modalProps) => (dispatch) => {
   });
 };
 
-
-
+export const addCurrencyInPo = (data, poSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CURRENCY_IN_PO_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/po/updateCurrency/${poSupplierDetailsId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })// dispatch(getTermsnConditionOfPo(poSupplierDetailsId))
+      dispatch({
+        type: types.ADD_CURRENCY_IN_PO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CURRENCY_IN_PO_FAILURE,
+        payload: err,
+      });
+    });
+};

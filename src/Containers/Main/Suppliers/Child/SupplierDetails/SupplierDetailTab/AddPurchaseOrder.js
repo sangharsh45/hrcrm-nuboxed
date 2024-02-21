@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import AddedSuppliesTable from './AddedSuppliesTable';
+import PostImageUpld from "../../../../../../Components/Forms/Formik/PostImageUpld";
 
 const AddPurchaseOrder = (props) => {
     useEffect(() => {
@@ -40,6 +41,7 @@ const AddPurchaseOrder = (props) => {
             if (item.suppliesId === a) {
                 setFieldValue("suppliesId", item.suppliesId);
                 setFieldValue("name", item.name);
+                setFieldValue("imageId", item.imageId);
                 setFieldValue("categoryName", item.categoryName);
                 setFieldValue("subCategoryName", item.subCategoryName);
                 setFieldValue("attributeName", item.attributeName);
@@ -54,9 +56,14 @@ const AddPurchaseOrder = (props) => {
                 initialValues={{
                     suppliesId: "",
                     unit: "",
+                    categoryName: "",
+                    subCategoryName: "",
+                    attributeName: "",
+                    subAttributeName: "",
                     supplierId: props.supplier.supplierId,
                     poSupplierDetailsId: props.poSupplierDetailsId || "",
-                    userId: props.userId
+                    userId: props.userId,
+                    imageId: ""
                 }}
 
                 onSubmit={(values, { resetForm }) => {
