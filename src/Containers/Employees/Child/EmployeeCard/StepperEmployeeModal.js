@@ -23,6 +23,7 @@ const StepperEmployeeModal = (props) => {
        
           <OnBoardingEmployeeForm 
           currentEmployeeId={currentEmployeeId}
+          employeeName={props.employeeName}
             //  employeeId={props.setEditingEmployee.employeeId}
             />
    

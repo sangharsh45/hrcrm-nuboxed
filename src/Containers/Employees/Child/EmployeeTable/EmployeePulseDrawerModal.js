@@ -10,6 +10,7 @@ import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import ContactsIcon from '@mui/icons-material/Contacts';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import UserKpiList from "./EmployeeDrawer/UserKpiList";
 const TabPane = StyledTabs.TabPane;
 class EmployeePulseDrawerModal extends Component {
   constructor(props) {
@@ -96,7 +97,7 @@ class EmployeePulseDrawerModal extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                
+                <UserKpiList employeeName={this.props.employeeName}/>
               </Suspense>
             </TabPane>
 
