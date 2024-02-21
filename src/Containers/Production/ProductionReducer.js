@@ -14,7 +14,7 @@ const initialState = {
     fetchingProductionLocId: false, fetchingProductionLocIdError:false,
     productionByLocsId:[],
 
-    
+    openbUILDERProductiondrawer:false,
 
 };
 export const productionReducer = (state = initialState, action) => {
@@ -33,6 +33,7 @@ export const productionReducer = (state = initialState, action) => {
                 return {
                   ...state,
                   creatingProductionLink: false,
+                  openProductiondrawer:false,
                   productionByLocsId:[action.payload,...state.productionByLocsId]
                 };
               case types.CREATE_PRODUCTION_LINK_FAILURE:
@@ -80,7 +81,9 @@ export const productionReducer = (state = initialState, action) => {
                       removingProductionError: true,
                     };  
 
-
+                    case types.HANDLE_BUILDER_PRODUCTION_DRAWER:
+                      return { ...state, openbUILDERProductiondrawer: action.payload };
+                
     default:
       return state;
 }

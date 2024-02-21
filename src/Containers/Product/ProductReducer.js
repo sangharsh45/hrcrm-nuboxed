@@ -977,14 +977,14 @@ export const productReducer = (state = initialState, action) => {
           return {
             ...state,
             addingProductBuilder: false,
-            builderbyProductId:[action.payload, ...state.builderbyProductId],
-            // builderbyProductId: state.builderbyProductId.map((item) => {
-            //   if (item.productSupplyLinkId == action.payload.productSupplyLinkId) {
-            //     return action.payload;
-            //   } else {
-            //     return item;
-            //   }
-            // }),
+            // builderbyProductId:[action.payload, ...state.builderbyProductId],
+            builderbyProductId: state.builderbyProductId.map((item) => {
+              if (item.suppliesId == action.payload.suppliesId) {
+                return action.payload;
+              } else {
+                return item;
+              }
+            }),
           };
         case types.UPDATE_PRO_SUPPL_BUILDER_FAILURE:
           return {

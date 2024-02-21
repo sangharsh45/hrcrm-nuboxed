@@ -57,7 +57,19 @@ class InventoryProductionTab extends PureComponent {
 <ProductionDispatchCard/>
                             </Suspense>
                         </TabPane>
-
+                        <TabPane
+                            tab={
+                                <>
+                                    <i class="fab fa-linode"></i>  &nbsp; Archieve
+                                </>
+                            }
+                            key="3"
+                        >
+                            {" "}
+                            <Suspense fallback={"Loading..."}>
+{/* <ProductionDispatchCard/> */}Arch..
+                            </Suspense>
+                        </TabPane>
                     </StyledTabs>
                 </TabsWrapper>
 

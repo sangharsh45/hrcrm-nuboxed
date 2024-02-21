@@ -1,6 +1,12 @@
-import React, { useState, useEffect,lazy, Suspense } from "react";
+import React, { useState, useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Tooltip,Button } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
+import MoveToggleProduction from "../Child/MoveToggleProduction";
+import {getProductionsbyLocId,handleBuilderProduction} from "../ProductionAction"
+const BuilderProductionDrawer =lazy(()=>import("./BuilderProductionDrawer"));
 
 function ProductionCardView(props) {
 
@@ -8,8 +14,8 @@ function ProductionCardView(props) {
     const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
-        // props.getProducts(page);
-        // setPage(page + 1);
+        props.getProductionsbyLocId(props.locationId,page);
+        setPage(page + 1);
     }, []);
 
     const [particularDiscountData, setParticularDiscountData] = useState({});
@@ -18,32 +24,26 @@ function ProductionCardView(props) {
         setParticularDiscountData(item);
     }
 
-    // const handleLoadMore = () => {
-    //     const proPag = props.products && props.products.length && props.products[0].pageCount
-    //     setTimeout(() => {
-    //         if  (props.products)
-    //         {
-    //           if (page < proPag) {
-    //             setPage(page + 1);
-    //             props.getProducts(page);
-    //         }
-    //         if (page === proPag){
-    //           setHasMore(false)
-    //         }
-    //       }
-    //       }, 100);   
-    // };
+    const handleLoadMore = () => {
+        const proPag = props.productionByLocsId && props.productionByLocsId.length && props.productionByLocsId[0].pageCount
+        setTimeout(() => {
+            if  (props.productionByLocsId)
+            {
+              if (page < proPag) {
+                setPage(page + 1);
+                props.getProductionsbyLocId(props.locationId,page);
+            }
+            if (page === proPag){
+              setHasMore(false)
+            }
+          }
+          }, 100);   
+    };
 
     const {
-        fetchingProducts,
-        products,
-        handleUpdateProductModal,
-        updateProductModal,
-        user,
-        proBuilderDrawer,
-        handleProductBuilderDrawer,
-        handlePriceDrawer,
-        priceOpenDrawer
+        fetchingProductionLocId,
+        productionByLocsId,
+        openbUILDERProductiondrawer,handleBuilderProduction
     } = props;
     return (
         <>
@@ -51,52 +51,38 @@ function ProductionCardView(props) {
          <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
+         <div className=" md:w-[8%]">Id</div>
          <div className=" md:w-[7%]">Item</div>
         <div className=" md:w-[6.1rem]">Start Date</div>
-        <div className=" md:w-[4.2rem] ">End Date</div>
-        <div className="md:w-[5.8rem]">Status</div>
-        <div className="md:w-[8.5rem]"></div>  
+        <div className=" md:w-[6rem]">End Date</div>
+        <div className=" md:w-[4.2rem] ">Status</div>
+        <div className="md:w-[5.8rem]"></div>
         <div className="w-12"></div>
             </div>
-        {/* <InfiniteScroll
-        dataLength={products.length}
+        <InfiniteScroll
+        dataLength={productionByLocsId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingProducts?<div class="text-center font-semibold text-xs">Loading...</div>:null}
+        loader={fetchingProductionLocId?<div class="text-center font-semibold text-xs">Loading...</div>:null}
         height={"75vh"}
         endMessage={ <div class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </div>}
       >
-             {products.map((item) => {
+             {productionByLocsId.map((item) => {
           return (
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 ">
        <div class="flex">
-       <div className=" flex font-medium flex-col md:w-[5.1rem] max-sm:w-full  ">
-       <SubTitle>
-                        {item.imageId ? (
-                            <MultiAvatar
-                                imageId={item.imageId ? item.imageId : ''}
-                                imgHeight={"1.8em"}
-                                imgWidth={"1.8em"}
-                                imgRadius={20}
-                            />
-                        ) : (
-                            <div class="font-bold text-xs" >
-                                No Image
-                            </div>
-                        )}
-                    </SubTitle>
-        </div>
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-                              {item.articleNo}
-                            </div>
-    </div>
+       <div className=" flex font-medium flex-col  md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div class=" text-xs text-cardBody font-poppins">
+                    {item.manufactureId} 
+                </div>
+
+</div> 
+    <div className=" flex font-medium flex-col  md:w-[6.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
     <div class=" text-xs text-cardBody font-poppins">
-                        {item.name} 
+                        {item.productName} 
                     </div>
     
     </div> 
@@ -118,59 +104,40 @@ function ProductionCardView(props) {
     </div>
     
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        
 
         <div class=" text-xs text-cardBody font-semibold  font-poppins">
                {item.attributeName}
              </div>
     </div>
- 
-    <div class="flex md:items-center"> 
-    
-    <div className=" flex font-medium flex-col  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-    <QrGenerate/>
-</div> 
-<div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
-<ProductPublishToggle item={item} />
-
-</div> 
-
+<div class=" text-xs text-cardBody font-semibold  font-poppins">
+    <Button 
+     type="primary"
+     onClick={() => {
+                                                handleParticularRowData(item);
+                                                handleBuilderProduction(true);
+                                            }}
+     >
+        Add Parts
+     </Button>
+     </div>
 </div>
-<div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[6%]">
-                   <div>
-                   <Tooltip title="Add Price">
-                            <EuroIcon
-                            className="!text-base cursor-pointer text-[blue]"
-                                onClick={() => {
-                                    props.handlePriceDrawer(true);
-                                    handleParticularRowData(item);
-                                }}
-                            />
-                        </Tooltip>
-                   </div>
-                   
-                   <div>
-                   <Tooltip title="Product Builder">
-                            <ViewQuiltIcon
-                            className="!text-base cursor-pointer text-[#4bc076]"
-                                onClick={() => {
-                                    props.handleProductBuilderDrawer(true);
-                                    handleParticularRowData(item);
-                                }}
-                            />
-                        </Tooltip>
-                        </div>
-            </div>
+    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
+        <MoveToggleProduction item={item}/>
+             </div>
+    </div>
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div class=" text-xs text-cardBody font-poppins">
 <Tooltip title="Edit">
                                         <BorderColorIcon
                                         className="!text-base cursor-pointer text-[tomato]"
-                                            onClick={() => {
-                                                props.setEditProducts(item);
-                                                handleUpdateProductModal(true);
-                                            }}
+                                            // onClick={() => {
+                                            //     props.setEditProducts(item);
+                                            //     handleUpdateProductModal(true);
+                                            // }}
                                         />
                                     </Tooltip>
 </div>
@@ -181,27 +148,34 @@ function ProductionCardView(props) {
 </div>
           );
         })}
-              </InfiniteScroll>  */}
+              </InfiniteScroll> 
               </div>
               </div>
 
-<Suspense fallback={"Loading"}>
-             
-</Suspense>      
+    <BuilderProductionDrawer
+    particularDiscountData={particularDiscountData}
+    openbUILDERProductiondrawer={openbUILDERProductiondrawer}
+    handleBuilderProduction={handleBuilderProduction}
+    />
            
         </>
     );
 }
 
 
-const mapStateToProps = ({ product, auth, supplies }) => ({
-   
+const mapStateToProps = ({ production, auth, }) => ({
+    productionByLocsId: production.productionByLocsId,
+    fetchingProductionLocId: production.fetchingProductionLocId,
+    locationId: auth.userDetails.locationId,
+    user: auth.userDetails,
+    openbUILDERProductiondrawer:production.openbUILDERProductiondrawer
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            
+            getProductionsbyLocId,
+            handleBuilderProduction
         },
         dispatch
     );
