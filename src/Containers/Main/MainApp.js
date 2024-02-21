@@ -397,11 +397,11 @@ function MainApp(props) {
                   <div class=" ml-3 max-sm:hidden " >
                   <Select
                     value={props.preferedLanguage}
-                    style={{ width: 120 }}
+                    style={{ width: "3.8rem" }}
                     onChange={(value) => handleLanguageSelect(value)}
                   >
-                    <Option value="English">English</Option>
-                    <Option value="Dutch">Dutch</Option>
+                    <Option value="English">EN</Option>
+                    <Option value="Dutch">NL</Option>
                   </Select>
                 </div>
                 </div>
@@ -538,7 +538,7 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div  class=" text-base cursor-pointer font-semibold text-[blue]"
+                  <div  class=" text-base cursor-pointer font-semibold text-[blue] max-sm:hidden"
                       onClick={() => {
                         // handleRowData(item);
                         props.handleActionDrawerModal(true);

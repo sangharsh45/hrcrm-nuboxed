@@ -41,6 +41,7 @@ const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
 function DealWonCard(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     if(props.role==="USER"&&user.department==="Recruiter"){
       props.getRecruiterList(props.recruiterId);     
@@ -50,7 +51,15 @@ function DealWonCard(props) {
     props. getWonDeals(props.userId,page);
     setPage(page + 1);
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const handleLoadMore = () => {
     setPage(page + 1);
       props. getWonDeals(props.userId,page);    
@@ -70,6 +79,342 @@ function DealWonCard(props) {
         wonDeals,
      
       } = props;
+
+      if (isMobile){
+        return (    
+          <>
+        
+             
+        <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+              
+              <InfiniteScroll
+                 dataLength={wonDeals.length}
+                next={handleLoadMore}
+                hasMore={hasMore}
+                loader={fetchingWonDeals ?<div class="flex justify-center">Loading...</div>:null}
+                height={"75vh"}
+              >
+                 {wonDeals.map((item) => {
+                         
+                         var findProbability = item.probability;
+                         item.stageList.forEach((element) => {
+                           if (element.oppStage === item.oppStage) {
+                             findProbability = element.probability;
+                           }
+                         });
+                         return (
+                            <div>
+                             <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+                              <div class="flex justify-between ">
+                             
+                                        <div>
+                    <MultiAvatar
+                      primaryTitle={item.opportunityName}
+                      imageId={item.imageId}
+                      // imageURL={imageURL}
+                      imgWidth={"1.8rem"}
+                      imgHeight={"1.8rem"}
+                    />
+        </div>
+                                           
+                                           
+                                                <Tooltip>
+                                                <div class=" flex max-sm:w-full  flex-row md:flex-col">
+                                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                                    Name
+                                                    </div> */}
+                                                    <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                                    <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`dealDetails/${item.invOpportunityId}`} title={item.opportunityName}>
+              {item.opportunityName}
+            </Link> 
+                                                    {/* <Link
+                                toUrl={`dealDetails/${item.invOpportunityId}`}
+                                title={`${item.opportunityName}`}
+                              >
+                                {item.opportunityName}
+                              </Link> */}
+                              &nbsp;&nbsp;
+                {/* {date === currentdate ? (
+                  <span
+                    style={{
+                      color: "tomato",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    New
+                  </span>
+                ) : null} */}
+               
+                                                    </div>
+        </div>
+                                                </Tooltip>
+                                      
+                                       
+        
+                                        
+                                   
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                            <div class=" text-sm text-cardBody font-poppins">   
+                                            <Link to ="/investor">
+                                {item.investor}
+                                </Link>
+                                            </div>
+                                       
+                                       
+                                       
+                                          
+        
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                            <div class=" text-sm text-cardBody font-poppins">
+                                           
+                    {item.contactName === null ? "None" :
+                      <MultiAvatar2
+                        primaryTitle={item.contactName}
+                        imageId={item.imageId}
+                         imageURL={item.imageURL}
+                        imgWidth={"1.8em"}
+                        imgHeight={"1.8em"}
+                      />
+                    }
+                  
+                                            </div>
+                                       
+                                        </div>
+                                        <div class="flex justify-between">
+                                      
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
+        
+                                            <div class=" text-sm justify-center text-cardBody font-poppins">
+                                            {dayjs(item.startDate).format("DD/MM/YYYY")}
+                                            </div>
+                                       
+                                     
+                                        
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
+        
+                                            <div class=" text-sm text-cardBody font-poppins text-center">
+                                            <CurrencySymbol currencyType={item.currency} />
+                    &nbsp;
+                    {item.proposalAmount}
+        
+                                            </div>
+                                       
+                                       
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
+        
+                                            <div class=" text-sm text-cardBody font-poppins text-center">
+                                            <Dropdown
+                      overlay={
+                        <div>
+                          <Menu mode="horizontal">
+                            <Menu.Item
+                              style={{
+                                paddingLeft: 5,
+                                paddingRight: 5,
+                                backgroundColor: "#F5F5F5",
+                              }}
+                            >
+                              
+                            </Menu.Item>
+                          </Menu>
+                        </div>
+                      }
+                      trigger={["click"]}
+                    >
+                      <Tooltip title={item.stageName}>
+                        {" "}
+                        <Progress
+                          type="circle"
+                          style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+                          percent={findProbability}
+                          width={30}
+                          strokeColor={"#005075"}
+                        />
+                      </Tooltip>
+                    </Dropdown>
+        
+                                            </div>
+                                       
+                                       
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
+        
+                                            <div class=" text-sm text-cardBody font-poppins">
+                                            
+                                            <span>
+                                            <MultiAvatar2
+                      primaryTitle={item.assignedTo}
+                      imgWidth={"1.8em"}
+                      imgHeight={"1.8em"}
+                    />
+                    </span>
+                     
+                                            </div>
+                                        
+                                      
+                               
+                               {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+        
+                      <Tooltip title={item.ownerName}>
+                  <span>
+                    <MultiAvatar2
+                      primaryTitle={item.ownerName}
+                      imageId={item.ownerImageId}
+                        imageURL={item.imageURL}
+                        imgWidth={"1.8rem"}
+                        imgHeight={"1.8rem"}
+                      />
+                    </span>
+                    </Tooltip>
+                          
+                           </div>
+                          
+                           <div class="flex justify-between">
+                           <div >
+                            <Tooltip title='Click to Open'><span
+                  onClick={() => {
+                   props.LinkClosedOpportunity(
+                     item.opportunityId,
+                     {
+                       closeInd:false,
+                     }
+                          
+                   );         
+                 }}         
+               
+                 >
+                  <LockIcon
+                        style={{
+                          fontSize: "0.8rem",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </span>
+             </Tooltip> 
+                            </div>
+                            <div>
+                            <Tooltip
+                                placement="right"
+                                title={
+                                  <FormattedMessage
+                                    id="app.notes"
+                                    defaultMessage="Notes"
+                                  />
+                                }
+                              >
+                                <span
+                                  onClick={() => {
+                                    props.handleDealsNotesDrawerModal(true);
+                                    handleSetCurrentItem(item);
+                                  }}
+                                >
+                                  <NoteAltIcon
+                                     className="!text-base cursor-pointer text-[green]"
+                                  />
+                                </span>
+                              </Tooltip>
+                            </div>
+                          
+                          
+                           
+                              <div>
+                                 <Tooltip
+                                placement="right"
+                                title={
+                                  <FormattedMessage
+                                    id="app.edit"
+                                    defaultMessage="Edit"
+                                  />
+                                }
+                              >
+                                {user.imInd === true && user.dealUpdateInd === true && (
+                                  <span class="cursor-pointer text-[blue]"
+                                    onClick={() => {
+                                      handleUpdateDealModal(true);
+                                      handleSetCurrentItem(item);
+                                    }}
+                                  >
+                                    <BorderColorIcon
+                                      className="!text-base cursor-pointer text-[tomato]"
+                                    />
+                                  </span>
+                                )}
+                              </Tooltip>
+                              </div>
+                            
+                            
+                              <div>
+                              <StyledPopconfirm
+                                title="Do you want to delete?"
+                                onConfirm={() =>
+                                  deleteOpportunityData(item.opportunityId)
+                                }
+                              >
+                                {user.imInd === true && user.dealDeleteInd === true && (
+                                
+                                  <DeleteOutlined
+                                    type="delete"
+                                    className="!text-base text-[red] cursor-pointer"
+                                  />
+                                  )}
+                                  </StyledPopconfirm>
+                              </div>
+                     
+                           
+                         
+                                       
+                           <div>
+                           <span
+                 
+                 style={{ cursor: "pointer" }}
+                 onClick={() => {
+                    //  props.getAllRecruitmentByOppId(item.opportunityId);
+                    //  props.getAllRecruitmentPositionByOppId(item.opportunityId);
+                    //  props.getAllRecruitmentAvgTimeByOppId(item.opportunityId);
+                    //  props.getAllRecruitmentPositionFilledByOppId(
+                    //    item.opportunityId
+                    //  );
+                    //  props.getAllRecruitmentDetailsByOppId(item.opportunityId);
+                    //  props.handleOpportunityDrawerModal(true);
+                    //  props.getOpportunitySKill(item.oppInnitiative);
+                    //  handleSetCurrentOpportunityId(item.opportunityName);
+                   }}
+                 >
+                   {user.pulseAccessInd === true && (
+                     <MonitorHeartIcon
+                       style={{ fontSize: "0.8rem", color: "#df9697" }}
+                     />
+                   )}
+                 </span>
+                                </div>
+                                </div>
+                              
+                                    </div>
+                                </div>
+        
+        
+                            )
+                        })}
+              </InfiniteScroll>
+        
+              </div>
+              <UpdateDealModal
+                currentItem={currentItem}
+                openupdateDealModal={openupdateDealModal}
+                handleUpdateDealModal={handleUpdateDealModal}
+                handleSetCurrentItem={handleSetCurrentItem}
+              />
+              <AddDealsNotesDrawerModal
+                currentItem={currentItem}
+                addDrawerDealsNotesModal={props.addDrawerDealsNotesModal}
+                handleDealsNotesDrawerModal={props.handleDealsNotesDrawerModal}
+                handleSetCurrentItem={handleSetCurrentItem}
+              />
+            </>
+          ); 
+      }
+
       return (    
   <>
 
@@ -342,11 +687,7 @@ function DealWonCard(props) {
                           }}
                         >
                           <NoteAltIcon
-                            style={{
-                              color: "green",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base cursor-pointer text-[green]"
                           />
                         </span>
                       </Tooltip>
@@ -372,7 +713,7 @@ function DealWonCard(props) {
                             }}
                           >
                             <BorderColorIcon
-                              style={{ color: "grey", fontSize: "1rem" }}
+                             className="!text-base cursor-pointer text-[tomato]"
                             />
                           </span>
                         )}
@@ -391,11 +732,7 @@ function DealWonCard(props) {
                         
                           <DeleteOutlined
                             type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base text-[red] cursor-pointer"
                           />
                           )}
                           </StyledPopconfirm>

@@ -95,9 +95,7 @@ import { FormattedMessage } from "react-intl";
     // console.log("data",data)
   return (
     <>
-    <MainWrapper
-    style={{height:"16em",width:"60%"}}
-    >
+    <MainWrapper className="!h-[15rem] w-[60%] max-sm:w-wk">
       {/* Recruitment Performance */}
       <div class=" flex justify-between" >
       {/* <div style={{ width: "47%" }}> */}

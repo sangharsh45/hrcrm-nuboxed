@@ -112,7 +112,7 @@ function NavMenu (props) {
     return (
         <div className="header">
              <ul className={click ? "nav-options active" : "nav-options"}>
-      <div style={{ marginLeft: "-1.1875em" }}>
+      <div class="-ml-[1.1875em] w-wk">
       <div class="overflow-y-auto max-h-[36.5rem]">
       <Menu
         defaultSelectedKeys={["/" + path]}
@@ -257,7 +257,7 @@ function NavMenu (props) {
 
 
 
-        <hr />
+      <div class="border-b-2 border-white"></div> 
         {user.leadsAccessInd === true && user.crmInd === true && (
           <Menu.Item key="/leads" style={{ height: "1.7rem",
            paddingLeft: "1rem",color: selectedMenuItem === '/leads' ? 'tomato' : '#4bc076' }}>
@@ -347,7 +347,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
         )}
-        <hr />
+        <div class="border-b-2 border-white"></div>
         {user.imInd === true && user.pitchAccessInd === true && (
           <Menu.Item key="/pitch " style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/pitch' ? 'tomato' : '#4bc076' }}>
@@ -444,7 +444,7 @@ function NavMenu (props) {
 
         {/*Contact*/}
         {/* )}  */}
-        <hr/>
+        <div class="border-b-2 border-white"></div>
         {/* Talent */}
        {user.talentAccessInd === true && user.recruitProInd === true &&  (
             <Menu.Item key="/candidate" style={{ height: "1.7rem", 
@@ -506,7 +506,7 @@ function NavMenu (props) {
               </Link>
             </Menu.Item> 
  )}
-          <hr/>
+        
         {/* )} */}
         {/*Demand*/}
         {user.userType === "USER" && user.department === "Customer" && (
@@ -611,7 +611,7 @@ function NavMenu (props) {
         {/* Accessment */}
 
 
-        <hr />
+       
         {/* Accessment */}
 
         {user.eLearningInd === true && user.assessmentAccessInd === true &&  (
@@ -671,7 +671,7 @@ function NavMenu (props) {
             </Menu.Item>
           )}
 
-        <hr />
+        <div class="border-b border-white"></div>
 
 
 
@@ -708,6 +708,7 @@ function NavMenu (props) {
             }
           >
            */}
+          <div class="border-b-2 border-white"></div> 
         {user.orderAccessInd === true && user.erpInd === true && (
 
           <Menu.Item key="/order" style={{ height: "1.7rem", 
@@ -769,7 +770,7 @@ function NavMenu (props) {
             </span>
           </Link>
         </Menu.Item>
-        <hr />
+        <div class="border-b-2 border-white"></div>
         {user.refurbishWorkshopInd === true && user.erpInd === true && (
 
           <Menu.Item key="/refurbish" style={{ height: "1.7rem",
@@ -846,7 +847,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
               </span>
             </Link>
           </Menu.Item>
-        <hr />
+        <div class="border-b-2 border-white"></div>
         {user.inventoryAccessInd === true && user.erpInd === true && (
 
           <Menu.Item key="/inventory " style={{ height: "1.7rem", 
@@ -880,7 +881,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
             </Link>
           </Menu.Item>
         )}
-        <hr />
+        <div class="border-b-2 border-white"></div>
 
     
 
@@ -939,7 +940,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
             </span>
           </Link>
         </Menu.Item> */}
-        <hr />
+        <div class="border-b-2 border-white"></div>
         {user.leaveAccessInd === true   && ( 
         <Menu.Item key="/report" style={{ height: "1.7rem", 
         paddingLeft: "1rem", color: selectedMenuItem === '/report' ? 'tomato' : '#4bc076' }}>
@@ -1019,7 +1020,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
         {/* 
            </SubMenu> 
      )}  */}
-        <hr />
+        <div class="border-b-2 border-white"></div>
         {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
         { user.teamsAccessInd === true &&  user.hrInd === true || user.role === "ADMIN" ? (
                

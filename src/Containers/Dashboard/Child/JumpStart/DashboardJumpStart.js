@@ -79,8 +79,8 @@ render() {
   console.log(this.state.endDate.format('DD-MM-YYYY'))
   return(
     <div class=" flex flex-row w-full" >
-    <div class="flex w-full" >
-        
+    <div class="flex w-full max-sm:flex-col" >
+    <div class="flex w-wk">
         <JumpStartBox
             noProgress
             title={
@@ -125,6 +125,7 @@ render() {
             // }
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           />
+          </div>
           {/* <JumpStartBox
             noProgress
             title="Profiles Submitted"
@@ -132,6 +133,7 @@ render() {
             value={this.props.showDatelist.taggedProfile}
             isLoading={this.props.fetchingDatewiseReport}
           /> */}
+          <div class="flex w-wk">
           <JumpStartBox2
             noProgress
             // title="Open Tasks"
@@ -185,7 +187,7 @@ render() {
             }
             
           />
-           
+           </div>
            {/* <JumpStartBox
             noProgress
             title="DashBoard6"
