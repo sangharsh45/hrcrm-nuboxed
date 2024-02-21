@@ -2,7 +2,7 @@ import React, {useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
-import { getBuilderByProId,removeProductBuilder,updateProSupplBuilder } from "../../Product/ProductAction";
+import { getBuilderByProId,removeProductBuilder,PstoProductionBuilder } from "../../Product/ProductAction";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,44 +14,31 @@ function ProductionBldrCrd (props) {
     props.getBuilderByProId(props.particularDiscountData.productId);
   },[]);
 
-  const [editedFields, setEditedFields] = useState({});
-  const [editsuppliesId, setEditsuppliesId] = useState(null);
+  const [editableRowIndex, setEditableRowIndex] = useState(-1);
+  const [editedRowData, setEditedRowData] = useState(null);
 
-  const handleChange = (suppliesId, fieldName, value) => {
-    setEditedFields((prevFields) => ({
-      ...prevFields,
-      [suppliesId]: {
-        ...prevFields[suppliesId],
-        [fieldName]: value,
-      },
-    }));
+  const handleEditClick = (index, rowData) => {
+    setEditableRowIndex(index);
+    setEditedRowData({ ...rowData });
   };
 
-  const handleEditClick = (suppliesId) => {
-    setEditsuppliesId(suppliesId);
-  };
-  const handleCancelClick = (suppliesId) => {
-    setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
-    setEditsuppliesId(null);
+  const handleInputChange = (event, fieldName) => {
+    const { value } = event.target;
+    setEditedRowData({ ...editedRowData, [fieldName]: value });
   };
 
-  const handleUpdateSupplies = (suppliesId,suppliesName,categoryName,subCategoryName, quantity,
-    ) => {
-    const data = {
-      suppliesId:suppliesId,
-      suppliesName:editedFields[suppliesId]?.suppliesName !== undefined ? editedFields[suppliesId].suppliesName : suppliesName,
-      categoryName:editedFields[suppliesId]?.categoryName !== undefined ? editedFields[suppliesId].categoryName : categoryName,
-      subCategoryName: editedFields[suppliesId]?.subCategoryName !== undefined ? editedFields[suppliesId].subCategoryName : subCategoryName,                 
-      quantity: editedFields[suppliesId]?.quantity !== undefined ? editedFields[suppliesId].quantity : quantity,        
-      productId:props.particularDiscountData.productId,  
-      suppliesId:suppliesId          
-    };
-  
-    props.updateProSupplBuilder(data)
-      setEditedFields((prevFields) => ({ ...prevFields, [suppliesId]: undefined }));
-      setEditsuppliesId(null);
-    
+  const handleSaveClick = () => {
+    props.PstoProductionBuilder(editedRowData)
+    console.log('Modified Row Data:', editedRowData);
+    setEditableRowIndex(-1);
+    setEditedRowData(null);
   };
+
+  const handleCancelClick = (index) => {
+    setEditableRowIndex((prevFields) => ({ ...prevFields, [index]: undefined }));
+  };
+
+
 
 return (
     <>
@@ -67,9 +54,9 @@ return (
         <div className="w-12"></div>
             </div>
       
-             {props.builderbyProductId.map((item) => {
+             {props.builderbyProductId.map((item,index) => {
           return (
-<div>
+<div key={item.suppliesId}>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "    >
 <div className=" flex font-medium flex-col w-[10rem]   max-sm:w-full">
                     <div className="flex max-sm:w-full ">
@@ -111,34 +98,34 @@ return (
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
       
-      <div class=" text-xs text-cardBody font-semibold  font-poppins">
-                   {editsuppliesId === item.suppliesId ? (
-                       <input
-                       class="border-[2px] border-black w-12"
-                      //  style={{border:"2px solid black"}}
-                       value={editedFields[item.suppliesId]?.quantity !== undefined ? editedFields[item.suppliesId].quantity : item.quantity}
-                       onChange={(e) => handleChange(item.suppliesId, 'quantity', e.target.value)}
-                       />
-                       
-                    ) : (
-                      <div className="font-normal text-sm text-cardBody font-poppins">
-                        <div> {item.quantity}</div>
-                      </div>
-                    )}
+      <div class="flex text-xs text-cardBody font-semibold  font-poppins">
+      {editableRowIndex === index ? (
+                Array.from({ length: editedRowData ? editedRowData.quantity : item.quantity }, (_, i) => (
+                  <input
+                  className="border-[2px] border-black rounded w-12 bg-[antiquewhite]"
+                    key={i}
+                    type="text"
+                    value={editedRowData ? editedRowData[`input${i + 1}`] || '' : item[`input${i + 1}`] || ''}
+                    onChange={(e) => handleInputChange(e, `input${i + 1}`)}
+                  />
+                ))
+              ) : (
+                item.quantity
+              )}
                     </div>
   </div>
   <div class="flex flex-col w-24 max-sm:flex-row max-sm:w-[10%]">
     <div class="flex">
-    {editsuppliesId === item.suppliesId ? (
+    {editableRowIndex === index ? (
                         <>
                       <Button 
                       type="primary"
-                      onClick={() => handleUpdateSupplies(item.suppliesId,item.suppliesName,item.categoryName, item.subCategoryName )}>
+                      onClick={handleSaveClick}>
                         Save
                       </Button>
                         <Button 
                          type="primary"
-                        onClick={() => handleCancelClick(item.suppliesId)} className="ml-[0.5rem]">
+                        onClick={() => handleCancelClick(index,item)} className="ml-[0.5rem]">
                         Cancel
                       </Button>
                       </>
@@ -148,7 +135,7 @@ return (
                       className="!text-base cursor-pointer text-[tomato] flex justify-center items-center mt-1 ml-1"
                         tooltipTitle="Edit"
                         iconType="edit"
-                        onClick={() => handleEditClick(item.suppliesId)}
+                        onClick={() => handleEditClick(index,item)}
                       />
                     )}
     </div>
@@ -188,7 +175,7 @@ const mapDispatchToProps = (dispatch) =>
         {
             getBuilderByProId,
             removeProductBuilder,
-            updateProSupplBuilder
+            PstoProductionBuilder
             
         },
         dispatch
