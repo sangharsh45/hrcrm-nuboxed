@@ -74,7 +74,7 @@
     }
     .nav-options {
       display: flex;
-      width: 39%;
+      width: 50%;
       height: max-content;
       position: absolute;
       align-items: flex-start;

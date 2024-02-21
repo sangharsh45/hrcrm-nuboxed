@@ -40,6 +40,7 @@ function ContactInvestCardList(props) {
 
   const [hasMore, setHasMore] = useState(true);
   const [pageNo, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -62,6 +63,15 @@ function ContactInvestCardList(props) {
   useEffect(()=>{
     return()=>props.emptyContactInvest();
   },[] );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [contactiData, setContactiData] = useState("");
 
   function handleCurrentContactIdata(dta) {
@@ -83,6 +93,285 @@ function ContactInvestCardList(props) {
     handleUpdateContactInvestModal,
     handleContactInvestNotesDrawerModal
   } = props;
+
+  if (isMobile){
+    return (
+      <>
+        
+  
+        <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+         
+            <InfiniteScroll
+          dataLength={contactByUserId.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingContactsInvest?<div  class="flex justify-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+         
+        {filterData.map((item) => { 
+          
+           const currentdate = dayjs().format("DD/MM/YYYY");
+           const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+           const diff = Math.abs(
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${item.address &&
+              item.address.length &&
+              item.address[0].address1} 
+             Street : ${item.address &&
+              item.address.length &&
+              item.address[0].street}   
+            State : ${item.address && item.address.length && item.address[0].state}
+            City : ${item.address && item.address.length && item.address[0].city}
+           Country : ${(item.address &&
+                item.address.length &&
+                item.address[0].country) ||
+              ""} 
+             PostalCode : ${item.address &&
+              item.address.length &&
+              item.address[0].postalCode} `;
+                      return (
+                          <div>
+                                 <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[8rem]  p-3"
+                >
+                                       <div class="flex justify-between">
+                                  
+  <div className="flex items-center max-sm:w-full"> 
+  <div>
+                                  <SubTitle>
+              <MultiAvatar2
+                primaryTitle={item.firstName}
+                imageId={item.imageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+            </SubTitle></div>
+            &nbsp;
+            <div class="max-sm:w-full md:w-[12.1rem]">
+                                          <Tooltip>
+                                            <div class=" flex  max-sm:w-full justify-between flex-row md:flex-col">
+                                              {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                              Name
+                                              </div> */}
+                                              <div class="text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                              <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`contactinvest/${item.contactId}`} title={item.fullName}>
+        {item.fullName}
+    </Link>                                               
+             {/* <Link
+            toUrl={`contactinvest/${item.contactId}`}
+            title={`${item.fullName}`}
+          >{item.fullName}</Link> */}
+          &nbsp;&nbsp;
+          {date === currentdate ? (
+            <span class="text-[tomato] font-bold"
+             
+            >
+              New
+            </span>
+          ) : null}
+         
+                                              </div>
+                                              </div>
+                                          </Tooltip>
+                                          </div>
+                                          </div>
+                                 
+                                 
+                                      {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div> */}
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">   
+                                      {item.tagWithCompany}
+                                      </div>
+                                  
+                                 
+                                  </div>
+                                  <div class="flex justify-between">
+                                 
+                                      {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
+                                      <div class="text-[0.82rem] text-cardBody font-poppins">
+                                           {item.designation}
+                                      </div>
+                                  
+                                  
+                                    {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div> */}
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
+                                         {item.department}
+                                    </div>
+                                
+                                  
+                                      {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
+  
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                       {item.oppNo}
+                                      </div>
+                                  
+                                  
+                                      {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div> */}
+  
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                       {item.totalProposalValue}
+                                      </div>
+                                 
+                                  
+                                      {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Source</div> */}
+  
+                                      <div class="text-[0.82rem] text-cardBody font-poppins">
+  
+                                      </div>
+                                  
+                                  </div>
+                                  <div class="flex justify-between items-center">
+                                 
+                         
+                         {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+  
+                     
+                <Tooltip title={item.ownerName}>
+                  <div class="max-sm:flex justify-end mt-1">
+              
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imageURL={item.imageURL}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              
+              </div>
+            </Tooltip>
+  
+                    
+                                  
+                      <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
+                      <Tooltip title={item.mobileNo} >
+              {item.doNotCallInd !== true && (
+                <span class=" mr-2 text-xs cursor-pointer"
+                  onClick={() => {
+                    props.handleDonotCallModal(true);
+                    handleCurrentContactIdata(item);
+                  }}
+                >
+                 <PhoneInTalkIcon className="!text-base text-[gold]"/>
+                </span>
+              )}
+              {item.doNotCallInd === true && (
+                <span class=" mr-2 text-xs cursor-pointer"
+                  onClick={() => {
+                    props.handleDonotCallModal(true);
+                    handleCurrentContactIdata(item);
+                  }}
+                >
+                  <PhoneDisabledIcon className="!text-base text-[gold]"/>
+                </span>
+              )}
+            </Tooltip>
+                          </div>
+                          
+                          <Tooltip title={item.emailId}>
+             
+              <MailOutlineIcon  className="!text-base cursor-pointer text-green-400"
+                type="mail"
+               
+                onClick={() => {
+                  props.getContactById(item.contactId);
+                  props.handleCurrentContactIdata(true);
+                }}
+              />
+             </Tooltip>
+                         
+                       
+                          <div >
+                          <span class="cursor-pointer"
+                
+                onClick={() => {
+                  handleCurrentContactIdata(item);
+                  props.handleContactDrawerModal(true);
+                }}
+              >{user.pulseAccessInd === true && (
+                <MonitorHeartIcon className=" !text-base cursor-pointer text-[#df9697]"/>
+              )}
+              </span>
+                          </div>
+                         
+                      
+                      
+                        <div>
+                      <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+              <span class="cursor-pointer"
+               
+              >
+              <LocationOnIcon  className="!text-base cursor-pointer text-[#960a0a]"/>
+              </span>
+            </Tooltip>
+            </div>
+            {/* <div><Tooltip title={item.email}>
+                <MailOutlineIcon
+                  type="mail"
+                  style={{ cursor: "pointer",fontSize: "1rem" }}
+                  onClick={() => {
+                    props.getCustomerById(item.customerId);
+                    props.handleCustomerEmailDrawerModal(true);
+                  }}
+                />
+              </Tooltip> </div> */}
+              <div>
+              {user.imInd === true  && user.investorContactUpdateInd === true &&  (
+              <Tooltip title="Edit">
+                <BorderColorIcon
+                  className="!text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                    handleUpdateContactInvestModal(true);
+                    handleCurrentContactIdata(item);
+                    
+                  }}
+                />
+              </Tooltip>
+              )}
+              </div>
+                        
+              
+                      <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    props.handleContactInvestNotesDrawerModal(true);
+                    handleCurrentContactIdata(item);
+                  }}
+                  className="text-green-500 cursor-pointer !text-base"
+                />
+             </Tooltip>
+  
+             
+                        </div>  
+                       
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+         </InfiniteScroll>
+        </div>
+       
+  
+        <UpdateContactInvestModal
+          contactiData={contactiData}
+          updateContactInvestModal={updateContactInvestModal}
+          handleUpdateContactInvestModal={handleUpdateContactInvestModal}
+          handleCurrentContactIdata={handleCurrentContactIdata}
+        />
+        
+        <AddContactInvestNotesDrawerModal
+          contactiData={contactiData}
+          addDrawerContactInvestNotesModal={addDrawerContactInvestNotesModal}
+          handleContactInvestNotesDrawerModal={handleContactInvestNotesDrawerModal}
+          handleCurrentContactIdata={handleCurrentContactIdata}
+        />
+      
+      </>
+    ); 
+  }
 
 
   return (
@@ -159,15 +448,13 @@ function ContactInvestCardList(props) {
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between  mt-2 bg-white h-11 items-center p-3"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
+                               
                                 >
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex items-center max-sm:w-full"> 
 <div>
-                                <SubTitle>
+                               
             <MultiAvatar2
               primaryTitle={item.firstName}
               imageId={item.imageId}
@@ -175,14 +462,12 @@ function ContactInvestCardList(props) {
               imgWidth={"1.8em"}
               imgHeight={"1.8em"}
             />
-          </SubTitle></div>
+          </div>
           &nbsp;
           <div class="max-sm:w-full md:w-[12.1rem]">
                                         <Tooltip>
                                           <div class=" flex  max-sm:w-full justify-between flex-row md:flex-col">
-                                            {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
-                                            Name
-                                            </div> */}
+                                            
                                             <div class="text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                             <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`contactinvest/${item.contactId}`} title={item.fullName}>
       {item.fullName}
@@ -256,7 +541,7 @@ function ContactInvestCardList(props) {
                    
               <Tooltip title={item.ownerName}>
                 <div class="max-sm:flex justify-end mt-1">
-            <SubTitle>
+            
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
@@ -264,7 +549,7 @@ function ContactInvestCardList(props) {
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
-            </SubTitle>
+           
             </div>
           </Tooltip>
 
@@ -289,7 +574,7 @@ function ContactInvestCardList(props) {
                   handleCurrentContactIdata(item);
                 }}
               >
-                <PhoneDisabledIcon/>
+                <PhoneDisabledIcon className="!text-base text-[gold]"/>
               </span>
             )}
           </Tooltip>
@@ -297,7 +582,7 @@ function ContactInvestCardList(props) {
                         <div class=" max-sm:flex justify-end max-sm:w-full">
                         <Tooltip title={item.emailId}>
            
-            <MailOutlineIcon className=" !text-base cursor-pointer"
+            <MailOutlineIcon className="!text-base cursor-pointer text-green-400"
               type="mail"
              
               onClick={() => {
@@ -316,7 +601,7 @@ function ContactInvestCardList(props) {
                 props.handleContactDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
-              <MonitorHeartIcon className=" !text-base cursor-pointer"/>
+              <MonitorHeartIcon className=" !text-base cursor-pointer text-[#df9697]"/>
             )}
             </span>
                         </div>
@@ -331,7 +616,7 @@ function ContactInvestCardList(props) {
             <span class="cursor-pointer"
              
             >
-            <LocationOnIcon  className=" !text-base cursor-pointer"/>
+            <LocationOnIcon  className="!text-base cursor-pointer text-[#960a0a]"/>
             </span>
           </Tooltip>
           </div>
@@ -349,7 +634,7 @@ function ContactInvestCardList(props) {
             {user.imInd === true  && user.investorContactUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                className=" !text-base cursor-pointer"
+                className="!text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                   handleUpdateContactInvestModal(true);
                   handleCurrentContactIdata(item);

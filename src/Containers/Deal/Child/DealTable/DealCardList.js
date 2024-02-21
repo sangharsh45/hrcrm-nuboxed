@@ -96,7 +96,7 @@ function DealCardList(props) {
         }
         height={"87vh"}
       >
-        <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
+        <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
 
           {dealsByuserId.map((item) => {
             var findProbability = item.probability;
@@ -107,7 +107,7 @@ function DealCardList(props) {
             });
             return (
               <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
-              text-[#444444] m-3 p-1 w-[15vw] flex flex-col  ">
+              text-[#444444] m-2 p-1 w-[16vw] flex flex-col justify-center max-sm:w-wk  ">
                 <div class=" flex  flex-nowrap items-center h-[2.81em]"
                 >
                   <div class=" mr-[0.2rem] flex basis-[15%]">
@@ -325,11 +325,7 @@ function DealCardList(props) {
                           }}
                         >
                           <NoteAltIcon
-                            style={{
-                              color: "green",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                           className="!text-base cursor-pointer text-[green]"
                           />
                         </span>
                       </Tooltip>
@@ -350,7 +346,7 @@ function DealCardList(props) {
                             }}
                           >
                             <BorderColorIcon
-                              style={{ color: "grey", fontSize: "1rem" }}
+                             className="!text-base cursor-pointer text-[tomato]"
                             />
                           </span>
                         )}
@@ -365,11 +361,7 @@ function DealCardList(props) {
                         {user.imInd === true && user.dealDeleteInd === true && (
                           <DeleteOutlined
                             type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base text-[red] cursor-pointer"
                           />
                         )}
                         </Tooltip>

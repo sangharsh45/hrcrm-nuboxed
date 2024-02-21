@@ -37,8 +37,8 @@ function DashboardCustomerOrgJumpstart (props){
   return(
     <>
       <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
-        
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={<FormattedMessage
@@ -65,7 +65,8 @@ function DashboardCustomerOrgJumpstart (props){
            isLoading={props.fetchingJumpstartBulb2}
     
           />
-
+</div>
+<div class="flex w-wk">
           <JumpStartBox2
             noProgress
             title={<FormattedMessage
@@ -93,6 +94,7 @@ function DashboardCustomerOrgJumpstart (props){
             
             isLoading={props.fetchingJumpstartCusto2list}
           />
+          </div>
         </div>
     
       </div>

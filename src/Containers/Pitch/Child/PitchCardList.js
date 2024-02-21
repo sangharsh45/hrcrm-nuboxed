@@ -39,13 +39,22 @@ const ButtonGroup = Button.Group;
 const PitchCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     props.getPitch(props.userId,page,"creationdate");
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState({});
 
@@ -67,6 +76,405 @@ const PitchCardList = (props) => {
   // if (fetchingPitch) {
   //   return <BundleLoader />;
   // }
+
+  if (isMobile){
+    return (
+      <>
+    <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      
+        <InfiniteScroll
+          dataLength={props.pitchData.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingPitch?<div class="flex justify-center" >Loading...</div>:null}
+          height={"75vh"}
+        >
+     {props.pitchData.map((item) => { 
+   const currentdate = dayjs().format("DD/MM/YYYY");
+   const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+   const countryCode = item.address[0].country_alpha2_code  
+           const diff = Math.abs(
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+                 Street : ${
+                   item.address && item.address.length && item.address[0].street
+                 }   
+                State : ${
+                  item.address && item.address.length && item.address[0].state
+                }
+               Country : ${
+                 (item.address && item.address.length && item.address[0].country) ||
+                 ""
+               } 
+                 PostalCode : ${
+                   item.address && item.address.length && item.address[0].postalCode
+                 } `;
+                      return (
+                          <div>
+                             <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+                                       <div class="flex justify-between">
+                                  <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
+                                  <div className="flex max-sm:w-full items-center"> 
+  <div>
+  
+              <MultiAvatar
+                primaryTitle={item.name}
+                imageId={item.imageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+            
+  </div>
+                                     <div class="w-[4%]">
+  
+                                     </div>
+  
+                                          <div class="max-sm:w-full" >
+                                          <Tooltip>
+                                            <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
+                                              {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                              Name
+                                              </div> */}
+                                              <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                  
+                                                  {/* <Link
+                                                   toUrl={`customer/${item.customerId}`}
+                                                   title={`${item.name}`} 
+                                                 > */}
+                                                 {item.firstName}
+                                                 &nbsp;
+                                                 {item.middleName}
+                                                 &nbsp;
+                                                 {item.lastName}
+                                                 {/* </Link> */}
+                                                 &nbsp;&nbsp;
+                                                 {date === currentdate ? (
+                                                   <span class="text-[tomato] font-bold" >
+                                                     New
+                                                   </span>
+                                                 ) : null}
+                                                
+                                                                                     </div>
+                                              </div>
+                                          </Tooltip>
+                                          </div>
+                                          </div>
+                                  </div>
+                                 
+  
+  
+  
+    
+  
+  
+       <div>
+       <ButtonGroup>
+  <RoleButton
+   type="Hot"
+   iconType="fas fa-mug-hot"
+   // tooltip="Hot"
+   tooltip={<FormattedMessage
+     id="app.hot"
+     defaultMessage="Hot"
+   />}
+   role={item.type}
+   onClick={() =>{
+    const typ="Hot"
+     props.updateTypeForPitch(item.investorLeadsId,typ)
+   }}
+  />
+  </ButtonGroup>
+  </div>
+  <div><ButtonGroup>
+  <RoleButton1
+   type="Warm"
+   iconType="	fas fa-burn"
+   // tooltip="Warm"
+   tooltip={<FormattedMessage
+     id="app.warm"
+     defaultMessage="Warm"
+   />}
+   role={item.type}
+   onClick={() =>{
+   const typ="Warm"
+     props.updateTypeForPitch(item.investorLeadsId,typ)
+   }}
+  />
+  </ButtonGroup></div>
+       <div>
+  <ButtonGroup>
+  <RoleButton2
+   type="Cold"
+   iconType="far fa-snowflake"
+   // tooltip="Cold"
+   tooltip={<FormattedMessage
+     id="app.cold"
+     defaultMessage="Cold"
+   />}
+   role={item.type}
+   onClick={() => {
+    const typ="Cold"
+     props.updateTypeForPitch(item.investorLeadsId,typ)
+   }}
+  />
+  </ButtonGroup>
+  </div>
+  
+ 
+       </div>  
+                                  <div class="flex justify-between md:ml-4">
+                                  <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                             
+  
+                             <div class="text-[0.82rem] text-cardBody font-poppins">
+    {item.countryDialCode && item.phoneNumber
+      ? `${item.countryDialCode} ${item.phoneNumber}`
+      : 'Not available'}
+  </div>
+  
+                         </div>
+                         <div className=" flex font-medium flex-col md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+  
+                                  
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <CountryFlag1 countryCode={countryCode} />
+                        &nbsp;
+                        {countryCode}
+                                      </div>
+                                </div>
+                                </div>
+                         <div class="flex justify-between  max-sm:mb-2 ">
+                         <div className=" flex font-medium flex-col  md:w-[13.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           
+                             <div className="text-[0.82rem] text-cardBody font-poppins">
+                             {item.companyName || "Not Available"}
+  </div>
+  
+                         </div>
+                         <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                      {item.url !== null ? (
+                <Tooltip title={item.url}>
+                  <span className=" cursor-pointer"
+                   
+                   
+                    onClick={() => {}}
+                  >
+                    {" "}
+                    <a href={`item.url`} target="_blank">
+                      <ExploreIcon
+                      className="!text-base cursor-pointer text-[green]"
+                      />
+                    </a>
+                  </span>
+                </Tooltip>
+              ) : null}
+                          </div>
+                                 
+                                  </div>
+                                 
+            
+       <div class="md:w-[1%]"></div>
+       <div class="flex justify-between max-sm:mb-1 md:items-center">
+      
+       
+                                    
+  
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                      
+                                      <span>
+                        {item.assignedTo === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedTo === item.ownerName ? (
+                    
+                    null
+                  ) : (
+                            <MultiAvatar
+                              primaryTitle={item.assignedTo}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                          )}
+                          </>
+                )}
+                        </span>
+               
+                                      </div>
+                                 
+       
+                         
+                      
+  
+                         <span>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imageURL={item.imageURL}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </span>
+                   
+                                 
+                           
+                    
+                                    
+  
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">
+                 
+                                      </div>
+                                      <div>
+                                      <Tooltip title="Qualify? Pitch will move to Investor section!">
+                          <ConnectWithoutContactIcon
+                            onClick={() => {
+                              handleRowData(item);
+                              props.handlePitchConvertModal(true);
+                           
+                            }}
+                            className="!text-base cursor-pointer text-[blue]"
+                          />
+                        </Tooltip>
+ 
+  </div>
+                                 
+                                  
+                                  <div >
+                      <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    props.handlePitchNotesDrawerModal(true);
+                    handleSetCurrentLeadsId(item);
+                  }}
+                  className="!text-base cursor-pointer text-[green]"
+                />
+             </Tooltip>
+  
+              </div>
+              <div>
+  <Tooltip
+          title={
+            <FormattedMessage id="app.activity" defaultMessage="Activity" />
+          }
+        >
+  <AddchartIcon
+  className="!text-base cursor-pointer text-blue-500"
+  
+  onClick={()=>{
+    props.handleAssimodal(true)
+    handleRowData(item)
+    }}
+  />
+  </Tooltip>
+  </div>
+ 
+                                  
+                                 
+                                 
+                                 
+                                  {user.imInd === true  &&  user.pitchUpdateInd === true && (  
+                                  <div>
+              <Tooltip title="Edit">
+                <BorderColorIcon
+                  className="!text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                     props.setEditPitch(item);
+                     props.handleUpdatePitchModal(true);
+                  handleSetCurrentLeadsId(item);
+                    
+                  }}
+                />
+              </Tooltip>
+          
+              </div>
+                                  )}
+                                 
+                          <div>
+  
+                          <StyledPopconfirm
+              title="Do you want to delete?"
+              onConfirm={() => deletePitchData(item.investorleadsId)}
+            > <Tooltip title="Delete">
+               {user.imInd === true  &&  user.plantDeleteInd === true && ( 
+              <DeleteOutlined
+                type="delete"
+                className="!text-base text-[red] cursor-pointer"
+                
+              />
+               )} 
+               </Tooltip>
+            </StyledPopconfirm>
+                          </div>
+                              
+                          <div>
+              
+  
+                      </div>
+                    
+                      
+                        <div>
+                      <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+              <span class="cursor-pointer" >
+              <LocationOnIcon   className="!text-base cursor-pointer text-[#960a0a]"/>
+              </span>
+            </Tooltip>
+            </div>
+            <div>
+            <Tooltip title={item.email}>
+                <MailOutlineIcon
+                  type="mail"
+                  className="!text-base cursor-pointer text-green-400"
+                  
+                />
+              </Tooltip> </div>
+             
+                        
+                        
+                      
+                      </div>
+                        </div>
+                              </div>
+                           
+  
+  
+                      )
+                  })}
+                    </InfiniteScroll>
+        </div>
+        <UpdateLPitchModal
+          item={currentLeadsId}
+          updatePitchModal={props.updatePitchModal}
+          // updateLeadsModal={updateLeadsModal}
+          handleUpdatePitchModal={props.handleUpdatePitchModal}
+          // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+        />
+       
+        <OpenASSimodal 
+          rowdata={rowdata}
+          openASSImodal={props.openASSImodal}
+        handleAssimodal={props.handleAssimodal}
+        />
+           <AddPitchNotesDrawerModal 
+         item={currentLeadsId}
+          addDrawerPitchNotesModal={props.addDrawerPitchNotesModal}
+          handlePitchNotesDrawerModal={props.handlePitchNotesDrawerModal}
+        />
+            <AddConvertPitchStatusModal
+             rowdata={rowdata}
+            //  handleRowData={handleRowData}
+             addPitchConvertModal={props.addPitchConvertModal}
+             handlePitchConvertModal={props.handlePitchConvertModal}
+             />
+      </>
+    );
+  }
 
   return (
     <>
@@ -309,7 +717,7 @@ const PitchCardList = (props) => {
                                
           
      <div class="md:w-[1%]"></div>
-     <div class="flex justify-between max-sm:mb-1 md:items-center">
+     <div class="flex justify-between ">
      <div class="flex justify-between items-center max-sm:w-[50%] ">
      <div className=" flex font-medium flex-col md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}

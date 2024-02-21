@@ -219,7 +219,7 @@ const DashboardActionLeft = (props) => {
    </div>
    
       <>
-      <div class="ml-[9rem]">
+      <div class="ml-[9rem] max-sm:hidden" >
     <TimeInterval
     style={{fontSize:"0.67"}}
           times={dateRangeList}
