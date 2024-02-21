@@ -51,12 +51,14 @@ class OrganizationAboutEdit extends Component {
        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
+          <div class=" flex flex-row justify-between">
           <EditableSelect
                         defaultValue={fiscalStartDate}
                         handleChange={this.handleChange}
                         name={'fiscalStartDate'}
                         placeholder={'Fiscal start date'}
-                        options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}
+                   
+                       options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}
                         value={this.state.fields.fiscalStartDate}
                         style={{ width: 282 }}
                     />
@@ -68,7 +70,6 @@ class OrganizationAboutEdit extends Component {
             disabled={"disabled"}
             width="100%"
           /> */}
-          <Spacer style={{ margin: "0.125em" }} />
           <EditableSelect
                         defaultValue={fiscalStartMonth}
                         handleChange={this.handleChange}
@@ -76,8 +77,9 @@ class OrganizationAboutEdit extends Component {
                         placeholder={'Fiscal start month'}
                         options={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
                         value={this.state.fields.fiscalStartMonth}
-                        style={{ width: 282 }}
+                        style={{ width: 282,marginLeft:"0.5rem" }}
                     />
+                    </div>
           {/* <EditableInput
             defaultValue={fiscalStartMonth}
             handleChange={this.handleChange}
@@ -86,7 +88,7 @@ class OrganizationAboutEdit extends Component {
             disabled={"disabled"}
             width="100%"
           /> */}
-
+         <Spacer style={{ margin: "0.125em" }} />
 <EditSearchSelect
                         defaultValue={{ value: tradeCurrency, label: tradeCurrency, color: '#FF8B00' }}
                         selectType='currency'

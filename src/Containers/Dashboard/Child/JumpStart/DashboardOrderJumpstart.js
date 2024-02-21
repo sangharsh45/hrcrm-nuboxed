@@ -23,7 +23,8 @@ function DashboardOrderJumpstart (props) {
     return (
       <>
        <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={<FormattedMessage
@@ -47,7 +48,8 @@ function DashboardOrderJumpstart (props) {
             // value={ props.jumstartOrderCount.pendingOrder}
             // isLoading={props.fetchingJumpOrderCount}
           />
-
+</div>
+<div class="flex w-wk">
           <JumpStartBox2
             noProgress
             title={<FormattedMessage
@@ -70,6 +72,7 @@ function DashboardOrderJumpstart (props) {
             // value={ props.jumstartOrderCount.cancelOrder}
             // isLoading={props.fetchingJumpOrderCount}
           />
+          </div>
         </div>
       </div>
 

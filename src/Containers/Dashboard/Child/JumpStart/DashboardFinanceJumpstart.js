@@ -13,7 +13,8 @@ function DashboardFinanceJumpstart (props) {
     return (
       <>
        <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={<FormattedMessage
@@ -37,7 +38,8 @@ function DashboardFinanceJumpstart (props) {
             // value={props.jumpstartInvestor2Count.createdinvestorLeadsList}
             // isLoading={props.fetchingJumpstartInvestor2}
           />
-
+</div>
+<div class="flex w-wk">
           <JumpStartBox2
             noProgress
             title={<FormattedMessage
@@ -60,6 +62,7 @@ function DashboardFinanceJumpstart (props) {
             // value={ props.jumpstartInvestor4Count.closedOpportunity}
             // isLoading={props.fetchingJumpstartInvestor4}
           />
+          </div>
         </div>
       </div>
 

@@ -73,8 +73,8 @@ render() {
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   return(
       <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
-        
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={   <FormattedMessage
@@ -99,7 +99,8 @@ render() {
      
     
           />
-
+</div>
+<div class="flex w-wk">
           <JumpStartBox2
             noProgress
             title={   <FormattedMessage
@@ -121,6 +122,7 @@ render() {
             
             // isLoading={this.props.fetchingJumpstartBulb3}
           />
+           </div>
         </div>
      
     

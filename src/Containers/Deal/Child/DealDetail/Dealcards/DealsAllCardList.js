@@ -21,13 +21,22 @@ const ButtonGroup = Button.Group;
 const DealsAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     props.getAllDeals("all",page);
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState({});
 
@@ -48,23 +57,248 @@ const DealsAllCardList = (props) => {
     return <BundleLoader />;
   }
 
+  if (isMobile){
+    return (
+      <>
+    <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      
+        <InfiniteScroll
+          dataLength={props.allDealsData.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+     {props.allDealsData.map((item) => { 
+         var findProbability = item.probability;
+         item.stageList.forEach((element) => {
+           if (element.oppStage === item.oppStage) {
+             findProbability = element.probability;
+           }
+         });
+   const currentdate = dayjs().format("DD/MM/YYYY");
+   const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+         
+           const diff = Math.abs(
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+                 Street : ${
+                   item.address && item.address.length && item.address[0].street
+                 }   
+                State : ${
+                  item.address && item.address.length && item.address[0].state
+                }
+               Country : ${
+                 (item.address && item.address.length && item.address[0].country) ||
+                 ""
+               } 
+                 PostalCode : ${
+                   item.address && item.address.length && item.address[0].postalCode
+                 } `;
+                      return (
+                          <div>
+                              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+                                       <div class="flex justify-between">
+                                  
+                                  <div className="flex  items-center"> 
+  <div>
+
+              <MultiAvatar
+                primaryTitle={item.opportunityName}
+                imageId={item.imageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+         
+  </div>
+                                     
+  
+                                         
+                                          <Tooltip>
+                                            
+                                              
+                                              <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                  
+                                                
+                                                {item.opportunityName}
+                                                
+                                                 &nbsp;&nbsp;
+                                                 {date === currentdate ? (
+                                                   <span class="text-[tomato] font-bold"
+                                              
+                                                   >
+                                                     New
+                                                   </span>
+                                                 ) : null}
+                                                
+                                                                                     </div>
+                                              
+                                          </Tooltip>
+                                          
+                                          </div>
+                                  
+                                  
+  
+  <div class=" text-sm text-cardBody font-poppins">   
+  <Link to ="/investor">
+  {item.investor}
+  </Link>
+  </div>
+  
+  
+ 
+  
+  
+  <div class=" text-sm text-cardBody font-poppins">
+
+  {item.contactName === null ? "None" :
+  <MultiAvatar2
+  primaryTitle={item.contactName}
+  imageId={item.imageId}
+  imageURL={item.imageURL}
+  imgWidth={"1.8em"}
+  imgHeight={"1.8em"}
+  />
+  }
+  
+  </div>
+  
+  </div>
+  <div class="flex justify-between">
+  
+  
+  
+  <div class=" text-sm justify-center text-cardBody font-poppins">
+  {dayjs(item.startDate).format("DD/MM/YYYY")}
+  </div>
+ 
+  
+ 
+  
+  
+  <div class=" text-sm text-cardBody font-poppins text-center">
+  <CurrencySymbol currencyType={item.currency} />
+  &nbsp;
+  {item.proposalAmount}
+  
+  </div>
+ 
+  
+  
+  
+  <div class=" text-sm text-cardBody font-poppins text-center">
+  <Dropdown
+  overlay={
+  <div>
+  <Menu mode="horizontal">
+  <Menu.Item
+  style={{
+  paddingLeft: 5,
+  paddingRight: 5,
+  backgroundColor: "#F5F5F5",
+  }}
+  >
+  
+  </Menu.Item>
+  </Menu>
+  </div>
+  }
+  trigger={["click"]}
+  >
+  <Tooltip title={item.stageName}>
+  {" "}
+  <Progress
+  type="circle"
+  style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+  percent={findProbability}
+  width={30}
+  strokeColor={"#005075"}
+  />
+  </Tooltip>
+  </Dropdown>
+  
+  </div>
+ 
+  
+  
+  
+  <div class=" text-sm text-cardBody font-poppins">
+  
+  <span>
+  {item.assignedTo === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedTo === item.ownerName ? (
+                    
+                    null
+                  ) : (
+  <MultiAvatar2
+  primaryTitle={item.assignedTo}
+  imgWidth={"1.8rem"}
+  imgHeight={"1.8rem"}
+  />
+    )}
+    </>
+                )}
+  </span>
+  
+  </div>
+ 
+ 
+  
+  
+  
+  <Tooltip title={item.ownerName}>
+  <span>
+  <MultiAvatar2
+  primaryTitle={item.ownerName}
+  imageId={item.ownerImageId}
+  imageURL={item.imageURL}
+  imgWidth={"1.8rem"}
+  imgHeight={"1.8rem"}
+  />
+  </span>
+  </Tooltip>
+ 
+  </div>
+                        </div>
+                              </div>
+                           
+  
+  
+                      )
+                  })}
+                    </InfiniteScroll>
+        </div>
+       
+      </>
+    ); 
+  }
+
   return (
     <>
   <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-    <div className=" flex  w-[98%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]"><FormattedMessage
+    <div className=" flex  w-[96%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
-        <div className=" md:w-[6.1rem]"><FormattedMessage
+        <div className=" md:w-[9.1rem]"><FormattedMessage
                   id="app.investor"
                   defaultMessage="investor"
                 /></div>
-        <div className=" md:w-[17.2rem] "><FormattedMessage
+        <div className=" md:w-[15.2rem] "><FormattedMessage
                   id="app.sponsor"
                   defaultMessage="sponsor"
                 /></div>
-        <div className="md:w-[10.1rem]"><FormattedMessage
+        <div className="md:w-[11.1rem]"><FormattedMessage
                   id="app.startdate"
                   defaultMessage="startdate"
                 /></div>
@@ -80,7 +314,7 @@ const DealsAllCardList = (props) => {
                   id="app.assignto"
                   defaultMessage="Assign To"
                 /></div>
-        <div className="md:w-[]"><FormattedMessage
+        <div className="md:w-[3rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>

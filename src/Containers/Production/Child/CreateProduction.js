@@ -63,7 +63,7 @@ function CreateProduction (props) {
 {showCard &&
  <ProductionSearchedCard handleRowItem={handleRowItem} rowData={rowData}/> 
 }
-<CreateProductionCard/>
+{/* <CreateProductionCard/> */}
 </Suspense>
 
     </>

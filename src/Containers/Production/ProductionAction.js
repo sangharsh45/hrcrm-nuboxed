@@ -123,3 +123,11 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
         // message.error("Something went wrong");
       });
   };
+
+  
+  export const handleBuilderProduction = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_BUILDER_PRODUCTION_DRAWER,
+      payload: modalProps,
+    });
+  }
