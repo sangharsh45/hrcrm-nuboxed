@@ -1310,3 +1310,49 @@ export const getAllProductList = () => (dispatch) => {
     });
 };
 
+export const PstoProductionBuilder = (data) => (dispatch) => {
+  dispatch({ type: types.POST_PRODUCTION_BUILDER_REQUEST });
+  axios
+      .post(`${base_url2}/production/productionProductBuilder`, data, {
+    headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.POST_PRODUCTION_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.POST_PRODUCTION_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getProductionBuilder = (productionProductId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCTION_BUILDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/production/getProductionPBuilder/${productionProductId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },})
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCTION_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCTION_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};

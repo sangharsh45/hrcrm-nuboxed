@@ -251,6 +251,13 @@ const initialState = {
   fetchingAllProductsError:false,
   productAlls:[],
 
+  postingProductionBldr: false,
+  postingProductionBldrError:false,
+
+  fetchingProdNbldr: false,
+  fetchingProdNbldrError:false,
+  ProdNbldr:[]
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -1048,7 +1055,47 @@ export const productReducer = (state = initialState, action) => {
                 case types.GET_ALL_PRODUCT_LIST_FAILURE:
                   return { ...state, fetchingAllProducts: false, fetchingAllProductsError: true };
 
-    default:
+                  case types.POST_PRODUCTION_BUILDER_REQUEST:
+                    return { ...state, postingProductionBldr: true };
+                  case types.POST_PRODUCTION_BUILDER_SUCCESS:
+                    return {
+                      ...state,
+                      postingProductionBldr: false,
+                      builderbyProductId: state.builderbyProductId.map((item) => {
+                        if (item.suppliesId == action.payload.suppliesId) {
+                          return action.payload;
+                        } else {
+                          return item;
+                        }
+                      }),
+                    };
+                  case types.POST_PRODUCTION_BUILDER_FAILURE:
+                    return {
+                      ...state,
+                      postingProductionBldr: false,
+                      postingProductionBldrError: true,
+                    };
+
+                    case types.GET_PRODUCTION_BUILDER_REQUEST:
+                      return {
+                        ...state,
+                        fetchingProdNbldr: true,
+                        fetchingProdNbldrError: false,
+                      };
+                    case types.GET_PRODUCTION_BUILDER_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingProdNbldr: false,
+                        ProdNbldr: action.payload,
+                      };
+                    case types.GET_PRODUCTION_BUILDER_FAILURE:
+                      return {
+                        ...state,
+                        fetchingProdNbldr: false,
+                        fetchingProdNbldrError: true,
+                      };
+          
+                  default:
       return state;
   }
 };
