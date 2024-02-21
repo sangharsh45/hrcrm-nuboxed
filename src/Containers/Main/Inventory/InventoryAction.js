@@ -1,7 +1,7 @@
 import * as types from "./InventoryActionType";
 import { base_url } from "../../../Config/Auth";
 import { base_url2 } from "../../../Config/Auth";
-
+import Swal from "sweetalert2";
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
@@ -1326,6 +1326,12 @@ export const updateReceivedDamagedUnit = (data, poSupplierDetailsId, suppliesId)
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(res);
       dispatch({
         type: types.UPDATE_RECEIVED_DAMAGED_UNIT_SUCCESS,
@@ -1380,6 +1386,12 @@ export const generateGrnForPo = (data) => (dispatch) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.GENERATE_GRN_FOR_PO_SUCCESS,
         payload: res.data,
@@ -1438,7 +1450,12 @@ export const trnasferGrnItemToStock = (data, poSupplierSuppliesId) => (dispatch)
       },
     })
     .then((res) => {
-      // dispatch(getMaterialReceivedDetailData(poSupplierDetailsId))
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS,
         payload: res.data,
@@ -1452,4 +1469,11 @@ export const trnasferGrnItemToStock = (data, poSupplierSuppliesId) => (dispatch)
         payload: err,
       });
     });
+};
+
+export const handleReceivedUnit = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_RECEIVED_UNIT_MODAL,
+    payload: modalProps,
+  });
 };

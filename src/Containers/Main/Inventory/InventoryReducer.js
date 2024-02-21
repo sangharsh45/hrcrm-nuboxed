@@ -103,6 +103,8 @@ const initialState = {
   fetchingReceivedDetailsListError: false,
   receivedDetailsList: [],
 
+  addReceiveUnit: false,
+
   //dispatchModal
   dispatchModal: false,
   //receivedItem
@@ -247,6 +249,9 @@ export const inventoryReducer = (state = initialState, action) => {
 
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };
+
+    case types.HANDLE_RECEIVED_UNIT_MODAL:
+      return { ...state, addReceiveUnit: action.payload };
 
     case types.HANDLE_MATERIAL_RECEIVED_MODAL:
       return { ...state, addMaterialReceived: action.payload };

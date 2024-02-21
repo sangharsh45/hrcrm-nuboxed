@@ -268,6 +268,9 @@ const initialState = {
   fetchingProductListError: false,
   productList: [],
 
+  addingCurrencyInPo: false,
+  addingCurrencyInPoError: false,
+
   fetchingGeneratorCatalogueSupplierList: false,
   fetchingGeneratorCatalogueSupplierListError: false,
   generatorCatalogueSuppliers: [],
@@ -1120,6 +1123,27 @@ export const suppliersReducer = (state = initialState, action) => {
         ...state,
         addingTermsnCondition: false,
         addingTermsnConditionError: true,
+      };
+
+    case types.ADD_CURRENCY_IN_PO_REQUEST:
+      return { ...state, addingCurrencyInPo: true };
+    case types.ADD_CURRENCY_IN_PO_SUCCESS:
+      return {
+        ...state,
+        addingCurrencyInPo: false,
+        purchaseList: state.purchaseList.map((item) => {
+          if (item.poSupplierDetailsId == action.payload.poSupplierDetailsId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.ADD_CURRENCY_IN_PO_FAILURE:
+      return {
+        ...state,
+        addingCurrencyInPo: false,
+        addingCurrencyInPoError: true,
       };
 
     case types.GET_PRODUCT_LIST_REQUEST:
