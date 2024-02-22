@@ -48,7 +48,8 @@ export const catgPaymentReducer = (state = initialState, action) => {
     return {
       ...state,
       addingPayment: false,
-      paymentsListData: [...state.paymentsListData, action.payload],
+      paymentsListData:[action.payload,...state.paymentsListData],
+      // paymentsListData: [...state.paymentsListData, action.payload],
       
     };
   case types.ADD_PAYMENT_FAILURE:

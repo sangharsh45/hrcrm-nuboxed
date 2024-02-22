@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
@@ -16,7 +17,7 @@ class SingleEducations extends Component {
   }
   render() {
     const {
-      education: { educationType, educationTypeId },
+      education: { educationType,creationDate, educationTypeId },
       handleChange,
       name,
       value,
@@ -26,6 +27,8 @@ class SingleEducations extends Component {
       handleDeleteEducation,
     } = this.props;
     console.log(linkedEducations);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -34,7 +37,11 @@ class SingleEducations extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {educationType}
+                  {educationType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
                   {this.props.education.editInd ? (

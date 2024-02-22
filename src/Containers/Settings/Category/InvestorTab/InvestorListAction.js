@@ -49,7 +49,7 @@ export const addInvestorData = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getInvestorList(orgId));
+        // dispatch(getInvestorList(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("INVESTOR_ has been added successfully!");

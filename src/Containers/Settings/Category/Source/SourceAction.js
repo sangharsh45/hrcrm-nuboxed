@@ -49,7 +49,7 @@ export const addSources = (source,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getSources(orgId));
+        // dispatch(getSources(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("source has been added successfully!");

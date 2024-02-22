@@ -48,7 +48,8 @@ export const itemTaskReducer = (state = initialState, action) => {
     return {
       ...state,
       addingItemTask: false,
-      itemTaskListData: [...state.itemTaskListData, action.payload],
+      itemTaskListData:[action.payload,...state.itemTaskListData]
+      // itemTaskListData: [...state.itemTaskListData, action.payload],
       
     };
   case types.ADD_ITEM_TASK_FAILURE:

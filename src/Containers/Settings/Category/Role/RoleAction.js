@@ -48,7 +48,7 @@ export const getRoles = (orgId) => (dispatch) => {
           message.success(res.data.message):
         message.success("Role has been added successfully!");
         }
-        dispatch(getRoles(orgId));
+        // dispatch(getRoles(orgId));
         console.log(res);
         dispatch({
           type: types.ADD_ROLES_SUCCESS,

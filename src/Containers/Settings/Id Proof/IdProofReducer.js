@@ -40,7 +40,8 @@ export const idProofsReducer = (state = initialState, action) => {
       return {
         ...state,
         addingIdProofs: false,
-        idProofs: [...state.idProofs, action.payload],
+        idProofs:[action.payload,...state.idProofs],
+        // idProofs: [...state.idProofs, action.payload],
       };
     case types.ADD_ID_PROOF_FAILURE:
       return {

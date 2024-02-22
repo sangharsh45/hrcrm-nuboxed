@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
 import { TextInput } from "../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
@@ -16,9 +17,11 @@ class SingleExpenses extends Component {
         }
     }
     render() {
-        const { expense: { expenseType, expenseTypeId }, handleChange, name, value, linkedExpenses,
+        const { expense: { expenseType,creationDate, expenseTypeId }, handleChange, name, value, linkedExpenses,
             updatingExpenses, handleUpdateExpense, handleDeleteExpense } = this.props;
         console.log(linkedExpenses)
+        const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(creationDate).format("DD/MM/YYYY");
         // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
         return (
             <div class=" w-full cursor-pointer">
@@ -28,7 +31,11 @@ class SingleExpenses extends Component {
                             ?
                             <div class=" flex justify-between" >
                                 <div class=" font-semibold" >
-                                    {expenseType}
+                                    {expenseType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                                 </div>
                                 <div>
                                     {this.props.expense.editInd?

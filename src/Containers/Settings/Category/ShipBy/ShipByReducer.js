@@ -49,7 +49,8 @@ export const shipByReducer = (state = initialState, action) => {
     return {
       ...state,
       addingShipBy: false,
-      ShipByData: [...state.ShipByData, action.payload],
+      ShipByData:[action.payload,...state.ShipByData]
+      // ShipByData: [...state.ShipByData, action.payload],
       
     };
   case types.ADD_SHIPBY_FAILURE:

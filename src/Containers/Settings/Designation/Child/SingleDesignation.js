@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
@@ -17,7 +18,7 @@ class SingleDesignation extends Component {
   }
   render() {
     const {
-      designation: { designationType, designationTypeId },
+      designation: { designationType, creationDate,designationTypeId },
       handleChange,
       name,
       value,
@@ -27,6 +28,8 @@ class SingleDesignation extends Component {
       handleDeleteDesignation,
     } = this.props;
     console.log(linkedDesignations);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -35,7 +38,11 @@ class SingleDesignation extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {designationType}
+                  {designationType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
                   {this.props.designation.editInd ? (

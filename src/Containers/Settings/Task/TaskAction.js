@@ -48,7 +48,7 @@ export const addTasks = (task, cb) => (dispatch) => {
         message.success(res.data.message):
       message.success("Task has been added successfully!");
       }
-      dispatch(getTasks());
+      // dispatch(getTasks());
       console.log(res);
       dispatch({
         type: types.ADD_TASK_SUCCESS,

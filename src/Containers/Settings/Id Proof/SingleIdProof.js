@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
 import { TextInput } from "../../../Components/UI/Elements";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -17,7 +18,7 @@ class SingleIdProof extends Component {
   }
   render() {
     const {
-      idProof: { IdProofType, IdProofTypeId },
+      idProof: { IdProofType,creationDate, IdProofTypeId },
       handleChange,
       name,
       value,
@@ -27,6 +28,8 @@ class SingleIdProof extends Component {
       handleDeleteIdProof,
     } = this.props;
     console.log(linkedIdProofs);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -35,7 +38,11 @@ class SingleIdProof extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                <div class=" font-semibold" >
-                  {IdProofType}
+                  {IdProofType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
                   {this.props.idProof.editInd ? (
