@@ -4,13 +4,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { trnasferGrnItemToStock } from "../../../InventoryAction"
 
-function TransferToStock(props) {
+function AllowGrnToggle(props) {
 
     function onChange() {
         props.trnasferGrnItemToStock({
-            grnReceivedInd: true,
-            grnStockInd: true,
-            allowGrnInd: props.allowGrnInd,
+            grnStockInd: props.grnStockInd,
+            allowGrnInd: true,
             poSupplierSuppliesId: props.poSupplierSuppliesId
         },
             props.poSupplierSuppliesId
@@ -27,8 +26,8 @@ function TransferToStock(props) {
                     cancelText="No"
                 >
                     <Switch
-                        disabled={props.grnStockInd}
-                        checked={props.grnStockInd}
+                        disabled={props.allowGrnInd}
+                        checked={props.allowGrnInd}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                     />
@@ -49,4 +48,4 @@ const mapDispatchToProps = (dispatch) =>
         },
         dispatch
     );
-export default connect(mapStateToProps, mapDispatchToProps)(TransferToStock);
+export default connect(mapStateToProps, mapDispatchToProps)(AllowGrnToggle);

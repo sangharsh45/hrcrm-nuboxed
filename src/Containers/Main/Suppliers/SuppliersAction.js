@@ -160,7 +160,12 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Item added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(getGeneratorSuppliersList(res.data));
       dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
@@ -219,13 +224,17 @@ export const movePoToInventory = (data, supplierId) => (dispatch) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Po moved to inventory location',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.MOVE_TO_INVENTORY_SUCCESS,
         payload: res.data,
       });
-
-      message.success("Po has moved to inventory !!")
     })
     .catch((err) => {
       console.log(err);
@@ -1268,7 +1277,7 @@ export const addCurrencyInPo = (data, poSupplierDetailsId) => (dispatch) => {
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Added Successfully',
+        title: 'Currency added Successfully',
         showConfirmButton: false,
         timer: 1500
       })// dispatch(getTermsnConditionOfPo(poSupplierDetailsId))

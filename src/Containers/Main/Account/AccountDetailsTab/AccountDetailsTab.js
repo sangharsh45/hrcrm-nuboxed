@@ -263,6 +263,7 @@ function AccountDetailsTab(props) {
                 addDistributorActivityModal={props.addDistributorActivityModal}
                 handleDistributorActivityModal={props.handleDistributorActivityModal} />
             <CatalogueOrderModal
+                distributorId={props.distributorData.distributorId}
                 handleAddOrderModal={props.handleAddOrderModal}
                 addCatalogueOrderModal={props.addCatalogueOrderModal}
             />

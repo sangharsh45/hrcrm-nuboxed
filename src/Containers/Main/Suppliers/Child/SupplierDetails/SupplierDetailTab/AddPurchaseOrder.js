@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import AddedSuppliesTable from './AddedSuppliesTable';
-import PostImageUpld from "../../../../../../Components/Forms/Formik/PostImageUpld";
+
 
 const AddPurchaseOrder = (props) => {
     useEffect(() => {
@@ -63,7 +63,6 @@ const AddPurchaseOrder = (props) => {
                     supplierId: props.supplier.supplierId,
                     poSupplierDetailsId: props.poSupplierDetailsId || "",
                     userId: props.userId,
-                    imageId: ""
                 }}
 
                 onSubmit={(values, { resetForm }) => {
@@ -186,6 +185,7 @@ const AddPurchaseOrder = (props) => {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
+                                    loading={props.addingPurchaseSuppliers}
                                 >
                                     <FormattedMessage
                                         id="app.submit"
@@ -207,6 +207,7 @@ const mapStateToProps = ({ suppliers, auth, supplies }) => ({
     userId: auth.userDetails.userId,
     purchaseList: supplies.purchaseList,
     poSupplierDetailsId: suppliers.pOSupplierDetailsId,
+    addingPurchaseSuppliers: suppliers.addingPurchaseSuppliers
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     linkPurchaseToSuppliers,

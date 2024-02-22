@@ -1205,7 +1205,7 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         updatingPartIdOfAnItem: false,
         reciveUnitData: state.reciveUnitData.map((item) =>
-          item.poSupplierSuppliesId === action.payload.poSupplierSuppliesId
+          item.supplierSuppliesUniqueNumberId === action.payload.supplierSuppliesUniqueNumberId
             ? action.payload : item
         ),
       };

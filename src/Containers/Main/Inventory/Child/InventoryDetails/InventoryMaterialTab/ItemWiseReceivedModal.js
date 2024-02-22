@@ -22,7 +22,7 @@ class ItemWiseReceivedModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <ReceivedUnitList row={this.props.row} />
+                        <ReceivedUnitList poSupplierSuppliesId={this.props.row.poSupplierSuppliesId} />
                     </Suspense>
                 </StyledDrawer>
             </>
