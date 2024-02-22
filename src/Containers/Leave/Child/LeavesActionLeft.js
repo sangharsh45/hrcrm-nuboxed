@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import TocIcon from '@mui/icons-material/Toc';
-import {  Input, Tooltip, Badge } from "antd";
+import {  Input, Tooltip, Avatar } from "antd";
 import { FormattedMessage } from "react-intl";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -30,7 +30,9 @@ const LeavesActionLeft = (props) => {
               color: props.viewType === "tile" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <GridViewIcon />
+            </Avatar>
           </span>
       
       </Tooltip>
@@ -57,7 +59,9 @@ const LeavesActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
               <TocIcon />
+              </Avatar>
           </span>
       
       </Tooltip>
@@ -75,10 +79,11 @@ const LeavesActionLeft = (props) => {
               cursor: "pointer",
             }}
           >
-            
+             <Avatar style={{ background: props.viewType === "list" ? "#f279ab" : "#4bc076" }}>
             <CategoryIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>
@@ -96,10 +101,11 @@ const LeavesActionLeft = (props) => {
               cursor: "pointer",
             }}
           >
-            
+            <Avatar style={{ background: props.viewType === "grant" ? "#f279ab" : "#4bc076" }}>
             <AreaChartOutlined  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>
@@ -115,10 +121,11 @@ const LeavesActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-            
+          <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <ListAltIcon  
             // icon={solid('users')}
              />
+             </Avatar>  
           </span>
     
       </Tooltip>

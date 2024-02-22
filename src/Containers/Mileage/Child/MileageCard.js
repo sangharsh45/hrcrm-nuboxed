@@ -8,7 +8,7 @@ import { getMileageByUserId,
   handleStatusMileageModal,
   handleMileageVoucherIdDrwer,
  } from "../MileageAction";
-import styled from 'styled-components'
+
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import AssistantIcon from '@mui/icons-material/Assistant';
 import { DeleteOutlined, } from "@ant-design/icons";
@@ -44,11 +44,12 @@ class MileageCard extends React.Component {
     if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
       <>
-       <div class=" h-h86 overflow-auto overflow-x-auto">
-        <CardWrapper>      
+       <div class=" h-[84vh] overflow-auto overflow-x-auto">
+       <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">       
               {MileageDat.map((item) => {
                  return (
-                    <CardElement>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[7.5rem] 
+                  text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
         
                                 
                    <div >
@@ -56,12 +57,13 @@ class MileageCard extends React.Component {
                          </div>
                       <div class="flex items-center justify-between ">
                       <div class="text-sm">Voucher ID</div>
-                        <Header>
+                        <div className="flex text-ellipsis whitespace-nowrap overflow-hidden h-[2em] text-base p-1
+                         text-[blue] cursor-pointer max-sm:items-center">
 <div class="text-[0.82rem] font-semibold " onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
-                        </Header> 
+                        </div> 
                        
                
             
@@ -82,50 +84,25 @@ class MileageCard extends React.Component {
 
                     <div class="flex  justify-between" >
                     {item.status === "Approved" && (
-                 <div
-                 style={{
-                   border: "2px solid green",
-                   padding: "0px 0.62em",
-                   textAlign: "center",
-                   margin: "2px",
-                   borderRadius: "0.62em",
-                 }}
-               >
+                 <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-green-500 p-[0px_0.62em]" >
                  <div className="text-[green]">{item.status}</div>
                </div>
               )}
             
               {item.status === "Rejected" && (
-                <div
-                style={{
-                  border: "2px solid red",
-                  padding: "0px 0.62em",
-                  textAlign: "center",
-                  margin: "2px",
-                  borderRadius: "0.62em",
-                }}
-              >
+                <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-red-500 p-[0px_0.62em]">
                 <div className="text-[red]">{item.status}</div>
                 </div>
               )}
               {item.status === "Pending" && (
-                  <div
-                  style={{
-                    border: "2px solid #e1d16c",
-                    padding: "0px 0.62em",
-                    textAlign: "center",
-                    margin: "2px",
-                    width: "max-content",
-                    borderRadius: "0.62em",
-                  }}
-                >
+                  <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-[#e1d16c] p-[0px_0.62em]">
                   
                   <div className="text-[#e1d16c]" > Waiting for approval</div>
                   </div>
               )}
 
 
-<div style={{ cursor: "pointer",padding:"2px"}}
+<div  className=" cursor-pointer p-[2px]"
 
 onClick={() => {
 this.props.handleStatusMileageModal(true);
@@ -135,8 +112,7 @@ this.handleExpand(item.voucherId)
 }}
 >
                  <Tooltip  title={"Status"}>
-                 <AssistantIcon
-style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+                 <AssistantIcon  className="!text-base cursor-pointer text-[grey] p-[2px]"/>
    </Tooltip> 
 
    </div>
@@ -155,7 +131,7 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
             >
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer",color:"red" }}
+                className="!text-base cursor-pointer text-[red]" 
                 // onClick={() => {
                 // this.props.deleteMileageVoucher(item.voucherId);
                   
@@ -175,10 +151,10 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
                       
          
                         
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
+              </div>
 
               </div> 
 
@@ -220,133 +196,3 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(MileageCard);
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.35rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
-    color: rgb(68,68,68);
-    margin: 1em;
-    padding: 0.2rem;
-    width: 19vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: -webkit-fill-available;
-    
-  }
-`
-const CardDescription = styled.div`
-  
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-const CardImage = styled.div`
-  
-  width:200;
-  display:flex;
-  height:200
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-const WithOutImage = styled.div`
-  
-  width:200px;
-  height:200px;
-  display:flex;
-    align-items: center;
-    flex-direction:column
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`
-const Desc = styled.p`
-  height: 0px;
-`
-const Price = styled.div`
-  height: 1.5em;
-  font-weight: 700;
-  font-family: Poppins;
-  font-size: 1em;
-  white-space: nowrap;
-`
-
-const AppIcon = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "123%" }}
-  ></i>
-);
-
-const AppIcon1 = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "145%" }}
-  ></i>
-);
-
-const PulseIcon = styled(AppIcon)`
-  color: #df9697;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;
-const PulseIcon1 = styled(AppIcon1)`
-  color: green;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;

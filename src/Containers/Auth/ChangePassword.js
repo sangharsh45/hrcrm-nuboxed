@@ -56,7 +56,7 @@ class ChangePassword extends Component {
   }
   callback = () => {
     message.success("You have successfully changed your password");
-    this.props.history.push("/");
+    this.props.history.push("/change-password");
   };
   render() {
     return (
