@@ -9,7 +9,6 @@ import { FormattedMessage } from 'react-intl';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 import AddAddressDetail from "./AddAddressDetail";
-import AddOrderForm from "./AddCatalogueForm";
 import AddCatalogueForm from "./AddCatalogueForm";
 
 const Step = StyledSteps.Step;
@@ -47,7 +46,7 @@ class AccountOrder1Stepper extends Component {
                     defaultMessage="Order"
                 />,
                 icon: <UserOutlined />,
-                content: <AddAddressDetail distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
+                content: <AddAddressDetail distributorId={this.props.distributorId} />,
             },
             {
                 title: <FormattedMessage
@@ -57,7 +56,7 @@ class AccountOrder1Stepper extends Component {
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
-                content: <AddCatalogueForm distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
+                content: <AddCatalogueForm distributorId={this.props.distributorId} />,
             },
 
 

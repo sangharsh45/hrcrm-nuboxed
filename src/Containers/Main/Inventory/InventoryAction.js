@@ -1388,7 +1388,7 @@ export const generateGrnForPo = (data) => (dispatch) => {
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Created Successfully',
+        title: 'Grn Created Successfully',
         showConfirmButton: false,
         timer: 1500
       })
@@ -1476,12 +1476,12 @@ export const handleReceivedUnit = (modalProps) => (dispatch) => {
   });
 };
 
-export const getReceivedUnitOfAnItem = (locationId) => (dispatch) => {
+export const getReceivedUnitOfAnItem = (poSupplierSuppliesId) => (dispatch) => {
   dispatch({
     type: types.GET_RECEIVED_UNIT_OF_AN_ITEM_REQUEST,
   });
   axios
-    .get(`${base_url2}/po//${locationId}`, {
+    .get(`${base_url2}/po/uniqueItemList/${poSupplierSuppliesId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1501,12 +1501,12 @@ export const getReceivedUnitOfAnItem = (locationId) => (dispatch) => {
     });
 };
 
-export const updatePartIdOfAnItem = (data, poSupplierSuppliesId) => (dispatch) => {
+export const updatePartIdOfAnItem = (data, supplierSuppliesUniqueNumberId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_PART_ID_OF_AN_ITEM_REQUEST,
   });
   axios
-    .put(`${base_url2}/po/part/${poSupplierSuppliesId}`, data, {
+    .put(`${base_url2}/po/updatePartNumber/${supplierSuppliesUniqueNumberId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1514,7 +1514,7 @@ export const updatePartIdOfAnItem = (data, poSupplierSuppliesId) => (dispatch) =
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Updated Successfully',
+        title: 'Part no updated successfully',
         showConfirmButton: false,
         timer: 1500
       })

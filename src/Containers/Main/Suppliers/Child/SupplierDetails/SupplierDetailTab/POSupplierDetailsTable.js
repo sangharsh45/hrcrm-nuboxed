@@ -27,6 +27,7 @@ function PoSupplierDetailsTable(props) {
     }
     const handleCallback = () => {
         setEdit(false)
+        setPrice("")
     }
     return (
         <>

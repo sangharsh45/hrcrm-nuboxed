@@ -32,9 +32,14 @@ function PurchaseOrderTable(props) {
     const [showIcon, setShowIcon] = useState(false)
     const handleCurrencyField = () => {
         setShowIcon(!showIcon)
+
     }
     const handleChangeCurrency = (val) => {
         setCurrency(val)
+    }
+    const handleCallback = () => {
+        setShowIcon(false)
+        setCurrency("")
     }
     return (
         <>
@@ -137,7 +142,7 @@ function PurchaseOrderTable(props) {
                                                             return <Option value={a.currency_name}>{a.currency_name}</Option>;
                                                         })}
                                                     </Select> :
-                                                    item.currency}
+                                                    item.poCurrency}
                                             </div>
                                         </div>
                                         <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
@@ -148,7 +153,7 @@ function PurchaseOrderTable(props) {
                                                             <Button onClick={() => {
                                                                 props.addCurrencyInPo({
                                                                     poCurrency: currency
-                                                                })
+                                                                }, item.poSupplierDetailsId, handleCallback())
                                                             }}>Add</Button>
                                                             <Button onClick={handleCurrencyField}>Cancel</Button>
                                                         </div> :

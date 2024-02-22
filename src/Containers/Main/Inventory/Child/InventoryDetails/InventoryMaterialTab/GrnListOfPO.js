@@ -31,6 +31,7 @@ const GrnListOfPO = (props) => {
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.final" defaultMessage="Final" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.remark" defaultMessage="Remark" /></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.grn" defaultMessage="Grn #" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.stock" defaultMessage="To Stock" /></div>
                         <div className=""></div>
                     </div>
 
@@ -95,6 +96,7 @@ const GrnListOfPO = (props) => {
                                     <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                         <div class=" text-xs text-cardBody font-poppins">
                                             <TransferToStock
+                                                allowGrnInd={item.allowGrnInd}
                                                 grnStockInd={item.grnStockInd}
                                                 poSupplierSuppliesId={item.poSupplierSuppliesId}
                                                 poSupplierDetailsId={props.row.poSupplierDetailsId}

@@ -24,7 +24,7 @@ class CatalogueOrderModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <AccountOrder1Stepper />
+                        <AccountOrder1Stepper distributorId={this.props.distributorId} />
                     </Suspense>
                 </StyledDrawer>
             </div>

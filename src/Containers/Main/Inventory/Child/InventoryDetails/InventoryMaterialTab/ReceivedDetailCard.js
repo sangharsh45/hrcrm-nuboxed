@@ -8,288 +8,296 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BorderColorOutlined } from '@mui/icons-material';
-import { Button, Form, Input, Popconfirm, Switch, Typography, message } from 'antd';
+import { Button, Checkbox, Form, Input, Modal, Popconfirm, Select, Switch, Tooltip, Typography, message } from 'antd';
 import PoReceiveToggle from './PoReceiveToggle';
+import { FormattedMessage } from 'react-intl';
+import { trnasferGrnItemToStock } from "../../../InventoryAction"
+import AllowGrnToggle from './AllowGrnToggle';
 
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = <Input />;
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
-
+const { Option } = Select;
 
 const ReceivedDetailCard = (props) => {
     useEffect(() => {
         props.getMaterialReceivedDetailData(props.row.poSupplierDetailsId)
     }, [])
-    const [form] = Form.useForm();
-    const [data, setData] = useState([]);
-    const [editingKey, setEditingKey] = useState('');
+    const [existGrn, setExistGrn] = useState(false)
+    const handleChange = () => {
+        setExistGrn(!existGrn)
+    }
 
-    useEffect(() => {
-        setData(props.receivedDetailData)
-    }, [props.receivedDetailData])
+    const [grnNumber, setGrnNo] = useState("")
+    const handleChangeGrnId = (val) => {
+        console.log(val)
+        setGrnNo(val)
+    }
 
-    const isEditing = (record) => record.poSupplierSuppliesId === editingKey;
-
-    const edit = (record) => {
-        form.setFieldsValue({
-            unitReceived: '',
-            unitDamaged: '',
-            remark: '',
-            ...record,
-        });
-        setEditingKey(record.poSupplierSuppliesId);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+        props.generateGrnForPo({
+            createGrnNo: result,
+            grnId: "",
+            grnNumber: grnNumber,
+            grnReceivedInd: true,
+            poSupplierDetailsId: props.row.poSupplierDetailsId,
+            userId: props.userId
+        })
+    };
+    const handleCancelmodal = () => {
+        setIsModalOpen(false);
     };
 
-    const cancel = () => {
-        setEditingKey('');
-    };
+    const [rowData, setRowData] = useState({})
+    const handleRowData = (item) => {
+        setRowData(item)
+    }
+    const [showEdit, setShowEdit] = useState(false)
+    const handleEditicon = () => {
+        setShowEdit(!showEdit)
+    }
+    const [unitReceived, setUnitReceived] = useState("")
+    const handleUnitReceived = (value) => {
+        setUnitReceived(value)
+    }
 
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.poSupplierSuppliesId);
-            if (index > -1) {
-                // alert("if");
-                const item = newData[index];
-                console.log(item)
-                newData.splice(index, 1, { ...item, ...row });
-                const a = newData[index];
+    const [unitDamaged, setUnitDamaged] = useState("")
+    const handleUnitDamaged = (value) => {
+        setUnitDamaged(value)
+    }
 
-                if (a.unit >= a.unitReceived && a.unitDamaged <= a.unit) {
-                    props.updateReceivedDamagedUnit(
-                        {
-                            unitReceived: a.unitReceived,
-                            unitDamaged: a.unitDamaged,
-                            remark: a.remark,
-                            units: a.inquiryUnits,
-                            userId: props.userId,
-                            poSupplierSuppliesId: key,
-                            poReceivedInd: true,
-                            unitReceiveInd: true
-                        },
-                        props.row.poSupplierDetailsId,
-                        a.suppliesId
-                    );
-                } else {
-                    message.error("Received unit should be less then units !")
-                }
+    const [remark, setRemark] = useState("")
+    const handleRemark = (value) => {
+        setRemark(value)
+    }
 
-                setEditingKey('');
-            } else {
-                alert("else");
-                newData.push(row);
-                // setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
+    const handleCallback = () => {
+        setUnitReceived("")
+        setUnitDamaged("")
+        setRemark("")
+        setShowEdit(false)
+    }
+    const handleCancel = () => {
+        setShowEdit(false)
+    }
 
     const result = props.receivedDetailData.filter((item) =>
         item.unitReceiveInd === true && item.grnReceivedInd === false).map((opt) => opt.poSupplierSuppliesId)
-    console.log(result)
     const show = props.receivedDetailData.some((item) => item.unitReceiveInd === true && item.grnReceivedInd === false)
-    console.log(show)
     const checkall = props.receivedDetailData.every((item) => item.grnReceivedInd === true)
-    console.log(checkall)
-    const columns = [
-        {
-            title: "Name",
-            dataIndex: "suppliesFullName",
-            width: "15%"
-        },
-        {
-            title: "Category",
-            dataIndex: "categoryName",
-            render: (text, item) => {
-                return (
-                    <>
-                        {item.categoryName} {item.subCategoryName}
-                    </>
-                )
-            },
-            width: "9%"
-        },
-        {
-            title: "Attribute",
-            render: (text, item) => {
-                return (
-                    <>
-                        {item.attributeName} {item.subAttributeName}
-                    </>
-                )
-            },
-            width: "7%"
-        },
-        {
-            title: "Price",
-            dataIndex: "price",
-            width: "6%"
-        },
-        {
-            title: "Unit",
-            dataIndex: "unit",
-            width: "6%"
-        },
-        {
-            title: "Received",
-            dataIndex: "unitReceived",
-            width: "6%",
-            editable: true,
-        },
-        {
-            title: "Damaged",
-            dataIndex: "unitDamaged",
-            width: "6%",
-            editable: true,
-        },
-        {
-            title: "Remark",
-            dataIndex: "remark",
-            width: "6%",
-            editable: true,
-        },
-        {
-            title: "Received",
-            width: "6%",
-            render: (text, item) => {
-                return (
-                    <>
-                        <PoReceiveToggle
-                            poSupplierDetailsId={props.row.poSupplierDetailsId}
-                            suppliesId={item.suppliesId}
-                            poReceivedInd={item.poReceivedInd}
 
-                        />
-                    </>
-                )
-            },
-        },
-
-        {
-            title: '',
-            width: "6%",
-            dataIndex: 'operation',
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-                        <Typography.Link
-                            onClick={() =>
-                                save(record.poSupplierSuppliesId)
-                            }
-                            style={{
-                                marginRight: 8,
-                            }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
-                    </span>
-                ) : record.poReceivedInd && record.grnReceivedInd === false && (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        <BorderColorOutlined />
-                    </Typography.Link>
-                )
-            },
-        },
-
-    ]
-    const mergedColumns = columns.map((col) => {
-        if (!col.editable) {
-            return col;
-        }
-
-        return {
-            ...col,
-            onCell: (record) => ({
-                record,
-                inputType: col.dataIndex === 'remark' ? 'text' : 'number',
-                dataIndex: col.dataIndex,
-                title: col.title,
-                editing: isEditing(record),
-            }),
-        };
-    });
     return (
         <>
-            <Form form={form} component={false}>
-                <StyledTable
-                    rowKey="poSupplierSuppliesId"
-                    dataSource={data}
-                    scroll={{ y: 320 }}
-                    pagination={false}
-                    components={{
-                        body: {
-                            cell: EditableCell,
-                        },
-                    }}
-                    columns={mergedColumns}
-                    rowClassName="editable-row"
-                />
-            </Form>
+            <div className=' flex justify-end sticky z-auto'>
+                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=""></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
+                        <div className=" md:w-[22.12rem]"><FormattedMessage id="app.Category" defaultMessage="Category" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Attribute" defaultMessage="Attribute" /></div>
+                        <div className=" md:w-[22.12rem]"><FormattedMessage id="app.Price" defaultMessage="Price" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Unit" defaultMessage="Unit" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Received" defaultMessage="Receive" /></div>
+                        <div className=" md:w-[22.12rem]"><FormattedMessage id="app.Damaged" defaultMessage="Damaged" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Remark" defaultMessage="Remark" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Received" defaultMessage="Received" /></div>
+                        <div className=""></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Received" defaultMessage="Allow Grn" /></div>
+                        <div className=""></div>
+                    </div>
+
+                    {props.receivedDetailData.map((item) => {
+
+                        return (
+                            <div>
+                                <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
+                                    <div class="flex">
+                                        <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
+                                            <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins ">
+                                                {item.suppliesFullName}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.categoryName} {item.subCategoryName}
+                                        </div>
+
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.attributeName} {item.subAttributeName}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.price}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.unit}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                <Input
+                                                    value={unitReceived}
+                                                    type="text"
+                                                    placeholder='Received'
+                                                    onChange={(e) => handleUnitReceived(e.target.value)}
+                                                />
+                                                : item.unitReceived}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                <Input
+                                                    value={unitDamaged}
+                                                    type="text"
+                                                    placeholder='Damaged'
+                                                    onChange={(e) => handleUnitDamaged(e.target.value)}
+                                                />
+                                                : item.unitDamaged}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                <Input
+                                                    value={remark}
+                                                    type="text"
+                                                    placeholder='Remark'
+                                                    onChange={(e) => handleRemark(e.target.value)}
+                                                />
+                                                : item.remark}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            <PoReceiveToggle
+                                                poSupplierDetailsId={props.row.poSupplierDetailsId}
+                                                suppliesId={item.suppliesId}
+                                                poReceivedInd={item.poReceivedInd}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                <>
+                                                    <Button
+                                                        type="primary"
+                                                        onClick={() => {
+                                                            if ((unitReceived <= item.unit && unitReceived >= 0) && (unitDamaged <= item.unit && unitDamaged >= 0)) {
+                                                                props.updateReceivedDamagedUnit({
+                                                                    unitReceived: unitReceived,
+                                                                    unitDamaged: unitDamaged,
+                                                                    remark: remark,
+                                                                    userId: props.userId,
+                                                                    poSupplierSuppliesId: item.poSupplierSuppliesId,
+                                                                    poReceivedInd: true,
+                                                                    unitReceiveInd: true,
+
+                                                                },
+                                                                    props.row.poSupplierDetailsId,
+                                                                    item.suppliesId,
+                                                                    handleCallback())
+                                                            } else {
+                                                                message.error("Receive and damage unit should be less than unit !")
+                                                            }
+                                                        }}
+                                                    >Add</Button>
+                                                    <Button onClick={handleCancel}>Cancel</Button>
+                                                </>
+                                                : item.grnReceivedInd ? null :
+                                                    item.poReceivedInd ? <BorderColorOutlined
+                                                        onClick={() => {
+                                                            handleRowData(item);
+                                                            handleEditicon()
+                                                        }}
+                                                    /> : null
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                            {item.unitReceiveInd && !item.grnReceivedInd ? <Tooltip title="Check for grn">
+                                                <AllowGrnToggle
+                                                    allowGrnInd={item.allowGrnInd}
+                                                    grnStockInd={item.grnStockInd}
+                                                    poSupplierSuppliesId={item.poSupplierSuppliesId}
+                                                    poSupplierDetailsId={props.row.poSupplierDetailsId}
+                                                />
+
+                                            </Tooltip> : null}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
             <div className=' flex justify-end mt-1'>
                 {show && <Button
                     type='primary'
-                    onClick={() => props.generateGrnForPo({
-                        createGrnNo: result,
-                        grnId: "",
-                        grnReceivedInd: true,
-                        poSupplierDetailsId: props.row.poSupplierDetailsId,
-                        userId: props.userId
-                    })}
+                    onClick={showModal}
                 >
                     Generate Grn
                 </Button>}
+                <Modal
+                    title="Generate Grn"
+                    open={isModalOpen}
+                    onOk={handleOk}
+                    onCancel={handleCancelmodal}
+                >
+                    <Switch
+                        checked={existGrn}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                        onChange={handleChange}
+                    />
+                    {existGrn ?
+                        <Select
+                            value={grnNumber}
+                            onChange={(value) =>
+                                handleChangeGrnId(value)
+                            }
+                        >
+                            {props.receivedDetailData.map((a) => {
+                                return <Option value={a.grnId}>{a.grnNumber}</Option>;
+                            })}
+                        </Select> : null}
+                </Modal>
             </div>
+
         </>
-    )
+    );
 }
+
+
 const mapStateToProps = ({ inventory, auth }) => ({
     receivedDetailData: inventory.receivedDetailData,
     userId: auth.userDetails.userId,
 });
-const mapDispatchToProps = dispatch =>
-    bindActionCreators({
-        getMaterialReceivedDetailData,
-        updateReceivedDamagedUnit,
-        generateGrnForPo
-    }, dispatch);
+
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+            getMaterialReceivedDetailData,
+            updateReceivedDamagedUnit,
+            generateGrnForPo,
+            trnasferGrnItemToStock
+        },
+        dispatch
+    );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReceivedDetailCard);
 
