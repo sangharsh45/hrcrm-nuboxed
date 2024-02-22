@@ -15,6 +15,11 @@ const initialState = {
     productionByLocsId:[],
 
     openbUILDERProductiondrawer:false,
+    clickedProductionIdrwr:false,
+
+    fetchingProdNbldr: false,
+    fetchingProdNbldrError:false,
+    ProdNbldr:[],
 
 };
 export const productionReducer = (state = initialState, action) => {
@@ -83,7 +88,31 @@ export const productionReducer = (state = initialState, action) => {
 
                     case types.HANDLE_BUILDER_PRODUCTION_DRAWER:
                       return { ...state, openbUILDERProductiondrawer: action.payload };
-                
+
+                      case types.HANDLE_PRODUCTIONID_DRAWER:
+                        return { ...state, clickedProductionIdrwr: action.payload };
+                 
+                        case types.GET_PRODUCTION_BUILDER_REQUEST:
+                          return {
+                            ...state,
+                            fetchingProdNbldr: true,
+                            fetchingProdNbldrError: false,
+                          };
+                        case types.GET_PRODUCTION_BUILDER_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingProdNbldr: false,
+                            ProdNbldr: action.payload,
+                          };
+                        case types.GET_PRODUCTION_BUILDER_FAILURE:
+                          return {
+                            ...state,
+                            fetchingProdNbldr: false,
+                            fetchingProdNbldrError: true,
+                          };                  
+
+
+
     default:
       return state;
 }
