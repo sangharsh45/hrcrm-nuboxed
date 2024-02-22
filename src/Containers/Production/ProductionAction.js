@@ -131,3 +131,34 @@ export const handleCreateProduction = (modalProps) => (dispatch) => {
       payload: modalProps,
     });
   }
+  export const handleProductionIDrawer = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_PRODUCTIONID_DRAWER,
+      payload: modalProps,
+    });
+  }
+  
+  export const getProductionBuilder = (productionProductId) => (dispatch) => {
+    dispatch({
+      type: types.GET_PRODUCTION_BUILDER_REQUEST,
+    });
+    axios
+      .get(`${base_url2}/production/getProductionPBuilder/${productionProductId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },})
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PRODUCTION_BUILDER_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PRODUCTION_BUILDER_FAILURE,
+          payload: err,
+        });
+      });
+  };

@@ -239,7 +239,38 @@ const initialState = {
 
   fetchingProductCurrency: false,
   fetchingProductCurrencyError:false,
-  ProductCurrency:[],
+  ProductCurrency:[
+    {
+      "skillLevelLinkId": "SLLG15730474789302024",
+      "skillDefinationId": "DEIN70611587316272024",
+      "currency_id":"CU06",
+      "currency_name":"INR",
+      "skill": "4WD",
+      "level1": 233.0,
+      "level2": 432.0,
+      "level3": 320.0,
+      "level4": 0.0,
+      "level5": 0.0,
+      "liveInd": false,
+      "countryId": "C001"
+  },
+  {
+      "skillLevelLinkId": "SLLG5122091210302024",
+      "skillDefinationId": "DEIN40102183900272024",
+      "currency_id":"CU04",
+      "currency_name":"AUD",
+      "skill": "Java",
+      "level1": 823.0,
+      "level2": 456.0,
+      "level3": 345.0,
+      "level4": 0.0,
+      "level5": 0.0,
+      "liveInd": false,
+      "countryId": "C001"
+  },
+  
+  ],
+
   creatingProductCurrency: false,
   creatingProductCurrencyError:false,
 
@@ -254,9 +285,7 @@ const initialState = {
   postingProductionBldr: false,
   postingProductionBldrError:false,
 
-  fetchingProdNbldr: false,
-  fetchingProdNbldrError:false,
-  ProdNbldr:[]
+
 
 };
 const newDateRange = (dateRange, newDate) =>
@@ -915,7 +944,14 @@ export const productReducer = (state = initialState, action) => {
         ...state,
         addingProductBuilder: false,
         addedProBuilder:action.payload,
-        builderbyProductId:[action.payload,...state.builderbyProductId]
+        searchedBuilders: state.searchedBuilders.map((item) => {
+          if (item.suppliesId == action.payload.suppliesId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+        // builderbyProductId:[action.payload,...state.builderbyProductId]
       };
     case types.ADD_PRODUCT_BUILDER_FAILURE:
       return {
@@ -1076,24 +1112,7 @@ export const productReducer = (state = initialState, action) => {
                       postingProductionBldrError: true,
                     };
 
-                    case types.GET_PRODUCTION_BUILDER_REQUEST:
-                      return {
-                        ...state,
-                        fetchingProdNbldr: true,
-                        fetchingProdNbldrError: false,
-                      };
-                    case types.GET_PRODUCTION_BUILDER_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingProdNbldr: false,
-                        ProdNbldr: action.payload,
-                      };
-                    case types.GET_PRODUCTION_BUILDER_FAILURE:
-                      return {
-                        ...state,
-                        fetchingProdNbldr: false,
-                        fetchingProdNbldrError: true,
-                      };
+              
           
                   default:
       return state;
