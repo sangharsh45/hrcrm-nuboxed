@@ -20,7 +20,7 @@ const TaskActionLeft = props => {
             color: props.viewType === "table" && "#1890ff",
             cursor:"pointer"
           }}
-        ><Avatar style={{background:"#FF9500"}}>
+        > <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
            <TocIcon className="text-white"  />
            </Avatar>
         </span>
@@ -35,7 +35,7 @@ const TaskActionLeft = props => {
             cursor:"pointer"
           }}
         > 
-        <Avatar style={{background:"#FF9500"}}><LeaderboardIcon  className="text-white"    /></Avatar>
+        <Avatar style={{ background: props.viewType === "gantt" ? "#f279ab" : "#4bc076" }}><LeaderboardIcon  className="text-white"    /></Avatar>
         
         
         </span>
@@ -51,7 +51,7 @@ const TaskActionLeft = props => {
             cursor:"pointer"
           }}
         >
-         <Avatar style={{background:"#FF9500"}}><FactCheckIcon  className="text-white" /></Avatar> 
+         <Avatar style={{ background: props.viewType === "approve" ? "#f279ab" : "#4bc076" }}><FactCheckIcon  className="text-white" /></Avatar> 
         </span>
        
       </Tooltip>

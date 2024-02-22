@@ -34,8 +34,9 @@ class MileageCard2 extends React.Component {
     if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
       <>
-         <div class=" h-h86 overflow-auto overflow-x-auto">
-         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+         <div class=" h-[86vh] overflow-hidden overflow-x-hidden max-sm:h-h86">
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto h-[37rem] shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE] 
+         max-sm:w-wk max-sm:overflow-auto max-sm:h-[32rem]">
       {MileageDat.map((item) => { 
                     return (
                         <div>
@@ -105,42 +106,17 @@ class MileageCard2 extends React.Component {
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
-                 <div
-                 style={{
-                   border: "2px solid green",
-                   padding: "0px 0.62em",
-                   textAlign: "center",
-                   margin: "2px",
-                   borderRadius: "0.62em",
-                 }}
-               >
+                 <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-green-500 p-[0px_0.62em]"  >
                 <div className="text-[green]">{item.status}</div>
                </div>
               )}
             
               {item.status === "Rejected" && (
-                <div
-                style={{
-                  border: "2px solid red",
-                  padding: "0px 0.62em",
-                  textAlign: "center",
-                  margin: "2px",
-                  borderRadius: "0.62em",
-                }}
-              >
+                <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-red-500 p-[0px_0.62em]">
                <div className="text-[red]">{item.status}</div></div>
               )}
               {item.status === "Pending" && (
-                  <div
-                  style={{
-                    border: "2px solid #e1d16c",
-                    padding: "0px 0.62em",
-                    textAlign: "center",
-                    margin: "2px",
-                    borderRadius: "0.62em",
-                    width:"12rem"
-                  }}
-                >
+                 <div className=" w-[12rem] rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-[#e1d16c] p-[0px_0.62em]">
                   <div className="text-[#e1d16c]">Waiting for approval</div></div>
               )}
                                     </div>
@@ -173,9 +149,7 @@ class MileageCard2 extends React.Component {
          >
               <DeleteOutlined
                 type="delete"
-                style={{   cursor: "pointer",
-                color: "red",
-                fontSize: "1rem",}}
+                className="!text-base cursor-pointer text-[red]" 
                 // onClick={() => {
                 // this.props.deleteMileageVoucher(item.voucherId);
                   

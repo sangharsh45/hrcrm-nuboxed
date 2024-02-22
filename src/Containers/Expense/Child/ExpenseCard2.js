@@ -37,8 +37,8 @@ function ExpenseCard2(props) {
 
     return (
       <>
-      <div class=" h-h86 overflow-auto overflow-x-auto">
-      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      <div class=" h-h86 overflow-hidden overflow-x-hidden">
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] h-[36rem] bg-[#E3E8EE] max-sm:w-wk max-sm:h-[32rem]">
               {Expenses.map((item) => {
                  return (
                   <div>
@@ -91,14 +91,7 @@ function ExpenseCard2(props) {
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
-                 <div
-                 style={{
-                   border: "2px solid green",
-                   padding: "0px 0.62em",
-                   textAlign: "center",
-                   margin: "2px",
-                   borderRadius: "0.62em",
-                 }}
+                 <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-green-500 p-[0px_0.62em]"
                >
                  <div className="text-[green]">{item.status}</div>
                </div>
@@ -106,26 +99,13 @@ function ExpenseCard2(props) {
             
               {item.status === "Rejected" && (
                 <div
-                style={{
-                  border: "2px solid red",
-                  padding: "0px 0.62em",
-                  textAlign: "center",
-                  margin: "2px",
-                  borderRadius: "0.62em",
-                }}
+                className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-red-500 p-[0px_0.62em] "
               >
                 <div className="text-[red]">{item.status}</div></div>
               )}
               {item.status === "Pending" && (
                   <div
-                  style={{
-                    border: "2px solid #e1d16c",
-                    padding: "0px 0.62em",
-                    textAlign: "center",
-                    margin: "2px",
-                    borderRadius: "0.62em",
-                    width:"11rem"
-                  }}
+                  className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-[#e1d16c] p-[0px_0.62em]"
                 >
                  <div className="text-[#e1d16c]"> Waiting for approval</div>
                   </div>
