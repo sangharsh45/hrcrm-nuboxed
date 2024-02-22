@@ -48,7 +48,7 @@ export const addItemTask = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getItemTask(orgId));
+        // dispatch(getItemTask(orgId));
         // {res.data.message?  
         //   message.success(res.data.message):
         message.success("ITEM_TASK has been added successfully!");

@@ -48,7 +48,8 @@ export const kpiReducer = (state = initialState, action) => {
     return {
       ...state,
       addingKpi: false,
-      kpiListData: [...state.kpiListData, action.payload],
+      kpiListData:[action.payload,...state.kpiListData]
+      // kpiListData: [...state.kpiListData, action.payload],
       
     };
   case types.ADD_KPI_FAILURE:

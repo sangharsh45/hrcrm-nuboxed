@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
@@ -17,7 +18,7 @@ class SingleSectors extends Component {
   }
   render() {
     const {
-      sector: { sectorName, sectorId, EditInd },
+      sector: { sectorName,creationDate, sectorId, EditInd },
       handleChange,
       name,
       value,
@@ -29,6 +30,8 @@ class SingleSectors extends Component {
     // const sortedSectors = [...linkedSectors].sort((a, b) => a.sectorName.localeCompare(b.sectorName));
     console.log(linkedSectors);
     console.log("name", name);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -37,7 +40,11 @@ class SingleSectors extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {sectorName}
+                  {sectorName}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
                   {this.props.sector.editInd ? (

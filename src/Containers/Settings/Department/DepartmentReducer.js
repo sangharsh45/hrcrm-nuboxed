@@ -70,7 +70,8 @@ export const departmentsReducer = (state = initialState, action) => {
         return {
           ...state,
           addingDepartments: false,
-          departments: [...state.departments, action.payload],
+          departments:[action.payload,...state.departments]
+          // departments: [...state.departments, action.payload],
         };
       case types.ADD_DEPARTMENTS_FAILURE:
         return { ...state, addingDepartments: false, addingDepartmentsError: true };
@@ -312,15 +313,16 @@ export const departmentsReducer = (state = initialState, action) => {
           return {
             ...state,
             addingModules: false,
-            departments: state.departments.map((item) => {
-              if (item.departmentId
-                === action.payload.departmentId
-              ) {
-                return action.payload;
-              } else {
-                return item;
-              }
-            }),
+            departments:[action.payload,...state.departments]
+            // departments: state.departments.map((item) => {
+            //   if (item.departmentId
+            //     === action.payload.departmentId
+            //   ) {
+            //     return action.payload;
+            //   } else {
+            //     return item;
+            //   }
+            // }),
           };
         case types.ADDING_MODULE_FAILURE:
           return {

@@ -4,6 +4,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 import {linkTypeToggle} from "../DocumentsAction";
 import { connect } from "react-redux";
+import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
 import { Button,Tooltip, Select } from "antd";
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -35,7 +36,7 @@ class SingleDocuments extends Component {
 
   render() {
     const {
-      document: { documentTypeName,editInd, mandatoryInd, userType, documentTypeId },
+      document: { documentTypeName,creationDate,editInd, mandatoryInd, userType, documentTypeId },
       handleChange,
       name,
       value,
@@ -46,6 +47,8 @@ class SingleDocuments extends Component {
       handleUpdateDocument,
       handleDeleteDocument,
     } = this.props;
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     console.log(linkedDocuments);
     return (
       <div class=" w-full cursor-pointer">
@@ -56,7 +59,11 @@ class SingleDocuments extends Component {
                 <div class=" flex" >
                   <div class=" w-60">
                   <div class=" font-semibold" >
-                    {documentTypeName}
+                    {documentTypeName}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                   </div>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
@@ -83,7 +90,7 @@ class SingleDocuments extends Component {
                     </div>
                   
                     <div >               
-                   {this.props.document.editInd === true &&(
+                   {editInd && !mandatoryInd &&(
                       <BorderColorIcon
                       
                         tooltipTitle="Edit"
@@ -93,7 +100,7 @@ class SingleDocuments extends Component {
                       />
                     ) }  
                  
-                    {this.props.document.editInd === true &&(
+                 {editInd && !mandatoryInd &&(
                      <Tooltip title="Delete">
                     <DeleteOutlined
                     

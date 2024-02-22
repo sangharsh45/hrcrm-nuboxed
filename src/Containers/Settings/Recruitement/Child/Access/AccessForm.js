@@ -70,6 +70,8 @@ const AccessForm = (props) => {
     setCheckedRepositoryList(props.departmentAcces.repository)
     setCheckedBasicList(props.departmentAcces.basic)
     setCheckedShipperList(props.departmentAcces.shipper)
+    setCheckedProcurementList(props.departmentAcces.procurement)
+    setCheckedSubscriptionList(props.departmentAcces.subscription)
     setCheckedPlantList(props.departmentAcces.plant)
     setCheckedTeamsList(props.departmentAcces.teams)
     setCheckedPaymentsList(props.departmentAcces.payment)
@@ -117,6 +119,8 @@ const AccessForm = (props) => {
   props.departmentAcces.pitch,
   props.departmentAcces.repository,
   props.departmentAcces.shipper,
+  props.departmentAcces.procurement,
+  props.departmentAcces.subscription,
   props.departmentAcces.plant,
   props.departmentAcces.teams,
   props.departmentAcces.payment,
@@ -807,6 +811,44 @@ const AccessForm = (props) => {
               setCheckAllShipper(e.target.checked);
             };
 
+
+                  // Procurement
+
+                  const [checkedProcurementList, setCheckedProcurementList] = useState(props.departmentAcces.procurement              );
+                  const [indeterminateProcurement, setIndeterminateProcurement] = useState(true);
+                  const [checkAllProcurement, setCheckAllProcurement] = useState(false);
+                
+                  const onProcurementChange = (list) => {
+                    setCheckedProcurementList(list);
+                    setIndeterminateProcurement(!!list.length && list.length < plainOptions.length);
+                    setCheckAllProcurement(list.length === plainOptions.length);
+                  };
+                
+                  const onCheckAllProcurementChange = (e) => {
+                    setCheckedProcurementList(e.target.checked ? plainOptions : []);
+                    setIndeterminateProcurement(false);
+                    setCheckAllProcurement(e.target.checked);
+                  };
+
+
+                       // Subscription
+
+                       const [checkedSubscriptionList, setCheckedSubscriptionList] = useState(props.departmentAcces.subscription              );
+                       const [indeterminateSubscription, setIndeterminateSubscription] = useState(true);
+                       const [checkAllSubscription, setCheckAllSubscription] = useState(false);
+                     
+                       const onSubscriptionChange = (list) => {
+                         setCheckedSubscriptionList(list);
+                         setIndeterminateSubscription(!!list.length && list.length < plainOptions.length);
+                         setCheckAllSubscription(list.length === plainOptions.length);
+                       };
+                     
+                       const onCheckAllSubscriptionChange = (e) => {
+                         setCheckedSubscriptionList(e.target.checked ? plainOptions : []);
+                         setIndeterminateSubscription(false);
+                         setCheckAllSubscription(e.target.checked);
+                       };
+
                  // Plant
 
                  const [checkedPlantList, setCheckedPlantList] = useState(props.departmentAcces.plant              );
@@ -979,6 +1021,8 @@ const onCheckAllTeamsChange = (e) => {
       repository:checkedRepositoryList || [],
       basic:checkedBasicList || [],
       shipper:checkedShipperList || [],
+      procurement:checkedProcurementList || [],
+      subscription:checkedSubscriptionList || [],
       plant:checkedPlantList || [],
       teams:checkedTeamsList || [],
       payment:checkedPaymentsList || [],
@@ -1349,6 +1393,29 @@ const onCheckAllTeamsChange = (e) => {
 
           </div>
           </div>
+
+          <div class=" flex justify-around mt-8" >
+              <div >
+              <div class="text-sm font-semibold">Procurement</div>
+              <Checkbox indeterminate={indeterminateProcurement} onChange={onCheckAllProcurementChange} checked={checkAllProcurement}>
+               <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={plainOptions} value={checkedProcurementList} onChange={onProcurementChange} />
+
+            </div>
+             
+               <div >
+                  <div class="text-sm font-semibold">Subscription</div>
+                  <Checkbox indeterminate={indeterminateSubscription} onChange={onCheckAllSubscriptionChange} checked={checkAllSubscription}>
+                  <label class="text-xs">   Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedSubscriptionList} onChange={onSubscriptionChange} />
+                </div>
+             
+             
+                </div>
       
           </div>
           : null }
@@ -1356,7 +1423,7 @@ const onCheckAllTeamsChange = (e) => {
 
 
 
- {props.departmentData.accountInd === true ?  
+ {props.departmentData.financeInd === true ?  
     <div>     
             <div class=" text-clr text-base flex justify-center mt-8 font-bold">Accounting</div>
         

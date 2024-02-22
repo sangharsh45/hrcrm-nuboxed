@@ -49,7 +49,8 @@ export const catgCustomerReducer = (state = initialState, action) => {
     return {
       ...state,
        addingCustomer: false,
-       customerListData: [...state.customerListData, action.payload],
+       customerListData:[action.payload,...state.customerListData],
+      //  customerListData: [...state.customerListData, action.payload],
       
     };
   case types.ADD_CUSTOMER_FAILURE:

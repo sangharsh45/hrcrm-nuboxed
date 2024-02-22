@@ -48,7 +48,7 @@ export const addPayment = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getPayments(orgId));
+        // dispatch(getPayments(orgId));
         // {res.data.message?  
         //   message.success(res.data.message):
         message.success("PAYMENT has been added successfully!");

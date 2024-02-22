@@ -3,6 +3,7 @@ import { Button,Tooltip } from "antd";
 import {  TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
@@ -22,7 +23,7 @@ class SingleRole extends Component {
   // this.setState({ departmentId: value });
   render() {
     const {
-      role: { roleType, roleTypeId, departmentName, departmentId },
+      role: { roleType,creationDate, roleTypeId, departmentName, departmentId },
       handleChange,
       name,
       value,
@@ -34,6 +35,8 @@ class SingleRole extends Component {
      handleDeleteRole,
     } = this.props;
     console.log(linkedRoles);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -41,7 +44,11 @@ class SingleRole extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                 <div class=" font-semibold" >{roleType}</div>
+                 <div class=" font-semibold" >{roleType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}</div>
                  <div class=" font-semibold" >
                   {departmentName}
                 </div>

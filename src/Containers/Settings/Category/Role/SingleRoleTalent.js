@@ -3,6 +3,7 @@ import { Button ,Tooltip} from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
 const { Option } = Select;
@@ -20,7 +21,7 @@ class SingleRoleTalent extends Component {
   }
   render() {
     const {
-        talentRole: { roleType, roleTypeExternalId,departmentName,departmentId },
+        talentRole: { roleType,creationDate, roleTypeExternalId,departmentName,departmentId },
       handleChange,
       name,
       value,
@@ -32,6 +33,8 @@ class SingleRoleTalent extends Component {
     //   handleDeleteDepartment,
     } = this.props;
      console.log(linkedRoles);
+     const currentdate = dayjs().format("DD/MM/YYYY");
+     const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -40,7 +43,11 @@ class SingleRoleTalent extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                   <div class=" font-semibold" >
-                  {roleType}
+                  {roleType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
              
                 <div>
