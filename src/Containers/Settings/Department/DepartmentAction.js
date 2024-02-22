@@ -426,7 +426,7 @@ export const addingDeptModules = (data, departmentId) => (dispatch, getState) =>
 
     .then((res) => {
       console.log(res);
-      dispatch(getDepartments())
+      // dispatch(getDepartments())
       dispatch({
         type: types.ADDING_MODULE_SUCCESS,
         payload: res.data,

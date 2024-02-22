@@ -48,7 +48,7 @@ export const addKpi = (sectors,departmentId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getKpis(departmentId));
+        // dispatch(getKpis(departmentId));
         // {res.data.message?  
         //   message.success(res.data.message):
         message.success("KPI has been added successfully!");

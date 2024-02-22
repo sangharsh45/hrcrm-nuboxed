@@ -1012,6 +1012,7 @@ const countryNameOption = props.countries.map((item) => {
 
                   <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
+                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                       <Select
                     className="w-[250px]"
                         value={department}
@@ -1024,6 +1025,7 @@ const countryNameOption = props.countries.map((item) => {
                      </div>
                     
                      <div class="w-w48  max-sm:w-wk">
+                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reporting Manager</label>
                      <Select
                         className="w-[250px]"
                         value={reportingManager}

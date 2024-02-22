@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 import { Select } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -21,7 +22,7 @@ class SingleKpi extends Component {
   this.setState({frequency:value});
   render() {
     const {
-        kpi: { kpi, performanceManagementId,frequency, EditInd },
+        kpi: { kpi, creationDate,performanceManagementId,frequency, EditInd },
       handleChange,
       name1,
       value,
@@ -32,6 +33,8 @@ class SingleKpi extends Component {
     } = this.props;
     console.log(linkedSectors);
     console.log("kpi", kpi);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -42,7 +45,11 @@ class SingleKpi extends Component {
                 <div class=" flex  flex-col justify-between ml-4">
                  <div class=" flex text-base text-[#40A9FF]">KPI</div>
                  <div class=" font-semibold" >
-                  {kpi}
+                  {kpi}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 </div>
                 <div class=" flex  flex-col justify-between">
@@ -52,7 +59,7 @@ class SingleKpi extends Component {
                 </div>
                 </div>
                 <div>
-                  {/* {this.props.source.editInd ? ( */}
+                {this.props.kpi.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -60,7 +67,7 @@ class SingleKpi extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null}  */}
+                    ) : null}
                   
                   <Tooltip title="Delete">
                     <DeleteOutlined

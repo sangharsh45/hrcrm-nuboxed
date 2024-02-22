@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Tooltip, } from "antd";
+import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -18,7 +19,7 @@ class SinglePayment extends Component {
   }
   render() {
     const {
-        payment: { name, paymentCatagoryId, EditInd },
+        payment: { name,creationDate, paymentCatagoryId, EditInd },
       handleChange,
       name1,
       value,
@@ -29,6 +30,8 @@ class SinglePayment extends Component {
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -37,10 +40,14 @@ class SinglePayment extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {name}
+                  {name}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
-                  {/* {this.props.source.editInd ? ( */}
+                  {this.props.payment.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -48,7 +55,7 @@ class SinglePayment extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null}  */}
+                  ) : null} 
                 
                   <Tooltip title="Delete">
                     <DeleteOutlined

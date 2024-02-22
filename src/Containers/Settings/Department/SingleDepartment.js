@@ -8,6 +8,7 @@ import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
 import DepartmentStatusToggle from "./DepartmentStatusToggle";
@@ -21,7 +22,7 @@ const SingleDepartment = (props) => {
     setViewType((prevViewType) => (prevViewType === "view" ? "edit" : "view"));
   };
   const {
-    department: { departmentName,moduleMapper,crmInd,procurementInd,imInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
+    department: { departmentName,creationDate,editInd,moduleMapper,crmInd,financeInd,procurementInd,imInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
    handleChange,
    name,
    value,
@@ -31,9 +32,11 @@ const SingleDepartment = (props) => {
    handleDeleteDepartment,
 
  } = props;
-
+ const currentdate = dayjs().format("DD/MM/YYYY");
+ const date = dayjs(creationDate).format("DD/MM/YYYY");
   // const { crmInd } = department;
   console.log("moduleMapper",moduleMapper);
+  // console.log("erpInd", moduleMapper.erpInd);
   const [crmStatus, setCrmStatus] = useState(crmInd);
   useEffect(() => {
     setCrmStatus(crmInd);
@@ -242,6 +245,25 @@ const SingleDepartment = (props) => {
     };
     props.addingDeptModules(data, departmentId);
   };
+  
+
+
+  const [accountingStatus, setAccountingStatus] = useState(financeInd);
+
+  useEffect(() => {
+    setAccountingStatus(financeInd);
+  }, [financeInd]);
+  
+  const handleAccountingClick = (checked) => {
+    setAccountingStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "finance",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
   const [orderManagStatus, setOrderManagStatus] = useState(orderManagementInd);
 
   useEffect(() => {
@@ -320,7 +342,11 @@ const SingleDepartment = (props) => {
               <div className="w-full flex-row">
                 <div className="flex justify-between">
                   <div className="w-[9rem]">
-                  <div class=" font-semibold" >{departmentName}</div>
+                  <div class=" font-semibold" >{departmentName}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}</div>
                   </div>
                   {/* {mandetoryInd === true && ( */}
   <>
@@ -353,6 +379,7 @@ const SingleDepartment = (props) => {
 {/* )} */}
 <div class=" flex flex-col w-[80%] ">
 <div class=" flex flex-row ">
+  
 {moduleMapper.erpInd === true && (
   <>
     <div class="text-sm w-[2rem] ml-4">ERP</div>
@@ -609,6 +636,29 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
+
+{moduleMapper.financeInd === true && (
+  <>
+                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleAccountingClick(!accountingStatus)}
+                        // onCancel={handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={accountingStatus || financeInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
 {moduleMapper.logisticsInd === true && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
@@ -658,7 +708,7 @@ const SingleDepartment = (props) => {
 </div>
 
                   <div class="ml-2">
-                    {mandetoryInd !== true && (
+                    {mandetoryInd !== true && editInd === true && (
                       <BorderColorIcon
                         tooltipTitle="Edit"
                         iconType="edit"

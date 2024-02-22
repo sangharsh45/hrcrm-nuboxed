@@ -49,7 +49,7 @@ export const addShipBy = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getShipByData(orgId));
+        // dispatch(getShipByData(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("shipBy has been added successfully!");

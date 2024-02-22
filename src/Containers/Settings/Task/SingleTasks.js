@@ -3,6 +3,7 @@ import { Button, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 const TaskConnetToggle = lazy(() =>
@@ -20,7 +21,7 @@ class SingleTasks extends Component {
   }
   render() {
     const {
-      task: { taskType, taskTypeId,taskCheckListInd },
+      task: { taskType,creationDate, taskTypeId,taskCheckListInd },
       handleChange,
       name,
       value,
@@ -30,6 +31,8 @@ class SingleTasks extends Component {
       handleDeleteTask,
     } = this.props;
     console.log(linkedTasks);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -38,7 +41,11 @@ class SingleTasks extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                    <div class=" flex w-2/5">
-                   <div class=" font-semibold" >{taskType}</div>
+                   <div class=" font-semibold" >{taskType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}</div>
                 <div>
                   </div>
                 </div>

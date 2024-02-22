@@ -23,6 +23,7 @@ export const brandmodelReducer = (state = initialState, action) => {
             return {
                 ...state,
                 addingBrandModel: false,
+                
                 brandModel: [...state.brandModel, action.payload],
             };
         case types.ADD_BRAND_MODEL_FAILURE:

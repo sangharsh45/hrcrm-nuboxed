@@ -4,11 +4,12 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
+import { getlocation } from "../../../Event/Child/Location/LocationAction";
 import { getDepartmentwiserUser } from "../../../Settings/SettingsAction"
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import { getCurrencyList } from "../../../Settings/Category/Currency/CurrencyAction"
-import { getTimeZone } from "../../../Auth/AuthAction"
+import { getTimeZone,getCountries } from "../../../Auth/AuthAction"
 import { getRoles } from "../../../Settings/Category/Role/RoleAction"
 import { updateEmployee, } from "../../EmployeeAction";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
@@ -47,7 +48,8 @@ class UpdateEmployeeForm extends Component {
     const { getCountries, getEmployeelist, getDepartments, getTimeZone, getCurrencyList, getRoles, getlocation, } = this.props;
     getRoles(this.props.organizationId);
     getTimeZone();
-    // getEmployeelist("cretiondate");
+    getlocation(this.props.orgId);
+    getCountries(getCountries);
     getDepartments();
     getCurrencyList();
 
@@ -887,6 +889,7 @@ name="departmentId"
                     <div class="mt-2"><label style={{ color: "#444", fontWeight: "bold", fontSize: " 0.75rem" }}>Reports To</label></div>
                     <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
+                        <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                         <Select
                           className="w-[250px]"
                           value={department}
@@ -899,6 +902,7 @@ name="departmentId"
                       </div>
 
                       <div class="w-w47.5 max-sm:w-wk">
+                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reporting Manager</label>
                         <Select
                           className="w-[250px]"
                           value={reportingManager}
@@ -952,6 +956,8 @@ const mapDispatchToProps = (dispatch) =>
     getCurrencyList,
     getDepartments,
     getDepartmentwiserUser,
+    getlocation,
+    getCountries,
     // getEmployeelist,
     //    getCountries,
     //    getDesignations,

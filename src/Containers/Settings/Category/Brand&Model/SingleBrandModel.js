@@ -3,7 +3,7 @@ import { Button, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
-
+import dayjs from "dayjs";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
 class SingleBrandModel extends Component {
@@ -17,14 +17,15 @@ class SingleBrandModel extends Component {
     }
     render() {
         const {
-            brandmodel: { brand, model, phoneMasterListId },
+            brandmodel: { brand,creationDate, model, phoneMasterListId },
             handleChange,
             handleModelChange,
             name,
             value,
             updatingBrandModel,
         } = this.props;
-
+        const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(creationDate).format("DD/MM/YYYY");
         return (
             <div class=" w-full cursor-pointer">
                 <ViewEditCard>
@@ -32,7 +33,11 @@ class SingleBrandModel extends Component {
                         viewType === "view" ? (
                             <div class=" flex justify-between" >
                                 <div class=" font-semibold" >
-                                    {brand} {model}
+                                    {brand} {model}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                                 </div>
                                 <div>
                                     <BorderColorIcon

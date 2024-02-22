@@ -4,6 +4,7 @@ import { Button,Tooltip } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
 
@@ -18,7 +19,7 @@ class SingleEvent extends Component {
   }
   render() {
     const {
-        event: { eventType, eventTypeId },
+        event: { eventType,creationDate, eventTypeId },
       handleChange,
       name,
       value,
@@ -28,6 +29,8 @@ class SingleEvent extends Component {
       handleDeleteEvent,
     } = this.props;
     console.log(linkedEvents);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -36,7 +39,11 @@ class SingleEvent extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {eventType}
+                  {eventType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
                   {this.props.event.editInd?

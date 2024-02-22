@@ -50,6 +50,24 @@ const handleCrmClick = (checked) => {
   props.addingModules(data, props.orgId);
 };
 
+const { financeInd } = props.moduleList;
+console.log(financeInd);
+const [financeStatus, setFinanceStatus] = useState(financeInd);
+
+useEffect(() => {
+  setFinanceStatus(financeInd);
+}, [financeInd]);
+
+const handleFinanceClick = (checked) => {
+  setFinanceStatus(checked);
+  let data = {
+    value: checked,
+    orgId: props.orgId,
+    type: "finance",
+  };
+  props.addingModules(data, props.orgId);
+};
+
   // const { mandetoryInd } = props.moduleList;
   // console.log(mandetoryInd);
   // const [mandatoryStatus, setMandatoryStatus] = useState(mandetoryInd);
@@ -346,7 +364,7 @@ const handleCrmClick = (checked) => {
                     <div   class="  ml-2">
                     <Popconfirm
         title="Do you wish to change Status?"
-        onConfirm={() => handleErpClick(!erpStatus)}
+        onConfirm={() => handleFinanceClick(!financeStatus)}
         okText="Yes"
         cancelText="No"
       >
@@ -354,7 +372,7 @@ const handleCrmClick = (checked) => {
                               onChange={() => {}}
                         //  onChange={this.props.handleErpClick}
                           style={{ width: "4em" }}
-                          checked={erpStatus || props.moduleList.erpInd}
+                          checked={financeStatus || props.moduleList.financeInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />

@@ -59,7 +59,8 @@ export const documentsReducer = (state = initialState, action) => {
       return {
         ...state,
         addingDocuments: false,
-        documents: [...state.documents, action.payload],
+        documents:[action.payload,...state.documents],
+        // documents: [...state.documents, action.payload],
       };
     case types.ADD_DOCUMENTS_FAILURE:
       return { ...state, addingDocuments: false, addingDocumentsError: true };

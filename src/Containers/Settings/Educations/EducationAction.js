@@ -44,7 +44,7 @@ export const addEducations = (education, cb) => (dispatch) => {
     })
     .then((res) => {
       message.success("Education has been added successfully!");
-      dispatch(getEducations());
+      // dispatch(getEducations());
       console.log(res);
       dispatch({
         type: types.ADD_EDUCATION_SUCCESS,

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Tooltip, } from "antd";
+import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -22,7 +23,7 @@ class SingleSource extends Component {
   this.setState({listType:value});
   render() {
     const {
-      source: { name, sourceId,listType, EditInd },
+      source: { name,creationDate, sourceId,listType, EditInd },
       handleChange,
       name1,
       value,
@@ -33,6 +34,8 @@ class SingleSource extends Component {
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
       <div class=" w-full cursor-pointer">
@@ -41,10 +44,14 @@ class SingleSource extends Component {
             viewType === "view" ? (
               <div class=" flex justify-between" >
                 <div class=" font-semibold" >
-                  {name}
+                  {name}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
                 </div>
                 <div>
-                  {/* {this.props.source.editInd ? ( */}
+                  {this.props.source.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -52,7 +59,7 @@ class SingleSource extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null}  */}
+                  ) : null}  
                  
                   <Tooltip title="Delete">
                     <DeleteOutlined
