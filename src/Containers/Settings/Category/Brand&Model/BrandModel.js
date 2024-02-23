@@ -152,7 +152,7 @@ class BrandModel extends Component {
                                     <FormattedMessage id="app.save" defaultMessage="Save" />
                                 </Button>
                                 &nbsp;
-                                <Button type="primary" ghost onClick={this.toggleInput}>
+                                <Button type="cancel"  onClick={this.toggleInput}>
                                     {/* Cancel */}
                                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                                 </Button>
@@ -163,7 +163,6 @@ class BrandModel extends Component {
                                 <div class=" flex justify-end" >
                                     <Button
                                         type="primary"
-                                        ghost
                                         htmlType="button"
                                         loading={addingBrandModel}
                                         onClick={this.toggleInput}
@@ -180,8 +179,7 @@ class BrandModel extends Component {
                         )}
                          </div>
             <div class=" flex flex-col" >
-                            {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-                            <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
                             {brandModel.length ? (
   brandModel
     .slice() 

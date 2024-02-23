@@ -187,7 +187,7 @@ class Education extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
@@ -198,7 +198,6 @@ class Education extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingEducations}
                     onClick={this.toggleInput}
@@ -215,7 +214,7 @@ class Education extends Component {
             )}
                </div>
             <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
               {educations.length ? (
   educations
     .slice() 
@@ -270,7 +269,7 @@ class Education extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <div>Updated on {dayjs(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format('YYYY-MM-DD')} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format('YYYY-MM-DD')} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</div>
       </>
     );
   }

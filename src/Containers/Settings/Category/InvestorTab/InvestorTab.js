@@ -46,7 +46,7 @@ class InvestorTab extends Component {
                   tab={
                     <>
                       <MonetizationOnIcon />
-                      <span class=" ml-[0.25em]" >
+                      <span class=" ml-1" >
                         Type
                       </span>
                     </>
@@ -119,7 +119,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(InvestorTab);
 //                   tab={
 //                     <>
 //                       <MonetizationOnIcon />
-//                       <span class=" ml-[0.25em]" >
+//                       <span class=" ml-1" >
 //                         Type
 //                       </span>
 //                     </>

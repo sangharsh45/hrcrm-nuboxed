@@ -166,7 +166,7 @@ class IdProofs extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   Cancel
                 </Button>
               </div>
@@ -176,7 +176,6 @@ class IdProofs extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingIdProofs}
                     onClick={this.toggleInput}
@@ -188,7 +187,7 @@ class IdProofs extends Component {
             )}
             </div>
             <div class=" flex flex-col" >           
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
               {idProofs.length ? (
   idProofs
     .slice() 
@@ -218,7 +217,7 @@ class IdProofs extends Component {
           
           </MainWrapper>         
         </div>
-        <div>Updated on {dayjs(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format('YYYY-MM-DD')} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format('YYYY-MM-DD')} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</div>
       </>
     );
   }

@@ -176,7 +176,7 @@ class RoleTalent extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   Cancel
                 </Button>
               </div>
@@ -186,7 +186,6 @@ class RoleTalent extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                   loading={addingTalentRoles}
                     onClick={this.toggleInput}
@@ -198,8 +197,7 @@ class RoleTalent extends Component {
             )}
              </div>
             <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
              {talentRoles.length ? (
   talentRoles
     .slice() 

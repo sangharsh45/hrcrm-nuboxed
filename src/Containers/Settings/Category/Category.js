@@ -60,7 +60,7 @@
 //                   tab={
 //                     <>
 //                       <i class="fas fa-building"></i>
-//                       <span class=" ml-[0.25em]"
+//                       <span class=" ml-1"
 //                        >Department</span>
 //                     </>
 //                   }
@@ -78,7 +78,7 @@
 //                       // icon={solid("user-tie")}
 //                       />
 
-//                       <span class=" ml-[0.25em]"
+//                       <span class=" ml-1"
 //                        >Role (Internal)</span>
 //                     </>
 //                   }
@@ -95,7 +95,7 @@
 //                       // icon={solid("user-tie")}
 //                       />
 
-//                       <span class=" ml-[0.25em]">Role (External)</span>
+//                       <span class=" ml-1">Role (External)</span>
 //                     </>
 //                   }
 //                   key="6"
@@ -109,7 +109,7 @@
 //                     <>
 //                       <i class="fab fa-artstation"></i>
 //                       <span
-//                        class=" ml-[0.25em]" >Designation</span>
+//                        class=" ml-1" >Designation</span>
 //                     </>
 //                   }
 //                   key="7"
@@ -187,7 +187,7 @@ class Category extends Component {
                   tab={
                     <>
                       <i className="fas fa-building"></i>
-                      <span className="ml-[0.25em]">Department</span>
+                      <span className="ml-1">Department</span>
                     </>
                   }
                   key="4"
@@ -196,7 +196,7 @@ class Category extends Component {
                   tab={
                     <>
                       <AccessibilityIcon />
-                      <span className="ml-[0.25em]">Role (Internal)</span>
+                      <span className="ml-1">Role (Internal)</span>
                     </>
                   }
                   key="5"
@@ -205,7 +205,7 @@ class Category extends Component {
                   tab={
                     <>
                       <AccessibilityIcon />
-                      <span className="ml-[0.25em]">Role (External)</span>
+                      <span className="ml-1">Role (External)</span>
                     </>
                   }
                   key="6"
@@ -214,7 +214,7 @@ class Category extends Component {
                   tab={
                     <>
                       <i className="fab fa-artstation"></i>
-                      <span className="ml-[0.25em]">Designation</span>
+                      <span className="ml-1">Designation</span>
                     </>
                   }
                   key="7"
