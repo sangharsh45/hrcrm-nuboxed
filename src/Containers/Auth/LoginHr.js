@@ -144,7 +144,7 @@ class LoginHr extends Component {
                         <EyeOutlined
                           type="eye"
                           onClick={this.handleClick}
-                          style={{ alignSelf:"center" }}
+                          style={{ alignSelf:"center",marginLeft:"-1.25rem" }}
                           size="24"
                         />
                       ) : (
@@ -152,7 +152,7 @@ class LoginHr extends Component {
                           type="eye-invisible"
                           onClick={this.handleClick}
                           size="24"
-                          style={{ alignSelf:"center" }}
+                          style={{ alignSelf:"center",marginLeft:"-1.25rem" }}
                         />
                       )}
                       </div>
