@@ -112,7 +112,7 @@ this.handleExpand(item.voucherId)
 }}
 >
                  <Tooltip  title={"Status"}>
-                 <AssistantIcon  className="!text-base cursor-pointer text-[grey] p-[2px]"/>
+                 <AssistantIcon  className="!text-base cursor-pointer text-[grey] "/>
    </Tooltip> 
 
    </div>
