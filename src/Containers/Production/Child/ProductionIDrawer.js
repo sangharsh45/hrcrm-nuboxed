@@ -1,13 +1,12 @@
-
 import React, { lazy, Component,Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
-const ProductionBldrCrd = lazy(() => import("./ProductionBldrCrd"));
+const ProductionIDCard = lazy(() => import("./ProductionIDCard"));
 
-class BuilderProductionDrawer extends Component {
+class ProductionIDrawer extends Component {
   render() {
-    const { openbUILDERProductiondrawer, handleBuilderProduction,particularDiscountData, ...formProps } = this.props;
+    const { clickedProductionIdrwr, handleProductionIDrawer,particularDiscountData, ...formProps } = this.props;
     const isSmallScreen = window.innerWidth <= 600;
     const drawerWidth = isSmallScreen ? "90%" : "60%";
     return (
@@ -15,18 +14,18 @@ class BuilderProductionDrawer extends Component {
         <StyledDrawer
           title={<FormattedMessage
             id="app.production"
-            defaultMessage="Product Builder"
+            defaultMessage="Production Id"
           />}
 
           width={drawerWidth}
-          visible={openbUILDERProductiondrawer}
-          onClose={() => handleBuilderProduction(false)}
+          visible={clickedProductionIdrwr}
+          onClose={() => handleProductionIDrawer(false)}
           footer={null}
         >
 
               
                 <Suspense fallback={<BundleLoader/>}>
-                <ProductionBldrCrd particularDiscountData={particularDiscountData}/>
+                <ProductionIDCard particularDiscountData={particularDiscountData}/>
                 </Suspense>
       
 
@@ -36,5 +35,5 @@ class BuilderProductionDrawer extends Component {
   }
 }
 
-export default BuilderProductionDrawer;
+export default ProductionIDrawer;
 

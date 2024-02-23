@@ -3,7 +3,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
 import { FormattedMessage } from "react-intl";
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
-import { Tooltip } from "antd";
+import { Tooltip,Avatar } from "antd";
 import { connect } from "react-redux";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { bindActionCreators } from "redux";
@@ -22,7 +22,9 @@ const MileageActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <GridViewIcon style={{fontSize:"1.4rem"}}  />
+             <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <GridViewIcon   />
+            </Avatar>
           </span>
        
       </Tooltip>
@@ -37,10 +39,11 @@ const MileageActionLeft = (props) => {
               color: props.viewType === "tile" && "#1890ff",
             }}
           >
-            
+            <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <TocIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>
@@ -51,7 +54,9 @@ const MileageActionLeft = (props) => {
               color: props.viewType === "list" && "#1890ff",
             }}
           >
+              <Avatar style={{ background: props.viewType === "list" ? "#f279ab" : "#4bc076" }}>
             <ViewWeekIcon/>
+            </Avatar>
           </span>
       </Tooltip>
       {props.user.mileageFullListInd === true && (
@@ -65,10 +70,11 @@ const MileageActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-            
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <ListAltIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>

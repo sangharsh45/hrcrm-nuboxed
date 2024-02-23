@@ -5,8 +5,9 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { Tooltip,Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MoveToggleProduction from "../Child/MoveToggleProduction";
-import {getProductionsbyLocId,handleBuilderProduction} from "../ProductionAction"
+import {getProductionsbyLocId,handleBuilderProduction,handleProductionIDrawer} from "../ProductionAction"
 const BuilderProductionDrawer =lazy(()=>import("./BuilderProductionDrawer"));
+const ProductionIDrawer=lazy(()=>import("./ProductionIDrawer"));
 
 function ProductionCardView(props) {
 
@@ -43,7 +44,7 @@ function ProductionCardView(props) {
     const {
         fetchingProductionLocId,
         productionByLocsId,
-        openbUILDERProductiondrawer,handleBuilderProduction
+        openbUILDERProductiondrawer,handleBuilderProduction,clickedProductionIdrwr,handleProductionIDrawer
     } = props;
     return (
         <>
@@ -73,8 +74,13 @@ function ProductionCardView(props) {
 <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 ">
        <div class="flex">
        <div className=" flex font-medium flex-col  md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-<div class=" text-xs text-cardBody font-poppins">
+       
+<div class=" underline text-[#1890ff] cursor-pointer w-[7rem] flex text-xs  font-poppins"
+ onClick={() => {
+    handleParticularRowData(item);
+    props.handleProductionIDrawer(true)
+}}
+>
                     {item.manufactureId} 
                 </div>
 
@@ -157,7 +163,11 @@ function ProductionCardView(props) {
     openbUILDERProductiondrawer={openbUILDERProductiondrawer}
     handleBuilderProduction={handleBuilderProduction}
     />
-           
+    <ProductionIDrawer
+     particularDiscountData={particularDiscountData}
+     clickedProductionIdrwr={clickedProductionIdrwr}
+     handleProductionIDrawer={handleProductionIDrawer}
+    />     
         </>
     );
 }
@@ -168,14 +178,16 @@ const mapStateToProps = ({ production, auth, }) => ({
     fetchingProductionLocId: production.fetchingProductionLocId,
     locationId: auth.userDetails.locationId,
     user: auth.userDetails,
-    openbUILDERProductiondrawer:production.openbUILDERProductiondrawer
+    openbUILDERProductiondrawer:production.openbUILDERProductiondrawer,
+    clickedProductionIdrwr:production.clickedProductionIdrwr
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getProductionsbyLocId,
-            handleBuilderProduction
+            handleBuilderProduction,
+            handleProductionIDrawer
         },
         dispatch
     );

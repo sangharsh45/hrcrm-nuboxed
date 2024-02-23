@@ -24,7 +24,7 @@ function CallTable(props) {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 const [currentNameId, setCurrentNameId] = useState("");
-
+const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     const {
       getCallListRangeByUserId,
@@ -37,7 +37,15 @@ const [currentNameId, setCurrentNameId] = useState("");
   useEffect(() => {
     return () => props.emptyCall();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleLoadMore = () => {
     const callPageMapd = props.callListRangeByUserId && props.callListRangeByUserId.length &&props.callListRangeByUserId[0].pageCount
@@ -71,7 +79,173 @@ const [currentNameId, setCurrentNameId] = useState("");
     userDetails: { employeeId },
   } = props;
 
+  if (isMobile){
+    return (
+      <>
+         <div className=' flex justify-end sticky top-28 z-auto'>
+         <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+         
+        <InfiniteScroll
+          dataLength={callListRangeByUserId.length}
+          next={handleLoadMore}
+        hasMore={hasMore}
+          loader={fetchingCallListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
+          height={"75vh"}
+          endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+        >
+        
+            {callListRangeByUserId.map((item) => {
+              const incdata =item.included
+              const findEmp = incdata.map(item => ({
+                empName: item.empName
+                  ? item.empName
+                      .split(' ')
+                      .map(word => (word ? word.charAt(0).toUpperCase() : '')) 
+                      .slice(0,2)
+                  : ''
+              }));
+               return (
+                <div>
+              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+               <div class="flex items-center  justify-between">
+               
+              <div> {item.callType}</div>
+              
+              
+              <p> {item.callPurpose}</p>
+               
+                </div>
+                <div class="flex items-center  justify-between">
+              
+        
+                <MultiAvatar2
+                      primaryTitle={item.contactName}
+                      // imageId={item.ownerImageId}
+                      imageURL={item.imageURL}
+                      imgWidth={"1.8em"}
+                      imgHeight={"1.8em"}
+                    />
+                
+     
+               
+               
+                <p> {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
+                
+                
+               
+                <div>
+             
+                <Avatar.Group
+                     maxCount={7}
+                    maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+                  >
+                      {item.included &&
+                    item.included.map((candidate, i) => {
+                      
+                      const data1 = candidate.empName ? candidate.empName.slice(0, 2).toUpperCase() : "No data"
+                      return (
+                        <Tooltip title={candidate.empName} key={i}>
+                        <Avatar style={{ backgroundColor: "#f56a00" }}>
+                        {data1}
+                      
+                      </Avatar>
+                      </Tooltip>
+                       
   
+                     
+                      );
+                    })}
+                    
+              </Avatar.Group>
+          
+          
+                </div>
+                
+                </div>
+                
+                <div class="flex items-center  justify-between">
+               
+               <span>
+                {item.assignedTo === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedTo === item.woner ? (
+                    
+                    null
+                  ) : (
+                  <MultiAvatar2
+                    primaryTitle={item.assignedTo}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                  )}
+                  </>
+                )}
+              </span>
+                {/* <p> {item.assignedTo || "Unassigned"}</p> */}
+                
+                
+               
+               <MultiAvatar2
+                     primaryTitle={item.woner}
+                     //imageId={item.ownerImageId}
+                     imageURL={item.imageURL}
+                     imgWidth={"1.8em"}
+                     imgHeight={"1.8em"}
+                   />
+              
+               
+                
+             
+                <p> {item.completionInd ? "Yes" : "No"}</p>
+               
+              
+                
+               
+                
+                      <div>
+                      <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleCallNotesDrawerModal(true);
+                    handleSetCallNameId(item);
+                  }}
+                  className="!text-base cursor-pointer text-[green]"
+                />
+             </Tooltip>
+                      </div>
+                      <div>
+                      <Tooltip title="Delete">
+                      <DeleteOutlined  type="delete" 
+                      className="!text-base cursor-pointer text-[red]"
+                  onClick={() => deleteCall(item.callId, employeeId)}
+                />
+                  </Tooltip>
+                      </div>
+                    
+                </div>
+              </div>
+              </div>
+             )
+            })}
+     
+        </InfiniteScroll>
+        </div>
+        </div>
+        <AddCallNotesDrawerModal
+  handleSetCallNameId={handleSetCallNameId}
+  handleCallNotesDrawerModal={props.handleCallNotesDrawerModal}
+  addDrawerCallNotesModal={props.addDrawerCallNotesModal}
+    currentNameId={currentNameId}
+    // taskName={currentprocessName.taskName} // Pass taskName as a prop
+  
+  />
+      </>
+    );
+  }
 
   return (
     <>

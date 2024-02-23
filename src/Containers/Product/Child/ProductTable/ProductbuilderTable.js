@@ -58,7 +58,7 @@ function ProductbuilderTable (props) {
 {showCard &&
 <ProBuildSearchedCard particularDiscountData={props.particularDiscountData}/>
 }
-<ProductbuilderTable2 particularDiscountData={props.particularDiscountData}/>
+{/* <ProductbuilderTable2 particularDiscountData={props.particularDiscountData}/> */}
 </Suspense>
 
     </>

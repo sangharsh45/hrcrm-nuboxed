@@ -16,10 +16,10 @@ class LeaveJumpstart extends React.Component {
     } = this.props;
      console.log(leaveBalance);
     return (
-      <div class=" flex flex-col w-full" >
-            <div class=" flex w-full flex-row  md:ml-[9%] max-sm:ml-0 max-sm:justify-between">
-
-                <div class="md:w-1/5 max-sm:w-[24%]">
+      <div class=" flex flex-col w-full items-center" >
+            <div class=" flex w-full flex-row  md:ml-[9%] max-sm:ml-0 max-sm:justify-between max-sm:flex-col">
+<div class="flex w-wk">
+                <div class="md:w-[35%] max-sm:w-wk">
                 <JumpStartBox
                 // bgColor="#005075"
                 title="Annual Leaves"
@@ -29,7 +29,7 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div class="md:w-1/5 max-sm:w-[24%]">
+                <div class="md:w-[35%] max-sm:w-wk">
                 <JumpStartBox1
                 // bgColor="#0073a8"
                 stringValue
@@ -38,8 +38,9 @@ class LeaveJumpstart extends React.Component {
                 value={totalAppliedLeaves}
                 />
                 </div>
-
-                <div class="md:w-1/5 max-sm:w-[24%]">
+                </div>
+                <div class="flex w-wk">
+                <div class="md:w-[35%] max-sm:w-wk">
                 <JumpStartBox2
                 // bgColor="#0093d7"
                 // title="Pending"
@@ -50,7 +51,7 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div class="md:w-1/5 max-sm:w-[24%]">
+                <div class="md:w-[35%] max-sm:w-wk">
                 <JumpStartBox3
                 // bgColor="#24b9fe"
                 title="Leave Balance"
@@ -58,6 +59,7 @@ class LeaveJumpstart extends React.Component {
                 noProgress
                 value={leaveBalance}
                 />
+                </div>
                 </div>
             </div>
         </div>
