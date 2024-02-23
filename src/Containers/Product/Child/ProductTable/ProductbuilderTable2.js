@@ -76,9 +76,7 @@ return (
                       <div>
                        
                          <MultiAvatar
-                            // primaryTitle={item.name}
                             imageId={item.imageId}
-                            // imageURL={item.imageURL}
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
