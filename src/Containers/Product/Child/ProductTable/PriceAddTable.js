@@ -77,33 +77,33 @@
 //     >
 //        <div class="flex">
 //     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-//     <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+//     <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
 //                               {item.currency_name}
-//                             </h4>
+//                             </div>
 //     </div>
 
 //     <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-//     <h4 class=" text-xs text-cardBody font-poppins">
+//     <div class=" text-xs text-cardBody font-poppins">
 //                         {item.price} 
-//                     </h4>
+//                     </div>
     
 //     </div> 
  
 //     </div>
     
 //     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-//     <h4 class=" text-xs text-cardBody font-poppins">
+//     <div class=" text-xs text-cardBody font-poppins">
                       
 //                       {item.price}
-//                     </h4>
+//                     </div>
 //     </div>
 //     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
         
 
-//         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+//         <div class=" text-xs text-cardBody font-semibold  font-poppins">
 //                       {item.VAT}
-//                     </h4>
+//                     </div>
 //     </div>
     
 //     <div class="flex md:items-center"> 
@@ -189,12 +189,15 @@ import { bindActionCreators } from "redux";
 import { getCurrency } from "../../../Auth/AuthAction";
 import { Button,Input,Select, } from "antd";
 import { getProductCurrency,createProductCurrency,handleDiscountModal,handleOfferModal } from "../../ProductAction";
+import Swal from 'sweetalert2';
 
 const { Option } = Select;
 
 function ProductbuilderTable (props) {
 
   const [data, setData] = useState([]);
+  const [showNoDataAlert, setShowNoDataAlert] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
   useEffect(()=> {
     props.getProductCurrency(props.particularDiscountData.productId);
@@ -202,17 +205,37 @@ function ProductbuilderTable (props) {
   },[]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     setData(props.ProductCurrency.map((item, index) => ({ ...item, key: String(index) })));
   }, [props.ProductCurrency]);
 
+useEffect(() => {
+    if (data.length === 0) {
+      setShowNoDataAlert(true);
+    } else {
+      setShowNoDataAlert(false);
+    }
+  }, [data]);
+
+ 
 
   const handleAddRow = () => {
     const newRow = {
       key: String(data.length + 1),
-      currency_name: '',
-      level1: '',
+      currencyId: '',
+      price: '',
       level2: '',
       level3: '',
+     
 
     };
     setData([...data, newRow]);
@@ -236,19 +259,121 @@ function ProductbuilderTable (props) {
     console.log(key)
     const targetRow = data.find((row) => row.key === key);
     if (targetRow) {
-      const { level1, level2, level3, currency_id,skillLevelLinkId } = targetRow;
-      console.log(`Skill ID: ${currency_id}, Level 1: ${level1}, Level 2: ${level2}, Level 3: ${level3}`);
+      const { price, level2, level3, currency_id,skillLevelLinkId } = targetRow;
+      console.log(`Skill ID: ${currency_id}, Level 1: ${price}, Level 2: ${level2}, Level 3: ${level3}`);
       const result = {
-        currency_id: currency_id,
-              level1: level1,
+        currencyId: currency_id,
+        price: price,
               level2: level2,
               level3: level3,
               skillLevelLinkId:skillLevelLinkId,
-             
+              productId:props.particularDiscountData.productId,
+              userId:props.userId
             };
       props.createProductCurrency(result)
     }
   };
+
+  useEffect(() => {
+    if (showNoDataAlert) {
+      Swal.fire({
+        icon: 'info',
+        title: 'No data',
+      });
+    }
+  }, [showNoDataAlert]);
+
+  if (isMobile){
+    <div>
+    <Button type="primary" onClick={handleAddRow} >
+      Add Row
+    </Button>
+    <div className=' flex justify-end sticky z-auto'> 
+       <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      
+    
+            {data.length ? data.map((item) => {
+        return (
+<div key={item.procurId}>
+<div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
+  >
+   
+  <div className=" flex font-medium flex-col md:w-[9.1rem] max-sm:w-full  ">
+  <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                            <Select
+        className="w-32"
+        value={item.currency_id}
+        onChange={(value) => handleSelectChange(value, item.key, 'currency_id')}
+      >
+        {props.currencies.map((s) => (
+          <Option key={s.currency_id} value={s.currency_id}>
+            {s.currency_name}
+          </Option>
+        ))}
+      </Select>
+                          </div>
+  </div>
+
+  <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+  <div class=" text-xs text-cardBody font-poppins">
+  <Input
+  className="w-32"
+        value={item.price}
+        onChange={(e) => handleInputChange(e.target.value, item.key, 'price')}
+      />
+                  </div>
+  
+  </div> 
+
+ 
+  
+  <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+  <div class=" text-xs text-cardBody font-poppins">
+                    
+  <Input
+       className="w-32"
+        value={item.level2}
+        onChange={(e) => handleInputChange(e.target.value, item.key, 'level2')}
+      />
+                  </div>
+  </div>
+  <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+      
+
+      <div class=" text-xs text-cardBody font-semibold  font-poppins">
+      <Input
+       className="w-32"
+        value={item.level3}
+        onChange={(e) => handleInputChange(e.target.value, item.key, 'level3')}
+      />
+                  </div>
+  </div>
+  
+  <div class="flex md:items-center"> 
+  
+
+<div class="flex flex-col w-20 max-sm:flex-row max-sm:w-[10%]">
+  <div>
+  <Button type="primary" onClick={() => handleSave(item.key)}>
+       Add
+      </Button>
+  </div>
+
+                      </div>
+</div>
+
+</div>
+</div>
+        );
+      }):"No data"}
+
+    
+            </div>
+            </div>      
+
+  </div>
+  }
 
   return (
     <div>
@@ -264,14 +389,14 @@ function ProductbuilderTable (props) {
          <div className="md:w-[5.8rem]">VAT(%)</div>
          <div className="w-12"></div>             </div>
       
-              {data.map((item) => {
+              {data.length ? data.map((item) => {
           return (
 <div key={item.procurId}>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
     >
      
     <div className=" flex font-medium flex-col md:w-[9.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+    <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               <Select
           classNames="w-32"
           value={item.currency_id}
@@ -283,43 +408,43 @@ function ProductbuilderTable (props) {
             </Option>
           ))}
         </Select>
-                            </h4>
+                            </div>
     </div>
 
     <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
     <Input
     className="w-32"
-          value={item.level1}
-          onChange={(e) => handleInputChange(e.target.value, item.key, 'level1')}
+          value={item.price}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'price')}
         />
-                    </h4>
+                    </div>
     
     </div> 
  
    
     
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                       
     <Input
          className="w-32"
           value={item.level2}
           onChange={(e) => handleInputChange(e.target.value, item.key, 'level2')}
         />
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
         
 
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         <Input
          className="w-32"
           value={item.level3}
           onChange={(e) => handleInputChange(e.target.value, item.key, 'level3')}
         />
-                    </h4>
+                    </div>
     </div>
     
     <div class="flex md:items-center"> 
@@ -338,13 +463,16 @@ function ProductbuilderTable (props) {
 </div>
 </div>
           );
-        })}
-             
+        }):"No data"}
+
+      
               </div>
               </div>      
 
     </div>
   );
+
+
 };
 
 const mapStateToProps = ({product,auth }) => ({
@@ -352,7 +480,8 @@ const mapStateToProps = ({product,auth }) => ({
     fetchingProductCurrency: product.fetchingProductCurrency,
     addDiscountModal: product.addDiscountModal,
     addProductOfferModal: product.addProductOfferModal,
-    currencies:auth.currencies
+    currencies:auth.currencies,
+    userId:auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>

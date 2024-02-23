@@ -15,7 +15,7 @@ function ProductionIDCard(props) {
         <div className="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className="flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=""></div>
-            <div className="md:w-[7%]">Name</div>
+            <div className="md:w-[7%]">Part #</div>
             <div className="md:w-[4.2rem] ">Category</div>
             <div className="md:w-[5.8rem]">Sub Category</div>
             <div className="md:w-[4.2rem] ">Unit</div>
@@ -38,7 +38,7 @@ function ProductionIDCard(props) {
                     <div className="max-sm:w-full md:flex items-center">
                       <div className="flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
                         <div className="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-                          {item.suppliesName}
+                          {item.partNumber}
                         </div>
                       </div>
                     </div>
