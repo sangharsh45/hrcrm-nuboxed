@@ -1237,7 +1237,7 @@ export const getUserStageList = (employeeId) => (dispatch) => {
     });
 };
 
-export const addEmployeeWorkflow = (employeeId,data) => (dispatch) => {
+export const addEmployeeWorkflow = (data,employeeId,) => (dispatch) => {
   dispatch({ type: types.ADD_WORKFLOW_EMPLOYEE_REQUEST });
   axios
     .put(`${base_url}/employee/add/workflow/save`, data, {

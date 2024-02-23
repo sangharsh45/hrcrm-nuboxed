@@ -91,8 +91,8 @@ class IdProofs extends Component {
       editInd:true
     });
   };
-  handleDeleteIdProof = (idProofTypeId={idProofTypeId}) => {
-    this.props.removeIdProof(idProofTypeId);
+  handleDeleteIdProof = (IdProofTypeId={IdProofTypeId}) => {
+    this.props.removeIdProof(IdProofTypeId);
     this.setState({ IdProofType: "", singleIdProof: "" });
   };
   handleUpdateIdProof = (IdProofType,IdProofTypeId,editInd, cb) => {
