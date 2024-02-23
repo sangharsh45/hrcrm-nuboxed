@@ -326,8 +326,8 @@ const LeadsCardList = (props) => {
                         />
                       </span>
                     </div>
-                  
-                    <div className=" flex font-medium  ">
+                  <div class="flex">
+                    <div className=" flex font-medium mr-1  ">
                      
   
                       <div class=" text-xs text-cardBody font-poppins"></div>
@@ -346,7 +346,7 @@ const LeadsCardList = (props) => {
                       </div>
                     </div>
                     
-                      <div>
+                      <div className="mr-1">
                         <Tooltip title="Notes">
                           <NoteAltIcon
                             onClick={() => {
@@ -358,7 +358,7 @@ const LeadsCardList = (props) => {
                           />
                         </Tooltip>
                       </div>
-                      <div>
+                      <div className="mr-1">
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -381,7 +381,7 @@ const LeadsCardList = (props) => {
   
                     
                       {user.leadsUpdateInd === true && user.crmInd === true && (
-                        <div>
+                        <div className="mr-1">
                           <Tooltip title="Edit">
                             <BorderColorIcon
                               className="!text-base cursor-pointer text-[tomato]"
@@ -395,7 +395,7 @@ const LeadsCardList = (props) => {
                         </div>
                       )}
                       {user.leadsDeleteInd === true && user.crmInd === true && (
-                        <div className="mt-1">
+                        <div className="mt-1 mr-1">
                           <StyledPopconfirm
                             title="Do you want to delete?"
                             onConfirm={() => deleteLeadsData(item.leadsId)}
@@ -410,7 +410,7 @@ const LeadsCardList = (props) => {
                         </div>
                       )}
 
-                      <div>
+                      <div className="mr-1">
                         <Tooltip
                           overlayStyle={{ maxWidth: "300px" }}
                           title={dataLoc}
@@ -424,7 +424,7 @@ const LeadsCardList = (props) => {
                           </span>
                         </Tooltip>
                       </div>
-                      <div>
+                      <div className="mr-1">
                         <Tooltip title={item.email}>
                           <MailOutlineIcon
                             type="mail"
@@ -437,7 +437,7 @@ const LeadsCardList = (props) => {
                         </Tooltip>{" "}
                       </div>
                     
-                   
+                   </div>
                    
                   </div>
                 </div>

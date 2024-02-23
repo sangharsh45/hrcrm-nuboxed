@@ -52,11 +52,11 @@ function LeaveCardView(props) {
   }
   return (
     <>
-      <div className=" h-h72 overflow-auto overflow-x-auto max-sm:h-[28vh]">
+      <div className=" h-h72 md:mt-4 overflow-auto overflow-x-auto max-sm:h-[28vh]">
       <div className="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">
           {leaveListRangeByUserId.map((item) => {
             return (
-              <div className="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[7.5rem] 
+              <div className="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[6.5rem] 
 text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
                 <div className="w-[200] flex h-[200] max-sm:w-full max-sm:flex-col max-sm:items-center  ">
                   <div className=" flex flex-col justify-around w-full ">
@@ -132,8 +132,9 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
                       </div>
                     )}
                   </span>
+                  <div class="flex justify-end items-center">
                   <Tooltip title={item.reason}>
-                    <NoteAltIcon className="!text-base cursor-pointer text-[green] p-[2px]"
+                    <NoteAltIcon className="!text-base mt-1 cursor-pointer text-[green] "
                    
                     onClick={() => {
                    
@@ -144,7 +145,7 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
                   </Tooltip>
                   <span>
                     {item.status === "Pending" ? (
-                      <div className="cursor-pointer p-[2px]"
+                      <div className="cursor-pointer "
                         onClick={() => {
                           props.setEditLeave(item);
                           handleUpdateLeaveModal(true);
@@ -161,7 +162,7 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
                   </span>
 
                   <span>
-                    <div className="!text-base cursor-pointer p-[2px]"
+                    <div className="!text-base cursor-pointer "
                       onClick={() => {
                         handleStatusLeaveModal(true);
                         handleSetCurrentLeaveId(item.leaveId);
@@ -175,7 +176,7 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
 
                   <span>
                     {item.status === "Pending" ? (
-                      <div style={{ cursor: "pointer", padding: "2px" }}>
+                      <div class="cursor-pointer">
                         <DeleteOutlined
                           type="delete"
                           className="!text-base cursor-pointer text-[red]" 
@@ -185,6 +186,7 @@ text-[#444444] m-3 p-1 w-[19vw] flex flex-col max-sm:w-wk  ">
                       ""
                     )}
                   </span>
+                  </div>
                 </div>
               </div>
             );

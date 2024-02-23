@@ -553,11 +553,8 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import Highlighter from 'react-highlight-words';
 import {getDepartments} from "../../../Settings/Department/DepartmentAction";
-import { StyledPopconfirm, StyledTable } from "../../../../Components/UI/Antd";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { Button, Tooltip,Input } from "antd";
-import {
-  Spacer
-} from "../../../../Components/UI/Elements";
 import {
   getEmployeelist,
   handleEmployeeDrawerForAdmin,
@@ -582,6 +579,7 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 function EmployeeTable(props) {
   const [page, setPage] = useState(0);
   const [rowData, setRowData] = useState("");
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   function handleRowData(item) {
     setRowData(item);
 
@@ -608,7 +606,15 @@ function EmployeeTable(props) {
     props.getRoles(props.organizationId);
     props.getDepartments();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
 
@@ -746,6 +752,195 @@ function EmployeeTable(props) {
   } = props;
   const { imgRadius } = props;
  
+  if (isMobile){
+
+    return (
+      <>
+          <div className=' flex justify-end sticky top-28 z-auto'>
+          <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                 
+                  {props.filteredData.map((item) => {
+                      const currentdate = moment().format("DD/MM/YYYY");
+                      const date = moment(item.createAt).format("DD/MM/YYYY");
+                      return (
+                          <div>
+                             <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                                  <div class="flex justify-between w-wk items-center ">
+                                     <div>
+                                      <EmployeeDetailsView
+            employeeId={item.employeeId}
+            fullName={item.fullName}
+          />
+                                          &nbsp;&nbsp;
+                                          {date === currentdate ? (
+                                              <span
+                                                  class="text-[tomato] font-bold">
+                                                  New
+                                              </span>
+                                          ) : null}
+                                    </div>
+  
+                                     
+                                          <div class=" text-xs text-cardBody font-poppins">
+                                              {item.department}
+                                          </div>
+  
+                                     
+                                     
+                                  </div>
+                                  <div class="flex justify-between w-wk items-center ">
+
+  <div class=" text-sm text-cardBody font-poppins">
+      
+     {item.roleTypeName}
+  </div>
+
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.countryDialCode} {item.mobileNo}
+                                      </div>
+                                  
+                                  </div>
+                                  
+                                  <div class="flex justify-between w-wk items-center ">
+                                 
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                         {item.emailId}
+                                      </div>
+                                 
+                                  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {props.user.userDeleteInd === true || user.role === "ADMIN" ? (
+              <SuspendEmployee
+                partnerId={item.partnerId}
+                suspendInd={item.suspendInd}
+                assignedIndicator={item.assignedInd}
+                employeeId={item.employeeId}
+              />
+              ):null}
+                                      </div>
+                                 
+                                  </div>
+                                  <div class="flex justify-between w-wk items-center ">
+                                  <div className=" flex font-medium  md:w-[8.21rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                      <div class=" text-xs cursor-pointer text-cardBody font-poppins text-center">
+                                      {item.suspendInd !== true && ( 
+                <Tooltip  title={item.role}>
+                  {/* <Button
+                    size={"small"}
+                    type="ghost"
+                    style={{            
+                      borderColor: "transparent",
+                      alignSelf: "flex-end",
+                    }}
+                  
+                  > */}
+                  { item.role === "ADMIN" ?(
+  <CellTowerIcon 
+    // onClick={() => {
+    //   handleEmployeeDrawerForAdmin(true);
+    //   handleSetCurrentEmployeeId(item.employeeId)
+    // }}
+   style={{ 
+    // color: item.role === "ADMIN" ?"blue":  "",
+    fontSize: "123%"
+    }}
+  />
+                  ):null}
+  
+                  {/* </Button> */}
+                </Tooltip>
+                 )}
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  md:w-[10.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      <span
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  // props.getCandidateById(item.candidateId);
+                   props.getEmployeeDocument(item.employeeId);
+                   props.getEmployeeTreeMap(item.employeeId);
+                  props.handleEmployeePulseDrawerModal(true);
+                  handleSetCurrentEmployeeId(item)
+                }}
+              >
+      
+                  <MonitorHeartIcon
+                    style={{ fontSize: "0.8rem", color: "#df9697" }}
+                  />
+           
+              </span>
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  md:w-[9.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      <Tooltip title="Add as Admin">
+             <CircleNotificationsIcon
+             style={{ cursor: "pointer",fontSize: "1rem" }}
+             onClick={() => {
+              handleSetCurrentEmployeeId(item);
+              props.handleNotifyDrawer(true);
+             }}
+             />
+             </Tooltip>
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                      <div class=" text-base text-cardBody font-poppins text-center">
+                                      {item.suspendInd === true && (
+                   <StyledPopconfirm
+                   title="Do you want to delete?"
+                   onConfirm={() => props.deleteEmployeeData(item.userId)}>
+             <Tooltip title="Delete">
+          
+             <DeleteOutlined
+          style={{
+            cursor: "pointer",
+            color: "red",
+            fontSize: "1rem",
+          }}
+             />
+         
+             </Tooltip>
+             </StyledPopconfirm>
+       )}
+                                      </div>
+                                  </div>
+                                  </div>
+  
+                              </div>
+                          </div>
+                      )
+                  })}
+              </div>
+              <Suspense fallback={<BundleLoader/>}>
+              <EmployeeDrawerForAdmin
+        employeeId={currentEmployeeId}
+          handleEmployeeDrawerForAdmin={handleEmployeeDrawerForAdmin}
+          employeeDrawerVisibleForAdmin={employeeDrawerVisibleForAdmin}
+        />
+           <EmployeePulseDrawerModal
+           singleEmployee={props.singleEmployee}
+           employeeTreeMap={props.employeeTreeMap}
+          //  currentData={rowData}
+          employeeName={currentEmployeeId}
+          documentsByEmployeeId={props.documentsByEmployeeId}
+          addDrawerEmployeePulseModal={props.addDrawerEmployeePulseModal}
+          handleEmployeePulseDrawerModal={props.handleEmployeePulseDrawerModal}
+          // candidateByUserId={this.props.candidateByUserId}
+        />
+              <OpenNotifyDrawer
+        currentEmployeeId={currentEmployeeId}
+         openNotifydrwr={props.openNotifydrwr} handleNotifyDrawer={props.handleNotifyDrawer}/>
+                   </Suspense>
+          </div>
+      </>
+  )   
+  }
+
+
   return (
     <>
         <div className=' flex justify-end sticky top-28 z-auto'>
