@@ -172,7 +172,7 @@ class Documents extends Component {
                   
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage
                     id="app.cancel"
@@ -186,7 +186,6 @@ class Documents extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingDocuments}
                     onClick={this.toggleInput}
@@ -199,7 +198,7 @@ class Documents extends Component {
             )}
              </div>
             <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
               {documents.length ? (
   documents
     .slice() 
@@ -229,7 +228,7 @@ class Documents extends Component {
          
           </MainWrapper>
         </div>
-        <div>Updated on {dayjs(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format('YYYY-MM-DD')} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format('YYYY-MM-DD')} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</div>
       </>
     );
   }

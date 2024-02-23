@@ -1,4 +1,4 @@
-import React, { Suspense, useState,lazy} from "react";
+import React, { useState,lazy} from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";

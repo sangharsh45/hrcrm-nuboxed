@@ -176,7 +176,7 @@ class InvestorList extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel" onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
@@ -187,7 +187,6 @@ class InvestorList extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     loading={addingInvestorData}
                     onClick={this.toggleInput}
@@ -199,13 +198,12 @@ class InvestorList extends Component {
                     />
                   </Button>
                 </div>
-                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
+      
               </>
             )}
             </div>
             <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
              {investorListData.length ? (
   investorListData
     .slice() 
@@ -237,7 +235,7 @@ class InvestorList extends Component {
       
        
         </div>
-        <div>Updated on {dayjs(this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updatedBy}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updatedBy}</div>
       </>
     );
   }

@@ -82,7 +82,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <FactoryIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                         Sector
                       </span>
                     </>
@@ -97,7 +97,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                         Source
                       </span>
                     </>
@@ -112,7 +112,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                         Ship By
                       </span>
                     </>
@@ -127,7 +127,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                       Type
                       </span>
                     </>
@@ -143,7 +143,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                         BrandModel
                       </span>
                     </>
@@ -158,7 +158,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                         Vat
                       </span>
                     </>
@@ -173,7 +173,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <PaymentIcon />
-                      <span class=" ml-[0.25em]">
+                      <span class=" ml-1">
                       <FormattedMessage id="app.payment" defaultMessage="Payment" />
                       </span>
                     </>

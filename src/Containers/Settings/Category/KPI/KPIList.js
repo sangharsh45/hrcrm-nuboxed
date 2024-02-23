@@ -193,7 +193,7 @@ class KPIList extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
@@ -204,7 +204,6 @@ class KPIList extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     loading={addingKpi}
                     onClick={this.toggleInput}
@@ -216,13 +215,12 @@ class KPIList extends Component {
                     />
                   </Button>
                 </div>
-                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].kpi}</div> */}
+              
               </>
             )}
 </div>
             <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
              {kpiListData.length ? (
   kpiListData
     .slice() 
@@ -253,7 +251,7 @@ class KPIList extends Component {
       
        
         </div>
-        <div>Updated on {dayjs(this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updatedBy}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.kpiListData && this.props.kpiListData.length && this.props.kpiListData[0].updatedBy}</div>
       </>
     );
   }

@@ -1,6 +1,6 @@
 import * as types from "./SectorsActionTypes";
 import axios from "axios";
-import dayjs from "dayjs";
+import Swal from 'sweetalert2'
 import { base_url } from "../../../Config/Auth";
 import { message } from "antd"
 
@@ -158,6 +158,7 @@ export const updateSectors = ( sectorId,sectorName,cb) => (dispatch) => {
           type: types.GET_SECTOR_SEARCH_SUCCESS,
           payload: res.data,
         });
+  
       }
       )
       .catch((err) => {
