@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip, Popconfirm} from "antd";
+import {removeKpi} from "../KPI/KPIAction"
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -70,8 +73,14 @@ class SingleKpi extends Component {
                     ) : null}
                   
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeKpi(performanceManagementId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteKpi(performanceManagementId)}
+                        // onClick={() => handleDeleteKpi(performanceManagementId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -80,15 +89,8 @@ class SingleKpi extends Component {
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
                 </div>
               </div>
             ) : (
@@ -142,5 +144,16 @@ class SingleKpi extends Component {
   }
 }
 
-export default SingleKpi;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeKpi,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleKpi);
+
 

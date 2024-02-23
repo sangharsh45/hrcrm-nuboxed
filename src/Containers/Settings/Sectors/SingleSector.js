@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeSectors} from "../Sectors/SectorsAction"
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
@@ -58,8 +61,14 @@ class SingleSectors extends Component {
                   ) : null}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeSectors(sectorId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteSector(sectorId)}
+                        // onClick={() => handleDeleteSector(sectorId)}
                      
                       style={{
                         verticalAlign: "center",
@@ -68,15 +77,8 @@ class SingleSectors extends Component {
                         color: "red",
                       }}
                     />
+                      </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
                 </div>
               </div>
             ) : (
@@ -119,6 +121,17 @@ class SingleSectors extends Component {
   }
 }
 
-export default SingleSectors;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeSectors,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleSectors);
+
 
 

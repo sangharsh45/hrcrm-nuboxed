@@ -7,8 +7,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 
 const SuppliesTable =lazy(()=>import("./SuppliesTable"));
 const SuppliesDeletedTable =lazy(()=>import("./SuppliesDeletedTable"));
-const SuppliesCard =lazy(()=>import("./SuppliesCard"));
-const SuppliesDeletedCard =lazy(()=>import("./SuppliesDeletedCard"));
+
 
 function Supplies(props) {
     const { setSuppliesViewType, viewType, handleSuppliesModal } = props;
@@ -34,13 +33,12 @@ function Supplies(props) {
 
             <Suspense fallback={<BundleLoader />}>
                 {viewType === "all" ? (
-                      <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-                   {isLargeScreen ? <SuppliesTable />:<SuppliesCard />}
-                    </div>
+              
+                   <SuppliesTable />
+                  
                 ) : viewType === "dashboard" ? (
-                    <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-                     {isLargeScreen ? <SuppliesDeletedTable /> :<SuppliesDeletedCard />}
-                    </div>
+                   
+                     <SuppliesDeletedTable /> 
                 ) : null}
             </Suspense>
         </React.Fragment>

@@ -404,7 +404,28 @@ const SingleDepartment = (props) => {
     </div>
   </>
 )}
-
+{moduleMapper.financeInd === true && (
+  <>
+                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleAccountingClick(!accountingStatus)}
+                        // onCancel={handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={accountingStatus || financeInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
 {moduleMapper.crmInd === true && (
   <>
                   <div class=" text-sm w-[2rem] ml-4 ">CRM</div>
@@ -640,28 +661,7 @@ const SingleDepartment = (props) => {
                     </>
 )}
 
-{moduleMapper.financeInd === true && (
-  <>
-                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
-                    <div   class=" w-[7%] ml-2">
-                    <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={() => handleAccountingClick(!accountingStatus)}
-                        // onCancel={handleOrderManagementCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Switch
-                          style={{ width: "4em" }}
-                          onChange={() => {}}
-                          checked={accountingStatus || financeInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </Popconfirm>
-                    </div>
-                    </>
-)}
+
 {moduleMapper.logisticsInd === true && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
@@ -686,7 +686,7 @@ const SingleDepartment = (props) => {
 )}
 {moduleMapper.procurementInd === true && (
   <>
-                    <div class=" text-sm w-[5rem] ml-4">Procurement</div>
+                    <div class=" text-sm w-[6rem] ml-4">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
                         title="Do you wish to change Status ? "
