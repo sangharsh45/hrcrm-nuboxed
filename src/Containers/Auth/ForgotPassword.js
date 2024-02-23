@@ -114,16 +114,9 @@ import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import styled from "styled-components";
-import { CheckCircleTwoTone, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import {
-  // doSignUp,
-  // getCountries,
-  // verifyEmailurL,
-  //validateOtpurL,
-} from "./AuthAction";
-import RandomImageScreen from "./RandomImageScreen";
+import {  EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import FWLogo from "../../Assets/Images/name.jpg";
 
-//import { tick } from "../../Assets/Images/Logo.png";
 
 /**
  * yup validation scheme for set Password
@@ -144,6 +137,7 @@ class ForgotPassword extends Component {
     show1: Boolean(),
     show2: Boolean(),
     show: Boolean(),
+    sendOtpClicked: false,
   };
   handleClick = () =>
     this.setState(({ type, prevState }) => ({
@@ -178,7 +172,9 @@ class ForgotPassword extends Component {
     return (
       <>
       <div className="main" style={{display:"flex",justifyContent:"space-evenly"}}>
+     
       <div className="forgot_password">
+     
       <FlexContainer>
           <AuthContainer
             style={{
@@ -187,6 +183,12 @@ class ForgotPassword extends Component {
               width: "100%",
             }}
           >
+             <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ width: 200 }}
+              alt="Tekorero logo"
+            />
             <FormWrapper>
               <Title>Forgot Password</Title>
               <SubTitle>Link will be sent to your registered email id</SubTitle>
@@ -212,8 +214,8 @@ class ForgotPassword extends Component {
                 {({ errors, touched, values, isSubmitting }) => (
                   <Form style={{ width: "25vw" }}>
                     <div >
-                      <div style={{ width: "100%",display:"flex" }}>
-                      <div style={{ width: "75%" }}>
+                      <div className="flex w-full">
+                      <div className="w-[75%]" >
                       <Field
                         // type="defaultUser.email"
                         placeholder="Enter your email"
@@ -226,13 +228,14 @@ class ForgotPassword extends Component {
                         inlineLabel
                       />
                       </div>
-                      <div style={{ width: "25%", }}>
+                      <div className="w-[25%]" >
                       <Button
                         type="primary"
                         // htmlType="submit"
                         //disabled={!values.defaultUser.email.length}
                         // loading={isSubmitting}
                         onClick={() => {
+                          this.setState({ sendOtpClicked: true });
                         this.props.verifyEmailurL({
                         emailId: values.defaultUser.email,
                             otp: 0,
@@ -250,8 +253,8 @@ class ForgotPassword extends Component {
                       </div>
                       </div>
 
-                      <div style={{ width: "100%",display:"flex" }}>
-                        <div style={{ width: "75%" }}>
+                      <div className="w-full flex" >
+                        <div className="w-[75%]" >
                       <Field
                         // disabled={!this.state.otp}
                         name="defaultUser.validateotp"
@@ -261,7 +264,7 @@ class ForgotPassword extends Component {
                         component={this.InputComponent}
                       />
                         </div>
-                      <div style={{ width: "25%" }}>
+                      <div className="w-[25%]">
                       <Button
                         type="primary"
                         // htmlType="submit"
@@ -277,7 +280,7 @@ class ForgotPassword extends Component {
                           width: "100%",
                           margin: "7%",
                         }}
-                        
+                        disabled={!this.state.sendOtpClicked}
                         // disabled={!this.state.checked}
                       >
                         Validate
@@ -285,9 +288,9 @@ class ForgotPassword extends Component {
                       </div>
                       </div>
 
-                      <div style={{ width: "100%",display:"flex" }}>
+                      <div className="w-full flex" >
                       
-                      <div style={{ width: "100%" }}>
+                      <div className="w-full" >
                         <Field
                           name="password"
                           //type={this.state.type}
@@ -299,7 +302,7 @@ class ForgotPassword extends Component {
                         <EyeOutlined
                           type="eye"
                           onClick={this.handleClick}
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          style={{ marginLeft: "-1.25em", marginTop: "-0.25em" }}
                           size="24"
                         />
                       ) : (
@@ -307,15 +310,15 @@ class ForgotPassword extends Component {
                             type="eye-invisible"
                             onClick={this.handleClick}
                             size="24"
-                            style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                            style={{ marginLeft: "-1.25em", marginTop: "-0.25em" }}
                           />
                    )} 
                     
                       </div>
 
-                      <div style={{ width: "100%",display:"flex" }}>
+                      <div className="w-full flex" >
                   
-                      <div style={{ width: "100%" }}>
+                      <div className="w-full " >
                         <Field
                           name="confirmPassword"
                           type={this.state.type1}
@@ -329,7 +332,7 @@ class ForgotPassword extends Component {
                           onClick={this.handleClick1}
                           style={{
                             marginLeft: "-1.25em",
-                            marginTop: "1.25em",
+                            marginTop: "-0.25em",
                           }}
                         // style={{ size: 24 }}
                         />
@@ -339,7 +342,7 @@ class ForgotPassword extends Component {
                             onClick={this.handleClick1}
                             style={{
                               marginLeft: "-1.25em",
-                              marginTop: "1.25em",
+                              marginTop: "-0.25em",
                             }}
                           // style={{ size: 24 }}
                           />
@@ -362,21 +365,11 @@ class ForgotPassword extends Component {
                       </div>
                       
                       </div>
-                      <Spacer style={{ marginBottom: "1em" }} />
-                      <div>
-                        <span
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
+                     
+                      <div className="mt-4">
+                        <span className="flex justify-between">
                         
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "flex-start",
-                          }}
-                        >
+                        <span className=" font-bold flex justify-start">
                           {" "}
                           <Link
                             to="/login"

@@ -75,7 +75,7 @@ const EmployeesActionLeft = (props) => {
           overflowCount={999}
         >
       <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setEmployeeViewType("tile")}
             style={{
               color: props.viewType === "tile" && "#1890ff",
@@ -87,27 +87,7 @@ const EmployeesActionLeft = (props) => {
           </span>
           </Badge> 
       </Tooltip>
-      {/* <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "table" &&
-              props.employeerecordData.EmployeeListByLiveInd) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setEmployeeViewType("table")}
-            style={{
-              color: props.viewType === "table" && "#1890ff",
-            }}
-          >
-            <GroupsIcon />
-          </span>
-        </Badge>
-      </Tooltip> */}
+  
       <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
       <Badge
           size="small"
@@ -119,7 +99,7 @@ const EmployeesActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setEmployeeViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",
@@ -132,7 +112,7 @@ const EmployeesActionLeft = (props) => {
           </Badge>
       </Tooltip>
 
-      <div class=" ml-6 h-6 w-60">
+      <div class=" ml-6 h-6 w-72">
       <Input
      placeholder="Search By Name"
       width={"100%"}
