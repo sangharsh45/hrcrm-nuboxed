@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { getPurchaseOrderDetailsList, updatePriceOfPoItem } from "../../../SuppliersAction"
 import { BorderAllRounded, BorderColorOutlined } from "@mui/icons-material";
 import { Button, Input } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function PoSupplierDetailsTable(props) {
     useEffect(() => {
@@ -29,6 +30,12 @@ function PoSupplierDetailsTable(props) {
         setEdit(false)
         setPrice("")
     }
+
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(0);
+    const handleLoadMore = () => {
+        setPage(page + 1);
+    };
     return (
         <>
             <div className=' flex justify-end sticky z-auto'>
@@ -44,21 +51,13 @@ function PoSupplierDetailsTable(props) {
                                 id="app.category"
                                 defaultMessage="Category" />
                         </div>
-                        <div className=" md:w-[14.1rem]">
-                            <FormattedMessage
-                                id="app.subcategory"
-                                defaultMessage="Sub Category" />
-                        </div>
+
                         <div className=" md:w-[14.1rem]">
                             <FormattedMessage
                                 id="app.attribute"
                                 defaultMessage="Attribute" />
                         </div>
-                        <div className=" md:w-[14.1rem]">
-                            <FormattedMessage
-                                id="app.subattribute"
-                                defaultMessage="Sub Attribute" />
-                        </div>
+
                         <div className=" md:w-[14.1rem]">
                             <FormattedMessage
                                 id="app.unit"
@@ -67,108 +66,101 @@ function PoSupplierDetailsTable(props) {
                         <div className=" md:w-[14.1rem]">
                             <FormattedMessage
                                 id="app.price"
-                                defaultMessage="Price" />
+                                defaultMessage="Price/Unit" />
                         </div>
 
                     </div>
-                    {props.poDetails.map((item) => {
-                        return (
-                            <>
-                                <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3" >
-                                    <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.suppliesFullName}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.categoryName}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.subCategoryName}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.attributeName}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.subAttributeName}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <span>
-                                                    {item.unit}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-
-                                                {edit && row.suppliesId === item.suppliesId ?
-                                                    <>
-                                                        <Input
-                                                            value={price}
-                                                            type="text"
-                                                            placeholder="Enter Price"
-                                                            onChange={(e) => handleInputPrice(e.target.value)}
-                                                        />
-                                                        <Button
-                                                            type="primary"
-                                                            onClick={() => props.updatePriceOfPoItem({
-                                                                price: price,
-                                                                supplierId: props.supplierId,
-                                                                userId: props.userId,
-                                                                suppliesId: item.suppliesId,
-                                                                poSupplierDetailsId: props.poSupplierDetailsId
-                                                            }, handleCallback())}
-                                                        >Add</Button>
-                                                        <Button onClick={handlePrice}>Cancel</Button>
-                                                    </>
-                                                    : <span>
-                                                        {item.price}
+                    <InfiniteScroll
+                        dataLength={props.poDetails.length}
+                        next={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={props.fetchingPoDetailsList ? <div class="text-center font-semibold text-xs">Loading...</div> : null}
+                        height={"75vh"}
+                    >
+                        {props.poDetails.map((item) => {
+                            return (
+                                <>
+                                    <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3" >
+                                        <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                    <span>
+                                                        {item.suppliesFullName}
                                                     </span>
-                                                }
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
-                                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                                <BorderColorOutlined
-                                                    onClick={() => {
-                                                        handlePrice()
-                                                        handleRowData(item)
-                                                    }}
-                                                />
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                    <span>
+                                                        {item.categoryName} {item.subCategoryName}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                    <span>
+                                                        {item.attributeName} {item.subAttributeName}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                    <span>
+                                                        {item.unit}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+
+                                                    {edit && row.suppliesId === item.suppliesId ?
+                                                        <>
+                                                            <Input
+                                                                value={price}
+                                                                type="text"
+                                                                placeholder="Enter Price"
+                                                                onChange={(e) => handleInputPrice(e.target.value)}
+                                                            />
+                                                            <Button
+                                                                type="primary"
+                                                                onClick={() => props.updatePriceOfPoItem({
+                                                                    price: price,
+                                                                    supplierId: props.supplierId,
+                                                                    userId: props.userId,
+                                                                    suppliesId: item.suppliesId,
+                                                                    poSupplierDetailsId: props.poSupplierDetailsId
+                                                                }, handleCallback())}
+                                                            >Add</Button>
+                                                            <Button onClick={handlePrice}>Cancel</Button>
+                                                        </>
+                                                        : <span>
+                                                            {item.price}
+                                                        </span>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
+                                                <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                                                    <BorderColorOutlined
+                                                        onClick={() => {
+                                                            handlePrice()
+                                                            handleRowData(item)
+                                                        }}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </>
-                        )
-                    })}
+                                </>
+                            )
+                        })}
+                    </InfiniteScroll>
                 </div>
             </div>
 
@@ -177,7 +169,8 @@ function PoSupplierDetailsTable(props) {
 }
 const mapStateToProps = ({ suppliers, auth }) => ({
     poDetails: suppliers.poDetails,
-    userId: auth.userDetails.userId
+    userId: auth.userDetails.userId,
+    fetchingPoDetailsList: suppliers.fetchingPoDetailsList
 });
 
 const mapDispatchToProps = (dispatch) =>

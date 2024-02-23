@@ -48,6 +48,9 @@ function General(props) {
           birthdayEmailInd: props.requirementDuration.birthdayEmailInd,
           productionInd: props.requirementDuration.productionInd,
           repairInd: props.requirementDuration.repairInd,
+          makeToInd: props.requirementDuration.makeToInd,
+          independentInd: props.requirementDuration.independentInd,
+
         }}
         onSubmit={(values) => {
           console.log(values)
@@ -168,6 +171,33 @@ function General(props) {
                           width={"5em"}
                         />
                       </div>
+
+                      {values.productionInd &&
+                        <>
+                          <div class=" flex flex-row">
+                            <p style={{ minWidth: "-webkit-fill-available" }}> Make To Order</p>
+                            <Field
+                              name="makeToInd"
+                              component={SwitchComponent}
+                              data={values.makeToInd}
+                              checkedChildren={"Yes"}
+                              unCheckedChildren={"No"}
+                              width={"5em"}
+                            />
+                          </div>
+                          <div class=" flex flex-row">
+                            <p style={{ minWidth: "-webkit-fill-available" }}> Independent</p>
+                            <Field
+                              name="independentInd"
+                              component={SwitchComponent}
+                              data={values.independentInd}
+                              checkedChildren={"Yes"}
+                              unCheckedChildren={"No"}
+                              width={"5em"}
+                            />
+                          </div>
+                        </>
+                      }
 
                       <div class=" flex flex-row mt-2">
                         <p style={{ minWidth: "-webkit-fill-available" }}>Repair</p>

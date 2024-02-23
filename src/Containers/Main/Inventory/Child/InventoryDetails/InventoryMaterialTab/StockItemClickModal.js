@@ -1,29 +1,28 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import GrnListOfPO from "./GrnListOfPO";
-// import ReceivedDetailCard from "./ReceivedDetailCard";
-// const OpenReceivedOrderIdForm = lazy(() => import("./OpenReceivedOrderIdForm.js"));
+import PartNoListItemWise from "./PartNoListItemWise";
 
-
-class GrnListOfPOModal extends Component {
+class StockItemClickModal extends Component {
     render() {
         const {
-            showGrnListOfPo,
-            handlegrnlistmodal,
+            showStockItem,
+            handleSTockItemModal,
             ...formProps
         } = this.props;
         return (
             <>
                 <StyledDrawer
-                    title={`GRN list for PO# - ${this.props.row.newPoNumber}`}
+                    title={`Item - ${this.props.row.suppliesFullName}`}
                     width="70%"
-                    visible={showGrnListOfPo}
-                    onClose={() => handlegrnlistmodal(false)}
+                    visible={showStockItem}
+                    destroyOnClose
+                    maskClosable={false}
+                    onClose={() => handleSTockItemModal(false)}
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <GrnListOfPO row={this.props.row} />
+                        <PartNoListItemWise poSupplierSuppliesId={this.props.row.poSupplierSuppliesId} />
                     </Suspense>
                 </StyledDrawer>
             </>
@@ -31,4 +30,4 @@ class GrnListOfPOModal extends Component {
     }
 }
 
-export default GrnListOfPOModal;
+export default StockItemClickModal;

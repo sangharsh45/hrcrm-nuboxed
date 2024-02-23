@@ -1476,6 +1476,13 @@ export const handleReceivedUnit = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleSTockItemModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STOCK_ITEM_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const getReceivedUnitOfAnItem = (poSupplierSuppliesId) => (dispatch) => {
   dispatch({
     type: types.GET_RECEIVED_UNIT_OF_AN_ITEM_REQUEST,
@@ -1527,6 +1534,56 @@ export const updatePartIdOfAnItem = (data, supplierSuppliesUniqueNumberId) => (d
       console.log(err);
       dispatch({
         type: types.UPDATE_PART_ID_OF_AN_ITEM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getGrnNoByPoId = (pOSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_GRN_NO_BY_PO_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/grnList/${pOSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_GRN_NO_BY_PO_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_GRN_NO_BY_PO_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getPartNoByItem = (poSupplierSuppliesId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PART_NO_BY_ITEM_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/stock/uniqueItemList/${poSupplierSuppliesId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_PART_NO_BY_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PART_NO_BY_ITEM_FAILURE,
         payload: err,
       });
     });

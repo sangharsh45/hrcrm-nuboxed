@@ -480,6 +480,14 @@ export const handleOrderDetailsModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleProductOrderDetailsModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCT_ORDER_DETAIL_MODAL,
+    payload: modalProps,
+  });
+};
+
+
 /**
  * Link Renewal in distributor
  */
@@ -1940,7 +1948,7 @@ export const applyForLoginInContact = (data, contactPersonId, id, userId) => (di
     });
 };
 
-export const addLocationInOrder = (data,distributorId) => (dispatch) => {
+export const addLocationInOrder = (data, distributorId) => (dispatch) => {
   dispatch({
     type: types.ADD_LOCATION_IN_ORDER_REQUEST,
   });
@@ -1958,7 +1966,7 @@ export const addLocationInOrder = (data,distributorId) => (dispatch) => {
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
       });
-    
+
       message.success("Order has moved to inventory !!")
     })
     .catch((err) => {

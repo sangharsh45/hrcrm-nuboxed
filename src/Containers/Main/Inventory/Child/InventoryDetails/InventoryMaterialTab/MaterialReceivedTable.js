@@ -13,6 +13,7 @@ import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 import ReceivedDetailModal from "./ReceivedDetailModal";
 import { ListAltOutlined } from "@mui/icons-material";
 import GrnListOfPOModal from "./GrnListOfPOModal";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const MaterialReceivedTable = (props) => {
     useEffect(() => {
@@ -23,6 +24,12 @@ const MaterialReceivedTable = (props) => {
     const handleRow = (item) => {
         setRow(item)
     }
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(0);
+    const handleLoadMore = () => {
+        setPage(page + 1);
+    };
+
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
@@ -32,59 +39,65 @@ const MaterialReceivedTable = (props) => {
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.po" defaultMessage="PO #" /></div>
                         <div className=" md:w-[22.12rem]"><FormattedMessage id="app.created" defaultMessage="Created" /></div>
                     </div>
+                    <InfiniteScroll
+                        dataLength={props.materialReceiveData.length}
+                        next={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={props.fetchingMaterialReceiveData ? <div class="text-center font-semibold text-xs">Loading...</div> : null}
+                        height={"75vh"}
+                    >
+                        {props.materialReceiveData.map((item) => {
+                            const currentdate = dayjs().format("DD/MM/YYYY");
+                            const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+                            return (
+                                <div>
+                                    <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
+                                        <div class="flex">
 
-                    {props.materialReceiveData.map((item) => {
-                        const currentdate = dayjs().format("DD/MM/YYYY");
-                        const date = dayjs(item.creationDate).format("DD/MM/YYYY");
-                        return (
-                            <div>
-                                <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
-                                    <div class="flex">
-
-                                        <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
-                                            <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
-                                                <div
-                                                    onClick={() => {
-                                                        handleRow(item);
-                                                        props.handleMaterialReceived(true);
-                                                    }}
-                                                >{item.newPoNumber}</div>
-                                                {date === currentdate ? (
-                                                    <div class="text-xs font-bold text-[tomato]">
-                                                        New
-                                                    </div>
-                                                ) : null}
+                                            <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
+                                                <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
+                                                    <div
+                                                        onClick={() => {
+                                                            handleRow(item);
+                                                            props.handleMaterialReceived(true);
+                                                        }}
+                                                    >{item.newPoNumber}</div>
+                                                    {date === currentdate ? (
+                                                        <div class="text-xs font-bold text-[tomato]">
+                                                            New
+                                                        </div>
+                                                    ) : null}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            <MultiAvatar
-                                                primaryTitle={item.userName}
-                                                imgWidth={"1.8rem"}
-                                                imgHeight={"1.8rem"}
-                                            />
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                <MultiAvatar
+                                                    primaryTitle={item.userName}
+                                                    imgWidth={"1.8rem"}
+                                                    imgHeight={"1.8rem"}
+                                                />
+                                            </div>
+
                                         </div>
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                <ListAltOutlined
+                                                    onClick={() => {
+                                                        handleRow(item);
+                                                        props.handlegrnlistmodal(true)
+                                                    }}
+                                                />
+                                            </div>
 
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            <ListAltOutlined
-                                                onClick={() => {
-                                                    handleRow(item);
-                                                    props.handlegrnlistmodal(true)
-                                                }}
-                                            />
                                         </div>
-
                                     </div>
+
                                 </div>
-
-                            </div>
-                        );
-                    })}
-
+                            );
+                        })}
+                    </InfiniteScroll>
                 </div>
             </div>
             <ReceivedDetailModal
@@ -107,7 +120,8 @@ const mapStateToProps = ({ inventory, auth }) => ({
     locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
     materialReceiveData: inventory.materialReceiveData,
     addMaterialReceived: inventory.addMaterialReceived,
-    showGrnListOfPo: inventory.showGrnListOfPo
+    showGrnListOfPo: inventory.showGrnListOfPo,
+    fetchingMaterialReceiveData: inventory.fetchingMaterialReceiveData
 });
 
 const mapDispatchToProps = (dispatch) =>

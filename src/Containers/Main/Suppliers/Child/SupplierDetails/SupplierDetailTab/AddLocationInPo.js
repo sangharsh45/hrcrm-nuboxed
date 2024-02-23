@@ -72,7 +72,9 @@ function AddLocationInPo(props) {
                             <div class="flex justify-end mt-2">
                                 <Button
                                     type="primary"
-                                    htmlType="submit">
+                                    htmlType="submit"
+                                    loading={props.moveToInventory}
+                                >
                                     Submit
                                 </Button>
                             </div>
@@ -83,10 +85,11 @@ function AddLocationInPo(props) {
         </>
     );
 }
-const mapStateToProps = ({ distributor, plant, auth }) => ({
+const mapStateToProps = ({ distributor, suppliers, auth }) => ({
     orgId: auth.userDetails.organizationId,
     userId: auth.userDetails.userId,
     locationlist: distributor.locationlist,
+    moveToInventory: suppliers.moveToInventory
 });
 
 const mapDispatchToProps = (dispatch) =>
