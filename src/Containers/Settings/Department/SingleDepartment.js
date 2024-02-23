@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import {linkDepartmentDocumentToggle} from "../Department/DepartmentAction"
+import {linkDepartmentDocumentToggle,removeDepartments} from "../Department/DepartmentAction"
 import { Button, Popconfirm, Switch, Tooltip } from "antd";
 import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -11,7 +11,10 @@ import { TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
-import DepartmentStatusToggle from "./DepartmentStatusToggle";
+const DepartmentStatusToggle = lazy(() =>
+  import("./DepartmentStatusToggle")
+);
+
 const { Option } = Select;
 
 const SingleDepartment = (props) => {
@@ -401,7 +404,28 @@ const SingleDepartment = (props) => {
     </div>
   </>
 )}
-
+{moduleMapper.financeInd === true && (
+  <>
+                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleAccountingClick(!accountingStatus)}
+                        // onCancel={handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={accountingStatus || financeInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
 {moduleMapper.crmInd === true && (
   <>
                   <div class=" text-sm w-[2rem] ml-4 ">CRM</div>
@@ -637,28 +661,7 @@ const SingleDepartment = (props) => {
                     </>
 )}
 
-{moduleMapper.financeInd === true && (
-  <>
-                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
-                    <div   class=" w-[7%] ml-2">
-                    <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={() => handleAccountingClick(!accountingStatus)}
-                        // onCancel={handleOrderManagementCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Switch
-                          style={{ width: "4em" }}
-                          onChange={() => {}}
-                          checked={accountingStatus || financeInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </Popconfirm>
-                    </div>
-                    </>
-)}
+
 {moduleMapper.logisticsInd === true && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
@@ -683,7 +686,7 @@ const SingleDepartment = (props) => {
 )}
 {moduleMapper.procurementInd === true && (
   <>
-                    <div class=" text-sm w-[5rem] ml-4">Procurement</div>
+                    <div class=" text-sm w-[6rem] ml-4">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
                         title="Do you wish to change Status ? "
@@ -718,8 +721,14 @@ const SingleDepartment = (props) => {
                     )}
   <Tooltip title="Delete">
                     {mandetoryInd !== true && (
+                          <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => props.removeDepartments(departmentId )}
+                        >
                       <DeleteOutlined
-                        onClick={() => handleDeleteDepartment(departmentId)}
+                        // onClick={() => handleDeleteDepartment(departmentId)}
                      
                         style={{
                           verticalAlign: "center",
@@ -728,6 +737,7 @@ const SingleDepartment = (props) => {
                           color: "red",
                         }}
                       />
+                       </Popconfirm>
                     )}
                     </Tooltip>
                   </div>
@@ -785,6 +795,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       addingDeptModules,
       linkDepartmentDocumentToggle,
+      removeDepartments,
     },
     dispatch
   );

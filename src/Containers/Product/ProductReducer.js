@@ -241,7 +241,7 @@ const initialState = {
   fetchingProductCurrencyError:false,
   ProductCurrency:[
     {
-      "skillLevelLinkId": "SLLG15730474789302024",
+      "procurId": "SLLG15730474789302024",
       "skillDefinationId": "DEIN70611587316272024",
       "currency_id":"CU06",
       "currency_name":"INR",
@@ -255,7 +255,7 @@ const initialState = {
       "countryId": "C001"
   },
   {
-      "skillLevelLinkId": "SLLG5122091210302024",
+      "procurId": "SLLG5122091210302024",
       "skillDefinationId": "DEIN40102183900272024",
       "currency_id":"CU04",
       "currency_name":"AUD",

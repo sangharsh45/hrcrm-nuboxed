@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import {removeEducation} from "../Educations/EducationAction"
+import { bindActionCreators } from "redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
@@ -55,9 +58,15 @@ class SingleEducations extends Component {
                   ) : null}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeEducation(educationTypeId )}
+                        >
                     <DeleteOutlined
                      
-                      onClick={() => handleDeleteEducation(educationTypeId)}
+                      // onClick={() => handleDeleteEducation(educationTypeId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -66,15 +75,9 @@ class SingleEducations extends Component {
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+   
                 </div>
               </div>
             ) : (
@@ -119,6 +122,17 @@ class SingleEducations extends Component {
   }
 }
 
-export default SingleEducations;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeEducation,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEducations);
+
 
 

@@ -29,8 +29,20 @@ const TagBrandModel =lazy(()=>import("./TagBrandModel"));
 
 
 function SuppliesTable(props) {
+
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     props.getSuppliesList();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const [particularDiscountData, setParticularDiscountData] = useState({});
@@ -40,7 +52,177 @@ function SuppliesTable(props) {
   }
 
   const { updateSuppliesDrawer, handleUpdateSupplieDrawer,materialBuildrawer,handleMaterialBuilderDrawer } = props;
-
+  if (isMobile){
+    return (
+      <>
+        <div className=" flex justify-end sticky top-28 z-auto">
+        <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+         
+            {props.purchaseList.map((item) => {
+              return (
+                <>
+                    <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                    <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                    <div class="flex justify-between w-wk items-center ">
+                 
+                      <div className="flex max-sm:w-full ">
+                        <div>
+                         
+                           <MultiAvatar
+                              // primaryTitle={item.name}
+                              imageId={item.imageId}
+                              // imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                         
+                        </div>
+                        <div class="w-[4%]"></div>
+  
+                        <div class="max-sm:w-full md:flex items-center">
+                       
+                        <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.hsn}
+                        </div>
+                      </div>
+                        </div>
+                      </div>
+                    
+                      
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.name}
+                        </div>
+                      
+                      </div>
+                      <div class="flex justify-between w-wk items-center ">
+                      <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.categoryName}
+                        </div>
+                      </div>
+  
+                      <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.subCategoryName}
+                        </div>
+                      </div>
+                      <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.attributeName} {item.subAttributeName}
+                        </div>
+                      </div>
+                      </div>
+                      <div class="flex justify-between w-wk items-center ">
+                     
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.reorder}
+                        </div>
+                     
+                      
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {`${moment(item.creationDate).format("ll")}`}
+                        </div>
+                     
+                     
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <QrCode/>
+                        </div>
+                     
+                      </div>
+                      <div class="flex justify-between w-wk items-center ">
+                      
+                        <div>
+                        <Tooltip title="Material Builder">
+                              <ViewQuiltIcon
+                              className="cursor-pointer text-base"
+                                  onClick={() => {
+                                      props.handleMaterialBuilderDrawer(true);
+                                      handleParticularRowData(item);
+                                  }}
+                              />
+                          </Tooltip>
+                        </div>
+                     
+                      
+                        <div>
+                          <Tooltip>
+                            <PhoneFilled
+                              onClick={() => {
+                                props.handleBrandModel(true);
+                                handleParticularRowData(item);
+                              }}
+                              style={{ color: "blue", cursor: "pointer" }}
+                            />
+                          </Tooltip>
+                        </div>
+                        <div>
+                         
+                            <InventoryIcon
+                              style={{ cursor: "pointer", fontSize: "1rem",}}
+                            />
+                        
+                        </div>
+                     
+                     
+                        <div>
+                        <Tooltip title="Edit">
+                            <BorderColorIcon
+                              onClick={() => {
+                                handleUpdateSupplieDrawer(true);
+                                handleParticularRowData(item);
+                              }}
+                              style={{
+                                color: "grey",
+                                cursor: "pointer",
+                                fontSize: "1rem",
+                              }}
+                            />
+                          </Tooltip>
+                        </div>
+                        <div>
+                          <Popconfirm
+                            title="Do you want to delete?"
+                            //  onConfirm={() => props.deleteShipperData(item.shipperId)}
+                          >
+                            <DeleteFilled
+                              style={{ cursor: "pointer", color: "red" }}
+                            />
+                          </Popconfirm>
+                        </div>
+                     
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+  
+  <Suspense fallback={<BundleLoader/>}>
+  <TagBrandModel
+          addBrandModel={props.addBrandModel}
+          handleBrandModel={props.handleBrandModel}
+          particularDiscountData={particularDiscountData}
+        />
+        <UpdateSuppliesFormDrawer
+         particularDiscountData={particularDiscountData}
+        updateSuppliesDrawer={updateSuppliesDrawer}
+        handleUpdateSupplieDrawer={handleUpdateSupplieDrawer}
+        />
+       <MaterialBuilderDrawer
+        particularDiscountData={particularDiscountData}
+        materialBuildrawer={materialBuildrawer}
+        handleMaterialBuilderDrawer={handleMaterialBuilderDrawer}
+        /> 
+  </Suspense>
+       
+      </>
+    );
+  }
   return (
     <>
       <div className=" flex justify-end sticky top-28 z-auto">
@@ -213,6 +395,7 @@ function SuppliesTable(props) {
     </>
   );
 }
+
 
 const mapStateToProps = ({ supplies, auth }) => ({
   fetchingPurchaseList: supplies.fetchingPurchaseList,

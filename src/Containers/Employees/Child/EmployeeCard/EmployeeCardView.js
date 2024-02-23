@@ -82,7 +82,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 const showTooltip = tooltipContent.trim() !== ''; 
                  return (
                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
-                  text-[#444444] my-3 p-1 ml-3 w-[16rem] flex flex-col  ">
+                  text-[#444444] my-3 p-1 ml-3 w-[16rem] flex flex-col  max-sm:w-wk max-sm:ml-0 ">
                       <div class="flex">
                    <Tooltip 
                    title={item.country}
@@ -133,14 +133,19 @@ function handleSetCurrentEmployeeId(employeeId,) {
                       </div> 
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-1 "><PhoneIcon  className="!text-base cursor-pointer text-[grey]"/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
-          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins "><DraftsIcon  className="!text-base cursor-pointer text-green-400" /> 
+          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins flex justify-between ">
+            <div>
+            <DraftsIcon  className="!text-base cursor-pointer text-green-400 mr-1" /> 
           <Tooltip title={item.emailId}>
           {elipsize(item.emailId || "", 25)}
           </Tooltip>
+          </div>
+          <div>
           <ContentCopyIcon
         className={`!text-base cursor-pointer ${isCopied ? 'text-blue-400' : 'text-gray-400'}`}
         onClick={handleCopyClick}
       />
+      </div>
           </div>
           <div class=" font-normal text-xs mt-1 text-cardBody font-poppins ">Reports To:    <span>
           {item.reportingManagerName 

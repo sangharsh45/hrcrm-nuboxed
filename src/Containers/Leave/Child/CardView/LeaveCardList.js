@@ -123,7 +123,7 @@ function LeaveCardList (props) {
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
+                    <div className=" flex font-medium flex-col md:w-[25rem] max-sm:justify-between w-full max-sm:flex-row">
                     
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">

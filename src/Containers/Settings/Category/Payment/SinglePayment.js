@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip, Popconfirm} from "antd";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removePayment} from "../Payment/PaymentAction"
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -58,8 +61,14 @@ class SinglePayment extends Component {
                   ) : null} 
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removePayment(paymentCatagoryId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeletePayment(paymentCatagoryId)}
+                        // onClick={() => handleDeletePayment(paymentCatagoryId)}
                    
                       style={{
                         verticalAlign: "center",
@@ -68,15 +77,9 @@ class SinglePayment extends Component {
                         color: "red",
                       }}
                     />
+                         </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+  
                 </div>
               </div>
             ) : (
@@ -119,5 +122,16 @@ class SinglePayment extends Component {
   }
 }
 
-export default SinglePayment;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removePayment,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePayment);
+
 

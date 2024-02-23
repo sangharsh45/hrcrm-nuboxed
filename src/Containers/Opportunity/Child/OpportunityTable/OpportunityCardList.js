@@ -138,7 +138,7 @@ function OpportunityCardList(props) {
                        findProbability = element.probability;}
                     });
                  return (
-                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] justify-center shadow-[#aaa] h-[9rem] 
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] justify-center shadow-[#aaa] h-[8rem] 
                   text-[#444444] m-2 p-1 w-[16vw] flex flex-col max-sm:w-full max-sm:m-[0.15rem]  ">
         <div class="flex items-center flex-nowrap h-[2.81em]">
           <div class=" flex basis-[15%] mr-[0.2rem]" >
@@ -168,19 +168,19 @@ title={`${item.opportunityName}`}>
         <div className="flex justify-around">
           <div>
           {item.customer && (
-              <div class="overflow-hidden text-ellipsis cursor-pointer text-[0.9375em] flex items-center">
+              <div class="overflow-hidden text-ellipsis cursor-pointer text-xs flex items-center">
                 {item.customer || ""}
               </div>
             )}
           </div>
           <div>
-          <div class="font-medium text-[0.9375em] -mb-[0.18em]">
+          <div class="font-medium text-xs ">
           {item.contactName && (
-              <div class="overflow-hidden text-ellipsis cursor-pointer text-[0.9375em] flex items-center">
+              <div class="overflow-hidden  text-ellipsis cursor-pointer text-xs flex items-center">
                 {item.contactName || ""}
               </div>
             )}
-            &nbsp;&nbsp;
+           
             
           </div>
           </div>
@@ -188,11 +188,11 @@ title={`${item.opportunityName}`}>
           <div className="flex ">
         
           <div>
-          <div class="font-medium text-[0.9375em] -mb-[0.18em]">
+          <div class="font-medium text-xs ">
           </div>
           </div>
           </div>
-          <div className="flex justify-around">      
+          <div className="flex justify-around mt-1">      
 <div>
 <span>
 <Dropdown
@@ -265,7 +265,7 @@ imgHeight={"1.8em"}
 </span> */}
         </div>
     
-        <div class="w-full p-2 -mt-[0.18em] " >
+        <div class="w-full " >
             <div class="flex justify-between w-wk mt-1">
               <div>
               {item.approveInd&&item.opportunityOwner ? (
@@ -317,7 +317,6 @@ imgHeight={"1.8em"}
       type="check-circle"
       theme="twoTone"
       twoToneColor="#24D8A7"
-      size={140}
       style={{ fontSize:"1rem" 
      
      }}

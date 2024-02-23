@@ -101,8 +101,8 @@ class MileageCard extends React.Component {
                   </div>
               )}
 
-
-<div  className=" cursor-pointer p-[2px]"
+<div class="flex justify-end items-center">
+<div  className=" cursor-pointer "
 
 onClick={() => {
 this.props.handleStatusMileageModal(true);
@@ -147,6 +147,7 @@ this.handleExpand(item.voucherId)
             Reapply
             </Button>
           )}
+          </div>
               </div>           
                       
          

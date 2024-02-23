@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { Button,Tooltip } from "antd";
+import { Button,Tooltip ,Popconfirm} from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeEvents} from "../Event/EventAction"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
@@ -55,9 +58,15 @@ class SingleEvent extends Component {
                   />:null}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeEvents(eventTypeId )}
+                        >
                     <DeleteOutlined
                  
-                        onClick={() => handleDeleteEvent(eventTypeId)}
+                        // onClick={() => handleDeleteEvent(eventTypeId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -66,6 +75,7 @@ class SingleEvent extends Component {
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
                   {/* {disableDelete && <ActionIcon
                                         tooltipTitle='Delete'
@@ -127,6 +137,17 @@ class SingleEvent extends Component {
   }
 }
 
-export default SingleEvent;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeEvents,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEvent);
+
 
 

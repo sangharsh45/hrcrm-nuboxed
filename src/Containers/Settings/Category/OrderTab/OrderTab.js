@@ -47,7 +47,7 @@ class OrderTab extends Component {
                   tab={
                     <>
                       <MonetizationOnIcon />
-                      <span class=" ml-[0.25em]" >
+                      <span class=" ml-1" >
                       Item task
                       </span>
                     </>
@@ -118,7 +118,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(OrderTab);
 //                   tab={
 //                     <>
 //                       <MonetizationOnIcon />
-//                       <span class=" ml-[0.25em]" >
+//                       <span class=" ml-1" >
 //                       Item task
 //                       </span>
 //                     </>

@@ -183,12 +183,11 @@
 
 // export default connect(mapStateToProps, mapDispatchToProps)(ProductbuilderTable);
 
-import React, { useEffect,lazy, Suspense,useState  } from "react";
+import React, { useEffect,useState  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getCurrency } from "../../../Auth/AuthAction";
-import { Button,Table, Input, Select, } from "antd";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Button,Input,Select, } from "antd";
 import { getProductCurrency,createProductCurrency,handleDiscountModal,handleOfferModal } from "../../ProductAction";
 
 const { Option } = Select;
@@ -218,67 +217,6 @@ function ProductbuilderTable (props) {
     };
     setData([...data, newRow]);
   };
- const columns = [
-    {
-      title: 'Currency',
-      dataIndex: 'currency_name',
-      render: (_, record) => (
-        <Select
-          style={{ width: 120 }}
-          value={record.currency_id}
-          onChange={(value) => handleSelectChange(value, record.key, 'currency_id')}
-        >
-          {props.currencies.map((s) => (
-            <Option key={s.currency_id} value={s.currency_id}>
-              {s.currency_name}
-            </Option>
-          ))}
-        </Select>
-      ),
-    },
-    {
-      title: 'Price(B2B)',
-      dataIndex: 'level1',
-      render: (_, record) => (
-        <Input
-        style={{width:"11em"}}
-          value={record.level1}
-          onChange={(e) => handleInputChange(e.target.value, record.key, 'level1')}
-        />
-      ),
-    },
-    {
-      title: 'Price(B2C)',
-      dataIndex: 'level2',
-      render: (_, record) => (
-        <Input
-        style={{width:"11em"}}
-          value={record.level2}
-          onChange={(e) => handleInputChange(e.target.value, record.key, 'level2')}
-        />
-      ),
-    },
-    {
-      title: 'VAT(%)',
-      dataIndex: 'level3',
-      render: (_, record) => (
-        <Input
-        style={{width:"11em"}}
-          value={record.level3}
-          onChange={(e) => handleInputChange(e.target.value, record.key, 'level3')}
-        />
-      ),
-    },
-    {
-      title: 'Action',
-      dataIndex: 'action',
-      render: (_, record) => (
-        <Button type="primary" onClick={() => handleSave(record.key)}>
-          Save
-        </Button>
-      ),
-    },
-  ];
 
   const handleSelectChange = (value, key, dataIndex) => {
     const updatedData = data.map((row) =>
@@ -317,7 +255,94 @@ function ProductbuilderTable (props) {
       <Button type="primary" onClick={handleAddRow} style={{ marginBottom: 16 }}>
         Add Row
       </Button>
-      <Table dataSource={data} columns={columns} />
+      <div className=' flex justify-end sticky z-auto'> 
+         <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">          <div className=""></div>
+          <div className=" md:w-[7%]">Currency</div>     
+    <div className=" md:w-[6.1rem]">Price(B2B)</div>
+        <div className=" md:w-[4.2rem] ">Price(B2C)</div>
+         <div className="md:w-[5.8rem]">VAT(%)</div>
+         <div className="w-12"></div>             </div>
+      
+              {data.map((item) => {
+          return (
+<div key={item.procurId}>
+<div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
+    >
+     
+    <div className=" flex font-medium flex-col md:w-[9.1rem] max-sm:w-full  ">
+    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                              <Select
+          classNames="w-32"
+          value={item.currency_id}
+          onChange={(value) => handleSelectChange(value, item.key, 'currency_id')}
+        >
+          {props.currencies.map((s) => (
+            <Option key={s.currency_id} value={s.currency_id}>
+              {s.currency_name}
+            </Option>
+          ))}
+        </Select>
+                            </h4>
+    </div>
+
+    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+    <h4 class=" text-xs text-cardBody font-poppins">
+    <Input
+    className="w-32"
+          value={item.level1}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'level1')}
+        />
+                    </h4>
+    
+    </div> 
+ 
+   
+    
+    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+    <h4 class=" text-xs text-cardBody font-poppins">
+                      
+    <Input
+         className="w-32"
+          value={item.level2}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'level2')}
+        />
+                    </h4>
+    </div>
+    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+        
+
+        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <Input
+         className="w-32"
+          value={item.level3}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'level3')}
+        />
+                    </h4>
+    </div>
+    
+    <div class="flex md:items-center"> 
+    
+  
+ <div class="flex flex-col w-20 max-sm:flex-row max-sm:w-[10%]">
+    <div>
+    <Button type="primary" onClick={() => handleSave(item.key)}>
+          Save
+        </Button>
+    </div>
+  
+                        </div>
+</div>
+
+</div>
+</div>
+          );
+        })}
+             
+              </div>
+              </div>      
+
     </div>
   );
 };

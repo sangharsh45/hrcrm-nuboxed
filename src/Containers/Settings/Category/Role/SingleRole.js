@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Button,Tooltip } from "antd";
+import { Button,Tooltip,Popconfirm } from "antd";
+import {removeRole} from "../Role/RoleAction"
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {  TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
@@ -44,13 +47,17 @@ class SingleRole extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                 <div class=" font-semibold" >{roleType}&nbsp;&nbsp;&nbsp;
+                <div class=" flex  flex-col ml-4">
+                 <div class=" font-semibold w-[8rem]" >{roleType}&nbsp;&nbsp;&nbsp;
             {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
                                   >
                                     New
                                   </span> : null}</div>
-                 <div class=" font-semibold" >
+                                  </div>
+                 <div class=" flex  flex-col justify-between">
+                 <div class=" font-semibold w-[8rem]" >
                   {departmentName}
+                </div>
                 </div>
                 <div>
                   {this.props.role.editInd ? (
@@ -64,9 +71,15 @@ class SingleRole extends Component {
                   ) : null}
                   
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeRole(roleTypeId )}
+                        >
                     <DeleteOutlined
                   
-                        onClick={() => handleDeleteRole(roleTypeId)}
+                        // onClick={() => handleDeleteRole(roleTypeId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -75,6 +88,7 @@ class SingleRole extends Component {
                         color: "red",
                       }}
                     />
+                                </Popconfirm>
                   </Tooltip>
                 </div>
               </div>
@@ -134,7 +148,18 @@ class SingleRole extends Component {
   }
 }
 
-export default SingleRole;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeRole,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleRole);
+
 
 
 

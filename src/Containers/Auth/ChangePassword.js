@@ -19,8 +19,8 @@ import { changePassword, generateOtpByEmail, validateOtp } from "./AuthAction";
 const ChangePasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required("Required")
-    .min(8, "password should be min 8 character ")
-    .max(50, "password should be max 50 character !"),
+    .min(8, "Password should contain minimum 8 character ")
+    .max(50, "Password should have maximum 50 characters!"),
   confirmPassword: Yup.string()
     .required("Enter password")
     .oneOf([Yup.ref("password")], "Passwords do not match"),
@@ -93,7 +93,7 @@ class ChangePassword extends Component {
               >
                 {({ errors, touched, values, isSubmitting }) => (
                   <Form style={{ width: "25vw" }}>
-                    <div className="set_password">
+                    <div className="set_password items-center">
                       <div class=" w-full" >
                         <Field
                           name="password"

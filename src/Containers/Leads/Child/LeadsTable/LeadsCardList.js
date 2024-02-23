@@ -102,7 +102,7 @@ const LeadsCardList = (props) => {
           next={handleLoadMore}
           hasMore={hasMore}
           loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-          height={"59vh"}
+          height={"86vh"}
         >
           {leadsAllData.map((item) => {
             const currentdate = dayjs().format("DD/MM/YYYY");
@@ -171,68 +171,70 @@ const LeadsCardList = (props) => {
                       </div>
                     </div>
   
-                    <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
-                      <div>
-                        <ButtonGroup>
-                          <RoleButton
-                            type="Warm"
-                            iconType="	fas fa-burn"
-                            tooltip={
-                              <FormattedMessage
-                                id="app.warm"
-                                defaultMessage="Warm"
-                              />
-                            }
-                            role={item.type}
-                            onClick={() => {
-                              const typ = "Warm";
-                              props.updateTypeForLead(item.leadsId, typ);
-                            }}
+                    <div class="flex flex-row items-center md:w-[6rem] max-sm:flex-row w-full max-sm:justify-end">
+                  
+
+                  <div>
+                    <ButtonGroup>
+                      <RoleButton
+                        type="Hot"
+                        iconType="fas fa-mug-hot"
+                        // tooltip="Hot"
+                        tooltip={
+                          <FormattedMessage
+                            id="app.hot"
+                            defaultMessage="Hot"
                           />
-                        </ButtonGroup>
-                      </div>
-  
-                      <div>
-                        <ButtonGroup>
-                          <RoleButton
-                            type="Hot"
-                            iconType="fas fa-mug-hot"
-                            // tooltip="Hot"
-                            tooltip={
-                              <FormattedMessage
-                                id="app.hot"
-                                defaultMessage="Hot"
-                              />
-                            }
-                            role={item.type}
-                            onClick={() => {
-                              const typ = "Hot";
-                              props.updateTypeForLead(item.leadsId, typ);
-                            }}
+                        }
+                        role={item.type}
+                        onClick={() => {
+                          const typ = "Hot";
+                          props.updateTypeForLead(item.leadsId, typ);
+                        }}
+                      />
+                    </ButtonGroup>
+                  </div>
+                  <div>
+                    <ButtonGroup>
+                      <RoleButton1
+                        type="Warm"
+                        iconType="	fas fa-burn"
+                        // tooltip="Warm"
+                        tooltip={
+                          <FormattedMessage
+                            id="app.warm"
+                            defaultMessage="Warm"
                           />
-                        </ButtonGroup>
-                      </div>
-                      <div>
-                        <ButtonGroup>
-                          <RoleButton
-                            type="Cold"
-                            iconType="far fa-snowflake"
-                            // tooltip="Cold"
-                            tooltip={
-                              <FormattedMessage
-                                id="app.cold"
-                                defaultMessage="Cold"
-                              />
-                            }
-                            role={item.type}
-                            onClick={() => {
-                              const typ = "Cold";
-                              props.updateTypeForLead(item.leadsId, typ);
-                            }}
+                        }
+                        role={item.type}
+                        onClick={() => {
+                          const typ = "Warm";
+                          props.updateTypeForLead(item.leadsId, typ);
+                        }}
+                      />
+                    </ButtonGroup>
+                  </div>
+                  <div>
+                    <ButtonGroup>
+                      <RoleButton2
+                        type="Cold"
+                        iconType="far fa-snowflake"
+                        // tooltip="Cold"
+                        tooltip={
+                          <FormattedMessage
+                            id="app.cold"
+                            defaultMessage="Cold"
                           />
-                        </ButtonGroup>
-                      </div>
-                    </div>
+                        }
+                        role={item.type}
+                        onClick={() => {
+                          const typ = "Cold";
+                          props.updateTypeForLead(item.leadsId, typ);
+                        }}
+                      />
+                    </ButtonGroup>
+                  </div>
+                </div>
                   </div>
                   <div class="flex justify-between items-center w-full ">
                     <div className=" flex font-medium f ">
@@ -324,8 +326,8 @@ const LeadsCardList = (props) => {
                         />
                       </span>
                     </div>
-                  
-                    <div className=" flex font-medium  ">
+                  <div class="flex">
+                    <div className=" flex font-medium mr-1  ">
                      
   
                       <div class=" text-xs text-cardBody font-poppins"></div>
@@ -344,7 +346,7 @@ const LeadsCardList = (props) => {
                       </div>
                     </div>
                     
-                      <div>
+                      <div className="mr-1">
                         <Tooltip title="Notes">
                           <NoteAltIcon
                             onClick={() => {
@@ -356,7 +358,7 @@ const LeadsCardList = (props) => {
                           />
                         </Tooltip>
                       </div>
-                      <div>
+                      <div className="mr-1">
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -379,7 +381,7 @@ const LeadsCardList = (props) => {
   
                     
                       {user.leadsUpdateInd === true && user.crmInd === true && (
-                        <div>
+                        <div className="mr-1">
                           <Tooltip title="Edit">
                             <BorderColorIcon
                               className="!text-base cursor-pointer text-[tomato]"
@@ -393,7 +395,7 @@ const LeadsCardList = (props) => {
                         </div>
                       )}
                       {user.leadsDeleteInd === true && user.crmInd === true && (
-                        <div>
+                        <div className="mt-1 mr-1">
                           <StyledPopconfirm
                             title="Do you want to delete?"
                             onConfirm={() => deleteLeadsData(item.leadsId)}
@@ -407,10 +409,8 @@ const LeadsCardList = (props) => {
                           </StyledPopconfirm>
                         </div>
                       )}
-                      <div></div>
-                    
-                   
-                      <div>
+
+                      <div className="mr-1">
                         <Tooltip
                           overlayStyle={{ maxWidth: "300px" }}
                           title={dataLoc}
@@ -424,7 +424,7 @@ const LeadsCardList = (props) => {
                           </span>
                         </Tooltip>
                       </div>
-                      <div>
+                      <div className="mr-1">
                         <Tooltip title={item.email}>
                           <MailOutlineIcon
                             type="mail"
@@ -437,7 +437,7 @@ const LeadsCardList = (props) => {
                         </Tooltip>{" "}
                       </div>
                     
-                   
+                   </div>
                    
                   </div>
                 </div>

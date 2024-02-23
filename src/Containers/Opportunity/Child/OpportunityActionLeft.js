@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
@@ -73,7 +73,7 @@ const OpportunityActionLeft = (props) => {
           }
         >
           <span
-            class=" mr-2 text-sm "
+            class=" mr-1 text-sm "
             onClick={() => props.setOpportunityViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",cursor:"pointer"
@@ -125,7 +125,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("won")}
             style={{
               cursor:"pointer",
@@ -151,7 +151,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("close")}
             style={{
               cursor:"pointer",
@@ -176,7 +176,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("lost")}
             style={{
               cursor:"pointer",
@@ -191,7 +191,7 @@ const OpportunityActionLeft = (props) => {
         </Badge>
       </Tooltip>
     
-  <div class="ml-2">
+  {/* <div class="ml-2"> */}
   <Tooltip
           title="Teams"
         >
@@ -201,7 +201,7 @@ const OpportunityActionLeft = (props) => {
         overflowCount={999}
       >
           <span
-            class=" mr-2 text-sm "
+            class=" mr-1 text-sm "
             onClick={() => props.setOpportunityViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",cursor:"pointer"
@@ -214,8 +214,8 @@ const OpportunityActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
-  </div>
-  <div class="ml-2">
+  {/* </div> */}
+  {/* <div class="ml-2"> */}
     {user.crmInd=== true && user.opportunityFullListInd===true && ( 
   <Tooltip
           title="All list"
@@ -226,7 +226,7 @@ const OpportunityActionLeft = (props) => {
         overflowCount={999}
       >
           <span
-            class=" mr-2 text-sm "
+            class=" mr-1 text-sm "
             onClick={() => props.setOpportunityViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",cursor:"pointer"
@@ -240,7 +240,7 @@ const OpportunityActionLeft = (props) => {
           </Badge>
         </Tooltip>
     )}
-  </div>
+  {/* </div> */}
      
 
       <Tooltip
@@ -262,7 +262,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
               cursor:"pointer",
@@ -270,7 +270,7 @@ const OpportunityActionLeft = (props) => {
             }}
           >
              <Avatar style={{ background: props.viewType === "dashboard" ? "#f279ab" : "#4bc076" }}>
-            <DeleteIcon />
+            <DeleteOutlined />
             </Avatar>
           </span>
         </Badge>
@@ -286,7 +286,7 @@ const OpportunityActionLeft = (props) => {
         }
       >
         <span
-          class=" mr-2 text-sm cursor-pointer"
+          class=" mr-1 text-sm cursor-pointer"
           onClick={() => props.setOpportunityViewType("Map")}
           style={{
             color: props.viewType === "Map" && "#1890ff",

@@ -1323,6 +1323,12 @@ export const PstoProductionBuilder = (data) => (dispatch) => {
         type: types.POST_PRODUCTION_BUILDER_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        // showConfirmButton: false,
+        // timer: 1500
+      })
     })
     .catch((err) => {
       dispatch({

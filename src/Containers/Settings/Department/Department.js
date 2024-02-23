@@ -14,9 +14,6 @@ import {
   updateDepartments,
   ClearReducerDataOfDepartment
 } from "./DepartmentAction";
-// import {
-//   getSectors,
-// } from "../Sectors/SectorsAction";
 import { Select } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
 const SingleDepartment = lazy(() =>
@@ -213,11 +210,11 @@ class Department extends Component {
                     onClick={this.handleAddDepartment}
                   // style={{ marginRight: "0.125em" }}
                   >
-                    Save
+                    <label class="text-white"> Save</label>
                   </Button>
                   &nbsp;
-                  <Button type="primary" ghost onClick={this.toggleInput}>
-                    Cancel
+                  <Button type="cancel"  onClick={this.toggleInput}>
+                  <label class="text-white"> Cancel</label>
                   </Button>
               </div>
             ) : (
@@ -226,12 +223,11 @@ class Department extends Component {
                <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingDepartments}
-                    onClick={this.toggleInput}
+                    onClick={this.toggleInput}                
                   >
-                    Add More
+                   <label class="text-white"> Add More</label>
                   </Button>
                 </div>
                
@@ -239,8 +235,7 @@ class Department extends Component {
             )}
              </div>
             <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+            <MainWrapper className="!h-[69vh] !mt-2" >
               {departments.length ? (
   departments
     .slice() 
@@ -272,33 +267,10 @@ class Department extends Component {
             </div>
            
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+      
+  
         </div>
-        <div>Updated on {dayjs(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format('YYYY-MM-DD')} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format('YYYY-MM-DD')} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
       </>
     );
   }

@@ -176,7 +176,7 @@ class Customer extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
@@ -187,7 +187,6 @@ class Customer extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     loading={addingCustomer}
                     onClick={this.toggleInput}
@@ -205,7 +204,7 @@ class Customer extends Component {
               </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              <MainWrapper className="!h-[69vh] !mt-2" >
              {customerListData.length ? (
   customerListData
     .slice() 
@@ -237,7 +236,7 @@ class Customer extends Component {
       
        
         </div>
-        <div>Updated on {dayjs(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</div>
+        <div class=" font-bold">Updated on {dayjs(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</div>
       </>
     );
   }

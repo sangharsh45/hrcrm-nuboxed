@@ -139,7 +139,7 @@ class CategoryActivity extends Component {
 
     return (
       <div className="flex flex-nowrap">
-        <div style={{ width: "70%" }}>
+        <div class=" w-[70%]">
           <TabsWrapper>
             <StyledTabs
               defaultActiveKey={activeKey}
@@ -149,7 +149,7 @@ class CategoryActivity extends Component {
                 tab={
                   <>
                     <i className="far fa-calendar-check"></i>
-                    <span className="ml-[0.25em]">Event</span>
+                    <span className="ml-1">Event</span>
                   </>
                 }
                 key="1"
@@ -158,7 +158,7 @@ class CategoryActivity extends Component {
                 tab={
                   <>
                     <i className="fas fa-tasks"></i>
-                    <span className="ml-[0.25em]">Task</span>
+                    <span className="ml-1">Task</span>
                   </>
                 }
                 key="2"

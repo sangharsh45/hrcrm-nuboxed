@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 import { Select } from "../../../../Components/UI/Elements";
-
+import {removeSource} from "../Source/SourceAction"
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
 class SingleSource extends Component {
@@ -62,8 +64,14 @@ class SingleSource extends Component {
                   ) : null}  
                  
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeSource(sourceId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteSource(sourceId)}
+                        // onClick={() => handleDeleteSource(sourceId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -72,15 +80,8 @@ class SingleSource extends Component {
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
                 </div>
               </div>
             ) : (
@@ -136,6 +137,17 @@ class SingleSource extends Component {
   }
 }
 
-export default SingleSource;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeSource,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleSource);
+
 
 

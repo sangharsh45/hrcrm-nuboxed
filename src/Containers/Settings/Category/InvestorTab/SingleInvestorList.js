@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip, Popconfirm} from "antd";
 import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeInvestor} from "../InvestorTab/InvestorListAction"
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -58,8 +61,14 @@ class SingleInvestorList extends Component {
                  ) : null} 
                
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeInvestor(investorCategoryId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteInvestor(investorCategoryId)}
+                        // onClick={() => handleDeleteInvestor(investorCategoryId)}
                    
                       style={{
                         verticalAlign: "center",
@@ -68,15 +77,9 @@ class SingleInvestorList extends Component {
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+    
                 </div>
               </div>
             ) : (
@@ -119,6 +122,17 @@ class SingleInvestorList extends Component {
   }
 }
 
-export default SingleInvestorList;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeInvestor,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleInvestorList);
+
 
 

@@ -923,6 +923,23 @@ h1{
   background-image: linear-gradient(to right, tomato, tomato);
 }
 
+.ant-btn-cancel {
+  color: #fff;
+  height: 1.58rem;
+  font-size: 0.8125em;
+  border-color: #fff;
+  padding: 3px 8px; 
+  color: white;
+  border-radius: 0.3rem;
+  box-shadow: grey 1px 2px 0px 0px;
+  background-color: rgb(237, 131, 131);
+  transition: background-image 0.3s ease; /* Add transition for smooth effect */
+}
+.ant-btn-cancel:hover {
+  background-color: linear-gradient(to right, red);
+}
+
+
 .ant-avatar1 {
   box-sizing: border-box;
   margin: 0;

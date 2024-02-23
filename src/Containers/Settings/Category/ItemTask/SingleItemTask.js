@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeItemTask} from "../ItemTask/ItemTaskAction"
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -57,8 +60,14 @@ class SingleItemTask extends Component {
                   {/* ) : null}  */}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeItemTask(itemTaskId )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteItemTask(itemTaskId)}
+                        // onClick={() => handleDeleteItemTask(itemTaskId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -67,15 +76,9 @@ class SingleItemTask extends Component {
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+ 
                 </div>
               </div>
             ) : (
@@ -118,6 +121,17 @@ class SingleItemTask extends Component {
   }
 }
 
-export default SingleItemTask;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeItemTask,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleItemTask);
+
 
 
