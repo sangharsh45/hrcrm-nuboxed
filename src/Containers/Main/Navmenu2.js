@@ -102,14 +102,10 @@ function NavMenu (props) {
   const handleSelect = (menuItemKey) => {
     setSelectedMenuItem(menuItemKey);
     localStorage.setItem('selectedMenuItem', menuItemKey);
+    closeMobileMenu();
     // Additional logic for handling selection
   };
-  // const handleSelect = (menuItemKey) => {
-  //   setSelectedMenuItem(menuItemKey);
-  //   localStorage.setItem('selectedMenuItem', menuItemKey);
-  //   closeMobileMenu(); // Close the mobile menu
-    
-  // };
+ 
     console.log("Oppo", props.opportunityRecord);
     const { user } = props;
     let path = window.location.href.split("/")[3];
@@ -118,7 +114,7 @@ function NavMenu (props) {
     return (
         <div className="header">
              <ul className={click ? "nav-options active" : "nav-options"}>
-      <div class="-ml-[1.1875em] w-wk">
+      <div class="-ml-[1.1875em] w-wk h-screen">
       <div class="overflow-y-auto max-h-[36.5rem]">
       <Menu
         defaultSelectedKeys={["/" + path]}

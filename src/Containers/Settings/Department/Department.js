@@ -213,11 +213,11 @@ class Department extends Component {
                     onClick={this.handleAddDepartment}
                   // style={{ marginRight: "0.125em" }}
                   >
-                    Save
+                    <label class="text-white"> Save</label>
                   </Button>
                   &nbsp;
-                  <Button type="primary" ghost onClick={this.toggleInput}>
-                    Cancel
+                  <Button type="cancle" ghost onClick={this.toggleInput}>
+                  <label class="text-white"> Cancel</label>
                   </Button>
               </div>
             ) : (
@@ -229,9 +229,9 @@ class Department extends Component {
                     ghost
                     htmlType="button"
                     Loading={addingDepartments}
-                    onClick={this.toggleInput}
+                    onClick={this.toggleInput}                
                   >
-                    Add More
+                   <label class="text-white"> Add More</label>
                   </Button>
                 </div>
                
