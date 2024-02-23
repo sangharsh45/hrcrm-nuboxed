@@ -31,7 +31,7 @@ const AddPurchaseOrder = (props) => {
         })
         .map((item) => {
             return {
-                label: item.name,
+                label: item.suppliesName,
                 value: item.suppliesId
             }
         })
@@ -40,7 +40,7 @@ const AddPurchaseOrder = (props) => {
         return props.purchaseList.map((item) => {
             if (item.suppliesId === a) {
                 setFieldValue("suppliesId", item.suppliesId);
-                setFieldValue("name", item.name);
+                setFieldValue("suppliesName", item.suppliesName);
                 setFieldValue("imageId", item.imageId);
                 setFieldValue("categoryName", item.categoryName);
                 setFieldValue("subCategoryName", item.subCategoryName);

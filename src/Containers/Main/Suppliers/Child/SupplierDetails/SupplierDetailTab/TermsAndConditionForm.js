@@ -167,6 +167,7 @@ function TermsAndConditionForm(props) {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
+                                    loading={props.addingTermsnCondition}
                                 >
                                     <FormattedMessage
                                         id="app.submit"
@@ -183,7 +184,8 @@ function TermsAndConditionForm(props) {
 }
 const mapStateToProps = ({ suppliers, plant, auth }) => ({
     termsnconditionofpo: suppliers.termsnconditionofpo,
-    userId: auth.userDetails.userId
+    userId: auth.userDetails.userId,
+    addingTermsnCondition: suppliers.addingTermsnCondition
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -48,6 +48,34 @@ function AccountDetailsTab(props) {
         <>
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" onChange={handleTabChange}>
+
+                    {props.orderCreatProductionInd && <TabPane
+                        tab={
+                            <>
+                                <span onClick={() => handleOrderCreateClick(false)}>
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span class="ml-1">Order</span>
+                                </span>
+                                {activeKey === "1" && (
+                                    <>
+                                        <Tooltip title="Create">
+                                            <AddShoppingCartIcon
+                                                type="plus"
+                                                tooltipTitle="Create"
+                                                onClick={() => {
+                                                    props.handleAddOrderModal(true);
+                                                }}
+                                                className="!text-base cursor-pointer ml-1"
+                                            />
+                                        </Tooltip>
+                                    </>
+                                )}</>}
+                        key="1"
+                    >
+                        <Suspense fallback={"Loading ..."}>
+                            <AccountOrder1Table distributorId={props.distributorData.distributorId} />
+                        </Suspense>
+                    </TabPane>}
                     {props.orderCreatRepairInd && <TabPane
                         tab={
                             <>
@@ -60,10 +88,10 @@ function AccountDetailsTab(props) {
                                         <DynamicFeedIcon
                                             className="!text-base cursor-pointer"
                                         />
-                                        <span class="ml-1">Repair Order</span>
+                                        <span class="ml-1">Repair</span>
                                     </span>
                                 </Badge>
-                                {activeKey === "1" && (
+                                {activeKey === "2" && (
                                     <>
                                         <Tooltip title="Add Order">
                                             <AddShoppingCartIcon
@@ -79,38 +107,11 @@ function AccountDetailsTab(props) {
                                 )}
                             </>
                         }
-                        key="1"
+                        key="2"
                     >
 
                         <Suspense fallback={"Loading ..."}>
                             <AccountOrderTable distributorId={props.distributorData.distributorId} />
-                        </Suspense>
-                    </TabPane>}
-                    {props.orderCreatProductionInd && <TabPane
-                        tab={
-                            <>
-                                <span onClick={() => handleOrderCreateClick(false)}>
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span class="ml-1">Production Order</span>
-                                </span>
-                                {activeKey === "2" && (
-                                    <>
-                                        <Tooltip title="Create">
-                                            <AddShoppingCartIcon
-                                                type="plus"
-                                                tooltipTitle="Create"
-                                                onClick={() => {
-                                                    props.handleAddOrderModal(true);
-                                                }}
-                                                className="!text-base cursor-pointer ml-1"
-                                            />
-                                        </Tooltip>
-                                    </>
-                                )}</>}
-                        key="2"
-                    >
-                        <Suspense fallback={"Loading ..."}>
-                            <AccountOrder1Table distributorId={props.distributorData.distributorId} />
                         </Suspense>
                     </TabPane>}
                     <TabPane

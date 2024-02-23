@@ -21,17 +21,7 @@ class InventoryDetailActionLeft extends Component {
     return (
       <>
         <FlexContainer alignItems="center">
-          {this.props.orderCreatRepairInd && <Tooltip title="Repair">
-            <div
-              className=" mr-2 cursor-pointer font-medium text-sm"
-              style={{
-                color: viewType1 === "repair" && "red",
-              }}
-              onClick={() => setInventoryDetailViewType("repair")}
-            >
-              Repair
-            </div>
-          </Tooltip>}
+
           {/* {user.designation === "Manager" && */}
           <Tooltip title="Material">
             <div
@@ -55,6 +45,17 @@ class InventoryDetailActionLeft extends Component {
               onClick={() => setInventoryDetailViewType("production")}
             >
               Production
+            </div>
+          </Tooltip>}
+          {this.props.orderCreatRepairInd && <Tooltip title="Repair">
+            <div
+              className=" mr-2 cursor-pointer font-medium text-sm"
+              style={{
+                color: viewType1 === "repair" && "red",
+              }}
+              onClick={() => setInventoryDetailViewType("repair")}
+            >
+              Repair
             </div>
           </Tooltip>}
 

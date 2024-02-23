@@ -26,6 +26,10 @@ const initialState = {
   fetchingInventoryByIdError: false,
   inventoryDetailById: [],
 
+  fetchingPartNoByItem: false,
+  fetchingPartNoByItemError: false,
+  partNoByitem: [],
+
   // add inventory output
   addingInventoryOutput: false,
   addingInventoryOutputError: false,
@@ -230,6 +234,10 @@ const initialState = {
   fetchingGrnListOfAPoError: false,
   poGrnList: [],
 
+  fetchingGrnNoByPoId: false,
+  fetchingGrnNoByPoIdError: true,
+  grnNoByPo: [],
+
   updatingPartIdOfAnItem: false,
   updatingPartIdOfAnItemError: false,
 
@@ -238,6 +246,8 @@ const initialState = {
   reciveUnitData: [],
 
   showGrnListOfPo: false,
+
+  showStockItem: false,
 
   fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: false,
   productionDispatchByLocsId: [],
@@ -1146,8 +1156,27 @@ export const inventoryReducer = (state = initialState, action) => {
         generatingGrnForPoError: true,
       };
 
+    case types.GET_PART_NO_BY_ITEM_REQUEST:
+      return { ...state, fetchingPartNoByItem: true };
+    case types.GET_PART_NO_BY_ITEM_SUCCESS:
+      return {
+        ...state,
+        fetchingPartNoByItem: false,
+        partNoByitem: action.payload
+      };
+    case types.GET_PART_NO_BY_ITEM_FAILURE:
+      return {
+        ...state,
+        fetchingPartNoByItem: false,
+        fetchingPartNoByItemError: true,
+
+      };
+
     case types.HANDLE_GRN_LIST_MODAL:
       return { ...state, showGrnListOfPo: action.payload };
+
+    case types.HANDLE_STOCK_ITEM_MODAL:
+      return { ...state, showStockItem: action.payload };
 
     case types.GET_GRN_LIST_OF_A_PO_REQUEST:
       return { ...state, fetchingGrnListOfAPo: true };
@@ -1195,7 +1224,6 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         fetchingReceivedUnitOfAnItem: false,
         fetchingReceivedUnitOfAnItemError: true,
-
       };
 
     case types.UPDATE_PART_ID_OF_AN_ITEM_REQUEST:
@@ -1216,6 +1244,21 @@ export const inventoryReducer = (state = initialState, action) => {
         updatingPartIdOfAnItemError: true,
       };
 
+    case types.GET_GRN_NO_BY_PO_ID_REQUEST:
+      return { ...state, fetchingGrnNoByPoId: true };
+    case types.GET_GRN_NO_BY_PO_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingGrnNoByPoId: false,
+        grnNoByPo: action.payload
+      };
+    case types.GET_GRN_NO_BY_PO_ID_FAILURE:
+      return {
+        ...state,
+        fetchingGrnNoByPoId: false,
+        fetchingGrnNoByPoIdError: true,
+
+      };
     default:
       return state;
   }

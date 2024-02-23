@@ -382,6 +382,8 @@ const initialState = {
   addingAllProductForOrderError: false,
 
   orderCartDrawer: false,
+
+  showProductList: false
 };
 
 export const distributorReducer = (state = initialState, action) => {
@@ -1685,7 +1687,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingLocationInOrder: false,
-        addInventoryInOrder: false,   
+        addInventoryInOrder: false,
         // distributorOrder: [...action.payload,...state.distributorOrder],
         // distributorOrder: state.distributorOrder.map((item) => {
         //   if (item.orderId == action.payload.orderId) {
@@ -2100,24 +2102,25 @@ export const distributorReducer = (state = initialState, action) => {
         updatingOrderStep1Error: true,
       };
 
-      case types.REMOVE_ORDER_ACC_REQUEST:
-        return { ...state, removingOrderAcc: true };
-      case types.REMOVE_ORDER_ACC_SUCCESS:
-        return {
-          ...state,
-          removingOrderAcc: false,
-          distributorOrder: state.distributorOrder.filter(
-            (item) => item.orderId !== action.payload.orderId
-          ),
-        };
-      case types.REMOVE_ORDER_ACC_FAILURE:
-        return {
-          ...state,
-          removingOrderAcc: false,
-          removingOrderAccError: true,
-        };  
+    case types.REMOVE_ORDER_ACC_REQUEST:
+      return { ...state, removingOrderAcc: true };
+    case types.REMOVE_ORDER_ACC_SUCCESS:
+      return {
+        ...state,
+        removingOrderAcc: false,
+        distributorOrder: state.distributorOrder.filter(
+          (item) => item.orderId !== action.payload.orderId
+        ),
+      };
+    case types.REMOVE_ORDER_ACC_FAILURE:
+      return {
+        ...state,
+        removingOrderAcc: false,
+        removingOrderAccError: true,
+      };
 
-
+    case types.HANDLE_PRODUCT_ORDER_DETAIL_MODAL:
+      return { ...state, showProductList: action.payload };
     default:
       return state;
   }

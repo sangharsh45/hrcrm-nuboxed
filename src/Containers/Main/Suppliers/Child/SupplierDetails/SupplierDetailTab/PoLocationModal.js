@@ -9,11 +9,9 @@ const PoLocationModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title={`Select location for PO - ${props.rowData.poSupplierDetailsId} `}
+                title={`Delivery details for PO# - ${props.rowData.poSupplierDetailsId} `}
                 width="40vw"
                 visible={addlocationInPo}
-                closable
-                destroyOnClose
                 onClose={() => handlePoLocationModal(false)}
                 footer={null}
             >

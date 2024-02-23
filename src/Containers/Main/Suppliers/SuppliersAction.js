@@ -226,7 +226,7 @@ export const movePoToInventory = (data, supplierId) => (dispatch) => {
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Po moved to inventory location',
+        title: 'PO released ',
         showConfirmButton: false,
         timer: 1500
       })
@@ -1140,7 +1140,7 @@ export const updatePriceOfPoItem = (data) => (dispatch) => {
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Updated Successfully',
+        title: 'Price updated Successfully',
         showConfirmButton: false,
         timer: 1500
       })
@@ -1277,7 +1277,7 @@ export const addCurrencyInPo = (data, poSupplierDetailsId) => (dispatch) => {
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Currency added Successfully',
+        title: 'Currency updated Successfully',
         showConfirmButton: false,
         timer: 1500
       })// dispatch(getTermsnConditionOfPo(poSupplierDetailsId))

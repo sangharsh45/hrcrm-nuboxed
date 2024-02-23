@@ -3,7 +3,8 @@ import { StyledTable } from '../../../../../../Components/UI/Antd'
 import {
     getMaterialReceivedDetailData,
     updateReceivedDamagedUnit,
-    generateGrnForPo
+    generateGrnForPo,
+    getGrnNoByPoId
 } from "../../../InventoryAction"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -13,19 +14,22 @@ import PoReceiveToggle from './PoReceiveToggle';
 import { FormattedMessage } from 'react-intl';
 import { trnasferGrnItemToStock } from "../../../InventoryAction"
 import AllowGrnToggle from './AllowGrnToggle';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { StyledLabel } from '../../../../../../Components/UI/Elements';
 
 const { Option } = Select;
 
 const ReceivedDetailCard = (props) => {
     useEffect(() => {
         props.getMaterialReceivedDetailData(props.row.poSupplierDetailsId)
+        props.getGrnNoByPoId(props.row.poSupplierDetailsId)
     }, [])
-    const [existGrn, setExistGrn] = useState(false)
+    const [existGrn, setExistGrn] = useState(true)
     const handleChange = () => {
         setExistGrn(!existGrn)
     }
 
-    const [grnNumber, setGrnNo] = useState("")
+    const [grnNo, setGrnNo] = useState("")
     const handleChangeGrnId = (val) => {
         console.log(val)
         setGrnNo(val)
@@ -39,8 +43,8 @@ const ReceivedDetailCard = (props) => {
         setIsModalOpen(false);
         props.generateGrnForPo({
             createGrnNo: result,
-            grnId: "",
-            grnNumber: grnNumber,
+            grnNumber: "",
+            grnId: grnNo,
             grnReceivedInd: true,
             poSupplierDetailsId: props.row.poSupplierDetailsId,
             userId: props.userId
@@ -84,10 +88,16 @@ const ReceivedDetailCard = (props) => {
     }
 
     const result = props.receivedDetailData.filter((item) =>
-        item.unitReceiveInd === true && item.grnReceivedInd === false).map((opt) => opt.poSupplierSuppliesId)
-    const show = props.receivedDetailData.some((item) => item.unitReceiveInd === true && item.grnReceivedInd === false)
+        item.unitReceiveInd === true && item.grnReceivedInd === false && item.allowGrnInd === true).map((opt) => opt.poSupplierSuppliesId)
+    const show = props.receivedDetailData.some((item) => item.grnReceivedInd === false && item.allowGrnInd === true)
     const checkall = props.receivedDetailData.every((item) => item.grnReceivedInd === true)
+    console.log(show)
 
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(0);
+    const handleLoadMore = () => {
+        setPage(page + 1);
+    };
     return (
         <>
             <div className=' flex justify-end sticky z-auto'>
@@ -104,145 +114,153 @@ const ReceivedDetailCard = (props) => {
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Remark" defaultMessage="Remark" /></div>
                         <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Received" defaultMessage="Received" /></div>
                         <div className=""></div>
-                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.Received" defaultMessage="Allow Grn" /></div>
+                        <div className=" md:w-[15.5rem]"><FormattedMessage id="app.creategrn" defaultMessage="Create GRN" /></div>
                         <div className=""></div>
                     </div>
+                    <InfiniteScroll
+                        dataLength={props.receivedDetailData.length}
+                        next={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={props.fetchingMaterialReceiveDetailData ? <div class="text-center font-semibold text-xs">Loading...</div> : null}
+                        height={"75vh"}
+                    >
+                        {props.receivedDetailData.map((item) => {
 
-                    {props.receivedDetailData.map((item) => {
-
-                        return (
-                            <div>
-                                <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
-                                    <div class="flex">
-                                        <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
-                                            <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins ">
-                                                {item.suppliesFullName}
+                            return (
+                                <div>
+                                    <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
+                                        <div class="flex">
+                                            <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:w-full  ">
+                                                <div class="flex justify-between text-sm text-cardBody font-semibold  font-poppins ">
+                                                    {item.suppliesFullName}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.categoryName} {item.subCategoryName}
-                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {item.categoryName} {item.subCategoryName}
+                                            </div>
 
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.attributeName} {item.subAttributeName}
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.price}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {item.attributeName} {item.subAttributeName}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.unit}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {item.price}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
-                                                <Input
-                                                    value={unitReceived}
-                                                    type="text"
-                                                    placeholder='Received'
-                                                    onChange={(e) => handleUnitReceived(e.target.value)}
-                                                />
-                                                : item.unitReceived}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {item.unit}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
-                                                <Input
-                                                    value={unitDamaged}
-                                                    type="text"
-                                                    placeholder='Damaged'
-                                                    onChange={(e) => handleUnitDamaged(e.target.value)}
-                                                />
-                                                : item.unitDamaged}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                    <Input
+                                                        value={unitReceived}
+                                                        type="text"
+                                                        placeholder='Received'
+                                                        onChange={(e) => handleUnitReceived(e.target.value)}
+                                                    />
+                                                    : item.unitReceived}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
-                                                <Input
-                                                    value={remark}
-                                                    type="text"
-                                                    placeholder='Remark'
-                                                    onChange={(e) => handleRemark(e.target.value)}
-                                                />
-                                                : item.remark}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                    <Input
+                                                        value={unitDamaged}
+                                                        type="text"
+                                                        placeholder='Damaged'
+                                                        onChange={(e) => handleUnitDamaged(e.target.value)}
+                                                    />
+                                                    : item.unitDamaged}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            <PoReceiveToggle
-                                                poSupplierDetailsId={props.row.poSupplierDetailsId}
-                                                suppliesId={item.suppliesId}
-                                                poReceivedInd={item.poReceivedInd}
-                                            />
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                    <Input
+                                                        value={remark}
+                                                        type="text"
+                                                        placeholder='Remark'
+                                                        onChange={(e) => handleRemark(e.target.value)}
+                                                    />
+                                                    : item.remark}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
-                                                <>
-                                                    <Button
-                                                        type="primary"
-                                                        onClick={() => {
-                                                            if ((unitReceived <= item.unit && unitReceived >= 0) && (unitDamaged <= item.unit && unitDamaged >= 0)) {
-                                                                props.updateReceivedDamagedUnit({
-                                                                    unitReceived: unitReceived,
-                                                                    unitDamaged: unitDamaged,
-                                                                    remark: remark,
-                                                                    userId: props.userId,
-                                                                    poSupplierSuppliesId: item.poSupplierSuppliesId,
-                                                                    poReceivedInd: true,
-                                                                    unitReceiveInd: true,
-
-                                                                },
-                                                                    props.row.poSupplierDetailsId,
-                                                                    item.suppliesId,
-                                                                    handleCallback())
-                                                            } else {
-                                                                message.error("Receive and damage unit should be less than unit !")
-                                                            }
-                                                        }}
-                                                    >Add</Button>
-                                                    <Button onClick={handleCancel}>Cancel</Button>
-                                                </>
-                                                : item.grnReceivedInd ? null :
-                                                    item.poReceivedInd ? <BorderColorOutlined
-                                                        onClick={() => {
-                                                            handleRowData(item);
-                                                            handleEditicon()
-                                                        }}
-                                                    /> : null
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                        <div class=" text-xs text-cardBody font-poppins">
-                                            {item.unitReceiveInd && !item.grnReceivedInd ? <Tooltip title="Check for grn">
-                                                <AllowGrnToggle
-                                                    allowGrnInd={item.allowGrnInd}
-                                                    grnStockInd={item.grnStockInd}
-                                                    poSupplierSuppliesId={item.poSupplierSuppliesId}
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                <PoReceiveToggle
                                                     poSupplierDetailsId={props.row.poSupplierDetailsId}
+                                                    suppliesId={item.suppliesId}
+                                                    poReceivedInd={item.poReceivedInd}
+                                                    unitReceiveInd={item.unitReceiveInd}
                                                 />
-
-                                            </Tooltip> : null}
+                                            </div>
                                         </div>
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {showEdit && rowData.poSupplierSuppliesId === item.poSupplierSuppliesId ?
+                                                    <>
+                                                        <Button
+                                                            type="primary"
+                                                            onClick={() => {
+                                                                if ((unitReceived <= item.unit && unitReceived >= 0) && (unitDamaged <= item.unit && unitDamaged >= 0)) {
+                                                                    props.updateReceivedDamagedUnit({
+                                                                        unitReceived: unitReceived,
+                                                                        unitDamaged: unitDamaged,
+                                                                        remark: remark,
+                                                                        userId: props.userId,
+                                                                        poSupplierSuppliesId: item.poSupplierSuppliesId,
+                                                                        poReceivedInd: true,
+                                                                        unitReceiveInd: true,
+
+                                                                    },
+                                                                        props.row.poSupplierDetailsId,
+                                                                        item.suppliesId,
+                                                                        handleCallback())
+                                                                } else {
+                                                                    message.error("Receive and damage unit should be less than unit !")
+                                                                }
+                                                            }}
+                                                        >Add</Button>
+                                                        <Button onClick={handleCancel}>Cancel</Button>
+                                                    </>
+                                                    : item.grnReceivedInd ? null :
+                                                        item.poReceivedInd ? <BorderColorOutlined
+                                                            onClick={() => {
+                                                                handleRowData(item);
+                                                                handleEditicon()
+                                                            }}
+                                                        /> : null
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div class=" text-xs text-cardBody font-poppins">
+                                                {item.unitReceiveInd && !item.grnReceivedInd ? <Tooltip title="Check for grn">
+                                                    <AllowGrnToggle
+                                                        allowGrnInd={item.allowGrnInd}
+                                                        grnStockInd={item.grnStockInd}
+                                                        poSupplierSuppliesId={item.poSupplierSuppliesId}
+                                                        poSupplierDetailsId={props.row.poSupplierDetailsId}
+                                                    />
+
+                                                </Tooltip> : null}
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
-
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </InfiniteScroll>
                 </div>
             </div>
             <div className=' flex justify-end mt-1'>
@@ -250,31 +268,37 @@ const ReceivedDetailCard = (props) => {
                     type='primary'
                     onClick={showModal}
                 >
-                    Generate Grn
+                    Generate GRN
                 </Button>}
                 <Modal
-                    title="Generate Grn"
+                    title=""
                     open={isModalOpen}
                     onOk={handleOk}
                     onCancel={handleCancelmodal}
                 >
-                    <Switch
-                        checked={existGrn}
-                        checkedChildren="Yes"
-                        unCheckedChildren="No"
-                        onChange={handleChange}
-                    />
-                    {existGrn ?
-                        <Select
-                            value={grnNumber}
-                            onChange={(value) =>
-                                handleChangeGrnId(value)
-                            }
-                        >
-                            {props.receivedDetailData.map((a) => {
-                                return <Option value={a.grnId}>{a.grnNumber}</Option>;
-                            })}
-                        </Select> : null}
+                    <StyledLabel>Select from existing GRN</StyledLabel>
+                    <div class=" flex justify-evenly">
+                        <Switch
+                            checked={existGrn}
+                            checkedChildren="Yes"
+                            unCheckedChildren="No"
+                            onChange={handleChange}
+                        />
+                        {existGrn ?
+                            <Select
+                                width="100"
+                                value={grnNo}
+                                onChange={(value) =>
+                                    handleChangeGrnId(value)
+                                }
+                            >
+                                {props.grnNoByPo.map((a) => {
+                                    return <Option value={a.grnId}>{a.grnNumber}</Option>;
+                                })}
+                            </Select> : null}
+                    </div>
+
+
                 </Modal>
             </div>
 
@@ -286,6 +310,8 @@ const ReceivedDetailCard = (props) => {
 const mapStateToProps = ({ inventory, auth }) => ({
     receivedDetailData: inventory.receivedDetailData,
     userId: auth.userDetails.userId,
+    grnNoByPo: inventory.grnNoByPo,
+    fetchingMaterialReceiveDetailData: inventory.fetchingMaterialReceiveDetailData
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -294,7 +320,8 @@ const mapDispatchToProps = (dispatch) =>
             getMaterialReceivedDetailData,
             updateReceivedDamagedUnit,
             generateGrnForPo,
-            trnasferGrnItemToStock
+            trnasferGrnItemToStock,
+            getGrnNoByPoId
         },
         dispatch
     );
