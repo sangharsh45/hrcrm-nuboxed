@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getProductbuilder,addProductBuilder,getSearchBuilder } from "../../ProductAction";
 import {  Select } from "../../../../Components/UI/Elements";
+import { BundleLoader } from "../../../../Components/Placeholder";
 
-
-const ProductbuilderTable2 =lazy(()=>import("./ProductbuilderTable2"));
 const ProBuildSearchedCard =lazy(()=>import("./ProBuildSearchedCard"));
 
 const { Option } = Select;
@@ -29,6 +28,9 @@ function ProductbuilderTable (props) {
       setshowCard(true)
   };
 
+  if(props.fetchingProductBuilder){
+    return <BundleLoader/>
+  }
   return (
     <>
 
