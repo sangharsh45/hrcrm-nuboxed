@@ -77,6 +77,7 @@ class SingleDocuments extends Component {
                 >
                   <option value="User">User</option>
         <option value="Customer">Customer</option>
+        <option value="Supplier">Supplier</option>
       
                 </Select> 
                     </div>

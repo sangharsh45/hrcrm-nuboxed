@@ -450,12 +450,12 @@ export const setFiscalTimeIntervalReport = (data) => (dispatch) => {
 /**
  * get user details after login
  */
-export const getOrganizationDetails = (token) => (dispatch) => {
+export const getOrganizationDetails = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_ORGANIZATION_DETAILS_REQUEST,
   });
   axios
-    .get(`${base_url}/organization`, {
+    .get(`${base_url}/organization/get/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
