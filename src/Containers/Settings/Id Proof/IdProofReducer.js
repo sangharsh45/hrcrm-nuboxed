@@ -60,11 +60,16 @@ export const idProofsReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingIdProofs: false,
-        idProofs: state.idProofs.map((idProof) =>
-          idProof.idProofTypeId === action.payload.idProofTypeId
+        idProofs: state.idProofs.map((task) =>
+        task.IdProofTypeId === action.payload.IdProofTypeId
             ? action.payload
-            : idProof
+            : task
         ),
+        // idProofs: state.idProofs.map((idProof) =>
+        //   idProof.idProofTypeId === action.payload.idProofTypeId
+        //     ? action.payload
+        //     : idProof
+        // ),
       };
     case types.UPDATE_ID_PROOF_FAILURE:
       return {
