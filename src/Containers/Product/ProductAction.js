@@ -1241,7 +1241,6 @@ export const createProductCurrency = (data,) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getProducts(0))
       dispatch({
         type: types.CREATE_PRODUCT_CURRENCY_SUCCESS,
         payload: res.data,

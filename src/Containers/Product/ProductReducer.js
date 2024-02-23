@@ -239,37 +239,7 @@ const initialState = {
 
   fetchingProductCurrency: false,
   fetchingProductCurrencyError:false,
-  ProductCurrency:[
-    {
-      "procurId": "SLLG15730474789302024",
-      "skillDefinationId": "DEIN70611587316272024",
-      "currency_id":"CU06",
-      "currency_name":"INR",
-      "skill": "4WD",
-      "level1": 233.0,
-      "level2": 432.0,
-      "level3": 320.0,
-      "level4": 0.0,
-      "level5": 0.0,
-      "liveInd": false,
-      "countryId": "C001"
-  },
-  {
-      "procurId": "SLLG5122091210302024",
-      "skillDefinationId": "DEIN40102183900272024",
-      "currency_id":"CU04",
-      "currency_name":"AUD",
-      "skill": "Java",
-      "level1": 823.0,
-      "level2": 456.0,
-      "level3": 345.0,
-      "level4": 0.0,
-      "level5": 0.0,
-      "liveInd": false,
-      "countryId": "C001"
-  },
-  
-  ],
+  ProductCurrency:[],
 
   creatingProductCurrency: false,
   creatingProductCurrencyError:false,
@@ -1061,7 +1031,7 @@ export const productReducer = (state = initialState, action) => {
               return {
                 ...state,
                 creatingProductCurrency: false,
-                ProductCurrency: [action.payload]
+                ProductCurrency: [action.payload, ...state.ProductCurrency]
               };
             case types.CREATE_PRODUCT_CURRENCY_FAILURE:
               return {

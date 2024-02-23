@@ -13,8 +13,19 @@ function ProductbuilderTable (props) {
 
   useEffect(()=> {
     props.getProductbuilder();
-    
   },[]);
+
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+ 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const prosb=props.productBuilder
 
@@ -31,6 +42,9 @@ function ProductbuilderTable (props) {
   if(props.fetchingProductBuilder){
     return <BundleLoader/>
   }
+
+
+
   return (
     <>
 
@@ -38,7 +52,7 @@ function ProductbuilderTable (props) {
                                 <div class=" w-full h-full">
 
                                     <div class="flex justify-between">
-                                    <div class=" w-[18%]">
+                                    <div class={`${isMobile ? "w-wk" : "w-[18%]"}`}>
                                     <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">HSN</div>
       <Select value={selectedValue} onChange={handleChange}>
         {prosb.map(option => {
