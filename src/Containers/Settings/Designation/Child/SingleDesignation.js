@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { Button,Tooltip } from "antd";
+import { Button,Popconfirm,Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import {removeDesignations} from "../DesignationAction"
+import { bindActionCreators } from "redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
@@ -56,9 +59,15 @@ class SingleDesignation extends Component {
                   ) : null}
                
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeDesignations(designationTypeId )}
+                        >
                     <DeleteOutlined
     
-                      onClick={() => handleDeleteDesignation(designationTypeId)}
+                      // onClick={() => handleDeleteDesignation(designationTypeId)}
                   
                       style={{
                         verticalAlign: "center",
@@ -67,6 +76,7 @@ class SingleDesignation extends Component {
                         color: "red",
                       }}
                     />
+                      </Popconfirm>
                   </Tooltip>
                   {/* {disableDelete && <ActionIcon
                                         tooltipTitle='Delete'
@@ -128,5 +138,16 @@ class SingleDesignation extends Component {
   }
 }
 
-export default SingleDesignation;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeDesignations,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDesignation);
+
 

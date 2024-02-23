@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import {linkDepartmentDocumentToggle} from "../Department/DepartmentAction"
+import {linkDepartmentDocumentToggle,removeDepartments} from "../Department/DepartmentAction"
 import { Button, Popconfirm, Switch, Tooltip } from "antd";
 import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -11,7 +11,10 @@ import { TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
-import DepartmentStatusToggle from "./DepartmentStatusToggle";
+const DepartmentStatusToggle = lazy(() =>
+  import("./DepartmentStatusToggle")
+);
+
 const { Option } = Select;
 
 const SingleDepartment = (props) => {
@@ -718,8 +721,14 @@ const SingleDepartment = (props) => {
                     )}
   <Tooltip title="Delete">
                     {mandetoryInd !== true && (
+                          <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => props.removeDepartments(departmentId )}
+                        >
                       <DeleteOutlined
-                        onClick={() => handleDeleteDepartment(departmentId)}
+                        // onClick={() => handleDeleteDepartment(departmentId)}
                      
                         style={{
                           verticalAlign: "center",
@@ -728,6 +737,7 @@ const SingleDepartment = (props) => {
                           color: "red",
                         }}
                       />
+                       </Popconfirm>
                     )}
                     </Tooltip>
                   </div>
@@ -785,6 +795,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       addingDeptModules,
       linkDepartmentDocumentToggle,
+      removeDepartments,
     },
     dispatch
   );

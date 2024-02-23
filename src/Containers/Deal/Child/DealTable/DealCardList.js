@@ -106,7 +106,7 @@ function DealCardList(props) {
               }
             });
             return (
-              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
+              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[8rem] 
               text-[#444444] m-2 p-1 w-[16vw] flex flex-col justify-center max-sm:w-wk  ">
                 <div class=" flex  flex-nowrap items-center h-[2.81em]"
                 >
@@ -139,16 +139,16 @@ function DealCardList(props) {
                 <div className="flex justify-around">
                   <div>
                     {item.investor && (
-                      <div class="overflow-hidden text-ellipsis cursor-pointer text-sm flex items-center">
+                      <div class="overflow-hidden text-ellipsis cursor-pointer text-xs flex items-center">
                         {item.investor || ""}
                       </div>
                     )}
                   </div>
                   <div>
-                    <div class="font-medium text-[0.9375em] -mb-[0.18em]"
+                    <div class="font-medium text-xs ml-1 "
                      
                     >
-                      &nbsp;&nbsp;
+                     
                       {<CurrencySymbol currencyType={item.currency} />}
                       &nbsp;{item.proposalAmount || ""}
                     </div>
@@ -157,11 +157,11 @@ function DealCardList(props) {
                 <div className="flex ">
         
         <div>
-        <div class="font-medium text-[0.9375em] -mb-[0.18em]">
+        <div class="font-medium text-xs ">
         </div>
         </div>
         </div>
-                <div className="flex justify-around mt-4">
+                <div className="flex justify-around mt-1">
                   <div>
                     <span>
                       <Dropdown
@@ -220,7 +220,7 @@ function DealCardList(props) {
                   </span>
                 </div>
 
-                <div class="w-full p-2 -mt-[0.18em]">
+                <div class="w-full ">
                   <div class="flex justify-between w-wk mt-1">
                     <div>
                       {item.approveInd && item.opportunityOwner ? (
