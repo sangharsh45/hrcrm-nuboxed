@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Button, Tooltip, } from "antd";
-
+import { Button, Tooltip,Popconfirm } from "antd";
+import {removeShipBy} from "../ShipBy/ShipByAction"
 import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -58,8 +60,14 @@ class SingleShipBy extends Component {
                   ) : null} 
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeShipBy(shipById )}
+                        >
                     <DeleteOutlined
-                        onClick={() => handleDeleteShip(shipById)}
+                        // onClick={() => handleDeleteShip(shipById)}
                      
                       style={{
                         verticalAlign: "center",
@@ -68,15 +76,9 @@ class SingleShipBy extends Component {
                         color: "red",
                       }}
                     />
+                         </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+ 
                 </div>
               </div>
             ) : (
@@ -119,5 +121,16 @@ class SingleShipBy extends Component {
   }
 }
 
-export default SingleShipBy;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeShipBy,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleShipBy);
+
 

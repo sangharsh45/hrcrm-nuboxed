@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeIdProof} from "../Id Proof/IdProofAction"
 import { TextInput } from "../../../Components/UI/Elements";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -56,9 +59,15 @@ class SingleIdProof extends Component {
                   ) : null}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeIdProof(IdProofTypeId )}
+                        >
                     <DeleteOutlined
                     
-                      onClick={() => handleDeleteIdProof(IdProofTypeId)}
+                      // onClick={() => handleDeleteIdProof(IdProofTypeId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -67,15 +76,9 @@ class SingleIdProof extends Component {
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+               
                 </div>
               </div>
             ) : (
@@ -120,6 +123,17 @@ class SingleIdProof extends Component {
   }
 }
 
-export default SingleIdProof;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeIdProof,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleIdProof);
+
 
 

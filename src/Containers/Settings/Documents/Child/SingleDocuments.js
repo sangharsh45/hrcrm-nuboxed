@@ -2,11 +2,11 @@ import React, { Component,lazy } from "react";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
-import {linkTypeToggle} from "../DocumentsAction";
+import {linkTypeToggle,removeDocuments} from "../DocumentsAction";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
-import { Button,Tooltip, Select } from "antd";
+import { Button,Tooltip, Select,Popconfirm } from "antd";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 const DocumentStatusToggle = lazy(() =>
@@ -102,9 +102,15 @@ class SingleDocuments extends Component {
                  
                  {editInd && !mandatoryInd &&(
                      <Tooltip title="Delete">
+                        <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeDocuments(documentTypeId )}
+                        >
                     <DeleteOutlined
                     
-                      onClick={() => handleDeleteDocument(documentTypeId)}
+                      // onClick={() => handleDeleteDocument(documentTypeId)}
                      
                       style={{
                         verticalAlign: "center",
@@ -113,6 +119,7 @@ class SingleDocuments extends Component {
                         color: "red",
                       }}
                     />
+                    </Popconfirm>
                   </Tooltip>  
                       ) }                
                   </div>
@@ -167,7 +174,8 @@ const mapStateToProps = ({ document }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      linkTypeToggle
+      linkTypeToggle,
+      removeDocuments
     },
     dispatch
   );

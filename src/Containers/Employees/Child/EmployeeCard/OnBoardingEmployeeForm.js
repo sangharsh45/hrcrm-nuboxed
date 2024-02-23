@@ -14,6 +14,7 @@ const { Option } = Select;
 const OnBoardingEmployeeForm = (props) => {
   const [selectedWork, setSelectedWork] = useState("");
   const [stage, setStage] = useState("")
+  const [selectedStage, setSelectedStage] = useState("");
   useEffect(() => {
     props.getProcessForOnboarding(props.orgId);
     // props.getUserStageList(props.employeeName.employeeId);
@@ -26,8 +27,10 @@ const OnBoardingEmployeeForm = (props) => {
 } 
 
 const handleStages = (val) => {
-  setStage(val)
-}
+  setStage(val);
+  setSelectedStage(val); // Set the selected stage ID
+};
+
   // const handleWorkflowChange = (event) => {
   //   const selectedWork = event.target.value;
   //   setSelectedWork(selectedWork);
@@ -66,26 +69,19 @@ const handleStages = (val) => {
           <Steps direction="vertical" current={1}>
                 {props.onboardingProcessStages.map((user, index) => (
                   <Steps.Item
-                  value={stage}
+                  value={selectedStage}
                   onChange={(value) => handleStages(value)}
                    key={index}  title={user.stageName} 
                    
                    >
                     <div>
-                      <b value={user.employeeId}> {user.stageName}</b>
+                     
+                      <Button value={user.UnboardingStagesId}> {user.stageName}</Button>
                     </div>
                   </Steps.Item>
                 ))}
               </Steps>
-        {/* <StartRepairReasonModal
-            particularRowData={props.particularRowData}
-            handleRepairReason={props.handleRepairReason}
-            showRepairReasonModal={props.showRepairReasonModal} />
-        <ShowPaymentHistoryModal
-            particularRowData={props.particularRowData}
-            handlePaymentHistory={props.handlePaymentHistory}
-            showPaymentHistoryModal={props.showPaymentHistoryModal}
-        /> */}
+  
 
     </div>              
 </> 
@@ -97,7 +93,7 @@ const handleStages = (val) => {
                       
                         employeeId: props.employeeName.employeeId,
                         workflowId: selectedWork,
-                        stageId: stage,
+                        stageId: selectedStage,
                     
                     },
                         // props.rowData.orderPhoneId,

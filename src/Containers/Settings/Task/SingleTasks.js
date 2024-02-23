@@ -1,9 +1,12 @@
 import React, { Component ,lazy} from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeTask} from "../Task/TaskAction"
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 const TaskConnetToggle = lazy(() =>
@@ -72,9 +75,15 @@ class SingleTasks extends Component {
                   ) : null}
                
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeTask(taskTypeId )}
+                        >
                     <DeleteOutlined
                     
-                      onClick={() => handleDeleteTask(taskTypeId)}
+                      // onClick={() => handleDeleteTask(taskTypeId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -83,15 +92,9 @@ class SingleTasks extends Component {
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+ 
                 </div>
               </div>
             ) : (
@@ -132,6 +135,17 @@ class SingleTasks extends Component {
   }
 }
 
-export default SingleTasks;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeTask,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTasks);
+
 
 
