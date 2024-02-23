@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
 import { CheckCircleTwoTone } from "@ant-design/icons";
@@ -46,7 +46,7 @@ const DealActionLeft = (props) => {
           }
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
@@ -101,7 +101,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setDealViewType("won")}
             style={{
            
@@ -132,7 +132,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("close")}
             style={{
               color: props.viewType === "close" && "#1890ff",
@@ -161,7 +161,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("lost")}
             style={{
               color: props.viewType === "lost" && "#1890ff",
@@ -260,7 +260,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
               // cursor:"pointer"
@@ -268,7 +268,7 @@ const DealActionLeft = (props) => {
             }}
           >
              <Avatar style={{ background: props.viewType === "" ? "#f279ab" : "#4bc076" }}>
-            <DeleteIcon />
+            <DeleteOutlined />
             </Avatar>
           </span>
         </Badge>
@@ -284,7 +284,7 @@ const DealActionLeft = (props) => {
         }
       >
         <span
-          class=" mr-2 text-sm cursor-pointer"
+          class=" mr-1 text-sm cursor-pointer"
           onClick={() => props.setOpportunityViewType("Map")}
           style={{
             color: props.viewType === "Map" && "#1890ff",

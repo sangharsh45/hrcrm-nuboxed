@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
 import dayjs from "dayjs";
+import Swal from 'sweetalert2'
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
 import { BundleLoader } from "../../../Components/Placeholder";
@@ -237,6 +238,13 @@ class Sectors extends Component {
                   ))
                   ) : (
                     <p>No Data Available</p>
+                    // Swal.fire({
+                    //   icon: 'info',
+                    //   title:"No data available",
+                    //   showConfirmButton: false,
+                    //   timer: 1500
+                    // })
+              
                   )}
               </MainWrapper>
             </div>

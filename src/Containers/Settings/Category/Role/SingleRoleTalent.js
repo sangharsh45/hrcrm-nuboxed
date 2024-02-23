@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Button ,Tooltip} from "antd";
+import { Button ,Popconfirm,Tooltip} from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeTalentRole} from "../Role/RoleAction"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -62,9 +65,15 @@ class SingleRoleTalent extends Component {
                   ) : null}
                 
                   <Tooltip title="Delete">
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeTalentRole(roleTypeExternalId )}
+                        >
                     <DeleteOutlined
                   
-                        onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
+                        // onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
                     
                       style={{
                         verticalAlign: "center",
@@ -73,6 +82,7 @@ class SingleRoleTalent extends Component {
                         color: "red",
                       }}
                     />
+                     </Popconfirm>
                   </Tooltip>
                 </div>
               </div>
@@ -114,6 +124,17 @@ class SingleRoleTalent extends Component {
   }
 }
 
-export default SingleRoleTalent;
+const mapStateToProps = ({ departments, sector }) => ({
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeTalentRole
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleRoleTalent);
+
 
 
