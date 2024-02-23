@@ -104,6 +104,12 @@ function NavMenu (props) {
     localStorage.setItem('selectedMenuItem', menuItemKey);
     // Additional logic for handling selection
   };
+  // const handleSelect = (menuItemKey) => {
+  //   setSelectedMenuItem(menuItemKey);
+  //   localStorage.setItem('selectedMenuItem', menuItemKey);
+  //   closeMobileMenu(); // Close the mobile menu
+    
+  // };
     console.log("Oppo", props.opportunityRecord);
     const { user } = props;
     let path = window.location.href.split("/")[3];
