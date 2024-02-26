@@ -3199,12 +3199,14 @@ export const settingsReducer = (state = initialState, action) => {
         return {
             ...state,
             creatingCurrencyConversion: false,
+
         };
     case types.CREATE_CURRENCY_CONVERSION_FAILURE:
         return {
             ...state,
             creatingCurrencyConversion: false,
             creatingCurrencyConversionError: true,
+            // conversionCurrencies:[action.payload,...state.conversionCurrencies]   
         };
 
         case types.GET_CURRENCY_CONVERSION_REQUEST:
@@ -3218,7 +3220,7 @@ export const settingsReducer = (state = initialState, action) => {
             ...state,
             fetchingCurrencyConversion: false,
             fetchingCurrencyConversionError: false,
-            conversionCurrencies: action.payload,
+            conversionCurrencies: [...state.conversionCurrencies, ...action.payload],
           };
         case types.GET_CURRENCY_CONVERSION_FAILURE:
           return {

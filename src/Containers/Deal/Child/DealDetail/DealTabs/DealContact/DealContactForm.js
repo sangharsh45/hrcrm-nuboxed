@@ -5,7 +5,7 @@ import { Button, Select,  Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../../../../Components/UI/Elements";
+import {  Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -398,8 +398,8 @@ class DealContactForm extends Component {
                       )}
                     </div>
                   </div>
-                  <Spacer />
-                  < div class=" flex justify-between">
+     
+                  < div class=" flex justify-between mt-3">
                     <div class=" w-full">
                       <FastField
                         type="text"
@@ -418,7 +418,7 @@ class DealContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -429,7 +429,7 @@ class DealContactForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />
-
+</div>
                 </div>
                 <div class=" h-3/4 w-5/12 max-sm:w-wk "
                 >
@@ -437,7 +437,6 @@ class DealContactForm extends Component {
                     <div class=" w-1/2">
                       <Field
                         name="customerId"
-                        // selectType="customerList"
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -450,7 +449,6 @@ class DealContactForm extends Component {
                         value={values.customerId}
                         isDisabled={defaultCustomers}
                         options={Array.isArray(customerNameOption) ? customerNameOption : []}
-                        // defaultValue={defaultCustomers ? defaultCustomers : null}
                         inlineLabel
                       />
                     </div>
@@ -458,7 +456,6 @@ class DealContactForm extends Component {
                     <div class=" w-2/5">
                       <FastField
                         name="designationTypeId"
-                        //label="Designation"
                         label={
                           <FormattedMessage
                             id="app.designation"
@@ -474,12 +471,10 @@ class DealContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">         
+                  <div class="mt-3 flex justify-between">         
                   <div class="w-2/5">
                     <FastField
                       name="departmentId"
-                      //label="Department"
                       label={
                         <FormattedMessage
                           id="app.department"
@@ -494,7 +489,7 @@ class DealContactForm extends Component {
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5">
+                  <div class="w-2/5">
                           <FastField
                             name="source"
                             type="text"
@@ -512,13 +507,12 @@ class DealContactForm extends Component {
                           />
                         </div>
                   </div>
-                  <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} > <FormattedMessage
+                      <div class=" text-[white] text-xs" > <FormattedMessage
                         id="app.address"
                         defaultMessage="Address"
-                      /> </HeaderLabel>
+                      /> </div>
                   </div>
                     </div>
                   <FieldArray
@@ -531,8 +525,6 @@ class DealContactForm extends Component {
                       />
                     )}
                   />
-
-                  <Spacer />
                   {/* <Field
                     name="address[0].address1"
                     // label="Address"
@@ -546,7 +538,7 @@ class DealContactForm extends Component {
                     isColumn
                     width="100%"
                   />
-                  <Spacer /> */}
+             */}
                   {/* <Field
                     name="address[0].street"
                     //label="Street"
@@ -561,8 +553,8 @@ class DealContactForm extends Component {
                     isColumn
                     width="100%"
                   /> */}
-                  <Spacer />
-                  <div class=" flex  justify-between">
+       
+                  <div class="mt-3 flex  justify-between">
                     {/* <div style={{ width: "47%" }}>
                       <Field
                         name="address[0].city"
@@ -579,7 +571,7 @@ class DealContactForm extends Component {
                       />
                     </div> */}
                   </div>
-                  <Spacer />
+     
                   {/* <FlexContainer justifyContent="space-between">
                     <div style={{ width: "47%" }}>
                       <Field
@@ -616,8 +608,7 @@ class DealContactForm extends Component {
                   </FlexContainer> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex  justify-end">
+              <div class="mt-3 flex justify-end">
                 <Button
                   type="primary"
                   htmlType="submit"

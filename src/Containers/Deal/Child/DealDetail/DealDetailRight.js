@@ -12,8 +12,7 @@ class DealDetailRight extends Component {
     } = this.props;
     return (
       <>
-      <div style={{display:"flex"}}>
-        <div class=" w-[30%]" >
+      <div class="flex">        <div class=" w-[30%]" >
             <DealAboutViewCard
           dealDetailsbyID={dealDetailsbyID}
         />

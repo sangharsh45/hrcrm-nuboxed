@@ -71,7 +71,7 @@ const PitchActionLeft = (props) => {
         
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("card")}
           style={{
            color: props.viewType === "card" && "#1890ff",
@@ -96,7 +96,7 @@ const PitchActionLeft = (props) => {
         
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("teams")}
           style={{
            color: props.viewType === "teams" && "#1890ff",
@@ -108,6 +108,8 @@ const PitchActionLeft = (props) => {
         </span>
         </Badge>
       </Tooltip>
+      {(props.user.pitchFullListInd===true || props.user.role==="ADMIN") && (
+
       <Tooltip
         title= "All"
       >
@@ -116,7 +118,7 @@ const PitchActionLeft = (props) => {
         count={(props.viewType === "all" && props.pitchCount.InvestorLeadsDetails) || 0}
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("all")}
           style={{
            color: props.viewType === "all" && "#1890ff",
@@ -131,6 +133,7 @@ const PitchActionLeft = (props) => {
         </span>
         </Badge>
       </Tooltip>
+           )}
       {/* <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
@@ -195,6 +198,7 @@ const mapStateToProps = ({pitch,auth}) => ({
   pitchRecord:pitch.pitchRecord,
   pitchCount:pitch.pitchCount,
   userId: auth.userDetails.userId,
+  user:auth.userDetails
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
