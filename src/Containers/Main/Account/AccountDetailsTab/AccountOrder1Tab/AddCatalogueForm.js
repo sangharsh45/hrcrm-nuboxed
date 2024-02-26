@@ -69,10 +69,10 @@ const AddCatalogueForm = (props) => {
                         {
                             ...values,
                             distributorId: props.distributorId,
-                            orderId: props.orderDetailsId
+                            orderId: props.orderDetailsId.orderId
                         },
                         props.distributorId,
-                        props.orderDetailsId
+                        props.orderDetailsId.orderId
                     );
                     resetForm();
                 }}
@@ -200,7 +200,7 @@ const AddCatalogueForm = (props) => {
             <Suspense fallback={"Loading"}>
                 <AddCatalogueTable
                     distributorId={props.distributorId}
-                    orderId={props.orderDetailsId}
+                    orderId={props.orderDetailsId.orderId}
                     toggle={props.toggle} />
             </Suspense>
         </>
