@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch,Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import {getDepartmentwiserUser} from "../../Settings/SettingsAction"
-import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
+import {getCurrency} from "../../Auth/AuthAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
@@ -152,7 +152,7 @@ const handlereportingManager = (val) => {
     };
   });
 
-const sortedCurrency =props.currencyList.sort((a, b) => {
+const sortedCurrency =props.currencies.sort((a, b) => {
   const nameA = a.currency_name.toLowerCase();
   const nameB = b.currency_name.toLowerCase();
   // Compare department names
@@ -172,11 +172,11 @@ const currencyNameOption = sortedCurrency.map((item) => {
 });
 
   useEffect(()=>{
-    const { getCountries ,getDepartments,getTimeZone,getCurrencyList,getAssignedToList,getRoles,getlocation,} = props;
+    const { getCountries ,getDepartments,getTimeZone,getCurrency,getAssignedToList,getRoles,getlocation,} = props;
     getRoles(props.organizationId);
     getCountries(getCountries);
     getlocation(props.orgId);
-    getCurrencyList();
+    getCurrency();
     getDepartments();
     getAssignedToList(props.orgId)
     getTimeZone();
@@ -1061,7 +1061,7 @@ const countryNameOption = props.countries.map((item) => {
 const mapStateToProps = ({ auth,role,location,currency,settings, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
-  currencyList: currency.currencyList,
+  currencies: auth.currencies,
   timeZone: auth.timeZone,
   fullName: auth.userDetails.fullName,
   assignedToList:employee.assignedToList,
@@ -1085,7 +1085,7 @@ const mapDispatchToProps = (dispatch) =>
       getDepartmentwiserUser,
       getRoles,
       getlocation,
-      getCurrencyList,
+      getCurrency,
       getTimeZone,
       getAssignedToList,
   }, dispatch);

@@ -775,7 +775,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-         {/* {user.refurbishWorkshopInd === true && user.productionInd === true || user.role === "ADMIN" &&  ( */}
+         {(user.productionAccessInd === true && user.productionInd === true || user.role === "ADMIN") &&  (
         <Menu.Item key="/production" style={{ height: "1.7rem", 
         paddingLeft: "1rem",color: selectedMenuItem === '/production' ? 'tomato' : '#4bc076' }}>
           <Link to="/production" onClick={() => handleSelect('/production')}>
@@ -789,7 +789,7 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
-         {/* )} */}
+        )} 
         {(user.materialAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
 
           <Menu.Item key="/supplies" style={{ height: "1.7rem",

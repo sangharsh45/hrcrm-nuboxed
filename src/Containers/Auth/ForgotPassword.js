@@ -108,10 +108,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link, withRouter } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import { Spacer } from "../../Components/UI/Elements";
 import { Input } from "./styled";
 import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
-import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import styled from "styled-components";
 import {  EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
@@ -176,7 +174,7 @@ class ForgotPassword extends Component {
      
       <div className="forgot_password">
      
-      <FlexContainer>
+      <div class=" flex">
           <AuthContainer
             style={{
               backgroundColor: "white",
@@ -200,7 +198,7 @@ class ForgotPassword extends Component {
             <FormWrapper>
               <Title>Forgot Password</Title>
               <SubTitle>Link will be sent to your registered email id</SubTitle>
-              <Spacer />
+            <div class=" mt-3">
               <Formik
                 initialValues={{
                   email: "",
@@ -400,13 +398,14 @@ class ForgotPassword extends Component {
                     </Button>
                       </span>
                     </div>
-                    {/* <Spacer style={{ marginBottom: "1em" }} /> */}
+                 
                     
                   </Form>
                 )}
               </Formik>
-              {/* <Spacer style={{ marginBottom: -40 }} />
-              <Link to='/login' style={{ textAlign: 'center', fontSize: 16, marginLeft: "0.625em" }}>Back to login</Link> */}
+              </div>
+        
+              {/* <Link to='/login' style={{ textAlign: 'center', fontSize: 16, marginLeft: "0.625em" }}>Back to login</Link> */}
         
             </FormWrapper>
             <div className="footer1"
@@ -418,7 +417,7 @@ class ForgotPassword extends Component {
                         </div>
           </AuthContainer>
           
-        </FlexContainer>
+        </div>
         </div>
         {/* <div className="Image">
         <RandomImageScreen />

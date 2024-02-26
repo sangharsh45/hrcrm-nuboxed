@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import ContactDetailView from "./ContactDetailView";
+const ContactDetailView=lazy(()=> import("./ContactDetailView"));
+
 
 class ContactDetailCard extends Component {
   render() {
