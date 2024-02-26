@@ -1,7 +1,5 @@
 import React, {  lazy} from "react";
 import { StyledSelect, } from "../../../Components/UI/Antd";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { FormattedMessage } from "react-intl";
 import {
   setDashboardViewType,
@@ -30,40 +28,8 @@ const HeaderActionRight  = (props) => {
          { user.department=== "Management" && (  
             <>
             
-        {/* <span class=" mr-2 cursor-pointer text-xs"
-          onClick={() => props.setDashboardViewType("test")}
-          style={{
-            color: props.viewType === "test" && "#1890ff",
-  
-          }}
-        > <PersonIcon/>
-        
-        </span> */}
-           
-{/* {user.recruitOppsInd===true && (
-
-        <span class=" mr-2 cursor-pointer text-xs"
-          onClick={() => props.setDashboardViewType("ques")}
-          style={{
-            color: props.viewType === "ques" && "#1890ff",
-  
-          }}
-        > <QuestionMarkIcon  />
-        
-        </span>
-)}         
-{user.crmInd===true && (
-
-<span class=" mr-2 cursor-pointer text-xs"
-  onClick={() => props.setDashboardViewType("bulb")}
-  style={{
-    color: props.viewType === "bulb" && "#1890ff",
-
-  }}
-> <LightbulbIcon  />
-
-</span>
-)} */}
+      
+                  
             </>
              )}
 

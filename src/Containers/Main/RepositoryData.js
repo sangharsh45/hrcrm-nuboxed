@@ -1,10 +1,12 @@
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'; 
-import React from 'react'
+import React,{lazy} from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {handleRepositoryOrganizationModal} from "../Auth/AuthAction"
-import RepositoryOrganizationModal from './RepositoryOrganizationModal';
 import { Tooltip } from 'antd';
+const RepositoryOrganizationModal = lazy(() =>
+  import("./RepositoryOrganizationModal")
+);
 
 function RepositoryData(props) {
   return (

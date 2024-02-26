@@ -1,7 +1,7 @@
-import { Badge, Popover,Tooltip,Avatar } from "antd";
+import { Badge, Tag,Tooltip,Avatar } from "antd";
 import React, {  } from "react";
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import { StyledRangePicker } from "../../../Components/UI/Antd";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import {
   setSelectedTimeIntervalReport,
@@ -17,12 +17,14 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import DashboardShareForm from "./DashboardShareForm";
 
 const DashboardActionLeft = (props) => {
   const {
     setSelectedTimeIntervalReport,
     dateRangeList,
     viewType,
+    setDashboardViewType,
     handleButtonClick,
     activeButton,
     user,
@@ -31,8 +33,38 @@ const DashboardActionLeft = (props) => {
   return (
     <>
       <div class=" flex items-center "  >
-        
-        <div class="flex w-[10rem] ">
+         { user.department=== "Management" && (  
+            <>
+            
+      
+                  
+            </>
+             )}
+
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "tomato",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
+                />
+              </Tag>
+            )}
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
+           
+    
+        <div class="flex w-[10rem] ml-2 ">
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -102,7 +134,7 @@ const DashboardActionLeft = (props) => {
        
 
    
-    {user.erpInd === true && (
+    {user.orderManagementInd === true && (
          <Badge
          size="small"
          // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -125,7 +157,7 @@ const DashboardActionLeft = (props) => {
         </span>
         </Badge>
     )}
-{user.erpInd === true  && (
+{user.orderManagementInd === true  && (
       <Badge
       size="small"
       // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -148,7 +180,7 @@ const DashboardActionLeft = (props) => {
         </Badge>
 )}
    
-    {user.erpInd === true && (
+    {user.financeInd === true && (
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -193,7 +225,7 @@ const DashboardActionLeft = (props) => {
         </Badge>
 )}
 
-{/* {user.imInd === true  && ( */}
+{user.recruitProInd === true  && (
             <Badge
             size="small"
             // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -214,7 +246,7 @@ const DashboardActionLeft = (props) => {
 </Tooltip>       
         </span>
         </Badge>
-{/* )} */}
+)}
     
    </div>
    
