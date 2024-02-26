@@ -35,7 +35,7 @@ const CurrencyCoversionForm = (props) => {
     return (
       <>
        <Formik
-                    enableReinitialize
+
                     initialValues={{
                         reportingCurrency:reportingCurrency,
                         conversionCurrency:conversionCurrency,
@@ -47,7 +47,11 @@ const CurrencyCoversionForm = (props) => {
                     onSubmit={(values, { resetForm }) => {
                         props.createCurrencyConversion({
                             ...values,
-                        });
+                            reportingCurrency:reportingCurrency,
+                        conversionCurrency:conversionCurrency,
+                        },
+                        props.orgId
+                        );
                         resetForm();
                     }
                     }

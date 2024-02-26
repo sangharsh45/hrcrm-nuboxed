@@ -44,6 +44,7 @@ function ProductionCardView(props) {
     const {
         fetchingProductionLocId,
         productionByLocsId,
+        user,
         openbUILDERProductiondrawer,handleBuilderProduction,clickedProductionIdrwr,handleProductionIDrawer
     } = props;
     return (
@@ -135,9 +136,12 @@ function ProductionCardView(props) {
         <MoveToggleProduction item={item}/>
              </div>
     </div>
+  
+    {(user.productionUpdateInd === true  || user.role === "ADMIN") &&  (  
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div class=" text-xs text-cardBody font-poppins">
 <Tooltip title="Edit">
+
                                         <BorderColorIcon
                                         className="!text-base cursor-pointer text-[tomato]"
                                             // onClick={() => {
@@ -150,6 +154,7 @@ function ProductionCardView(props) {
 
 
 </div>
+    )}
 </div>
 </div>
           );

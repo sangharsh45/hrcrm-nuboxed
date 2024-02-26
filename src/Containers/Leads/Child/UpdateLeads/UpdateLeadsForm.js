@@ -61,9 +61,9 @@ function UpdateLeadsForm (props) {
       };
     });
 
-    const [defaultOption, setDefaultOption] = useState(props.setEditingLeads.assignedTo);
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.crmAllData.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -504,6 +504,7 @@ const mapStateToProps = ({ auth, leads,employee,source }) => ({
     orgId: auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
+    fullName: auth.userDetails.fullName,
     allCustomerEmployeeList:employee.allCustomerEmployeeList,
     crmAllData:leads.crmAllData,
 });

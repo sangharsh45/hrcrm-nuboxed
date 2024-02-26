@@ -14,7 +14,7 @@ import {
 } from "../../../../ContactAction";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import { DeleteOutlined, } from "@ant-design/icons";
-import moment from "moment";
+import dayjs from "dayjs";
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ class LinkedDocuments extends Component {
         />,
         dataIndex: "creationDate",
         render: (name, item, i) => {
-          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>;
         },
       },
       {

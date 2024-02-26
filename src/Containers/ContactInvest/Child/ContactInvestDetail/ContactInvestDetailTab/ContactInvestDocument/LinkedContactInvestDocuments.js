@@ -40,7 +40,7 @@
 //         />,
 //         dataIndex: "creationDate",
 //         render: (name, item, i) => {
-//           return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
+//           return <div>{` ${moment(item.creationDate).format("ll")}`}</div>;
 //         },
 //       },
 //       {
@@ -64,7 +64,7 @@
 //         width: "20%",
 //         render: (name, item, i) => {
 //           console.log(item);
-//           return <span>{elipsize(item.documentDescription || "", 15)}</span>;
+//           return <div>{elipsize(item.documentDescription || "", 15)}</div>;
 //         },
 //         onFilter: (value, record) => record.taskType.indexOf(value) === 0,
 //         sorter: (a, b) => a.taskType.length - b.taskType.length,
@@ -224,7 +224,7 @@ class LinkedContactInvestDocuments extends Component {
                               >
                                   <div class="flex">
                                       <div className=" flex font-medium  md:w-[6.8rem] max-sm:w-full  ">
-                                      <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>
+                                      <div>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</div>
                                       </div>
 
                                       <div className=" flex font-medium   md:w-[14.2rem] max-sm:flex-row w-full max-sm:justify-between items-center  ">

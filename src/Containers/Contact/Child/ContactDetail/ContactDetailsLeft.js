@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import ContactOverViewCard from "./ContactCards/ContactOverViewCard";
-import ContactDetailCard from "./ContactCards/ContactDetailCard";
+import React, { Component ,lazy} from "react";
+const ContactOverViewCard=lazy(()=> import("./ContactCards/ContactOverViewCard"));
+const ContactDetailCard=lazy(()=> import("./ContactCards/ContactDetailCard"));
+
 
 class ContactDetailsLeft extends Component {
   render() {

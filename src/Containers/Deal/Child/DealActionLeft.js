@@ -4,7 +4,7 @@ import { Tooltip, Badge,Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { DeleteOutlined } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
@@ -54,7 +54,7 @@ const DealActionLeft = (props) => {
           >
             {" "}
             <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
-            <LightbulbIcon />
+            <CurrencyExchangeIcon/>
             </Avatar>
           </span>
         </Tooltip>
@@ -70,9 +70,8 @@ const DealActionLeft = (props) => {
         overflowCount={999}
       >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
               color: viewType === "stage" && "#1890ff",
             }}
             // iconType="table"
@@ -193,9 +192,9 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
+        
               color: viewType === "teams" && "#1890ff",
            
             }}
@@ -209,6 +208,7 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
+        {(props.dealFullListInd===true || props.user.role==="ADMIN") && (
         <Tooltip
           title={   <FormattedMessage
             id="app.all"
@@ -221,9 +221,8 @@ const DealActionLeft = (props) => {
         overflowCount={999}
       >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
               color: viewType === "all" && "#1890ff",
               cursor:"pointer"
             }}
@@ -240,7 +239,7 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
-     
+     )}
       <Tooltip
         title={
           <FormattedMessage
@@ -307,6 +306,7 @@ const mapStateToProps = ({ deal, auth, opportunity }) => ({
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
+  dealFullListInd:auth.userDetails.dealFullListInd
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

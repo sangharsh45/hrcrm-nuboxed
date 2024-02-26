@@ -12,7 +12,7 @@ function ProductionActionRight (props) {
     return (
       <>
         <div class=" flex items-center">
-          
+          {(user.productionCreateInd === true || user.role === "ADMIN") &&(
           <Button
             type="primary"
          
@@ -20,7 +20,7 @@ function ProductionActionRight (props) {
           >
             Add
           </Button>
-        
+          )}
         </div>
       </>
     );

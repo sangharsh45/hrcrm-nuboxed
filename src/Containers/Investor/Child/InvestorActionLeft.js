@@ -79,8 +79,8 @@ const InvestorActionLeft = (props) => {
   }, [props.viewType, props.userId, transcript]);
 
   return (
-    <div class=" flex items-center"
-    >
+    <div class=" flex items-center">
+    
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -88,7 +88,7 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("list")}
             style={{
               color: props.viewType === "list" && "#1890ff",
@@ -100,7 +100,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-
+   
       
       <Tooltip 
       title={<FormattedMessage id="app.teams" defaultMessage="Teams" />}
@@ -111,7 +111,7 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
@@ -123,6 +123,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+      {(props.user.investorFullListInd===true || props.user.role==="ADMIN") && (
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -130,7 +131,7 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
@@ -142,6 +143,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+  )}
       {/* <Tooltip>
         <Badge
           size="small"

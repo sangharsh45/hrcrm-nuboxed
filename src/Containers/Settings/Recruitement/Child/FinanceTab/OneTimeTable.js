@@ -10,59 +10,7 @@ import { getCurrencyConversion } from "../../../SettingsAction";
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = <Input />;
-    return (
-        <td {...restProps}>
-            {editing && inputType === "picker"  ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : editing && inputType !== "picker" ? (
-                <Form.Item
-            name={dataIndex}
-            style={{
-              margin: 0,
-            }}
-            rules={[
-              {
-                required: true,
-                message: `Please Input ${title}!`,
-              },
-            ]}
-          >
-            <Select>
-              {["USD", "EURO","GBP","INR"].map((item) => {
-                return <Option value={item}>{item} </Option>;
-              })}
-            </Select>
-          </Form.Item>
-      ):(
-                children
-            )}
-        </td>
-    );
-};
+
 function OneTimeTable (props) {
     useEffect(()=> {
         props.getCurrencyConversion(props.orgId);
@@ -71,7 +19,59 @@ function OneTimeTable (props) {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
-
+    const EditableCell = ({
+        editing,
+        dataIndex,
+        title,
+        inputType,
+        record,
+        index,
+        children,
+        ...restProps
+    }) => {
+        const inputNode = <Input />;
+        return (
+            <td {...restProps}>
+                {editing && inputType === "picker"  ? (
+                    <Form.Item
+                        name={dataIndex}
+                        style={{
+                            margin: 0,
+                        }}
+                        rules={[
+                            {
+                                required: true,
+                                message: `Please Input ${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
+                ) : editing && inputType !== "picker" ? (
+                    <Form.Item
+                name={dataIndex}
+                style={{
+                  margin: 0,
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: `Please Input ${title}!`,
+                  },
+                ]}
+              >
+                <Select>
+                  {["USD", "EURO","GBP","INR"].map((item) => {
+                    return <Option value={item}>{item} </Option>;
+                  })}
+                </Select>
+              </Form.Item>
+          ):(
+                    children
+                )}
+            </td>
+        );
+    };
     useEffect(() => {
         setData(props.conversionCurrencies)
     }, [props.conversionCurrencies])

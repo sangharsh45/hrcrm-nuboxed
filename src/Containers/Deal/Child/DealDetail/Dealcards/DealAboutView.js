@@ -29,7 +29,7 @@ class DealAboutView extends Component {
         >
           <FormattedMessage
                 id="app.proposalvalueis"
-                defaultMessage=" Proposal Value is"
+                defaultMessage=" Deals Value is"
               />
          
         </p>
@@ -128,7 +128,7 @@ class DealAboutView extends Component {
           //label="Proposal value"
           label={<FormattedMessage
             id="app.proposalvalue"
-            defaultMessage="Proposal Value"
+            defaultMessage="Deals Value"
           />}
           // value={proposalAmount} 
           value={
@@ -155,10 +155,9 @@ class DealAboutView extends Component {
          
         </div> */}
 
-        <ProfileItemRow
-          label=""
-        // value={`${dayjs(exchangePrice.date).format("ll")}`}
-        />
+     
+         {/* value={`${dayjs(exchangePrice.date).format("ll")}`} */}
+        
         {/* <ProfileItemRow label="Sales Process" value={processName} /> */}
         {/* <ProfileItemRow
           label="Closure date"
@@ -176,13 +175,17 @@ export default DealAboutView;
 
 const ProfileItemRow = ({ label, value, ex }) => {
   return (
-    <div class=" flex flex-no-wrap items-center"
+//     <div class=" flex flex-no-wrap items-center"
 
-    >
+//     >
       
-<SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
-      <SubTitle style={{ textAlign:"end" }}>{value}</SubTitle>
+// <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
+//       <SubTitle style={{ textAlign:"end" }}>{value}</SubTitle>
       
-    </div>
+//     </div>
+     <div class=" flex items-center w-[92%] justify-between flex-no-wrap m-2 h-2">
+     <div class=" text-[#444] font-semibold" >{label}</div>
+     <div className="overflow-hidden truncate ml-8">{value}</div>
+   </div>
   );
 };

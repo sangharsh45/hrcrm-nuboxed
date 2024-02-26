@@ -252,7 +252,7 @@ const {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+        
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -282,9 +282,9 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
+              
                   <div>
-                    <div class=" flex justify-between">
+                    <div class="mt-3 flex justify-between">
                       <div class=" w-1/2">
                         <Field
                           isRequired
@@ -403,8 +403,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+
                   
                     {/* <Field
                       name="employeesId"
@@ -496,7 +495,7 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -516,9 +515,9 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
+                  </div>
                 
-                  <Spacer />
+                
                   {/* <Field
                     disabled="true"
                     isRequired
@@ -552,7 +551,7 @@ const {
                   )} */}
                 </div>
                 <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+          
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -563,7 +562,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+           
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -575,7 +574,7 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+           
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
@@ -618,8 +617,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+      
+              <div class="mt-3 flex justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

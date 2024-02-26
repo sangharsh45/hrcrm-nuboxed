@@ -27,7 +27,7 @@ class DealDetailLeft extends Component {
     const { account } = this.state;
 
     return (
-      <FlexContainer flexDirection="" style={{ display: "block" }}>
+      <div class="block">
         <div>
         <DealCards
           dealDetailsbyID={dealDetailsbyID}
@@ -40,12 +40,12 @@ class DealDetailLeft extends Component {
         </div>
         
         
-          <div style={{ width: "89vw" }}>
+          <div class="w-[89vw]">
          <DealDetailTab
          dealDetailsbyID={dealDetailsbyID}
           />
           </div>
-       </FlexContainer>
+       </div>
     );
   }
 }

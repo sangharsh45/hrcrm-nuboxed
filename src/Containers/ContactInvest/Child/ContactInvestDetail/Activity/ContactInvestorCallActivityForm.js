@@ -288,11 +288,10 @@ function ContactInvestorCallActivityForm(props) {
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
-                      <StyledLabel>
-                        {/* Type */}
+                     
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage id="app.type" defaultMessage="Type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
                         <Tooltip
@@ -366,13 +365,13 @@ function ContactInvestorCallActivityForm(props) {
                       </div>
                     </div>
                     <div class=" w-1/2">
-                      <Spacer />
-                      <StyledLabel>
+                     
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="Category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -391,18 +390,9 @@ function ContactInvestorCallActivityForm(props) {
                         </Button>
                         <Button
                           onClick={() => handleCategoryChange("Follow up")}
-                          style={{
-                            backgroundColor:
-                            category === "Follow up"
-                                ? "orange"
-                                : "white",
-                            color:
-                            category === "Follow up"
-                                ? "white"
-                                : "black",
-                          }}
+                          className={`cursor-pointer ${category==="Follow up" ? "bg-[orange] text-[white]" :"bg-[white] text-[black]"}`}
                         >
-                          {/* Follow up */}
+
                           <FormattedMessage
                             id="app.followup"
                             defaultMessage="Follow up"
@@ -411,12 +401,12 @@ function ContactInvestorCallActivityForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
+
+                  <div class="mt-3 flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       Mode
-                      </StyledLabel>
+                      </div>
                       <Switch
                         // style={{
                         //   marginLeft: "0.3125em"
@@ -470,7 +460,7 @@ function ContactInvestorCallActivityForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+          
                   <Field
                     name="startDate"
                     // label="Date"
@@ -483,8 +473,8 @@ function ContactInvestorCallActivityForm(props) {
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+           
+                  <div class="mt-3 flex justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -547,7 +537,7 @@ function ContactInvestorCallActivityForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
+                 
                   {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -577,7 +567,7 @@ function ContactInvestorCallActivityForm(props) {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk mt-3" 
                 >
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -645,7 +635,7 @@ function ContactInvestorCallActivityForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+                      <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -665,8 +655,8 @@ function ContactInvestorCallActivityForm(props) {
                       value: employeeId,
                     }}
                   />
+                 </div>
                  
-                  <Spacer />
                 
                   {/* <div >
                   <Field
@@ -689,7 +679,7 @@ function ContactInvestorCallActivityForm(props) {
                   />
                    </div>
                   <Spacer /> */}
-                  <div>
+                  <div class="mt-3">
                     <div class=" w-full"><Field
                       name="callDescription"
                       // label="Notes"
@@ -703,7 +693,7 @@ function ContactInvestorCallActivityForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+                  
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
@@ -747,8 +737,7 @@ function ContactInvestorCallActivityForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+                <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

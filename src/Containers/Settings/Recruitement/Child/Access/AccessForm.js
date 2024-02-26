@@ -10,10 +10,11 @@ import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsActio
 
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
+const materialOptions = ['Access', 'Create', 'Update', 'Delete',];
 const userOptions = ['Access', 'Create', 'Update', 'Delete','Access Plus'];
  const defaultCheckedList=['Full List'];
  const melCheckedList=['Full List','Access'];
- const dashboardCheckedList=['Access','Full List','Recruit Dash'];
+ const dashboardCheckedList=['Access','Full List'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
  const accountingCheckedList=['Access'];
@@ -69,6 +70,7 @@ const AccessForm = (props) => {
     setCheckedBasicList(props.departmentAcces.basic)
     setCheckedShipperList(props.departmentAcces.shipper)
     setCheckedProcurementList(props.departmentAcces.procurement)
+    setCheckedProductionList(props.departmentAcces.production)
     setCheckedSubscriptionList(props.departmentAcces.subscription)
     setCheckedPlantList(props.departmentAcces.plant)
     setCheckedTeamsList(props.departmentAcces.teams)
@@ -126,6 +128,7 @@ const AccessForm = (props) => {
   props.departmentAcces.catalog,
   props.departmentAcces.holiday,
   props.departmentAcces.topic,
+  props.departmentAcces.production,
  
   
   
@@ -510,12 +513,12 @@ const AccessForm = (props) => {
                                              
                                                const onMaterialsChange = (list) => {
                                                  setCheckedMaterialsList(list);
-                                                 setIndeterminateMaterials(!!list.length && list.length < plainOptions.length);
-                                                 setCheckAllMaterials(list.length === plainOptions.length);
+                                                 setIndeterminateMaterials(!!list.length && list.length < materialOptions.length);
+                                                 setCheckAllMaterials(list.length === materialOptions.length);
                                                };
                                              
                                                const onCheckAllMaterialsChange = (e) => {
-                                                 setCheckedMaterialsList(e.target.checked ? plainOptions : []);
+                                                 setCheckedMaterialsList(e.target.checked ? materialOptions : []);
                                                  setIndeterminateMaterials(false);
                                                  setCheckAllMaterials(e.target.checked);
                                                };
@@ -829,6 +832,25 @@ const AccessForm = (props) => {
                   };
 
 
+                          // Production
+
+                          const [checkedProductionList, setCheckedProductionList] = useState(props.departmentAcces.production              );
+                          const [indeterminateProduction, setIndeterminateProduction] = useState(true);
+                          const [checkAllProduction, setCheckAllProduction] = useState(false);
+                        
+                          const onProductionChange = (list) => {
+                            setCheckedProductionList(list);
+                            setIndeterminateProduction(!!list.length && list.length < materialOptions.length);
+                            setCheckAllProduction(list.length === materialOptions.length);
+                          };
+                        
+                          const onCheckAllProductionChange = (e) => {
+                            setCheckedProductionList(e.target.checked ? materialOptions : []);
+                            setIndeterminateProduction(false);
+                            setCheckAllProduction(e.target.checked);
+                          };
+
+
                        // Subscription
 
                        const [checkedSubscriptionList, setCheckedSubscriptionList] = useState(props.departmentAcces.subscription              );
@@ -837,12 +859,12 @@ const AccessForm = (props) => {
                      
                        const onSubscriptionChange = (list) => {
                          setCheckedSubscriptionList(list);
-                         setIndeterminateSubscription(!!list.length && list.length < plainOptions.length);
-                         setCheckAllSubscription(list.length === plainOptions.length);
+                         setIndeterminateSubscription(!!list.length && list.length < materialOptions.length);
+                         setCheckAllSubscription(list.length === materialOptions.length);
                        };
                      
                        const onCheckAllSubscriptionChange = (e) => {
-                         setCheckedSubscriptionList(e.target.checked ? plainOptions : []);
+                         setCheckedSubscriptionList(e.target.checked ? materialOptions : []);
                          setIndeterminateSubscription(false);
                          setCheckAllSubscription(e.target.checked);
                        };
@@ -929,12 +951,12 @@ const onCheckAllTeamsChange = (e) => {
                                     
                                       const onCatalogChange = (list) => {
                                         setCheckedCatalogList(list);
-                                        setIndeterminateCatalog(!!list.length && list.length < plainOptions.length);
-                                        setCheckAllCatalog(list.length === plainOptions.length);
+                                        setIndeterminateCatalog(!!list.length && list.length < materialOptions.length);
+                                        setCheckAllCatalog(list.length === materialOptions.length);
                                       };
                                     
                                       const onCheckAllCatalogChange = (e) => {
-                                        setCheckedCatalogList(e.target.checked ? plainOptions : []);
+                                        setCheckedCatalogList(e.target.checked ? materialOptions : []);
                                         setIndeterminateCatalog(false);
                                         setCheckAllCatalog(e.target.checked);
                                       };
@@ -1020,6 +1042,7 @@ const onCheckAllTeamsChange = (e) => {
       basic:checkedBasicList || [],
       shipper:checkedShipperList || [],
       procurement:checkedProcurementList || [],
+      production:checkedProductionList || [],
       subscription:checkedSubscriptionList || [],
       plant:checkedPlantList || [],
       teams:checkedTeamsList || [],
@@ -1342,7 +1365,7 @@ const onCheckAllTeamsChange = (e) => {
     <div class="text-xs">  Check all </div>
     </Checkbox>
     <Divider />
-    <CheckboxGroup options={plainOptions} value={checkedCatalogList} onChange={onCatalogChange} />
+    <CheckboxGroup options={materialOptions} value={checkedCatalogList} onChange={onCatalogChange} />
 
   </div> 
                 </div>
@@ -1354,7 +1377,7 @@ const onCheckAllTeamsChange = (e) => {
                   <div class="text-xs">   Check all </div>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedMaterialsList} onChange={onMaterialsChange} />
+                  <CheckboxGroup options={materialOptions} value={checkedMaterialsList} onChange={onMaterialsChange} />
                 </div>
           
              
@@ -1409,8 +1432,24 @@ const onCheckAllTeamsChange = (e) => {
                   <div class="text-xs">   Check all</div>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedSubscriptionList} onChange={onSubscriptionChange} />
+                  <CheckboxGroup options={materialOptions} value={checkedSubscriptionList} onChange={onSubscriptionChange} />
                 </div>
+             
+             
+                </div>
+
+                <div class=" flex justify-around mt-8" >
+              <div >
+              <div class="text-sm font-semibold">Production</div>
+              <Checkbox indeterminate={indeterminateProduction} onChange={onCheckAllProductionChange} checked={checkAllProduction}>
+               <div class="text-xs"> Check all</div>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={materialOptions} value={checkedProductionList} onChange={onProductionChange} />
+
+            </div>
+             
+            
              
              
                 </div>
@@ -1642,7 +1681,7 @@ const onCheckAllTeamsChange = (e) => {
               </div> 
              : null }  
                
-              <div class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</div>
+              <div class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("DD/MM/YYYY")} by {props.departmentAcces.name}</div>
               
               <div class=" flex justify-end" >
               <FloatButton.Group  >
