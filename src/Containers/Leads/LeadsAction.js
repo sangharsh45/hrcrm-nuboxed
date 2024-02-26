@@ -36,7 +36,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     });
   
     axios
-      .post(`${base_url}/leads/jk`, leads, {
+      .post(`${base_url}/leads`, leads, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
