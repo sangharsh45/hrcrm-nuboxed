@@ -2590,6 +2590,12 @@ export const saveUnitForCatalogueItem = (data, id, orderId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Items added successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(getProductListByDistributor(id, orderId));
       dispatch({
         type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS,
@@ -2615,8 +2621,14 @@ export const addAllProductInOrder = (data, id, orderId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'All items added to the order',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(getProductListByDistributor(id, orderId));
-      dispatch(getDistributorOrderByDistributorId(id, 0))
+      dispatch(getProductionOrder(id, 0))
       dispatch({
         type: types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS,
         payload: res.data,
@@ -2813,5 +2825,88 @@ export const removeOrderAcc = (orderId) => (dispatch) => {
         payload: err,
       });
       message.error("Something went wrong");
+    });
+};
+
+export const createOrderForProduction = (data) => (dispatch) => {
+  dispatch({
+    type: types.CREATE_ORDER_FOR_PRODUCTION_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/order/catalogOrder`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.CREATE_ORDER_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Created Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.CREATE_ORDER_FOR_PRODUCTION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getProductionOrder = (distributorId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCTION_ORDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/all-phoneOrders/${distributorId}/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getProductionOrderDetails = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCTION_ORDER_DETAIL_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/product/${orderId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_DETAIL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_DETAIL_FAILURE,
+        payload: err,
+      });
     });
 };

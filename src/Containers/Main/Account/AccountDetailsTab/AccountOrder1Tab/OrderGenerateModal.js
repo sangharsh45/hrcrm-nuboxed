@@ -4,6 +4,7 @@ import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
+import CheckInInventoryLocation from "./CheckInInventoryLocation";
 
 const TabPane = StyledTabs.TabPane;
 class OrderGenerateModal extends Component {
@@ -23,13 +24,7 @@ class OrderGenerateModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        {/* <StyledTabs defaultActiveKey="1">
-                            <TabPane tab={`Product`} key="1">
-                                <div style={{ marginTop: 20 }}>
-                                    <LinkDistributorOrderForm />
-                                </div>
-                            </TabPane>
-                        </StyledTabs> */}
+                        <CheckInInventoryLocation />
                     </Suspense>
                 </StyledDrawer>
             </div>

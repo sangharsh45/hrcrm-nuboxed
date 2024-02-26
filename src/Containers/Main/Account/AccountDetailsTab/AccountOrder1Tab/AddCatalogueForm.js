@@ -69,10 +69,11 @@ const AddCatalogueForm = (props) => {
                         {
                             ...values,
                             distributorId: props.distributorId,
-                            orderId: props.orderDetailsId.orderId
+                            orderId: props.productionOrderId.orderId,
+                            orgId: props.orgId
                         },
                         props.distributorId,
-                        props.orderDetailsId.orderId
+                        props.productionOrderId.orderId
                     );
                     resetForm();
                 }}
@@ -200,15 +201,16 @@ const AddCatalogueForm = (props) => {
             <Suspense fallback={"Loading"}>
                 <AddCatalogueTable
                     distributorId={props.distributorId}
-                    orderId={props.orderDetailsId.orderId}
+                    orderId={props.productionOrderId.orderId}
                     toggle={props.toggle} />
             </Suspense>
         </>
     )
 }
-const mapStateToProps = ({ distributor }) => ({
+const mapStateToProps = ({ distributor, auth }) => ({
     allProduct: distributor.allProduct,
-    orderDetailsId: distributor.orderDetailsId,
+    orgId: auth.userDetails.organizationId,
+    productionOrderId: distributor.productionOrderId,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getAllProductList,

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
-const OrderCatalogueDetails = lazy(() => import("./OrderCatalogueDetails"));
+const OrderCatalogueDetails = lazy(() => import("../AccountOrderTab/OrderCatalogueDetails"));
 
 class OrderDetailModal extends Component {
     render() {

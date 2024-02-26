@@ -11,7 +11,7 @@ import { TextareaComponent } from '../../../../../Components/Forms/Formik/Textar
 import { Button, Tooltip, message } from 'antd';
 import { getCurrency } from "../../../../Auth/AuthAction";
 import { FormattedMessage } from 'react-intl';
-import { addOrderForm, getContactDistributorList } from '../../AccountAction'
+import { createOrderForProduction, getContactDistributorList } from '../../AccountAction'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFieldArray1';
 const FormSchema = Yup.object().shape({
@@ -96,7 +96,7 @@ function AddAddressDetail(props) {
                 console.log(priority)
 
                 if (values.advancePayment < 100) {
-                    props.addOrderForm({
+                    props.createOrderForProduction({
                         ...values,
                         priority: priority || "",
 
@@ -314,6 +314,7 @@ function AddAddressDetail(props) {
                                                 ></Button>
                                             </Tooltip>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -362,7 +363,7 @@ const mapStateToProps = ({ homeStepper, auth, distributor }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            addOrderForm,
+            createOrderForProduction,
             getCurrency,
             getContactDistributorList
         },
@@ -370,3 +371,29 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAddressDetail);
+
+function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {
+    const start = type;
+    console.log(start);
+    //////debugger;
+    if (status === type) {
+        size = "30px";
+    } else {
+        size = "16px";
+    }
+    return (
+        <Tooltip title={tooltip}>
+            <Button
+                ghost={status !== type}
+                style={{
+                    padding: "6px",
+                    borderColor: "transparent",
+                    color: status === type ? "orange" : "grey",
+                }}
+                onClick={onClick}
+            >
+                <i className={`fas ${iconType}`} style={{ fontSize: "22px" }}></i>
+            </Button>
+        </Tooltip>
+    );
+}
