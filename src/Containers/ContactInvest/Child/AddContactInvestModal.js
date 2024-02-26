@@ -13,7 +13,7 @@ function AddContactInvestModal (props) {
       <StyledDrawer
         title={<FormattedMessage
           id="app.contactinvest "
-          defaultMessage="contactinvest"
+          defaultMessage="Contact - Investor"
         />}
         width={drawerWidth}
         visible={addContactInvestModal}

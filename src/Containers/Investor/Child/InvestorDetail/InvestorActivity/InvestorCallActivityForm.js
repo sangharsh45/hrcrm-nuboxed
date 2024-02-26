@@ -8,7 +8,6 @@ import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import { handleCallNotesModal } from "../../../../Call/CallAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
@@ -328,13 +327,11 @@ function InvestorCallActivityForm(props) {
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
-                      <StyledLabel>
-                        {/* Type */}
+            
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage id="app.type" defaultMessage="Type" />
-                      </StyledLabel>
-                      <div class=" flex justify-between">
-                        {/* <Tooltip title="Inbound"> */}
+                      </div>
+                      <div class=" flex justify-between mt-3">
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -343,21 +340,18 @@ function InvestorCallActivityForm(props) {
                             />
                           }
                         >
-                          <div
-                            onClick={() => handleTypeChange("Inbound")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                           <div class="text-lg"
+                            onClick={() => handleTypeChange("Inbound")} style={{
+                              cursor:"pointer",
                               color:
                               Type  === "Inbound"
                                   ? "Orange"
                                   : null,
-                            }}
-                          >
+                            }}>
+                           
                             <i className="fas fa-sign-in-alt"></i>
                           </div>
                         </Tooltip>
-                        {/* <Tooltip title="Outbound"> */}
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -366,21 +360,19 @@ function InvestorCallActivityForm(props) {
                             />
                           }
                         >
-                          <div
-                            onClick={() => handleTypeChange("Outbound")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                          <div class="text-lg"
+                            onClick={() => handleTypeChange("Outbound")}  style={{
+                              cursor:"pointer",
                               color:
                               Type === "Outbound"
                                   ? "Orange"
                                   : null,
-                            }}
-                          >
+                            }}>
+                           
                             <i className="fas fa-sign-out-alt"></i>
                           </div>
                         </Tooltip>
-                        {/* <Tooltip title="Conference"> */}
+    
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -389,61 +381,42 @@ function InvestorCallActivityForm(props) {
                             />
                           }
                         >
-                          <div
+                          <div class="text-lg"
                             onClick={() => handleTypeChange("Conference")}
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                              cursor:"pointer",
                               color:
                               Type === "Conference"
                                   ? "Orange"
                                   : null,
                             }}
-                          >
+                            >
+                             
                             <i className="fas fa-network-wired"></i>
                           </div>
                         </Tooltip>
                       </div>
                     </div>
                     <div class=" w-1/2">
-                      <Spacer />
-                      <StyledLabel>
+         
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="Category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
-                          onClick={() => handleCategoryChange("New")}
-                          style={{
-                            backgroundColor:
-                            category === "New"
-                                ? "orange"
-                                : "white",
-                            color:
-                            category === "New" ? "white" : "black",
-                          }}
-                        >
-                          {/* New */}
+                         onClick={() => handleCategoryChange("New")}
+                         className={`cursor-pointer ${category==="New" ? "bg-[orange] text-[white]" :"bg-[white] text-[black]"}`}>
+                   
                           <FormattedMessage id="app.new" defaultMessage="New" />
                         </Button>
                         <Button
                           onClick={() => handleCategoryChange("Follow up")}
-                          style={{
-                            backgroundColor:
-                            category === "Follow up"
-                                ? "orange"
-                                : "white",
-                            color:
-                            category === "Follow up"
-                                ? "white"
-                                : "black",
-                          }}
-                        >
-                          {/* Follow up */}
-                          <FormattedMessage
+                          className={`cursor-pointer ${category==="Follow up" ? "bg-[orange] text-[white]" :"bg-[white] text-[black]"}`}>
+                 <FormattedMessage
                             id="app.followup"
                             defaultMessage="Follow up"
                           />
@@ -451,16 +424,13 @@ function InvestorCallActivityForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
-                    <div class=" self-start">
-                      <StyledLabel>
+        
+                  <div class=" flex justify-between items-end max-sm:flex-col mt-3" >
+                    <div class="self-start">
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       Mode
-                      </StyledLabel>
+                      </div>
                       <Switch
-                        // style={{
-                        //   marginLeft: "0.3125em"
-                        // }}
                         name="mode"
                         checkedChildren="Audio"
                         unCheckedChildren="Video"
@@ -510,7 +480,7 @@ function InvestorCallActivityForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+      
                   <Field
                     name="startDate"
                     // label="Date"
@@ -523,8 +493,8 @@ function InvestorCallActivityForm(props) {
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+        
+                  <div class=" flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -568,7 +538,7 @@ function InvestorCallActivityForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
+             
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -587,7 +557,7 @@ function InvestorCallActivityForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
+            
                   {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -685,7 +655,7 @@ function InvestorCallActivityForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+                   <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -705,8 +675,8 @@ function InvestorCallActivityForm(props) {
                       value: employeeId,
                     }}
                   />
-                 
-                  <Spacer />
+                 </div>
+                  
                
                   {/* <div >
                   <Field
@@ -728,9 +698,9 @@ function InvestorCallActivityForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer /> */}
+          */}
                   <div>
-                    <div class=" w-full"><Field
+                    <div class=" w-full mt-3"><Field
                       name="callDescription"
                       // label="Notes"
                       label={
@@ -743,7 +713,7 @@ function InvestorCallActivityForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+              
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
@@ -787,8 +757,8 @@ function InvestorCallActivityForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+ 
+              <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

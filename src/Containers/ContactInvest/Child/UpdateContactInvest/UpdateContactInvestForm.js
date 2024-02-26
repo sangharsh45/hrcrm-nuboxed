@@ -5,13 +5,12 @@ import { Button } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel } from "../../../../Components/UI/Elements";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { updateContactInvest } from "../../ContactInvestAction";
-import Upload from "../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
@@ -182,10 +181,10 @@ class UpdateContactInvestForm extends Component {
               <div class=" flex justify-around max-sm:flex-col  ">
                 <div class=" h-full w-w47.5 max-sm:w-wk" >
                  <div class=" flex justify-between  flex-nowrap">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-wk">
+                        {/* <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="salutation"
                             type="text"
@@ -202,7 +201,7 @@ class UpdateContactInvestForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
+                        </div> */}
                         <div class=" w-1/2 max-sm:w-wk">
                           <FastField
                             isRequired
@@ -421,7 +420,7 @@ class UpdateContactInvestForm extends Component {
                       />
                     </div>
             
-                <div class="  w-w47.5 mt-3">
+                <div class="  w-w47.5 ">
                   <FastField
                     name="designationTypeId"
                     //label="Designation"

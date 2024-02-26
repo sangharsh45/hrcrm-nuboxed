@@ -491,18 +491,19 @@ function ContactInvestCardList(props) {
                                         </div>
                                         </div>
                                 </div>
-                                <div className="  flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-48">
+                     
+                                </div>
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-48">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[9.5rem] ">
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[9.5rem]">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
-                                </div>
                                 </div>
                                 <div class="flex">
                                 <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[12.2rem]">

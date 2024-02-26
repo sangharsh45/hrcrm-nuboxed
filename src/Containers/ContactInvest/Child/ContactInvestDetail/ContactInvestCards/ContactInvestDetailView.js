@@ -10,6 +10,7 @@ class ContactInvestDetailView extends Component {
         tagWithCompany,
         designation,
         department,
+        source,
         mobileNumber,
         emailId,
       },
@@ -34,6 +35,12 @@ class ContactInvestDetailView extends Component {
             defaultMessage="Designation"
           />}
           value={designation} />
+<ContactInvestItemRow 
+          label={<FormattedMessage
+            id="app.source"
+            defaultMessage="Source"
+          />}
+          value={source} />
         <ContactInvestItemRow //label="Email" 
           label={<FormattedMessage
             id="app.emailId"
@@ -54,10 +61,10 @@ export default ContactInvestDetailView;
 
 const ContactInvestItemRow = ({ label, value }) => {
   return (
-    <div class=" flex items-center flex-nowrap m-2"
-    >
-      <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
-      <SubTitle style={{ marginLeft: "-1.875em" }}>{value}</SubTitle>
-    </div>
+    <div class=" flex items-center w-[95%] justify-between flex-no-wrap m-2">
+    <div class=" text-[#444] font-semibold" >{label}</div>
+    <div className="overflow-hidden truncate ml-8">{value}</div>
+  </div>
+
   );
 };

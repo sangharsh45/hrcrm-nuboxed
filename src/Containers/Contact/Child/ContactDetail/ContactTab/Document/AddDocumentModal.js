@@ -5,14 +5,10 @@ import { FormattedMessage } from "react-intl";
 import { Button,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import {
-  StyledLabel,
-} from "../../../../../../Components/UI/Elements";
 import {
   handleDocumentUploadModal,
   addContactDocument,
@@ -106,13 +102,11 @@ class AddDocumentModal extends Component {
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="65vw"
+          width="60%"
           visible={documentUploadModal}
           destroyOnClose
           maskClosable={false}
-          style={{ marginTop: "5rem" }}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          onClose={() => this.handleClose()}
+                 onClose={() => this.handleClose()}
           footer={null}
         >
           <Suspense fallback={""}>
@@ -163,11 +157,11 @@ class AddDocumentModal extends Component {
                         // component={DocumentUpload}
                       />
                       {errors.documentId && (
-                        <p style={{ color: "tomato", fontWeight: 600 }}>
+                         <div class="tet-[tomato] font-semibold">
                           {errors.documentId}
-                        </p>
+                        </div>
                       )}
-                      <Spacer />
+                  
                       <Field
                         name="documentTypeId"
                         selectType="documentTypeName"
@@ -211,7 +205,7 @@ class AddDocumentModal extends Component {
                         isColumn
                         component={InputComponent}
                       />
-                      <Spacer />
+                   <div class="mt-3">
                       <Field
                         name="documentDescription"
                         //label="Description"
@@ -226,13 +220,14 @@ class AddDocumentModal extends Component {
                         width={"100%"}
                         component={TextareaComponent}
                       />
-                      <Spacer style={{ marginBottom: "0.9375em" }} />
+                      </div>
+                     
                     </div>
 
                   </div>
 
-                  <Spacer />
-                  <div class=" flex justify-end">
+              
+                  <div class=" flex justify-end mt-3">
                     <Button
                       htmlType="submit"
                       type="primary"
@@ -242,7 +237,7 @@ class AddDocumentModal extends Component {
                         id="app.submit"
                         defaultMessage="Submit"
                       />
-                      {/* Submit */}
+                
                     </Button>
                   </div>
                 </Form>

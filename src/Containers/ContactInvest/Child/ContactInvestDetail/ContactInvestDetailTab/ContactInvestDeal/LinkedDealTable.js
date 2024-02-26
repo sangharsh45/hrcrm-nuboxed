@@ -80,7 +80,7 @@
 //       dataIndex: "closeByDate",
 //       render: (text, item) => {
 //         const closeByDate = moment(item.closeByDate).format("ll");
-//         return <span>{closeByDate}</span>;
+//         return <div>{closeByDate}</div>;
 //       },
 //     },
 //     {
@@ -94,7 +94,7 @@
 //       defaultSortOrder: "descend",
 //       render: (text, item) => {
 //         const creationDate = moment(item.creationDate).format("ll");
-//         return <span>{creationDate}</span>;
+//         return <div>{creationDate}</div>;
 //       },
 //     },
 //     {
@@ -275,14 +275,14 @@ console.log(props.contactInVestDetail.contactId)
         
         &nbsp;&nbsp;
         {date === currentdate ? (
-          <span class="text-xs"
+          <div class="text-xs"
             style={{
               color: "tomato",
               fontWeight: "bold",
             }}
           >
             New
-          </span>
+          </div>
         ) : null}
        
                                             </div>
@@ -313,10 +313,10 @@ console.log(props.contactInVestDetail.contactId)
                   <div className=" flex font-medium justify-center flex-col  md:w-[8.5rem] max-sm:flex-row w-full max-sm:justify-between ">
          
                     <h4 class=" text-xs text-cardBody font-poppins">
-                    <span>
+                    <div>
             <CurrencySymbol currencyType={item.currency} />
             &nbsp;&nbsp;{item.proposalAmount}
-          </span>
+          </div>
                  
                     </h4>
                   </div>
@@ -345,7 +345,7 @@ width={30}
          
                     <h4 class=" text-xs text-cardBody font-poppins">
                     <Tooltip title={item.contactName}>
-              <span>
+              <div>
                 <MultiAvatar
                   primaryTitle={item.contactName}
                   imageId={item.imageId}
@@ -353,7 +353,7 @@ width={30}
                   imgWidth={"1.8em"}
                   imgHeight={"1.8em"}
                 />
-              </span>
+              </div>
             </Tooltip>
                  
                     </h4>

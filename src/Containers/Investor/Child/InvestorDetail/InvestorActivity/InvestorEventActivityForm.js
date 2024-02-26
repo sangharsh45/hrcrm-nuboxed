@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import { getAssignedToList } from "../../../../Employees/EmployeeAction";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import dayjs from "dayjs";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
@@ -289,7 +288,7 @@ const {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+             <div class="mt-3">
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -304,6 +303,7 @@ const {
                     isColumn
                     inlineLabel
                   />
+                  </div>
                   <Field
                     isRequired
                     name="eventSubject"
@@ -319,9 +319,8 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
                   <div>
-                    <div class=" flex justify-between">
+                    <div class=" flex justify-between mt-3">
                       <div class=" w-1/2">
                         <Field
                           isRequired
@@ -440,8 +439,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+   
                   
                     {/* <Field
                       name="employeesId"
@@ -465,7 +463,8 @@ const {
                       }}
                       inlineLabel
                     /> */}
-                 <Listbox value={selected} onChange={setSelected}>
+                    <div class="mt-3">
+                 <Listbox value={selected} onChange={setSelected} >
         {({ open }) => (
           <>
             <Listbox.Label className="block text-sm font-semibold text-gray-700">
@@ -533,7 +532,8 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+      </div>
+      <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -553,8 +553,8 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
-                  <Spacer />
+                </div>
+                 
             
                   {/* <Field
                     disabled="true"
@@ -588,8 +588,8 @@ const {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+                <div class=" h-full w-w47.5 max-sm:w-wk mt-3">
+        
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -600,7 +600,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+            <div class="mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -612,12 +612,13 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+               
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
                         <div>
-                          <StyledLabel>Set Reminder </StyledLabel>
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder </div>
                         </div>
                         <div>
                           <Switch
@@ -655,8 +656,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+          
+              <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
