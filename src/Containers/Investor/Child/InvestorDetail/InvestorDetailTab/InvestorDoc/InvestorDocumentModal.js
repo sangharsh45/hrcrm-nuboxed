@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
@@ -141,11 +140,11 @@ class InvestorDocumentModal extends Component {
                         component={DragableUpload}
                       />
                       {errors.documentId && (
-                        <p style={{ color: "tomato", fontWeight: 600 }}>
+                        <div class="tet-[tomato] font-semibold">
                           {errors.documentId}
-                        </p>
+                        </div>
                       )}
-                      <Spacer />
+             
                       <Field
                         name="documentTypeId"
                         selectType="documentTypeName"
@@ -162,7 +161,7 @@ class InvestorDocumentModal extends Component {
                         inlineLabel
                       />
                            <div class=" flex  mt-4">
-                        <StyledLabel>Contract</StyledLabel>
+                           <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Contract</div>
                         <Switch
                           style={{ width: "6.25em", marginLeft: "0.625em" }}
                           onChange={this.handleContract}
@@ -185,7 +184,7 @@ class InvestorDocumentModal extends Component {
                         isColumn
                         component={InputComponent}
                       />
-                      <Spacer />
+                    
                       <Field
                         name="documentDescription"
                         //label="Description"
@@ -203,11 +202,11 @@ class InvestorDocumentModal extends Component {
 
                       <div>
                       </div>
-                      <Spacer />
+                 
                       {!this.state.documentshare && this.props.testShow && (
-                        <p>Will be shared with investor Owner</p>
+                        <div>Will be shared with investor Owner</div>
                       )}
-                      <Spacer />
+                    
                       {this.state.documentshare && (
                         <div class=" flex justify-between w-full ">
                           {/* {organization &&
@@ -252,14 +251,14 @@ class InvestorDocumentModal extends Component {
                                   />
                                 </div>
                                 <div>
-                                  <StyledLabel>
+                                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                                     {" "}
                                     <FormattedMessage
                                       id="app.level"
                                       defaultMessage="Level"
                                     />
-                                    ,{/* Level */}
-                                  </StyledLabel>
+                        
+                                  </div>
                                   <div class=" flex justify-between">
                                     <ButtonGroup>
                                       <Tooltip title="Specific">
@@ -331,8 +330,8 @@ class InvestorDocumentModal extends Component {
                     </div>
                   </div>
 
-                  <Spacer />
-                  <div class=" flex justify-end">
+             
+                  <div class=" flex justify-end mt-3">
                     <Button
                       htmlType="submit"
                       type="primary"

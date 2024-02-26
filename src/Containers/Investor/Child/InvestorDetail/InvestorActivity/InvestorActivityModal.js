@@ -28,9 +28,7 @@ const InvestorActivityModal = (props) => {
         visible={investorActivityModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleActivityModal(false)}
-        style={{marginTop:"5rem"}}
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>

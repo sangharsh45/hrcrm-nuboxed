@@ -144,7 +144,7 @@ class InvestorLinkedDocuments extends Component {
                               >
                                   <div class="flex">
                                       <div className=" flex font-medium  md:w-[9.8rem] max-sm:w-full  ">
-                                      <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>
+                                      <div>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</div>
                                       </div>
 
                                       <div className=" flex font-medium   md:w-[11.21rem] max-sm:flex-row w-full max-sm:justify-between items-center  ">

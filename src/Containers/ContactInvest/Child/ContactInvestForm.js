@@ -10,7 +10,7 @@ import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArra
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { addLinkContactByOpportunityId } from "../../Contact/ContactAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../Settings/Department/DepartmentAction";
@@ -204,10 +204,10 @@ class ContactInvestForm extends Component {
               <div class=" flex justify-around max-sm:flex-col ">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
                   <div class=" flex justify-between  flex-nowrap">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-wk">
+                        {/* <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="salutation"
                             type="text"
@@ -223,7 +223,7 @@ class ContactInvestForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
+                        </div> */}
                         <div class=" w-1/2 max-sm:w-wk">
                           <FastField
                             isRequired
