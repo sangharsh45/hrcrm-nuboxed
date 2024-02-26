@@ -7,6 +7,7 @@ import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { MultiAvatar } from "../../../Components/UI/Elements";
+import { BundleLoader } from "../../../Components/Placeholder";
 
 function ProductionBldrCrd(props) {
   useEffect(() => {
@@ -62,7 +63,10 @@ function ProductionBldrCrd(props) {
     setEditableRowIndex(-1);
     setEditedRowData(null);
   };
-
+  
+if(props.fetchingBuilderByProductId){
+  return <BundleLoader/>
+}
   return (
     <>
       <div className='flex justify-end sticky z-auto'>
