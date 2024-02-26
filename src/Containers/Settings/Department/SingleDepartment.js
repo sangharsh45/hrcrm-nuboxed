@@ -576,7 +576,7 @@ const SingleDepartment = (props) => {
                     </>
 )} */}
 
-{moduleMapper.productionInd === true && (
+{moduleMapper.productionInd === true && erpStatus && (
   <>
 
                     <div class=" text-sm w-[5rem] ml-4">Production</div>
@@ -600,7 +600,7 @@ const SingleDepartment = (props) => {
                     </>
 )}
 
-{moduleMapper.repairInd === true && (
+{moduleMapper.repairInd === true && erpStatus && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Repair</div>
                     <div   class=" w-[7%] ml-2">
@@ -638,7 +638,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )} */}
-{moduleMapper.orderManagementInd === true && (
+{moduleMapper.orderManagementInd === true && erpStatus && (
   <>
                     <div class=" text-sm w-[9rem] ml-4">Order Management</div>
                     <div   class=" w-[7%] ml-2">
@@ -662,7 +662,7 @@ const SingleDepartment = (props) => {
 )}
 
 
-{moduleMapper.logisticsInd === true && (
+{moduleMapper.logisticsInd === true && erpStatus && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
                     <div   class=" w-[7%] ml-2">
@@ -684,7 +684,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{moduleMapper.procurementInd === true && (
+{moduleMapper.procurementInd === true && erpStatus && (
   <>
                     <div class=" text-sm w-[6rem] ml-4">Procurement</div>
                     <div   class=" w-[7%] ml-2">
