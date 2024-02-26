@@ -9,7 +9,7 @@ import { getDepartmentwiserUser } from "../../../Settings/SettingsAction"
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import { getCurrencyList } from "../../../Settings/Category/Currency/CurrencyAction"
-import { getTimeZone,getCountries } from "../../../Auth/AuthAction"
+import { getTimeZone, getCountries } from "../../../Auth/AuthAction"
 import { getRoles } from "../../../Settings/Category/Role/RoleAction"
 import { updateEmployee, } from "../../EmployeeAction";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
@@ -29,8 +29,8 @@ class UpdateEmployeeForm extends Component {
       checked: true,
       typeInd: false,
       role: [],
-      reportingManager: "",
-      department: "",
+      reportingManager: this.props.currentEmployeeId.reportingManager || "",
+      department: this.props.currentEmployeeId.reportingManagerDeptId || "",
       selectedRole: "",
       selectedCountry: '',
       selectedDept: "",
@@ -52,6 +52,7 @@ class UpdateEmployeeForm extends Component {
     getCountries(getCountries);
     getDepartments();
     getCurrencyList();
+    this.props.getDepartmentwiserUser(this.state.department);
 
   }
   handleReset = (resetForm) => {
@@ -117,7 +118,7 @@ class UpdateEmployeeForm extends Component {
           }
         })
         .map((option) => ({
-          label: option.roleTypeName || "",
+          label: option.roleType || "",
           value: option.roleTypeId,
         }));
 
@@ -236,18 +237,14 @@ class UpdateEmployeeForm extends Component {
 
 
 
-
-
-
-
-
     const { clearbit, currentEmployeeId } = this.props;
+    console.log(currentEmployeeId)
+    console.log(this.props.userDetails)
     return (
       <>
         <Formik
           initialValues={{
             salutation: currentEmployeeId.salutation || "",
-            departmentId: currentEmployeeId.departmentName,
             firstName: currentEmployeeId.firstName || "",
             lastName: currentEmployeeId.lastName || "",
             emailId: currentEmployeeId.emailId || "",
@@ -264,20 +261,15 @@ class UpdateEmployeeForm extends Component {
             workplace: currentEmployeeId.workplace || "",
             location: currentEmployeeId.location || "",
             designationTypeId: currentEmployeeId.designationTypeId || "",
-            departmentId: currentEmployeeId.department,
-            reportingManagerDeptId: currentEmployeeId.reportingManagerDept || "",
+            departmentId: currentEmployeeId.departmentId,
+            roleType: currentEmployeeId.roleType || "",
             roleTypeName: currentEmployeeId.roleTypeName || "",
-            // roleType:this.state.selectedRole,
             linkedinPublicUrl: currentEmployeeId.linkedinPublicUrl || "",
             label: currentEmployeeId.label || "",
 
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
             employee_type: this.state.workType,
-            // job_type: this.state.active,
-
-            reportingManager: currentEmployeeId.reportingManagerName || "",
-
             address: [
               {
                 addressId: currentEmployeeId.address.length ? currentEmployeeId.address[0].addressId : "",
@@ -302,11 +294,6 @@ class UpdateEmployeeForm extends Component {
                 // location: currentEmployeeId.locationDetailsId ,
                 reportingManagerDeptId: department,
                 reportingManager: reportingManager,
-                // roleType: currentEmployeeId.departmentId,
-                // departmentId:currentEmployeeId.roleTypeId,
-
-
-
                 job_type: this.state.active ? "Full Time" : "Part Time",
                 type: this.state.typeInd ? "true" : "false",
                 employee_type: this.state.workType,
@@ -643,7 +630,7 @@ name="departmentId"
                               ? DepartmentOptions
                               : []
                           }
-                          value={values.departmentId}
+                          // value={values.departmentId}
                           isColumn
                           margintop={"0"}
                           inlineLabel
@@ -686,7 +673,7 @@ name="departmentId"
                     </div>
                     <div class=" w-w48 max-sm:w-wk">
                       <Field
-                        name="roleTypeName"
+                        name="roleType"
                         label={<FormattedMessage
                           id="app.role"
                           defaultMessage="Role"
@@ -781,7 +768,7 @@ name="departmentId"
                               )
                               : []
                           }
-                          value={values.location}
+                          // value={values.location}
                           filterOption={{
                             filterType: "workplace",
                             filterValue: values.workplace,
@@ -889,7 +876,7 @@ name="departmentId"
                     <div class="mt-2"><label style={{ color: "#444", fontWeight: "bold", fontSize: " 0.75rem" }}>Reports To</label></div>
                     <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
-                        <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+                        <label style={{ color: "#444", fontWeight: "bold", fontSize: " 0.75rem" }}>Department</label>
                         <Select
                           className="w-[250px]"
                           value={department}
@@ -902,7 +889,7 @@ name="departmentId"
                       </div>
 
                       <div class="w-w47.5 max-sm:w-wk">
-                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reporting Manager</label>
+                        <label style={{ color: "#444", fontWeight: "bold", fontSize: " 0.75rem" }}>Reporting Manager</label>
                         <Select
                           className="w-[250px]"
                           value={reportingManager}

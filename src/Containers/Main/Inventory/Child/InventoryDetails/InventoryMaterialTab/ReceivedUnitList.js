@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { getReceivedUnitOfAnItem, updatePartIdOfAnItem } from "../../../InventoryAction"
 import { BorderColorOutlined } from "@mui/icons-material";
 import { Button, Input } from "antd";
+import AutoPartNoTOggle from "./AutoPartNoTOggle";
 
 
 const ReceivedUnitList = (props) => {
@@ -106,7 +107,7 @@ const ReceivedUnitList = (props) => {
                                     </div>
                                     <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                         <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-
+                                            <AutoPartNoTOggle autoPartInd={item.autoPartInd} />
                                         </div>
                                     </div>
                                 </div>
