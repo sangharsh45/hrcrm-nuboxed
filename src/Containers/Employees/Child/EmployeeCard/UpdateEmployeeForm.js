@@ -7,8 +7,7 @@ import { Radio } from "antd";
 import { getlocation } from "../../../Event/Child/Location/LocationAction";
 import { getDepartmentwiserUser } from "../../../Settings/SettingsAction"
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
-import Upload from "../../../../Components/Forms/Formik/Upload";
-import { getCurrencyList } from "../../../Settings/Category/Currency/CurrencyAction"
+import { getCurrency } from "../../../Auth/AuthAction"
 import { getTimeZone, getCountries } from "../../../Auth/AuthAction"
 import { getRoles } from "../../../Settings/Category/Role/RoleAction"
 import { updateEmployee, } from "../../EmployeeAction";
@@ -45,13 +44,13 @@ class UpdateEmployeeForm extends Component {
 
 
   componentDidMount() {
-    const { getCountries, getEmployeelist, getDepartments, getTimeZone, getCurrencyList, getRoles, getlocation, } = this.props;
+    const { getCountries, getEmployeelist, getDepartments, getTimeZone, getCurrency, getRoles, getlocation, } = this.props;
     getRoles(this.props.organizationId);
     getTimeZone();
     getlocation(this.props.orgId);
     getCountries(getCountries);
     getDepartments();
-    getCurrencyList();
+    getCurrency();
     this.props.getDepartmentwiserUser(this.state.department);
 
   }
@@ -201,7 +200,7 @@ class UpdateEmployeeForm extends Component {
     });
 
 
-    const sortedCurrency = this.props.currencyList.sort((a, b) => {
+    const sortedCurrency = this.props.currencies.sort((a, b) => {
       const nameA = a.currency_name.toLowerCase();
       const nameB = b.currency_name.toLowerCase();
       // Compare department names
@@ -934,21 +933,17 @@ const mapStateToProps = ({ auth, role, settings, location, currency, employee, d
   employees: employee.employees,
   departmentwiseUser: settings.departmentwiseUser,
   departments: departments.departments,
-  currencyList: currency.currencyList,
+  currencies: auth.currencies,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
     updateEmployee,
     getTimeZone,
-    getCurrencyList,
+    getCurrency,
     getDepartments,
     getDepartmentwiserUser,
     getlocation,
     getCountries,
-    // getEmployeelist,
-    //    getCountries,
-    //    getDesignations,
-    // getDepartments,
     getRoles,
 
   }, dispatch);

@@ -341,7 +341,8 @@ export const contactReducer = (state = initialState, action) => {
         ...state,
         addingDocumentByContactId: false,
         documentUploadModal:false,
-        addingDocumentByContactIdError: false,
+        documentsByContactId:[action.payload,...state.documentsByContactId]
+        // addingDocumentByContactIdError: false,
       };
     case types.ADD_CONTACT_DOCUMENT_FAILURE:
       return {

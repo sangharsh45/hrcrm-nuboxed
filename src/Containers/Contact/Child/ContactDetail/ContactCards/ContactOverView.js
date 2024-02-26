@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Title, MultiAvatar } from "../../../../../Components/UI/Elements";
+import {  MultiAvatar } from "../../../../../Components/UI/Elements";
 
 class ContactOverView extends Component {
   render() {
@@ -17,15 +17,11 @@ class ContactOverView extends Component {
             <div class=" w-1/4">
               <MultiAvatar />
             </div>
-            &nbsp;
+         
             <div class=" flex flex-col w-4/5">
-              <Title
-                overflow="hidden"
-                textOverflow="ellipsis"
-                fontSize={"1.375em"}
-              >
+            <div class=" w-wk text-[#444] overflow-hidden text-lg textOverflow-ellipsis">
                 {` ${fullName || ""} `}
-              </Title>
+              </div>
             </div>
           </div>
         </div>

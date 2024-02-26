@@ -2,7 +2,7 @@ import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button,Switch } from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
@@ -104,10 +104,7 @@ class AddDocumentModal extends Component {
           }
           width="60%"
           visible={documentUploadModal}
-          destroyOnClose
-          maskClosable={false}
                  onClose={() => this.handleClose()}
-          footer={null}
         >
           <Suspense fallback={""}>
             <Formik
