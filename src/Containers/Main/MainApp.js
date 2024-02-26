@@ -319,8 +319,11 @@ function MainApp(props) {
     // primaryTitle={organizationName}
     />
   );
+
   return (
+    
     <>
+    
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
           <div class="max-sm:hidden overflow-x-auto">
@@ -577,13 +580,10 @@ function MainApp(props) {
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
-                  {user.role === "ADMIN" ?
-                  
-
-                      <SettingsDropdown />
-
-                  
-                   : null} 
+                  {user.settingsAccessInd === true || user.role === "ADMIN" ?
+  <SettingsDropdown />
+  : null
+}
                   {/* {user.role === "ADMIN" ?
                     <IsAuthorized>
 

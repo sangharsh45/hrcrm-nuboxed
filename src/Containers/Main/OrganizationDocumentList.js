@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { StyledPopconfirm} from "../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { getRepositoryDocuments ,deleteOrgDocata,LinkOrgDocPublish,LinkOrgDocPrivate} from "../Auth/AuthAction";
-import styled from 'styled-components';
 import { base_url } from "../../Config/Auth";
-import { Switch ,Button} from "antd";
+import {  Button} from "antd";
 import DownloadIcon from "@mui/icons-material/Download";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 
 class OrganizationDocumentList extends Component {
     constructor(props) {
@@ -90,7 +89,7 @@ this.setState({
       <div className="overflow-y-auto max-h-[39rem]">
      <div class="flex flex-col  justify-center flex-wrap w-full max-sm:justify-between  max-sm:items-center">    
           {this.props.repositoryData.map((item) => (
-            <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[4rem] 
+            <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[3rem] 
             text-[#444444] m-3 p-1 w-wk flex flex-col  "
             
             key={item.id}>
@@ -133,7 +132,7 @@ this.setState({
                     <div className="text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                  
                     </div>
-                  {item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  ? (
+                  {(item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  || user.role === "ADMIN")  ? (
                       <Button
                             // style={{width:"5rem"}}
                         // onClick={this.handlePublishClick}
@@ -150,7 +149,7 @@ this.setState({
                     ):null} 
                   </div>
                   <div className=" flex font-medium flex-col  max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                  {item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  ? (
+                  {(item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true || user.role === "ADMIN") ? (
                  <Button
                  onClick={() => this.handlePrivateClick(item)}
              >
@@ -164,10 +163,14 @@ this.setState({
             title="Do you want to delete?"
              onConfirm={() => this.props.deleteOrgDocata(item.documentId)}
           >
-           {user.repositoryCreateInd ===true && (
-            <DeleteIcon
-              type="delete"
-              className=" !text-base cursor-pointer text-[red]"
+           {(user.repositoryCreateInd ===true || user.role === "ADMIN") && (
+            <DeleteOutlined
+            style={{
+              verticalAlign: "center",
+              marginLeft: "1rem",
+              fontSize:"1rem",
+              color: "red",
+            }}
             />
             )} 
           </StyledPopconfirm>
