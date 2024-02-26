@@ -80,7 +80,7 @@ const InvestorActionLeft = (props) => {
 
   return (
     <div class=" flex items-center">
-      {props.user.investorFullListInd===true || props.user.role==="ADMIN" ?
+    
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -100,7 +100,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-    :null}
+   
       
       <Tooltip 
       title={<FormattedMessage id="app.teams" defaultMessage="Teams" />}
@@ -123,6 +123,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+      {(props.user.investorFullListInd===true || props.user.role==="ADMIN") && (
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -142,6 +143,7 @@ const InvestorActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+  )}
       {/* <Tooltip>
         <Badge
           size="small"
