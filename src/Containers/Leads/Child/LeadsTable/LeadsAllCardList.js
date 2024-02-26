@@ -90,7 +90,7 @@ const LeadsAllCardList = (props) => {
           dataLength={allleadsInfo.length}
           next={handleLoadMore}
           hasMore={hasMore}
-          loader={fetchingAllLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+          loader={fetchingAllLeads?<div class="items-center">Loading...</div>:null}
           height={"75vh"}
         >
           {allleadsInfo.map((item) => {
@@ -145,16 +145,16 @@ const LeadsAllCardList = (props) => {
                           <Tooltip>
                             <div class="max-sm:w-full justify-between flex md:flex-col">
                              
-                              <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                              <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                                 {item.name}
                                 &nbsp;&nbsp;
                                 {date === currentdate ? (
-                                  <span class="text-xs text-[tomato] font-bold"
+                                  <div class="text-xs text-[tomato] font-bold"
                                   >
                                     New
-                                  </span>
+                                  </div>
                                 ) : null}
-                              </h4>
+                              </div>
                             </div>
                           </Tooltip>
                         </div>
@@ -228,33 +228,33 @@ const LeadsAllCardList = (props) => {
                   <div class="flex justify-between items-center w-wk ">
                     <div className=" flex font-medium  ">
              
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                         {item.countryDialCode && item.phoneNumber
                           ? `${item.countryDialCode} ${item.phoneNumber}`
                           : "Not Available"}
                        
-                      </h4>
+                      </div>
                     </div>
                     <div className=" flex font-medium ">
                      
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                       <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
                       {countryCode}
-                      </h4>
+                      </div>
                     </div>
                   </div>
                   <div class="flex justify-between items-center w-wk ">
                     <div className=" flex font-medium  ">
                     
-                      <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      <div class=" text-xs text-cardBody font-semibold  font-poppins">
                         {item.companyName || "Not Available"}
-                      </h4>
+                      </div>
                     </div>
                     <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                       {item.url !== null ? (
                         <Tooltip title={item.url}>
-                          <span
+                          <div
                          
                             style={{ cursor: "pointer" }}
                             onClick={() => {}}
@@ -265,16 +265,16 @@ const LeadsAllCardList = (props) => {
                                  className=" !text-base cursor-pointer text-green-800"
                               />
                             </a>
-                          </span>
+                          </div>
                         </Tooltip>
                       ) : null}
                     </div>
   
                     <div className=" flex font-medium  ">
                      
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      <div class=" text-xs text-cardBody font-poppins">
                         {item.sector}
-                      </h4>
+                      </div>
                     </div>
                   </div>
                   <div class="flex justify-between items-center w-wk ">
@@ -282,7 +282,7 @@ const LeadsAllCardList = (props) => {
                     
   
                       <div class=" text-xs text-cardBody font-poppins">
-                        <span>
+                        <div>
                           {item.assignedTo === null ? (
                             "None"
                           ) : (
@@ -292,13 +292,13 @@ const LeadsAllCardList = (props) => {
                               imgHeight={"1.8rem"}
                             />
                           )}
-                        </span>
+                        </div>
                       </div>
                     </div>
                     <div className=" flex font-medium ">
                      
-  
-                      <span>
+                    <Tooltip title={item.ownerName}>
+                      <div>
                         <MultiAvatar
                           primaryTitle={item.ownerName}
                           imageId={item.ownerImageId}
@@ -306,7 +306,8 @@ const LeadsAllCardList = (props) => {
                           imgWidth={"1.8rem"}
                           imgHeight={"1.8rem"}
                         />
-                      </span>
+                      </div>
+                      </Tooltip>
                     </div>
                     <div className=" flex font-medium ">
                      
@@ -390,12 +391,12 @@ const LeadsAllCardList = (props) => {
                           overlayStyle={{ maxWidth: "300px" }}
                           title={dataLoc}
                         >
-                          <span class="cursor-pointer"
+                          <div class="cursor-pointer"
                           >
                             <LocationOnIcon
                               className="!text-base cursor-pointer text-[#960a0a]"
                             />
-                          </span>
+                          </div>
                         </Tooltip>
                       </div>
                       <div>

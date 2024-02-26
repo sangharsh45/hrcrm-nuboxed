@@ -432,7 +432,7 @@ function NavMenu(props) {
         {/* )}  */}
         <hr/>
         {/* Talent */}
-       {(user.talentAccessInd === true && user.recruitProInd === true || user.role === "ADMIN") &&  (
+       {((user.talentAccessInd === true && user.recruitProInd === true) || (user.role === "ADMIN")) &&  (
             <Menu.Item key="/candidate" style={{ height: "1.7rem", 
             paddingLeft: "1rem", color: selectedMenuItem === '/candidate' ? 'tomato' : '#4bc076' }}>
               <Link to="/candidate" onClick={() => handleSelect('/candidate')}>
