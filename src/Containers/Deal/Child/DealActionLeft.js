@@ -30,6 +30,7 @@ const DealActionLeft = (props) => {
     dealsTeamRecord,
   } = props;
 
+  console.log("kkkd",props.dealFullListInd,props.user.role)
   return (
     <div class=" flex items-center">
       <Badge
@@ -209,6 +210,7 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
+        {(props.dealFullListInd===true || props.user.role==="ADMIN") && (
         <Tooltip
           title={   <FormattedMessage
             id="app.all"
@@ -240,7 +242,7 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
-     
+     )}
       <Tooltip
         title={
           <FormattedMessage
@@ -307,6 +309,7 @@ const mapStateToProps = ({ deal, auth, opportunity }) => ({
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
+  dealFullListInd:auth.userDetails.dealFullListInd
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

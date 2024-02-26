@@ -8,7 +8,6 @@ import { Formik, Form, Field, FastField } from "formik";
 import dayjs from "dayjs";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { getUnits } from "../../../../../Containers/Settings/Unit/UnitAction";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
@@ -28,7 +27,6 @@ import {
   getTaskForWorkflow,
  } from "../../../../Settings/SettingsAction";
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
-import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
@@ -408,14 +406,14 @@ const [priority,setpriority]=useState(props.selectedTask
                
                       <div class=" flex justify-between flex-col w-full">
                         
-                          <StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                             {/* Priority */}
                             <FormattedMessage
                               id="app.priority"
                               defaultMessage="Priority"
                             />
                             
-                          </StyledLabel>
+                          </div>
                         
                           <div class="flex">
                             <Tooltip title="High">
@@ -477,7 +475,7 @@ const [priority,setpriority]=useState(props.selectedTask
                  
                     <div class=" w-1/2  max-sm:w-wk ">
                       
-                      <StyledLabel>Type</StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Type</div>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                        onChange={handleTaskTypeChange}
@@ -519,7 +517,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2 ml-2 max-sm:w-wk">
                           
-                          <StyledLabel>Workflow</StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Workflow</div>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
                        onChange={handleWorkflowChange}
@@ -584,7 +582,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     {/* )} */}
                       {/* <div class=" w-1/2">
-                          <Spacer />
+                         
                       <StyledLabel>Task Stages</StyledLabel>
                       <Field
                     name="taskChecklistId"
@@ -614,17 +612,17 @@ const [priority,setpriority]=useState(props.selectedTask
 
 
                  
-                    <div style={{ width: "24%" }}>
+                    <div class="w-[24]">
                      
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.status"
                           defaultMessage="Status"
                         />
                         {/* Status */}
-                      </StyledLabel>
+                      </div>
 
-                      <div style={{ width: "100%" }}>
+                      <div class="w-full">
                         <ButtonGroup>
                           <StatusIcon
                             color="blue"
@@ -676,8 +674,8 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between w-full max-sm:flex-col">
+
+                  <div class="mt-3 flex justify-between w-full max-sm:flex-col">
                    
                     {/* <div class=" w-5/12 max-sm:w-wk">
                       <div class=" flex justify-between w-full">
@@ -702,7 +700,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div> */}
                   </div>
-                  <Spacer />
+                
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Field
@@ -724,7 +722,7 @@ const [priority,setpriority]=useState(props.selectedTask
                         }}
                       />
                     </div>
-                    <Spacer />
+            
                     <div class=" w-5/12">
                       <Field
                         // isRequired
@@ -747,7 +745,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       />
                     </div>
                   </div>
-                  <Spacer /> */}
+               */}
 
                
                   <div class=" flex justify-between">
@@ -928,7 +926,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" flex justify-between w-full">
                         {values.taskTypeId === "TSK52434477391272022" && (
                           <div class=" w-full">
-                            <StyledLabel>Complexity</StyledLabel>
+                           <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Complexity</div>
                             <div>
                               <Tooltip title="Easy">
                                 <Button
@@ -1008,7 +1006,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   </div>
                   <div>
-                    <Spacer />
+      
                     {/* {values.startDate && (
                       <>
                         {dayjs(todayDate).isSameOrBefore(
@@ -1018,17 +1016,17 @@ const [priority,setpriority]=useState(props.selectedTask
                         ) : (
                           <>
                             {" "}
-                            <span
+                            <div
                             >
                               <b>This Task occurs in the past !</b>
-                            </span>
+                            </div>
                           </>
                         )}
                       </>
                     )} */}
                   </div>
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk">
+                <div class="h-full w-w47.5 max-sm:w-wk">
                  
                   {/* <Field
                     name="assignedTo"
@@ -1079,16 +1077,16 @@ const [priority,setpriority]=useState(props.selectedTask
                       {({ selected, active }) => (
                         <>
                           <div className="flex items-center">
-                            <span
+                            <div
                               className={`ml-3 block truncate ${
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
                               {item.fullName}
-                            </span>
+                            </div>
                           </div>
                           {selected && (
-                            <span
+                            <div
                               className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
                                 active ? "text-white" : "text-indigo-600"
                               }`}
@@ -1107,7 +1105,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                   clipRule="evenodd"
                                 />
                               </svg>
-                            </span>
+                            </div>
                           )}
                         </>
                       )}
@@ -1119,7 +1117,7 @@ const [priority,setpriority]=useState(props.selectedTask
           </>
         )}
       </Listbox>
-                  <Spacer />
+            
                   {/* {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
                       name="included"
@@ -1170,8 +1168,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   /> */}
               
                  
-                  <Spacer />
-               
+         
+               <div class="mt-3">
                   <Field
                     name="taskDescription"
                     //label="Notes"
@@ -1183,7 +1181,8 @@ const [priority,setpriority]=useState(props.selectedTask
                     component={TextareaComponent}
                     inlineLabel
                   />
-                     <div class=" mt-4">
+                  </div>
+                     <div class=" mt-3">
                       <Field
                             type="text"
                             name="link"
@@ -1204,13 +1203,13 @@ const [priority,setpriority]=useState(props.selectedTask
                 
                  
                   
-                  <Spacer />
-                  <div class=" flex justify-between">
+          
+                  <div class="mt-3 flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
                           <div>
-                            <StyledLabel>Set Reminder </StyledLabel>
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder </div>
                           </div>
                           <div>
                             {/* <FlexContainer justifyContent="space-between"> */}
@@ -1252,8 +1251,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+        
+              <div class="mt-3 flex justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
