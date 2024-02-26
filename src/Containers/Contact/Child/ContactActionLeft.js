@@ -116,7 +116,7 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",
@@ -141,7 +141,7 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
@@ -154,7 +154,7 @@ const ContactActionLeft = (props) => {
         </Badge>
       </Tooltip>
       )}
-      {user.crmInd=== true && user.contactFullListInd===true && ( 
+      {(user.crmInd=== true && user.contactFullListInd===true || user.role === "ADMIN") && ( 
       <Tooltip
         title="All"
       >
@@ -168,7 +168,7 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
@@ -190,7 +190,7 @@ const ContactActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("dashboard")}
             style={{
               color: props.viewType === "dashboard" && "#1890ff",

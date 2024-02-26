@@ -465,7 +465,7 @@ function ContactCardList(props) {
         dataLength={contactByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingContacts?<div class="font-semibold" style={{ textAlign: 'center' }}>Loading More...</div>:null}
+        loader={fetchingContacts?<div style={{ textAlign: 'center' }}>Loading ...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page</p>}
       >
@@ -580,8 +580,8 @@ function ContactCardList(props) {
                                     <div class="text-sm text-cardBody font-poppins">
 
                                     {item.thirdPartyAccessInd === true
-    ?<Tooltip title="Provided"><AlarmOnIcon style={{color:"green",fontSize:"1rem"}}/></Tooltip> 
-    :  <Tooltip title="Not Provided"> <DoNotDisturbOnTotalSilenceIcon style={{color:"red",fontSize:"1rem"}}/></Tooltip>}
+    ?<Tooltip title="Provided"><AlarmOnIcon   className=" !text-base text-[green]"/></Tooltip> 
+    :  <Tooltip title="Not Provided"> <DoNotDisturbOnTotalSilenceIcon  className=" !text-base text-[red]"/></Tooltip>}
 
                                     </div>
                                 </div>
@@ -606,22 +606,24 @@ function ContactCardList(props) {
                     <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
+                className=" !text-base cursor-pointer text-[#4bc076]"
                 onClick={() => {
                   handleContactNotesDrawerModal(true);
                   handleSetCurrentContact(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                
               />
            </Tooltip>
            </div>
            <div>
            <Tooltip title="Pulse">
        <MonitorHeartIcon
+       className=" !text-base cursor-pointer text-[#df9697]"
                 onClick={() => {
                   handleContactPulseDrawerModal(true);
                   handleSetCurrentContact(item);
                 }}
-                style={{ fontSize: "1rem",cursor:"pointer", color: "#df9697" }}
+                
               />
            </Tooltip>
 
@@ -637,7 +639,7 @@ function ContactCardList(props) {
                   handleSetCurrentContactId(item);
                 }}
               >
-               <PhoneInTalkIcon style={{fontSize:"1rem"}}/>
+               <PhoneInTalkIcon     className=" !text-base cursor-pointer text-[blue]"/>
               </span>
             )}
             {item.doNotCallInd === true && (
@@ -657,7 +659,7 @@ function ContactCardList(props) {
            
             <MailOutlineIcon
               type="mail"
-              style={{ cursor: "pointer",fontSize:"1rem" }}
+              className=" !text-base cursor-pointer text-[red]"
               onClick={() => {
                 props.getContactById(item.contactId);
                 props.handleContactEmailDrawerModal(true);
@@ -675,7 +677,7 @@ function ContactCardList(props) {
                 props.handleContactPulseDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
-              <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697",cursor:"pointer",}}/>
+              <MonitorHeartIcon  className=" !text-base cursor-pointer text-[#df9697]"/>
             )}
             </span>
                         </div>
@@ -692,10 +694,8 @@ function ContactCardList(props) {
                 cursor: "pointer",
               }}
             >
-            <LocationOnIcon   style={{
-                cursor: "pointer",
-                fontSize: "1rem"
-              }}/>
+            <LocationOnIcon   
+            className=" !text-base cursor-pointer text-[#960A0A]"/>
             </span>
           </Tooltip>
           </div>
@@ -714,7 +714,7 @@ function ContactCardList(props) {
            
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem", color: "grey", }}
+                className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                   props.setEditContact(item);
                   handleUpdateContactModal(true);

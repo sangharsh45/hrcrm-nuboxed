@@ -78,7 +78,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                     setIsCopied(false);
                   }, 1500);
                 };
-                const tooltipContent = `${item.workplace}, ${item.location}`;
+                const tooltipContent = `${item.workplace}, ${item.locationName}`;
                 const showTooltip = tooltipContent.trim() !== ''; 
                  return (
                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
