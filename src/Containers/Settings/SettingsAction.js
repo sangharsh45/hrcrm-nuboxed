@@ -4352,7 +4352,8 @@ export const LinkOnboardingStagePublish = (data, cb) => (dispatch) => {
     });
 };
 
-export const createCurrencyConversion = (data) => (dispatch) => {
+export const createCurrencyConversion = (data,orgId,cb) => (dispatch) => {
+    
   dispatch({
     type: types.CREATE_CURRENCY_CONVERSION_REQUEST,
   });
@@ -4364,11 +4365,12 @@ export const createCurrencyConversion = (data) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(getOneTimeDeliveryCharge())
+      dispatch(getCurrencyConversion(orgId))
       dispatch({
         type: types.CREATE_CURRENCY_CONVERSION_SUCCESS,
         payload: res.data,
       });
+      cb && cb("Success");
     })
     .catch((err) => {
       console.log(err);
@@ -4376,6 +4378,7 @@ export const createCurrencyConversion = (data) => (dispatch) => {
         type: types.CREATE_CURRENCY_CONVERSION_FAILURE,
         payload: err,
       });
+      cb && cb("Failure");
     });
 };
 

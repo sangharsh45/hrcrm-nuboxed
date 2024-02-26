@@ -184,14 +184,14 @@
 //         render: (name, item, i) => {
 //           console.log(item);
 //           //   return (
-//           //     <span style={{ height: "2em" }}>
+//           //     <divn style={{ height: "2em" }}>
 //           //       <MultiAvatar
 //           //         primaryTitle={item.firstName}
 //           //         imageId={item.imageId}
 //           //         imgWidth={"auto"}
 //           //         imgHeight={"2em"}
 //           //       />
-//           //     </span>
+//           //     </divn>
 //           //   );
 //         },
 //       },
@@ -291,9 +291,9 @@
 //         width: "15%",
 //         render: (name, item, i) => {
 //           return (
-//             <span>
+//             <divn>
 //               {item.countryDialCode} {item.mobileNumber}
-//             </span>
+//             </divn>
 //           );
 //         },
 //       },
@@ -429,15 +429,15 @@
 //   fetchingDealContactList: deal.fetchingDealContactList,
 // });
 
-// const mapDispatchToProps = (dispatch) =>
+// const mapDidivtchToProps = (didivtch) =>
 //   bindActionCreators(
 //     {
 //         getDealContactList
 //     },
-//     dispatch
+//     didivtch
 //   );
 
-// export default connect(mapStateToProps, mapDispatchToProps)(LinkedDealContact);
+// export default connect(mapStateToProps, mapDidivtchToProps)(LinkedDealContact);
 
 // function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
 //   if (role === type) {
@@ -450,7 +450,7 @@
 //       <Button
 //         style={{
 //           padding: "0.375em",
-//           borderColor: "transparent",
+//           borderColor: "trandivrent",
 //           color: role === type ? "#1890ff" : "grey",
 //         }}
 //         ghost={role !== type}
@@ -638,7 +638,7 @@ class LinkedDealContact extends Component {
       <>
           <div className=' flex justify-end sticky top-28 z-auto'>          
 <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-                  <div className=" flex  w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                  <div className=" flex  w-[97.5%] p-2 bg-trandivrent font-bold sticky top-0 z-10">
                   <div className=" md:w-[5.12rem]"></div>
                       <div className=" md:w-[11.12rem]">Name</div>
                       <div className=" md:w-[9.5rem]">Designation</div>
@@ -810,15 +810,15 @@ const mapStateToProps = ({ deal }) => ({
   fetchingDealContactList: deal.fetchingDealContactList,
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDidivtchToProps = (didivtch) =>
   bindActionCreators(
     {
         getDealContactList
     },
-    dispatch
+    didivtch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinkedDealContact);
+export default connect(mapStateToProps, mapDidivtchToProps)(LinkedDealContact);
 
 function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
   if (role === type) {
@@ -831,7 +831,7 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
       <Button
         style={{
           padding: "0.375em",
-          borderColor: "transparent",
+          borderColor: "trandivrent",
           color: role === type ? "#1890ff" : "grey",
         }}
         ghost={role !== type}
