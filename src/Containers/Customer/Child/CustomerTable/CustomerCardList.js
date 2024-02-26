@@ -770,8 +770,9 @@ const [rowdata, setrowdata] = useState("");
   cancelText="No"
 >
 { user.erpInd === true && (
-                       <Button type="primary">
-                     <span class="text-sm" >
+                       <Button type="primary"
+                       style={{width:"8rem"}}>
+                     <span class="text-xs" >
                      <FormattedMessage
                         id="app.addascustomer"
                         defaultMessage="Add as Customer"

@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
@@ -62,12 +61,7 @@ class AddInvoiceModal extends Component {
           }
           width="65vw"
           visible={invoiceModal}
-          destroyOnClose
-          maskClosable={false}
-          style={{marginTop:"5rem"}}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.handleClose()}
-          footer={null}
         >
           <Suspense fallback={""}>
             <Formik
@@ -129,7 +123,7 @@ class AddInvoiceModal extends Component {
                         isColumn
                         component={InputComponent}
                         />
-                      <Spacer />
+                   <div class=" mt-3">
                       <Field
                         name="documentDescription"
                         label={
@@ -143,8 +137,9 @@ class AddInvoiceModal extends Component {
                         width={"100%"}
                         component={TextareaComponent}
                         />
-                      <Spacer />
-                      <div class=" flex justify-between">
+                        </div>
+                   
+                      <div class=" flex justify-between mt-3">
                               <>
                                 <div class=" w-2/6 mr-2"
                                 >
@@ -178,8 +173,8 @@ class AddInvoiceModal extends Component {
                     </div>
                   </div>
 
-                  <Spacer />
-                  <div class=" flex justify-end">
+               
+                  <div class=" flex justify-end mt-3">
                     <Button
                       htmlType="submit"
                       type="primary"

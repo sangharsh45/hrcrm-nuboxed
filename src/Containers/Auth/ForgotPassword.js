@@ -116,6 +116,7 @@ import Button from "antd/lib/button";
 import styled from "styled-components";
 import {  EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import FWLogo from "../../Assets/Images/name.jpg";
+import FWLogo2 from "../../Assets/Images/nuboxnew.jpg";
 
 
 /**
@@ -183,12 +184,19 @@ class ForgotPassword extends Component {
               width: "100%",
             }}
           >
-             <img
+             {/* <img
               className="big-logo"
               src={FWLogo}
               style={{ width: 200 }}
               alt="Tekorero logo"
+            /> */}
+              <img
+              className="big-logo"
+              src={FWLogo2}
+              style={{ width: 200 }}
+              alt="Tekorero logo"
             />
+               <br />
             <FormWrapper>
               <Title>Forgot Password</Title>
               <SubTitle>Link will be sent to your registered email id</SubTitle>

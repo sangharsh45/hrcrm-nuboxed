@@ -68,7 +68,7 @@ const LeadsActionLeft = (props) => {
         >
 
 
-          <span class=" md:mr-2 text-sm cursor-pointer"
+          <span class=" md:mr-1 text-sm cursor-pointer"
             onClick={() => props.setLeadsViewType("card")}
             style={{
               color: props.viewType === "card" && "#1890ff",
@@ -82,7 +82,7 @@ const LeadsActionLeft = (props) => {
       </Tooltip>
 
       {user.teamsAccessInd === true && (
-        <div class="md:ml-2">
+        <div class="md:">
 
           <Tooltip
             title="Teams"
@@ -92,7 +92,7 @@ const LeadsActionLeft = (props) => {
               count={(props.viewType === "teams" && props.leadsTeamCountData.LeadsTeam) || 0}
               overflowCount={999}
             >
-              <span class=" md:mr-2 text-sm cursor-pointer"
+              <span class=" md:mr-1 text-sm cursor-pointer"
                 onClick={() => props.setLeadsViewType("teams")}
                 style={{
                   color: props.viewType === "teams" && "#1890ff",
@@ -107,13 +107,13 @@ const LeadsActionLeft = (props) => {
 
         </div>
       )}
-      <div class="md:ml-2">
+      <div class="md:">
         {user.crmInd === true && user.leadsFullListInd === true && (
           <Tooltip
             title="All"
           >
             <Badge>
-              <span class=" md:mr-2 text-sm cursor-pointer"
+              <span class=" md:mr-1 text-sm cursor-pointer"
                 onClick={() => props.setLeadsViewType("all")}
                 style={{
                   color: props.viewType === "all" && "#1890ff",
@@ -127,7 +127,7 @@ const LeadsActionLeft = (props) => {
           </Tooltip>
         )}
       </div>
-      <div class="md:mr-2 ml-2  max-sm:ml-1">
+      <div class="md:mr-1 max-sm:ml-1">
         <Badge
           size="small"
           count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}

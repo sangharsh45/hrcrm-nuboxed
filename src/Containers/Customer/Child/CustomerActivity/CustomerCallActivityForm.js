@@ -824,7 +824,7 @@ function CustomerCallActivityForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer /> */}
+                 
                     <div class=" mt-3">
                     <div class=" w-full"><Field
                       name="callDescription"
