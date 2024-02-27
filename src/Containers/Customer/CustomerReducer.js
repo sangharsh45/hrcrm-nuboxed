@@ -432,7 +432,8 @@ export const customerReducer = (state = initialState, action) => {
       return { ...state, 
         addingCustomer: false, 
         addCustomerModal: false ,
-        customerByUserId:[action.payload,...state.customerByUserId]
+        customerByUserId:[action.payload,...state.customerByUserId],
+        allCustomers:[action.payload,...state.allCustomers]
         // customerByUserId: state.customerByUserId.map((item) => {
         //   if (item.customerId === action.payload.customerId) {
         //     return action.payload;

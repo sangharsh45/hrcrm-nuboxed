@@ -11,7 +11,7 @@ import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { updateContact } from "../../ContactAction";
-import Upload from "../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
@@ -199,7 +199,7 @@ class UpdateContactForm extends Component {
                 <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
                  <div class=" flex  flex-nowrap justify-between">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
                         {/* <div class=" w-w47.5 max-sm:w-full">

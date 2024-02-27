@@ -11,7 +11,7 @@ import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArra
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { addContact, addLinkContactByOpportunityId } from "../ContactAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { getCustomerData } from "../../Customer/CustomerAction";
 const { Option } = Select;
@@ -193,7 +193,7 @@ class ContactForm extends Component {
                 <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
                   <div class=" flex  flex-nowrap justify-between">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
                         {/* <div class=" w-2/5 max-sm:w-full">
@@ -409,7 +409,7 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                
                   <Field
                     name="notes"
                     // label="Notes"

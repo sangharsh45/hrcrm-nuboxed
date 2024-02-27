@@ -146,7 +146,7 @@ const [rowdata, setrowdata] = useState("");
           dataLength={allCustomers.length}
           next={handleLoadMore}
           hasMore={hasMore}
-          loader={fetchingAllCustomerList?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+          loader={fetchingAllCustomerList?<div class="flex justify-center">Loading...</div>:null}
           height={"75vh"}
         >
         
@@ -200,10 +200,10 @@ const [rowdata, setrowdata] = useState("");
             title={`${item.name}`}
           >{item.name}</Link>&nbsp;&nbsp;
           {date === currentdate ? (
-            <span class="text-xs text-[tomato] font-bold"
+            <div class="text-xs text-[tomato] font-bold"
             >
               New
-            </span>
+            </div>
           ) : null}
          
                                               </div>
@@ -268,7 +268,7 @@ const [rowdata, setrowdata] = useState("");
   
                                       <div class=" text-xs text-cardBody font-poppins">
                                       
-                                      <span>
+                                      <div>
                 {item.assignedTo === null ? (
                   "None"
                 ) : (
@@ -278,7 +278,7 @@ const [rowdata, setrowdata] = useState("");
                     imgHeight={"1.8rem"}
                   />
                 )}
-              </span>
+              </div>
                
                                       </div>
                                   </div>
@@ -286,15 +286,14 @@ const [rowdata, setrowdata] = useState("");
                          
                        
   
-                         <span>
+                                  <Tooltip title={item.ownerName}>
                 <MultiAvatar
                   primaryTitle={item.ownerName}
                   imageId={item.ownerImageId}
-                  imageURL={item.imageURL}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
-              </span>
+              </Tooltip>
                      </div>
                      </div>
                      <div class="flex justify-between items-center w-wk ">
@@ -309,7 +308,7 @@ const [rowdata, setrowdata] = useState("");
     cancelText="No"
   >
                          <Button type="primary">
-                       <span class="text-sm" >Convert as Customer</span>
+                       <div class="text-sm" >Convert as Customer</div>
                           </Button>
                           </Popconfirm>
                    
@@ -318,7 +317,7 @@ const [rowdata, setrowdata] = useState("");
                                   <div>
                                   <Tooltip title={item.url}>
                 {item.url !== "" ? (
-                  <span
+                  <div
                     
                     style={{ cursor: "pointer" }}
                     onClick={() => {}}
@@ -329,7 +328,7 @@ const [rowdata, setrowdata] = useState("");
                         className=" !text-base cursor-pointer text-[green]"
                       />
                     </a>
-                  </span>
+                  </div>
                 )
                 :<div class=" w-3">
                         
@@ -339,7 +338,7 @@ const [rowdata, setrowdata] = useState("");
           
               </div>
                           <div>
-                          <span  className="!text-base cursor-pointer"
+                          <div  className="!text-base cursor-pointer"
                 
                 onClick={() => {
                   props.getCustomerDetailsById(item.customerId);
@@ -351,7 +350,7 @@ const [rowdata, setrowdata] = useState("");
               >
                 {" "}
                 {user.pulseAccessInd === true && <MonitorHeartIcon  className=" !text-base cursor-pointer text-[#df9697]"/>}
-              </span> 
+              </div> 
                           </div>
                           <div>
               
@@ -481,7 +480,7 @@ const [rowdata, setrowdata] = useState("");
         dataLength={allCustomers.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllCustomerList?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+        loader={fetchingAllCustomerList?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
       
@@ -537,10 +536,10 @@ const [rowdata, setrowdata] = useState("");
         >{item.name}</Link> */}
                &nbsp;&nbsp;
         {date === currentdate ? (
-    <span class="text-xs text-[tomato] font-bold"
+    <div class="text-xs text-[tomato] font-bold"
     >
             New
-          </span>
+          </div>
         ) : null}
        
                                             </div>
@@ -604,7 +603,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
-                                    <span>
+                                    <div>
               {item.assignedTo === null ? (
                 "None"
               ) : (
@@ -614,7 +613,7 @@ const [rowdata, setrowdata] = useState("");
                   imgHeight={"1.8rem"}
                 />
               )}
-            </span>
+            </div>
              
                                     </div>
                                 </div>
@@ -623,15 +622,14 @@ const [rowdata, setrowdata] = useState("");
                        
                      
 
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
+                                <Tooltip title={item.ownerName}>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </Tooltip>
                    </div>
                    <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
@@ -643,7 +641,7 @@ const [rowdata, setrowdata] = useState("");
   cancelText="No"
 >
                        <Button type="primary">
-                     <span class="text-sm" >Convert as Customer</span>
+                     <div class="text-sm" >Convert as Customer</div>
                         </Button>
                         </Popconfirm>
                    </div>
@@ -652,7 +650,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
-                <span
+                <div
                   
                   style={{ cursor: "pointer" }}
                   onClick={() => {}}
@@ -663,7 +661,7 @@ const [rowdata, setrowdata] = useState("");
                         className=" !text-base cursor-pointer text-[green]"
                     />
                   </a>
-                </span>
+                </div>
               )
               :<div class=" w-3">
                       
@@ -673,7 +671,7 @@ const [rowdata, setrowdata] = useState("");
         
             </div>
                         <div>
-                        <span
+                        <div
               style={{ cursor: "pointer" ,fontSize: "1rem"}}
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
@@ -687,7 +685,7 @@ const [rowdata, setrowdata] = useState("");
               {user.pulseAccessInd === true && <MonitorHeartIcon  
             className=" !text-base cursor-pointer text-[#df9697]"
                 />}
-            </span> 
+            </div> 
                         </div>
                         <div>
             
@@ -733,7 +731,7 @@ const [rowdata, setrowdata] = useState("");
 
 </Tooltip>
 </div>
-<div>
+{/* <div>
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
@@ -747,7 +745,7 @@ const [rowdata, setrowdata] = useState("");
               />
             </Tooltip>
             )}
-</div>
+</div> */}
             </div> 
 
                       </div>
