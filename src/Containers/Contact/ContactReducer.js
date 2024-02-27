@@ -243,6 +243,9 @@ addingNotesByContactId:false,
   fetchingAllContacts: false,
   fetchingAllContactsError:false,
    allContacts:[],
+
+   contactCETdrawer:false,
+   clickCETcontactActivity:false,
 };
 
 export const contactReducer = (state = initialState, action) => {
@@ -891,8 +894,12 @@ export const contactReducer = (state = initialState, action) => {
             case types.HANDLE_CLAER_REDUCER_DATA_CONTACT:
               return { ...state, 
                 contactByUserId: [], 
-                // deletedTruck: [] 
               };
+              case types.HANDLE_CONTACT_CET_DRAWER:
+                return { ...state, contactCETdrawer: action.payload };
+
+                case types.HANDLE_CET_ACTIVITY_CONTACT_MODAL:
+                  return { ...state, clickCETcontactActivity: action.payload };
    default:
       return state;
 

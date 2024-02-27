@@ -3,19 +3,19 @@ import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dayjs from 'dayjs';
-import { getCallTimeline } from '../../LeadsAction';
+// import { getCallTimeline } from '../../LeadsAction';
 import { Tooltip } from "antd";
 import { MultiAvatar } from "../../../../Components/UI/Elements";
 
-const CallLeadsTable = (props) => {
+const ContactCETcard = (props) => {
   useEffect(() => {
-      props.getCallTimeline(props.rowdata.leadsId);
+    //   props.getCallTimeline(props.rowdata.leadsId);
   }, []);
 
   const { callTimeline, ratingValue } = props;
   return (
     <>
-        <div className="mt-4">
+        {/* <div className="mt-4">
         <Timeline>
           {callTimeline &&
             callTimeline.map((status, i) => (
@@ -40,7 +40,8 @@ const CallLeadsTable = (props) => {
             ))}
         </Timeline>
         
-      </div>
+      </div> */}
+      cls, evn,tsks
     </>
   );
 };
@@ -54,12 +55,12 @@ const mapStateToProps = ({ leads, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getCallTimeline,
+    //   getCallTimeline,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CallLeadsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactCETcard);
 
 
 

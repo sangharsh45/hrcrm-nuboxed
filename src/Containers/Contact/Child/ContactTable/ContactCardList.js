@@ -23,8 +23,10 @@ import {
   handleContactEmailDrawerModal,
   handleContactNotesDrawerModal,
   emptyContact,
-  handleContactPulseDrawerModal
+  handleContactPulseDrawerModal,
+  handleContactCETdrawer
 } from "../../ContactAction";
+import AddchartIcon from "@mui/icons-material/Addchart";
 import { FormattedMessage } from "react-intl";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
@@ -36,7 +38,8 @@ import AddContactEmailDrawerModal from "../UpdateContact/AddContactEmailDrawerMo
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import AddContactNotesDrawerModal from "../AddContactNotesDrawerModal";
 import AddContactPulseDrawerModal from "./AddContactPulseDrawerModal";
-
+const ContactCETdrawer =lazy(()=>import("./ContactCETdrawer"));
+ 
 const Option = Select;
 const UpdateContactModal = lazy(() =>
   import("../UpdateContact/UpdateContactModal")
@@ -131,6 +134,7 @@ function ContactCardList(props) {
     handleContactReactSpeechModal,
     addContactSpeechModal,
     updateContactModal,
+    contactCETdrawer
   } = props;
 
   if (isMobile) {
@@ -615,7 +619,7 @@ function ContactCardList(props) {
               />
            </Tooltip>
            </div>
-           <div>
+           {/* <div>
            <Tooltip title="Pulse">
        <MonitorHeartIcon
        className=" !text-base cursor-pointer text-[#df9697]"
@@ -627,7 +631,25 @@ function ContactCardList(props) {
               />
            </Tooltip>
 
-</div>
+</div> */}
+<div>
+                      <Tooltip
+                        title={
+                          <FormattedMessage
+                            id="app.activity"
+                            defaultMessage="Activity"
+                          />
+                        }
+                      >
+                        <AddchartIcon
+                        className="!text-base cursor-pointer text-blue-500"
+                          onClick={() => {
+                            props.handleContactCETdrawer(true);
+                            handleSetCurrentContact(item);
+                          }}
+                        />
+                      </Tooltip>
+                    </div>
             </div>
                                 <div class="flex flex-col w-6  max-sm:flex-row max-sm:justify-evenly items-center">
                     <div class="rounded-full w-5 h-5 cursor-pointer md:mt-4">
@@ -773,11 +795,11 @@ function ContactCardList(props) {
         addContactSpeechModal={addContactSpeechModal}
         handleSetCurrentContactId={handleSetCurrentContactId}
       />
-      {/* <AddDonotCallModal
-        addDonotCallModal={props.addDonotCallModal}
-        contactId={currentContactId}
-        handleDonotCallModal={props.handleDonotCallModal}
-      /> */}
+      <ContactCETdrawer
+        currentContact={currentContact}
+        contactCETdrawer={props.contactCETdrawer}
+        handleContactCETdrawer={props.handleContactCETdrawer}
+      />
       <AddContactDrawerModal
         item={currentContactId}
         addDrawerContactModal={props.addDrawerContactModal}
@@ -808,6 +830,7 @@ const mapStateToProps = ({
   addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
   addContactSpeechModal: contact.addContactSpeechModal,
   addDrawerContactModal: contact.addDrawerContactModal,
+  contactCETdrawer:contact.contactCETdrawer
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -824,7 +847,8 @@ const mapDispatchToProps = (dispatch) =>
       handleContactNotesDrawerModal,
       handleContactPulseDrawerModal,
       handleContactEmailDrawerModal,
-      emptyContact
+      emptyContact,
+      handleContactCETdrawer
     },
     dispatch
   );

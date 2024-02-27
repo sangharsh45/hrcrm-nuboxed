@@ -209,7 +209,8 @@ case types.HANDLE_LEADS_MODAL:
         return { ...state, 
           addingLeads: false, 
           addLeadsModal: false ,
-          leadsAllData:[action.payload,...state.leadsAllData]
+          leadsAllData:[action.payload,...state.leadsAllData],
+          allleadsInfo:[action.payload,...state.allleadsInfo]
         };
       case types.ADD_LEADS_FAILURE:
         return { ...state, addingLeads: false, addLeadsModal: false };    
