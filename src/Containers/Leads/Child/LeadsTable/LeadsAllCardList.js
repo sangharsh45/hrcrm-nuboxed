@@ -126,7 +126,7 @@ const LeadsAllCardList = (props) => {
                   className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
                 >
                  <div class="flex justify-between items-center w-wk ">
-                    <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                    <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                       <div className="flex max-sm:w-full ">
                         <div>
                          
@@ -276,6 +276,12 @@ const LeadsAllCardList = (props) => {
                         {item.sector}
                       </div>
                     </div>
+                    <div className=" flex font-medium  ">
+                     
+                     <div class=" text-xs text-cardBody font-poppins">
+                       {item.source}
+                     </div>
+                   </div>
                   </div>
                   <div class="flex justify-between items-center w-wk ">
                     <div className=" flex font-medium  ">
@@ -302,7 +308,6 @@ const LeadsAllCardList = (props) => {
                         <MultiAvatar
                           primaryTitle={item.ownerName}
                           imageId={item.ownerImageId}
-                          imageURL={item.imageURL}
                           imgWidth={"1.8rem"}
                           imgHeight={"1.8rem"}
                         />
@@ -454,16 +459,17 @@ const LeadsAllCardList = (props) => {
     <>
      <div className=' flex justify-center sticky top-28 z-auto'>
      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-      <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" flex  w-[92%] p-2 bg-transparent font-bold sticky top-0 z-10">
       <div className=" md:w-[12.12rem]">Name</div>
         <div className=" md:w-[9.1rem]"></div>
-        <div className=" md:w-[6.5rem] ">Phone #</div>
-        <div className="md:w-[9.8rem]">Country</div>
+        <div className=" md:w-[7.5rem] ">Phone #</div>
+        <div className="md:w-[5.8rem]">Country</div>
         <div className="md:w-[10.5rem]">Company</div>
-        <div className="md:w-[7.8rem]">Sector</div> 
+        <div className="md:w-[8.8rem]">Sector</div> 
+        <div className="md:w-[8.8rem]">Source</div> 
         <div className="md:w-[6rem]">Assigned to</div>
         <div className="md:w-[5.5rem]">Owner</div>
-        <div className="md:w-[3.3rem]">Qualify</div>
+        {/* <div className="md:w-[3.3rem]">Qualify</div> */}
         <div className="w-12"></div>
 
       </div>
@@ -507,7 +513,7 @@ const LeadsAllCardList = (props) => {
                 className="flex rounded-xl  bg-white mt-2 h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
-                  <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                  <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                     <div className="flex max-sm:w-full ">
                       <div>
                        
@@ -609,7 +615,7 @@ const LeadsAllCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
            
                     <div class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
@@ -618,7 +624,7 @@ const LeadsAllCardList = (props) => {
                      
                     </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[3rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
                     <div class=" text-xs text-cardBody font-poppins">
                     <CountryFlag1 countryCode={countryCode} />
@@ -659,6 +665,12 @@ const LeadsAllCardList = (props) => {
                       {item.sector}
                     </div>
                   </div>
+                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                   
+                   <div class=" text-xs text-cardBody font-poppins">
+                     {item.source}
+                   </div>
+                 </div>
                 </div>
                 <div class="flex md:items-center ">
                   <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
@@ -681,17 +693,16 @@ const LeadsAllCardList = (props) => {
                   <div className=" flex font-medium flex-col md:w-16  max-sm:flex-row w-full max-sm:justify-between">
                    
 
-                    <div>
+                  <Tooltip title={item.ownerName}>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
                         imageId={item.ownerImageId}
-                        imageURL={item.imageURL}
                         imgWidth={"1.8rem"}
                         imgHeight={"1.8rem"}
                       />
-                    </div>
+                      </Tooltip>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  {/* <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
 
                     <div class=" text-xs text-cardBody font-poppins"></div>
@@ -702,7 +713,7 @@ const LeadsAllCardList = (props) => {
                         convertInd={item.convertInd}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip title="Notes">
@@ -736,7 +747,7 @@ const LeadsAllCardList = (props) => {
                     </div>
                   </div>
 
-                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                  {/* <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     {user.leadsUpdateInd === true && user.crmInd === true && (
                       <div>
                         <Tooltip title="Edit">
@@ -767,7 +778,7 @@ const LeadsAllCardList = (props) => {
                       </div>
                     )}
                     <div></div>
-                  </div>
+                  </div> */}
                   <div class="flex flex-col w-[4%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip

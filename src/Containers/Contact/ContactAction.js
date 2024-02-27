@@ -1262,3 +1262,16 @@ export const ClearReducerDataOfContact = () => (dispatch) => {
     type: types.HANDLE_CLAER_REDUCER_DATA_CONTACT,
   });
 };
+
+export const handleContactCETdrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_CET_DRAWER,
+    payload: modalProps,
+  });
+};
+export const handleCETactivityContactModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CET_ACTIVITY_CONTACT_MODAL,
+    payload: modalProps,
+  });
+};
