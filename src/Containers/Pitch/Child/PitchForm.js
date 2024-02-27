@@ -5,8 +5,10 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
+import {getSectors} from "../../Settings/Sectors/SectorsAction"
+import {getCountry} from "../../Settings/Category/Country/CountryAction"
+import {getSources} from "../../Settings/Category/Source/SourceAction"
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { setClearbitData} from "../../Leads/LeadsAction";
 import {addPitch} from "../PitchAction"
@@ -22,7 +24,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  // phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function PitchForm (props) {
@@ -33,8 +35,33 @@ function PitchForm (props) {
  
   useEffect(()=> {
 props.getAllEmployeelist();
+props.getSources(props.orgId);
+props.getCountry();
+props.getSectors();
   },[]);
-
+  const sourceOption = props.sources.map((item) => {
+    return {
+      label: item.name
+      || null,
+      value: item.sourceId
+      ,
+    };
+  });
+  const dialCodeOption = props.country.map((item) => {
+    return {
+      label: `+${item.country_dial_code || ""}`,
+      value: item.country_dial_code
+      ,
+    };
+  });
+  const sectorOption = props.sectors.map((item) => {
+    return {
+      label: item.sectorName
+      || null,
+      value: item.sectorId
+      ,
+    };
+  });
     const {
       accounts,
       user,
@@ -63,6 +90,7 @@ props.getAllEmployeelist();
             sectorId: "",
             email: "",
             phoneNumber: "",
+            countryDialCode:"",
             fullName:"",
             userId: props.userId,
             notes: "",
@@ -87,7 +115,7 @@ props.getAllEmployeelist();
               },
             ],
           }}
-          // validationSchema={CustomerSchema}
+          validationSchema={CustomerSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             props.addPitch(
@@ -143,7 +171,7 @@ props.getAllEmployeelist();
                    
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-full">
+                        {/* <div class=" w-2/5 max-sm:w-full">
                           <Field
                             name="salutation"
                             label={
@@ -157,8 +185,8 @@ props.getAllEmployeelist();
                             inlineLabel
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-full">
+                        </div> */}
+                        <div class=" w-full max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -217,6 +245,7 @@ props.getAllEmployeelist();
                   </div>
 
                   <Field
+                  isRequired
                     name="email"
                     type="text"
                     label={
@@ -233,7 +262,7 @@ props.getAllEmployeelist();
                    
                       <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
+                        // selectType="dialCode"
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -242,8 +271,10 @@ props.getAllEmployeelist();
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        value={values.countryDialCode1}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        }
                         inlineLabel
                       />
                   
@@ -336,12 +367,11 @@ props.getAllEmployeelist();
                     </div>
                   </div>
                   <div class=" flex justify-between">
-                   {/* <div class=" w-1/2">
-               
-                      <FastField
+                  <div class=" w-w47.5">
+                      <Field
                         name="sectorId"
                         isColumnWithoutNoCreate
-                        selectType="sectorName"
+                        // selectType="sectorName"
                         label={
                           <FormattedMessage
                             id="app.sector"
@@ -349,13 +379,14 @@ props.getAllEmployeelist();
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        value={values.sectorId}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(sectorOption) ? sectorOption : []
+                        }
                       />
-                    
-                    </div> */}
-                    <div class=" w-full">
-                          <FastField
+                    </div>
+                    <div class=" w-w47.5">
+                          <Field
                             name="source"
                              label={
                               <FormattedMessage
@@ -364,50 +395,14 @@ props.getAllEmployeelist();
                               />
                             }
                             isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.sourceId}
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(sourceOption) ? sourceOption : []
+                            }
                             isColumn
                           />
                         </div>
                     </div>
-
-                  {/* <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="proposalValue"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.proposalValue"
-                            defaultMessage="Proposal Value"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                    <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="opportunityName"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.opportunityName"
-                            defaultMessage="Opportunity Name"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div> */}
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
@@ -529,14 +524,18 @@ props.getAllEmployeelist();
     );
 }
 
-const mapStateToProps = ({ auth,investor, leads,employee,pitch }) => ({
+const mapStateToProps = ({ auth,investor,source,countrys,sector, leads,employee,pitch }) => ({
     addingPitch: pitch.addingPitch,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
+  sources: source.sources,
+  country: countrys.country,
+orgId:auth.userDetails.organizationId,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   fullName: auth.userDetails.fullName,
+  sectors: sector.sectors,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -545,6 +544,9 @@ const mapDispatchToProps = (dispatch) =>
         addPitch,
       setClearbitData,
       getAllEmployeelist,
+      getSources,
+      getCountry,
+      getSectors
    
     },
     dispatch

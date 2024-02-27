@@ -297,11 +297,13 @@ const PitchCardList = (props) => {
                     
                     null
                   ) : (
+                    <Tooltip title={item.assignedTo}> 
                             <MultiAvatar
                               primaryTitle={item.assignedTo}
                               imgWidth={"1.8rem"}
                               imgHeight={"1.8rem"}
                             />
+                            </Tooltip>
                           )}
                           </>
                 )}
@@ -314,13 +316,14 @@ const PitchCardList = (props) => {
                       
   
                          <span>
+                         <Tooltip title={item.ownerName}> 
                 <MultiAvatar
                   primaryTitle={item.ownerName}
                   imageId={item.ownerImageId}
-                  imageURL={item.imageURL}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
+                </Tooltip>
               </span>
                    
                                  
@@ -486,8 +489,8 @@ const PitchCardList = (props) => {
                 /></div>
         <div className=" md:w-[5.5rem]"></div>
         <div className=" md:w-[7.1rem] "><FormattedMessage
-                  id="app.phoneno#"
-                  defaultMessage="phone #"
+                  id="app.mobile#"
+                  defaultMessage="mobile#"
                 /></div>
         <div className="md:w-[9.2rem]"><FormattedMessage
                   id="app.country"
@@ -497,6 +500,14 @@ const PitchCardList = (props) => {
                   id="app.company"
                   defaultMessage="company"
                 /></div>
+                    {/* <div className="md:w-[7.12rem]"><FormattedMessage
+                  id="app.Source"
+                  defaultMessage="Source"
+                /></div>
+                     <div className="md:w-[7.12rem]"><FormattedMessage
+                  id="app.Sector"
+                  defaultMessage="Sector"
+                /></div> */}
         <div className="md:w-[5.12rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
@@ -688,6 +699,21 @@ const PitchCardList = (props) => {
 </div>
 
                        </div>
+                       {/* <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       
+                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                           {item.source || "Not Available"}
+</div>
+
+                       </div> */}
+                       {/* <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                         
+                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                           {item.sector || "Not Available"}
+</div>
+
+                       </div> */}
+                     
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
@@ -714,6 +740,7 @@ const PitchCardList = (props) => {
                                     </div>
                                 </div> */}
                                 </div>
+                                
                                
           
      <div class="md:w-[1%]"></div>
@@ -733,11 +760,13 @@ const PitchCardList = (props) => {
                   
                   null
                 ) : (
+                  <Tooltip title={item.assignedTo}> 
                           <MultiAvatar
                             primaryTitle={item.assignedTo}
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
+                              </Tooltip>
                         )}
                         </>
               )}
@@ -750,13 +779,14 @@ const PitchCardList = (props) => {
                        {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
+                       <Tooltip title={item.ownerName}> 
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
+                </Tooltip>
             </span>
                    </div>
                                

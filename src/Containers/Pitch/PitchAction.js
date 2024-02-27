@@ -73,6 +73,12 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
           type: types.ADD_PITCH_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Succefully',
+          showConfirmButton: false,
+          // timer: 1500
+        })
         // cb && cb();
       })
       .catch((err) => {

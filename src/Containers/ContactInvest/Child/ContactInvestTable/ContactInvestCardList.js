@@ -8,7 +8,6 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
 import {  Tooltip } from "antd";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 import {
   handleUpdateContactModal,
@@ -27,6 +26,7 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   handleContactInvestNotesDrawerModal,
+  getContactInvestByUserId,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
 import { FormattedMessage } from "react-intl";
 const AddContactInvestNotesDrawerModal = lazy(() =>
@@ -720,6 +720,7 @@ const mapDispatchToProps = (dispatch) =>
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,
+      getContactInvestByUserId,
       handleContactEmailDrawerModal,
       emptyContactInvest,
       handleUpdateContactInvestModal,
