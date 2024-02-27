@@ -19,7 +19,7 @@ class CatalogueOrderModal extends Component {
                     destroyOnClose
                     maskClosable={false}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{ top: 40 }}
+                    style={{ top: 30 }}
                     onClose={() => handleAddOrderModal(false)}
                     footer={null}
                 >

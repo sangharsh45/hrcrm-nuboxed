@@ -11,7 +11,7 @@ import { TextareaComponent } from '../../../../../Components/Forms/Formik/Textar
 import { Button, Tooltip, message } from 'antd';
 import { getCurrency } from "../../../../Auth/AuthAction";
 import { FormattedMessage } from 'react-intl';
-import { addOrderForm, getContactDistributorList } from '../../AccountAction'
+import { createOrderForProduction, getContactDistributorList } from '../../AccountAction'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFieldArray1';
 const FormSchema = Yup.object().shape({
@@ -96,7 +96,7 @@ function AddAddressDetail(props) {
                 console.log(priority)
 
                 if (values.advancePayment < 100) {
-                    props.addOrderForm({
+                    props.createOrderForProduction({
                         ...values,
                         priority: priority || "",
 
@@ -107,7 +107,7 @@ function AddAddressDetail(props) {
             }}
         >
             {({ values, handleChange }) => (
-                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                <div class="overflow-y-auto h-[28rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
                             <StyledLabel><h3> <FormattedMessage
@@ -175,7 +175,7 @@ function AddAddressDetail(props) {
                             </div>
                         </div> */}
 
-                            <div class="justify-between flex mt-3">
+                            <div class="justify-between flex mt-2">
                                 <div class="w-[30%]">
                                     <Field
                                         name="paymentInTerms"
@@ -210,7 +210,7 @@ function AddAddressDetail(props) {
                                 </div>
                             </div>
 
-                            <div class="justify-between flex mt-3">
+                            <div class="justify-between flex mt-2">
                                 <div class="w-[22%]">
                                     <Field
                                         width={"100%"}
@@ -256,7 +256,7 @@ function AddAddressDetail(props) {
                                                 defaultMessage="High"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("High")}
@@ -277,7 +277,7 @@ function AddAddressDetail(props) {
                                                 defaultMessage="Medium"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Medium")}
@@ -298,7 +298,7 @@ function AddAddressDetail(props) {
                                                 defaultMessage="Low"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Low")}
@@ -314,6 +314,7 @@ function AddAddressDetail(props) {
                                                 ></Button>
                                             </Tooltip>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -330,10 +331,11 @@ function AddAddressDetail(props) {
                                     />
                                 </div>
 
-                                <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
+                                <div class="w-[47%]  mt-[48px] mr-[90px] mb-[17px] flex justify-end">
                                     <Button
                                         className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
                                         htmlType="Submit"
+                                        loading={props.creatingOrderForProduction}
                                     >
                                         <FormattedMessage
                                             id="app.save"
@@ -357,12 +359,13 @@ const mapStateToProps = ({ homeStepper, auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
+    creatingOrderForProduction: distributor.creatingOrderForProduction
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            addOrderForm,
+            createOrderForProduction,
             getCurrency,
             getContactDistributorList
         },
@@ -370,3 +373,29 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAddressDetail);
+
+function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {
+    const start = type;
+    console.log(start);
+    //////debugger;
+    if (status === type) {
+        size = "30px";
+    } else {
+        size = "16px";
+    }
+    return (
+        <Tooltip title={tooltip}>
+            <Button
+                ghost={status !== type}
+                style={{
+                    padding: "6px",
+                    borderColor: "transparent",
+                    color: status === type ? "orange" : "grey",
+                }}
+                onClick={onClick}
+            >
+                <i className={`fas ${iconType}`} style={{ fontSize: "22px" }}></i>
+            </Button>
+        </Tooltip>
+    );
+}
