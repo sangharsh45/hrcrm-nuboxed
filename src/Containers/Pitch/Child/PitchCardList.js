@@ -118,7 +118,7 @@ const PitchCardList = (props) => {
                   className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
                 >
                                        <div class="flex justify-between">
-                                  <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
+                                  <div className=" flex font-medium flex-col w-[1rem]   max-sm:w-full">
                                   <div className="flex max-sm:w-full items-center"> 
   <div>
   
@@ -483,7 +483,7 @@ const PitchCardList = (props) => {
     <>
   <div class="rounded-lg m-5 p-2 w-[97%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.1rem]"><FormattedMessage
+        <div className=" md:w-[10.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
@@ -492,22 +492,22 @@ const PitchCardList = (props) => {
                   id="app.mobile#"
                   defaultMessage="mobile#"
                 /></div>
-        <div className="md:w-[9.2rem]"><FormattedMessage
+        <div className="md:w-[5.2rem]"><FormattedMessage
                   id="app.country"
                   defaultMessage="country"
                 /></div>
-        <div className="md:w-[13.12rem]"><FormattedMessage
+        <div className="md:w-[7.12rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-                    {/* <div className="md:w-[7.12rem]"><FormattedMessage
+                    <div className="md:w-[5.12rem]"><FormattedMessage
                   id="app.Source"
                   defaultMessage="Source"
                 /></div>
-                     <div className="md:w-[7.12rem]"><FormattedMessage
+                     <div className="md:w-[5.12rem]"><FormattedMessage
                   id="app.Sector"
                   defaultMessage="Sector"
-                /></div> */}
+                /></div>
         <div className="md:w-[5.12rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
@@ -559,7 +559,7 @@ const PitchCardList = (props) => {
                                 
                                 >
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full items-center"> 
 <div>
 
@@ -669,8 +669,8 @@ const PitchCardList = (props) => {
 
 </div>  
      </div>  
-                                <div class="flex justify-between md:ml-4">
-                                <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div class="flex justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </div> */}
 
                            <div class="text-[0.82rem] text-cardBody font-poppins">
@@ -680,7 +680,7 @@ const PitchCardList = (props) => {
 </div>
 
                        </div>
-                       <div className=" flex font-medium flex-col md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                   {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
@@ -713,25 +713,7 @@ const PitchCardList = (props) => {
 </div>
 
                        </div> */}
-                     
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span className=" cursor-pointer"
-                  //type="edit"
-                 
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                    className="!text-base cursor-pointer text-[green]"
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
+            
                                 {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </div>
@@ -793,7 +775,25 @@ const PitchCardList = (props) => {
                          
                    <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
-
+         
+                                    <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                    {item.url !== null ? (
+              <Tooltip title={item.url}>
+                <span className=" cursor-pointer"
+                  //type="edit"
+                 
+                  onClick={() => {}}
+                >
+                  {" "}
+                  <a href={`item.url`} target="_blank">
+                    <ExploreIcon
+                    className="!text-base cursor-pointer text-[green]"
+                    />
+                  </a>
+                </span>
+              </Tooltip>
+            ) : null}
+                        </div>
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>

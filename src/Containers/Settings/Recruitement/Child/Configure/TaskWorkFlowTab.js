@@ -363,7 +363,7 @@ class TaskWorkflowTab extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" onClick={this.toggleInput1}>
+                <Button type="cancel" onClick={this.toggleInput1}>
                   Cancel
                
                 </Button>
@@ -428,11 +428,12 @@ class TaskWorkflowTab extends Component {
                           />
                         </Button>
                         <Button
+                             type="cancel"
                          style={{
                           border: "0.06em solid white",
                           color: "black",
                         }}
-                         type="primary" onClick={this.handleCancel}>
+                          onClick={this.handleCancel}>
                           <FormattedMessage
                             id="app.cancel"
                             defaultMessage="Cancel"
@@ -555,7 +556,7 @@ class TaskWorkflowTab extends Component {
                     <FormattedMessage id="app.save" defaultMessage="Save" />
                   </Button>
 
-                  <Button type="primary" ghost onClick={this.toggleInput}>
+                  <Button type="cancel"  onClick={this.toggleInput}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
@@ -566,7 +567,7 @@ class TaskWorkflowTab extends Component {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
+                    
                     htmlType="button"
                     onClick={this.toggleInput}
                   >
