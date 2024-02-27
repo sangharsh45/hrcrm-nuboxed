@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import {
     getProductionOrder,
+    handleProductOrderDetailsModal,
     handleOrderGenerateModal
 } from "../../AccountAction";
 import { FormattedMessage } from 'react-intl';
@@ -12,6 +13,7 @@ import { Button, Input, Tooltip } from 'antd';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { BundleLoader } from '../../../../../Components/Placeholder';
 import OrderGenerateModal from './OrderGenerateModal';
+import OrderDetailModal from './OrderDetailModal';
 
 
 const AccountOrder1Table = (props) => {
@@ -106,7 +108,7 @@ const AccountOrder1Table = (props) => {
                                                             class="underline cursor-pointer text-[#1890ff]"
                                                             onClick={() => {
                                                                 handleSetParticularOrderData(item);
-                                                                props.handleOrderDetailsModal(true);
+                                                                props.handleProductOrderDetailsModal(true);
                                                             }}
                                                         >{item.newOrderNo}</span>
                                                         &nbsp;&nbsp;
@@ -171,21 +173,28 @@ const AccountOrder1Table = (props) => {
                 </div>
             </div>
             <OrderGenerateModal
+                particularRowData={particularRowData}
                 handleOrderGenerateModal={props.handleOrderGenerateModal}
                 generateOrderModal={props.generateOrderModal}
             />
+            <OrderDetailModal
+                particularRowData={particularRowData}
+                showProductList={props.showProductList}
+                handleProductOrderDetailsModal={props.handleProductOrderDetailsModal} />
         </>
     )
 }
 const mapStateToProps = ({ distributor, auth, inventory }) => ({
     accountOrderProduction: distributor.accountOrderProduction,
     productionOrder: distributor.productionOrder,
+    showProductList: distributor.showProductList,
     generateOrderModal: distributor.generateOrderModal,
     fetchingDistributorByDistributorId: distributor.fetchingDistributorByDistributorId,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getProductionOrder,
-    handleOrderGenerateModal
+    handleOrderGenerateModal,
+    handleProductOrderDetailsModal
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrder1Table);

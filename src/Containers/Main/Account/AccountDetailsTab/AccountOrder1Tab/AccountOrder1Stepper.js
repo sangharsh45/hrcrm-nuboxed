@@ -90,7 +90,8 @@ class AccountOrder1Stepper extends Component {
                             <>
                                 {current > 1 ? null : (
                                     <>
-                                        <Button className="mt-2"
+                                        <Button style={{ marginRight: "3rem", marginTop: "65px" }}
+                                            className=" w-16 absolute top-3/4 right-0"
                                             type="primary"
                                             onClick={() => this.next()}
 
@@ -106,7 +107,7 @@ class AccountOrder1Stepper extends Component {
                         )}
 
                         {current > 0 && (
-                            <Button className="mt-1" onClick={() => this.prev()}>
+                            <Button className=" w-16 absolute top-3/4 right-0 mt" style={{ marginRight: "1rem", marginTop: "90px" }} onClick={() => this.prev()}>
                                 <FormattedMessage
                                     id="app.previous"
                                     defaultMessage="Previous"

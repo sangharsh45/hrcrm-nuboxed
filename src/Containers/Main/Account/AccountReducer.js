@@ -1980,7 +1980,7 @@ export const distributorReducer = (state = initialState, action) => {
         fetchingOpportunityRecordError: true,
       };
     case types.HANDLE_ADD_ORDER_MODAL:
-      return { ...state, addCatalogueOrderModal: action.payload };
+      return { ...state, addCatalogueOrderModal: action.payload, productByDistributor: [] };
 
     case types.HANDLE_UPDATE_ORDER_MODAL:
       return { ...state, updateOrderModal: action.payload };
@@ -2007,6 +2007,13 @@ export const distributorReducer = (state = initialState, action) => {
     case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS:
       return {
         ...state, addingUnitForCatalogueItem: false,
+        productByDistributor: state.productByDistributor.map((item) => {
+          if (item.productId == action.payload.productId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_FAILURE:
       return {
@@ -2035,6 +2042,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingAllProductForOrder: false,
+        addCatalogueOrderModal: false
       };
     case types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE:
       return {

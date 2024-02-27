@@ -2623,7 +2623,7 @@ export const addAllProductInOrder = (data, id, orderId) => (dispatch) => {
       console.log(res);
       Swal.fire({
         icon: 'success',
-        title: 'All items added to the order',
+        title: 'Items added to the order',
         showConfirmButton: false,
         timer: 1500
       })

@@ -1,113 +1,4 @@
-// import React, { useEffect, useState } from 'react'
-// import { StyledTable } from '../../../../../Components/UI/Antd'
-// import { getProductListByDistributor, addAllProductInOrder } from "../../AccountAction"
-// import { bindActionCreators } from 'redux'
-// import { connect } from 'react-redux'
-// import { Button } from 'antd'
-// import moment from 'moment'
-
-// const AddCatalogueTable = (props) => {
-
-//     useEffect(() => {
-//         props.getProductListByDistributor(props.distributorId, props.orderId)
-//     }, [])
-
-//     const handleFinalSubmit = () => {
-//         props.addAllProductInOrder({
-//             type: "Catalogue",
-//             distributorId: props.distributorId,
-//             orderId: props.orderId,
-//             products: props.productByDistributor,
-//             userId: props.userId,
-//             createdBy: props.userId,
-//             subscriptionType: "Onetime",
-//             deliveryType: "Daily",
-//             deliveryUnit: "Instance",
-//             noOfDays: 1,
-//             orgId: props.orgId,
-//             deliveryStartDate: moment(),
-//             deliveryEndDate: moment(),
-//             subscriptionStartDate: moment()
-//         }, props.distributorId, props.orderId)
-//     }
-//     const column = [
-//         {
-//             title: "",
-//             width: "1%"
-//         },
-
-//         {
-//             title: "Name",
-//             width: "15%",
-//             dataIndex: 'name'
-//         },
-
-//         {
-//             title: "Category",
-//             width: "18%",
-//             dataIndex: "categoryName"
-//         },
-//         {
-//             title: "Sub Category",
-//             width: "18%",
-//             dataIndex: "subCategoryName"
-//         },
-//         {
-//             title: "Attribute",
-//             width: "10%",
-//             dataIndex: "attributeName"
-//         },
-//         {
-//             title: "Sub Attribute",
-//             width: "10%",
-//             dataIndex: "subAttributeName"
-//         },
-//         {
-//             title: "Units",
-//             width: "13%",
-//             dataIndex: "quantity",
-
-//         },
-
-
-//     ];
-
-//     return (
-//         <>
-//             <StyledTable
-//                 dataSource={props.productByDistributor}
-//                 pagination={false}
-//                 columns={column}
-//             />
-//             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-//                 <Button
-//                     disabled={!props.productByDistributor.length}
-//                     type="primary"
-//                     onClick={handleFinalSubmit}
-//                 >
-//                     Submit
-//                 </Button>
-//             </div>
-//         </>
-//     )
-// }
-
-// const mapStateToProps = ({ distributor, auth }) => ({
-//     productByDistributor: distributor.productByDistributor,
-//     userId: auth.userDetails.userId,
-//     orgId: auth.userDetails.organizationId,
-// });
-// const mapDispatchToProps = dispatch =>
-//     bindActionCreators({
-//         getProductListByDistributor,
-//         addAllProductInOrder
-//     }, dispatch);
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddCatalogueTable);
-
-
 import React, { useEffect, useState } from 'react'
-import { StyledTable } from '../../../../../Components/UI/Antd'
 import { getProductListByDistributor, addAllProductInOrder } from "../../AccountAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -139,8 +30,8 @@ const AddCatalogueTable = (props) => {
     }
     return (
         <>
-            <div className=' flex justify-end sticky top-28 z-auto'>
-                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+            <div className='sticky top-20 z-auto'>
+                <div class="rounded-lg mx-5 my-2 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[9.41rem]">
                             <FormattedMessage
@@ -167,14 +58,7 @@ const AddCatalogueTable = (props) => {
                             />
                         </div>
                     </div>
-                    {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
-        height={"75vh"}
-      > */}
-                    <div class="overflow-x-auto h-[64vh]">
+                    <div class="overflow-x-auto h-[38vh]">
                         {props.productByDistributor.map((item) => {
 
                             return (
@@ -214,17 +98,19 @@ const AddCatalogueTable = (props) => {
                             )
                         })}
                     </div>
-                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <Button
-                            disabled={!props.productByDistributor.length}
-                            type="primary"
-                            onClick={handleFinalSubmit}
-                        >
-                            Submit
-                        </Button>
-                    </div>
+                </div>
+                <div class=' flex justify-end mr-20'>
+                    <Button
+                        disabled={!props.productByDistributor.length}
+                        type="primary"
+                        loading={props.addingAllProductForOrder}
+                        onClick={handleFinalSubmit}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </div>
+
         </>
     )
 }
@@ -232,6 +118,7 @@ const mapStateToProps = ({ distributor, auth, inventory }) => ({
     productByDistributor: distributor.productByDistributor,
     userId: auth.userDetails.userId,
     orgId: auth.userDetails.organizationId,
+    addingAllProductForOrder: distributor.addingAllProductForOrder
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getProductListByDistributor,

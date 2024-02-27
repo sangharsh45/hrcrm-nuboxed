@@ -1,122 +1,112 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../../Components/UI/Antd";
-import { getCatalogueListById } from "../../AccountAction";
-import CatalogueTableByProductId from "./CatalogueTableByProductId";
-
+import { getProductionOrderDetails } from "../../AccountAction";
+import { FormattedMessage } from "react-intl";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function OrderCatalogueDetails(props) {
     useEffect(() => {
-        props.getCatalogueListById(props.particularRowData.orderId)
+        props.getProductionOrderDetails(props.particularRowData.orderId)
     }, [])
-
-    const [show, setShow] = useState(false)
-    const [data, setData] = useState({})
-
-    const handleNameClick = (item) => {
-        setShow(!show)
-        setData(item)
-    }
-    const columns = [
-        {
-            title: "",
-            dataIndex: "",
-            width: "1%",
-        },
-        {
-            title: "Name",
-            dataIndex: "name",
-            width: "15%",
-            render: (text, item) => {
-                return (
-                    <>
-                        <span
-                            onClick={() => handleNameClick(item)}
-                            style={{
-                                cursor: "pointer",
-                                textDecoration: "underline",
-                                color: show && data.productId === item.productId ? "red" : "green"
-                            }}>
-                            {item.name}</span>
-                    </>
-                )
-            }
-
-        },
-        {
-            title: "Category",
-            dataIndex: "categoryName",
-            width: "9%",
-        },
-        {
-            title: "Sub Category",
-            dataIndex: "subCategoryName",
-            width: "9%",
-        },
-        {
-            title: "Attribute",
-            dataIndex: "attributeName",
-            width: "9%",
-
-        },
-        {
-            title: "Sub Attribute",
-            dataIndex: "subAttributeName",
-            width: "9%",
-        },
-        {
-            title: "Quantity",
-            dataIndex: "quantity",
-            width: "9%",
-        },
-
-
-    ];
-
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(0);
+    const handleLoadMore = () => {
+        setPage(page + 1);
+    };
     return (
         <>
-            <StyledTable
-                columns={columns}
-                dataSource={props.catalogueById}
-                pagination={false}
-                scroll={{ y: 600 }}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {show &&
-                <CatalogueTableByProductId
-                    data={data}
-                    orderId={props.particularRowData.orderId}
-                />}
-            {/* {expand && (
-                <DistributorPhoneTaskTable
-                    phoneId={phoneId}
-                    RowData={RowData} />
-            )}
-            <PhoneNotesOrderModal
-                RowData={RowData}
-                phoNotesOrderModal={props.phoNotesOrderModal}
-                handlePhoneNotesOrderModal={props.handlePhoneNotesOrderModal}
-            />
-            {spares && (
-                <AddingSpareList
-                    phoneId={phoneId}
-                    RowData={RowData}
-                />
-            )} */}
+            <div className=' flex justify-end sticky top-28 z-auto'>
+                <div class="rounded-lg m-5 p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex justify-between w-[90.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[9.41rem]">
+                            <FormattedMessage
+                                id="app.name"
+                                defaultMessage="Name"
+                            />
+                        </div>
+                        <div className=" md:w-[8.1rem]">
+                            <FormattedMessage
+                                id="app.category"
+                                defaultMessage="Category"
+                            />
+                        </div>
+                        <div className=" md:w-[11.2rem]">
+                            <FormattedMessage
+                                id="app.attribute"
+                                defaultMessage="Attribute"
+                            />
+                        </div>
+                        <div className="md:w-[5.8rem]">
+                            <FormattedMessage
+                                id="app.units"
+                                defaultMessage="Units"
+                            />
+                        </div>
+                    </div>
+                    <InfiniteScroll
+                        dataLength={props.productionOrderDetail.length}
+                        next={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={props.fetchingProductionDetailById ? <div class="text-center font-semibold text-xs">Loading...</div> : null}
+                        height={"75vh"}
+                    >
+                        {props.productionOrderDetail.map((item) => {
+
+                            return (
+                                <div >
+                                    <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3">
+                                        <div class="flex w-3/4">
+
+                                            <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.name}
+
+                                                </div>
+                                            </div>
+
+                                            <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.categoryName} {item.subCategoryName}
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.attributeName} {item.subAttributeName}
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.quantity}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            )
+                        })}
+                    </InfiniteScroll>
+                </div>
+
+            </div>
+
         </>
-    );
+    )
 }
 
 const mapStateToProps = ({ distributor }) => ({
-    catalogueById: distributor.catalogueById
+    productionOrderDetail: distributor.productionOrderDetail,
+    fetchingProductionDetailById: distributor.fetchingProductionDetailById
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getCatalogueListById
+            getProductionOrderDetails
         },
         dispatch
     );

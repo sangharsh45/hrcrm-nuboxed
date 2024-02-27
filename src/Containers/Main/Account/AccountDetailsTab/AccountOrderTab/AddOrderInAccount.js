@@ -256,7 +256,7 @@ function AddOrderInAccount(props) {
                                                 defaultMessage="High"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("High")}
@@ -277,7 +277,7 @@ function AddOrderInAccount(props) {
                                                 defaultMessage="Medium"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Medium")}
@@ -298,7 +298,7 @@ function AddOrderInAccount(props) {
                                                 defaultMessage="Low"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Low")}
