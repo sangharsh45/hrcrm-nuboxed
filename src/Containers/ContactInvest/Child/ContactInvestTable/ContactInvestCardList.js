@@ -29,6 +29,7 @@ import {
   getContactInvestByUserId,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
 import { FormattedMessage } from "react-intl";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const AddContactInvestNotesDrawerModal = lazy(() =>
   import("../AddContactInvestNotesDrawerModal")
 );
@@ -423,7 +424,7 @@ function ContactInvestCardList(props) {
         height={"75vh"}
       >
        
-      {filterData.map((item) => { 
+       { !fetchingContactsInvest && filterData.length === 0 ?<NodataFoundPage />:filterData.map((item,index) =>  {
         
          const currentdate = dayjs().format("DD/MM/YYYY");
          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
@@ -540,19 +541,18 @@ function ContactInvestCardList(props) {
                        {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    
-              <Tooltip title={item.ownerName}>
+              {/* <Tooltip title={item.ownerName}> */}
                 <div class="max-sm:flex justify-end mt-1">
             
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
            
             </div>
-          </Tooltip>
+          {/* </Tooltip> */}
 
                    </div>
                                 <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">

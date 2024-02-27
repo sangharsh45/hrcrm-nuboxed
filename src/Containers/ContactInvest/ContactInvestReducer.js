@@ -73,7 +73,8 @@ export const contactInvestReducer = (state = initialState, action) => {
       return { ...state, addingContactInvest: false, 
         addingContactInvest: false,
         addContactInvestModal:false,
-        contactiNVESTbyId:[action.payload,...state.contactiNVESTbyId]
+        contactiNVESTbyId:[action.payload,...state.contactiNVESTbyId],
+        allContactInvestData:[action.payload,...state.allContactInvestData]
        };
     case types.ADD_CONTACT_INVEST_FAILURE:
       return { ...state, addingContactInvest: false, addContactInvestModal: false };

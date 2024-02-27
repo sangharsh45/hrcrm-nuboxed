@@ -21,6 +21,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BundleLoader } from "../../../Components/Placeholder";
 import CountryFlag1 from "../../Settings/Category/Country/CountryFlag1";
+import NodataFoundPage from "../../../Helpers/ErrorBoundary/NodataFoundPage";
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
 const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
 const StatusPitchToggle =lazy(()=>import("../Child/StatusPitchToggle"));
@@ -495,7 +496,7 @@ const PitchAllCardList = (props) => {
         loader={fetchingAllPitch?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
-   {props.allPitchData.map((item) => { 
+  { !fetchingAllPitch && props.allPitchData.length === 0 ?<NodataFoundPage />:props.allPitchData.map((item,index) =>  {
  const currentdate = dayjs().format("DD/MM/YYYY");
  const date = dayjs(item.creationDate).format("DD/MM/YYYY");
  const countryCode = item.address[0].country_alpha2_code   

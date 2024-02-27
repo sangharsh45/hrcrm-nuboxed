@@ -478,8 +478,7 @@ function InvestorCardList(props) {
         height={"75vh"}
       >
         
-        {investorsbyId.length > 0 ? (
-  investorsbyId.map((item) => {
+        { !fetchingInvestors && investorsbyId.length === 0 ?<NodataFoundPage />:investorsbyId.map((item,index) =>  {
          const currentdate = dayjs().format("DD/MM/YYYY");
          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -603,11 +602,13 @@ function InvestorCardList(props) {
                   
                   null
                 ) : (
+                  <Tooltip title={item.assignedTo}> 
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
+                   </Tooltip>
                 )}
                 </>
               )}
@@ -620,13 +621,14 @@ function InvestorCardList(props) {
                        {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
+                       <Tooltip title={item.ownerName}> 
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
+                   </Tooltip>
             </span>
                    </div>
                    </div>
@@ -731,7 +733,7 @@ function InvestorCardList(props) {
               />
             </Tooltip> </div> */}
             <div>
-            {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
+            {user.imInd === true  &&  user.investorUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
@@ -741,7 +743,7 @@ function InvestorCardList(props) {
                 }}
               />
             </Tooltip>
-            )}
+           )} 
             </div>
                       </div> 
           
@@ -751,11 +753,8 @@ function InvestorCardList(props) {
 
 
                     )
-                })
-                ) : (
-                  // "no data"
-                 <NodataFoundPage/>
-                )}
+                })}
+
      </InfiniteScroll> 
      </div>
      

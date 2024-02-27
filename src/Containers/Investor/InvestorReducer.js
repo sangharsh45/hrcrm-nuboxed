@@ -8,6 +8,10 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+  fetchingDialCode: false,
+  fetchingDialCodeError: false,
+  dialCodeList:[],
+
    
 
   addinginvestActivityTask: false,
@@ -171,6 +175,7 @@ export const investorReducer = (state = initialState, action) => {
         addingInvestor: false,
         addInvestorModal: false,
         investorsbyId: [action.payload, ...state.investorsbyId],
+        allInvestorsbyId: [action.payload, ...state.allInvestorsbyId],
         clearbit: null
       };
     case types.ADD_INVESTOR_FAILURE:
@@ -573,6 +578,23 @@ export const investorReducer = (state = initialState, action) => {
                           fetchingInvestorDealsData: false,
                           fetchingInvestorDealsDataError: true,
                         };
+
+
+                        case types.GET_DIAL_CODE_REQUEST:
+
+                          return { ...state, fetchingDialCode: true };
+                        case types.GET_DIAL_CODE_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingDialCode: false,
+                            dialCodeList: action.payload,
+                          };
+                        case types.GET_DIAL_CODE_FAILURE:
+                          return {
+                            ...state,
+                            fetchingDialCode: false,
+                            fetchingDialCodeError: true,
+                          };
 
 default:
       return state;

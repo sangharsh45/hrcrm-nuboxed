@@ -11,6 +11,10 @@ const initialState = {
     fetchingOpportunityRecordError: false,
     opportunityRecord:[],
 
+    fetchingAllPitchRecords: false,
+    fetchingAllPitchRecordsError: false,
+    pitchAllRecord:{},
+
     fetchingAllPitch: false,
       fetchingAllPitchError: false,
       allPitchData:[],
@@ -355,6 +359,22 @@ case types.GET_PITCH_REQUEST:
                 ...state,
                 fetchingPitchRecords: false,
                 fetchingPitchRecordsError: true,
+              };
+
+              
+            case types.GET_PITCH_ALL_RECORDS_REQUEST:
+              return { ...state, fetchingAllPitchRecords: true };
+            case types.GET_PITCH_ALL_RECORDS_SUCCESS:
+              return {
+                ...state,
+                fetchingAllPitchRecords: false,
+                pitchAllRecord: action.payload,
+              };
+            case types.GET_PITCH_ALL_RECORDS_FAILURE:
+              return {
+                ...state,
+                fetchingAllPitchRecords: false,
+                fetchingAllPitchRecordsError: true,
               };
   
               case types.HANDLE_ASSI_MODAL:

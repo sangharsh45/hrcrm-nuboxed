@@ -10,7 +10,7 @@ import {getCountries} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../InvestorAction"
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import {AddInvestor} from "../InvestorAction";
+import {AddInvestor,getDialCode} from "../InvestorAction";
 import {setClearbitData} from "../../Customer/CustomerAction";
 import { Listbox} from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -25,7 +25,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
  // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+   phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function InvesterForm(props) {
@@ -49,6 +49,7 @@ function InvesterForm(props) {
     props.getSectors();
      props.getAllEmployeelist();
      props.getCountries();
+     props.getDialCode();
      props.getInvestorList(props.orgId)
   }, []);
 
@@ -100,7 +101,7 @@ function InvesterForm(props) {
    
 
  
-    const sortedCountry =props.countries.sort((a, b) => {
+    const sortedCountry =props.dialCodeList.sort((a, b) => {
       const nameA = a.country_dial_code.toLowerCase();
       const nameB = b.country_dial_code.toLowerCase();
       // Compare department names
@@ -135,7 +136,7 @@ function InvesterForm(props) {
             country: props.user.country,
             email: "",
             source: "",
-            countryDialCode: props.user.countryDialCode,
+            countryDialCode: "",
             phoneNumber: "",
             fullName:"",
             category: checked ? "Both" : whiteblue ? "White" : "Blue",
@@ -249,7 +250,7 @@ function InvesterForm(props) {
                   />                   */}
                    <div class=" flex justify-between mt-3">
                     <div class=" w-3/12 max-sm:w-[30%]">
-                      <FastField
+                      <Field
                         name="countryDialCode"
                         selectType="dialCode"
                         isColumnWithoutNoCreate
@@ -267,7 +268,7 @@ function InvesterForm(props) {
                             ? countryNameOption
                             : []
                         }
-                        value={values.countryDialCode1}
+                        // value={values.countryDialCode1}
                         inlineLabel
                       />
                     </div>
@@ -519,6 +520,7 @@ const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector
   clearbit: customer.clearbit,
   user: auth.userDetails,
   countries:auth.countries,
+  dialCodeList:investor.dialCodeList,
   allEmployeeList:investor.allEmployeeList,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
@@ -532,6 +534,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getCountries,
+      getDialCode,
         AddInvestor,
       setClearbitData,
       getSectors,

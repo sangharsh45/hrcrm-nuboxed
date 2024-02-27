@@ -9,7 +9,7 @@ import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { Input, Tooltip,Badge,Avatar } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
-import {getPitchRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
+import {getPitchRecords,getPitchAllRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
 import { FormattedMessage } from "react-intl";
 const { Search } = Input;
 const Option = StyledSelect.Option;
@@ -35,16 +35,17 @@ const PitchActionLeft = (props) => {
     }
   };
   const dummy = ["cloud", "azure", "fgfdg"];
-  // useEffect(() => {
-  //   if (props.viewType === "card") {
-  //     props.getPitchRecords(props.userId);
-  //   } else if (props.viewType === "all") {
-  //     props.getPitchRecords(props.userId);
-  //   }
-  // }, [props.viewType, props.userId]);
   useEffect(() => {
-    props.getPitchCount(props.userId)
-    }, [props.userId]);
+    if (props.viewType === "card") {
+      props.getPitchCount(props.userId);
+    } else if (props.viewType === "all") {
+      props.getPitchAllRecords();
+    }
+  }, [props.viewType, props.userId]);
+  // useEffect(() => {
+  //   props.getPitchCount(props.userId)
+  //   props.getPitchAllRecords
+  //   }, [props.userId]);
  
  
   const suffix = (
@@ -115,7 +116,7 @@ const PitchActionLeft = (props) => {
       >
              <Badge
         size="small"
-        count={(props.viewType === "all" && props.pitchCount.InvestorLeadsDetails) || 0}
+        count={(props.viewType === "all" && props.pitchAllRecord.InvestorLeadsDetails) || 0}
         overflowCount={999}
       >
         <span   class=" mr-1 text-sm cursor-pointer"
@@ -198,7 +199,8 @@ const mapStateToProps = ({pitch,auth}) => ({
   pitchRecord:pitch.pitchRecord,
   pitchCount:pitch.pitchCount,
   userId: auth.userDetails.userId,
-  user:auth.userDetails
+  user:auth.userDetails,
+  pitchAllRecord:pitch.pitchAllRecord,
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -206,7 +208,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   ClearReducerDataOfPitch,
   getPitch,
   getPitchCount,
-  searchPitchName
+  searchPitchName,
+  getPitchAllRecords
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PitchActionLeft));

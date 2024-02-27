@@ -28,6 +28,7 @@ import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CountryFlag1 from "../../Settings/Category/Country/CountryFlag1";
+import NodataFoundPage from "../../../Helpers/ErrorBoundary/NodataFoundPage";
 const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
 const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
@@ -530,7 +531,7 @@ const PitchCardList = (props) => {
         loader={fetchingPitch?<div class="flex justify-center" >Loading...</div>:null}
         height={"75vh"}
       >
-   {props.pitchData.map((item) => { 
+    { !fetchingPitch && props.pitchData.length === 0 ?<NodataFoundPage />:props.pitchData.map((item,index) =>  {
  const currentdate = dayjs().format("DD/MM/YYYY");
  const date = dayjs(item.creationDate).format("DD/MM/YYYY");
  const countryCode = item.address[0].country_alpha2_code  

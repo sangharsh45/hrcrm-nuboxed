@@ -5,6 +5,7 @@ import { Button, Select, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import {getSources} from "../../Settings/Category/Source/SourceAction"
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -15,7 +16,7 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 import { getDesignations } from "../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../Settings/Department/DepartmentAction";
 import {addContactInvest} from "../ContactInvestAction";
-import {getInvestorData} from "../../Investor/InvestorAction";
+import {getInvestorData,getDialCode} from "../../Investor/InvestorAction";
 
 const { Option } = Select;
 /**
@@ -33,6 +34,8 @@ const ContactSchema = Yup.object().shape({
 class ContactInvestForm extends Component {
   componentDidMount() {
     this.props.getInvestorData(this.props.userId);
+    this.props.getSources(this.props.orgId);
+    this.props.getDialCode();
   }
 
   constructor(props) {
@@ -48,6 +51,7 @@ class ContactInvestForm extends Component {
       availability: false,
     };
   }
+
   handleCandidate = (checked) => {
     this.setState({ candidate: checked });
   };
@@ -91,6 +95,32 @@ class ContactInvestForm extends Component {
   };
 
   render() {
+    // const sortedCountry =this.props.dialCodeList.sort((a, b) => {
+    //   const nameA = a.country_dial_code.toLowerCase();
+    //   const nameB = b.country_dial_code.toLowerCase();
+    //   // Compare department names
+    //   if (nameA < nameB) {
+    //     return -1;
+    //   }
+    //   if (nameA > nameB) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
+    const countryNameOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
+  const sourceOption = this.props.sources.map((item) => {
+    return {
+      label: item.name
+      || null,
+      value: item.sourceId
+      ,
+    };
+  });
     const {
       user: { userId, firstName, lastName },
       addContactInvest,
@@ -151,7 +181,7 @@ class ContactInvestForm extends Component {
             firstName: "",
             middleName: "",
             lastName: "",
-            countryDialCode: this.props.user.countryDialCode,
+            countryDialCode: "",
             countryDialCode1: this.props.user.countryDialCode,
             phoneNumber: "",
             mobileNumber: "",
@@ -224,7 +254,7 @@ class ContactInvestForm extends Component {
                             isColumn
                           />
                         </div> */}
-                        <div class=" w-1/2 max-sm:w-wk">
+                        <div class=" w-full max-sm:w-wk">
                           <FastField
                             isRequired
                             name="firstName"
@@ -304,24 +334,25 @@ class ContactInvestForm extends Component {
                   </div>               
                   <div class=" flex justify-between">
                     <div class=" w-2/6">
-                      <FastField
+                    <Field
                         name="countryDialCode"
+                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
+                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.dialCode"
+                            id="app.phone"
                             defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        selectType="dialCode"
-                        component={SearchSelect}
-                        placeholder='+31'
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(countryNameOption)
+                            ? countryNameOption
+                            : []
+                        }
+                        // value={values.countryDialCode1}
                         inlineLabel
                       />
                     </div>
@@ -357,27 +388,27 @@ class ContactInvestForm extends Component {
                     <div class=" w-2/4">
                       {" "}
                       {this.state.whatsapp && (
-                        <FastField
-                          name="countryDialCode1"
-                          selectType="dialCode"
-                          isColumnWithoutNoCreate
-                          //label="Phone No #"
-                          placeholder='+31'
-                          label={
-                            <FormattedMessage
-                              id="app.dialCode"
-                              defaultMessage="dialCode"
-
-                            />
-                          }
-                          isColumn
-                          component={SearchSelect}
-                          defaultValue={{
-                            value: this.props.user.countryDialCode,
-                          }}
-                          value={values.countryDialCode1}
-                          inlineLabel
-                        />
+                         <Field
+                         name="countryDialCode1"
+                         selectType="dialCode"
+                         isColumnWithoutNoCreate
+                         // label="Phone #"
+                         label={
+                           <FormattedMessage
+                             id="app.phone"
+                             defaultMessage="Dial Code"
+                           />
+                         }
+                         isColumn
+                         component={SelectComponent}
+                         options={
+                           Array.isArray(countryNameOption)
+                             ? countryNameOption
+                             : []
+                         }
+                         // value={values.countryDialCode1}
+                         inlineLabel
+                       />
                       )}
                     </div>
                     <div class=" w-2/4">
@@ -495,7 +526,7 @@ class ContactInvestForm extends Component {
                     />
                   </div>
                   <div class=" w-w47.5">
-                  <FastField
+                  <Field
                             name="sourceId"
                              label={
                               <FormattedMessage
@@ -504,9 +535,10 @@ class ContactInvestForm extends Component {
                               />
                             }
                             isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.sourceId}
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(sourceOption) ? sourceOption : []
+                            }
                             isColumn
                           />
                         </div>
@@ -634,10 +666,13 @@ class ContactInvestForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer,investor, opportunity, departments, designations }) => ({
+const mapStateToProps = ({ auth, contact,source, customer,investor, opportunity, departments, designations }) => ({
   addingContact: contact.addingContact,
   addingContactError: contact.addingContactError,
   user: auth.userDetails,
+  sources: source.sources,
+  dialCodeList:investor.dialCodeList,
+  orgId:auth.userDetails.organizationId,
   userId: auth.userDetails.userId,
   investorData:investor.investorData,
   investorId: investor.investorDetails.investorId,
@@ -653,6 +688,8 @@ const mapDispatchToProps = (dispatch) =>
       addContactInvest,
       addLinkContactByOpportunityId,
       getDesignations,
+      getSources,
+      getDialCode,
       getInvestorData,
       getDepartments,
     },

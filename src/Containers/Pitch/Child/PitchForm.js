@@ -6,9 +6,8 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getSectors} from "../../Settings/Sectors/SectorsAction"
-import {getCountry} from "../../Settings/Category/Country/CountryAction"
 import {getSources} from "../../Settings/Category/Source/SourceAction"
-import {getAllEmployeelist} from "../../Investor/InvestorAction"
+import {getAllEmployeelist,getDialCode} from "../../Investor/InvestorAction"
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { setClearbitData} from "../../Leads/LeadsAction";
 import {addPitch} from "../PitchAction"
@@ -36,7 +35,7 @@ function PitchForm (props) {
   useEffect(()=> {
 props.getAllEmployeelist();
 props.getSources(props.orgId);
-props.getCountry();
+props.getDialCode();
 props.getSectors();
   },[]);
   const sourceOption = props.sources.map((item) => {
@@ -47,7 +46,7 @@ props.getSectors();
       ,
     };
   });
-  const dialCodeOption = props.country.map((item) => {
+  const dialCodeOption = props.dialCodeList.map((item) => {
     return {
       label: `+${item.country_dial_code || ""}`,
       value: item.country_dial_code
@@ -531,6 +530,7 @@ const mapStateToProps = ({ auth,investor,source,countrys,sector, leads,employee,
   user: auth.userDetails,
   sources: source.sources,
   country: countrys.country,
+  dialCodeList:investor.dialCodeList,
 orgId:auth.userDetails.organizationId,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
@@ -545,7 +545,7 @@ const mapDispatchToProps = (dispatch) =>
       setClearbitData,
       getAllEmployeelist,
       getSources,
-      getCountry,
+      getDialCode,
       getSectors
    
     },
