@@ -69,10 +69,11 @@ const AddCatalogueForm = (props) => {
                         {
                             ...values,
                             distributorId: props.distributorId,
-                            orderId: props.orderDetailsId
+                            orderId: props.productionOrderId.orderId,
+                            orgId: props.orgId
                         },
                         props.distributorId,
-                        props.orderDetailsId
+                        props.productionOrderId.orderId
                     );
                     resetForm();
                 }}
@@ -140,7 +141,7 @@ const AddCatalogueForm = (props) => {
                             </div>
                         </div>
                         <div class="justify-between flex">
-                            <div class="w-[27%]">
+                            <div class="w-[25%]">
                                 <Field
                                     name="attributeName"
                                     label={<FormattedMessage
@@ -154,7 +155,7 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div class="w-[27%]">
+                            <div class="w-[25%]">
                                 <Field
                                     name="subAttributeName"
                                     label={<FormattedMessage
@@ -168,7 +169,7 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div class="w-[27%]">
+                            <div class="w-[25%]">
                                 <Field
                                     name="quantity"
                                     label={<FormattedMessage
@@ -182,10 +183,11 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div class="w-[27%] mt-4">
+                            <div class="w-[15%] mt-4">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
+                                    loading={props.addingUnitForCatalogueItem}
                                 >
                                     <FormattedMessage
                                         id="app.submit"
@@ -200,15 +202,17 @@ const AddCatalogueForm = (props) => {
             <Suspense fallback={"Loading"}>
                 <AddCatalogueTable
                     distributorId={props.distributorId}
-                    orderId={props.orderDetailsId}
+                    orderId={props.productionOrderId.orderId}
                     toggle={props.toggle} />
             </Suspense>
         </>
     )
 }
-const mapStateToProps = ({ distributor }) => ({
+const mapStateToProps = ({ distributor, auth }) => ({
     allProduct: distributor.allProduct,
-    orderDetailsId: distributor.orderDetailsId,
+    orgId: auth.userDetails.organizationId,
+    productionOrderId: distributor.productionOrderId,
+    addingUnitForCatalogueItem: distributor.addingUnitForCatalogueItem
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getAllProductList,

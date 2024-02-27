@@ -359,6 +359,19 @@ const initialState = {
   startRepairingInStatus: false,
   startRepairingInStatusError: false,
 
+  fetchingProductionOrderById: false,
+  fetchingProductionOrderByIdError: false,
+  productionOrder: [],
+
+  fetchingProductionDetailById: false,
+  fetchingProductionDetailByIdError: false,
+  productionOrderDetail: [],
+
+  productionOrderId: {},
+
+  creatingOrderForProduction: false,
+  creatingOrderForProductionError: false,
+
   addNotesInOrder: false,
   fetchingNotesInOrders: false,
   fetchingNotesInOrdersError: false,
@@ -1967,7 +1980,7 @@ export const distributorReducer = (state = initialState, action) => {
         fetchingOpportunityRecordError: true,
       };
     case types.HANDLE_ADD_ORDER_MODAL:
-      return { ...state, addCatalogueOrderModal: action.payload };
+      return { ...state, addCatalogueOrderModal: action.payload, productByDistributor: [] };
 
     case types.HANDLE_UPDATE_ORDER_MODAL:
       return { ...state, updateOrderModal: action.payload };
@@ -1994,6 +2007,13 @@ export const distributorReducer = (state = initialState, action) => {
     case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS:
       return {
         ...state, addingUnitForCatalogueItem: false,
+        productByDistributor: state.productByDistributor.map((item) => {
+          if (item.productId == action.payload.productId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_FAILURE:
       return {
@@ -2022,6 +2042,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingAllProductForOrder: false,
+        addCatalogueOrderModal: false
       };
     case types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE:
       return {
@@ -2121,6 +2142,54 @@ export const distributorReducer = (state = initialState, action) => {
 
     case types.HANDLE_PRODUCT_ORDER_DETAIL_MODAL:
       return { ...state, showProductList: action.payload };
+
+    case types.CREATE_ORDER_FOR_PRODUCTION_REQUEST:
+      return { ...state, creatingOrderForProduction: true };
+    case types.CREATE_ORDER_FOR_PRODUCTION_SUCCESS:
+      return {
+        ...state,
+        creatingOrderForProduction: false,
+        productionOrder: [action.payload, ...state.productionOrder],
+        // orderDetailsId: action.payload
+        productionOrderId: action.payload
+      };
+    case types.CREATE_ORDER_FOR_PRODUCTION_FAILURE:
+      return {
+        ...state,
+        creatingOrderForProduction: false,
+        creatingOrderForProductionError: true,
+      };
+
+    case types.GET_PRODUCTION_ORDER_REQUEST:
+      return { ...state, fetchingProductionOrderById: true };
+    case types.GET_PRODUCTION_ORDER_SUCCESS:
+      return {
+        ...state,
+        fetchingProductionOrderById: false,
+        productionOrder: action.payload
+      };
+    case types.GET_PRODUCTION_ORDER_FAILURE:
+      return {
+        ...state,
+        fetchingProductionOrderById: false,
+        fetchingProductionOrderByIdError: true,
+      };
+
+    case types.GET_PRODUCTION_ORDER_DETAIL_REQUEST:
+      return { ...state, fetchingProductionDetailById: true };
+    case types.GET_PRODUCTION_ORDER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        fetchingProductionDetailById: false,
+        productionOrderDetail: action.payload
+      };
+    case types.GET_PRODUCTION_ORDER_DETAIL_FAILURE:
+      return {
+        ...state,
+        fetchingProductionDetailById: false,
+        fetchingProductionDetailByIdError: true,
+
+      };
     default:
       return state;
   }
