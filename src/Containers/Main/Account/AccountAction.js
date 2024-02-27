@@ -487,6 +487,12 @@ export const handleProductOrderDetailsModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleSearchItem = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_SEARCH_ITEMS_MODAL,
+    payload: modalProps,
+  });
+};
 
 /**
  * Link Renewal in distributor
@@ -2906,6 +2912,46 @@ export const getProductionOrderDetails = (orderId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_PRODUCTION_ORDER_DETAIL_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const searchItemInLocation = (data, cb) => (dispatch) => {
+  dispatch({ type: types.SEARCH_ITEM_IN_LOCATION_REQUEST });
+  axios
+    .post(`${base_url2}/order/productionProductData`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.SEARCH_ITEM_IN_LOCATION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.SEARCH_ITEM_IN_LOCATION_FAILURE,
+      });
+    });
+};
+
+export const movetoProductionArchieve = (data, productionProductId) => (
+  dispatch
+) => {
+  dispatch({ type: types.MOVE_TO_PRODUCTION_ARCHIEVE_REQUEST });
+  axios
+    .put(`${base_url2}/production/updateDispatch/${productionProductId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.MOVE_TO_PRODUCTION_ARCHIEVE_FAILURE,
         payload: err,
       });
     });

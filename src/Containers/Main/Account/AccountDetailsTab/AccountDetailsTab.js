@@ -22,7 +22,7 @@ const AccountActivityModal = lazy(() => import("./AccountActivityTab/AccountActi
 const AddDistributorDocumentModal = lazy(() => import("./AccountDocumentTab/AddDistributorDocumentModal"));
 const DistributorDocumentTable = lazy(() => import("./AccountDocumentTab/DistributorDocumentTable"));
 const LinkedDistributorNotes = lazy(() => import("./AccountNoteTab/LinkedDistributorNotes"));
-const OrderGenerateModal = lazy(() => import("./AccountOrder1Tab/OrderGenerateModal"));
+// const OrderGenerateModal = lazy(() => import("./AccountOrder1Tab/OrderGenerateModal"));
 const CatalogueOrderModal = lazy(() => import("./AccountOrder1Tab/CatalogueOrderModal"));
 const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
 const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountContact"))
@@ -268,10 +268,10 @@ function AccountDetailsTab(props) {
                 handleAddOrderModal={props.handleAddOrderModal}
                 addCatalogueOrderModal={props.addCatalogueOrderModal}
             />
-            <OrderGenerateModal
+            {/* <OrderGenerateModal
                 generateOrderModal={props.generateOrderModal}
                 handleOrderGenerateModal={props.handleOrderGenerateModal}
-            />
+            /> */}
         </>
     );
 }
