@@ -42,6 +42,7 @@ import {
   sendToWon,
   deleteDealsData
 } from "../../DealAction";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
 const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
 const DealSelectStages =lazy(()=>import("./DealSelectStages"));
@@ -98,7 +99,7 @@ function DealCardList(props) {
       >
         <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
 
-          {dealsByuserId.map((item) => {
+        { !fetchingDeal && dealsByuserId.length === 0 ?<NodataFoundPage />:dealsByuserId.map((item,index) =>  {
             var findProbability = item.probability;
             item.stageList.forEach((element) => {
               if (element.oppStage === item.oppStage) {

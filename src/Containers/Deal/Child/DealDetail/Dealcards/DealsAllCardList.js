@@ -327,7 +327,7 @@ const DealsAllCardList = (props) => {
         loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
-   {props.allDealsData.map((item) => { 
+  { !fetchingAllDealsData && props.allDealsData.length === 0 ?<NodataFoundPage />:props.allDealsData.map((item,index) =>  {
        var findProbability = item.probability;
        item.stageList.forEach((element) => {
          if (element.oppStage === item.oppStage) {
@@ -522,17 +522,14 @@ imgHeight={"1.8rem"}
 
 
 
-<Tooltip title={item.ownerName}>
 <span>
 <MultiAvatar2
 primaryTitle={item.ownerName}
 imageId={item.ownerImageId}
-imageURL={item.imageURL}
 imgWidth={"1.8rem"}
 imgHeight={"1.8rem"}
 />
 </span>
-</Tooltip>
 </div>
 </div>
                       </div>

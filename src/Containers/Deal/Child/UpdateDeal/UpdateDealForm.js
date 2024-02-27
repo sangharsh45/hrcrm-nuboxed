@@ -193,7 +193,7 @@ function UpdateDealForm (props) {
             currency: props.currentItem.currency || "",
             salesUserIds: selectedOption ? selectedOption.employeeId:props.currentItem.salesUserIds,
             investorId: props.currentItem.investorId || "",
-            contactId: props.currentItem.contactId || "",
+            contactId: props.currentItem.contactName || "",
             included: includeNames,
           }}
           validationSchema={UpdateOpportunitySchema}

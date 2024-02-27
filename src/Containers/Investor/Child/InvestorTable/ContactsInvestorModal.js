@@ -6,7 +6,7 @@ import ContactsInvestorCardList from "./ContactsInvestorCardList";
 
 const ContactsInvestorModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "60%";
+  const drawerWidth = isSmallScreen ? "90%" : "65%";
   const { addDrawerInvestorContactModal, handleInvestorContModal,RowData, ...formProps } = props;
   return (
     <>

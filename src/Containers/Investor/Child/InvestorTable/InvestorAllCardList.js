@@ -26,6 +26,7 @@ import {
 import ReactCountryFlag from 'react-country-flag';
 import {getAllInvestorsbyId,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
 import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const UpdateInvestorModal = lazy(() =>
   import("../UpdateInvestor/UpdateInvestorModal")
 );
@@ -415,7 +416,7 @@ function InvestorAllCardList(props) {
         height={"75vh"}
       >
         
-      {allInvestorsbyId.map((item) => { 
+        { !fetchingAllInvestors && allInvestorsbyId.length === 0 ?<NodataFoundPage />:allInvestorsbyId.map((item,index) =>  {
          const currentdate = dayjs().format("DD/MM/YYYY");
          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -536,11 +537,13 @@ function InvestorAllCardList(props) {
               {item.assignedTo === null ? (
                 "Not available"
               ) : (
+                <Tooltip title={item.assignedTo}> 
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
+                </Tooltip>
               )}
             </span>
              
@@ -551,13 +554,14 @@ function InvestorAllCardList(props) {
                        {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
+                       <Tooltip title={item.ownerName}> 
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
+                   </Tooltip>
             </span>
                    </div>
                    </div>
@@ -648,7 +652,7 @@ function InvestorAllCardList(props) {
               />
             </Tooltip> </div> */}
             <div>
-            {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
+            {/* {user.imInd === true  &&  user.investorUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
                className=" !text-base cursor-pointer text-[tomato]"
@@ -660,7 +664,7 @@ function InvestorAllCardList(props) {
                 }}
               />
             </Tooltip>
-            )}
+            )} */}
             </div>
                       </div> 
           

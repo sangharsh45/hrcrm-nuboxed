@@ -28,6 +28,7 @@ import {getAllContactInvest,
   handleContactInvestNotesDrawerModal,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
 import { FormattedMessage } from "react-intl";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const AddContactInvestNotesDrawerModal = lazy(() =>
   import("../AddContactInvestNotesDrawerModal")
 );
@@ -401,7 +402,7 @@ if (isMobile){
       
 
       <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-          <div className=" flex justify-between w-[92%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" flex  justify-between w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[15.1rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
@@ -445,7 +446,7 @@ if (isMobile){
         height={"75vh"}
       >
        
-      {props.allContactInvestData.map((item) => { 
+       { !fetchingAllContactInvest && props.allContactInvestData.length === 0 ?<NodataFoundPage />:props.allContactInvestData.map((item,index) =>  {
         
          const currentdate = dayjs().format("DD/MM/YYYY");
          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
@@ -469,11 +470,9 @@ if (isMobile){
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
-                                >
+                              <div className="flex rounded-xl justify-between  mt-2 bg-white h-11 items-center p-3"
+                               
+                               >
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
@@ -568,19 +567,18 @@ if (isMobile){
                        {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    
-              <Tooltip title={item.ownerName}>
+              {/* <Tooltip title={item.ownerName}> */}
                 <div class="max-sm:flex justify-end mt-1">
            
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
            
             </div>
-          </Tooltip>
+          {/* </Tooltip> */}
 
                    </div>
                                 <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
@@ -660,7 +658,7 @@ if (isMobile){
               />
             </Tooltip> </div> */}
             <div>
-            {user.imInd === true  && user.investorContactUpdateInd === true &&  (
+            {/* {user.imInd === true  && user.investorContactUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
                 className="!text-base cursor-pointer text-[tomato]"
@@ -671,7 +669,7 @@ if (isMobile){
                 }}
               />
             </Tooltip>
-            )}
+            )} */}
             </div>
                       </div>  
                   

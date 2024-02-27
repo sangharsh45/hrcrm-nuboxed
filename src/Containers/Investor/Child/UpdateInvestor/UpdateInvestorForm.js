@@ -6,7 +6,7 @@ import { Button} from "antd";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import {getAllEmployeelist} from "../../InvestorAction"
+import {getAllEmployeelist,getDialCode} from "../../InvestorAction"
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -28,12 +28,32 @@ function UpdateInvestorForm (props) {
   useEffect(() => {
     props.getAllEmployeelist();
     props.getInvestorList(props.orgId)
+    props.getDialCode();
   }, []);
 
 
   const handleReset = (resetForm) => {
     resetForm();
   };
+
+  const sortedCountry =props.dialCodeList.sort((a, b) => {
+    const nameA = a.country_dial_code.toLowerCase();
+    const nameB = b.country_dial_code.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const countryNameOption = sortedCountry.map((item) => {
+    return {
+      label: `+${item.country_dial_code}`,
+      value: item.country_dial_code,
+    };
+  });
   
     const {
       accounts,
@@ -152,21 +172,27 @@ function UpdateInvestorForm (props) {
                     /> */}
                    <div class=" flex justify-between mt-6">
                    <div class=" w-3/12 max-sm:w-[30%]">
-                      <FastField
+                   <Field
                         name="countryDialCode"
                         selectType="dialCode"
                         isColumnWithoutNoCreate
+                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
-                            defaultMessage="Dial Code "
+                            id="app.phone"
+                            defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(countryNameOption)
+                            ? countryNameOption
+                            : []
+                        }
                         // value={values.countryDialCode1}
                         inlineLabel
-                       />
+                      />
                     </div>
                     <div class=" w-8/12">
                       <FastField
@@ -412,6 +438,7 @@ const mapStateToProps = ({ auth,investor,investorList,employee }) => ({
   updateInvestorById: investor.updateInvestorById,
   updateInvestorByIdError: investor.updateInvestorByIdError,
   user: auth.userDetails,
+  dialCodeList:investor.dialCodeList,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   employees: employee.employees,
@@ -424,7 +451,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       UpdateInvestor,
       getAllEmployeelist,
-      getInvestorList
+      getInvestorList,
+      getDialCode
     },
     dispatch
   );

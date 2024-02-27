@@ -5,8 +5,7 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import {getCountry} from "../../Settings/Category/Country/CountryAction"
-import {getAllEmployeelist} from "../../Investor/InvestorAction"
+import {getAllEmployeelist,getDialCode} from "../../Investor/InvestorAction"
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
      updatePitch,
@@ -36,7 +35,7 @@ function UpdatePitchForm (props) {
   };
   useEffect (()=>{
     props.getAllEmployeelist();
-    props.getCountry();
+    props.getDialCode();
     props.getSources(props.orgId);
     props.getSectors();
   },[])
@@ -49,7 +48,7 @@ function UpdatePitchForm (props) {
       ,
     };
   });
-  const dialCodeOption = props.country.map((item) => {
+  const dialCodeOption = props.dialCodeList.map((item) => {
     return {
       label: `+${item.country_dial_code || ""}`,
       value: item.country_dial_code
@@ -512,7 +511,7 @@ const mapStateToProps = ({ auth,investor,countrys,source,sector, leads,employee,
     orgId:auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
-    country: countrys.country,
+    dialCodeList:investor.dialCodeList,
     sectors: sector.sectors,
     allEmployeeList:investor.allEmployeeList,
     setEditingPitch:pitch.setEditingPitch,
@@ -524,7 +523,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         updatePitch,
         getSources,
-        getCountry,
+        getDialCode,
         setEditPitch,
         getAllEmployeelist,
         getSectors

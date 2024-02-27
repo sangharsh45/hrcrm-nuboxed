@@ -802,3 +802,30 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const getDialCode = (investorId) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_DIAL_CODE_REQUEST,
+    });
+    axios
+      .get(`${base_url}/countries/all/dail-code/list`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_DIAL_CODE_SUCCESS,
+          payload: res.data,
+        })
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_DIAL_CODE_FAILURE,
+          payload: err,
+        });
+      });
+  };

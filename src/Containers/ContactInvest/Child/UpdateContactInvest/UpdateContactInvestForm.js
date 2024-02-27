@@ -15,7 +15,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
-import {getInvestorData} from "../../../Investor/InvestorAction";
+import {getInvestorData,getDialCode} from "../../../Investor/InvestorAction";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateContactSchema = Yup.object().shape({
@@ -30,6 +30,7 @@ class UpdateContactInvestForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
     this.props.getInvestorData(this.props.userId);
+    this.props.getDialCode();
   }
   constructor(props) {
     super(props);
@@ -96,6 +97,25 @@ class UpdateContactInvestForm extends Component {
       contactiData
     } = this.props;
     console.log(linkContact);
+
+    const sortedCountry =this.props.dialCodeList.sort((a, b) => {
+      const nameA = a.country_dial_code.toLowerCase();
+      const nameB = b.country_dial_code.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const countryNameOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
     const customerNameOption = this.props.investorData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -125,6 +145,7 @@ class UpdateContactInvestForm extends Component {
             designationTypeId:contactiData.designationTypeId || "",
             description:contactiData.description || "",
             departmentId:contactiData.departmentId || "",
+            sourceId:contactiData.source || "",
             departmentDetails:
              contactiData.departmentDetails || "",
             userId: this.props.userId,
@@ -202,7 +223,7 @@ class UpdateContactInvestForm extends Component {
                             isColumn
                           />
                         </div> */}
-                        <div class=" w-1/2 max-sm:w-wk">
+                        <div class=" w-full max-sm:w-wk">
                           <FastField
                             isRequired
                             name="firstName"
@@ -282,23 +303,25 @@ class UpdateContactInvestForm extends Component {
                   </div>
                   <div class=" flex justify-between">
                     <div class=" w-2/6 max-sm:w-2/5">
-                      <FastField
+                    <Field
                         name="countryDialCode"
+                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
+                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.dialCode"
+                            id="app.phone"
                             defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        selectType="dialCode"
-                        component={SearchSelect}
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(countryNameOption)
+                            ? countryNameOption
+                            : []
+                        }
+                        // value={values.countryDialCode1}
                         inlineLabel
                       />
                     </div>
@@ -594,6 +617,7 @@ const mapStateToProps = ({ auth,investor, contact, contactinvest,customer, depar
   userId: auth.userDetails.userId,
   customerId: customer.customer.customerId,
   departmentId: departments.departmentId,
+  dialCodeList:investor.dialCodeList,
   designationTypeId: designations.designationTypeId,
 });
 
@@ -605,6 +629,7 @@ const mapDispatchToProps = (dispatch) =>
       getDesignations,
       getDepartments,
       getInvestorData,
+      getDialCode,
     },
     dispatch
   );
