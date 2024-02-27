@@ -63,7 +63,7 @@ class ContactActionRight extends React.Component {
         </Button>
         )} */}
         
-        {this.props.viewType === "table" ? (
+        {/* {this.props.viewType === "table" ? ( */}
           
         <Tooltip placement="left" title="Create">
             {user.contactCreateInd === true &&  user.crmInd === true && (
@@ -75,7 +75,7 @@ class ContactActionRight extends React.Component {
              )}
         </Tooltip>
          
-        ): null}
+        {/* ): null} */}
       </div>
     );
   }

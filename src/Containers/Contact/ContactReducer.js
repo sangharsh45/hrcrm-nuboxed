@@ -260,7 +260,8 @@ export const contactReducer = (state = initialState, action) => {
     case types.ADD_CONTACT_SUCCESS:
       return { ...state, addingContact: false, 
         addContactModal: false,
-        contactByUserId:[action.payload,...state.contactByUserId]
+        contactByUserId:[action.payload,...state.contactByUserId],
+        allContacts:[action.payload,...state.allContacts]
        };
     case types.ADD_CONTACT_FAILURE:
       return { ...state, addingContact: false, addContactModal: false };

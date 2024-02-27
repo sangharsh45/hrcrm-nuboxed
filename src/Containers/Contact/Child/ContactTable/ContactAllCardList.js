@@ -2,7 +2,18 @@ import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {  Select } from "antd";
+import { MultiAvatar, MultiAvatar2 } from "../../../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+import { Link } from 'react-router-dom';
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
+import dayjs from "dayjs";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import {
   getAllContact,
   handleUpdateContactModal,
@@ -23,7 +34,7 @@ import AddContactDrawerModal from "../UpdateContact/AddContactDrawerModal";
 import AddContactEmailDrawerModal from "../UpdateContact/AddContactEmailDrawerModal";
 import AddContactNotesDrawerModal from "../AddContactNotesDrawerModal";
 import AddContactPulseDrawerModal from "./AddContactPulseDrawerModal";
-
+import {  Tooltip, Select } from "antd";
 const Option = Select;
 const UpdateContactModal = lazy(() =>
   import("../UpdateContact/UpdateContactModal")
@@ -124,16 +135,16 @@ return (
       dataLength={allContacts.length}
       next={handleLoadMore}
       hasMore={hasMore}
-      loader={fetchingAllContacts?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+      loader={fetchingAllContacts?<div class="flex justify-center">Loading...</div>:null}
       height={"75vh"}
     >
       
-    {/* {allContacts.map((item) => { 
+    {allContacts.map((item) => { 
       
-       const currentdate = moment().format("DD/MM/YYYY");
-       const date = moment(item.creationDate).format("DD/MM/YYYY");
+       const currentdate = dayjs().format("DD/MM/YYYY");
+       const date = dayjs(item.creationDate).format("DD/MM/YYYY");
        const diff = Math.abs(
-          moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
         );
         const dataLoc = ` Address : ${item.address &&
           item.address.length &&
@@ -159,7 +170,7 @@ return (
                               <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
 <div>
-                              <SubTitle>
+                              
           <MultiAvatar2
             primaryTitle={item.firstName}
             imageId={item.imageId}
@@ -167,7 +178,7 @@ return (
             imgWidth={"1.8em"}
             imgHeight={"1.8em"}
           />
-        </SubTitle></div>
+        </div>
         &nbsp;
         <div class="max-sm:w-full">
                                       <Tooltip>
@@ -249,15 +260,14 @@ return (
                  
             <Tooltip title={item.ownerName}>
               <div class="max-sm:flex justify-end">
-          <SubTitle>
+              <Tooltip title={item.ownerName}>
             <MultiAvatar
               primaryTitle={item.ownerName}
               imageId={item.ownerImageId}
-              imageURL={item.imageURL}
               imgWidth={"1.8rem"}
               imgHeight={"1.8rem"}
             />
-          </SubTitle>
+   </Tooltip>
           </div>
         </Tooltip>
 
@@ -386,7 +396,7 @@ return (
 
 
                   )
-              })} */}
+              })}
                     </InfiniteScroll>
     </div>
 
@@ -460,16 +470,16 @@ return (
         dataLength={allContacts.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllContacts?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+        loader={fetchingAllContacts?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
         
-      {/* {allContacts.map((item) => { 
+      {allContacts.map((item) => { 
         
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${item.address &&
             item.address.length &&
@@ -494,7 +504,6 @@ return (
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
 <div>
-                                <SubTitle>
             <MultiAvatar2
               primaryTitle={item.firstName}
               imageId={item.imageId}
@@ -502,7 +511,7 @@ return (
               imgWidth={"1.8em"}
               imgHeight={"1.8em"}
             />
-          </SubTitle></div>
+    </div>
           &nbsp;
           <div class="max-sm:w-full">
                                         <Tooltip>
@@ -584,15 +593,14 @@ return (
                    
               <Tooltip title={item.ownerName}>
                 <div class="max-sm:flex justify-end">
-            <SubTitle>
+                <Tooltip title={item.ownerName}>
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
-            </SubTitle>
+</Tooltip>
             </div>
           </Tooltip>
 
@@ -696,7 +704,7 @@ return (
           </Tooltip>
           </div>
     
-              {user.contactUpdateInd === true &&  user.crmInd === true && (
+              {/* {user.contactUpdateInd === true &&  user.crmInd === true && (
             <div>
            
             <Tooltip title="Edit">
@@ -712,7 +720,7 @@ return (
             </Tooltip>
       
             </div>
-              )}
+              )} */}
                       </div>    
                      <div class="w-[1%]"></div>
                       </div>
@@ -721,7 +729,7 @@ return (
 
 
                     )
-                })} */}
+                })}
                       </InfiniteScroll>
       </div>
 
@@ -793,6 +801,7 @@ const mapStateToProps = ({
   addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
   addContactSpeechModal: contact.addContactSpeechModal,
   addDrawerContactModal: contact.addDrawerContactModal,
+  fetchingAllContacts:contact.fetchingAllContacts
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

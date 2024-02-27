@@ -149,7 +149,7 @@ function ContactCardList(props) {
           dataLength={contactByUserId.length}
           next={handleLoadMore}
           hasMore={hasMore}
-          loader={fetchingContacts?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
+          loader={fetchingContacts?<div class="items-center">Loading...</div>:null}
           height={"75vh"}
         >
           
@@ -271,15 +271,14 @@ function ContactCardList(props) {
                                   <div className="flex font-medium ">                 
                 <Tooltip title={item.ownerName}>
                   <div class="max-sm:flex justify-end">
-             
+                  <Tooltip title={item.ownerName}>
                 <MultiAvatar
                   primaryTitle={item.ownerName}
                   imageId={item.ownerImageId}
-                  imageURL={item.imageURL}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
-              
+              </Tooltip>
               </div>
             </Tooltip>
   
@@ -469,7 +468,7 @@ function ContactCardList(props) {
         dataLength={contactByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingContacts?<div style={{ textAlign: 'center' }}>Loading ...</div>:null}
+        loader={fetchingContacts?<div class="">Loading ...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page</p>}
       >
@@ -593,15 +592,14 @@ function ContactCardList(props) {
                                 <div className="flex font-medium  md:w-20  max-sm:flex-row w-full max-sm:justify-between">
               <Tooltip title={item.ownerName}>
                 <div class="max-sm:flex justify-end">
-           
+                <Tooltip title={item.ownerName}>
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
                 imgWidth={"1.9rem"}
                 imgHeight={"1.9rem"}
               />
-            
+            </Tooltip>
             </div>
           </Tooltip>
 
