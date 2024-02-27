@@ -1,9 +1,10 @@
 import React from "react";
 import error from "../../Assets/Images/i.png";
 import { Button } from "antd";
+import { Spacer } from "../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
-class AppErrorBoundary extends React.Component {
+class NodataFoundPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -22,13 +23,13 @@ class AppErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
+    // if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
         <>
-        <div class="flex justify-center items-center px-[5rem] py-[1.25rem]"
+          <div class="flex justify-center items-center px-[5rem] py-[1.25rem]"
           >
-         <div class=" flex  flex-col justify-center items-center w-[25rem] h-[25rem] px-[0.5rem] py-[1.25rem] bg-[#f5f5f5]"
+            <div class=" flex  flex-col justify-center items-center w-[25rem] h-[25rem] px-[0.5rem] py-[1.25rem] bg-[#f5f5f5]"
             style={{ boxShadow: " 0 0.8125em 1.6875em -0.3125em rgba(50, 50, 93, 0.25)"}}
             >
               <img
@@ -36,39 +37,37 @@ class AppErrorBoundary extends React.Component {
                 style={{ height: "3.125em", width: "3.125em", borderRadius: "50%" }}
               ></img>
               <div>
-              <div class=" flex text-lg text-[blue] font-bold font-poppins justify-center items-center mt-2"
+                <div class=" flex text-lg font-bold font-poppins justify-center items-center mt-2"
 
->
-                  OOPS !
-                </div>
-                <div class=" flex justify-center text-lg font-bold font-poppins items-center mt-2 ml-4"
                 >
-                  It is a problem with us.
-                  <br />
-                  Please refresh your browser
+                No Data Available!
+                </div>
+                <div class=" flex justify-center text-lg font-bold font-poppins items-center mt-2"
+                >
+                 Click on "Add" Button to get Started.
+                
                 </div>
               </div>
-           <div class=" mt-3">
+              {/* <Spacer />
               <Button
                 type="primary"
               
                 onClick={() => this.handleRefreshPage()}
               >
                 <FormattedMessage
-                  id="app.refresh"
-                  defaultMessage="Refresh"
+                  id="app.close"
+                  defaultMessage="Close"
                 />
-                {/* Retry */}
-              </Button>
-              </div>
+           
+              </Button> */}
             </div>
           </div>
         </>
       );
-    }
+    // }
 
     return this.props.children;
   }
 }
 
-export default AppErrorBoundary;
+export default NodataFoundPage;

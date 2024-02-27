@@ -31,6 +31,7 @@ import {getInvestorsbyId,
   handleInvestorNotesDrawerModal,emptyInvestor,
 } from "../../InvestorAction";
 import { FormattedMessage } from "react-intl";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const AddInvestorNotesDrawerModal = lazy(() => import("../InvestorDetail/AddInvestorNotesDrawerModal"));
 const ContactsInvestorModal = lazy(() => import("./ContactsInvestorModal"));
 const UpdateInvestorModal = lazy(() =>
@@ -477,7 +478,8 @@ function InvestorCardList(props) {
         height={"75vh"}
       >
         
-      {investorsbyId.map((item) => { 
+        {investorsbyId.length > 0 ? (
+  investorsbyId.map((item) => {
          const currentdate = dayjs().format("DD/MM/YYYY");
          const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -749,7 +751,11 @@ function InvestorCardList(props) {
 
 
                     )
-                })}
+                })
+                ) : (
+                  // "no data"
+                 <NodataFoundPage/>
+                )}
      </InfiniteScroll> 
      </div>
      

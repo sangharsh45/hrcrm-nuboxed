@@ -617,15 +617,15 @@ function CallForm(props) {
                   </div>
                   <div class=" flex mt-3 justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
-                    <input
+                    {/* <input
         type="time"
         id="startTime"
         name="startTime"
         // value={startTime}
         value={places.startTime}
         onChange={(e) => handleStartTimeChange(e,  'startTime')}
-      />
-                      {/* <Field
+      /> */}
+                    <Field
                         name="startTime"
                         // label="Start Time"
                         label={
@@ -643,7 +643,7 @@ function CallForm(props) {
                         style={{
                           width: "100%",
                         }}
-                      /> */}
+                      />
                     </div>
                     <div class=" w-2/5 max-sm:w-wk">
                       <Field

@@ -5,13 +5,14 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
+import {getCountry} from "../../Settings/Category/Country/CountryAction"
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
      updatePitch,
     setEditPitch,
 } from "../PitchAction";
+import {getSectors} from "../../Settings/Sectors/SectorsAction"
 import {getSources} from "../../Settings/Category/Source/SourceAction"
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -35,10 +36,35 @@ function UpdatePitchForm (props) {
   };
   useEffect (()=>{
     props.getAllEmployeelist();
+    props.getCountry();
+    props.getSources(props.orgId);
+    props.getSectors();
   },[])
  
+  const sourceOption = props.sources.map((item) => {
+    return {
+      label: item.name
+      || null,
+      value: item.sourceId
+      ,
+    };
+  });
+  const dialCodeOption = props.country.map((item) => {
+    return {
+      label: `+${item.country_dial_code || ""}`,
+      value: item.country_dial_code
+      ,
+    };
+  });
 
-
+  const sectorOption = props.sectors.map((item) => {
+    return {
+      label: item.sectorName
+      || null,
+      value: item.sectorId
+      ,
+    };
+  });
     const {
       accounts,
       user,
@@ -93,7 +119,7 @@ function UpdatePitchForm (props) {
             ],
             
           }}
-          validationSchema={UpdatePitchSchema}
+          // validationSchema={UpdatePitchSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             props.updatePitch(
@@ -124,24 +150,8 @@ function UpdatePitchForm (props) {
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-full">
-                          <FastField
-                            name="salutation"
-                            type="text"
-                            label={
-                              <FormattedMessage
-                                id="app.salutation"
-                                defaultMessage="salutation"
-                              />
-                            }
-                            options={["Mr.", "Ms.", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
-                            isColumn
-                          />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-full">
+                     
+                        <div class=" w-full max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -216,7 +226,7 @@ function UpdatePitchForm (props) {
                   
                       <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
+                       
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -225,7 +235,10 @@ function UpdatePitchForm (props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        }
                         inlineLabel
                        />
                       
@@ -324,11 +337,11 @@ function UpdatePitchForm (props) {
                     </div>                    
                     </div>
                      <div class=" flex justify-between">
-                     {/* <div class=" w-1/2">
-                      <FastField
+                     <div class=" w-w47.5">
+                      <Field
                         name="sectorId"
                         isColumnWithoutNoCreate
-                        selectType="sectorName"
+                        // selectType="sectorName"
                         label={
                           <FormattedMessage
                             id="app.sector"
@@ -336,10 +349,13 @@ function UpdatePitchForm (props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(sectorOption) ? sectorOption : []
+                        }
                       />
-                    </div> */}
-                    <div class="w-full">
+                    </div>
+                    <div class="w-w47.5">
                   
                         <FastField
                           name="source"
@@ -350,12 +366,13 @@ function UpdatePitchForm (props) {
                           />
                           }
                           isColumnWithoutNoCreate
-                          selectType="sourceName"
-                          component={SearchSelect}
                           defaultValue={{
                             label:props.setEditingPitch.source,
                           }}
-                          value={values.sourceId}
+                          component={SelectComponent}
+                            options={
+                              Array.isArray(sourceOption) ? sourceOption : []
+                            }
                           isColumn
                           inlineLabel
                         />
@@ -484,7 +501,7 @@ function UpdatePitchForm (props) {
   
 }
 
-const mapStateToProps = ({ auth,investor, leads,employee,pitch }) => ({
+const mapStateToProps = ({ auth,investor,countrys,source,sector, leads,employee,pitch }) => ({
     setEditingPitch: leads.setEditingPitch,
     updateLeadsById: leads.updateLeadsById,
     updatePitchById:pitch.updatePitchById,
@@ -492,10 +509,14 @@ const mapStateToProps = ({ auth,investor, leads,employee,pitch }) => ({
     user: auth.userDetails,
     userId: auth.userDetails.userId,
     organizationId: auth.userDetails.organizationId,
+    orgId:auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
+    country: countrys.country,
+    sectors: sector.sectors,
     allEmployeeList:investor.allEmployeeList,
-    setEditingPitch:pitch.setEditingPitch
+    setEditingPitch:pitch.setEditingPitch,
+    sources: source.sources,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -503,10 +524,10 @@ const mapDispatchToProps = (dispatch) =>
     {
         updatePitch,
         getSources,
-        // updateLeads,
+        getCountry,
         setEditPitch,
         getAllEmployeelist,
-    //   setClearbitData,
+        getSectors
     },
     dispatch
   );

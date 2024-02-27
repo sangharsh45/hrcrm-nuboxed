@@ -149,7 +149,8 @@ case types.GET_PITCH_REQUEST:
         return { ...state, 
             addingPitch: false, 
             addPitchModal: false ,
-            pitchData:[action.payload,...state.pitchData]
+            pitchData:[action.payload,...state.pitchData],
+            allPitchData:[action.payload,...state.allPitchData]
         };
       case types.ADD_PITCH_FAILURE:
         return { ...state, addingPitch: false,  };  

@@ -700,16 +700,25 @@ const PitchAllCardList = (props) => {
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
-              {item.assignedTo === null ? (
-                "None"
-              ) : (
-                <MultiAvatar
-                  primaryTitle={item.assignedTo}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
-                />
-              )}
-            </span>
+                        {item.assignedTo === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedTo === item.ownerName ? (
+                    
+                    null
+                  ) : (
+                    <Tooltip title={item.assignedTo}> 
+                            <MultiAvatar
+                              primaryTitle={item.assignedTo}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                            </Tooltip>
+                          )}
+                          </>
+                )}
+                        </span>
              
                                     </div>
                                 </div>
@@ -718,13 +727,15 @@ const PitchAllCardList = (props) => {
                        {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                        <span>
+                       <Tooltip title={item.ownerName}> 
               <MultiAvatar
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
-                imageURL={item.imageURL}
+                // imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
+                    </Tooltip>
             </span>
                    </div>
                                
@@ -773,8 +784,8 @@ onClick={()=>{
 </div>
 </div>
                                 </div>
-                                <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
-                               
+                                <div class="flex max-sm:flex-row   md:w-20 max-sm:w-[25%] ">
+{/*                                
                                 <div class="flex flex-col w-6 max-sm:flex-row">
                                 {user.imInd === true  &&  user.pitchUpdateInd === true && (  
                                 <div>
@@ -813,7 +824,7 @@ onClick={()=>{
             
 
                     </div>
-                    </div>
+                    </div> */}
                     <div class="flex flex-col w-6 max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
