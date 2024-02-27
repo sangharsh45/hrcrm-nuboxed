@@ -181,7 +181,7 @@ class SingleTaskStages extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
 
-                <Button type="primary" ghost onClick={() => toggleViewType()}>
+                <Button      type="cancel" onClick={() => toggleViewType()}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>

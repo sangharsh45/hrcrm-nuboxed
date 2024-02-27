@@ -245,7 +245,7 @@ class SingleDealsStages extends Component {
                   />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={() => toggleViewType()}>
+                <Button     type="cancel" onClick={() => toggleViewType()}>
                {/* Cancel */}
                   <FormattedMessage
                     id="app.cancel"
