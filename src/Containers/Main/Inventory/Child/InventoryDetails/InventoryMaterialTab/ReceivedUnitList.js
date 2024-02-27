@@ -82,6 +82,7 @@ const ReceivedUnitList = (props) => {
                                                         type="primary"
                                                         onClick={() => props.updatePartIdOfAnItem({
                                                             partNumber: part,
+                                                            autoPartInd: true,
                                                             userId: props.userId,
                                                             poSupplierSuppliesId: props.poSupplierSuppliesId,
                                                         }, item.supplierSuppliesUniqueNumberId, handleCallback())}
@@ -97,17 +98,21 @@ const ReceivedUnitList = (props) => {
                                     </div>
                                     <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                         <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                            <BorderColorOutlined
+                                            {item.autoPartInd ? null : <BorderColorOutlined
                                                 onClick={() => {
                                                     handlePartNo()
                                                     handleRowData(item)
                                                 }}
-                                            />
+                                            />}
                                         </div>
                                     </div>
                                     <div className=" flex font-medium flex-col md:w-26 max-sm:justify-between w-full max-sm:flex-row ">
                                         <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                                            <AutoPartNoTOggle autoPartInd={item.autoPartInd} />
+                                            <AutoPartNoTOggle
+                                                supplierSuppliesUniqueNumberId={item.supplierSuppliesUniqueNumberId}
+                                                autoPartInd={item.autoPartInd}
+                                                showPartNoInd={item.showPartNoInd}
+                                            />
                                         </div>
                                     </div>
                                 </div>

@@ -2,33 +2,27 @@ import React, { Component, useState } from "react";
 import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updatePartIdOfAnItem } from "../../../InventoryAction"
+import { movetoProductionArchieve } from "../../AccountAction"
 
-function AutoPartNoTOggle(props) {
+function MoveToProductionArchieve(props) {
 
     function onChange() {
-        props.updatePartIdOfAnItem({
-            autoPartInd: props.autoPartInd ? false : true,
-            poSupplierSuppliesId: props.poSupplierSuppliesId,
-            partNumber: "",
-            showPartNoInd: true
-        },
-            props.supplierSuppliesUniqueNumberId
-        )
+        props.movetoProductionArchieve({
+            dispatchInd: props.dispatchInd ? false : true
+        }, props.productionProductId)
     };
     return (
         <>
             <div>
                 <Popconfirm
-                    title="Do you want to generate part no automatic ?"
+                    title="Do you want to transfer to archieve ?"
                     onCancel={null}
                     onConfirm={onChange}
                     okText="Yes"
                     cancelText="No"
                 >
                     <Switch
-                        disabled={props.showPartNoInd}
-                        checked={props.showPartNoInd}
+                        checked={props.dispatchInd}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                     />
@@ -45,8 +39,8 @@ const mapStateToProps = ({ auth, inventory }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            updatePartIdOfAnItem,
+            movetoProductionArchieve,
         },
         dispatch
     );
-export default connect(mapStateToProps, mapDispatchToProps)(AutoPartNoTOggle);
+export default connect(mapStateToProps, mapDispatchToProps)(MoveToProductionArchieve);

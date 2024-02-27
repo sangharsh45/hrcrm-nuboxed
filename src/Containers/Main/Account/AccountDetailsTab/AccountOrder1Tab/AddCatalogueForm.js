@@ -88,7 +88,7 @@ const AddCatalogueForm = (props) => {
                     ...rest
                 }) => (
                     <Form>
-                        <div class="justify-between flex">
+                        <div class="justify-between flex mx-4">
                             <div class="w-[33%]">
                                 <Field
                                     name="productId"
@@ -140,7 +140,7 @@ const AddCatalogueForm = (props) => {
                                 />
                             </div>
                         </div>
-                        <div class="justify-between flex">
+                        <div class="justify-between flex mx-4">
                             <div class="w-[25%]">
                                 <Field
                                     name="attributeName"

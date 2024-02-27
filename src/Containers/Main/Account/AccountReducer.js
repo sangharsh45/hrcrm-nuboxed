@@ -176,6 +176,9 @@ const initialState = {
   fetchingPaymentHistoryError: false,
   paymentHistory: [],
 
+  movingToProductionArchieve: false,
+  movingToProductionArchieveError: false,
+
   addCatalogueOrderModal: false,
 
   generateOrderModal: false,
@@ -396,7 +399,12 @@ const initialState = {
 
   orderCartDrawer: false,
 
-  showProductList: false
+  showProductList: false,
+  searchItemsInLocation: false,
+
+  searchingItemInLocation: false,
+  searchingItemInLocationError: true,
+  searchedItem: []
 };
 
 export const distributorReducer = (state = initialState, action) => {
@@ -2042,7 +2050,14 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingAllProductForOrder: false,
-        addCatalogueOrderModal: false
+        addCatalogueOrderModal: false,
+        productionOrder: state.productionOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE:
       return {
@@ -2143,6 +2158,9 @@ export const distributorReducer = (state = initialState, action) => {
     case types.HANDLE_PRODUCT_ORDER_DETAIL_MODAL:
       return { ...state, showProductList: action.payload };
 
+    case types.HANDLE_SEARCH_ITEMS_MODAL:
+      return { ...state, searchItemsInLocation: action.payload, searchedItem: [] };
+
     case types.CREATE_ORDER_FOR_PRODUCTION_REQUEST:
       return { ...state, creatingOrderForProduction: true };
     case types.CREATE_ORDER_FOR_PRODUCTION_SUCCESS:
@@ -2188,7 +2206,35 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingProductionDetailById: false,
         fetchingProductionDetailByIdError: true,
+      };
 
+    case types.SEARCH_ITEM_IN_LOCATION_REQUEST:
+      return { ...state, searchingItemInLocation: true };
+    case types.SEARCH_ITEM_IN_LOCATION_SUCCESS:
+      return {
+        ...state,
+        searchingItemInLocation: false,
+        searchedItem: action.payload
+      };
+    case types.SEARCH_ITEM_IN_LOCATION_FAILURE:
+      return {
+        ...state,
+        searchingItemInLocation: false,
+        searchingItemInLocationError: true,
+      };
+
+    case types.MOVE_TO_PRODUCTION_ARCHIEVE_REQUEST:
+      return { ...state, movingToProductionArchieve: true };
+    case types.MOVE_TO_PRODUCTION_ARCHIEVE_SUCCESS:
+      return {
+        ...state,
+        movingToProductionArchieve: false,
+      };
+    case types.MOVE_TO_PRODUCTION_ARCHIEVE_FAILURE:
+      return {
+        ...state,
+        movingToProductionArchieve: false,
+        movingToProductionArchieveError: true,
       };
     default:
       return state;
