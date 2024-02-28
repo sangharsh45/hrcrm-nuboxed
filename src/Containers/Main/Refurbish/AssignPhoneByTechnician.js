@@ -1,4 +1,4 @@
-import React, { useEffect, useState,lazy } from 'react'
+import React, { useEffect, useState, lazy } from 'react'
 import { Button, DatePicker, Select } from 'antd'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
@@ -7,7 +7,7 @@ import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { getProductionUsersById, UpdateTechnicianByPhone, getNoOfPhoneById } from "./RefurbishAction"
 import { SubTitle } from '../../../Components/UI/Elements';
 
-const QRCodeModal=lazy(()=>import('../../../Components/UI/Elements/QRCodeModal'));
+const QRCodeModal = lazy(() => import('../../../Components/UI/Elements/QRCodeModal'));
 
 const { Option } = Select;
 
@@ -127,7 +127,7 @@ const AssignPhoneByTechnician = (props) => {
                 <div>
                     <div class="text-sm font-semibold m-2">Department</div>
                     <Select
-                    className="w-[250px]"
+                        className="w-[350px]"
                         value={department}
                         onChange={(value) => handleDepartment(value)}
                     >
@@ -137,9 +137,9 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                <div class="text-sm font-semibold m-2">Technician</div>
+                    <div class="text-sm font-semibold m-2">Technician</div>
                     <Select
-                        className="w-[250px]"
+                        className="w-[350px]"
                         value={technician}
                         onChange={(value) => handleTechnician(value)}
                     >
@@ -149,9 +149,9 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                <div class="text-sm font-semibold m-2">Due Date</div>
+                    <div class="text-sm font-semibold m-2">Due Date</div>
                     <DatePicker
-                         className="w-[250px]"
+                        className="w-[250px]"
                         value={dueDate}
                         onChange={(value) => hanldeOnChange(value)}
                     />

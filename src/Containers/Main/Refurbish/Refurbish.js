@@ -8,9 +8,7 @@ const RefurbishMainTable=lazy(()=>import('./RefurbishMainTable'));
 const OrderPhoneTab =lazy(()=> import('./OrderPhoneTab'));
 
 const Refurbish = (props) => {
-  useEffect(() => {
-    props.getShifts(props.userId);
-  }, []);
+
   return (
     <div>
       <RefurbishHeader

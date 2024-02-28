@@ -17,6 +17,7 @@ import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFi
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
+    orderCurrencyId: Yup.string().required("Input needed!"),
 })
 function AddOrderInAccount(props) {
     const contactOption = props.contactDistributor.map((item) => {
@@ -55,7 +56,7 @@ function AddOrderInAccount(props) {
                 deliverToBusinessInd: "",
                 fullLoadTruckInd: "",
                 privateInd: "",
-                advancePayment: "",
+                advancePayment: 50,
                 distributorId: props.distributorId,
                 userId: props.userId,
                 orderId: "",
@@ -107,7 +108,7 @@ function AddOrderInAccount(props) {
             }}
         >
             {({ values, handleChange }) => (
-                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                <div class="overflow-y-auto h-[28rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
                             <StyledLabel><h3> <FormattedMessage
@@ -323,7 +324,7 @@ function AddOrderInAccount(props) {
                                 <div class="w-[30%]">
                                     <Field
                                         name="comments"
-                                        label="Comment"
+                                        label="Notes"
                                         width={"100%"}
                                         isColumn
                                         component={TextareaComponent}

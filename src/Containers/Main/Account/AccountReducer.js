@@ -356,6 +356,10 @@ const initialState = {
   fetchingDistributorQuoteByDistributorIdError: false,
   distributorQuote: [],
 
+  fetchingCustomerByUser: false,
+  fetchingCustomerByUserError: true,
+  customerListByUser: [],
+
   startingQcInStatus: false,
   startingQcInStatusError: false,
 
@@ -426,7 +430,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingDistributor: false,
         addDistributorModal: false,
-        allDistributors: [action.payload, ...state.allDistributors]
+        customerListByUser: [action.payload, ...state.customerListByUser]
       };
     case types.ADD_DISTRIBUTOR_FAILURE:
       return {
@@ -436,7 +440,7 @@ export const distributorReducer = (state = initialState, action) => {
         addDistributorModal: false,
       };
     case types.EMPTY_DISTRIBUTOR_LIST:
-      return { ...state, allDistributors: [] };
+      return { ...state, allDistributors: [], customerListByUser: [] };
 
     /**
      * get the list of all distributors
@@ -777,7 +781,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         updateDisributorById: false,
         updateAccountModal: false,
-        allDistributors: state.allDistributors.map((item) => {
+        customerListByUser: state.customerListByUser.map((item) => {
           if (item.distributorId == action.payload.distributorId) {
             return action.payload;
           } else {
@@ -2206,6 +2210,22 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingProductionDetailById: false,
         fetchingProductionDetailByIdError: true,
+      };
+
+    case types.GET_CUSTOMER_BY_USER_REQUEST:
+      return { ...state, fetchingCustomerByUser: true };
+    case types.GET_CUSTOMER_BY_USER_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerByUser: false,
+        customerListByUser: action.payload
+      };
+    case types.GET_CUSTOMER_BY_USER_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerByUser: false,
+        fetchingCustomerByUserError: true,
+
       };
 
     case types.SEARCH_ITEM_IN_LOCATION_REQUEST:
