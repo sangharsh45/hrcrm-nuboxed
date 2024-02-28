@@ -5,12 +5,12 @@ const CatalogueListForOrder = lazy(() => import("./CatalogueListForOrder"));
 const PhoneListForRepair = lazy(() => import("./PhoneListForRepair"));
 
 const OrderPhoneRepairModal = (props) => {
-    const { showRepairPhoneList, handleRepairPhone,rowData, ...formProps } = props;
+    const { showRepairPhoneList, handleRepairPhone, rowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title={(`Order # - ${rowData.newOrderNo}`)} 
-                width="80%"
+                title={(`Order # - ${rowData.newOrderNo}`)}
+                width="85%"
                 visible={showRepairPhoneList}
                 closable
                 destroyOnClose

@@ -700,6 +700,34 @@ export const emptyDistributor = () => (dispatch) => {
     type: types.EMPTY_DISTRIBUTOR_LIST,
   });
 };
+// get customer by user
+
+export const getCustomerByUser = (userId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_CUSTOMER_BY_USER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/distributor/${userId}/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CUSTOMER_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CUSTOMER_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
 /**
  * get all the distributor
  */

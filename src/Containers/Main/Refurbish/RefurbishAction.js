@@ -2,6 +2,7 @@ import * as types from "./RefurbishActionTypes";
 import { base_url2, base_url } from "../../../Config/Auth";
 import axios from "axios";
 import { message } from "antd";
+import Swal from 'sweetalert2'
 
 export const setProductionViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_PRODUCTION_VIEW_TYPE, payload: viewType });
@@ -830,7 +831,11 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Repair Status Updated Successfully',
+        showConfirmButton: true,
+      })
       dispatch(getRepairPhoneByUser(orderPhoneId, userId))
       dispatch(getRepairOrderByUser(locationDetailsId, userId))
       dispatch({
@@ -838,7 +843,6 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
         payload: res.data,
       });
       cb && cb();
-      message.success("Repair status updated!!")
     })
     .catch((err) => {
       console.log(err);
@@ -1405,7 +1409,7 @@ export const getTaskByPhoneId = (phoneId) => (dispatch) => {
     });
 };
 
-export const approveSpare = (data,phoneSpareId) => (dispatch) => {
+export const approveSpare = (data, phoneSpareId) => (dispatch) => {
   dispatch({
     type: types.APPROVE_SPARE_REQUEST,
   });
@@ -1431,12 +1435,12 @@ export const approveSpare = (data,phoneSpareId) => (dispatch) => {
       message.error("Something went wrong");
     });
 };
-export const updateProcessTask = (data,phoneTaskId) => (dispatch) => {
+export const updateProcessTask = (data, phoneTaskId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_PROCESS_TASK_REQUEST,
   });
   axios
-    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`,data, {
+    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

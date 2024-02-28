@@ -204,6 +204,7 @@ const AddAccountForm = ({
                       inlineLabel
                     />
                   </div>
+
                   <div class=" w-[60%]">
                     <FastField
                       type="text"
@@ -494,6 +495,8 @@ const AddAccountForm = ({
               <Button
                 type="primary"
                 htmlType="submit"
+                style={{ marginRight: "3rem", marginTop: "65px" }}
+                className=" w-16 absolute top-3/4 right-0"
                 loading={addingDistributor}
               >
                 <FormattedMessage
