@@ -470,9 +470,17 @@ const PitchAllCardList = (props) => {
                   id="app.country"
                   defaultMessage="country"
                 /></div>
-        <div className="md:w-[17.1rem]"><FormattedMessage
+        <div className="md:w-[10.1rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
+                /></div>
+                     <div className="md:w-[5.12rem]"><FormattedMessage
+                  id="app.Source"
+                  defaultMessage="Source"
+                /></div>
+                     <div className="md:w-[5.12rem]"><FormattedMessage
+                  id="app.Sector"
+                  defaultMessage="Sector"
                 /></div>
         <div className="md:w-[7.1rem]"><FormattedMessage
                   id="app.assignedto"
@@ -665,23 +673,21 @@ const PitchAllCardList = (props) => {
 </div>
 
                        </div>
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span class="cursor-pointer"
-                  //type="edit"
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
+                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
+                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                           {item.source || "Not Available"}
+</div>
+
+                       </div>
+                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
+                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                           {item.sector || "Not Available"}
+</div>
+
+                       </div>
+                    
                                 {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </div>
@@ -742,8 +748,23 @@ const PitchAllCardList = (props) => {
                                
                          
                    <div className=" flex font-medium flex-col md:w-16 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
-
+                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                    {item.url !== null ? (
+              <Tooltip title={item.url}>
+                <span class="cursor-pointer"
+                  //type="edit"
+                  onClick={() => {}}
+                >
+                  {" "}
+                  <a href={`item.url`} target="_blank">
+                    <ExploreIcon
+                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
+                    />
+                  </a>
+                </span>
+              </Tooltip>
+            ) : null}
+                        </div>
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>

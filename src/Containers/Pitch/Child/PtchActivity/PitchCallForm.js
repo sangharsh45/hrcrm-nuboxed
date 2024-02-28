@@ -593,7 +593,7 @@ function PitchCallForm(props) {
                   <Spacer />
                   <Field
                     isRequired
-                    defaultValue={{ label: timeZone, value: userId }}
+                     defaultValue={{ label: timeZone, value: userId }}
                     name="timeZone"
                     isColumnWithoutNoCreate
                     //label="TimeZone "
@@ -878,7 +878,8 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   assignedToList:employee.assignedToList,
   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  timeZone: auth.userDetails.timeZone,
   // candidateByuserId:candidate.candidateByuserId
 });
 

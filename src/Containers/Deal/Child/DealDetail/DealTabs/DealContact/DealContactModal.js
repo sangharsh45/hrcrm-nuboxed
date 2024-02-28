@@ -15,10 +15,7 @@ const DealContactModal = (props) => {
         />}
         width="60%"
         visible={openDealContactModal}
-        closable
-        destroyOnClose
         onClose={() => handleDealContactModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <DealContactForm {...formProps} />
