@@ -1,9 +1,6 @@
+import { Menu } from "antd";
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { Menu } from "antd";
-import {
-  SubTitle,
-} from "../../../../../Components/UI/Elements";
 import { CurrencySymbol } from "../../../../../Components/Common";
 class DealAboutView extends Component {
   render() {
@@ -103,28 +100,7 @@ class DealAboutView extends Component {
 
     return (
       <>
-        {/* <FlexContainer justifyContent="flex-end">
-          {this.props.partnerLogin === "Yes" &&
-            this.props.department === "Partner" ? null : (
-              <Tooltip title="Edit">
-                <EditOutlined
-                  tooltipTitle="Edit"
-                  iconType="edit"
-                  onClick={toggleViewType}
-                  size="1em"
-                />
-              </Tooltip>
-            )}
-        </FlexContainer> */}
-        {/* <ProfileItemRow
-          label="Customer"
-          // label={<FormattedMessage
-          //   id="app.proposalvalue"
-          //   defaultMessage="Proposal Value"
-          // />}
-          value={customer}
-        /> */}
-        <ProfileItemRow
+ <ProfileItemRow
           //label="Proposal value"
           label={<FormattedMessage
             id="app.proposalvalue"
@@ -137,35 +113,11 @@ class DealAboutView extends Component {
           {proposalAmount}
           </span>
           }
-        // value={`${
-        //   proposalAmount === 0
-        //     ? proposalAmount
-        //     : CurrencyCompressor(proposalAmount)
-        // } ${currency}`}
         />
-        {/* <div style={{ display: "", marginBottom: "-16px" }}>
-          <ProfileItemRow
-            style={{ fontSize: "0.8125em", width: "36%" }}
-            label="Currency"
-            ex
-            value={currency}
-         
-          />
-
-         
-        </div> */}
+ 
 
      
-         {/* value={`${dayjs(exchangePrice.date).format("ll")}`} */}
-        
-        {/* <ProfileItemRow label="Sales Process" value={processName} /> */}
-        {/* <ProfileItemRow
-          label="Closure date"
-          value={dayjs(endDate).format("ll")}
-        /> */}
-        {/* <ProfileItemRow label="Win probability" value={oppType} /> */}
-        {/* <ProfileItemRow label="Description" value={description} /> */}
-         {/* <ProfileItemRow label="Recruiter Teams" value={sourceName} />  */}
+    
       </>
     );
   }
@@ -173,19 +125,11 @@ class DealAboutView extends Component {
 
 export default DealAboutView;
 
-const ProfileItemRow = ({ label, value, ex }) => {
+const ProfileItemRow = ({ label, value }) => {
   return (
-//     <div class=" flex flex-no-wrap items-center"
-
-//     >
-      
-// <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
-//       <SubTitle style={{ textAlign:"end" }}>{value}</SubTitle>
-      
-//     </div>
-     <div class=" flex items-center w-[92%] justify-between flex-no-wrap m-2 h-2">
-     <div class=" text-[#444] font-semibold" >{label}</div>
-     <div className="overflow-hidden truncate ml-8">{value}</div>
-   </div>
+    <div class=" flex items-center w-fit justify-between flex-no-wrap m-2 h-2">
+      <div class=" text-[#444] font-semibold" >{label}</div>
+      <div className="overflow-hidden truncate ml-8">{value}</div>
+    </div>
   );
 };

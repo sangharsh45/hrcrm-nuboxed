@@ -256,8 +256,8 @@ const countryNameOption = props.countries.map((item) => {
             firstName: "",
             lastName: "",
             emailId: "",
-            countryDialCode: "",
-            countryDialCode1: "",
+            countryDialCode: props.userDetails.countryDialCode || "",
+            countryDialCode1: props.userDetails.countryDialCode1 || "",
            
             phoneNo: "",
             // location:selectedLocation,
@@ -442,24 +442,21 @@ const countryNameOption = props.countries.map((item) => {
                   <div class="flex justify-between max-sm:flex-col">
                   <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk " >
                     <div class=" w-w47.5 max-sm:w-wk ">
-                      <Field
+                    <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
-                        label={<FormattedMessage
-                          id="app.dialCode"
-                          defaultMessage="Dial Code"
-                        />}
-                        placeholder="Select"
-                        isColumn
-                        options={
-                          Array.isArray(dialCodeNameOption)
-                            ? dialCodeNameOption
-                            : []
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
+                          />
                         }
-                        component={SelectComponent}
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
-                        />
+                      />
                         </div>
                          <div class=" w-w47.5 max-sm:w-wk">
                       <Field
@@ -478,23 +475,21 @@ const countryNameOption = props.countries.map((item) => {
                   </div>
                   <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk" >
                     <div class="w-w47.5 max-sm:w-wk">
-                      <Field
+                    <FastField
                         name="countryDialCode1"
                         isColumnWithoutNoCreate
-                        label={<FormattedMessage
-                          id="app.countryDialCode1"
-                          defaultMessage="Dial Code"
-                        />}
-                        placeholder="Select"
-                        isColumn
-                        options={
-                          Array.isArray(dialCodeNameOption)
-                            ? dialCodeNameOption
-                            : []
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
+                          />
                         }
-                        component={SelectComponent}
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
-                        />
+                      />
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                       <Field

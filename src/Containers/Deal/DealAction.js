@@ -753,3 +753,30 @@ export const deleteDealsData = (invOpportunityId) => (dispatch) => {
       });
     });
 };
+
+export const removeDealDocuments = ( documentId) => (dispatch) => {
+  // console.log(typeId);
+  dispatch({
+    type: types.REMOVE_DEAL_DOCUMENT_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunity/document/${documentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success("Document has been deleted successfully!");
+      console.log(res);
+      dispatch({
+        type: types.REMOVE_DEAL_DOCUMENT_SUCCESS,
+        payload:documentId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_DEAL_DOCUMENT_FAILURE,
+      });
+    });
+};

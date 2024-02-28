@@ -20,7 +20,7 @@ import {
   handleCallModal,
   handleCallNotesModal,
 } from "../../../Call/CallAction";
-// import {addLeadsActivityCall} from "../../LeadsAction"
+import {addContactActivityCall} from "../../ContactAction";
 import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
@@ -119,10 +119,10 @@ function ContactCallForm(props) {
       user: { userId, firstName, empName,middleName, fullName, lastName, timeZone },
       isEditing,
       prefillCall,
-      addingCall,
+      addingContactActivityCall,
       deleteCall,
       deletingCall,
-      addLeadsActivityCall,
+      addContactActivityCall,
       startDate,
       endDate,
       startTime,
@@ -177,83 +177,80 @@ function ContactCallForm(props) {
           }
           validationSchema={CallSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log(values);
+  
             let timeZoneFirst = values.timeZone;
-            console.log(timeZone);
+     
 
             let mytimeZone = timeZoneFirst.substring(4, 10);
-            console.log(mytimeZone);
+           
 
             var a = mytimeZone.split(":");
-            console.log(a);
+     
             var timeZoneminutes = +a[0] * 60 + +a[1];
-            console.log(timeZoneminutes);
+          
             if (!values.endDate) {
               values.endDate = values.startDate;
             }
             let newStartDate = dayjs(values.startDate).format("YYYY-MM-DD");
-            console.log(newStartDate);
+           
             //Time calculation
             let firstStartTime = dayjs(values.startTime).format(
               "HH:mm:ss.SSS[Z]"
             ); // getting start time from form input
-            console.log(firstStartTime);
-
+       
             let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
-            console.log(firstStartHours);
+   
 
             let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
-            console.log(timeEndPart);
+      
 
             var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
-            console.log(firstStartTimeSplit);
+   
 
             var minutes =
               +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
-            console.log(minutes);
+
 
             var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
-            console.log(firstStartTimeminutes);
+            
 
             let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
             let m = firstStartTimeminutes % 60;
             h = h < 10 ? "0" + h : h;
             m = m < 10 ? "0" + m : m;
             let finalStartTime = `${h}:${m}`;
-            console.log(finalStartTime);
+         
 
             let newStartTime = `${finalStartTime}${timeEndPart}`;
-            console.log(newStartTime);
+          
 
             let newEndDate = dayjs(values.endDate).format("YYYY-MM-DD");
             let firstEndTime = dayjs(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
-            console.log(firstEndTime);
+      
             let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
-            console.log(firstEndHours);
+           
 
             var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
-            console.log(firstEndTimeSplit);
+        
             var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
-            console.log(endMinutes);
+         
             var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
-            console.log(firstEndTimeminutes);
+           
             let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
-            console.log(hr);
+
             let mi = firstEndTimeminutes % 60;
-            console.log(hr);
+   
             hr = hr < 10 ? "0" + hr : hr;
             mi = mi < 10 ? "0" + mi : mi;
             let finalEndTime = `${hr}:${mi}`;
-            console.log(finalEndTime);
-            console.log(timeEndPart);
-            console.log(`${finalEndTime}${timeEndPart}`);
+          
 
             let newEndTime = `${finalEndTime}${timeEndPart}`;
             let testVal = {
               ...values,
               callCategory: category,
               callType: Type,
-            //   leadsId:props.rowdata.leadsId,
+              contactId:props.currentContact.contactId,
               startDate: `${newStartDate}T${newStartTime}`,
               endDate: `${newEndDate}T${newEndTime}`,
 
@@ -277,7 +274,7 @@ function ContactCallForm(props) {
                 },
                 () => handleCallback(resetForm)
               )
-              : addLeadsActivityCall(testVal,
+              : addContactActivityCall(testVal,
                resetForm()
                );
          
@@ -740,7 +737,7 @@ function ContactCallForm(props) {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  Loading={isEditing ? updatingCall : addingCall}
+                  Loading={isEditing ? updatingCall : addingContactActivityCall}
                 >
                   {isEditing ? (
                     "Update"
@@ -758,8 +755,8 @@ function ContactCallForm(props) {
     );
   }
 
-const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate }) => ({
-  addingCall: call.addingCall,
+const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate,contact }) => ({
+  addingContactActivityCall: contact.addingContactActivityCall,
   allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
   allOpportunityData:opportunity.allOpportunityData,
@@ -779,16 +776,16 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   addLeadsActivityCall,
-    //   getAllCustomerData,
-    //   handleChooserModal,
-    //   getAllSalesList,
-    //   updateCall,
-    //   handleCallModal,
-    //   deleteCall,
-    //   getAssignedToList,
-    //   getAllOpportunityData,
-    //   getFilteredEmailContact,
+      addContactActivityCall,
+      getAllCustomerData,
+      handleChooserModal,
+      getAllSalesList,
+      updateCall,
+      handleCallModal,
+      deleteCall,
+      getAssignedToList,
+      getAllOpportunityData,
+      getFilteredEmailContact,
     //   setClearbitCandidateData, 
     //   handleCallNotesModal,
     },

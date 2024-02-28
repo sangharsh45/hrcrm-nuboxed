@@ -3,7 +3,6 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import Swal from "sweetalert2";
-import { message } from "antd";
 import { getContactListByOpportunityId } from "../Opportunity/OpportunityAction";
 /**
  * contact modal action
@@ -628,7 +627,10 @@ export const inputContactDataSearch = (name) => (dispatch) => {
       });
     })
     .catch((err) => {
-      message.error("Contact list is empty");
+      Swal.fire({
+        icon: 'error',
+        title: 'Contact list is empty',
+      })
       dispatch({
         type: types.INPUT_CONTACT_SEARCH_DATA_FAILURE,
         payload: err,
@@ -1274,4 +1276,154 @@ export const handleCETactivityContactModal = (modalProps) => (dispatch) => {
     type: types.HANDLE_CET_ACTIVITY_CONTACT_MODAL,
     payload: modalProps,
   });
+};
+
+export const addContactActivityCall = (call,contactId, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CONTACT_ACTIVITY_CALL_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/activity/call/save`, call, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      Swal({
+        icon: 'success',
+        title: 'Call has been added successfully!',
+      })
+      // dispatch(getCallTimeline(contactId));
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_CALL_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_CALL_FAILURE,
+        payload: err,
+      });
+      cb();
+    });
+};
+export const addContactActivityEvent = (event,contactId, cb) => (dispatch, getState) => {
+  dispatch({
+    type: types.ADD_CONTACT_ACTIVITY_EVENT_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/activity/event/save`, event, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      Swal({
+        icon: 'success',
+        title: 'Meeting has been added successfully!',
+      })
+      console.log(res);
+      // dispatch(getCallTimeline(CONTACTId));
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_EVENT_SUCCESS,
+        payload: res.data,
+      });
+      // cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_EVENT_FAILURE,
+        payload: err,
+      });
+      // cb();
+    });
+};
+
+export const addContactActivityTask = (task,contactId, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CONTACT_ACTIVITY_TASK_REQUEST,
+  });
+  axios
+    .post(`${base_url}/activity/task/create`, task, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      Swal({
+        icon: 'success',
+        title: 'Task has been added successfully!',
+      })
+      // dispatch(getCallTimeline(leadsId));
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_TASK_SUCCESS,
+        payload: res.data,
+      });
+      // cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CONTACT_ACTIVITY_TASK_FAILURE,
+        payload: err,
+      });
+      // cb();
+    });
+};
+export const getContactCETimeline = (contactId) => (dispatch) => {
+  dispatch({
+      type: types.GET_CONTACT_CET_TIMELINE_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/contact/activity/list/${contactId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_CONTACT_CET_TIMELINE_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_CONTACT_CET_TIMELINE_FAILURE,
+              payload: err,
+          });
+      });
+};
+export const getContactCETrecord = (contactId) => (dispatch) => {
+  dispatch({
+      type: types.GET_CONTACT_CET_RECORD_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/contact/activity/record/${contactId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_CONTACT_CET_RECORD_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_CONTACT_CET_RECORD_FAILURE,
+              payload: err,
+          });
+      });
 };

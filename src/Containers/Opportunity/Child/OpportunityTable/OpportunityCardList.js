@@ -145,7 +145,6 @@ function OpportunityCardList(props) {
             <MultiAvatar
               primaryTitle={item.opportunityName}
               imageId={item.imageId}
-              // imageURL={imageURL}
               imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
             />

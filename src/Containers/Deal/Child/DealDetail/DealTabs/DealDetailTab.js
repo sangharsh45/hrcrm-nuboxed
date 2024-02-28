@@ -137,7 +137,7 @@ return  <BundleLoader />
                 
                   {activeKey === "2" && (
                     <>
-                      <Tooltip 
+                      {/* <Tooltip 
                         title={<FormattedMessage
                           id="app.create"
                           defaultMessage="Create"
@@ -156,7 +156,8 @@ return  <BundleLoader />
                         />
                          )}
                          
-                      </Tooltip>
+                      </Tooltip> */}
+                      <span class=" ml-2">
                       <Tooltip 
                           title={<FormattedMessage
                             id="app.tagexisting"
@@ -177,6 +178,7 @@ return  <BundleLoader />
                           />
 
                      </Tooltip>
+                     </span>
                     </>
                   )}
                 </>

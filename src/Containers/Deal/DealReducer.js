@@ -67,6 +67,9 @@ const initialState = {
   fetchDealdetailsError:false,
   dealDetailsbyID:{},
 
+  removingDealDocument: false,
+  removingDealDocumentError: false,
+
   fetchingDelasRecords: false,
   fetchingDelasRecordsError: false,
   dealsRecord:{},
@@ -141,7 +144,8 @@ export const dealReducer = (state = initialState, action) => {
             ...state,
             creatingDeal: false,
             opencreateDealModal: false,
-           dealsByuserId :[action.payload,...state.dealsByuserId]
+           dealsByuserId :[action.payload,...state.dealsByuserId],
+           allDealsData :[action.payload,...state.allDealsData]
           };
         case types.CREATE_DEAL_FAILURE:
           return {
@@ -507,6 +511,7 @@ export const dealReducer = (state = initialState, action) => {
           addingDocumentByDealId: false,
           addingDocumentByDealIdError: false,
           documentUploadModal:false,
+          documentsByInnOppId:[action.payload,...state.documentsByInnOppId],
         };
       case types.ADD_DEAL_DOCUMENT_FAILURE:
         return {
@@ -558,6 +563,24 @@ export const dealReducer = (state = initialState, action) => {
               };
             case types.DELETE_DEAL_DATA_FAILURE:
               return { ...state, deleteDealData: false, deleteDealDataError: false };
+
+
+              case types.REMOVE_DEAL_DOCUMENT_REQUEST:
+                return { ...state, removingDealDocument: true };
+              case types.REMOVE_DEAL_DOCUMENT_SUCCESS:
+                return {
+                  ...state,
+                  removingDealDocument: false,
+                  documentsByInnOppId: state.documentsByInnOppId.filter(
+                    (item) => item.documentId !== action.payload
+                ), 
+                };
+              case types.REMOVE_DEAL_DOCUMENT_FAILURE:
+                return {
+                  ...state,
+                  removingDealDocument: false,
+                  removingDealDocumentError: true,
+                };
 
     default:
       return state;

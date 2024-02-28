@@ -35,8 +35,8 @@ class FinanceDashTab extends Component {
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
                <span class=" ml-1 font-semibold"><FormattedMessage
-              id="app.finance"
-              defaultMessage="Finance"
+              id="app.receivable"
+              defaultMessage="Receivable"
             /></span>
               
 
@@ -50,7 +50,7 @@ class FinanceDashTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <h1>finance</h1>
+                <h1>Receivable</h1>
               </Suspense>
             </TabPane>
           </StyledTabs>
