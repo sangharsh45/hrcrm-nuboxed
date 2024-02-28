@@ -20,6 +20,9 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
+// import {getDialCode} from "../../Investor/InvestorAction";
+
+
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
@@ -49,6 +52,7 @@ function CustomerForm(props) {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getCrm();
+    // props.getDialCode();
   }, []);
 
     const {
@@ -85,6 +89,14 @@ function CustomerForm(props) {
         value: item.sectorId,
       };
     });
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //     ,
+    //   };
+    // });
+
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
@@ -223,7 +235,8 @@ function CustomerForm(props) {
                         name="countryDialCode"
                         selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
+                        component={SearchSelect}
+                        value={values.countryDialCode}
                         label={
                           <FormattedMessage
                             id="app.dialcode"
@@ -231,8 +244,10 @@ function CustomerForm(props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        value={values.countryDialCode1}
+                        //   component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                       />
                     </div>
@@ -521,7 +536,7 @@ function CustomerForm(props) {
   }
 
 
-const mapStateToProps = ({ auth, customer,employee ,opportunity,sector,leads}) => ({
+const mapStateToProps = ({ auth, customer,employee ,investor,sector,leads}) => ({
   addingCustomer: customer.addingCustomer,
   addingCustomerError: customer.addingCustomerError,
   clearbit: customer.clearbit,
@@ -531,11 +546,13 @@ const mapStateToProps = ({ auth, customer,employee ,opportunity,sector,leads}) =
   sectors: sector.sectors,
   fullName: auth.userDetails.fullName,
   crmAllData:leads.crmAllData,
+  // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // getDialCode,
       addCustomer,
       setClearbitData,
       getSectors,

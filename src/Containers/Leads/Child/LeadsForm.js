@@ -17,7 +17,10 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-import { Listbox, } from '@headlessui/react'
+import { Listbox, } from '@headlessui/react';
+// import {getDialCode} from "../../Investor/InvestorAction";
+import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
+
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const LeadsSchema = Yup.object().shape({
@@ -34,6 +37,7 @@ function LeadsForm (props) {
  
   useEffect(()=> {
 props. getCrm();
+// props.getDialCode();
   },[]);
 
     const {
@@ -53,6 +57,14 @@ props. getCrm();
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
 
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //     ,
+    //   };
+    // });
+    
     return (
       <>
         <Formik
@@ -250,6 +262,9 @@ props. getCrm();
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
+                        component={SearchSelect}
+                        value={values.countryDialCode1}
+                        
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -258,8 +273,10 @@ props. getCrm();
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        value={values.countryDialCode1}
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                       />
                   
@@ -543,14 +560,15 @@ props. getCrm();
     );
 }
 
-const mapStateToProps = ({ auth, leads,employee }) => ({
+const mapStateToProps = ({ auth, leads,investor }) => ({
   addingLeads: leads.addingLeads,
   crmAllData:leads.crmAllData,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -559,6 +577,7 @@ const mapDispatchToProps = (dispatch) =>
        addLeads,
        getCrm,
       setClearbitData,
+      // getDialCode,
     },
     dispatch
   );

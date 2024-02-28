@@ -20,6 +20,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Listbox } from '@headlessui/react'
+// import {getDialCode} from "../../../Investor/InvestorAction";
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -40,6 +41,7 @@ function UpdateLeadsForm (props) {
     props.getAllCustomerEmployeelist();
     props.getSources(props.orgId)
     props. getCrm();
+    // props.getDialCode();
   },[])
  
 
@@ -64,6 +66,13 @@ function UpdateLeadsForm (props) {
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
+    
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //   };  });
+    
     return (
       <>
         <Formik
@@ -227,6 +236,7 @@ function UpdateLeadsForm (props) {
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
+                        component={SearchSelect}
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -235,7 +245,10 @@ function UpdateLeadsForm (props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                        />
                       
@@ -494,7 +507,7 @@ function UpdateLeadsForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, leads,employee,source }) => ({
+const mapStateToProps = ({ auth, leads,employee,source,investor }) => ({
     setEditingLeads: leads.setEditingLeads,
     updateLeadsById: leads.updateLeadsById,
     updateLeadsByIdError: leads.updateLeadsByIdError,
@@ -507,6 +520,7 @@ const mapStateToProps = ({ auth, leads,employee,source }) => ({
     fullName: auth.userDetails.fullName,
     allCustomerEmployeeList:employee.allCustomerEmployeeList,
     crmAllData:leads.crmAllData,
+    // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -517,7 +531,8 @@ const mapDispatchToProps = (dispatch) =>
       getAllCustomerEmployeelist,
       setClearbitData,
       getSources,
-      getCrm
+      getCrm,
+      // getDialCode,
     },
     dispatch
   );
