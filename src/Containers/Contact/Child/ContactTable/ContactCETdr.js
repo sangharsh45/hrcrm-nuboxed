@@ -6,8 +6,8 @@ import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 
 const ContactCallForm = lazy(() => import("./ContactCallForm"));
-// const LeadsEventForm = lazy(() =>import("./LeadsEventForm"));
-// const LeadsTaskForm = lazy(() => import("./LeadsTaskForm"));
+const ContactEventForm = lazy(() =>import("./ContactEventForm"));
+const ContactTaskForm = lazy(() => import("./ContactTaskForm"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -29,7 +29,7 @@ const ContactCETdr = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <ContactActivityTab />
+          <ContactActivityTab currentContact={props.currentContact}/>
 
         </Suspense>
       </StyledDrawer>
@@ -57,7 +57,7 @@ const ContactCETdr = (props) => {
                 key="1"
               >
                 <Suspense fallback={"loading ..."}>
-                  <ContactCallForm   {...formProps} />
+                  <ContactCallForm  currentContact={props.currentContact} {...formProps} />
                 </Suspense>
               </TabPane>
           
@@ -71,8 +71,7 @@ const ContactCETdr = (props) => {
                 key="2"
               >
                 <Suspense fallback={"loading ..."}>
-                    ents
-                  {/* <LeadsEventForm rowdata={props.rowdata} {...formProps}/> */}
+                  <ContactEventForm currentContact={props.currentContact} {...formProps}/>
                 </Suspense>
               </TabPane>
               <TabPane
@@ -84,15 +83,14 @@ const ContactCETdr = (props) => {
                 }
                 key="3"
               >
-                <Suspense fallback={"loading ..."}>
-                    tsk
-                  {/* <LeadsTaskForm rowdata={props.rowdata} {...formProps}/> */}
+                <Suspense fallback={"loading ..."}> 
+                  <ContactTaskForm currentContact={props.currentContact} {...formProps}/>
                 </Suspense>
               </TabPane>
             </StyledTabs>
           </TabsWrapper>
           <ContactCETdr
-        //   rowdata={props.rowdata}
+          currentContact={props.currentContact}
             clickCETcontactActivity={clickCETcontactActivity}
             handleCETactivityContactModal={handleCETactivityContactModal}
           />

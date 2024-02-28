@@ -3,7 +3,6 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { asses_url } from "../../Config/Auth";
-import { message } from "antd";
 import Swal from 'sweetalert2'
 
 export const setLeadsViewType = (viewType) => (dispatch) => {
@@ -1020,8 +1019,8 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         Swal.fire({
           icon: 'success',
           title: 'Reinstated Successfully',
-          showConfirmButton: false,
-          timer: 4000
+          // showConfirmButton: false,
+          // timer: 4000
         })
       })
       .catch((err) => {
@@ -1212,9 +1211,10 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Call has been added successfully!");
-        ////debugger;
-        console.log(res);
+        Swal({
+          icon: 'success',
+          title: 'Call has been added successfully!',
+        })
          dispatch(getCallTimeline(leadsId));
         dispatch({
           type: types.ADD_LEADS_ACTIVITY_CALL_SUCCESS,
@@ -1247,7 +1247,10 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Meeting has been added successfully!");
+        Swal({
+          icon: 'success',
+          title: 'Meeting has been added successfully!',
+        })
         console.log(res);
         dispatch(getCallTimeline(leadsId));
         // dispatch(getEventListRangeByUserId(userId,0));
@@ -1282,8 +1285,10 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Task has been added successfully!");
-        console.log(res);
+        Swal({
+          icon: 'success',
+          title: 'Task has been added successfully!',
+        })
         dispatch(getCallTimeline(leadsId));
         dispatch({
           type: types.ADD_LEADS_ACTIVITY_TASK_SUCCESS,

@@ -3,22 +3,22 @@ import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dayjs from 'dayjs';
-// import { getCallTimeline } from '../../LeadsAction';
+import { getContactCETimeline } from '../../ContactAction';
 import { Tooltip } from "antd";
 import { MultiAvatar } from "../../../../Components/UI/Elements";
 
 const ContactCETcard = (props) => {
   useEffect(() => {
-    //   props.getCallTimeline(props.rowdata.leadsId);
+      props.getContactCETimeline(props.currentContact.contactId);
   }, []);
 
-  const { callTimeline, ratingValue } = props;
+  const { contactCETimeline, ratingValue } = props;
   return (
     <>
-        {/* <div className="mt-4">
+        <div className="mt-4">
         <Timeline>
-          {callTimeline &&
-            callTimeline.map((status, i) => (
+          {contactCETimeline &&
+            contactCETimeline.map((status, i) => (
               <Timeline.Item key={i}>
                 <div>
                 <div>{status.category} - {status.activityType} on {dayjs(status.startDate).format('DD/MM/YYYY')} - {status.woner !==props.fullName ?  <Tooltip title={status.woner}> 
@@ -40,22 +40,22 @@ const ContactCETcard = (props) => {
             ))}
         </Timeline>
         
-      </div> */}
-      cls, evn,tsks
+      </div>
+ 
     </>
   );
 };
 
-const mapStateToProps = ({ leads, auth }) => ({
+const mapStateToProps = ({ contact, auth }) => ({
   userId: auth.userDetails.userId,
-  callTimeline: leads.callTimeline,
+  contactCETimeline: contact.contactCETimeline,
   fullName:auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getCallTimeline,
+      getContactCETimeline,
     },
     dispatch
   );
