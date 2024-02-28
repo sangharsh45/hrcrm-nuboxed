@@ -20,7 +20,6 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-// import {getDialCode} from "../../Investor/InvestorAction";
 
 
 // yup validation scheme for creating a account
@@ -33,7 +32,7 @@ const CustomerSchema = Yup.object().shape({
 
 function CustomerForm(props) {
 
-   const[checked,setChecked]=useState(true);
+  const[checked,setChecked]=useState(true);
   const[whiteblue,setWhiteblue]=useState(true);
 
   function handleWhiteBlue (checked) {
@@ -52,7 +51,6 @@ function CustomerForm(props) {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getCrm();
-    // props.getDialCode();
   }, []);
 
     const {
@@ -89,13 +87,7 @@ function CustomerForm(props) {
         value: item.sectorId,
       };
     });
-    // const dialCodeOption = props.dialCodeList.map((item) => {
-    //   return {
-    //     label: `+${item.country_dial_code || ""}`,
-    //     value: item.country_dial_code
-    //     ,
-    //   };
-    // });
+
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
@@ -244,10 +236,9 @@ function CustomerForm(props) {
                           />
                         }
                         isColumn
-                        //   component={SelectComponent}
-                        // options={
-                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
-                        // }
+                        defaultValue={{
+                          label:`+${props.user.countryDialCode}`,
+                        }}
                         inlineLabel
                       />
                     </div>
@@ -536,7 +527,7 @@ function CustomerForm(props) {
   }
 
 
-const mapStateToProps = ({ auth, customer,employee ,investor,sector,leads}) => ({
+const mapStateToProps = ({ auth, customer,employee,sector,leads}) => ({
   addingCustomer: customer.addingCustomer,
   addingCustomerError: customer.addingCustomerError,
   clearbit: customer.clearbit,
@@ -546,13 +537,11 @@ const mapStateToProps = ({ auth, customer,employee ,investor,sector,leads}) => (
   sectors: sector.sectors,
   fullName: auth.userDetails.fullName,
   crmAllData:leads.crmAllData,
-  // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // getDialCode,
       addCustomer,
       setClearbitData,
       getSectors,
