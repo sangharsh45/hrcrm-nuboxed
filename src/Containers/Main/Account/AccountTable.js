@@ -16,7 +16,7 @@ import {
   handleUpdateAccountModal,
   emptyDistributor
 } from "./AccountAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 const UpdateAccountModal = lazy(() => import("./UpdateAccountModal"));
 
@@ -53,7 +53,7 @@ function AccountTable(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex  w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=" md:w-[15.12rem]">  <FormattedMessage
               id="app.name"
@@ -98,10 +98,10 @@ function AccountTable(props) {
           >
 
             {props.allDistributors.map((item) => {
-              const currentdate = moment().format("DD/MM/YYYY");
-              const date = moment(item.creationDate).format("DD/MM/YYYY");
+              const currentdate = dayjs().format("DD/MM/YYYY");
+              const date = dayjs(item.creationDate).format("DD/MM/YYYY");
               const diff = Math.abs(
-                moment().diff(moment(item.lastRequirementOn), "days")
+                dayjs().diff(dayjs(item.lastRequirementOn), "days")
               );
               const dataLoc = `${item.address && item.address.length && item.address[0].address1
                 } 
@@ -225,7 +225,7 @@ function AccountTable(props) {
                       <div class=" text-xs text-cardBody font-poppins">
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                             className=" !text-base cursor-pointer text-[gray]"
+                            className=" !text-base cursor-pointer text-[gray]"
                             onClick={() => {
                               props.setEditDistributor(item)
                               handleUpdateAccountModal(true);
@@ -253,7 +253,7 @@ function AccountTable(props) {
         handleUpdateAccountModal={handleUpdateAccountModal}
       />
 
-     
+
     </>
   );
 }
@@ -312,8 +312,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);
 //       return 0;
 //     },
 //     render: (name, item, i) => {
-//       const currentdate = moment().format("DD/MM/YYYY");
-//       const date = moment(item.creationDate).format("DD/MM/YYYY");
+//       const currentdate = dayjs().format("DD/MM/YYYY");
+//       const date = dayjs(item.creationDate).format("DD/MM/YYYY");
 //       return (
 //         <>
 //           <AccountDetailsView

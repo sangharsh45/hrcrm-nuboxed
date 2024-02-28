@@ -40,10 +40,11 @@ export const addDistributor = (distributor) => (dispatch) => {
         },
       })
     .then((res) => {
-      console.log(res);
-      // dispatch(getOpportunityRecord(userId));
-      // dispatch(getDistributorsByUserId(userId));
-      // dispatch(getAccountRecords())
+      Swal.fire({
+        icon: 'success',
+        title: 'Customer Created Successfully',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.ADD_DISTRIBUTOR_SUCCESS,
         payload: res.data,
@@ -625,9 +626,8 @@ export const updateDistributor = (data, distributorId, userId) => (
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Updated Successfully',
+        showConfirmButton: true,
       })
     })
     .catch((err) => {
@@ -2599,8 +2599,7 @@ export const saveUnitForCatalogueItem = (data, id, orderId) => (dispatch) => {
       Swal.fire({
         icon: 'success',
         title: 'Items added successfully',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       dispatch(getProductListByDistributor(id, orderId));
       dispatch({
@@ -2630,8 +2629,7 @@ export const addAllProductInOrder = (data, id, orderId) => (dispatch) => {
       Swal.fire({
         icon: 'success',
         title: 'Items added to the order',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       dispatch(getProductListByDistributor(id, orderId));
       dispatch(getProductionOrder(id, 0))
@@ -2758,9 +2756,8 @@ export const updateOrderStep1 = (data, orderPhoneId) => (
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Updated Successfully',
+        showConfirmButton: true,
       })
     })
     .catch((err) => {
@@ -2794,9 +2791,8 @@ export const updateOrderPayment = (data, paymentId) => (
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Updated Successfully',
+        showConfirmButton: true,
       })
     })
     .catch((err) => {
@@ -2851,9 +2847,8 @@ export const createOrderForProduction = (data) => (dispatch) => {
       });
       Swal.fire({
         icon: 'success',
-        title: 'Order Created Succefully',
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Order Created Successfully',
+        showConfirmButton: true,
       })
     })
     .catch((err) => {

@@ -15,7 +15,7 @@ import { getContactListByCustomerId, getAllCustomerListByUserId } from "../../..
 import { getAllCandidateListByUserId } from "../../../Containers/Candidate/CandidateAction";
 import { getAllUsersByOrganizationId } from "../../../Containers/Call/CallAction";
 import { getCountries } from "../../../Containers/Auth/AuthAction";
-import { getTimeZone } from "../../../Containers/Auth/AuthAction";
+import { getTimeZone, getAllDialCodeList } from "../../../Containers/Auth/AuthAction";
 import { getCurrency } from "../../../Containers/Auth/AuthAction";
 import { getDocuments } from "../../../Containers/Settings/Documents/DocumentsAction";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
@@ -36,7 +36,7 @@ class SearchSelect extends Component {
   componentDidMount() {
     const {
       opportunityId,
-       userId,
+      userId,
       organizationId,
       customerId,
       selectType,
@@ -53,7 +53,7 @@ class SearchSelect extends Component {
       getCurrency,
       getSources,
       getOnlySalesUser,
-      getStages,
+      getAllDialCodeList,
       getProducts,
       getTimeZone,
       getProcess,
@@ -144,7 +144,7 @@ class SearchSelect extends Component {
       getCountries();
     }
     if (selectType === "dialCode") {
-      getCountries();
+      getAllDialCodeList();
     }
     if (selectType === "currencyName") {
       getCurrency();
@@ -309,6 +309,7 @@ class SearchSelect extends Component {
       isColumn,
       process,
       countries,
+      dialcodeList,
       currencies,
       products,
       selectType,
@@ -433,15 +434,15 @@ class SearchSelect extends Component {
             if (departmentNameA > departmentNameB) {
               return 1;
             }
-  
+
             // names must be equal
             return 0;
           }
-        )
+          )
           .map((item, i) => ({
             value: item.departmentId,
-            label:item.departmentName,
-              
+            label: item.departmentName,
+
             color: "#FF8B00",
           }));
       } else {
@@ -469,7 +470,7 @@ class SearchSelect extends Component {
             //.sort((a, b) => (a.firstName < b.firstName ? -1 : 1))
             .map((item, i) => ({
               value: item.departmentId,
-              label:item.departmentName,
+              label: item.departmentName,
               color: "#FF8B00",
             }));
         } else {
@@ -478,7 +479,7 @@ class SearchSelect extends Component {
             //.sort((a, b) => (a.firstName < b.firstName ? -1 : 1))
             .map((item, i) => ({
               value: item.departmentId,
-              label:item.departmentName,
+              label: item.departmentName,
               color: "#FF8B00",
             }));
         }
@@ -704,8 +705,7 @@ class SearchSelect extends Component {
 
       // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
     }
-    if (selectType === "country" ) 
-    {
+    if (selectType === "country") {
       debugger;
       options = countries.map((item, i) => ({
         value: item.countryAlpha3Code,
@@ -719,22 +719,22 @@ class SearchSelect extends Component {
       }));
     }
     if (selectType === "dialCode") {
-      options = countries.map((item, i) => ({
+      options = dialcodeList.map((item, i) => ({
         label: `+${item.country_dial_code}`,
         value: `+${item.country_dial_code}`,
       }));
-      options = uniqBy(options, "value");
-    }  
+      // options = uniqBy(options, "value");
+    }
     if (selectType === "currencyName") {
       options = currencies.map((item, i) => ({
-          value: item.currency_name,
-          label: item.currency_name,
-          color: "#FF8B00",
-        }));
+        value: item.currency_name,
+        label: item.currency_name,
+        color: "#FF8B00",
+      }));
     }
 
 
-   
+
     if (selectType === "timeZone") {
       options = timeZone.map((item, i) => ({
         label: `${item.zone_name}`,
@@ -792,7 +792,7 @@ class SearchSelect extends Component {
           // names must be equal
           return 0;
         }
-      )
+        )
         .map((item, i) => ({
           value: item.sectorId,
           label: item.sectorName,
@@ -818,7 +818,7 @@ class SearchSelect extends Component {
           // names must be equal
           return 0;
         }
-      )
+        )
         .map((item, i) => ({
           value: item.designationTypeId,
           label: item.designationType,
@@ -845,7 +845,7 @@ class SearchSelect extends Component {
           // names must be equal
           return 0;
         }
-      )
+        )
         .map((item, i) => ({
           value: item.roleTypeId,
           label: item.roleType,
@@ -882,17 +882,17 @@ class SearchSelect extends Component {
     }
     if (selectType === "contactOpportunityList") {
       <>
-     {contactByCustomerId.length ? 
-      options = contactByCustomerId
-        // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
-        .map((item, i) => ({
-          value: item.contactId,
-          label: `${item.firstName || ""} ${item.middleName ||
-            ""} ${item.lastName || ""}`,
-          color: "#FF8B00",
-        }))
-        :null}
-</>
+        {contactByCustomerId.length ?
+          options = contactByCustomerId
+            // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
+            .map((item, i) => ({
+              value: item.contactId,
+              label: `${item.firstName || ""} ${item.middleName ||
+                ""} ${item.lastName || ""}`,
+              color: "#FF8B00",
+            }))
+          : null}
+      </>
     }
 
     if (selectType === "customerList") {
@@ -948,7 +948,7 @@ class SearchSelect extends Component {
           // names must be equal
           return 0;
         }
-      )
+        )
         .map((item, i) => ({
           value: item.partnerId,
           label: item.partnerName,
@@ -1212,7 +1212,7 @@ class SearchSelect extends Component {
 }
 
 
-const mapStateToProps = ({ auth, call, document,source, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
+const mapStateToProps = ({ auth, call, document, source, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
   countries: auth.countries,
   currencies: auth.currencies,
   fetchingCountries: auth.fetchingCountries,
@@ -1243,6 +1243,7 @@ const mapStateToProps = ({ auth, call, document,source, role, functions, contact
   departments: departments.departments,
   allcustomersByUserId: customer.allcustomersByUserId,
   sources: source.sources,
+  dialcodeList: auth.dialcodeList
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1267,13 +1268,7 @@ const mapDispatchToProps = (dispatch) =>
       // getProducts,
       // getDeliveryUser,
       getTimeZone,
-      // handleUserModal,
-      // handleContactModal,
-      // handleAccountModal,
-      // handleOpportunityModal,
-      // getProcess,
-      // getProcessStages,
-      // getAllProcessStages,
+      getAllDialCodeList,
       getDepartments,
       // getDepartment,
       getDocuments,
