@@ -28,7 +28,7 @@ function ContactCETdrawer (props) {
           onClose={() => props.handleContactCETdrawer(false)}
         >
           <Suspense fallback={<BundleLoader />}>
-          <ContactCETTab/>
+          <ContactCETTab currentContact={props.currentContact}/>
           </Suspense>
         </StyledDrawer>
       </div>
@@ -90,7 +90,7 @@ function ContactCETdrawer (props) {
                     <Suspense fallback={"Loading ..."}>
                       {" "}
                       <ContactCETcard
-                        // rowdata={props.rowdata}
+                        currentContact={props.currentContact}
                       />
                     </Suspense>
                   </TabPane>
@@ -99,7 +99,7 @@ function ContactCETdrawer (props) {
               </TabsWrapper>
               <Suspense fallback={<BundleLoader/>}>
               <ContactCETdr
-              rowdata={props.rowdata}
+              currentContact={props.currentContact}
                 clickCETcontactActivity={clickCETcontactActivity}
                 handleCETactivityContactModal={handleCETactivityContactModal}
               />

@@ -246,6 +246,17 @@ addingNotesByContactId:false,
 
    contactCETdrawer:false,
    clickCETcontactActivity:false,
+
+   addingContactActivityCall: false,
+   addingContactActivityEvent: false,
+   addingContactActivityTask: false,
+   fetchingContactsCETimeline: false,
+  fetchingContactsCETimelineError:false,
+  contactCETimeline:[],
+
+  fetchingContactsCETRecord: false,
+  fetchingContactsCETRecordError:false,
+  contactCETRecord:{},
 };
 
 export const contactReducer = (state = initialState, action) => {
@@ -901,9 +912,81 @@ export const contactReducer = (state = initialState, action) => {
 
                 case types.HANDLE_CET_ACTIVITY_CONTACT_MODAL:
                   return { ...state, clickCETcontactActivity: action.payload };
-   default:
-      return state;
+  
+                  case types.ADD_CONTACT_ACTIVITY_CALL_REQUEST:
+                    return { ...state, addingContactActivityCall: true };
+                  case types.ADD_CONTACT_ACTIVITY_CALL_SUCCESS:
+                    return { ...state, addingContactActivityCall: false,
+                      clickCETcontactActivity: false,
+                      contactCETimeline:[action.payload,...state.contactCETimeline]
+                     };
+                  case types.ADD_CONTACT_ACTIVITY_CALL_FAILURE:
+                    return {
+                      ...state,
+                      addingContactActivityCall: false,
+                      clickCETcontactActivity: false,
+                    };
 
+                    case types.ADD_CONTACT_ACTIVITY_EVENT_REQUEST:
+                      return { ...state, addingContactActivityEvent: true };
+                    case types.ADD_CONTACT_ACTIVITY_EVENT_SUCCESS:
+                      return { ...state, addingContactActivityEvent: false,
+                        clickCETcontactActivity: false,
+                        contactCETimeline:[action.payload,...state.contactCETimeline]
+                       };
+                    case types.ADD_CONTACT_ACTIVITY_EVENT_FAILURE:
+                      return {
+                        ...state,
+                        addingContactActivityEvent: false,
+                        clickCETcontactActivity: false,
+                      }; 
+
+                      case types.ADD_CONTACT_ACTIVITY_TASK_REQUEST:
+                        return { ...state, addingContactActivityTask: true };
+                      case types.ADD_CONTACT_ACTIVITY_TASK_SUCCESS:
+                        return { ...state, addingContactActivityTask: false,
+                          clickCETcontactActivity: false,
+                          contactCETimeline:[action.payload,...state.contactCETimeline]
+                         };
+                      case types.ADD_CONTACT_ACTIVITY_TASK_FAILURE:
+                        return {
+                          ...state,
+                          addingContactActivityTask: false,
+                          clickCETcontactActivity: false,
+                        };  
+
+                        case types.GET_CONTACT_CET_TIMELINE_REQUEST:
+                          return { ...state, fetchingContactsCETimeline: true };
+                      case types.GET_CONTACT_CET_TIMELINE_SUCCESS:
+                          return {
+                              ...state,
+                              fetchingContactsCETimeline: false,
+                              contactCETimeline: action.payload,
+                          };
+                      case types.GET_CONTACT_CET_TIMELINE_FAILURE:
+                          return {
+                              ...state,
+                              fetchingContactsCETimeline: false,
+                              fetchingContactsCETimelineError: true,
+                          };
+
+                          case types.GET_CONTACT_CET_RECORD_REQUEST:
+                            return { ...state, fetchingContactsCETRecord: true };
+                        case types.GET_CONTACT_CET_RECORD_SUCCESS:
+                            return {
+                                ...state,
+                                fetchingContactsCETRecord: false,
+                                contactCETRecord: action.payload,
+                            };
+                        case types.GET_CONTACT_CET_RECORD_FAILURE:
+                            return {
+                                ...state,
+                                fetchingContactsCETRecord: false,
+                                fetchingContactsCETRecordError: true,
+                            };
+
+                  default:
+      return state;
 
   }
 
