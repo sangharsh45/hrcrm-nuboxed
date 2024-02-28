@@ -24,43 +24,27 @@ const QRCodeModal = ({
     const borderStyle = size === "large" ? "solid" : "solid";
     return (
         <>
-            {qrCodeId || qrUrl ? (
-                qrCodeId ? (
-                    <div style={{ borderRadius: 24 }}>
-                        <ProgressiveImage
-                            preview={ProfilePreview}
-                            image={`${base_url2}/qrcode/img/${qrCodeId}`}
-                            width={imgWidth || "55px"}
-                            height={imgHeight || "55px"}
-                            borderRadius={imgRadius}
-                        />
-                    </div>
-                ) : (
+            {/* {qrCodeId || qrUrl ? ( */}
+
+            {qrCodeId ? (
+                <div style={{ borderRadius: 24 }}>
                     <ProgressiveImage
                         preview={ProfilePreview}
-                        image={qrUrl}
+                        image={`${base_url2}/qrcode/img/${qrCodeId}`}
                         width={imgWidth || "55px"}
                         height={imgHeight || "55px"}
                         borderRadius={imgRadius}
-                    // borderRadius={'50%'}
                     />
-                )
+                </div>
             ) : (
-                <Avatar
-                    size={size || "large"}
-                    style={{
-                        color,
-                        // backgroundColor: bgcolor ? "red" : backgroundColor,
-                        backgroundColor,
-                        // fontSize,
-                        borderWidth,
-                        borderColor,
-                        borderStyle,
-                        minWidth: minAvatarWidth,
-                    }}
-                >
-                    {primaryTitle && primaryTitle.split("")[0].toUpperCase()}
-                </Avatar>
+                <ProgressiveImage
+                    preview={ProfilePreview}
+                    image={qrUrl}
+                    width={imgWidth || "55px"}
+                    height={imgHeight || "55px"}
+                    borderRadius={imgRadius}
+                // borderRadius={'50%'}
+                />
             )}
         </>
     );
@@ -88,3 +72,22 @@ export default QRCodeModal;
 //decision maker <i class="fas fa-vote-yea"></i>
 //evaluator <i class="fas fa-address-card"></i>
 //influencer <i class="fas fa-hands-helping"></i>
+
+
+// ) : (
+//     <Avatar
+//         size={size || "large"}
+//         style={{
+//             color,
+//             // backgroundColor: bgcolor ? "red" : backgroundColor,
+//             backgroundColor,
+//             // fontSize,
+//             borderWidth,
+//             borderColor,
+//             borderStyle,
+//             minWidth: minAvatarWidth,
+//         }}
+//     >
+//         {primaryTitle && primaryTitle.split("")[0].toUpperCase()}
+//     </Avatar>
+// )}

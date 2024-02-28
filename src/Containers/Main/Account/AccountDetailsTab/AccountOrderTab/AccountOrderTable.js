@@ -28,6 +28,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Input, Tooltip } from 'antd';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { BundleLoader } from '../../../../../Components/Placeholder';
+import { CurrencySymbol } from '../../../../../Components/Common';
 
 const AddLocationInOrder = lazy(() => import('./AddLocationInOrder'));
 const AccountOrderDetailsModal = lazy(() => import('./AccountOrderDetailsModal'));
@@ -75,7 +76,7 @@ const AccountOrderTable = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
-            <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                     <div className=" flex  w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[9.41rem]">
                             <FormattedMessage
@@ -116,13 +117,13 @@ const AccountOrderTable = (props) => {
                         <div className="md:w-[4.31rem]">
                             <FormattedMessage
                                 id="app.finalprice"
-                                defaultMessage="Final Price"
+                                defaultMessage="Final"
                             />
                         </div>
                         <div className="w-[5.8rem]">
                             <FormattedMessage
                                 id="app.revisedprice"
-                                defaultMessage="Revised Price"
+                                defaultMessage="Revised"
                             />
                         </div>
 
@@ -138,8 +139,8 @@ const AccountOrderTable = (props) => {
                         {props.distributorOrder.map((item) => {
                             const currentdate = moment().format("DD/MM/YYYY");
                             const date = moment(item.creationDate).format("DD/MM/YYYY");
-                        
-                          
+
+
                             return (
                                 <div >
                                     <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3">
@@ -162,28 +163,28 @@ const AccountOrderTable = (props) => {
                                                     </div>
                                                 </Tooltip>
                                             </div>
-                                            
+
                                             <div class="flex">
-                                            <div className="ml-1 font-medium flex-col md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
-                                                <div class=" text-xs text-cardBody font-poppins">
-                                                    <span
-                                                        class="underline cursor-pointer text-[#1890ff]"
-                                                        onClick={() => {
-                                                            handleSetParticularOrderData(item);
-                                                            props.handleOrderDetailsModal(true);
-                                                        }}
-                                                    >{item.newOrderNo}</span>
-                                                    &nbsp;&nbsp;
-                                                    {date === currentdate ? (
+                                                <div className="ml-1 font-medium flex-col md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
+                                                    <div class=" text-xs text-cardBody font-poppins">
                                                         <span
-                                                            class="text-[tomato] font-bold">
-                                                            {<FormattedMessage
-                                                                id="app.new"
-                                                                defaultMessage="New"
-                                                            />}
-                                                        </span>
-                                                    ) : null}
-                                                </div>
+                                                            class="underline cursor-pointer text-[#1890ff]"
+                                                            onClick={() => {
+                                                                handleSetParticularOrderData(item);
+                                                                props.handleOrderDetailsModal(true);
+                                                            }}
+                                                        >{item.newOrderNo}</span>
+                                                        &nbsp;&nbsp;
+                                                        {date === currentdate ? (
+                                                            <span
+                                                                class="text-[tomato] font-bold">
+                                                                {<FormattedMessage
+                                                                    id="app.new"
+                                                                    defaultMessage="New"
+                                                                />}
+                                                            </span>
+                                                        ) : null}
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -234,7 +235,7 @@ const AccountOrderTable = (props) => {
 
 
                                                 <div class=" text-xs text-cardBody font-poppins">
-                                                    {item.expectedPrice}
+                                                    <CurrencySymbol currencyType={item.orderCurrencyName} />{item.expectedPrice}
                                                 </div>
 
                                             </div>
@@ -242,7 +243,7 @@ const AccountOrderTable = (props) => {
 
 
                                                 <div class=" text-xs text-cardBody font-poppins">
-                                                    {`${item.orderCurrencyName || ""} ${item.finalPrice || ""}`}
+                                                    <CurrencySymbol currencyType={item.orderCurrencyName} />{item.finalPrice}
                                                 </div>
 
                                             </div>
@@ -252,7 +253,7 @@ const AccountOrderTable = (props) => {
 
 
                                                 <div class=" text-xs text-cardBody font-poppins">
-                                                    {visible && (item.orderId === particularRowData.orderId) ?
+                                                    <CurrencySymbol currencyType={item.orderCurrencyName} />{visible && (item.orderId === particularRowData.orderId) ?
                                                         <Input
                                                             type='text'
                                                             value={price}
@@ -295,7 +296,7 @@ const AccountOrderTable = (props) => {
                                                             handleSetParticularOrderData(item)
                                                         }}
                                                         className="!text-base cursor-pointer"
-                                                         />
+                                                    />
                                                 </Tooltip> : null}
 
                                             </div>
@@ -328,11 +329,12 @@ const AccountOrderTable = (props) => {
                                                 <div class=" text-xs text-cardBody font-poppins">
                                                     {item.transferInd === 0 ? (
                                                         <Tooltip title={<FormattedMessage
-                                                            id="app.addinventorylocation"
-                                                            defaultMessage="Add Inventory Location"
+                                                            id="app.selectinventorylocation"
+                                                            defaultMessage="Select Inventory Location"
                                                         />}>
                                                             <Button
-                                                            className="cursor-pointer text-[13px] bg-[#3096e9] text-white"
+                                                                type='primary'
+                                                                className="cursor-pointer text-sm bg-[#3096e9] text-white"
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
                                                                     props.handleInventoryLocationInOrder(true);
@@ -340,7 +342,7 @@ const AccountOrderTable = (props) => {
                                                             >
                                                                 <FormattedMessage
                                                                     id="app.orderpickup"
-                                                                    defaultMessage="Order Pickup"
+                                                                    defaultMessage="Pickup"
                                                                 />
 
                                                             </Button>
@@ -353,109 +355,109 @@ const AccountOrderTable = (props) => {
 
                                         </div>
                                         <div class="flex justify-end">
-                                        <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-                   <div>
-                   <Tooltip title={<FormattedMessage
-                                                    id="app.notes"
-                                                    defaultMessage="Notes"
-                                                />}>
-                                                    <NoteAltIcon
-                                                        className="!text-base cursor-pointer text-[green]"
-                                                        onClick={() => {
-                                                            props.handleNotesModalInOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-
-                                                </Tooltip>
-                   </div>
-                   
-                   <div>
-                   <Tooltip title={<FormattedMessage
-                                                    id="app.status"
-                                                    defaultMessage="Status"
-                                                />}>
-                                                    <EventRepeatIcon
-                                                     
-                                                        className="!text-base cursor-pointer"
-                                                        onClick={() => {
-                                                            props.handleStatusOfOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-                                                </Tooltip>
-                        </div>
-                        
-            </div>
-            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-
-                        <div>
-                        <Tooltip title="Collection">
-                                                    <PaidIcon
-                                                        className="!text-base cursor-pointer"
-                                                        onClick={() => {
-                                                            props.handlePaidModal(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-
-                                                    />
-                                                </Tooltip>
-
-                        </div>
-                        <div>
-                   <Tooltip title={<FormattedMessage
-                                                    id="app.updateorder"
-                                                    defaultMessage="Update Order"
-                                                />}>
-                                                    <BorderColorOutlined
-                                                        onClick={() => {
-                                                            props.setEditOrder(item)
-                                                            props.handleUpdateOrder(true)
-                                                            handleSetParticularOrderData(item)
-                                                        }}
-                                                        className="!text-base cursor-pointer" />
-                                                </Tooltip>
-                   </div>
-            </div>
-            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-                   <div>
-                   <Tooltip title={<FormattedMessage
-                                                    id="app.rating"
-                                                    defaultMessage="Rating"
-                                                />}>
-                                                    <StarBorderIcon
-                                                    
-                                                        className="!text-base cursor-pointer" />
-                                                </Tooltip>
-
-                        </div>
-                        <div>
-                        <Tooltip title={<FormattedMessage
-                                                    id="app.feedback"
-                                                    defaultMessage="Feedback"
-                                                />}>
-                                                    <FeedbackIcon
-                                                     className="!text-base cursor-pointer"
-                                                         />
-                                                </Tooltip>
-
-                        </div>
-            </div>      
-            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
-                   <div>
-                   <Tooltip title={<FormattedMessage
-                                                    id="app.delete"
-                                                    defaultMessage="Detele"
-                                                />}>
-                                                    <DeleteIcon
-                                                    className="!text-base cursor-pointer text-[red]"
-                                                    onClick={()=>{props.removeOrderAcc(item.orderId)}}
+                                            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.notes"
+                                                        defaultMessage="Notes"
+                                                    />}>
+                                                        <NoteAltIcon
+                                                            className="!text-base cursor-pointer text-[green]"
+                                                            onClick={() => {
+                                                                props.handleNotesModalInOrder(true);
+                                                                handleSetParticularOrderData(item);
+                                                            }}
                                                         />
-                                                </Tooltip>
 
-                        </div>   
-            </div>         
-            </div>                
+                                                    </Tooltip>
+                                                </div>
+
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.status"
+                                                        defaultMessage="Status"
+                                                    />}>
+                                                        <EventRepeatIcon
+
+                                                            className="!text-base cursor-pointer"
+                                                            onClick={() => {
+                                                                props.handleStatusOfOrder(true);
+                                                                handleSetParticularOrderData(item);
+                                                            }}
+                                                        />
+                                                    </Tooltip>
+                                                </div>
+
+                                            </div>
+                                            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+
+                                                <div>
+                                                    <Tooltip title="Collection">
+                                                        <PaidIcon
+                                                            className="!text-base cursor-pointer"
+                                                            onClick={() => {
+                                                                props.handlePaidModal(true);
+                                                                handleSetParticularOrderData(item);
+                                                            }}
+
+                                                        />
+                                                    </Tooltip>
+
+                                                </div>
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.updateorder"
+                                                        defaultMessage="Update Order"
+                                                    />}>
+                                                        <BorderColorOutlined
+                                                            onClick={() => {
+                                                                props.setEditOrder(item)
+                                                                props.handleUpdateOrder(true)
+                                                                handleSetParticularOrderData(item)
+                                                            }}
+                                                            className="!text-base cursor-pointer" />
+                                                    </Tooltip>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.rating"
+                                                        defaultMessage="Rating"
+                                                    />}>
+                                                        <StarBorderIcon
+
+                                                            className="!text-base cursor-pointer" />
+                                                    </Tooltip>
+
+                                                </div>
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.feedback"
+                                                        defaultMessage="Feedback"
+                                                    />}>
+                                                        <FeedbackIcon
+                                                            className="!text-base cursor-pointer"
+                                                        />
+                                                    </Tooltip>
+
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                <div>
+                                                    <Tooltip title={<FormattedMessage
+                                                        id="app.delete"
+                                                        defaultMessage="Detele"
+                                                    />}>
+                                                        <DeleteIcon
+                                                            className="!text-base cursor-pointer text-[red]"
+                                                            onClick={() => { props.removeOrderAcc(item.orderId) }}
+                                                        />
+                                                    </Tooltip>
+
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>

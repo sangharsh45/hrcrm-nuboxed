@@ -23,6 +23,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4
 const DistributorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   country: Yup.string().required("Input needed!"),
+  phoneNo: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8, "Minimum 8 digits").max(10, "Number is too long")
 });
 
 const UpdateAccountForm = ({
@@ -56,17 +57,21 @@ const UpdateAccountForm = ({
   }));
   const customerTypeOptions = customerListData.map((item) => {
     return {
-      label: `${item.name || ""}`,
+      label: `${item.name}`,
       value: item.customerTypeId,
+    };
+  });
+
+  const currencyOption = currencies.map((item) => {
+    return {
+      label: item.currency_name || "",
+      value: item.currency_name,
     };
   });
   const handlevat = () => {
     setVatInd(!vatInd)
   }
-  const currencyOption = currencies.map((item) => ({
-    label: item.currencyName || "",
-    value: item.currencyName,
-  }));
+
   const [defaultOption, setDefaultOption] = useState(fullName);
   const [selected, setSelected] = useState(defaultOption);
   const selectedOption = allCustomerEmployeeList.find((item) => item.fullName === selected);
@@ -297,18 +302,23 @@ const UpdateAccountForm = ({
                       />
                     </div>
                     <div class="w-w47.5">
-                      <FastField
+                      <Field
                         name="currency"
                         label={
                           <FormattedMessage
                             id="app.currency"
-                            defaultMessage="currency"
+                            defaultMessage="Currency"
                           />
                         }
                         isColumn
-                        inlineLabel
+                        placeholder="Currency"
                         component={SelectComponent}
-                        options={Array.isArray(currencyOption) ? currencyOption : []}
+                        options={
+                          Array.isArray(currencyOption)
+                            ? currencyOption
+                            : []
+                        }
+
                       />
                     </div>
                   </div>
@@ -331,20 +341,23 @@ const UpdateAccountForm = ({
                       />
                     </div>
                     <div class="w-w47.5">
-                      <FastField
+                      <Field
                         name="clientId"
                         label={
                           <FormattedMessage
                             id="app.type"
-                            defaultMessage="type"
+                            defaultMessage="Type"
                           />
                         }
                         isColumn
-                        inlineLabel
+                        placeholder="Type"
                         component={SelectComponent}
                         options={
-                          Array.isArray(customerTypeOptions) ? customerTypeOptions : []
+                          Array.isArray(customerTypeOptions)
+                            ? customerTypeOptions
+                            : []
                         }
+
                       />
                     </div>
                   </div>

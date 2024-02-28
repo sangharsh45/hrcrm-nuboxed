@@ -23,22 +23,22 @@ const initialState = {
   linkingOrgDocsPrivate: false,
   linkingOrgDocsPrivateError: false,
 
-  addDrawerActionModal:false,
+  addDrawerActionModal: false,
 
-  addingOrganization:false,
-  addingOrganizationError:false,
+  addingOrganization: false,
+  addingOrganizationError: false,
 
   editingOrganizationDetails: false,
   editingOrganizationDetailsError: false,
-  organizationDetails:{},
+  organizationDetails: {},
 
   fetchingIncludedOpportunity: false,
   fetchingIncludedOpportunityError: false,
-  opportunityIncluded:[],
+  opportunityIncluded: [],
 
   fetchingRepositoryDocuments: false,
   fetchingRepositoryDocumentsError: false,
-  repositoryData:[],
+  repositoryData: [],
 
   changingPassword: false,
   changingPasswordError: false,
@@ -47,8 +47,8 @@ const initialState = {
   token: sessionStorage.getItem("token"),
 
   addingOnboard: false,
-   addingOnboardError: false ,
-   token: sessionStorage.getItem("token"),
+  addingOnboardError: false,
+  token: sessionStorage.getItem("token"),
 
   updatingUserById: false,
   updatingUserByIdError: false,
@@ -60,15 +60,15 @@ const initialState = {
 
   fetchingTaskIncludedCount: false,
   fetchingTaskIncludedCountError: false,
-  taskIncludedCount:{},
+  taskIncludedCount: {},
 
   fetchingIncludedDeals: false,
   fetchingIncludedDealsError: false,
-  dealsIncluded:[],
+  dealsIncluded: [],
 
   fetchingOrganization: false,
   fetchingOrganizationError: false,
-  organizationDetailsList:[],
+  organizationDetailsList: [],
 
 
   fetchingCurrency: false,
@@ -77,7 +77,7 @@ const initialState = {
 
   fetchingIncludedTask: false,
   fetchingIncludedTaskError: false,
-  taskIncluded:[],
+  taskIncluded: [],
 
   fetchingCountries: false,
   fetchingCountriesError: false,
@@ -87,7 +87,7 @@ const initialState = {
   fetchingActionRequiredCountError: false,
   actionCount: [],
 
-  addOrganizationModal:false,
+  addOrganizationModal: false,
 
   fetchingTopicsByUserId: false,
   fetchingTopicsByUserIdError: false,
@@ -97,9 +97,9 @@ const initialState = {
   deletingTopicsByUserIdError: false,
   topicsByUserId: [],
 
-  updateOrganizationModal:false,
+  updateOrganizationModal: false,
 
-  repositoryOrganizationModal:false,
+  repositoryOrganizationModal: false,
 
   fetchingCallsListByUserId: false,
   fetchingCallsListByUserIdError: false,
@@ -111,27 +111,27 @@ const initialState = {
 
   fetchingOpportunityIncludedCount: false,
   fetchingOpportunityIncludedCountError: false,
-  oppIncludedCount:{},
+  oppIncludedCount: {},
 
   fetchingDealsIncludedCount: false,
   fetchingDealsIncludedCountError: false,
-  dealsIncludedCount:{},
+  dealsIncludedCount: {},
 
   fetchingLeavesByUserId: false,
   fetchingLeavesByUserIdError: false,
   leavesListByUserId: [],
 
-  deletingOrgDocData: false, 
-  deletingOrgDocDataError: false, 
+  deletingOrgDocData: false,
+  deletingOrgDocDataError: false,
 
   fetchingTasksListByUserId: false,
   fetchingTasksListByUserIdError: false,
   tasksListByUserId: [],
 
-  organizationDocumentDrawer:false,
+  organizationDocumentDrawer: false,
 
 
-  addingOrganizationDocument:false,
+  addingOrganizationDocument: false,
 
   addingOrgSignature: false,
   addingOrgSignatureError: false,
@@ -154,11 +154,15 @@ const initialState = {
   validatingOtpByEmailError: false,
   validateMsg: {},
 
-  settingPassword: false, 
+  settingPassword: false,
   settingPasswordError: false,
 
-  updatingPreferedLang: false, 
-  updatingPreferedLangError: false, 
+  updatingPreferedLang: false,
+  updatingPreferedLangError: false,
+
+  fetchingAllDialCode: false,
+  fetchingAllDialCodeError: false,
+  dialcodeList: []
 };
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -237,13 +241,14 @@ export const authReducer = (state = initialState, action) => {
       return { ...state };
 
     case types.SET_PASSWORD_REQUEST:
-      return { ...state, settingPassword: true, settingPasswordError: false};
+      return { ...state, settingPassword: true, settingPasswordError: false };
     case types.SET_PASSWORD_SUCCESS:
-      return { ...state,
+      return {
+        ...state,
         settingPassword: false, settingPasswordError: false
       };
     case types.SET_PASSWORD_FAILURE:
-      return { ...state,settingPassword: true, settingPasswordError: false };
+      return { ...state, settingPassword: true, settingPasswordError: false };
 
     case types.CHANGE_PASSWORD_REQUEST:
       return { ...state, changingPassword: true, changingPasswordError: false };
@@ -320,11 +325,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOrganizationDetails: false,
-      //   organizationDetails: state.organizationDetails.map((org) =>
-      //   org.organizationId === action.payload.organizationId
-      //     ? action.payload
-      //     : org
-      // ),
+        //   organizationDetails: state.organizationDetails.map((org) =>
+        //   org.organizationId === action.payload.organizationId
+        //     ? action.payload
+        //     : org
+        // ),
         organizationDetails: action.payload,
         userDetails: {
           ...state.userDetails,
@@ -723,19 +728,21 @@ export const authReducer = (state = initialState, action) => {
 
 
 
-      case types.ADD_ORGANIZATION_DOCUMENT_REQUEST:
-        return { ...state, addingOrganizationDocument: true };
-      case types.ADD_ORGANIZATION_DOCUMENT_SUCCESS:
-        return { ...state, 
-          addingOrganizationDocument: false, 
-          updateOrganizationModal: false ,
-          organizationDocumentDrawer:false,
-        
-        };
-      case types.ADD_ORGANIZATION_DOCUMENT_FAILURE:
-        return { ...state, addingOrganizationDocument: false, 
-          // addCustomerModal: false 
-        };
+    case types.ADD_ORGANIZATION_DOCUMENT_REQUEST:
+      return { ...state, addingOrganizationDocument: true };
+    case types.ADD_ORGANIZATION_DOCUMENT_SUCCESS:
+      return {
+        ...state,
+        addingOrganizationDocument: false,
+        updateOrganizationModal: false,
+        organizationDocumentDrawer: false,
+
+      };
+    case types.ADD_ORGANIZATION_DOCUMENT_FAILURE:
+      return {
+        ...state, addingOrganizationDocument: false,
+        // addCustomerModal: false 
+      };
 
     case types.VALIDATE_OTP_BY_EMAIL_REQUEST:
       return { ...state, validatingOtpByEmail: true };
@@ -752,297 +759,313 @@ export const authReducer = (state = initialState, action) => {
         validatingOtpByEmailError: true
       };
 
-      case types.EDIT_ORGANIZATION_DETAILS_REQUEST:
-        return { ...state, editingOrganizationDetails: true };
-      case types.EDIT_ORGANIZATION_DETAILS_SUCCESS:
-        return {
-          ...state,
-          editingOrganizationDetails: false,
-          organizationDetails: action.payload,
-          userDetails: {
-            ...state.userDetails,
-            metaData: {
-              ...state.userDetails.metaData,
-              organizationDetails: action.payload,
-            },
+    case types.EDIT_ORGANIZATION_DETAILS_REQUEST:
+      return { ...state, editingOrganizationDetails: true };
+    case types.EDIT_ORGANIZATION_DETAILS_SUCCESS:
+      return {
+        ...state,
+        editingOrganizationDetails: false,
+        organizationDetails: action.payload,
+        userDetails: {
+          ...state.userDetails,
+          metaData: {
+            ...state.userDetails.metaData,
+            organizationDetails: action.payload,
           },
-        };
-        case types.EDIT_ORGANIZATION_DETAILS_FAILURE:
-          return {
-            ...state,
-            editingOrganizationDetails: false,
-            editingOrganizationDetailsError: true,
-          };
+        },
+      };
+    case types.EDIT_ORGANIZATION_DETAILS_FAILURE:
+      return {
+        ...state,
+        editingOrganizationDetails: false,
+        editingOrganizationDetailsError: true,
+      };
 
-          case types.GET_REPOSITORY_DOCUMENTS_REQUEST:
-            return { ...state, fetchingRepositoryDocuments: true };
-          case types.GET_REPOSITORY_DOCUMENTS_SUCCESS:
-            return {
-              ...state,
-              fetchingRepositoryDocuments: false,
-              repositoryData: action.payload,
-            };
-          case types.GET_REPOSITORY_DOCUMENTS_FAILURE:
-            return {
-              ...state,
-              fetchingRepositoryDocuments: false,
-              fetchingRepositoryDocumentsError: true,
-            };
+    case types.GET_REPOSITORY_DOCUMENTS_REQUEST:
+      return { ...state, fetchingRepositoryDocuments: true };
+    case types.GET_REPOSITORY_DOCUMENTS_SUCCESS:
+      return {
+        ...state,
+        fetchingRepositoryDocuments: false,
+        repositoryData: action.payload,
+      };
+    case types.GET_REPOSITORY_DOCUMENTS_FAILURE:
+      return {
+        ...state,
+        fetchingRepositoryDocuments: false,
+        fetchingRepositoryDocumentsError: true,
+      };
 
-            case types.HANDLE_REPOSITORY_ORGANIZATION_MODAL:
+    case types.HANDLE_REPOSITORY_ORGANIZATION_MODAL:
       return { ...state, repositoryOrganizationModal: action.payload };
 
-      case types.HANDLE_ORGANIZATION_DOCUMENT_DRAWER:
-        return { ...state, organizationDocumentDrawer: action.payload };
+    case types.HANDLE_ORGANIZATION_DOCUMENT_DRAWER:
+      return { ...state, organizationDocumentDrawer: action.payload };
 
-        case types.DELETE_ORG_DOC_DATA_REQUEST:
-          return { ...state, deletingOrgDocData: true };
-        case types.DELETE_ORG_DOC_DATA_SUCCESS:
-          return {
-            ...state,
-            deletingOrgDocData: false,
-            repositoryData: state.repositoryData.filter(
-              (item) => item.documentId !== action.payload
-            ),
-          };
-        case types.DELETE_ORG_DOC_DATA_FAILURE:
-          return { ...state, deletingOrgDocData: false, deletingOrgDocDataError: false };
-
-
-          case types.LINK_ORG_DOC_PUBLISH_REQUEST:
-            return {
-              ...state,
-              linkingOrgDocsPublish: true,
-            };
-          case types.LINK_ORG_DOC_PUBLISH_SUCCESS:
-            return {
-              ...state,
-              linkingOrgDocsPublish: false,
-              repositoryData: state.repositoryData.map((item) => {
-                if (
-                  item.documentId === action.payload.documentId
-                ) {
-                  return action.payload;
-                } else {
-                  return item;
-                }
-              }),
-            };
-          case types.LINK_ORG_DOC_PUBLISH_FAILURE:
-            return {
-              ...state,
-              linkingOrgDocsPublish: false,
-              linkingOrgDocsPublishError: true,
-            };
-
-            
-          case types.LINK_ORG_DOC_PRIVATE_REQUEST:
-            return {
-              ...state,
-              linkingOrgDocsPrivate: true,
-            };
-          case types.LINK_ORG_DOC_PRIVATE_SUCCESS:
-            return {
-              ...state,
-              linkingOrgDocsPrivate: false,
-              repositoryData: state.repositoryData.map((item) => {
-                if (
-                  item.documentId === action.payload.documentId
-                ) {
-                  return action.payload;
-                } else {
-                  return item;
-                }
-              }),
-            };
-          case types.LINK_ORG_DOC_PRIVATE_FAILURE:
-            return {
-              ...state,
-              linkingOrgDocsPrivate: false,
-              linkingOrgDocsPrivateError: true,
-            };
-            case types.ADD_ONBOARD_REQUEST:
-              return { ...state, addingOnboard: true };
-            case types.ADD_ONBOARD_SUCCESS:
-              return {
-                ...state,
-                addingOnboard: false,
-                token: action.payload.token || sessionStorage.getItem("token"),
-              };
-            case types.ADD_ONBOARD_FAILURE:
-              return { ...state, addingOnboard: false, addingOnboardError: true };
-        
-              case types.SET_ORGANIZATION_VIEW_TYPE:
-                return { ...state, viewType: action.payload };
-        
-                case types.HANDLE_ORGANIZATION_MODAL:
-                  return { ...state, addOrganizationModal: action.payload };
+    case types.DELETE_ORG_DOC_DATA_REQUEST:
+      return { ...state, deletingOrgDocData: true };
+    case types.DELETE_ORG_DOC_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingOrgDocData: false,
+        repositoryData: state.repositoryData.filter(
+          (item) => item.documentId !== action.payload
+        ),
+      };
+    case types.DELETE_ORG_DOC_DATA_FAILURE:
+      return { ...state, deletingOrgDocData: false, deletingOrgDocDataError: false };
 
 
-                  case types.ADD_ORGANIZATION_REQUEST:
-                    return { ...state, addingOrganization: true };
-                  case types.ADD_ORGANIZATION_SUCCESS:
-                    return { ...state, 
-                      addingOrganization: false, 
-                      addOrganizationModal: false ,
-                      organizationDetailsList:[action.payload,...state.organizationDetailsList]
-                    };
-                  case types.ADD_ORGANIZATION_FAILURE:
-                    return { ...state, addingOrganization: false, addOrganizationModal: false };    
-             
-                    case types.GET_ORGANIZATION_REQUEST:
-                      return { ...state, fetchingOrganization: true };
-                    case types.GET_ORGANIZATION_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingOrganization: false,
-                        // customerByUserId: action.payload,
-                
-                        organizationDetailsList: [
-                          ...state.organizationDetailsList,
-                          ...action.payload],
-                      
-                      };
-                    case types.GET_ORGANIZATION_FAILURE:
-                      return {
-                        ...state,
-                        fetchingOrganization: false,
-                        fetchingOrganizationError: true,
-                      };
+    case types.LINK_ORG_DOC_PUBLISH_REQUEST:
+      return {
+        ...state,
+        linkingOrgDocsPublish: true,
+      };
+    case types.LINK_ORG_DOC_PUBLISH_SUCCESS:
+      return {
+        ...state,
+        linkingOrgDocsPublish: false,
+        repositoryData: state.repositoryData.map((item) => {
+          if (
+            item.documentId === action.payload.documentId
+          ) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_ORG_DOC_PUBLISH_FAILURE:
+      return {
+        ...state,
+        linkingOrgDocsPublish: false,
+        linkingOrgDocsPublishError: true,
+      };
 
 
-                      case types.GET_ACTION_REQUIRED_COUNT_REQUEST:
-                        return { ...state, fetchingActionRequiredCount: true };
-                      case types.GET_ACTION_REQUIRED_COUNT_SUCCESS:
-                        return { ...state, fetchingActionRequiredCount: false, actionCount: action.payload };
-                      case types.GET_ACTION_REQUIRED_COUNT_FAILURE:
-                        return {
-                          ...state,
-                          fetchingActionRequiredCount: false,
-                          fetchingActionRequiredCountError: true,
-                        };
+    case types.LINK_ORG_DOC_PRIVATE_REQUEST:
+      return {
+        ...state,
+        linkingOrgDocsPrivate: true,
+      };
+    case types.LINK_ORG_DOC_PRIVATE_SUCCESS:
+      return {
+        ...state,
+        linkingOrgDocsPrivate: false,
+        repositoryData: state.repositoryData.map((item) => {
+          if (
+            item.documentId === action.payload.documentId
+          ) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_ORG_DOC_PRIVATE_FAILURE:
+      return {
+        ...state,
+        linkingOrgDocsPrivate: false,
+        linkingOrgDocsPrivateError: true,
+      };
+    case types.ADD_ONBOARD_REQUEST:
+      return { ...state, addingOnboard: true };
+    case types.ADD_ONBOARD_SUCCESS:
+      return {
+        ...state,
+        addingOnboard: false,
+        token: action.payload.token || sessionStorage.getItem("token"),
+      };
+    case types.ADD_ONBOARD_FAILURE:
+      return { ...state, addingOnboard: false, addingOnboardError: true };
+
+    case types.SET_ORGANIZATION_VIEW_TYPE:
+      return { ...state, viewType: action.payload };
+
+    case types.HANDLE_ORGANIZATION_MODAL:
+      return { ...state, addOrganizationModal: action.payload };
 
 
-                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_REQUEST:
-                          return { ...state, fetchingOpportunityIncludedCount: true };
-                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_SUCCESS:
-                          return { ...state, fetchingOpportunityIncludedCount: false, oppIncludedCount: action.payload };
-                        case types.GET_OPPORTUNITY_INCLUDED_COUNT_FAILURE:
-                          return {
-                            ...state,
-                              fetchingOpportunityIncludedCount: false,
-                              fetchingOpportunityIncludedCountError: true,
-                          };
-                      case types.HANDLE_ACTION_DRAWER_MODAL:
-                        return { ...state, addDrawerActionModal: action.payload };
+    case types.ADD_ORGANIZATION_REQUEST:
+      return { ...state, addingOrganization: true };
+    case types.ADD_ORGANIZATION_SUCCESS:
+      return {
+        ...state,
+        addingOrganization: false,
+        addOrganizationModal: false,
+        organizationDetailsList: [action.payload, ...state.organizationDetailsList]
+      };
+    case types.ADD_ORGANIZATION_FAILURE:
+      return { ...state, addingOrganization: false, addOrganizationModal: false };
+
+    case types.GET_ORGANIZATION_REQUEST:
+      return { ...state, fetchingOrganization: true };
+    case types.GET_ORGANIZATION_SUCCESS:
+      return {
+        ...state,
+        fetchingOrganization: false,
+        // customerByUserId: action.payload,
+
+        organizationDetailsList: [
+          ...state.organizationDetailsList,
+          ...action.payload],
+
+      };
+    case types.GET_ORGANIZATION_FAILURE:
+      return {
+        ...state,
+        fetchingOrganization: false,
+        fetchingOrganizationError: true,
+      };
 
 
-                      case types.UPDATE_PREFERED_LANG_REQUEST:
-                        return { ...state, updatingPreferedLang: true };
-                      case types.UPDATE_PREFERED_LANG_SUCCESS:
-                        return {
-                          ...state, updatingPreferedLang: false,
-                          userDetails:action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
-                        };
-                      case types.UPDATE_PREFERED_LANG_FAILURE:
-                        return { ...state, updatingPreferedLang: false, updatingPreferedLangError: true };
+    case types.GET_ACTION_REQUIRED_COUNT_REQUEST:
+      return { ...state, fetchingActionRequiredCount: true };
+    case types.GET_ACTION_REQUIRED_COUNT_SUCCESS:
+      return { ...state, fetchingActionRequiredCount: false, actionCount: action.payload };
+    case types.GET_ACTION_REQUIRED_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingActionRequiredCount: false,
+        fetchingActionRequiredCountError: true,
+      };
 
 
-                        case types.GET_INCLUDED_OPPORTUNITY_REQUEST:
-                          return { ...state, fetchingIncludedOpportunity: true };
-                        case types.GET_INCLUDED_OPPORTUNITY_SUCCESS:
-                          return {
-                            ...state,
-                            fetchingIncludedOpportunity: false,
-                            // opportunityByUserId: action.payload,
-                    
-                            opportunityIncluded: [
-                              ...state.opportunityIncluded,
-                              ...action.payload],
-                          };
-                        case types.GET_INCLUDED_OPPORTUNITY_FAILURE:
-                          return {
-                            ...state,
-                            fetchingIncludedOpportunity: false,
-                            fetchingIncludedOpportunityError: true,
-                          };
-
-                          case types.EMPTY_INCLUDED_OPPORTUNITY_LIST:
-                            return { ...state, opportunityIncluded: [] }; 
+    case types.GET_OPPORTUNITY_INCLUDED_COUNT_REQUEST:
+      return { ...state, fetchingOpportunityIncludedCount: true };
+    case types.GET_OPPORTUNITY_INCLUDED_COUNT_SUCCESS:
+      return { ...state, fetchingOpportunityIncludedCount: false, oppIncludedCount: action.payload };
+    case types.GET_OPPORTUNITY_INCLUDED_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingOpportunityIncludedCount: false,
+        fetchingOpportunityIncludedCountError: true,
+      };
+    case types.HANDLE_ACTION_DRAWER_MODAL:
+      return { ...state, addDrawerActionModal: action.payload };
 
 
-                            case types.GET_DEALS_INCLUDED_COUNT_REQUEST:
-                              return { ...state, fetchingDealsIncludedCount: true };
-                            case types.GET_DEALS_INCLUDED_COUNT_SUCCESS:
-                              return { ...state, fetchingDealsIncludedCount: false, dealsIncludedCount: action.payload };
-                            case types.GET_DEALS_INCLUDED_COUNT_FAILURE:
-                              return {
-                                ...state,
-                                fetchingDealsIncludedCount: false,
-                                fetchingDealsIncludedCountError: true,
-                              };
+    case types.UPDATE_PREFERED_LANG_REQUEST:
+      return { ...state, updatingPreferedLang: true };
+    case types.UPDATE_PREFERED_LANG_SUCCESS:
+      return {
+        ...state, updatingPreferedLang: false,
+        userDetails: action.payload || JSON.parse(sessionStorage.getItem("userDetails")),
+      };
+    case types.UPDATE_PREFERED_LANG_FAILURE:
+      return { ...state, updatingPreferedLang: false, updatingPreferedLangError: true };
 
 
-                              case types.GET_TASK_INCLUDED_COUNT_REQUEST:
-                                return { ...state, fetchingTaskIncludedCount: true };
-                              case types.GET_TASK_INCLUDED_COUNT_SUCCESS:
-                                return { ...state, fetchingTaskIncludedCount: false, taskIncludedCount: action.payload };
-                              case types.GET_TASK_INCLUDED_COUNT_FAILURE:
-                                return {
-                                  ...state,
-                                  fetchingTaskIncludedCount: false,
-                                  fetchingTaskIncludedCountError: true,
-                                };
+    case types.GET_INCLUDED_OPPORTUNITY_REQUEST:
+      return { ...state, fetchingIncludedOpportunity: true };
+    case types.GET_INCLUDED_OPPORTUNITY_SUCCESS:
+      return {
+        ...state,
+        fetchingIncludedOpportunity: false,
+        // opportunityByUserId: action.payload,
 
-                              case types.GET_INCLUDED_DEALS_REQUEST:
-                                return { ...state, fetchingIncludedDeals: true };
-                              case types.GET_INCLUDED_DEALS_SUCCESS:
-                                return {
-                                  ...state,
-                                  fetchingIncludedDeals: false,
-                                  // opportunityByUserId: action.payload,
-                          
-                                  dealsIncluded: [
-                                    ...state.dealsIncluded,
-                                    ...action.payload],
-                                };
-                              case types.GET_INCLUDED_DEALS_FAILURE:
-                                return {
-                                  ...state,
-                                  fetchingIncludedDeals: false,
-                                  fetchingIncludedDealsError: true,
-                                };
+        opportunityIncluded: [
+          ...state.opportunityIncluded,
+          ...action.payload],
+      };
+    case types.GET_INCLUDED_OPPORTUNITY_FAILURE:
+      return {
+        ...state,
+        fetchingIncludedOpportunity: false,
+        fetchingIncludedOpportunityError: true,
+      };
+
+    case types.EMPTY_INCLUDED_OPPORTUNITY_LIST:
+      return { ...state, opportunityIncluded: [] };
 
 
-                                case types.EMPTY_INCLUDED_DEALS_LIST:
-                                  return { ...state, dealsIncluded: [] }; 
+    case types.GET_DEALS_INCLUDED_COUNT_REQUEST:
+      return { ...state, fetchingDealsIncludedCount: true };
+    case types.GET_DEALS_INCLUDED_COUNT_SUCCESS:
+      return { ...state, fetchingDealsIncludedCount: false, dealsIncludedCount: action.payload };
+    case types.GET_DEALS_INCLUDED_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingDealsIncludedCount: false,
+        fetchingDealsIncludedCountError: true,
+      };
 
-                                  case types.EMPTY_INCLUDED_TASK_LIST:
-                                    return { ...state, taskIncluded: [] }; 
-  
+
+    case types.GET_TASK_INCLUDED_COUNT_REQUEST:
+      return { ...state, fetchingTaskIncludedCount: true };
+    case types.GET_TASK_INCLUDED_COUNT_SUCCESS:
+      return { ...state, fetchingTaskIncludedCount: false, taskIncludedCount: action.payload };
+    case types.GET_TASK_INCLUDED_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingTaskIncludedCount: false,
+        fetchingTaskIncludedCountError: true,
+      };
+
+    case types.GET_INCLUDED_DEALS_REQUEST:
+      return { ...state, fetchingIncludedDeals: true };
+    case types.GET_INCLUDED_DEALS_SUCCESS:
+      return {
+        ...state,
+        fetchingIncludedDeals: false,
+        // opportunityByUserId: action.payload,
+
+        dealsIncluded: [
+          ...state.dealsIncluded,
+          ...action.payload],
+      };
+    case types.GET_INCLUDED_DEALS_FAILURE:
+      return {
+        ...state,
+        fetchingIncludedDeals: false,
+        fetchingIncludedDealsError: true,
+      };
+
+
+    case types.EMPTY_INCLUDED_DEALS_LIST:
+      return { ...state, dealsIncluded: [] };
+
+    case types.EMPTY_INCLUDED_TASK_LIST:
+      return { ...state, taskIncluded: [] };
 
 
 
-                                  case types.GET_INCLUDED_TASK_REQUEST:
-                                    return { ...state, fetchingIncludedTask: true };
-                                  case types.GET_INCLUDED_TASK_SUCCESS:
-                                    return {
-                                      ...state,
-                                      fetchingIncludedTask: false,
-                                      // opportunityByUserId: action.payload,
-                              
-                                      taskIncluded: [
-                                        ...state.taskIncluded,
-                                        ...action.payload],
-                                    };
-                                  case types.GET_INCLUDED_TASK_FAILURE:
-                                    return {
-                                      ...state,
-                                      fetchingIncludedTask: false,
-                                      fetchingIncludedTaskError: true,
-                                    };
-      
-                          
+
+    case types.GET_INCLUDED_TASK_REQUEST:
+      return { ...state, fetchingIncludedTask: true };
+    case types.GET_INCLUDED_TASK_SUCCESS:
+      return {
+        ...state,
+        fetchingIncludedTask: false,
+        // opportunityByUserId: action.payload,
+
+        taskIncluded: [
+          ...state.taskIncluded,
+          ...action.payload],
+      };
+    case types.GET_INCLUDED_TASK_FAILURE:
+      return {
+        ...state,
+        fetchingIncludedTask: false,
+        fetchingIncludedTaskError: true,
+      };
+
+    case types.GET_ALL_DIAL_CODE_LIST_REQUEST:
+      return { ...state, fetchingAllDialCode: true };
+    case types.GET_ALL_DIAL_CODE_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingAllDialCode: false,
+        dialcodeList: action.payload,
+      };
+    case types.GET_ALL_DIAL_CODE_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingAllDialCode: false,
+        fetchingAllDialCodeError: true,
+      };
+
+
     default:
       return state;
   }

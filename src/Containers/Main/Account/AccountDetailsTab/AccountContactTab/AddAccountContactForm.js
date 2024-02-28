@@ -108,7 +108,7 @@ class AddAccountContactForm extends Component {
                     }) => (
                         <Form class="form-background">
                             <div class="flex justify-between">
-                                <div class="h-full w-[45%]"> 
+                                <div class="h-full w-[45%]">
                                     <div class="flex justify-between mt-3">
                                         <div class="w-[40%]">
                                             <Field name="imageId" component={Upload} />
@@ -118,7 +118,7 @@ class AddAccountContactForm extends Component {
                                             <FastField
                                                 isRequired
                                                 name="firstName"
-                                                label={<FormattedMessage id="app.firstname" defaultMessage="First Name"/>}
+                                                label={<FormattedMessage id="app.firstname" defaultMessage="First Name" />}
                                                 type="text"
                                                 width={"100%"}
                                                 isColumn
@@ -131,7 +131,7 @@ class AddAccountContactForm extends Component {
                                                 <div class="w-[47%]">
                                                     <FastField
                                                         name="middleName"
-                                                        label={<FormattedMessage id="app.middlename" defaultMessage="Middle Name"/>}
+                                                        label={<FormattedMessage id="app.middlename" defaultMessage="Middle Name" />}
                                                         type="text"
                                                         width={"100%"}
                                                         isColumn
@@ -143,7 +143,7 @@ class AddAccountContactForm extends Component {
                                                 <div class="w-[47%]">
                                                     <FastField
                                                         name="lastName"
-                                                        label={<FormattedMessage id="app.lastname" defaultMessage="Last Name"/>}
+                                                        label={<FormattedMessage id="app.lastname" defaultMessage="Last Name" />}
                                                         type="text"
                                                         width={"100%"}
                                                         isColumn
@@ -182,38 +182,11 @@ class AddAccountContactForm extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div class="flex justify-between items-end">
-                                        <div class="w-[47%]">
-                                            <FastField
-                                                name="dialCode2"
-                                                selectType="dialCode"
-                                                label={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
-                                                isColumn
-                                                component={SearchSelect}
-                                                value={values.countryDialCode1}
-                                                inlineLabel
-                                                isColumnWithoutNoCreate
-                                            />
-                                        </div>
-                                        <div class="w-[47%]">
-                                            <FastField
-                                                type="text"
-                                                name="phoneNo"
-                                                placeholder="Phone #"
-                                                isColumn
-                                                component={InputComponent}
-                                                inlineLabel
-                                                width={"100%"}
-
-                                            />
-                                        </div>
-                                    </div>
-
                                     <div >
                                         <FastField
                                             type="email"
                                             name="emailId"
-                                            label={<FormattedMessage id="app.email" defaultMessage="Email"/>}
+                                            label={<FormattedMessage id="app.email" defaultMessage="Email" />}
                                             className="field"
                                             isColumn
                                             width={"100%"}
@@ -221,10 +194,10 @@ class AddAccountContactForm extends Component {
                                             inlineLabel
                                         />
                                     </div>
-                                    <div class= "w-full">
+                                    <div class="w-full">
                                         <FastField
                                             name="LinkedIn"
-                                            label={<FormattedMessage id="app.linkedIn" defaultMessage="LinkedIn"/>}
+                                            label={<FormattedMessage id="app.linkedIn" defaultMessage="LinkedIn" />}
                                             className="field"
                                             isColumn
                                             width={"100%"}
@@ -234,23 +207,23 @@ class AddAccountContactForm extends Component {
                                     </div>
 
                                     <div class="mt-3">
-                                    <Field
-                                        name="notes"
-                                        label={<FormattedMessage id="app.notes" defaultMessage="Notes"/>}
-                                        width={"100%"}
-                                        isColumn
-                                        component={TextareaComponent}
-                                    />
+                                        <Field
+                                            name="notes"
+                                            label={<FormattedMessage id="app.notes" defaultMessage="Notes" />}
+                                            width={"100%"}
+                                            isColumn
+                                            component={TextareaComponent}
+                                        />
                                     </div>
                                 </div>
                                 <div
-                                class="w-[45%] h-[70%]">
+                                    class="w-[45%] h-[70%]">
                                     <div class="flex justify-between">
                                         <div class="w-[47%]">
                                             <Field
                                                 name="designationId"
                                                 placeholder="Designation"
-                                                label={<FormattedMessage id="app.designation" defaultMessage="Designation"/>}
+                                                label={<FormattedMessage id="app.designation" defaultMessage="Designation" />}
                                                 component={SelectComponent}
                                                 options={Array.isArray(designation) ? designation : []}
                                                 style={{
@@ -262,7 +235,7 @@ class AddAccountContactForm extends Component {
                                             <Field
                                                 name="departmentId"
                                                 component={InputComponent}
-                                                label={<FormattedMessage id="app.department" defaultMessage="Department"/>}
+                                                label={<FormattedMessage id="app.department" defaultMessage="Department" />}
                                                 style={{
                                                     width: "100%"
                                                 }}
@@ -270,30 +243,30 @@ class AddAccountContactForm extends Component {
                                         </div>
                                     </div>
                                     <div>
-                                   <div class="mt-3">
-                                        <FieldArray
-                                            name="address"
-                                            render={(arrayHelpers) => (
-                                                <AddressFieldArray
-                                                    singleAddress
-                                                    arrayHelpers={arrayHelpers}
-                                                    values={values}
-                                                />
-                                            )}
-                                        />
+                                        <div class="mt-3">
+                                            <FieldArray
+                                                name="address"
+                                                render={(arrayHelpers) => (
+                                                    <AddressFieldArray
+                                                        singleAddress
+                                                        arrayHelpers={arrayHelpers}
+                                                        values={values}
+                                                    />
+                                                )}
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                          
+
                             <div class="flex justify-end mt-3">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
                                     loading={this.props.addingContactDistributor}
                                 >
-                                    <FormattedMessage id="app.create" defaultMessage="Create"/>
-                                    
+                                    <FormattedMessage id="app.create" defaultMessage="Create" />
+
                                 </Button>
                             </div>
                         </Form>

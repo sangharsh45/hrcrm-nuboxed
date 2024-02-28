@@ -9,13 +9,12 @@ import {
   getDistributorsByUserId,
   getAllDistributorsList
 } from "./AccountAction";
-const AddAccountModal =lazy(()=>import("./AddAccountModal"));
-const AccountTable =lazy(()=>import("./AccountTable"));
-const AccountDeleteTable =lazy(()=>import("./AccountDeleteTable"));
-const AllAccountList =lazy(()=>import("./AllAccountList"));
-const AccountCard =lazy(()=>import("./AccountCard"));
-const AllAccountCard =lazy(()=>import("./AllAccountCard"));
-const AccountDeleteCard =lazy(()=>import("./AccountDeleteCard"));
+const AddAccountModal = lazy(() => import("./AddAccountModal"));
+const AccountTable = lazy(() => import("./AccountTable"));
+const AccountDeleteTable = lazy(() => import("./AccountDeleteTable"));
+const AllAccountList = lazy(() => import("./AllAccountList"));
+const AccountCard = lazy(() => import("./AccountCard"));
+const AccountDeleteCard = lazy(() => import("./AccountDeleteCard"));
 
 const Account = ({
   addDistributorModal,
@@ -75,7 +74,8 @@ const Account = ({
           </div>
         ) : viewType === "all" ? (
           <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-            {isLargeScreen ? <AllAccountList /> : <AllAccountCard />}
+            <AllAccountList />
+            {/* : <AllAccountCard />} */}
           </div>
         ) : null}
       </Suspense>

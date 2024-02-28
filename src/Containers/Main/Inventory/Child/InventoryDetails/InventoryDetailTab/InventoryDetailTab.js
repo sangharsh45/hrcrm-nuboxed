@@ -119,35 +119,7 @@ class InventoryDetailTab extends PureComponent {
                 <ReceivedTable />
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <>
-                  {/* <span
-                  //    onClick={() => this.handleOrderCreateClick(false)}
-                  > */}
-                  {/* <i class="fas fa-cookie-bite"></i> */}
-                  <i class="fab fa-linode"></i>  &nbsp; Materials
 
-                  {/* </span> */}
-                  {/* {activeKey === "1" && (
-                 
-                  )} */}
-                </>
-              }
-              key="2"
-            >
-              {" "}
-              <Suspense fallback={"Loading..."}>
-                {(user.functionName === "Management" ||
-                  user.functionName === "Production") &&
-                  user.designation === "Manager" ? (
-                  <InventoryConsumptionForm />
-                ) : null}
-
-                <Spacer />
-                <InventoryConsumptionTable />
-              </Suspense>
-            </TabPane>
             <TabPane
               tab={
                 <>
@@ -168,7 +140,7 @@ class InventoryDetailTab extends PureComponent {
                   )} */}
                 </>
               }
-              key="3"
+              key="2"
             >
               <Suspense fallback={"Loading..."}>
                 <DispatchTable />

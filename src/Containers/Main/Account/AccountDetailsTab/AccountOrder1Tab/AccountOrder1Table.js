@@ -2,7 +2,7 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import moment from 'moment/moment';
+import dayjs from "dayjs";
 import {
     getProductionOrder,
     handleProductOrderDetailsModal,
@@ -83,8 +83,8 @@ const AccountOrder1Table = (props) => {
                         >
                             {props.productionOrder.length ? <>
                                 {props.productionOrder.map((item) => {
-                                    const currentdate = moment().format("DD/MM/YYYY");
-                                    const date = moment(item.creationDate).format("DD/MM/YYYY");
+                                    const currentdate = dayjs().format("DD/MM/YYYY");
+                                    const date = dayjs(item.creationDate).format("DD/MM/YYYY");
                                     return (
                                         <div >
                                             <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3">

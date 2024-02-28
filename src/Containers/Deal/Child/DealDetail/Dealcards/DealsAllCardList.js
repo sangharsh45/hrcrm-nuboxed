@@ -1,20 +1,21 @@
 
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
-import { MultiAvatar,MultiAvatar2, SubTitle } from "../../../../../Components/UI/Elements";
+import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
 import {
-    getAllDeals
+  getAllDeals
 } from "../../../DealAction";
-import { CurrencySymbol } from "../../../../../Components/Common"; 
-import { Button, Tooltip,Dropdown ,Menu,Progress} from "antd";
+import { CurrencySymbol } from "../../../../../Components/Common";
+import { Button, Tooltip, Dropdown, Menu, Progress } from "antd";
 import { FormattedMessage } from "react-intl";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import NodataFoundPage from "../../../../../Helpers/ErrorBoundary/NodataFoundPage";
 
 const ButtonGroup = Button.Group;
 
@@ -23,7 +24,7 @@ const DealsAllCardList = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
-    props.getAllDeals("all",page);
+    props.getAllDeals("all", page);
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
@@ -45,501 +46,491 @@ const DealsAllCardList = (props) => {
   };
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getAllDeals("all",page);
-      setPage(page + 1);
-}
+    props.getAllDeals("all", page);
+    setPage(page + 1);
+  }
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingAllDealsData,leadsAllData  } = props;
+  const { user, deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal, fetchingAllDealsData, leadsAllData } = props;
 
   if (fetchingAllDealsData) {
     return <BundleLoader />;
   }
 
-  if (isMobile){
+  if (isMobile) {
     return (
       <>
-    <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-      
-        <InfiniteScroll
-          dataLength={props.allDealsData.length}
-          next={handleLoadMore}
-          hasMore={hasMore}
-          loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
-          height={"75vh"}
-        >
-     {props.allDealsData.map((item) => { 
-         var findProbability = item.probability;
-         item.stageList.forEach((element) => {
-           if (element.oppStage === item.oppStage) {
-             findProbability = element.probability;
-           }
-         });
-   const currentdate = dayjs().format("DD/MM/YYYY");
-   const date = dayjs(item.creationDate).format("DD/MM/YYYY");
-         
-           const diff = Math.abs(
-            dayjs().diff(dayjs(item.lastRequirementOn), "days")
-            );
-            const dataLoc = ` Address : ${
-              item.address && item.address.length && item.address[0].address1
-            } 
-                 Street : ${
-                   item.address && item.address.length && item.address[0].street
-                 }   
-                State : ${
-                  item.address && item.address.length && item.address[0].state
+        <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+
+          <InfiniteScroll
+            dataLength={props.allDealsData.length}
+            next={handleLoadMore}
+            hasMore={hasMore}
+            loader={fetchingAllDealsData ? <div class="flex justify-center">Loading...</div> : null}
+            height={"75vh"}
+          >
+            {props.allDealsData.map((item) => {
+              var findProbability = item.probability;
+              item.stageList.forEach((element) => {
+                if (element.oppStage === item.oppStage) {
+                  findProbability = element.probability;
                 }
-               Country : ${
-                 (item.address && item.address.length && item.address[0].country) ||
-                 ""
-               } 
-                 PostalCode : ${
-                   item.address && item.address.length && item.address[0].postalCode
-                 } `;
-                      return (
-                          <div>
-                              <div
-                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
-                >
-                                       <div class="flex justify-between">
-                                  
-                                  <div className="flex  items-center"> 
-  <div>
+              });
+              const currentdate = dayjs().format("DD/MM/YYYY");
+              const date = dayjs(item.creationDate).format("DD/MM/YYYY");
 
-              <MultiAvatar
-                primaryTitle={item.opportunityName}
-                imageId={item.imageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-         
-  </div>
-                                     
-  
-                                         
-                                          <Tooltip>
-                                            
-                                              
-                                              <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                  
-                                                
-                                                {item.opportunityName}
-                                                
-                                                 &nbsp;&nbsp;
-                                                 {date === currentdate ? (
-                                                   <span class="text-[tomato] font-bold"
-                                              
-                                                   >
-                                                     New
-                                                   </span>
-                                                 ) : null}
-                                                
-                                                                                     </div>
-                                              
-                                          </Tooltip>
-                                          
-                                          </div>
-                                  
-                                  
-  
-  <div class=" text-sm text-cardBody font-poppins">   
-  <Link to ="/investor">
-  {item.investor}
-  </Link>
-  </div>
-  
-  
- 
-  
-  
-  <div class=" text-sm text-cardBody font-poppins">
+              const diff = Math.abs(
+                dayjs().diff(dayjs(item.lastRequirementOn), "days")
+              );
+              const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
+                } 
+                 Street : ${item.address && item.address.length && item.address[0].street
+                }   
+                State : ${item.address && item.address.length && item.address[0].state
+                }
+               Country : ${(item.address && item.address.length && item.address[0].country) ||
+                ""
+                } 
+                 PostalCode : ${item.address && item.address.length && item.address[0].postalCode
+                } `;
+              return (
+                <div>
+                  <div
+                    className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                  >
+                    <div class="flex justify-between">
 
-  {item.contactName === null ? "None" :
-  <MultiAvatar2
-  primaryTitle={item.contactName}
-  imageId={item.imageId}
-  imageURL={item.imageURL}
-  imgWidth={"1.8em"}
-  imgHeight={"1.8em"}
-  />
-  }
-  
-  </div>
-  
-  </div>
-  <div class="flex justify-between">
-  
-  
-  
-  <div class=" text-sm justify-center text-cardBody font-poppins">
-  {dayjs(item.startDate).format("DD/MM/YYYY")}
-  </div>
- 
-  
- 
-  
-  
-  <div class=" text-sm text-cardBody font-poppins text-center">
-  <CurrencySymbol currencyType={item.currency} />
-  &nbsp;
-  {item.proposalAmount}
-  
-  </div>
- 
-  
-  
-  
-  <div class=" text-sm text-cardBody font-poppins text-center">
-  <Dropdown
-  overlay={
-  <div>
-  <Menu mode="horizontal">
-  <Menu.Item
-  style={{
-  paddingLeft: 5,
-  paddingRight: 5,
-  backgroundColor: "#F5F5F5",
-  }}
-  >
-  
-  </Menu.Item>
-  </Menu>
-  </div>
-  }
-  trigger={["click"]}
-  >
-  <Tooltip title={item.stageName}>
-  {" "}
-  <Progress
-  type="circle"
-  style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
-  percent={findProbability}
-  width={30}
-  strokeColor={"#005075"}
-  />
-  </Tooltip>
-  </Dropdown>
-  
-  </div>
- 
-  
-  
-  
-  <div class=" text-sm text-cardBody font-poppins">
-  
-  <span>
-  {item.assignedTo === null ? (
-                  "Not available"
-                ) : (
-                  <>
-                  {item.assignedTo === item.ownerName ? (
-                    
-                    null
-                  ) : (
-  <MultiAvatar2
-  primaryTitle={item.assignedTo}
-  imgWidth={"1.8rem"}
-  imgHeight={"1.8rem"}
-  />
-    )}
-    </>
-                )}
-  </span>
-  
-  </div>
- 
- 
-  
-  
-  
-  <Tooltip title={item.ownerName}>
-  <span>
-  <MultiAvatar2
-  primaryTitle={item.ownerName}
-  imageId={item.ownerImageId}
-  imageURL={item.imageURL}
-  imgWidth={"1.8rem"}
-  imgHeight={"1.8rem"}
-  />
-  </span>
-  </Tooltip>
- 
-  </div>
+                      <div className="flex  items-center">
+                        <div>
+
+                          <MultiAvatar
+                            primaryTitle={item.opportunityName}
+                            imageId={item.imageId}
+                            imageURL={item.imageURL}
+                            imgWidth={"1.8em"}
+                            imgHeight={"1.8em"}
+                          />
+
                         </div>
-                              </div>
-                           
-  
-  
-                      )
-                  })}
-                    </InfiniteScroll>
+
+
+
+                        <Tooltip>
+
+
+                          <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+
+
+                            {item.opportunityName}
+
+                            &nbsp;&nbsp;
+                            {date === currentdate ? (
+                              <span class="text-[tomato] font-bold"
+
+                              >
+                                New
+                              </span>
+                            ) : null}
+
+                          </div>
+
+                        </Tooltip>
+
+                      </div>
+
+
+
+                      <div class=" text-sm text-cardBody font-poppins">
+                        <Link to="/investor">
+                          {item.investor}
+                        </Link>
+                      </div>
+
+
+
+
+
+                      <div class=" text-sm text-cardBody font-poppins">
+
+                        {item.contactName === null ? "None" :
+                          <MultiAvatar2
+                            primaryTitle={item.contactName}
+                            imageId={item.imageId}
+                            imageURL={item.imageURL}
+                            imgWidth={"1.8em"}
+                            imgHeight={"1.8em"}
+                          />
+                        }
+
+                      </div>
+
+                    </div>
+                    <div class="flex justify-between">
+
+
+
+                      <div class=" text-sm justify-center text-cardBody font-poppins">
+                        {dayjs(item.startDate).format("DD/MM/YYYY")}
+                      </div>
+
+
+
+
+
+                      <div class=" text-sm text-cardBody font-poppins text-center">
+                        <CurrencySymbol currencyType={item.currency} />
+                        &nbsp;
+                        {item.proposalAmount}
+
+                      </div>
+
+
+
+
+                      <div class=" text-sm text-cardBody font-poppins text-center">
+                        <Dropdown
+                          overlay={
+                            <div>
+                              <Menu mode="horizontal">
+                                <Menu.Item
+                                  style={{
+                                    paddingLeft: 5,
+                                    paddingRight: 5,
+                                    backgroundColor: "#F5F5F5",
+                                  }}
+                                >
+
+                                </Menu.Item>
+                              </Menu>
+                            </div>
+                          }
+                          trigger={["click"]}
+                        >
+                          <Tooltip title={item.stageName}>
+                            {" "}
+                            <Progress
+                              type="circle"
+                              style={{ cursor: "pointer", color: "red", fontSize: "0.8rem" }}
+                              percent={findProbability}
+                              width={30}
+                              strokeColor={"#005075"}
+                            />
+                          </Tooltip>
+                        </Dropdown>
+
+                      </div>
+
+
+
+
+                      <div class=" text-sm text-cardBody font-poppins">
+
+                        <span>
+                          {item.assignedTo === null ? (
+                            "Not available"
+                          ) : (
+                            <>
+                              {item.assignedTo === item.ownerName ? (
+
+                                null
+                              ) : (
+                                <MultiAvatar2
+                                  primaryTitle={item.assignedTo}
+                                  imgWidth={"1.8rem"}
+                                  imgHeight={"1.8rem"}
+                                />
+                              )}
+                            </>
+                          )}
+                        </span>
+
+                      </div>
+
+
+
+
+
+                      <Tooltip title={item.ownerName}>
+                        <span>
+                          <MultiAvatar2
+                            primaryTitle={item.ownerName}
+                            imageId={item.ownerImageId}
+                            imageURL={item.imageURL}
+                            imgWidth={"1.8rem"}
+                            imgHeight={"1.8rem"}
+                          />
+                        </span>
+                      </Tooltip>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+              )
+            })}
+          </InfiniteScroll>
         </div>
-       
+
       </>
-    ); 
+    );
   }
 
   return (
     <>
-  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
-    <div className=" flex  w-[96%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[10.5rem]"><FormattedMessage
-                  id="app.name"
-                  defaultMessage="name"
-                /></div>
-        <div className=" md:w-[9.1rem]"><FormattedMessage
-                  id="app.investor"
-                  defaultMessage="investor"
-                /></div>
-        <div className=" md:w-[15.2rem] "><FormattedMessage
-                  id="app.sponsor"
-                  defaultMessage="sponsor"
-                /></div>
-        <div className="md:w-[11.1rem]"><FormattedMessage
-                  id="app.startdate"
-                  defaultMessage="startdate"
-                /></div>
-        <div className="md:w-[7.5rem]"><FormattedMessage
-                  id="app.value"
-                  defaultMessage="Value"
-                /></div>
-        <div className="md:w-[4.2rem]"><FormattedMessage
-                  id="app.stages"
-                  defaultMessage="stages"
-                /></div> 
-        <div className="md:w-[7.1rem]"><FormattedMessage
-                  id="app.assignto"
-                  defaultMessage="Assign To"
-                /></div>
-        <div className="md:w-[3rem]"><FormattedMessage
-                  id="app.owner"
-                  defaultMessage="owner"
-                /></div>
+      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex  w-[96%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[10.5rem]"><FormattedMessage
+            id="app.name"
+            defaultMessage="name"
+          /></div>
+          <div className=" md:w-[9.1rem]"><FormattedMessage
+            id="app.investor"
+            defaultMessage="investor"
+          /></div>
+          <div className=" md:w-[15.2rem] "><FormattedMessage
+            id="app.sponsor"
+            defaultMessage="sponsor"
+          /></div>
+          <div className="md:w-[11.1rem]"><FormattedMessage
+            id="app.startdate"
+            defaultMessage="startdate"
+          /></div>
+          <div className="md:w-[7.5rem]"><FormattedMessage
+            id="app.value"
+            defaultMessage="Value"
+          /></div>
+          <div className="md:w-[4.2rem]"><FormattedMessage
+            id="app.stages"
+            defaultMessage="stages"
+          /></div>
+          <div className="md:w-[7.1rem]"><FormattedMessage
+            id="app.assignto"
+            defaultMessage="Assign To"
+          /></div>
+          <div className="md:w-[3rem]"><FormattedMessage
+            id="app.owner"
+            defaultMessage="owner"
+          /></div>
 
-      </div>
-      <InfiniteScroll
-        dataLength={props.allDealsData.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingAllDealsData?<div  class="flex justify-center">Loading...</div>:null}
-        height={"75vh"}
-      >
-  { !fetchingAllDealsData && props.allDealsData.length === 0 ?<NodataFoundPage />:props.allDealsData.map((item,index) =>  {
-       var findProbability = item.probability;
-       item.stageList.forEach((element) => {
-         if (element.oppStage === item.oppStage) {
-           findProbability = element.probability;
-         }
-       });
- const currentdate = dayjs().format("DD/MM/YYYY");
- const date = dayjs(item.creationDate).format("DD/MM/YYYY");
-       
-         const diff = Math.abs(
-          dayjs().diff(dayjs(item.lastRequirementOn), "days")
-          );
-          const dataLoc = ` Address : ${
-            item.address && item.address.length && item.address[0].address1
-          } 
-               Street : ${
-                 item.address && item.address.length && item.address[0].street
-               }   
-              State : ${
-                item.address && item.address.length && item.address[0].state
+        </div>
+        <InfiniteScroll
+          dataLength={props.allDealsData.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingAllDealsData ? <div class="flex justify-center">Loading...</div> : null}
+          height={"75vh"}
+        >
+          {!fetchingAllDealsData && props.allDealsData.length === 0 ? <NodataFoundPage /> : props.allDealsData.map((item, index) => {
+            var findProbability = item.probability;
+            item.stageList.forEach((element) => {
+              if (element.oppStage === item.oppStage) {
+                findProbability = element.probability;
               }
-             Country : ${
-               (item.address && item.address.length && item.address[0].country) ||
-               ""
-             } 
-               PostalCode : ${
-                 item.address && item.address.length && item.address[0].postalCode
-               } `;
-                    return (
+            });
+            const currentdate = dayjs().format("DD/MM/YYYY");
+            const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+
+            const diff = Math.abs(
+              dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
+              } 
+               Street : ${item.address && item.address.length && item.address[0].street
+              }   
+              State : ${item.address && item.address.length && item.address[0].state
+              }
+             Country : ${(item.address && item.address.length && item.address[0].country) ||
+              ""
+              } 
+               PostalCode : ${item.address && item.address.length && item.address[0].postalCode
+              } `;
+            return (
+              <div>
+                <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-1"
+                // style={{
+                //     borderBottom: "3px dotted #515050"
+                // }}
+                >
+                  <div class="flex justify-between">
+                    <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
+                      <div className="flex max-sm:w-full items-center">
                         <div>
-                            <div className="flex justify-between rounded-xl  mt-2 bg-white h-11 items-center p-1"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
-                                >
-                                     <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
-                                <div className="flex max-sm:w-full items-center"> 
-<div>
-<SubTitle>
-            <MultiAvatar
-              primaryTitle={item.opportunityName}
-              imageId={item.imageId}
-              imageURL={item.imageURL}
-              imgWidth={"1.8em"}
-              imgHeight={"1.8em"}
-            />
-          </SubTitle>
-</div>
-                                   <div class="w-[4%]">
+                          <SubTitle>
+                            <MultiAvatar
+                              primaryTitle={item.opportunityName}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8em"}
+                              imgHeight={"1.8em"}
+                            />
+                          </SubTitle>
+                        </div>
+                        <div class="w-[4%]">
 
-                                   </div>
+                        </div>
 
-                                        <div class="max-sm:w-full" >
-                                        <Tooltip>
-                                          <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
-                                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                        <div class="max-sm:w-full" >
+                          <Tooltip>
+                            <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
+                              {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </div> */}
-                                            <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-                                                {/* <Link
+                              <div class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+
+                                {/* <Link
                                                  toUrl={`customer/${item.customerId}`}
                                                  title={`${item.name}`} 
                                                > */}
-                                              {item.opportunityName}
-                                               {/* </Link> */}
-                                               &nbsp;&nbsp;
-                                               {date === currentdate ? (
-                                                 <span class="text-[tomato] font-bold"
-                                            
-                                                 >
-                                                   New
-                                                 </span>
-                                               ) : null}
-                                              
-                                                                                   </div>
-                                            </div>
-                                        </Tooltip>
-                                        </div>
-                                        </div>
-                                </div>
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                {item.opportunityName}
+                                {/* </Link> */}
+                                &nbsp;&nbsp;
+                                {date === currentdate ? (
+                                  <span class="text-[tomato] font-bold"
 
-<div class=" text-sm text-cardBody font-poppins">   
-<Link to ="/investor">
-{item.investor}
-</Link>
-</div>
-</div>
+                                  >
+                                    New
+                                  </span>
+                                ) : null}
 
-<div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
-
-
-<div class=" text-sm text-cardBody font-poppins">
-<SubTitle>
-{item.contactName === null ? "None" :
-<MultiAvatar2
-primaryTitle={item.contactName}
-imageId={item.imageId}
-imageURL={item.imageURL}
-imgWidth={"1.8em"}
-imgHeight={"1.8em"}
-/>
-}
-</SubTitle>
-</div>
-</div>
-</div>
-<div class="flex">
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-
-
-<div class=" text-sm justify-center text-cardBody font-poppins">
-{dayjs(item.startDate).format("DD/MM/YYYY")}
-</div>
-</div>
-
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-
-
-<div class=" text-sm text-cardBody font-poppins text-center">
-<CurrencySymbol currencyType={item.currency} />
-&nbsp;
-{item.proposalAmount}
-
-</div>
-</div>
-<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-
-
-<div class=" text-sm text-cardBody font-poppins text-center">
-<Dropdown
-overlay={
-<div>
-<Menu mode="horizontal">
-<Menu.Item
-style={{
-paddingLeft: 5,
-paddingRight: 5,
-backgroundColor: "#F5F5F5",
-}}
->
-
-</Menu.Item>
-</Menu>
-</div>
-}
-trigger={["click"]}
->
-<Tooltip title={item.stageName}>
-{" "}
-<Progress
-type="circle"
-style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
-percent={findProbability}
-width={30}
-strokeColor={"#005075"}
-/>
-</Tooltip>
-</Dropdown>
-
-</div>
-</div>
-<div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-
-
-<div class=" text-sm text-cardBody font-poppins">
-
-<span>
-{item.assignedTo === null ? (
-                "Not available"
-              ) : (
-                <>
-                {item.assignedTo === item.ownerName ? (
-                  
-                  null
-                ) : (
-<MultiAvatar2
-primaryTitle={item.assignedTo}
-imgWidth={"1.8rem"}
-imgHeight={"1.8rem"}
-/>
-  )}
-  </>
-              )}
-</span>
-
-</div>
-</div>
-<div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
-
-
-
-<span>
-<MultiAvatar2
-primaryTitle={item.ownerName}
-imageId={item.ownerImageId}
-imgWidth={"1.8rem"}
-imgHeight={"1.8rem"}
-/>
-</span>
-</div>
-</div>
-                      </div>
+                              </div>
                             </div>
-                         
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+
+                      <div class=" text-sm text-cardBody font-poppins">
+                        <Link to="/investor">
+                          {item.investor}
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
 
 
-                    )
-                })}
-                  </InfiniteScroll>
+                      <div class=" text-sm text-cardBody font-poppins">
+                        <SubTitle>
+                          {item.contactName === null ? "None" :
+                            <MultiAvatar2
+                              primaryTitle={item.contactName}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8em"}
+                              imgHeight={"1.8em"}
+                            />
+                          }
+                        </SubTitle>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                      <div class=" text-sm justify-center text-cardBody font-poppins">
+                        {dayjs(item.startDate).format("DD/MM/YYYY")}
+                      </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                      <div class=" text-sm text-cardBody font-poppins text-center">
+                        <CurrencySymbol currencyType={item.currency} />
+                        &nbsp;
+                        {item.proposalAmount}
+
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                      <div class=" text-sm text-cardBody font-poppins text-center">
+                        <Dropdown
+                          overlay={
+                            <div>
+                              <Menu mode="horizontal">
+                                <Menu.Item
+                                  style={{
+                                    paddingLeft: 5,
+                                    paddingRight: 5,
+                                    backgroundColor: "#F5F5F5",
+                                  }}
+                                >
+
+                                </Menu.Item>
+                              </Menu>
+                            </div>
+                          }
+                          trigger={["click"]}
+                        >
+                          <Tooltip title={item.stageName}>
+                            {" "}
+                            <Progress
+                              type="circle"
+                              style={{ cursor: "pointer", color: "red", fontSize: "0.8rem" }}
+                              percent={findProbability}
+                              width={30}
+                              strokeColor={"#005075"}
+                            />
+                          </Tooltip>
+                        </Dropdown>
+
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                      <div class=" text-sm text-cardBody font-poppins">
+
+                        <span>
+                          {item.assignedTo === null ? (
+                            "Not available"
+                          ) : (
+                            <>
+                              {item.assignedTo === item.ownerName ? (
+
+                                null
+                              ) : (
+                                <MultiAvatar2
+                                  primaryTitle={item.assignedTo}
+                                  imgWidth={"1.8rem"}
+                                  imgHeight={"1.8rem"}
+                                />
+                              )}
+                            </>
+                          )}
+                        </span>
+
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+
+
+
+                      <span>
+                        <MultiAvatar2
+                          primaryTitle={item.ownerName}
+                          imageId={item.ownerImageId}
+                          imgWidth={"1.8rem"}
+                          imgHeight={"1.8rem"}
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            )
+          })}
+        </InfiniteScroll>
       </div>
       {/* <UpdateLPitchModal
         item={currentLeadsId}
@@ -568,27 +559,27 @@ imgHeight={"1.8rem"}
   );
 };
 
-const mapStateToProps = ({ auth, leads,deal, sector,pitch }) => ({
-//   leadsAllData: leads.leadsAllData,
-user: auth.userDetails,
+const mapStateToProps = ({ auth, leads, deal, sector, pitch }) => ({
+  //   leadsAllData: leads.leadsAllData,
+  user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fetchingAllDealsData:deal.fetchingAllDealsData,
-  addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
-  updatePitchModal:pitch.updatePitchModal,
-  openASSImodal:pitch.openASSImodal,
-  allDealsData:deal.allDealsData
+  fetchingAllDealsData: deal.fetchingAllDealsData,
+  addDrawerPitchNotesModal: pitch.addDrawerPitchNotesModal,
+  updatePitchModal: pitch.updatePitchModal,
+  openASSImodal: pitch.openASSImodal,
+  allDealsData: deal.allDealsData
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getAllDeals,
-        // deletePitchData,
-        // handleUpdatePitchModal,
-        // setEditPitch,
-        // updateTypeForPitch,
-        // handlePitchNotesDrawerModal,
-        // handleAssimodal
- 
+      getAllDeals,
+      // deletePitchData,
+      // handleUpdatePitchModal,
+      // setEditPitch,
+      // updateTypeForPitch,
+      // handlePitchNotesDrawerModal,
+      // handleAssimodal
+
     },
     dispatch
   );

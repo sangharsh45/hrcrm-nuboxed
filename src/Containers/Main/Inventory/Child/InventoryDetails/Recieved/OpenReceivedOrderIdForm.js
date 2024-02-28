@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
 import { getPhonelistByOrderId } from "../../../InventoryAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { Button, Switch, Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { handleReceivedOrderIdPhoneNoteModal, updateInspection, setEditPhoneData, handlereceivePhoneModal } from "../../../InventoryAction";
 import { EditOutlined, FileDoneOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
@@ -13,14 +13,8 @@ import QRCodeModal from "../../../../../../Components/UI/Elements/QRCodeModal";
 import { MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
 import ReceiveValidationToggle from "./ReceiveValidationToggle";
 import ReceivedModal from "./ReceivedPhoneModal";
-import moment from "moment";
+import dayjs from "dayjs";
 import AccountPhoneTaskTable from "../../../../Account/AccountDetailsTab/AccountOrderTab/AccountPhoneTaskTable";
-
-
-const FormSchema = Yup.object().shape({
-  pauseNoOfDays: Yup.string().required("Input required!"),
-  pauseDate: Yup.string().required("Input required!"),
-});
 
 
 function OpenReceivedOrderIdForm(props) {
@@ -115,7 +109,7 @@ function OpenReceivedOrderIdForm(props) {
         //debugger
         return (
           <Tooltip title="Task">
-            <FileDoneOutlined style={{ color: "black",fontSize: "1rem" }} type="file-done"
+            <FileDoneOutlined style={{ color: "black", fontSize: "1rem" }} type="file-done"
 
               onClick={() => {
                 handleSetParticularOrderData(item);
@@ -135,7 +129,7 @@ function OpenReceivedOrderIdForm(props) {
         return (
           <Tooltip title="Notes">
             <NoteAltIcon
-              style={{ cursor: "pointer", fontSize: "1rem", color:"green" }}
+              style={{ cursor: "pointer", fontSize: "1rem", color: "green" }}
               onClick={() => {
                 handleSetParticularOrderData(item);
                 props.handleReceivedOrderIdPhoneNoteModal(true);
@@ -146,32 +140,7 @@ function OpenReceivedOrderIdForm(props) {
         );
       },
     },
-    {
-      title: "Received by",
-      width: "11%",
-      dataIndex: "receivePhoneUserName",
-      render: (text, item) => {
 
-        return (
-          <>
-            {item.receivePhoneUserName !== null && 
-            <>
-            <Tooltip title={item.receivePhoneUserName}>
-              <MultiAvatar2
-                primaryTitle={item.receivePhoneUserName}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </Tooltip>
-            &nbsp;
-            {moment(item.receivePhoneDate).format("ll")}
-            </>
-            } 
-          </>
-        )
-      }
-    },
     {
       title: "Received",
       width: "7%",
@@ -189,6 +158,32 @@ function OpenReceivedOrderIdForm(props) {
           </Tooltip>
         );
       },
+    },
+    {
+      title: "Received by",
+      width: "11%",
+      dataIndex: "receivePhoneUserName",
+      render: (text, item) => {
+
+        return (
+          <>
+            {item.receivePhoneUserName !== null &&
+              <>
+                <Tooltip title={item.receivePhoneUserName}>
+                  <MultiAvatar2
+                    primaryTitle={item.receivePhoneUserName}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                </Tooltip>
+                &nbsp;
+                {dayjs(item.receivePhoneDate).format("ll")}
+              </>
+            }
+          </>
+        )
+      }
     },
     {
       title: "",
@@ -254,7 +249,7 @@ function OpenReceivedOrderIdForm(props) {
               onClick={() => props.updateInspection({
                 inspectionInd: 2,
                 stopInspectionUser: props.userId,
-                stopInspectionDate: moment()
+                stopInspectionDate: dayjs()
               },
                 props.rowData.orderPhoneId,
                 props.locationDetailsId)}

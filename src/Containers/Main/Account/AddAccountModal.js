@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-const AddAccountForm =lazy(()=>import("./AddAccountForm")); 
+const AddAccountForm = lazy(() => import("./AddAccountForm"));
 
 
 const AddAccountModal = (props) => {
@@ -9,12 +9,9 @@ const AddAccountModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title="Account"
+                title="Customer"
                 width="60%"
                 visible={addDistributorModal}
-                closable
-                // maskClosable={false}
-                destroyOnClose
                 onClose={() => handleDistributorModal(false)}
                 footer={null}
             >
