@@ -252,7 +252,7 @@ const PitchCardList = (props) => {
                                 </div>
                                 </div>
                          <div class="flex justify-between  max-sm:mb-2 ">
-                         <div className=" flex font-medium flex-col  md:w-[13.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                         <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                              <div className="text-[0.82rem] text-cardBody font-poppins">
                              {item.companyName || "Not Available"}
@@ -482,42 +482,42 @@ const PitchCardList = (props) => {
 
   return (
     <>
-  <div class="rounded-lg m-5 p-2 w-[97%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+  <div class="rounded-lg max-lg:w-[83%] m-5 p-2 w-[97%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
     <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[10.1rem]"><FormattedMessage
+        <div className=" md:w-[10.1rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.name"
                   defaultMessage="name"
                 /></div>
         <div className=" md:w-[5.5rem]"></div>
-        <div className=" md:w-[7.1rem] "><FormattedMessage
+        <div className=" md:w-[7.1rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.mobile#"
                   defaultMessage="mobile#"
                 /></div>
-        <div className="md:w-[5.2rem]"><FormattedMessage
+        <div className="md:w-[5.2rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.country"
                   defaultMessage="country"
                 /></div>
-        <div className="md:w-[7.12rem]"><FormattedMessage
+        <div className="md:w-[7.12rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.company"
                   defaultMessage="company"
                 /></div>
-                    <div className="md:w-[5.12rem]"><FormattedMessage
+                    <div className="md:w-[5.12rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.Source"
                   defaultMessage="Source"
                 /></div>
-                     <div className="md:w-[5.12rem]"><FormattedMessage
+                     <div className="md:w-[5.12rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.Sector"
                   defaultMessage="Sector"
                 /></div>
-        <div className="md:w-[5.12rem]"><FormattedMessage
+        <div className="md:w-[5.12rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
-        <div className="md:w-[3.2rem]"><FormattedMessage
+        <div className="md:w-[3.2rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-[10.3rem]"><FormattedMessage
+        <div className="md:w-[10.3rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.qualify"
                   defaultMessage="qualify"
                 /></div>
@@ -561,7 +561,7 @@ const PitchCardList = (props) => {
                                 >
                                      <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
-                                <div className="flex max-sm:w-full items-center"> 
+                                <div className="flex max-sm:w-full items-center max-xl:text-[0.65rem] max-lg:text-[0.45rem]"> 
 <div>
 
             <MultiAvatar
@@ -671,21 +671,21 @@ const PitchCardList = (props) => {
 </div>  
      </div>  
                                 <div class="flex justify-between ">
-                                <div className=" flex font-medium flex-col  md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </div> */}
 
-                           <div class="text-[0.82rem] text-cardBody font-poppins">
+                           <div class="text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
   {item.countryDialCode && item.phoneNumber
     ? `${item.countryDialCode} ${item.phoneNumber}`
     : 'Not available'}
 </div>
 
                        </div>
-                       <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                   {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</div> */}
-                                  <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                  <div class=" text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                                   <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
                       {countryCode}
@@ -693,36 +693,30 @@ const PitchCardList = (props) => {
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 ">
-                       <div className=" flex font-medium flex-col  md:w-[13.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
-                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                           <div className="text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                            {item.companyName || "Not Available"}
 </div>
 
                        </div>
-                       {/* <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                       
-                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
+                           <div className="text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                            {item.source || "Not Available"}
 </div>
 
-                       </div> */}
-                       {/* <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                         
-                           <div className="text-[0.82rem] text-cardBody font-poppins">
+                       </div>
+                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </div> */}
+                           <div className="text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                            {item.sector || "Not Available"}
 </div>
 
-                       </div> */}
+                       </div>
             
-                                {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </div>
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">   
-                                    {item.sector}
-                                    </div>
-                                </div> */}
                                 </div>
+                                
                                 
                                
           
@@ -732,7 +726,7 @@ const PitchCardList = (props) => {
      <div className=" flex font-medium flex-col md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                                     
                                     <span>
                       {item.assignedTo === null ? (
@@ -757,7 +751,7 @@ const PitchCardList = (props) => {
              
                                     </div>
                                 </div>
-     <div className=" flex font-medium flex-col md:w-[5.5rem]  max-sm:flex-row w-full max-sm:justify-between">
+     <div className=" flex font-medium flex-col md:w-[5.5rem]  max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                        
                        {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
@@ -774,7 +768,7 @@ const PitchCardList = (props) => {
                    </div>
                                
                          
-                   <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between ">
+                   <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem] ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
          
                                     <div class="rounded-full bg-white  h-5 cursor-pointer w-8">

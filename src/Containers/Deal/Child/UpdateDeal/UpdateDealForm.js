@@ -630,7 +630,7 @@ function UpdateDealForm (props) {
                                 )
                               : []
                           }
-                          value={values.oppStage}
+                          // value={values.oppStage}
                           filterOption={{
                             filterType: "oppWorkflow",
                             filterValue: values.oppWorkflow,

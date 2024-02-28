@@ -5,13 +5,14 @@ import { Button, Select,  Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import {  Spacer } from "../../../../../../Components/UI/Elements";
+import {getDialCode} from "../../../../../Investor/InvestorAction"
+import {getSources} from "../../../../../Settings/Category/Source/SourceAction"
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { addLinkContactByOpportunityId } from "../../../../../Contact/ContactAction";
-import Upload from "../../../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
@@ -34,6 +35,8 @@ const ContactSchema = Yup.object().shape({
 class DealContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
+    this.props.getSources(this.props.orgId);
+    this.props.getDialCode();
 
   }
   constructor(props) {
@@ -105,7 +108,22 @@ class DealContactForm extends Component {
 
       // tagWithCompany,
     } = this.props;
-  
+
+    const dialCodeOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code || ""}`,
+        value: item.country_dial_code
+        ,
+      };
+    });
+    const sourceOption = this.props.sources.map((item) => {
+      return {
+        label: item.name
+        || null,
+        value: item.sourceId
+        ,
+      };
+    });
     const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -133,7 +151,7 @@ class DealContactForm extends Component {
         <Formik
           initialValues={{
             salutation: "",
-            // designation: undefined,
+            source:"",
             designationTypeId: this.props.designationTypeId,
             description: "",
             //department: undefined,
@@ -148,7 +166,7 @@ class DealContactForm extends Component {
             firstName: "",
             middleName: "",
             lastName: "",
-            countryDialCode: this.props.user.countryDialCode,
+            countryDialCode: "",
             countryDialCode1: this.props.user.countryDialCode,
             phoneNumber: "",
             mobileNumber: "",
@@ -196,16 +214,16 @@ class DealContactForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
+            <div class="overflow-y-auto h-[34rem] md:overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-between h-[27rem] overflow-x-hidden max-sm:flex-col"
               >
-                <div class=" h-full w-1/2 max-sm:w-wk"
-                >
+                 <div class=" h-full w-w47.5 max-sm:w-wk">
                   <div class=" flex  flex-nowrap justify-between">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5">
+                        {/* <div class=" w-2/5">
                           <FastField
                             name="salutation"
                             type="text"
@@ -221,8 +239,8 @@ class DealContactForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-2/5">
+                        </div> */}
+                        <div class=" w-full max-sm:w-2/5">
                           <FastField
                             isRequired
                             name="firstName"
@@ -301,29 +319,26 @@ class DealContactForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6 max-sm:w-2/5">
-                      <FastField
+                  <div class=" w-3/12 max-sm:w-[32%]">
+                  <Field
                         name="countryDialCode"
+                        // selectType="dialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
-                            defaultMessage="Dial Code"
+                            id="app.dialCode"
+                            defaultMessage="dialCode"
                           />
                         }
                         isColumn
-                        selectType="dialCode"
-                        component={SearchSelect}
-                        placeholder='+31'
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        }
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5 max-sm:w-2/4">
+                    <div class=" w-8/12">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -431,8 +446,8 @@ class DealContactForm extends Component {
                   />
 </div>
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk "
-                >
+                <div
+               class=" h-full w-w47.5 max-sm:w-wk">
                   <div class=" flex  justify-between max-sm:mt-20">
                     <div class=" w-1/2">
                       <Field
@@ -490,7 +505,7 @@ class DealContactForm extends Component {
                     />
                   </div>
                   <div class="w-2/5">
-                          <FastField
+                          <Field
                             name="source"
                             type="text"
                             label={
@@ -499,7 +514,9 @@ class DealContactForm extends Component {
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
+                            options={
+                              Array.isArray(sourceOption) ? sourceOption : []
+                            }
                             component={SelectComponent}
                             inlineLabel
                             className="field"
@@ -509,7 +526,7 @@ class DealContactForm extends Component {
                   </div>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                      <div class=" text-[white] text-xs" > <FormattedMessage
+                      <div class=" text-[white] text-xs mt-4" > <FormattedMessage
                         id="app.address"
                         defaultMessage="Address"
                       /> </div>
@@ -620,6 +637,7 @@ class DealContactForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
@@ -627,25 +645,28 @@ class DealContactForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer, opportunity, departments, designations }) => ({
+const mapStateToProps = ({ auth, source,contact,investor, customer, opportunity, departments, designations }) => ({
   addingDealContact: contact.addingDealContact,
   addingDealContactError: contact.addingDealContactError,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   customerData:customer.customerData,
+  sources: source.sources,
   customerId: customer.customer.customerId,
   tagWithCompany: customer.customer.name,
+  orgId:auth.userDetails.organizationId,
   opportunityId: opportunity.opportunity.opportunityId,
   departmentId: departments.departmentId,
+  dialCodeList:investor.dialCodeList,
   designationTypeId: designations.designationTypeId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // getContacts,
+      getSources,
       addDealContact,
-      // getContactById,
+      getDialCode,
       addLinkContactByOpportunityId,
       // getCurrency,
       getDesignations,
