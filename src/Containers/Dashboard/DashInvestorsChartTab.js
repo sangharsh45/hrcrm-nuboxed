@@ -65,7 +65,7 @@ class DashInvestorsChartTab extends Component {
                   <span class=" ml-1 font-semibold">
                   <FormattedMessage
               id="app.contactInvestorAdded"
-              defaultMessage="Contact Investor Added"
+              defaultMessage="Contacts Added"
             />
                    </span>
 

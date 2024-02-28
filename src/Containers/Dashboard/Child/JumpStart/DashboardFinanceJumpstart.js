@@ -19,7 +19,7 @@ function DashboardFinanceJumpstart (props) {
             noProgress
             title={<FormattedMessage
               id="app.financeadded"
-              defaultMessage="Finance Added"
+              defaultMessage="Receivable Added"
             />}
             // jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
             // cursorData={"pointer"}
@@ -31,7 +31,7 @@ function DashboardFinanceJumpstart (props) {
             noProgress
             title={<FormattedMessage
                 id="app.financeopen"
-                defaultMessage="Finance Open"
+                defaultMessage="Receivable Open"
             />}
             // jumpstartClick={()=>handlePitchAddedDrawer(true)}
             // cursorData={"pointer"}
@@ -44,7 +44,7 @@ function DashboardFinanceJumpstart (props) {
             noProgress
             title={<FormattedMessage
                 id="app.financeclosed"
-                defaultMessage="Finance Closed"
+                defaultMessage="Receivable Closed"
             />}
             // jumpstartClick={()=>handleDealAddedDrawer(true)}
             // cursorData={"pointer"}
@@ -55,7 +55,7 @@ function DashboardFinanceJumpstart (props) {
             noProgress
             title={<FormattedMessage
                 id="app.financecancelled"
-                defaultMessage="Finance Cancelled"
+                defaultMessage="Receivable Cancelled"
             />}
             // jumpstartClick={()=>handleDealClosedDrawer(true)}
             // cursorData={"pointer"}

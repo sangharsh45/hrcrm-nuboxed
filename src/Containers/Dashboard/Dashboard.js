@@ -142,10 +142,13 @@ class Dashboard extends Component {
                    (<DashInvestorsChartTab/>)
                    :this.state.activeButton==="RecruitPro" ?
                    (<DashboardDetailsTab viewType={viewType}/>)
+                   :this.state.activeButton==="Finance" ?(
+                    null)
                    : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
             
            
             :(
+              
               <StackedClosureChart/>
           )}
                
