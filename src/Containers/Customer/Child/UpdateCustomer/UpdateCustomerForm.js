@@ -14,6 +14,8 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { Listbox, } from '@headlessui/react'
 import { getCrm} from "../../../Leads/LeadsAction";
+// import {getDialCode} from "../../../Investor/InvestorAction";
+import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 
 //yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -27,6 +29,7 @@ function UpdateCustomerForm (props) {
   
   useEffect(() => {
     props.getCrm();
+    props.getDialCode();
   }, []);
 
 
@@ -50,7 +53,13 @@ function UpdateCustomerForm (props) {
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
     
     const srcnme=setEditingCustomer.source
-    console.log("ssrcc",srcnme)
+
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //   };  });
+
     return (
       <>
         <Formik
@@ -184,6 +193,8 @@ function UpdateCustomerForm (props) {
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
+                        component={SearchSelect}
+                      
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -192,14 +203,15 @@ function UpdateCustomerForm (props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        // value={values.countryDialCode1}
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                        />
                     </div>
                     <div class=" w-8/12">
                       <FastField
-                        //isRequired
                         type="text"
                         name="phoneNumber"
                         isColumn
@@ -444,7 +456,7 @@ function UpdateCustomerForm (props) {
 
 }
 
-const mapStateToProps = ({ auth, customer,employee,leads }) => ({
+const mapStateToProps = ({ auth, customer,employee,leads,investor }) => ({
   setEditingCustomer: customer.setEditingCustomer,
   clearbit: customer.clearbit,
   updateCustomerById: customer.updateCustomerById,
@@ -455,6 +467,7 @@ const mapStateToProps = ({ auth, customer,employee,leads }) => ({
   organizationId: auth.userDetails.organizationId,
   employees: employee.employees,
   crmAllData:leads.crmAllData,
+  dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -464,6 +477,7 @@ const mapDispatchToProps = (dispatch) =>
       setClearbitData,
       setEditCustomer,
       getCrm,
+      // getDialCode,
     },
     dispatch
   );

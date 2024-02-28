@@ -14,6 +14,8 @@ import { addContact, addLinkContactByOpportunityId } from "../ContactAction";
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { getCustomerData } from "../../Customer/CustomerAction";
+// import {getDialCode} from "../../Investor/InvestorAction";
+
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
@@ -30,6 +32,7 @@ const ContactSchema = Yup.object().shape({
 class ContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
+    this.props.getDialCode();
   }
   constructor(props) {
     super(props);
@@ -118,7 +121,13 @@ class ContactForm extends Component {
         value: item.customerId,
       };
     });
-
+    // const dialCodeOption = this.props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //     ,
+    //   };
+    // });
     return (
       <>
         <Formik
@@ -296,7 +305,6 @@ class ContactForm extends Component {
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
                         label={
                           <FormattedMessage
                             id="app.countryDialCode"
@@ -306,11 +314,13 @@ class ContactForm extends Component {
                         isColumn
                         selectType="dialCode"
                         component={SearchSelect}
-                        placeholder='+31'
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         defaultValue={{
                           value: this.props.user.countryDialCode,
                         }}
-                        value={values.countryDialCode}
                         inlineLabel
                       />
                     </div>
@@ -626,7 +636,7 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer, opportunity, departments, designations }) => ({
+const mapStateToProps = ({ auth,investor, contact, customer, opportunity, departments, designations }) => ({
   addingContact: contact.addingContact,
   addingContactError: contact.addingContactError,
   user: auth.userDetails,
@@ -637,12 +647,13 @@ const mapStateToProps = ({ auth, contact, customer, opportunity, departments, de
   opportunityId: opportunity.opportunity.opportunityId,
   departmentId: departments.departmentId,
   designationTypeId: designations.designationTypeId,
+  // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // getContacts,
+      // getDialCode,
       addContact,
       // getContactById,
       addLinkContactByOpportunityId,
