@@ -18,6 +18,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import { Listbox, } from '@headlessui/react'
+import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
@@ -89,7 +90,7 @@ props.getSectors();
             sectorId: "",
             email: "",
             phoneNumber: "",
-            countryDialCode:"",
+            countryDialCode:user.countryDialCode || "",
             fullName:"",
             userId: props.userId,
             notes: "",
@@ -259,21 +260,19 @@ props.getSectors();
                   <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[32%]">
                    
-                      <Field
+                    <FastField
                         name="countryDialCode"
-                        // selectType="dialCode"
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
                             id="app.dialCode"
-                            defaultMessage="dialCode"
+                            defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(dialCodeOption) ? dialCodeOption : []
-                        }
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
                       />
                   

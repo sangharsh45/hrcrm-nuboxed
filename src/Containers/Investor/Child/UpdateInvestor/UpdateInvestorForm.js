@@ -172,25 +172,19 @@ function UpdateInvestorForm (props) {
                     /> */}
                    <div class=" flex justify-between mt-6">
                    <div class=" w-3/12 max-sm:w-[30%]">
-                   <Field
+                   <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(countryNameOption)
-                            ? countryNameOption
-                            : []
-                        }
-                        // value={values.countryDialCode1}
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
                       />
                     </div>
