@@ -31,13 +31,13 @@ class AccountContactTable extends Component {
         return (
             <>
                 <div className=' flex justify-end sticky top-28 z-auto'>
-                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.name" defaultMessage="Name"/></div>
-                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.email" defaultMessage="Email"/></div>
-                            <div className=" md:w-[4.8rem] "><FormattedMessage id="app.Mobile No" defaultMessage="Mobile No"/></div>
-                            <div className="md:w-[2.9rem]"><FormattedMessage id="app.Designation" defaultMessage="Designation"/></div>
-                            <div className="md:w-[27.8rem]"><FormattedMessage id="app.Department" defaultMessage="Department"/></div>
+                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
+                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.email" defaultMessage="Email" /></div>
+                            <div className=" md:w-[4.8rem] "><FormattedMessage id="app.Mobile No" defaultMessage="Mobile No" /></div>
+                            <div className="md:w-[2.9rem]"><FormattedMessage id="app.Designation" defaultMessage="Designation" /></div>
+                            <div className="md:w-[27.8rem]"><FormattedMessage id="app.Department" defaultMessage="Department" /></div>
 
 
                         </div>
@@ -49,7 +49,7 @@ class AccountContactTable extends Component {
         height={"75vh"}
       > */}
 
-                        {this.props.contactDistributor.map((item) => { 
+                        {this.props.contactDistributor.map((item) => {
                             const data = {}
                             return (
                                 <div>
@@ -110,15 +110,17 @@ class AccountContactTable extends Component {
 
                                                     {!item.accessInd && <div class=" text-xs text-cardBody font-poppins">
                                                         <Button
-                                                        type="primary"
-                                                            onClick={() =>
+                                                            type="primary"
+                                                            onClick={() => {
+                                                                this.props.setEditDistributorContact(item);
                                                                 this.props.applyForLoginInContact(
                                                                     data,
                                                                     item.contactPersonId,
                                                                     this.props.distributorId,
                                                                     this.props.userId
-                                                                )}
-                                                        ><FormattedMessage id="app.applyforlogin" defaultMessage="Apply For Login"/></Button>
+                                                                )
+                                                            }}
+                                                        ><FormattedMessage id="app.applyforlogin" defaultMessage="Apply For Login" /></Button>
                                                     </div>}
 
                                                 </div>
@@ -128,7 +130,7 @@ class AccountContactTable extends Component {
                                                     <div class=" text-xs text-cardBody font-poppins">
                                                         <Tooltip title="Edit">
                                                             <BorderColorIcon
-                                                             className="!text-base cursor-pointer text-[grey]"
+                                                                className="!text-base cursor-pointer text-[grey]"
                                                                 onClick={() => {
                                                                     this.props.setEditDistributorContact(item);
                                                                     this.props.handleUpdateDistributorContactModal(true);
@@ -161,10 +163,12 @@ class AccountContactTable extends Component {
 }
 
 const mapStateToProps = ({ distributor, auth }) => ({
+    applyingForLoginInContact: distributor.applyingForLoginInContact,
     contactDistributor: distributor.contactDistributor,
     updateDistributorContactModal: distributor.updateDistributorContactModal,
     fetchingContactDistributorsById: distributor.fetchingContactDistributorsById,
     userId: auth.userDetails.userId,
+    setEditingDistributorContact: distributor.setEditingDistributorContact,
 });
 
 const mapDispatchToProps = (dispatch) =>
