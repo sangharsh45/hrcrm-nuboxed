@@ -43,7 +43,7 @@ const StatusOfOrder = (props) => (
                         <>
                             {
                                 props.particularRowData.qcStartInd === 0 ?
-                                    <div className=' flex justify-around w-[20rem]'>
+                                    <div className=' flex justify-around w-[38rem]'>
                                         <Button
                                             type='primary'
                                         >
@@ -62,7 +62,8 @@ const StatusOfOrder = (props) => (
                                         >
                                             Approve QC
                                         </Button>
-                                        <b>Received - </b>
+                                        <b>Advance as per Order - {props.particularRowData.advancePayment} % </b>
+                                        <b>Received - {props.particularRowData.receivePayment || 0} % </b>
                                     </div>
                                     : <b> QC approved on {moment(props.particularRowData.qcStartDate).format("DD-MM-YYYY")} By {props.particularRowData.qcStartUser}</b>
                             }
