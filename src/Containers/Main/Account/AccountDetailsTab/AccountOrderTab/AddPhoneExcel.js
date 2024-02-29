@@ -42,15 +42,15 @@ function AddPhoneExcel(props) {
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
                         <Form class="form-background">
-                        <div  class="justify-between flex">
-                                <div  class="h-full w-[47%]">
-                                <div class="mt-3">  
-                                    <Field
-                                        name="excelId"
-                                        isRequired
-                                        component={DraggableUpload1}
-                                    />
-                                     </div>
+                            <div class="justify-between flex">
+                                <div class="h-full w-[47%]">
+                                    <div class="mt-3">
+                                        <Field
+                                            name="excelId"
+                                            isRequired
+                                            component={DraggableUpload1}
+                                        />
+                                    </div>
                                 </div>
 
                             </div>
@@ -60,10 +60,10 @@ function AddPhoneExcel(props) {
                                     htmlType="submit"
                                     loading={props.addingCar}
                                 >
-                                <FormattedMessage
-                 id="app.finish"
-                 defaultMessage="Finish"
-                />  
+                                    <FormattedMessage
+                                        id="app.finish"
+                                        defaultMessage="Finish"
+                                    />
                                 </Button>
                             </div>
                         </Form>
