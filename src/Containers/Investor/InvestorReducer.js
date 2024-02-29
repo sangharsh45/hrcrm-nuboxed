@@ -45,6 +45,8 @@ const initialState = {
 
   addDrawerInvestorContactModal:false,
 
+  addDrawerInvestorPulseModal:false,
+
   fetchingOpportunityRecord: false,
   fetchingOpportunityRecordError: false,
   opportunityRecord:[],
@@ -595,6 +597,10 @@ export const investorReducer = (state = initialState, action) => {
                             fetchingDialCode: false,
                             fetchingDialCodeError: true,
                           };
+
+                          case types.HANDLE_INVESTOR_PULSE_DRAWER_MODAL:
+                            return { ...state, addDrawerInvestorPulseModal: action.payload }; 
+
 
 default:
       return state;
