@@ -111,7 +111,7 @@ function UpdateInvestorForm (props) {
               {
                 ...values,
                 investorId: RowData.investorId,
-                source: RowData.source,
+                // source: RowData.source,
                 assignedTo:selectedOption ? selectedOption.employeeId:props.RowData.employeeId,
               },
               RowData.investorId,

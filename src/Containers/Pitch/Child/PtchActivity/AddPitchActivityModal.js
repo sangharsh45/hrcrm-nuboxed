@@ -85,7 +85,9 @@ const AddPitchActivityModal = (props) => {
                 key="2"
               >
                 <Suspense fallback={"loading ..."}>
-                  <PitchEventForm rowdata={props.rowdata} {...formProps}/>
+                  <PitchEventForm rowdata={props.rowdata}
+                  //  {...formProps}
+                   />
                 </Suspense>
               </TabPane>
               <TabPane

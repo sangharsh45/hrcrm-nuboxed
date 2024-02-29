@@ -174,4 +174,6 @@ export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
     });
   };
 
+
+
   

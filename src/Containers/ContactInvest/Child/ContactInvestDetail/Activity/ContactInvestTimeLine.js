@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Timeline } from 'antd';
+import { Timeline, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
+import { MultiAvatar } from "../../../../../Components/UI/Elements";
 import {getContactInvestTimeline} from "../../../ContactInvestAction";
 
 const ContactInvestTimeline = (props) => {
@@ -20,7 +21,25 @@ const ContactInvestTimeline = (props) => {
             contactInvestStatus.map((status, i) => (
               <Timeline.Item key={i}>
               <div>
-              <div>{status.category} {status.activityType} {moment.utc(status.startDate).format('ll')}</div>
+              <div>{status.category} {status.activityType} {moment.utc(status.endDate).format('ll')}</div>
+              <span class=" ml-2">
+             
+             <>
+             {props.userId !== status.userId ? (
+               
+               <Tooltip title={status.woner}> 
+                       <MultiAvatar
+                         primaryTitle={status.woner}
+                         imgWidth={"1.8rem"}
+                         imgHeight={"1.8rem"}
+                       />
+                       </Tooltip>
+             ) : (
+              null
+                     )}
+                     </>
+         
+                   </span>
          
               </div>
               <div>
