@@ -20,14 +20,14 @@ const StatusOfOrder = (props) => (
             current={1}
             items={[
                 {
-                    title:<FormattedMessage
+                    title: <FormattedMessage
                         id="app.ordercreated"
                         defaultMessage="Order Created"
-                       />,
+                    />,
                     status: <FormattedMessage
-                    id="app.progress"
-                    defaultMessage="progress"
-                   />,
+                        id="app.progress"
+                        defaultMessage="progress"
+                    />,
                     description: <>
                         <b>On {moment(props.particularRowData.creationDate).format("DD-MM-YYYY")} By {props.particularRowData.userName}</b>
                     </>
@@ -44,6 +44,7 @@ const StatusOfOrder = (props) => (
                             {
                                 props.particularRowData.qcStartInd === 0 ?
                                     <Button
+                                        loading={props.startingQcInStatus}
                                         type='primary'
                                         onClick={() => props.startQCStatus({
                                             orderPhoneId: props.particularRowData.orderId || "",
@@ -72,13 +73,13 @@ const StatusOfOrder = (props) => (
                     title: 'Warehouse',
                     status: 'progress',
                     description: <>
-                        {props.particularRowData.transferInd === 2 &&
-                            <b>Arrived at {props.particularRowData.locationDetailsViewDTO
-                                && props.particularRowData.locationDetailsViewDTO.name || ""} |
-                                Inspected by {props.particularRowData.stopInspectionUserName} on
-                                &nbsp;{moment(props.particularRowData.stopInspectionDate).format("DD-MM-YYYY")}
-                            </b>
-                        }
+                        {/* {props.particularRowData.transferInd === 2 && */}
+                        <b>Arrived at {props.particularRowData.locationDetailsViewDTO
+                            && props.particularRowData.locationDetailsViewDTO.name || ""} |
+                            Inspected by {props.particularRowData.stopInspectionUserName} on
+                            &nbsp;{moment(props.particularRowData.stopInspectionDate).format("DD-MM-YYYY")}
+                        </b>
+                        {/* } */}
                     </>
                 },
                 {
@@ -91,7 +92,7 @@ const StatusOfOrder = (props) => (
                     //qc completed msg on date and user who assign technician                   
                     description:
                         <>
-                        {/* <Button
+                            {/* <Button
                                         type='primary'
                                         // onClick={() => props.startQCStatus({
                                         //     orderPhoneId: props.particularRowData.orderId || "",
@@ -153,6 +154,7 @@ const StatusOfOrder = (props) => (
                             {
                                 props.particularRowData.priceConfirmInd && props.particularRowData.qcRepairInd === 0 ?
                                     (<Button
+                                        loading={props.startRepairingInStatus}
                                         type='primary'
                                         onClick={() => props.startRepairInStatus({
                                             qcRepairInd: 1,
@@ -240,6 +242,8 @@ const mapStateToProps = ({ distributor, auth }) => ({
     userId: auth.userDetails.userId,
     showRepairReasonModal: distributor.showRepairReasonModal,
     showPaymentHistoryModal: distributor.showPaymentHistoryModal,
+    startingQcInStatus: distributor.startingQcInStatus,
+    startRepairingInStatus: distributor.startRepairingInStatus,
     distributorId: distributor.distributorDetailsByDistributorId.distributorId,
 });
 
