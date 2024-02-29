@@ -2004,6 +2004,7 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
         title: 'Repair facility has been choosen',
         showConfirmButton: true,
       })
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,

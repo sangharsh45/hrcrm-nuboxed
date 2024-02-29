@@ -75,7 +75,7 @@ function LocationOrderForm(props) {
                                     options={Array.isArray(locationsName) ? locationsName : []}
                                 />
                             </div>
-                            <div class="flex justify-end">
+                            <div class="flex justify-end mt-5">
                                 <Button type="primary" htmlType="submit">
                                     Submit
                                 </Button>
