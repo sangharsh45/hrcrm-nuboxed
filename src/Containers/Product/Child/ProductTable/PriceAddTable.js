@@ -233,8 +233,8 @@ useEffect(() => {
       key: String(data.length + 1),
       currencyId: '',
       price: '',
-      level2: '',
-      level3: '',
+      priceB2C: '',
+      vat: '',
      
 
     };
@@ -259,13 +259,13 @@ useEffect(() => {
     console.log(key)
     const targetRow = data.find((row) => row.key === key);
     if (targetRow) {
-      const { price, level2, level3, currency_id,skillLevelLinkId } = targetRow;
-      console.log(`Skill ID: ${currency_id}, Level 1: ${price}, Level 2: ${level2}, Level 3: ${level3}`);
+      const { price, priceB2C, vat, currency_id,skillLevelLinkId } = targetRow;
+      console.log(`Skill ID: ${currency_id}, Level 1: ${price}, Level 2: ${priceB2C}, Level 3: ${vat}`);
       const result = {
         currencyId: currency_id,
         price: price,
-              level2: level2,
-              level3: level3,
+              priceB2C: priceB2C,
+              vat: vat,
               skillLevelLinkId:skillLevelLinkId,
               productId:props.particularDiscountData.productId,
               userId:props.userId
@@ -333,8 +333,8 @@ useEffect(() => {
                     
   <Input
        className="w-32"
-        value={item.level2}
-        onChange={(e) => handleInputChange(e.target.value, item.key, 'level2')}
+        value={item.priceB2C}
+        onChange={(e) => handleInputChange(e.target.value, item.key, 'priceB2C')}
       />
                   </div>
   </div>
@@ -344,8 +344,8 @@ useEffect(() => {
       <div class=" text-xs text-cardBody font-semibold  font-poppins">
       <Input
        className="w-32"
-        value={item.level3}
-        onChange={(e) => handleInputChange(e.target.value, item.key, 'level3')}
+        value={item.vat}
+        onChange={(e) => handleInputChange(e.target.value, item.key, 'vat')}
       />
                   </div>
   </div>
@@ -391,7 +391,7 @@ useEffect(() => {
       
               {data.length ? data.map((item) => {
           return (
-<div key={item.procurId}>
+<div key={item.productCurrencyId}>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
     >
      
@@ -399,8 +399,8 @@ useEffect(() => {
     <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               <Select
           classNames="w-32"
-          value={item.currency_id}
-          onChange={(value) => handleSelectChange(value, item.key, 'currency_id')}
+          value={item.currencyName}
+          onChange={(value) => handleSelectChange(value, item.key, 'currencyName')}
         >
           {props.currencies.map((s) => (
             <Option key={s.currency_id} value={s.currency_id}>
@@ -430,8 +430,8 @@ useEffect(() => {
                       
     <Input
          className="w-32"
-          value={item.level2}
-          onChange={(e) => handleInputChange(e.target.value, item.key, 'level2')}
+          value={item.priceB2C}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'priceB2C')}
         />
                     </div>
     </div>
@@ -441,8 +441,8 @@ useEffect(() => {
         <div class=" text-xs text-cardBody font-semibold  font-poppins">
         <Input
          className="w-32"
-          value={item.level3}
-          onChange={(e) => handleInputChange(e.target.value, item.key, 'level3')}
+          value={item.vat}
+          onChange={(e) => handleInputChange(e.target.value, item.key, 'vat')}
         />
                     </div>
     </div>
