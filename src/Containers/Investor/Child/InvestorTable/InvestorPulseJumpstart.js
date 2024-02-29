@@ -3,7 +3,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
-// import {getProspectWeightedValue,getProspectOppValue,getProspectPipeLineValue,getProspectContactValue} from "../../CustomerAction"
+ import {
+  getInvestorWeightedValue,
+  getWonInvestorWeightedValue,
+  getInvestorOppValue,
+  getWonInvestorOppValue,
+  getInvestorPipeLineValue,
+  getWonInvestorPipeLineValue,
+  getInvestorContactValue
+} from "../../InvestorAction"
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 class InvestorPulseJumpStart extends React.Component{
   constructor() {
@@ -24,21 +32,24 @@ class InvestorPulseJumpStart extends React.Component{
     endDate
   };
 }
-// componentDidMount() {
-//   // const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
-//   // const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-//   this.props.getProspectWeightedValue(this.props.customer.customerId)
-//     this.props.getProspectOppValue(this.props.customer.customerId);    
-//     this.props.getProspectContactValue(this.props.customer.customerId);
-//     this.props.getProspectPipeLineValue(this.props.customer.customerId);
-//   // console.log(`Start Date: ${this.state.startDate.format("ll")}`);
-//   // console.log(`End Date: ${this.state.endDate.format("ll")}`);
-// }
+componentDidMount() {
+  // const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+  // const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
+   this.props.getInvestorWeightedValue(this.props.RowData.investorId)
+    this.props.getInvestorOppValue(this.props.RowData.investorId); 
+    this.props.getWonInvestorWeightedValue(this.props.RowData.investorId);   
+     this.props.getInvestorContactValue(this.props.RowData.investorId);
+     this.props.getInvestorPipeLineValue(this.props.RowData.investorId);
+     this.props.getWonInvestorPipeLineValue(this.props.RowData.investorId);
+     this.props.getWonInvestorOppValue(this.props.RowData.investorId);
+  // console.log(`Start Date: ${this.state.startDate.format("ll")}`);
+  // console.log(`End Date: ${this.state.endDate.format("ll")}`);
+}
 
 render() {
-  const weightedValue = `${this.props.WeightedValue.weightedValue} ${this.props.WeightedValue.tradeCurrency}`;
-  const pipeLineValue = `${this.props.pipelineValue.pipeLineValue} ${this.props.pipelineValue.tradeCurrency}`;
-  const OpportunityValue = `${this.props.OppValue.pipeLineValue} ${this.props.WeightedValue.tradeCurrency}`
+   const weightedValue = `${this.props.InvWeightedValue.weightedValue}`;
+   const pipeLineValue = `${this.props.InvestorPipelineValue.pipeLineValue} ${this.props.InvestorPipelineValue.tradeCurrency}`;
+ 
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
@@ -47,6 +58,7 @@ render() {
   console.log(startDate)
   console.log(this.state.endDate.format("YYYY MM DD"))
   return(
+    <>
     <div class=" flex flex-row w-full" >
     <div class="flex w-full" >
         
@@ -59,10 +71,10 @@ render() {
               />
             }
             value={
-              this.props.OppValue.CustomerOppertunityDetails
+              this.props.InvestOppValue.opportunity
 
             }
-            isLoading={this.props.fetchingOppValue} 
+            isLoading={this.props.fetchingInvestorOppValue} 
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
           />
@@ -81,7 +93,7 @@ render() {
               pipeLineValue
 
             }
-            isLoading={this.props.fetchingPipelineValue} 
+             isLoading={this.props.fetchingInvPipelineValue} 
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
           />
@@ -99,7 +111,7 @@ render() {
               weightedValue
 
             }
-            isLoading={this.props.fetchingWeightedValue} 
+            isLoading={this.props.fetchingINVWeightedValue} 
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
             
@@ -114,15 +126,17 @@ render() {
             }
 
             value={
-              this.props.contactValue.CustomerContactDetails
+              this.props.InvcontactValue.contact
 
             }
-            isLoading={this.props.fetchingContactValue} 
-            //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+            isLoading={this.props.fetchingInvContactValue} 
+            // //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
             
           />
-           
+
+
+       
 
         </div>
 
@@ -137,26 +151,111 @@ render() {
           <JumpStartBox noProgress title="Total Visitors" bgColor="#8791a1" />
         </FlexContainer> */}
       </div>
+        <div class=" flex flex-row w-full mt-4" >
+        <div class="flex w-full" >
+            
+            <JumpStartBox
+                noProgress
+                title={
+                  <FormattedMessage
+                    id="app.opportunities"
+                    defaultMessage="Won Opportunities"
+                  />
+                }
+                value={
+                  this.props.WonInvestOpp.InvestorOppertunityDetails
+    
+                }
+                isLoading={this.props.fetchingWonInvestorOppValue} 
+                //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+              
+              />
+      
+           
+              <JumpStartBox1
+                noProgress
+                title={
+                  <FormattedMessage
+                    id="app.pipeLineValue"
+                    defaultMessage="Won Pipe line value"
+                  />
+                }
+              
+                value={
+                  this.props.WonInvestorPipeline.wonPipeLineValue
+    
+                }
+                 isLoading={this.props.fetchingWonInvPipelineValue} 
+                //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+              
+              />
+    
+              <JumpStartBox2
+                noProgress
+                // title="Open Tasks"
+                title={
+                  <FormattedMessage
+                    id="app.weightedValue"
+                    defaultMessage="Won Weighted Value"
+                  />
+                }
+                // value={
+                //   this.props.WonInvWeighted.
+    
+                // }
+                isLoading={this.props.fetchingWonINVWeightedValue} 
+                //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+              
+                
+              />
+      
+         
+               
+    
+            </div>
+    
+            {/* <FlexContainer>
+              <JumpStartBox noProgress title="All Products" bgColor="#8791a1" />
+              <JumpStartBox noProgress title="Quantity On Hand" bgColor="#8791a1" />
+              <JumpStartBox
+                noProgress
+                title="Out of Stock Products"
+                bgColor="#8791a1"
+              />
+              <JumpStartBox noProgress title="Total Visitors" bgColor="#8791a1" />
+            </FlexContainer> */}
+          </div>
+          </>
     
   ); 
 }
 }
-const mapStateToProps = ({ customer,auth }) => ({
-  contactValue:customer.contactValue,
-  fetchingContactValue:customer.fetchingContactValue,
-  pipelineValue:customer.pipelineValue,
-  fetchingPipelineValue:customer.fetchingPipelineValue,
-  OppValue:customer.OppValue,
-  fetchingOppValue:customer.fetchingOppValue,
-  WeightedValue:customer.WeightedValue,
-  fetchingWeightedValue:customer.fetchingWeightedValue
+const mapStateToProps = ({ investor,auth }) => ({
+
+  WonInvWeighted:investor.WonInvWeighted,
+  fetchingWonINVWeightedValue:investor.fetchingWonINVWeightedValue,
+  WonInvestorPipeline:investor.WonInvestorPipeline,
+  fetchingWonInvPipelineValue:investor.fetchingWonInvPipelineValue,
+  WonInvestOpp:investor.WonInvestOpp,
+  fetchingWonInvestorOppValue:investor.fetchingWonInvestorOppValue,
+  InvcontactValue:investor.InvcontactValue,
+  fetchingInvContactValue:investor.fetchingInvContactValue,
+  InvestorPipelineValue:investor.InvestorPipelineValue,
+  fetchingInvPipelineValue:investor.fetchingInvPipelineValue,
+  InvestOppValue:investor.InvestOppValue,
+  fetchingInvestorOppValue:investor.fetchingInvestorOppValue,
+  InvWeightedValue:investor.InvWeightedValue,
+  fetchingINVWeightedValue:investor.fetchingINVWeightedValue
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-//   getProspectWeightedValue,
-//   getProspectOppValue,
-//   getProspectPipeLineValue,
-//   getProspectContactValue
+  getInvestorWeightedValue,
+  getWonInvestorWeightedValue,
+getInvestorOppValue,
+getWonInvestorOppValue,
+getInvestorPipeLineValue, 
+getWonInvestorPipeLineValue, 
+getInvestorContactValue
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvestorPulseJumpStart);

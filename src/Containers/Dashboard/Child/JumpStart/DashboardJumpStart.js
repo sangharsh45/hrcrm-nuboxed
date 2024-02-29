@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import {getleaveLeftSideDetails} from "../../../Leave/LeavesAction"
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
-import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
+import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour,} from "../../DashboardAction";
 
 class DashboardJumpStart extends React.Component{
   constructor() {
@@ -61,6 +62,7 @@ componentDidMount() {
   const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
   this.props.getTasklist(this.props.userId)
    this.props.getavgHour(this.props.userId, startDate, endDate);
+   this.props.getleaveLeftSideDetails(this.props.userId);
   console.log(`Start Date: ${this.state.startDate.format("ll")}`);
   console.log(`End Date: ${this.state.endDate.format("ll")}`);
 }
@@ -89,11 +91,12 @@ render() {
                 defaultMessage="Leave Balance"
               />
             }
-            value={
-              this.props.user.department === "Recruiter"
-                ? this.props.showDatelist.openRequirement
-                : this.props.showSalesDatelist.openRequirement
-            }
+            value={this.props.leaveFetching.leaveBalance}
+            // value={
+            //   this.props.user.department === "Recruiter"
+            //     ? this.props.showDatelist.openRequirement
+            //     : this.props.showSalesDatelist.openRequirement
+            // }
             isLoading={
               this.props.user.department === "Recruiter"
                 ? this.props.fetchingDatewiseReport
@@ -238,9 +241,10 @@ render() {
   ); 
 }
 }
-const mapStateToProps = ({ dashboard,auth }) => ({
+const mapStateToProps = ({ dashboard,auth ,leave}) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
+  leaveFetching:leave.leaveFetching,
   showDatelist:dashboard.showDatelist,
   orgId:auth.userDetails.organizationId,
   showSalesDatelist:dashboard.showSalesDatelist,
@@ -261,7 +265,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getDateWiseList,
   getSalesDateWiseList,
   getTasklist,
-  getavgHour
+  getavgHour,
+  getleaveLeftSideDetails
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardJumpStart);

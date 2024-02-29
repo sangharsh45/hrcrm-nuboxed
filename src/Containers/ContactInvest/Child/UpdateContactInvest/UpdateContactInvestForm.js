@@ -312,6 +312,9 @@ class UpdateContactInvestForm extends Component {
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${contactiData.countryDialCode}`,
+                        }}
                         isColumn
                         // width={"100%"}
                         selectType="dialCode"

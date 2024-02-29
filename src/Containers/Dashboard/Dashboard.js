@@ -167,6 +167,12 @@ class Dashboard extends Component {
             
              :null
             }
+                  {this.state.activeButton==="Customer"&&
+       <FunnelTab/>
+             }
+                  {/* {this.state.activeButton==="Customer"&&
+       <PieChart/>
+             } */}
              {this.state.activeButton==="Tasks"&&
        <GantChartTab/>
              }
@@ -184,7 +190,9 @@ class Dashboard extends Component {
       </div>
 
          <div class=" flex justify-between" >
-      
+                {/* {this.state.activeButton==="Customer"&&
+       <PieChart/>
+             } */}
          
                   {this.state.activeButton==="RecruitPro"&&
       <DashboardCustomerTab

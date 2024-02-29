@@ -260,7 +260,7 @@ function InvesterForm(props) {
                           />
                         }
                         defaultValue={{
-                          value: user.countryDialCode,
+                          label:`+${user.countryDialCode}`,
                         }}
                         // value={values.countryDialCode}
                         isColumn
