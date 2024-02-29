@@ -6,6 +6,12 @@ import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { addLocationInOrder, getLocationList } from "../../AccountAction"
+import * as Yup from "yup";
+
+const FormSchema = Yup.object().shape({
+    locationId: Yup.string().required("Input needed!"),
+
+})
 
 function LocationOrderForm(props) {
     useEffect(() => {
@@ -34,6 +40,7 @@ function LocationOrderForm(props) {
                     userId: props.userId,
                     orderPhoneId: props.particularRowData.orderId
                 }}
+                validationSchema={FormSchema}
                 onSubmit={(values, { resetForm }) => {
                     //debugger;
                     console.log(values);
@@ -42,7 +49,7 @@ function LocationOrderForm(props) {
                         transferInd: 1,
                     },
                         props.particularRowData.distributorId
-                 );
+                    );
                 }}
             >
                 {({

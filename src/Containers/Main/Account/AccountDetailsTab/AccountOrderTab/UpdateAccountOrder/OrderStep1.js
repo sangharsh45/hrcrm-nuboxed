@@ -14,6 +14,7 @@ import { updateOrderStep1, getContactDistributorList } from '../../../AccountAct
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
 import { FormattedMessage } from 'react-intl';
+import dayjs from "dayjs";
 
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
@@ -39,17 +40,18 @@ function OrderStep1(props) {
     }
     const currencyOption = props.currencies.map((item) => {
         return {
-            label: item.currencyName || "",
-            value: item.currencyId,
+            label: item.currency_name || "",
+            value: item.currency_id,
         };
     });
     return (
         <Formik
             initialValues={{
-                availabilityDate: props.setEdittingOrder.availabilityDate || "",
-                // deliveryDate: props.setEdittingOrder.deliveryDate || "",
+                availabilityDate: dayjs(props.setEdittingOrder.availabilityDate) || "",
+                deliveryDate: dayjs(props.setEdittingOrder.deliveryDate) || "",
                 contactPersonId: props.setEdittingOrder.contactPersonId || "",
                 paymentInTerms: props.setEdittingOrder.paymentInTerms || "",
+                customPayment: props.setEdittingOrder.customPayment || "",
                 comments: props.setEdittingOrder.comments || "",
                 awbNo: props.setEdittingOrder.awbNo || "",
                 deliverToBusinessInd: "",
@@ -107,6 +109,7 @@ function OrderStep1(props) {
                     props.updateOrderStep1({
                         ...values,
                         priority: priority || "",
+                        paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
                     },
                         props.setEdittingOrder.orderId,
                         props.setEdittingOrder.distributorId);
@@ -116,15 +119,13 @@ function OrderStep1(props) {
             }}
         >
             {({ values, handleChange }) => (
-                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                <div class="overflow-y-auto h-[28rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
-                            <StyledLabel><h3>
-                                <FormattedMessage
-                                    id="app.pickupaddress"
-                                    defaultMessage="Pickup Address"
-                                />
-                            </h3></StyledLabel>
+                            <StyledLabel><h3> <FormattedMessage
+                                id="app.pickupaddress"
+                                defaultMessage="Pickup Address"
+                            /></h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -185,26 +186,36 @@ function OrderStep1(props) {
                                 />
                             </div>
                         </div> */}
+
                             <div class="justify-between flex mt-3">
-                                <div class="w-[30%]">
+                                <div class="w-[22%]">
                                     <Field
                                         name="paymentInTerms"
-                                        label={<FormattedMessage
-                                            id="app.paymenttermsindays"
-                                            defaultMessage="Payment Terms (in Days)"
-                                        />}
+                                        label="Payment Terms (in Days)"
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
-                                        options={["7", "15", "30", "45", "60", "75", "90"]}
+                                        options={["7", "15", "21", "30", "45", "60", "75", "90", "Custom"]}
                                     />
                                 </div>
-                                <div class="w-[30%]">
+                                {values.paymentInTerms === "Custom" && <div class="w-[22%]">
                                     <Field
-                                        label={<FormattedMessage
-                                            id="app.airwaybill"
-                                            defaultMessage="Air Way Bill"
-                                        />}
+                                        label={
+                                            <FormattedMessage
+                                                id="app.Custom Payment"
+                                                defaultMessage="Custom Payment"
+                                            />
+                                        }
+                                        name="customPayment"
+                                        component={InputComponent}
+                                        inlineLabel
+                                        width={"100%"}
+                                        isColumn
+                                    />
+                                </div>}
+                                <div class="w-[22%]">
+                                    <Field
+                                        label="Air Way Bill"
                                         name="awbNo"
                                         component={InputComponent}
                                         inlineLabel
@@ -212,13 +223,9 @@ function OrderStep1(props) {
                                         isColumn
                                     />
                                 </div>
-                                <div class="w-[30%]">
+                                <div class="w-[22%]">
                                     <Field
-                                        label={<FormattedMessage
-                                            id="app.contactperson"
-                                            defaultMessage="Contact Person"
-                                        />}
-
+                                        label="Contact Person"
                                         name="contactPersonId"
                                         placeholder="Value"
                                         component={SelectComponent}
@@ -229,15 +236,13 @@ function OrderStep1(props) {
                                     />
                                 </div>
                             </div>
+
                             <div class="justify-between flex mt-3">
                                 <div class="w-[22%]">
                                     <Field
                                         width={"100%"}
                                         name="advancePayment"
-                                        label={<FormattedMessage
-                                            id="app.advancepayment"
-                                            defaultMessage="Advance Payment(%)"
-                                        />}
+                                        label="Advance Payment(%)"
                                         isColumn
                                         inlineLabel
                                         component={InputComponent}
@@ -246,10 +251,7 @@ function OrderStep1(props) {
                                 <div class="w-[22%]">
                                     <Field
                                         name="orderCurrencyId"
-                                        label={<FormattedMessage
-                                            id="app.currency"
-                                            defaultMessage="Currency"
-                                        />}
+                                        label="Currency"
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
@@ -259,19 +261,42 @@ function OrderStep1(props) {
                                 <div class="w-[22%]">
                                     <Field
                                         name="deliveryDate"
-                                        label={<FormattedMessage
-                                            id="app.deliverydate"
-                                            defaultMessage="Delivery Date"
-                                        />}
+                                        label="Delivery Date "
                                         isColumn
                                         inlineLabel
                                         width={"100%"}
                                         component={DatePicker}
                                         value={values.deliveryDate}
+
                                     />
                                 </div>
 
                                 <div class="w-[22%]">
+                                    <Field
+                                        name="availabilityDate"
+                                        label="Pickup Date "
+                                        isColumn
+                                        inlineLabel
+                                        width={"100%"}
+                                        component={DatePicker}
+                                    // value={values.availabilityDate}
+
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class=" mt-3 flex justify-between">
+                                <div class="w-[40%]">
+                                    <Field
+                                        name="comments"
+                                        label="Notes"
+                                        width={"100%"}
+                                        isColumn
+                                        component={TextareaComponent}
+                                    />
+                                </div>
+                                <div class="w-[40%]  ml-8 mt-8">
                                     <StyledLabel><FormattedMessage
                                         id="app.priority"
                                         defaultMessage="Priority"
@@ -283,7 +308,7 @@ function OrderStep1(props) {
                                                 defaultMessage="High"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("High")}
@@ -304,7 +329,7 @@ function OrderStep1(props) {
                                                 defaultMessage="Medium"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Medium")}
@@ -325,7 +350,7 @@ function OrderStep1(props) {
                                                 defaultMessage="Low"
                                             />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Low")}
@@ -343,26 +368,11 @@ function OrderStep1(props) {
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class=" mt-3 justify-between flex">
-                                <div class="w-[47%]">
-                                    <Field
-                                        name="comments"
-                                        label={<FormattedMessage
-                                            id="app.comment"
-                                            defaultMessage="Comment"
-                                        />}
-                                        width={"100%"}
-                                        isColumn
-                                        component={TextareaComponent}
-                                    />
-                                </div>
-
-                                <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
+                                <div class="w-[20%]  mt-[65px] mr-[100px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
                                         className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
                                         htmlType="Submit"
+                                        loading={props.updatingOrderStep1}
                                     >
                                         <FormattedMessage
                                             id="app.save"
@@ -370,6 +380,7 @@ function OrderStep1(props) {
                                         />
 
                                     </Button>
+
                                 </div>
                             </div>
                         </div>
@@ -385,7 +396,8 @@ const mapStateToProps = ({ auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
-    setEdittingOrder: distributor.setEdittingOrder
+    setEdittingOrder: distributor.setEdittingOrder,
+    updatingOrderStep1: distributor.updatingOrderStep1
 });
 
 const mapDispatchToProps = (dispatch) =>

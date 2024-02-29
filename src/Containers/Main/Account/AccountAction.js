@@ -324,15 +324,17 @@ export const addOrderForm = (customer, distributorId) => (dispatch, getState) =>
       },
     })
     .then((res) => {
-      console.log(res);
-
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Created',
+        showConfirmButton: true,
+      })
       dispatch(getOrderRecords(distributorId));
       dispatch({
         type: types.ADD_ORDER_SUCCESS,
         payload: res.data,
       });
-      // cb && cb();
-      message.success("Order creation step-1 completed !!")
+
     })
     .catch((err) => {
       console.log(err);
@@ -879,11 +881,15 @@ export const addCarDetails = (customer, id, cb) => (dispatch, getState) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Phone list added',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.ADD_CAR_SUCCESS,
         payload: res.data,
       });
-      cb && cb();
     })
     .catch((err) => {
       console.log(err);
@@ -1993,15 +1999,15 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
-      // dispatch(getDistributorOrderByDistributorId(distributorId,0))
-      window.location.reload()
+      Swal.fire({
+        icon: 'success',
+        title: 'Repair facility has been choosen',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
       });
-
-      message.success("Order has moved to inventory !!")
     })
     .catch((err) => {
       console.log(err);
@@ -2248,7 +2254,7 @@ export const updateQCStatus = (data, phoneId, orderPhoneId, cb) => (dispatch) =>
     });
 };
 
-export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
+export const startQCStatus = (data) => (dispatch) => {
   // debugger;
   dispatch({ type: types.START_QC_STATUS_REQUEST });
   axios
@@ -2258,20 +2264,22 @@ export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'QC Started',
+        showConfirmButton: true,
+      })
+
       dispatch({
         type: types.START_QC_STATUS_SUCCESS,
         payload: res.data,
       });
-      cb && cb();
-      message.success("QC started !")
     })
     .catch((err) => {
       console.log(err);
       dispatch({
         type: types.START_QC_STATUS_FAILURE,
       });
-      cb && cb();
     });
 };
 export const startRepairInStatus = (data, id) => (dispatch) => {
@@ -2284,7 +2292,12 @@ export const startRepairInStatus = (data, id) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Repair Started',
+        showConfirmButton: true,
+      })
+
       dispatch(getDistributorOrderByDistributorId(id, 0));
       dispatch({
         type: types.START_REPAIR_IN_STATUS_SUCCESS,
@@ -2776,8 +2789,11 @@ export const updateOrderStep1 = (data, orderPhoneId) => (
         },
       })
     .then((res) => {
-      console.log(res);
-      // dispatch(getDistributorsByUserId(userId));
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Details Updated',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.UPDATE_ORDER_STEP1_SUCCESS,
         payload: res.data,
@@ -2819,7 +2835,7 @@ export const updateOrderPayment = (data, paymentId) => (
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Successfully',
+        title: 'Order Payment Updated Successfully',
         showConfirmButton: true,
       })
     })

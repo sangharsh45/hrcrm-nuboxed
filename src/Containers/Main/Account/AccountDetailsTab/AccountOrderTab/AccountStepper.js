@@ -91,7 +91,7 @@ class AccountStepper extends Component {
                                 {current > 1 ? null : (
                                     <>
                                         <Button
-                                            style={{ marginRight: "3rem", marginTop: "65px" }}
+                                            style={{ marginRight: "3rem", marginTop: "70px" }}
                                             className=" w-16 absolute top-3/4 right-0"
                                             type="primary"
                                             onClick={() => this.next()}

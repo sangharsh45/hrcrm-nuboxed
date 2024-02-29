@@ -16,7 +16,7 @@ function OrderStep2(props) {
         <>
             <Formik
                 initialValues={{
-                    orderPhoneId: props.orderDetailsId,
+                    orderPhoneId: props.orderId,
                     excelId: "",
                     userId: props.userId,
                     distributorId: props.distributorId,
@@ -94,7 +94,6 @@ function OrderStep2(props) {
 }
 const mapStateToProps = ({ auth, distributor }) => ({
     userId: auth.userDetails.userId,
-    orderDetailsId: distributor.orderDetailsId,
     addingCar: distributor.addingCar
 });
 

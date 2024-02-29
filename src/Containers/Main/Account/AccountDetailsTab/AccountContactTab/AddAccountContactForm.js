@@ -8,15 +8,17 @@ import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import Upload from "../../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { addContactDistributor } from "../../AccountAction";
 import { getDesignations } from "../../../../Settings/Designation/DesignationAction"
 import { getDepartments } from "../../../../Settings/Department/DepartmentAction"
 import { FormattedMessage } from "react-intl";
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const DistributorSchema = Yup.object().shape({
     firstName: Yup.string().required("Input required"),
+    mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(8, "Minimum 8 digits").max(10, "Number is too long"),
     emailId: Yup.string()
         .email("Enter a valid Email")
         .required("Input needed!"),
@@ -37,13 +39,6 @@ class AddAccountContactForm extends Component {
             return {
                 label: item.designationType || "",
                 value: item.designationTypeId,
-            };
-        });
-
-        const department = this.props.departments.map((item) => {
-            return {
-                label: item.departmentName || "",
-                value: item.departmentId,
             };
         });
 
@@ -100,18 +95,13 @@ class AddAccountContactForm extends Component {
                 >
                     {({
                         values,
-                        errors,
-                        touched,
-                        isSubmitting,
-                        setFieldValue,
-                        setFieldTouched,
                     }) => (
                         <Form class="form-background">
                             <div class="flex justify-between">
                                 <div class="h-full w-[45%]">
                                     <div class="flex justify-between mt-3">
                                         <div class="w-[40%]">
-                                            <Field name="imageId" component={Upload} />
+                                            <FastField name="imageId" component={PostImageUpld} />
                                         </div>
                                         <div class="w-[60%]">
 
