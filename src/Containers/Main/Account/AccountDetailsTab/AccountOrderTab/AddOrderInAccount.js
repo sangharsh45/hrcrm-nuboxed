@@ -50,7 +50,7 @@ function AddOrderInAccount(props) {
                 deliveryDate: "",
                 contactPersonId: "",
                 paymentInTerms: "",
-                customPayment: "",
+                // customPayment: "",
                 comments: "",
                 awbNo: "",
                 orderCurrencyId: "",
@@ -101,7 +101,7 @@ function AddOrderInAccount(props) {
                     props.addOrderForm({
                         ...values,
                         priority: priority || "",
-                        paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
+                        // paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
 
                     }, props.distributorId);
                 } else {
@@ -189,7 +189,7 @@ function AddOrderInAccount(props) {
                                         options={["7", "15", "21", "30", "45", "60", "75", "90", "Custom"]}
                                     />
                                 </div>
-                                {values.paymentInTerms === "Custom" && <div class="w-[22%]">
+                                {/* {values.paymentInTerms === "Custom" && <div class="w-[22%]">
                                     <Field
                                         label={
                                             <FormattedMessage
@@ -203,7 +203,7 @@ function AddOrderInAccount(props) {
                                         width={"100%"}
                                         isColumn
                                     />
-                                </div>}
+                                </div>} */}
                                 <div class="w-[22%]">
                                     <Field
                                         label="Air Way Bill"
