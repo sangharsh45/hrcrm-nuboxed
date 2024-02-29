@@ -33,7 +33,7 @@ const StatusOfOrder = (props) => (
                     </>
                 },
                 {
-                    title: 'Advance Payment',
+                    title: 'Collections',
                     status: <>
                         {props.particularRowData.qcStartInd === 0 ? 'wait'
                             : props.particularRowData.qcStartInd === 1 &&
@@ -43,18 +43,28 @@ const StatusOfOrder = (props) => (
                         <>
                             {
                                 props.particularRowData.qcStartInd === 0 ?
-                                    <Button
-                                        loading={props.startingQcInStatus}
-                                        type='primary'
-                                        onClick={() => props.startQCStatus({
-                                            orderPhoneId: props.particularRowData.orderId || "",
-                                            qcStartInd: 1,
-                                            qcStartUserId: props.userId
-                                        },
-                                            props.distributorId
-                                        )}
-                                    >
-                                        Approve QC     </Button>
+                                    <div className=' flex justify-around w-[38rem]'>
+                                        <Button
+                                            type='primary'
+                                        >
+                                            Receive Payment
+                                        </Button>
+                                        <Button
+                                            loading={props.startingQcInStatus}
+                                            type='primary'
+                                            onClick={() => props.startQCStatus({
+                                                orderPhoneId: props.particularRowData.orderId || "",
+                                                qcStartInd: 1,
+                                                qcStartUserId: props.userId
+                                            },
+                                                props.distributorId
+                                            )}
+                                        >
+                                            Approve QC
+                                        </Button>
+                                        <b>Advance as per Order - {props.particularRowData.advancePayment} % </b>
+                                        <b>Received - {props.particularRowData.receivePayment || 0} % </b>
+                                    </div>
                                     : <b> QC approved on {moment(props.particularRowData.qcStartDate).format("DD-MM-YYYY")} By {props.particularRowData.qcStartUser}</b>
                             }
                         </>
@@ -64,7 +74,7 @@ const StatusOfOrder = (props) => (
                     status: 'progress',
                     description: <>
                         {props.particularRowData.transferInd !== 0 &&
-                            <b>On {moment(props.particularRowData.orderPickUpDate).format("DD-MM-YYYY")} By {props.particularRowData.orderPickUpUser}</b>
+                            <b>By {props.particularRowData.orderPickUpUser} On {moment(props.particularRowData.orderPickUpDate).format("DD-MM-YYYY")} </b>
                         }
                     </>
                 },
@@ -75,9 +85,13 @@ const StatusOfOrder = (props) => (
                     description: <>
                         {/* {props.particularRowData.transferInd === 2 && */}
                         <b>Arrived at {props.particularRowData.locationDetailsViewDTO
-                            && props.particularRowData.locationDetailsViewDTO.name || ""} |
-                            Inspected by {props.particularRowData.stopInspectionUserName} on
-                            &nbsp;{moment(props.particularRowData.stopInspectionDate).format("DD-MM-YYYY")}
+                            && props.particularRowData.locationDetailsViewDTO.name || ""} on
+                            &nbsp;{moment(props.particularRowData.inventoryReceiveDate).format("DD-MM-YYYY")},
+                            Received by {props.particularRowData.inventoryReceiveUser} |
+                            Inspection started by {props.particularRowData.startInspectionUserName} on
+                            &nbsp;{moment(props.particularRowData.startInspectionDate).format("DD-MM-YYYY")} |
+                            Inspection completed by {props.particularRowData.stopInspectionUserName} on
+                            &nbsp;{moment(props.particularRowData.stoptInspectionDate).format("DD-MM-YYYY")}
                         </b>
                         {/* } */}
                     </>
