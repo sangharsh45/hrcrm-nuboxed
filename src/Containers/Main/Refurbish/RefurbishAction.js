@@ -833,7 +833,7 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
     .then((res) => {
       Swal.fire({
         icon: 'success',
-        title: 'Repair Status Updated Successfully',
+        title: 'Status Updated ',
         showConfirmButton: true,
       })
       dispatch(getRepairPhoneByUser(orderPhoneId, userId))
