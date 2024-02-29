@@ -181,8 +181,8 @@ class ContactInvestForm extends Component {
             firstName: "",
             middleName: "",
             lastName: "",
-            countryDialCode: "",
-            countryDialCode1: this.props.user.countryDialCode,
+            countryDialCode: this.props.user.countryDialCode,
+            countryDialCode1: this.props.user.countryDialCode1,
             phoneNumber: "",
             mobileNumber: "",
             emailId: "",
@@ -334,25 +334,22 @@ class ContactInvestForm extends Component {
                   </div>               
                   <div class=" flex justify-between">
                     <div class=" w-2/6">
-                    <Field
+                    <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${user.countryDialCode}`,
+                        }}
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(countryNameOption)
-                            ? countryNameOption
-                            : []
-                        }
-                        // value={values.countryDialCode1}
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
                       />
                     </div>
@@ -399,6 +396,9 @@ class ContactInvestForm extends Component {
                              defaultMessage="Dial Code"
                            />
                          }
+                         defaultValue={{
+                          label:`+${user.countryDialCode1}`,
+                        }}
                          isColumn
                          component={SelectComponent}
                          options={

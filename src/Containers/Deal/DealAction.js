@@ -780,3 +780,32 @@ export const removeDealDocuments = ( documentId) => (dispatch) => {
       });
     });
 };
+
+
+export const setContactRoleForDeals = (
+  data,
+  contactId,
+  
+ 
+) => (dispatch) => {
+  //console.log(opportunityId, contactId, role);
+  console.log(sessionStorage.getItem("token"));
+  axios
+    .put(
+      `${base_url}/opportunity/update/contact/Role/${contactId}`,data,
+      {
+      
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
+};

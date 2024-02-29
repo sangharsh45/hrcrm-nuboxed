@@ -128,11 +128,12 @@ const {
     return (
       <>
         <Formik
-          enableReinitialize
+          // enableReinitialize
           initialValues={
-            isEditing
-              ? prefillEvent
-              : {
+            // isEditing
+            //   ? prefillEvent
+            //   :
+             {
                   eventType: "",
                   eventTypeId: "",
                   eventSubject: "",

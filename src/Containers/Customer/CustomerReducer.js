@@ -48,6 +48,10 @@ const initialState = {
   fetchingAllCustomersDataError: false,
   allCustomerData:[],
 
+  fetchingWeightedValue: false,
+  fetchingWeightedValueError: false,
+  WeightedValue: {},
+
   fetchingAllCustomerByPosition:false,
   fetchingAllCustomerByPosition:false,
 
@@ -177,6 +181,14 @@ const initialState = {
   fetchingCustomerDetailsByIdError: false,
   customer: {},
 
+  fetchingOppValue: false,
+  fetchingOppValueError: false,
+  OppValue: {},
+
+  fetchingPipelineValue: false,
+  fetchingPipelineValueError: false,
+  pipelineValue: {},
+
   addingLocationDetails:false,
 
   documentUploadModal: false,
@@ -240,6 +252,10 @@ const initialState = {
   fetchingCommercialsByCustomer: false,
   fetchingCommercialsByCustomerError: false,
   commercialsByCustomerId: [],
+
+  fetchingContactValue: false,
+  fetchingContactValueError: false,
+  contactValue: {},
 
   linkedProjectTask:false,
   linkedProjectTaskError:false,
@@ -1771,6 +1787,62 @@ export const customerReducer = (state = initialState, action) => {
                                                                   customerContractStatus: false,
                                                                   customerContractStatusError: true,
                                                                 };
+
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_REQUEST:
+                                                                  return { ...state, fetchingWeightedValue: true, fetchingWeightedValueError: false };
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_SUCCESS:
+                                                                  return {
+                                                                    ...state,
+                                                                    fetchingWeightedValue: false,
+                                                                    fetchingWeightedValueError: false,
+                                                                    WeightedValue: action.payload,
+                                                                  };
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_FAILURE:
+                                                                  return { ...state, fetchingWeightedValue: false, fetchingWeightedValueError: true };
+
+
+                                                                  case types.GET_PROSPECT_OPP_VALUE_REQUEST:
+                                                                    return { ...state, fetchingOppValue: true, fetchingOppValueError: false };
+                                                                  case types.GET_PROSPECT_OPP_VALUE_SUCCESS:
+                                                                    return {
+                                                                      ...state,
+                                                                      fetchingOppValue: false,
+                                                                      fetchingOppValueError: false,
+                                                                      OppValue: action.payload,
+                                                                    };
+                                                                  case types.GET_PROSPECT_OPP_VALUE_FAILURE:
+                                                                    return { ...state, fetchingOppValue: false, fetchingOppValueError: true };
+
+
+
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_REQUEST:
+                                                                      return { ...state, fetchingPipelineValue: true, fetchingPipelineValueError: false };
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_SUCCESS:
+                                                                      return {
+                                                                        ...state,
+                                                                        fetchingPipelineValue: false,
+                                                                        fetchingPipelineValueError: false,
+                                                                        pipelineValue: action.payload,
+                                                                      };
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_FAILURE:
+                                                                      return { ...state, fetchingPipelineValue: false, fetchingPipelineValueError: true };
+
+
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_REQUEST:
+                                                                        return { ...state, fetchingContactValue: true, fetchingContactValueError: false };
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_SUCCESS:
+                                                                        return {
+                                                                          ...state,
+                                                                          fetchingContactValue: false,
+                                                                          fetchingContactValueError: false,
+                                                                          contactValue: action.payload,
+                                                                        };
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_FAILURE:
+                                                                        return { ...state, fetchingContactValue: false, fetchingContactValueError: true };
+                                                                  
+                                                                
+                                                              
+                                                            
        default:
       return state;
   }
@@ -1787,6 +1859,7 @@ const newDateRange = (dateRange, newDate) =>
     }
   });
 
+  
 
 
 

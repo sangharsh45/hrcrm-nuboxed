@@ -18,6 +18,7 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { Listbox, } from '@headlessui/react'
+import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -223,23 +224,21 @@ function UpdatePitchForm (props) {
                     <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[32%]">
                   
-                      <Field
+                    <FastField
                         name="countryDialCode"
-                       
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
                             id="app.dialCode"
-                            defaultMessage="dialCode"
+                            defaultMessage="Dial Code"
                           />
                         }
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(dialCodeOption) ? dialCodeOption : []
-                        }
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
-                       />
+                      />
                       
                     </div>
                     <div class=" w-8/12">

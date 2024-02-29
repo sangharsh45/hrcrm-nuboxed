@@ -18,6 +18,7 @@ import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
+import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 const { Option } = Select;
 
 class UpdateEmployeeForm extends Component {
@@ -433,23 +434,21 @@ class UpdateEmployeeForm extends Component {
                     <div class="flex justify-between max-sm:flex-col">
                       <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk " >
                         <div class=" w-w47.5 max-sm:w-wk ">
-                          <Field
-                            name="countryDialCode"
-                            isColumnWithoutNoCreate
-                            //label="Mobile #"
-                            label={<FormattedMessage
-                              id="app.dialCode"
-                              defaultMessage="Dial Code"
-                            />}
-                            isColumn
-                            options={
-                              Array.isArray(dialCodeNameOption)
-                                ? dialCodeNameOption
-                                : []
-                            }
-                            component={SelectComponent}
-                            inlineLabel
+                        <FastField
+                        name="countryDialCode"
+                        isColumnWithoutNoCreate
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
                           />
+                        }
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
+                        inlineLabel
+                      />
                         </div>
                         <div class=" w-w47.5 max-sm:w-wk">
                           <Field
@@ -468,22 +467,21 @@ class UpdateEmployeeForm extends Component {
                       </div>
                       <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk" >
                         <div class="w-w47.5 max-sm:w-wk">
-                          <Field
-                            name="countryDialCode1"
-                            isColumnWithoutNoCreate
-                            label={<FormattedMessage
-                              id="app.countryDialCode1"
-                              defaultMessage="Dial Code"
-                            />}
-                            isColumn
-                            options={
-                              Array.isArray(dialCodeNameOption)
-                                ? dialCodeNameOption
-                                : []
-                            }
-                            component={SelectComponent}
-                            inlineLabel
+                        <FastField
+                        name="countryDialCode1"
+                        isColumnWithoutNoCreate
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
                           />
+                        }
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
+                        inlineLabel
+                      />
                         </div>
                         <div class="w-w47.5 max-sm:w-wk">
                           <Field

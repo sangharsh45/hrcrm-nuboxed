@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
+import {getProspectWeightedValue,getProspectOppValue,getProspectPipeLineValue,getProspectContactValue} from "../../CustomerAction"
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 class CustomerPulseJumpStart extends React.Component{
   constructor() {
@@ -23,10 +24,21 @@ class CustomerPulseJumpStart extends React.Component{
     endDate
   };
 }
-
+componentDidMount() {
+  // const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+  // const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
+  this.props.getProspectWeightedValue(this.props.customer.customerId)
+    this.props.getProspectOppValue(this.props.customer.customerId);    
+    this.props.getProspectContactValue(this.props.customer.customerId);
+    this.props.getProspectPipeLineValue(this.props.customer.customerId);
+  // console.log(`Start Date: ${this.state.startDate.format("ll")}`);
+  // console.log(`End Date: ${this.state.endDate.format("ll")}`);
+}
 
 render() {
-  const formattedDate = dayjs(this.props.dateOfJoining).format('YYYY-MM-DD'); // Format the date as per your requirement
+  const weightedValue = `${this.props.WeightedValue.weightedValue} ${this.props.WeightedValue.tradeCurrency}`;
+  const pipeLineValue = `${this.props.pipelineValue.pipeLineValue} ${this.props.pipelineValue.tradeCurrency}`;
+  const OpportunityValue = `${this.props.OppValue.pipeLineValue} ${this.props.WeightedValue.tradeCurrency}`
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
@@ -46,16 +58,13 @@ render() {
                 defaultMessage=" # Opportunities"
               />
             }
-            // value={
-            //   this.props.user.department === "Recruiter"
-            //     ? this.props.showDatelist.openRequirement
-            //     : this.props.showSalesDatelist.openRequirement
-            // }
-            // isLoading={
-            //   this.props.user.department === "Recruiter"
-            //     ? this.props.fetchingDatewiseReport
-            //     : this.props.fetchingSalesDatewiseReport
-            // }
+            value={
+              this.props.OppValue.CustomerOppertunityDetails
+
+            }
+            isLoading={this.props.fetchingOppValue} 
+            //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+          
           />
   
        
@@ -68,20 +77,15 @@ render() {
               />
             }
           
-            // isLoading={
-            //   this.props.user.department === "Recruiter"
-            //   ?this.props.fetchingDatewiseReport
-            //   :this.props.fetchingSalesDatewiseReport
-            // }
+            value={
+              pipeLineValue
+
+            }
+            isLoading={this.props.fetchingPipelineValue} 
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+          
           />
-          {/* <JumpStartBox
-            noProgress
-            title="Profiles Submitted"
-            bgColor="linear-gradient(270.23deg, #00A843 0.19%, #1FD071 99.8%)"
-            value={this.props.showDatelist.taggedProfile}
-            isLoading={this.props.fetchingDatewiseReport}
-          /> */}
+
           <JumpStartBox2
             noProgress
             // title="Open Tasks"
@@ -91,6 +95,11 @@ render() {
                 defaultMessage="Weighted Value"
               />
             }
+            value={
+              weightedValue
+
+            }
+            isLoading={this.props.fetchingWeightedValue} 
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
             
@@ -103,56 +112,18 @@ render() {
                 defaultMessage="#Contacts "
               />
             }
-            // title="Joining Date"
-           // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
-        //    value={formattedDate}
-            // value={this.props.showDatelist.onboarded}
-            // value={
-            //   this.props.dateOfJoining
 
-            //   // this.props.user.department === "Recruiter"
-            //   // ?this.props.showDatelist.onboarded
-            //   // :this.props.showSalesDatelist.onboarded
-            // }
-            
-            // isLoading={this.props.fetchingDatewiseReport}
+            value={
+              this.props.contactValue.CustomerContactDetails
+
+            }
+            isLoading={this.props.fetchingContactValue} 
+            //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           
             
           />
            
-           {/* <JumpStartBox
-            noProgress
-            title="DashBoard6"
-            bgColor="linear-gradient(269.97deg, #FFFFFF 0.02%, #000000 0.03%)"
-          /> */}
-          {/* <JumpStartBox
-                    // jumpstartClick={
-                    //   subscriptionType === "PROFESSIONALPLUS"
-                    //     ? () => this.props.handleLifetimeModal(true)
-                    //     : null
-                    // }
-                    // cursorData={
-                    //   subscriptionType === "PROFESSIONALPLUS" ? "pointer" : "default"
-                    // }
-                    noProgress
-                    currencyType={currencyType}
-                    title="Won"
-                    bgColor="#4cc9f0"
-                />
-                <JumpStartBox
-                    // jumpstartClick={
-                    //   subscriptionType === "PROFESSIONALPLUS"
-                    //     ? () => this.props.handleLifetimeModal(true)
-                    //     : null
-                    // }
-                    // cursorData={
-                    //   subscriptionType === "PROFESSIONALPLUS" ? "pointer" : "default"
-                    // }
-                    noProgress
-                    currencyType={currencyType}
-                    title="Customers Added"
-                    bgColor="#92defe"
-                /> */}
+
         </div>
 
         {/* <FlexContainer>
@@ -170,30 +141,22 @@ render() {
   ); 
 }
 }
-const mapStateToProps = ({ dashboard,auth }) => ({
-//   user: auth.userDetails,
-//   role: auth.userDetails.role,
-//   showDatelist:dashboard.showDatelist,
-//   orgId:auth.userDetails.organizationId,
-//   showSalesDatelist:dashboard.showSalesDatelist,
-//   fetchingSalesDatewiseReport:dashboard.fetchingSalesDatewiseReport,
-//   fetchingSalesDatewiseReportError:dashboard.fetchingSalesDatewiseReportError,
-//   fetchingDatewiseReport:dashboard.fetchingDatewiseReport,
-//   fetchingDatewiseReportError:dashboard.fetchingDatewiseReportError,
-//   recruiterId:auth.userDetails.userId,
-//   fetchingTaskper:dashboard.fetchingTaskper,
-//   userId: auth.userDetails.employeeId,
-//   dateOfJoining: auth.userDetails && auth.userDetails.dateOfJoining,
-//   taskperCount:dashboard.taskperCount,
-//   avgHour:dashboard.avgHour,
-//   fetchingAvgHour:dashboard.fetchingAvgHour
+const mapStateToProps = ({ customer,auth }) => ({
+  contactValue:customer.contactValue,
+  fetchingContactValue:customer.fetchingContactValue,
+  pipelineValue:customer.pipelineValue,
+  fetchingPipelineValue:customer.fetchingPipelineValue,
+  OppValue:customer.OppValue,
+  fetchingOppValue:customer.fetchingOppValue,
+  WeightedValue:customer.WeightedValue,
+  fetchingWeightedValue:customer.fetchingWeightedValue
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-//   getDateWiseList,
-//   getSalesDateWiseList,
-//   getTasklist,
-//   getavgHour
+  getProspectWeightedValue,
+  getProspectOppValue,
+  getProspectPipeLineValue,
+  getProspectContactValue
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerPulseJumpStart);

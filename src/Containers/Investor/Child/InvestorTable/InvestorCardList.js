@@ -28,10 +28,12 @@ import ReactCountryFlag from 'react-country-flag';
 import {getInvestorsbyId,
   handleInvestorContModal,
   handleUpdateInvestorModal,
+  handleInvestorPulseDrawerModal,
   handleInvestorNotesDrawerModal,emptyInvestor,
 } from "../../InvestorAction";
 import { FormattedMessage } from "react-intl";
 import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
+import InvestorPulseDrawerModal from "./InvestorPulseDrawerModal";
 const AddInvestorNotesDrawerModal = lazy(() => import("../InvestorDetail/AddInvestorNotesDrawerModal"));
 const ContactsInvestorModal = lazy(() => import("./ContactsInvestorModal"));
 const UpdateInvestorModal = lazy(() =>
@@ -101,6 +103,8 @@ function InvestorCardList(props) {
     investorsbyId,
     handleUpdateInvestorModal,
     handleInvestorContModal,
+    handleInvestorPulseDrawerModal,
+    addDrawerInvestorPulseModal,
     addDrawerInvestorContactModal,
     updateInvestorModal,
     investor,
@@ -746,6 +750,21 @@ function InvestorCardList(props) {
            )} 
             </div>
                       </div> 
+                      <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
+                      <div>
+                          <Tooltip title="Pulse">
+         <MonitorHeartIcon
+                  onClick={() => {
+                    handleInvestorPulseDrawerModal(true);
+                    handleCurrentRowData(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#df9697]"
+                />
+             </Tooltip>
+                          </div>
+
+          
+                      </div> 
           
                       </div>   
                             </div>
@@ -770,6 +789,13 @@ function InvestorCardList(props) {
         RowData={RowData}
         addDrawerInvestorContactModal={addDrawerInvestorContactModal}
         handleInvestorContModal={handleInvestorContModal}
+        handleCurrentRowData={handleCurrentRowData}
+      />
+
+<InvestorPulseDrawerModal
+        RowData={RowData}
+        addDrawerInvestorPulseModal={addDrawerInvestorPulseModal}
+        handleInvestorPulseDrawerModal={handleInvestorPulseDrawerModal}
         handleCurrentRowData={handleCurrentRowData}
       />
            <AddInvestorNotesDrawerModal
@@ -800,6 +826,7 @@ const mapStateToProps = ({
   investor
 }) => ({
   userId: auth.userDetails.userId,
+  addDrawerInvestorPulseModal:investor.addDrawerInvestorPulseModal,
   addDrawerInvestorContactModal:investor.addDrawerInvestorContactModal,
   investorsbyId:investor.investorsbyId,
   addDrawerInvestorNotesModal:investor.addDrawerInvestorNotesModal,
@@ -818,6 +845,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateInvestorModal,
       handleInvestorContModal,
       emptyInvestor,
+      handleInvestorPulseDrawerModal,
       handleInvestorNotesDrawerModal,
       updateOwnercustomerById,
       handleCustomerDrawerModal,

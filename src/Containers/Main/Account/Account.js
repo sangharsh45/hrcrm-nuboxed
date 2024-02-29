@@ -66,18 +66,18 @@ const Account = ({
           <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
             <AccountTable />
           </div>
-        ) : viewType === "card" ? (
-          <AccountCard />
-        ) : viewType === "dashboard" ? (
-          <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-            {isLargeScreen ? <AccountDeleteTable /> : <AccountDeleteCard />}
-          </div>
-        ) : viewType === "all" ? (
-          <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-            <AllAccountList />
-            {/* : <AllAccountCard />} */}
-          </div>
-        ) : null}
+        )
+          : viewType === "card" ? (
+            <AccountCard />
+          ) : viewType === "dashboard" ? (
+            <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
+              {isLargeScreen ? <AccountDeleteTable /> : <AccountDeleteCard />}
+            </div>
+          ) : viewType === "all" ? (
+            <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
+              <AllAccountList />
+            </div>
+          ) : null}
       </Suspense>
     </>
   );

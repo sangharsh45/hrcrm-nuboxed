@@ -17,6 +17,7 @@ import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFi
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
+    orderCurrencyId: Yup.string().required("Input needed!"),
 })
 function AddOrderInAccount(props) {
     const contactOption = props.contactDistributor.map((item) => {
@@ -49,13 +50,14 @@ function AddOrderInAccount(props) {
                 deliveryDate: "",
                 contactPersonId: "",
                 paymentInTerms: "",
+                // customPayment: "",
                 comments: "",
                 awbNo: "",
                 orderCurrencyId: "",
                 deliverToBusinessInd: "",
                 fullLoadTruckInd: "",
                 privateInd: "",
-                advancePayment: "",
+                advancePayment: 50,
                 distributorId: props.distributorId,
                 userId: props.userId,
                 orderId: "",
@@ -99,6 +101,7 @@ function AddOrderInAccount(props) {
                     props.addOrderForm({
                         ...values,
                         priority: priority || "",
+                        // paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
 
                     }, props.distributorId);
                 } else {
@@ -107,7 +110,7 @@ function AddOrderInAccount(props) {
             }}
         >
             {({ values, handleChange }) => (
-                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                <div class="overflow-y-auto h-[28rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
                             <StyledLabel><h3> <FormattedMessage
@@ -176,17 +179,32 @@ function AddOrderInAccount(props) {
                         </div> */}
 
                             <div class="justify-between flex mt-3">
-                                <div class="w-[30%]">
+                                <div class="w-[22%]">
                                     <Field
                                         name="paymentInTerms"
                                         label="Payment Terms (in Days)"
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
-                                        options={["7", "15", "30", "45", "60", "75", "90"]}
+                                        options={["7", "15", "21", "30", "45", "60", "75", "90", "Custom"]}
                                     />
                                 </div>
-                                <div class="w-[30%]">
+                                {/* {values.paymentInTerms === "Custom" && <div class="w-[22%]">
+                                    <Field
+                                        label={
+                                            <FormattedMessage
+                                                id="app.Custom Payment"
+                                                defaultMessage="Custom Payment"
+                                            />
+                                        }
+                                        name="customPayment"
+                                        component={InputComponent}
+                                        inlineLabel
+                                        width={"100%"}
+                                        isColumn
+                                    />
+                                </div>} */}
+                                <div class="w-[22%]">
                                     <Field
                                         label="Air Way Bill"
                                         name="awbNo"
@@ -196,7 +214,7 @@ function AddOrderInAccount(props) {
                                         isColumn
                                     />
                                 </div>
-                                <div class="w-[30%]">
+                                <div class="w-[22%]">
                                     <Field
                                         label="Contact Person"
                                         name="contactPersonId"
@@ -245,6 +263,31 @@ function AddOrderInAccount(props) {
                                 </div>
 
                                 <div class="w-[22%]">
+                                    <Field
+                                        name="availabilityDate"
+                                        label="Pickup Date "
+                                        isColumn
+                                        inlineLabel
+                                        width={"100%"}
+                                        component={DatePicker}
+                                        value={values.availabilityDate}
+
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class=" mt-3 flex justify-between">
+                                <div class="w-[40%]">
+                                    <Field
+                                        name="comments"
+                                        label="Notes"
+                                        width={"100%"}
+                                        isColumn
+                                        component={TextareaComponent}
+                                    />
+                                </div>
+                                <div class="w-[40%]  ml-8 mt-8">
                                     <StyledLabel><FormattedMessage
                                         id="app.priority"
                                         defaultMessage="Priority"
@@ -316,24 +359,11 @@ function AddOrderInAccount(props) {
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class=" mt-3 justify-between flex">
-                                <div class="w-[30%]">
-                                    <Field
-                                        name="comments"
-                                        label="Comment"
-                                        width={"100%"}
-                                        isColumn
-                                        component={TextareaComponent}
-                                    />
-                                </div>
-
-                                <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
+                                <div class="w-[20%]  mt-[65px] mr-[100px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
                                         className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
                                         htmlType="Submit"
+                                        loading={props.addingOrders}
                                     >
                                         <FormattedMessage
                                             id="app.save"
@@ -357,6 +387,7 @@ const mapStateToProps = ({ homeStepper, auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
+    addingOrders: distributor.addingOrders
 });
 
 const mapDispatchToProps = (dispatch) =>

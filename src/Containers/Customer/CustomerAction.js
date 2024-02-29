@@ -665,9 +665,7 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
       // cb && cb();
       Swal.fire({
         icon: 'error',
-        title: res.data.message,
-        // showConfirmButton: false,
-        // timer: 1500
+        title: 'Contact is exist with same emailId !',
       })
     })
     .catch((err) => {
@@ -2296,6 +2294,118 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       type: types.HANDLE_CUSTOMER_OPPORTUNITY_DRAWER_MODAL,
       payload: modalProps,
     });
+  };
+
+  export const getProspectWeightedValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_PROSPECT_WEIGHTED_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/oppertunity/weighted-value/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_PROSPECT_WEIGHTED_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PROSPECT_WEIGHTED_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getProspectOppValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_PROSPECT_OPP_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/oppertunity/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_PROSPECT_OPP_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PROSPECT_OPP_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getProspectPipeLineValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_PROSPECT_PIPELINE_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/oppertunity/proposal-value/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_PROSPECT_PIPELINE_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PROSPECT_PIPELINE_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getProspectContactValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_PROSPECT_CONTACT_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/contact/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_PROSPECT_CONTACT_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PROSPECT_CONTACT_VALUE_FAILURE,
+          payload: err,
+        });
+      });
   };
 
 

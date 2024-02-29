@@ -157,7 +157,7 @@ class UpdateContactInvestForm extends Component {
               this.props.user.countryDialCode,
             countryDialCode1:
               contactiData.countryDialCode1 ||
-              this.props.user.countryDialCode,
+              this.props.user.countryDialCode1,
             phoneNumber: contactiData.phoneNumber || "",
             mobileNumber: contactiData.mobileNumber || "",
             emailId: contactiData.emailId || "",
@@ -303,25 +303,22 @@ class UpdateContactInvestForm extends Component {
                   </div>
                   <div class=" flex justify-between">
                     <div class=" w-2/6 max-sm:w-2/5">
-                    <Field
+                    <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${contactiData.countryDialCode}`,
+                        }}
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(countryNameOption)
-                            ? countryNameOption
-                            : []
-                        }
-                        // value={values.countryDialCode1}
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
                       />
                     </div>

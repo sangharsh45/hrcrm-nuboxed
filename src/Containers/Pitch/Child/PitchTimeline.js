@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Timeline, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import dayjs from 'dayjs';
+import moment from 'moment';
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import {getpichTimeline} from "../PitchAction";
 
@@ -19,9 +19,16 @@ const PitchTimeline = (props) => {
         <Timeline>
           {pitchStatus &&
             pitchStatus.map((status, i) => (
+              
               <Timeline.Item key={i}>
+                
               <div>
-              <div>{status.category} {status.activityType} {dayjs(status.endDate).format('DD/MM/YYYY')}           <span class=" ml-2">
+                
+              <div>{status.category} {status.activityType} {moment.utc(status.endDate).format('ll')}
+
+
+
+          <span class=" ml-2">
              
                   <>
                   {props.userId !== status.userId ? (

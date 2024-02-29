@@ -136,7 +136,7 @@ function NavMenu(props) {
 
         )}
       
-        {(user.imInd === true && user.basicAccessInd === true || user.role === "ADMIN") && (
+        {(user.imInd === true && user.basicAccessInd === true || user.role === "ADMIN" && user.imInd === true) && (
           <Menu.Item key="/planner" style={{ height: "1.7rem", 
           paddingLeft: "1rem",color: selectedMenuItem === '/planner' ? 'tomato' : '#4bc076', }}>
             <Link to="/planner" onClick={() => handleSelect('/planner')}>
@@ -244,7 +244,7 @@ function NavMenu(props) {
 
 
         <hr />
-        {(user.leadsAccessInd === true && user.crmInd === true || user.role === "ADMIN") && (
+        {(user.leadsAccessInd === true && user.crmInd === true || user.role === "ADMIN" && user.crmInd === true) && (
           <Menu.Item key="/leads" style={{ height: "1.7rem",
            paddingLeft: "1rem",color: selectedMenuItem === '/leads' ? 'tomato' : '#4bc076' }}>
             <Link to="/leads" onClick={() => handleSelect('/leads')}>
@@ -266,7 +266,7 @@ function NavMenu(props) {
           </Menu.Item>
         )}
 
-        {(user.opportunityAccessInd === true && user.crmInd === true || user.role === "ADMIN") && (
+        {(user.opportunityAccessInd === true && user.crmInd === true || user.role === "ADMIN" && user.crmInd === true) && (
           <Menu.Item key="/opportunity" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/opportunity' ? 'tomato' : '#4bc076' }}>
             <Link to="/opportunity" onClick={() => handleSelect('/opportunity')}>
@@ -289,7 +289,7 @@ function NavMenu(props) {
         )}
 
 
-        {(user.contactAccessInd === true && user.crmInd === true || user.role === "ADMIN") && (
+        {(user.contactAccessInd === true && user.crmInd === true || user.role === "ADMIN" && user.crmInd === true) && (
           <Menu.Item key="/contact" style={{ height: "1.7rem",
            paddingLeft: "1rem",color: selectedMenuItem === '/contact' ? 'tomato' : '#4bc076' }}>
             <Link to="/contact" onClick={() => handleSelect('/contact')}>
@@ -312,7 +312,7 @@ function NavMenu(props) {
         )}
 
         {/* Customer */}
-        {(user.customerAccessInd === true && user.crmInd === true || user.role === "ADMIN") && (
+        {(user.customerAccessInd === true && user.crmInd === true || user.role === "ADMIN" && user.crmInd === true) && (
           <Menu.Item key="/customer" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/customer' ? 'tomato' : '#4bc076' }}>
             <Link to="/customer" onClick={() => handleSelect('/customer')}>
@@ -334,7 +334,7 @@ function NavMenu(props) {
           </Menu.Item>
         )}
         <hr />
-        {(user.imInd === true && user.pitchAccessInd === true || user.role === "ADMIN") && (
+        {(user.imInd === true && user.pitchAccessInd === true || user.role === "ADMIN" && user.imInd === true ) && (
           <Menu.Item key="/pitch " style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/pitch' ? 'tomato' : '#4bc076' }}>
             <Link to="/pitch" onClick={() => handleSelect('/pitch')}>
@@ -353,7 +353,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {(user.imInd === true && user.dealAccessInd === true || user.role === "ADMIN") && (
+        {(user.imInd === true && user.dealAccessInd === true || user.role === "ADMIN" && user.imInd === true) && (
           <Menu.Item key="/deal " style={{ height: "1.7rem", 
           paddingLeft: "1rem",  color: selectedMenuItem === '/deal' ? 'tomato' : '#4bc076' }}>
             <Link to="/deal" onClick={() => handleSelect('/deal')}>
@@ -371,7 +371,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {(user.imInd === true && user.investorContactAccessInd === true || user.role === "ADMIN") && (
+        {(user.imInd === true && user.investorContactAccessInd === true || user.role === "ADMIN" && user.imInd === true) && (
           <Menu.Item key="/contactInvest" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/contactInvest' ? 'tomato' : '#4bc076' }}>
             <Link to="/contactInvest"  onClick={() => handleSelect('/contactInvest')}>
@@ -389,7 +389,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {(user.imInd === true && user.investorAccessInd === true || user.role === "ADMIN") && (
+        {(user.imInd === true && user.investorAccessInd === true || user.role === "ADMIN" && user.imInd === true) && (
           <Menu.Item key="/investor" style={{ height: "1.7rem", 
           paddingLeft: "1rem",color: selectedMenuItem === '/investor' ? 'tomato' : '#4bc076' }}>
             <Link to="/investor" onClick={() => handleSelect('/investor')}>
@@ -432,7 +432,7 @@ function NavMenu(props) {
         {/* )}  */}
         <hr/>
         {/* Talent */}
-       {((user.talentAccessInd === true && user.recruitProInd === true) || (user.role === "ADMIN")) &&  (
+       {((user.talentAccessInd === true && user.recruitProInd === true) || (user.role === "ADMIN" && user.recruitProInd === true)) &&  (
             <Menu.Item key="/candidate" style={{ height: "1.7rem", 
             paddingLeft: "1rem", color: selectedMenuItem === '/candidate' ? 'tomato' : '#4bc076' }}>
               <Link to="/candidate" onClick={() => handleSelect('/candidate')}>
@@ -456,7 +456,7 @@ function NavMenu(props) {
           )}  
         {/*Talent*/}
         {/*Requirement*/}
-        {(user.requirementAccessInd === true && user.recruitProInd === true || user.role === "ADMIN") &&  (
+        {(user.requirementAccessInd === true && user.recruitProInd === true || user.role === "ADMIN" && user.recruitProInd === true) &&  (
           <Menu.Item key="/requirement" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/requirement' ? 'tomato' : '#4bc076' }}>
             <Link to="/requirement " onClick={() => handleSelect('/requirement')}>
@@ -477,7 +477,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
            )}
-          {(user.requirementAccessInd === true && user.recruitProInd === true || user.role === "ADMIN") &&  (
+          {(user.requirementAccessInd === true && user.recruitProInd === true || user.role === "ADMIN" && user.recruitProInd === true) &&  (
          <Menu.Item key="/project" style={{ height: "1.7rem",
           paddingLeft: "1rem", color: selectedMenuItem === '/project' ? 'tomato' : '#4bc076' }}>
               <Link to="/project" onClick={() => handleSelect('/project')}>
@@ -495,7 +495,7 @@ function NavMenu(props) {
           <hr/>
         {/* )} */}
         {/*Demand*/}
-        {(user.userType === "USER" && user.department === "Customer" || user.role === "ADMIN") && (
+        {(user.userType === "USER" && user.department === "Customer" && user.recruitProInd === true || user.role === "ADMIN" && user.recruitProInd === true) && (
           <Menu.Item key="/demand" style={{ height: "1.7rem", 
           paddingLeft: "1rem", color: selectedMenuItem === '/demand' ? 'tomato' : '#4bc076' }}>
             <Link to="/demand" onClick={() => handleSelect('/demand')}>
@@ -600,7 +600,7 @@ function NavMenu(props) {
         <hr />
         {/* Accessment */}
 
-        {(user.eLearningInd === true && user.assessmentAccessInd === true || user.role === "ADMIN") &&  (
+        {(user.eLearningInd === true && user.assessmentAccessInd === true || user.role === "ADMIN" && user.eLearningInd === true) &&  (
             <Menu.Item key="/accessment" style={{ height: "1.7rem",
              paddingLeft: "1rem", color: selectedMenuItem === '/accessment' ? 'tomato' : '#4bc076' }}>
               <Link to="/Accessment" onClick={() => handleSelect('/accessment')}>
@@ -619,7 +619,7 @@ function NavMenu(props) {
             </Menu.Item>
           )}
 
-        {(user.eLearningInd === true && user.courseAccessInd === true || user.role === "ADMIN") && (
+        {(user.eLearningInd === true && user.courseAccessInd === true || user.role === "ADMIN" && user.eLearningInd === true) && (
             <Menu.Item key="/course" style={{ height: "1.7rem",
              paddingLeft: "1rem",color: selectedMenuItem === '/course' ? 'tomato' : '#4bc076' }}>
               <Link to="/Course" onClick={() => handleSelect('/course')}>
@@ -638,7 +638,7 @@ function NavMenu(props) {
             </Menu.Item>
           )}
         {/* Program */}
-        {(user.eLearningInd === true && user.programAccessInd === true || user.role === "ADMIN") && (
+        {(user.eLearningInd === true && user.programAccessInd === true || user.role === "ADMIN" && user.eLearningInd === true) && (
             <Menu.Item key="/program" style={{ height: "1.7rem",
              paddingLeft: "1rem", color: selectedMenuItem === '/program' ? 'tomato' : '#4bc076' }}>
               <Link to="/Program" onClick={() => handleSelect('/program')}>
@@ -694,7 +694,7 @@ function NavMenu(props) {
             }
           >
            */}
-        {(user.orderAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
+        {(user.orderAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) &&  (
 
           <Menu.Item key="/order" style={{ height: "1.7rem", 
           paddingLeft: "1rem",color: selectedMenuItem === '/order' ? 'tomato' : '#4bc076' }}>
@@ -711,7 +711,7 @@ function NavMenu(props) {
           </Menu.Item>
         )}
 
-        {(user.accountAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
+        {(user.accountAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) &&  (
 
           <Menu.Item key="/account" style={{ height: "1.7rem", 
           paddingLeft: "1rem", color: selectedMenuItem === '/account' ? 'tomato' : '#4bc076' }}>
@@ -727,7 +727,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {(user.catalogAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
+        {(user.catalogAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) &&  (
         <Menu.Item key="/product" style={{ height: "1.7rem", 
         paddingLeft: "1rem",color: selectedMenuItem === '/product' ? 'tomato' : '#4bc076' }}>
           <Link to="/product" onClick={() => handleSelect('/product')}>
@@ -742,7 +742,7 @@ function NavMenu(props) {
           </Link>
         </Menu.Item>
         )}
-         {(user.subscriptionAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
+         {(user.subscriptionAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) &&  (
         <Menu.Item key="/subscription" style={{ height: "1.7rem", 
         paddingLeft: "1rem",color: selectedMenuItem === '/subscription' ? 'tomato' : '#4bc076' }}>
           <Link to="/subscription" onClick={() => handleSelect('/subscription')}>
@@ -758,7 +758,7 @@ function NavMenu(props) {
         </Menu.Item>
          )}
         <hr />
-        {(user.refurbishWorkshopInd === true && user.repairInd === true || user.role === "ADMIN") &&  (
+        {(user.refurbishWorkshopInd === true && user.repairInd === true || user.role === "ADMIN" && user.repairInd === true) &&  (
 
           <Menu.Item key="/refurbish" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/refurbish' ? 'tomato' : '#4bc076' }}>
@@ -775,7 +775,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-         {(user.productionAccessInd === true && user.productionInd === true || user.role === "ADMIN") &&  (
+         {(user.productionAccessInd === true && user.productionInd === true || user.role === "ADMIN" && user.productionInd === true) &&  (
         <Menu.Item key="/production" style={{ height: "1.7rem", 
         paddingLeft: "1rem",color: selectedMenuItem === '/production' ? 'tomato' : '#4bc076' }}>
           <Link to="/production" onClick={() => handleSelect('/production')}>
@@ -790,7 +790,7 @@ function NavMenu(props) {
           </Link>
         </Menu.Item>
         )} 
-        {(user.materialAccessInd === true && user.erpInd === true || user.role === "ADMIN") &&  (
+        {(user.materialAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) &&  (
 
           <Menu.Item key="/supplies" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/supplies' ? 'tomato' : '#4bc076' }}>
@@ -806,7 +806,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-         {(user.supplierAccessInd === true && user.erpInd === true || user.role === "ADMIN") && (
+         {(user.supplierAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) && (
 
 <Menu.Item key="/suppliers" style={{ height: "1.7rem", 
 paddingLeft: "1rem" , color: selectedMenuItem === '/suppliers' ? 'tomato' : '#4bc076'}}>
@@ -822,7 +822,7 @@ paddingLeft: "1rem" , color: selectedMenuItem === '/suppliers' ? 'tomato' : '#4b
   </Link>
 </Menu.Item>
  )} 
-  {(user.procurementAccessInd === true && user.erpInd === true || user.role === "ADMIN") && (
+  {(user.procurementAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) && (
 <Menu.Item key="/procurement" style={{ height: "1.7rem", 
 paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4bc076' }}>
             <Link to="/procurement" onClick={() => handleSelect('/procurement')}>
@@ -839,7 +839,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
   )}
         <hr />
         {
-  (user.inventoryAccessInd === true && user.erpInd === true || user.role === "ADMIN") && (
+  (user.inventoryAccessInd === true && user.erpInd === true || user.role === "ADMIN" && user.erpInd === true) && (
     <Menu.Item key="/inventory" style={{ height: "1.7rem", paddingLeft: "1rem", color: selectedMenuItem === '/inventory' ? 'tomato' : '#4bc076' }}>
       <Link to="/inventory" onClick={() => handleSelect('/inventory')}>
         <InventoryIcon
@@ -857,7 +857,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
 }
 
 
-        {(user.shipperAccessInd === true && user.erpInd === true ||  user.role === "ADMIN") &&  (
+        {(user.shipperAccessInd === true && user.erpInd === true ||  user.role === "ADMIN" && user.erpInd === true) &&  (
 
           <Menu.Item key="/shipper" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/shipper' ? 'tomato' : '#4bc076' }}>
@@ -879,7 +879,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
 
 
         
-  {(user.collectionAccessInd === true && user.financeInd === true || user.role === "ADMIN") &&  (
+  {(user.collectionAccessInd === true && user.financeInd === true || user.role === "ADMIN" && user.financeInd === true) &&  (
 
         <Menu.Item key="/collection" style={{ height: "1.7rem",
          paddingLeft: "1rem",color: selectedMenuItem === '/collection' ? 'tomato' : '#4bc076' }}>
@@ -1014,7 +1014,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
      )}  */}
         <hr />
         {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
-        { (user.teamsAccessInd === true &&  user.hrInd === true || user.role === "ADMIN") ? (
+        { (user.teamsAccessInd === true &&  user.hrInd === true || user.role === "ADMIN" &&  user.hrInd === true) ? (
                
                <Menu.Item key="/teams" style={{height:"1.7rem",
                paddingLeft:"1rem", color: selectedMenuItem === '/teams' ? 'tomato' : '#4bc076'}}>
@@ -1031,7 +1031,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
                 </Menu.Item>
                 ):null} 
 
-        {(user.userAccessInd === true && user.hrInd === true  || user.role === "ADMIN") ? (
+        {(user.userAccessInd === true && user.hrInd === true  || user.role === "ADMIN" &&  user.hrInd === true) ? (
 
           <Menu.Item key="/employees" style={{ height: "1.7rem",
            paddingLeft: "1rem", color: selectedMenuItem === '/employees' ? 'tomato' : '#4bc076' }}>
@@ -1065,7 +1065,7 @@ paddingLeft: "1rem",color: selectedMenuItem === '/procurement' ? 'tomato' : '#4b
             </span>
           </Link>
         </Menu.Item> */}
-        {(user.locationAccessInd === true && user.hrInd === true || user.role === "ADMIN") &&  (
+        {(user.locationAccessInd === true && user.hrInd === true || user.role === "ADMIN" &&  user.hrInd === true) &&  (
 
           <Menu.Item key="/location" style={{ height: "1.7rem",
            paddingLeft: "1rem",color: selectedMenuItem === '/location' ? 'tomato' : '#4bc076' }}>

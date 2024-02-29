@@ -65,6 +65,7 @@ const DashboardActionLeft = (props) => {
            
     
         <div class="flex w-[10rem] ml-2 ">
+        {viewType==="ALL" ?null: (
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -85,6 +86,7 @@ const DashboardActionLeft = (props) => {
         
         </span>
         </Badge>
+        )}
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}

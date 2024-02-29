@@ -178,7 +178,7 @@ function OpenReceivedOrderIdForm(props) {
                   />
                 </Tooltip>
                 &nbsp;
-                {dayjs(item.receivePhoneDate).format("ll")}
+                {dayjs(item.receivePhoneDate).format("DD-MM-YY")}
               </>
             }
           </>
@@ -246,6 +246,7 @@ function OpenReceivedOrderIdForm(props) {
         {props.rowData.inspectionInd === 1 &&
           <div style={{ marginLeft: '10px' }}>
             <Button
+              loading={props.updatingInspection}
               onClick={() => props.updateInspection({
                 inspectionInd: 2,
                 stopInspectionUser: props.userId,
@@ -280,6 +281,7 @@ function OpenReceivedOrderIdForm(props) {
 }
 
 const mapStateToProps = ({ inventory, distributor, auth }) => ({
+  updatingInspection: inventory.updatingInspection,
   phoneListById: distributor.phoneListById,
   fetchingPhoneListById: distributor.fetchingPhoneListById,
   phoneListData: inventory.phoneListData,

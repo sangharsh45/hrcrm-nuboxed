@@ -9,9 +9,7 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 import * as Yup from "yup";
 import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { getCountry } from "../../../Containers/Settings/Category/Country/CountryAction";
-import {
-  getCustomer,
-} from "../../Settings/Category/Customer/CustomerAction";
+import { getCustomer } from "../../Settings/Category/Customer/CustomerAction";
 import { Listbox } from '@headlessui/react'
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
@@ -100,6 +98,8 @@ const AddAccountForm = ({
           country: "",
           currency: "",
           clientId: "",
+          payment: "",
+          customPayment: "",
           groupId: groupId,
           vatInd: vatInd,
           address: [
@@ -124,6 +124,7 @@ const AddAccountForm = ({
           addDistributor(
             {
               ...values,
+              payment: values.payment === "Custom" ? values.customPayment : values.payment,
               assignedTo: selectedOption ? selectedOption.employeeId : userId,
             },
             userId,
@@ -204,6 +205,7 @@ const AddAccountForm = ({
                       inlineLabel
                     />
                   </div>
+
                   <div class=" w-[60%]">
                     <FastField
                       type="text"
@@ -288,21 +290,43 @@ const AddAccountForm = ({
                     />
                   </div>
                 </div>
-                <div class="mt-4">
-                  <Field
-                    name="insuranceGrade"
-                    type="text"
-                    label={
-                      <FormattedMessage
-                        id="app.insurancegrade"
-                        defaultMessage="insurancegrade"
-                      />
-                    }
-                    width={"100%"}
-                    component={InputComponent}
-                    isColumn
-                    inlineLabel
-                  />
+                <div class="flex justify-between mt-4" >
+                  <div class="w-w47.5">
+                    <Field
+                      name="insuranceGrade"
+                      type="text"
+                      label={
+                        <FormattedMessage
+                          id="app.insurancegrade"
+                          defaultMessage="insurancegrade"
+                        />
+                      }
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
+                    />
+                  </div>
+                  <div class="w-w47.5">
+                    <Field
+                      name="clientId"
+                      label={
+                        <FormattedMessage
+                          id="app.type"
+                          defaultMessage="Type"
+                        />
+                      }
+                      isColumn
+                      placeholder="Type"
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(customerTypeOptions)
+                          ? customerTypeOptions
+                          : []
+                      }
+
+                    />
+                  </div>
                 </div>
                 <div class="flex justify-between mt-4" >
                   <div class="w-w47.5">
@@ -360,27 +384,21 @@ const AddAccountForm = ({
                       isColumn
                     />
                   </div>
-                  <div class="w-w47.5">
-
-                    <Field
-                      name="clientId"
+                  {values.payment === "Custom" && <div class="w-w47.5">
+                    <FastField
                       label={
                         <FormattedMessage
-                          id="app.type"
-                          defaultMessage="Type"
+                          id="app.Custom Payment"
+                          defaultMessage="Custom Payment"
                         />
                       }
+                      name="customPayment"
+                      component={InputComponent}
+                      inlineLabel
+                      width={"100%"}
                       isColumn
-                      placeholder="Type"
-                      component={SelectComponent}
-                      options={
-                        Array.isArray(customerTypeOptions)
-                          ? customerTypeOptions
-                          : []
-                      }
-
                     />
-                  </div>
+                  </div>}
                 </div>
 
               </div>
@@ -494,6 +512,8 @@ const AddAccountForm = ({
               <Button
                 type="primary"
                 htmlType="submit"
+                style={{ marginRight: "3rem", marginTop: "65px" }}
+                className=" w-16 absolute top-3/4 right-0"
                 loading={addingDistributor}
               >
                 <FormattedMessage

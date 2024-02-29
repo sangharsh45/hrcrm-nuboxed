@@ -198,7 +198,7 @@ class InvestorContactForm extends Component {
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                        {/* <div class=" w-2/5">
                           <FastField
                             name="salutation"
                             type="text"
@@ -215,8 +215,8 @@ class InvestorContactForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-2/4">
+                        </div> */}
+                        <div class=" w-full">
                           <FastField
                             isRequired
                             name="firstName"

@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import { Link } from "../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  getAllDistributorsList,
+  getCustomerByUser,
   setEditDistributor,
   handleUpdateDistributorModal,
   handleDistributorOrderModal,
@@ -26,7 +26,7 @@ function AccountTable(props) {
   const [RowData, setRowData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getAllDistributorsList(page);
+    props.getCustomerByUser(props.userId, page);
     setPage(page + 1);
   }, []);
   function handleCurrentRowData(datas) {
@@ -35,10 +35,7 @@ function AccountTable(props) {
 
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getAllDistributorsList(props.currentUser ? props.currentUser : page,
-
-
-    );
+    props.getCustomerByUser(props.userId, props.currentUser ? props.currentUser : page);
   }
 
   const {
@@ -90,14 +87,14 @@ function AccountTable(props) {
 
           </div>
           <InfiniteScroll
-            dataLength={props.allDistributors.length}
+            dataLength={props.customerListByUser.length}
             next={handleLoadMore}
             hasMore={hasMore}
-            loader={props.fetchingAllDistributors ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
+            loader={props.fetchingCustomerByUser ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
             height={"75vh"}
           >
 
-            {props.allDistributors.map((item) => {
+            {props.customerListByUser.map((item) => {
               const currentdate = dayjs().format("DD/MM/YYYY");
               const date = dayjs(item.creationDate).format("DD/MM/YYYY");
               const diff = Math.abs(
@@ -258,8 +255,8 @@ function AccountTable(props) {
   );
 }
 const mapStateToProps = ({ distributor, auth }) => ({
-  allDistributors: distributor.allDistributors,
-  fetchingAllDistributors: distributor.fetchingAllDistributors,
+  customerListByUser: distributor.customerListByUser,
+  fetchingCustomerByUser: distributor.fetchingCustomerByUser,
   fetchingDistributorsByUserIdError:
     distributor.fetchingDistributorsByUserIdError,
   userId: auth.userDetails.userId,
@@ -274,7 +271,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleUpdateDistributorModal,
-      getAllDistributorsList,
+      getCustomerByUser,
       setEditDistributor,
       handleDistributorOrderModal,
       handleDistributorActivityTableModal,
@@ -288,228 +285,3 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);
 
-
-// const columns = [
-//   {
-//     title: "",
-//     width: "1%",
-//   },
-//   {
-//     title: "Name",
-//     width: "12%",
-//     defaultSortOrder: "descend",
-//     dataIndex: "name",
-//     sorter: (a, b) => {
-//       var nameA = a.name.toLowerCase(); // ignore upper and lowercase
-//       var nameB = b.name.toLowerCase(); // ignore upper and lowercase
-//       if (nameA < nameB) {
-//         return -1;
-//       }
-//       if (nameA > nameB) {
-//         return 1;
-//       }
-
-//       return 0;
-//     },
-//     render: (name, item, i) => {
-//       const currentdate = dayjs().format("DD/MM/YYYY");
-//       const date = dayjs(item.creationDate).format("DD/MM/YYYY");
-//       return (
-//         <>
-//           <AccountDetailsView
-//             distributorId={item.distributorId}
-//             name={item.name}
-//           />
-//           &nbsp;&nbsp;
-//           {date === currentdate ? (
-//             <span
-//               style={{
-//                 color: "tomato",
-//                 fontWeight: "bold",
-//               }}
-//             >
-//               New
-//             </span>
-//           ) : null}
-//         </>
-//       );
-//     },
-//   },
-
-//   {
-//     title: "Work",
-//     dataIndex: "phoneNo",
-//     render: (name, item, i) => {
-//       return (
-//         <>
-//           {item.dialCode} {item.phoneNo}
-//         </>
-//       );
-//     },
-//     width: "10%",
-//   },
-//   {
-//     title: "Website",
-//     dataIndex: "url",
-//     width: "15%",
-//   },
-//   {
-//     title: "Type",
-//     dataIndex: "clientName",
-//     width: "10%",
-//     textAlign: "center"
-//   },
-//   {
-//     title: "Payment",
-//     dataIndex: "payment",
-//     width: "10%",
-//     textAlign: "center"
-//   },
-//   {
-//     title: "VAT",
-//     dataIndex: "",
-//     textAlign: "center",
-//     width: "8%",
-
-//     render: (text, item) => {
-//       return (
-//         <>
-//           {item.countryName}
-//         </>
-//       )
-//     }
-//   },
-
-//   {
-//     title: "Billing Address",
-//     // render: (name, item, i) => {
-//     //   return `${item.addresses[0].address1 || ""} ${item.addresses[0]
-//     //     .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
-//     // },
-//     width: "22%",
-//   },
-
-//   {
-//     title: "Pin Code",
-//     // render: (name, item, i) => {
-//     //   return `${item.addresses[0].pinCode || ""}`;
-//     // },
-//     width: "6%",
-//   },
-//   // {
-//   //   title: "",
-//   //   dataIndex: "",
-//   //   render: (name, item, i) => {
-//   //     return (
-//   //       <Tooltip title="Add Shipping Address">
-//   //         <PlusOutlined
-//   //           onClick={() => {
-//   //             handleBillingAddressModal(true)
-//   //             handleSetCurrentDistributorId(item.distributorId);
-//   //           }}
-//   //         />
-//   //       </Tooltip>
-//   //     );
-//   //   },
-//   //   width: "4%",
-//   // },
-//   {
-//     title: "",
-//     width: "3%",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Contacts">
-//           <div
-//           // onClick={() => {
-//           //   handleBillingAddressModal(true)
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           >
-//           </div>
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     width: "2%",
-//     dataIndex: "documentId",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Order">
-
-//           <div
-//           // onClick={() => {
-//           //   props.handleDistributorOrderModal(true);
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           />
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     dataIndex: "documentId",
-//     width: "2%",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Activity">
-//           <span>
-//             <i
-//               class="fab fa-connectdevelop"
-//               style={{ cursor: "pointer" }}
-//             // onClick={() => {
-//             //   props.handleDistributorActivityTableModal(true);
-//             //   handleSetCurrentDistributorId(item.distributorId);
-//             // }}
-//             ></i>
-//           </span>
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     dataIndex: "documentId",
-//     width: "2%",
-//     render: (name, item, i) => {
-//       //debugger
-//       return (
-//         <Tooltip title="Edit">
-//           <div
-//             style={{ cursor: "pointer" }}
-//           // onClick={() => {
-//           //   props.setEditDistributor(item);
-//           //   handleUpdateDistributorModal(true);
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           />
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     width: "3%",
-//     render: (name, item, i) => {
-//       //debugger
-//       return (
-//         <>
-//           <Tooltip title="Delete Client">
-//             <Popconfirm
-//               title="Do you want to delete?"
-//             // onConfirm={() => props.deleteDistributorData(item.distributorId)}
-//             >
-//               <DeleteOutlined
-
-//                 style={{ cursor: "pointer", color: "red" }}
-//               />
-//             </Popconfirm>
-//           </Tooltip>
-
-//         </>
-//       );
-//     },
-//   },
-// ];

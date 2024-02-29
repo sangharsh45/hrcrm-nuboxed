@@ -582,6 +582,24 @@ export const dealReducer = (state = initialState, action) => {
                   removingDealDocumentError: true,
                 };
 
+
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_REQUEST:
+                  return { ...state };
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_SUCCESS:
+                  return {
+                    ...state,
+                    dealContactList: state.dealContactList.map(
+                      (item) =>{
+                      if (item.contactId === action.payload.contactId) {
+                        return action.payload;
+                      } else {
+                        return item;
+                      }
+                    }),
+                  };
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_FAILURE:
+                  return { ...state };
+
     default:
       return state;
   }

@@ -22,7 +22,7 @@ class UpdateOrderModal extends Component {
                     onClose={() => handleUpdateOrder(false)}
                     footer={null}
                 >
-                    <UpdateOrderStepper />
+                    <UpdateOrderStepper particularRowData={this.props.particularRowData} />
 
                 </StyledDrawer>
             </div>
