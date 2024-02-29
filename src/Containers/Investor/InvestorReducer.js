@@ -8,6 +8,13 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+  fetchingDialCode: false,
+  fetchingDialCodeError: false,
+  dialCodeList:[],
+
+  fetchingWonINVWeightedValue: false,
+  fetchingWonINVWeightedValueError: false,
+  WonInvWeighted: {},
    
 
   addinginvestActivityTask: false,
@@ -27,6 +34,10 @@ const initialState = {
   fetchingInvestorRecordsError: false,
   investorRecord:[],
 
+  fetchingInvestorOppValue: false,
+  fetchingInvestorOppValueError: false,
+  InvestOppValue: {},
+
   fetchingInvestorTeamRecords: false,
   fetchingInvestorTeamRecordsError: false,
   investorTeamRecord:{},
@@ -39,9 +50,29 @@ const initialState = {
 
   investorActivityModal:false,
 
+  addDrawerInvestorContactModal:false,
+
+  addDrawerInvestorPulseModal:false,
+
   fetchingOpportunityRecord: false,
   fetchingOpportunityRecordError: false,
   opportunityRecord:[],
+
+  fetchingWonInvPipelineValue: false,
+  fetchingWonInvPipelineValueError: false,
+  WonInvestorPipeline: {},
+
+  fetchingWonInvestorOppValue: false,
+  fetchingWonInvestorOppValueError: false,
+  WonInvestOpp: {},
+
+  fetchingInvPipelineValue: false,
+  fetchingInvPipelineValueError: false,
+  InvestorPipelineValue: {},
+
+  fetchingInvContactValue: false,
+  fetchingInvContactValueError: false,
+  InvcontactValue: {},
 
   addingInvestor: false,
   addInvestorModal: false,
@@ -53,6 +84,10 @@ const initialState = {
   fetchingInvestorDetailsById: false,
   fetchingInvestorDetailsByIdError: false,
   investorDetails: {},
+
+  fetchingINVWeightedValue: false,
+  fetchingINVWeightedValueError: false,
+  InvWeightedValue: {},
 
   fetchingInvestStatus: false,
   fetchingInvestStatusError: false,
@@ -69,6 +104,10 @@ const initialState = {
   fetchingTeamInvestor: false,
   fetchingTeamInvestorError: false,
   teamInvestor:[],
+
+  fetchingInvestorDealsData: false,
+  fetchingInvestorDealsDataError: false,
+  investorDealsData:[],
 
   addDrawerInvestorNotesModal:false,
 
@@ -165,6 +204,7 @@ export const investorReducer = (state = initialState, action) => {
         addingInvestor: false,
         addInvestorModal: false,
         investorsbyId: [action.payload, ...state.investorsbyId],
+        allInvestorsbyId: [action.payload, ...state.allInvestorsbyId],
         clearbit: null
       };
     case types.ADD_INVESTOR_FAILURE:
@@ -546,6 +586,141 @@ export const investorReducer = (state = initialState, action) => {
                         investorsbyId: [], 
                         // deletedTruck: [] 
                       };
+
+
+                      case types.HANDLE_INVESTOR_CONT_MODAL:
+                        return { ...state, addDrawerInvestorContactModal: action.payload }; 
+
+
+                        case types.GET_INVESTOR_DEALS_DATA_REQUEST:
+
+                        return { ...state, fetchingInvestorDealsData: true };
+                      case types.GET_INVESTOR_DEALS_DATA_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingInvestorDealsData: false,
+                          investorDealsData: action.payload,
+                        };
+                      case types.GET_INVESTOR_DEALS_DATA_FAILURE:
+                        return {
+                          ...state,
+                          fetchingInvestorDealsData: false,
+                          fetchingInvestorDealsDataError: true,
+                        };
+
+
+                        case types.GET_DIAL_CODE_REQUEST:
+
+                          return { ...state, fetchingDialCode: true };
+                        case types.GET_DIAL_CODE_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingDialCode: false,
+                            dialCodeList: action.payload,
+                          };
+                        case types.GET_DIAL_CODE_FAILURE:
+                          return {
+                            ...state,
+                            fetchingDialCode: false,
+                            fetchingDialCodeError: true,
+                          };
+
+                          case types.HANDLE_INVESTOR_PULSE_DRAWER_MODAL:
+                            return { ...state, addDrawerInvestorPulseModal: action.payload }; 
+
+
+                            case types.GET_INVESTOR_OPP_VALUE_REQUEST:
+                              return { ...state, fetchingInvestorOppValue: true, fetchingInvestorOppValueError: false };
+                            case types.GET_INVESTOR_OPP_VALUE_SUCCESS:
+                              return {
+                                ...state,
+                                fetchingInvestorOppValue: false,
+                                fetchingInvestorOppValueError: false,
+                                InvestOppValue: action.payload,
+                              };
+                            case types.GET_INVESTOR_OPP_VALUE_FAILURE:
+                              return { ...state, fetchingInvestorOppValue: false, fetchingInvestorOppValueError: true };
+
+                              case types.GET_WON_INVESTOR_OPP_VALUE_REQUEST:
+                                return { ...state, fetchingWonInvestorOppValue: true, fetchingWonInvestorOppValueError: false };
+                              case types.GET_WON_INVESTOR_OPP_VALUE_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingWonInvestorOppValue: false,
+                                  fetchingWonInvestorOppValueError: false,
+                                  WonInvestOpp: action.payload,
+                                };
+                              case types.GET_WON_INVESTOR_OPP_VALUE_FAILURE:
+                                return { ...state, fetchingWonInvestorOppValue: false, fetchingWonInvestorOppValueError: true };
+  
+
+
+                              case types.GET_INVESTOR_PIPELINE_VALUE_REQUEST:
+                                return { ...state, fetchingInvPipelineValue: true, fetchingInvPipelineValueError: false };
+                              case types.GET_INVESTOR_PIPELINE_VALUE_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingInvPipelineValue: false,
+                                  fetchingInvPipelineValueError: false,
+                                  InvestorPipelineValue: action.payload,
+                                };
+                              case types.GET_INVESTOR_PIPELINE_VALUE_FAILURE:
+                                return { ...state, fetchingInvPipelineValue: false, fetchingInvPipelineValueError: true };
+
+
+                                case types.GET_WON_INVESTOR_PIPELINE_VALUE_REQUEST:
+                                  return { ...state, fetchingWonInvPipelineValue: true, fetchingWonInvPipelineValueError: false };
+                                case types.GET_WON_INVESTOR_PIPELINE_VALUE_SUCCESS:
+                                  return {
+                                    ...state,
+                                    fetchingWonInvPipelineValue: false,
+                                    fetchingWonInvPipelineValueError: false,
+                                    WonInvestorPipeline: action.payload,
+                                  };
+                                case types.GET_WON_INVESTOR_PIPELINE_VALUE_FAILURE:
+                                  return { ...state, fetchingWonInvPipelineValue: false, fetchingWonInvPipelineValueError: true };
+  
+
+
+                                case types.GET_INVESTOR_WEIGHTED_VALUE_REQUEST:
+                                  return { ...state, fetchingINVWeightedValue: true, fetchingINVWeightedValueError: false };
+                                case types.GET_INVESTOR_WEIGHTED_VALUE_SUCCESS:
+                                  return {
+                                    ...state,
+                                    fetchingINVWeightedValue: false,
+                                    fetchingINVWeightedValueError: false,
+                                    InvWeightedValue: action.payload,
+                                  };
+                                case types.GET_INVESTOR_WEIGHTED_VALUE_FAILURE:
+                                  return { ...state, fetchingINVWeightedValue: false, fetchingINVWeightedValueError: true };
+
+                                  case types.GET_WON_INVESTOR_WEIGHTED_VALUE_REQUEST:
+                                    return { ...state, fetchingWonINVWeightedValue: true, fetchingWonINVWeightedValueError: false };
+                                  case types.GET_WON_INVESTOR_WEIGHTED_VALUE_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingWonINVWeightedValue: false,
+                                      fetchingWonINVWeightedValueError: false,
+                                      WonInvWeighted: action.payload,
+                                    };
+                                  case types.GET_WON_INVESTOR_WEIGHTED_VALUE_FAILURE:
+                                    return { ...state, fetchingWonINVWeightedValue: false, fetchingWonINVWeightedValueError: true };
+  
+
+
+                                  case types.GET_INVESTOR_CONTACT_VALUE_REQUEST:
+                                    return { ...state, fetchingInvContactValue: true, fetchingInvContactValueError: false };
+                                  case types.GET_INVESTOR_CONTACT_VALUE_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingInvContactValue: false,
+                                      fetchingInvContactValueError: false,
+                                      InvcontactValue: action.payload,
+                                    };
+                                  case types.GET_INVESTOR_CONTACT_VALUE_FAILURE:
+                                    return { ...state, fetchingInvContactValue: false, fetchingInvContactValueError: true };
+
+
 default:
       return state;
   }

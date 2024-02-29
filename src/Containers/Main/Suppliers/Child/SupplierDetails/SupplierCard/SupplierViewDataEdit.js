@@ -35,10 +35,7 @@ class SupplierViewDataEdit extends Component {
     const { shipper, toggleViewType } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
-          style={{ padding: "10px 20px 10px 20px" }}
-        >
+        <div class="flex-col pt-[10px] pr-[20px] pb-[10px] pl-[20px]">
           <EditableInput
             defaultValue={shipper.phoneNo}
             handleChange={this.handleChange}
@@ -46,7 +43,7 @@ class SupplierViewDataEdit extends Component {
             value={this.state.fields.phoneNo}
             width="100%"
           />
-          <Spacer style={{ margin: "2px" }} />
+          <div class="mt-1">
           <EditableInput
             defaultValue={shipper.emailId}
             handleChange={this.handleChange}
@@ -54,7 +51,8 @@ class SupplierViewDataEdit extends Component {
             value={this.state.fields.emailId}
             width="100%"
           />
-          <Spacer style={{ margin: "2px" }} />
+          </div>
+          <div class="mt-1">
           <EditableInput
             defaultValue={shipper.shipByName}
             handleChange={this.handleChange}
@@ -62,9 +60,10 @@ class SupplierViewDataEdit extends Component {
             value={this.state.fields.shipByName}
             width="100%"
           />
-        </FlexContainer>
+          </div>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="20px">
+        <div class="flex justify-end mr-[20px]">
           <Button
             type="primary"
             loading={this.props.updatingShipperById}
@@ -76,7 +75,7 @@ class SupplierViewDataEdit extends Component {
           <Button type="ghost" onClick={() => toggleViewType()}>
             Cancel
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

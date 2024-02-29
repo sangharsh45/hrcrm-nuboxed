@@ -5,7 +5,6 @@ import {
   getLibrarys,} from "../../../../Containers/Settings/Library/LibraryAction";
 import axios from "axios";
 import { Button } from "antd";
-import { Spacer } from "../../../../Components/UI/Elements";
  import { 
   handleUpdateCandidateModal,
   handleupdateCandidateResumeModal,
@@ -97,8 +96,8 @@ class UpdateCandidateResumeForm extends PureComponent {
     
       <>
       <input type="file" name="file" onChange={this.changeHandler} />
-        <Spacer />
-              <div class=" flex justify-end" >
+       
+              <div class=" flex justify-end mt-3" >
                   <div>
 				<button 
          style={{backgroundColor:"#24d8a7",height:"1.6rem",color:"white",borderColor:"#24d8a7"}}

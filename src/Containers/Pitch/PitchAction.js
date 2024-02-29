@@ -2,7 +2,6 @@ import * as types from "./PitchActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
-import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
 import Swal from 'sweetalert2'
 
@@ -68,12 +67,20 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
           .endOf("month")
           .toISOString();
         dispatch(getPitchCount(userId));
+        dispatch(getPitchAllRecords());
+        
         dispatch(getOpportunityRecord(userId));
   
         dispatch({
           type: types.ADD_PITCH_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Succefully',
+          showConfirmButton: false,
+          // timer: 1500
+        })
         // cb && cb();
       })
       .catch((err) => {
@@ -187,9 +194,9 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
         });
         Swal.fire({
           icon: 'success',
-          title: 'Qualifed Succefully',
+          title: 'Qualified Succefully',
           showConfirmButton: false,
-          timer: 1500
+          // timer: 1500
         })
       })
       .catch((err) => {
@@ -410,6 +417,32 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
         console.log(err.response);
         dispatch({
           type: types.GET_PITCH_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getPitchAllRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_PITCH_ALL_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorleads/all/count`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PITCH_ALL_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_PITCH_ALL_RECORDS_FAILURE,
           payload: err,
         });
       });

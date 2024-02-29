@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  FlexContainer,
   MainWrapper,
 } from "../../../../../Components/UI/Layout";
 import {
@@ -15,8 +14,7 @@ import { bindActionCreators } from "redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Editor } from "react-draft-wysiwyg";
 import { getPersonalSignatureByUserId } from "../../../../Auth/AuthAction";
-import { Button, Icon } from "antd";
-import { Spacer, TextInput } from "../../../../../Components/UI/Elements";
+import { Button, } from "antd";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 import { addPersonalSignatureByUserId } from "../../../../Auth/AuthAction";
 
@@ -81,8 +79,8 @@ function PersonalView(props) {
                 onEditorStateChange={onEditorStateChange}
                 placeholder={"Type here"}
               />
-              <Spacer />
-              <FlexContainer justifyContent="flex-end" marginRight="0.625em">
+             
+              <div class=" flex mt-3 justify-end mr-[0.625em]" >
                 <StyledPopconfirm
                   title="Do you want to Update?"
                   okText="Yes"
@@ -98,7 +96,7 @@ function PersonalView(props) {
                     Update
                 </Button>
                 </StyledPopconfirm>
-              </FlexContainer>
+              </div>
             </MainWrapper>
           </>
         )}
@@ -126,14 +124,11 @@ function NoDataComponent(props) {
   const { description, onClick, buttonText } = props;
   return (
     <div>
-      <FlexContainer
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
+      <div class=" flex justify-center items-center flex-col"
       >
         <p>{"We couldn't find relevant data"}</p>
         {/* <Button onClick={onClick}>{buttonText || "Create"}</Button> */}
-      </FlexContainer>
+      </div>
     </div>
   );
 }

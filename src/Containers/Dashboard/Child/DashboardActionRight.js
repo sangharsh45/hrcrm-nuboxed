@@ -1,138 +1,78 @@
-import { Popover, } from "antd";
-import React, {  } from "react";
-import { StyledRangePicker } from "../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import {
-  setSelectedTimeIntervalReport,
-  setTimeRangeReport,
-
-} from "../DashboardAction";
-import { bindActionCreators } from "redux";
-import TimeInterval from "../../../Utils/TimeInterval";
+import React, {  lazy} from "react";
+import { StyledSelect, } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
+import {
+  setDashboardViewType,
+} from "../DashboardAction";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import { Input,Tag } from "antd";
 
-const HeaderActionRight = (props) => {
+const DashboardShareForm=lazy(() => import("./DashboardShareForm"));
+
+
+const Option = StyledSelect.Option;
+const { Search } = Input;
+const HeaderActionRight  = (props) => {
+  const dummy = ["cloud", "azure", "fgfdg"];
   const {
-    setSelectedTimeIntervalReport,
-    dateRangeList,
     viewType,
     setDashboardViewType,
-    handleButtonClick,
-    activeButton,
     user,
+    role
   } = props;
-
+ 
   return (
-    <>
-      <div class=" flex items-center"  >
-        
-        
-        <span class="cursor-pointer" 
-        onClick={() => handleButtonClick("Tasks")} 
-        style={{
-          color:activeButton === "Tasks" && "#1890ff",
-          
-        }}
-        >
-            <FormattedMessage
-                        id="app.tasks"
-                        defaultMessage="Tasks"
-                      />
-          {/* Tasks */}
-        </span>
-  
-        &nbsp;
-    {user.crmInd === true && (
-        <span class="cursor-pointer"
-        onClick={() =>  handleButtonClick("Customer")} 
-        style={{
-          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
-       
-        }}
-        >
-           <FormattedMessage
-                        id="app.prospect"
-                        defaultMessage="Prospect"
-                      />
-           
-        </span>
-)}
-        &nbsp;
-    {user.imInd ==true  && (
-        <span class="cursor-pointer"
-        onClick={() => handleButtonClick("Investors")} 
-        style={{
-          color:activeButton === "Investors" && "#1890ff",
-    
-        }}
-        >  
-          <FormattedMessage
-                        id="app.investors"
-                        defaultMessage="Investors"
-                      />   
-           
-        </span>
-)}
-    &nbsp;
-    {user.erpInd === true && (
-        <span class="cursor-pointer"
-        onClick={() => handleButtonClick("Accounts")} 
-        style={{
-          color:activeButton === "Accounts" && "#1890ff",
-          
-        }}
-        >
-           <FormattedMessage
-                        id="app.customer"
-                        defaultMessage="Customer"
-                      /> 
-          
-        </span>
-    )}
-    &nbsp;
-   
-      <>
-      <div class="">
-    <TimeInterval
-    style={{fontSize:"0.67"}}
-          times={dateRangeList}
-          handleClick={setSelectedTimeIntervalReport}
-        />
-        </div>
-        <Popover>
-          <StyledRangePicker
-            style={{width:"20%"}}
-            onChange={(range) => {
-              props.setTimeRangeReport(range[0], range[1]);
-              console.log(range);
-            }}
+    <div class=" flex items-center max-sm:-mr-[0.75rem]">
+         { user.department=== "Management" && (  
+            <>
+            
+      
+                  
+            </>
+             )}
 
-          />
-        </Popover>
-        </>
-
-      </div>
-    </>
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "tomato",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
+                />
+              </Tag>
+            )}
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
+           
+    </div>
   );
 };
-
-
-const mapStateToProps = ({ auth, dashboard }) => ({
-  user: auth.userDetails,
-  userId: auth.userDetails.userId,
-  dateRangeList: dashboard.dateRangeList,
-
-
+const mapStateToProps = ({ account,report, auth,opportunity,dashboard }) => ({
+reportViewType: report.reportViewType,
+viewType:dashboard.viewType,
+user: auth.userDetails,
+role: auth.userDetails.role,
 });
-
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      setSelectedTimeIntervalReport,
-      setTimeRangeReport,
-    
+    // setReportViewType,
+    setDashboardViewType
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionRight);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HeaderActionRight)
+);

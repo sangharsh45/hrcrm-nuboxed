@@ -7,38 +7,23 @@ import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { handleLeadCallModal } from "../../LeadsAction";
 import { PlusOutlined } from "@ant-design/icons";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity";
-import AddCallTaskModal from "./AddCallTaskModal";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
-import CallLeadsTable from "./CallLeadsTable";
-import LeadsActivityTab from "./LeadsActivityTab";
-const CallForm = lazy(() =>
-  import("../../../Call/Child/CallForm")
-);
-const EventForm = lazy(() =>
-  import("../../../Event/Child/EventForm")
-);
-const TaskForm = lazy(() =>
-  import("../../../Task/Child/TaskForm")
-);
+
+const CallLeadsTable = lazy(() => import("./CallLeadsTable"));
+const AddCallTaskModal = lazy(() => import("./AddCallTaskModal"));
+
+
 
 const TabPane = StyledTabs.TabPane;
 
 function  OpenCETmodal(props)  {
-console.log("data",props.rowdata.name)
   return (
     <>
       <StyledDrawer
         title={props.rowdata.name}
         width="60%"
-        style={{marginTop:"5rem"}}
         visible={props.openCETmodal}
-        destroyOnClose
-        closable
-        placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           props.handleCETmodal(false);
         }}
@@ -80,10 +65,10 @@ console.log("data",props.rowdata.name)
                           />
                         }
                       >
-                       
+                       &nbsp;
                         <PlusOutlined
                           type="plus"
-                          
+                          style={{color:"blue"}}
                           tooltiptitle={
                             <FormattedMessage
                               id="app.Create"
@@ -108,19 +93,18 @@ console.log("data",props.rowdata.name)
                 <CallLeadsTable
                   rowdata={props.rowdata}
                 />
-                {/* <LeadsActivityTab 
-                 rowdata={props.rowdata}
-                /> */}
               </Suspense>
             </TabPane>
           
           </StyledTabs>
         </TabsWrapper>
+        <Suspense fallback={<BundleLoader/>}>
         <AddCallTaskModal
         rowdata={props.rowdata}
           addCallTaskModal={addCallTaskModal}
           handleLeadCallModal={handleLeadCallModal}
         />
+        </Suspense>
       </>
     );
 }

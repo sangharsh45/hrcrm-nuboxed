@@ -10,7 +10,6 @@ import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleCallNotesModal } from "../CallAction";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import {  StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
@@ -26,12 +25,11 @@ import {getAllCustomerData} from "../../Customer/CustomerAction"
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
-import { getEmployeelist } from "../../Employees/EmployeeAction";
-import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -70,7 +68,11 @@ function CallForm(props) {
 
   
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
-  const[reminder,setReminder] =useState(true)
+  const[reminder,setReminder] =useState(true);
+  const [places, setPlaces] = useState(Array.from({ length: 1 }, (_, placeIndex) => ({
+    startTime:"",
+    timeTo:"",
+  })));
   console.log("category",category);
   const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
@@ -97,7 +99,7 @@ function CallForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
+    props.getAssignedToList(props.orgId);
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
     props.getFilteredEmailContact(userId);
@@ -137,9 +139,9 @@ function CallForm(props) {
         value: item.customerId,
       };
     });
-    const sortedEmployee =props.employees.sort((a, b) => {
-      const nameA = a.fullName.toLowerCase();
-      const nameB = b.fullName.toLowerCase();
+    const sortedEmployee =props.assignedToList.sort((a, b) => {
+      const nameA = a.empName.toLowerCase();
+      const nameB = b.empName.toLowerCase();
       // Compare department names
       if (nameA < nameB) {
         return -1;
@@ -151,7 +153,7 @@ function CallForm(props) {
     });
     const employeesData = sortedEmployee.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -201,9 +203,40 @@ function CallForm(props) {
         value: item.employeeId,
       };
     });
+
+    const handleChange = (value, placeIndex) => {
+      console.log(value)
+      console.log(placeIndex+1)
+      const updatedPlaces = [...places];
+      updatedPlaces[placeIndex] = {
+        address1: value,
+        country: '',
+        state: '',
+        city:"",
+        pinCode:"",
+        street:"",
+        sequenceNo:placeIndex+1,
+        // latLng: null,
+        latitude: 0, 
+        longitude: 0, 
+        numberOfCars: updatedPlaces[placeIndex].numberOfCars,
+        carList: updatedPlaces[placeIndex].carList,
+        loadingDate: updatedPlaces[placeIndex].loadingDate,
+        // loadingHours: updatedPlaces[placeIndex].loadingHours,
+        startTime:updatedPlaces[placeIndex].startTime,
+        timeTo:updatedPlaces[placeIndex].timeTo
+      };
+      setPlaces(updatedPlaces);
+    };
+
+    const handleStartTimeChange = (event, placeIndex) => {
+      const updatedPlaces = [...places];
+      updatedPlaces[placeIndex].startTime = event.target.value;
+      setPlaces(updatedPlaces);
+    };
     // console.log(this.state.category);
     const {
-      user: { userId, firstName, middleName, fullName, lastName, timeZone },
+      user: { userId, firstName,empName, middleName, fullName, lastName, timeZone },
       isEditing,
       prefillCall,
       addingCall,
@@ -228,8 +261,8 @@ function CallForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("bn",selectedOption,selected)
+   const selectedOption = props.assignedToList.find((item) => item.empName === selected);
+
    return (
       <>
         <Formik
@@ -341,9 +374,11 @@ function CallForm(props) {
               ...values,
               callCategory: category,
               callType: Type,
-              startDate: `${newStartDate}T${newStartTime}`,
-              endDate: `${newEndDate}T${newEndTime}`,
-
+              // startDate: `${newStartDate}T${newStartTime}`,
+              // endDate: `${newEndDate}T${newEndTime}`,
+              startDate: `${newStartDate}T20:00:00Z`,
+              endDate: `${newEndDate}T20:00:00Z`,
+              // startTime: values.startTime?values.startTime:null,
               startTime: 0,
               endTime: 0,
               assignedTo: selectedOption ? selectedOption.employeeId:userId,
@@ -355,10 +390,10 @@ function CallForm(props) {
                   ...values,
                   callCategory: category,
                   callType: Type,
-
+                  startTime: values.startTime?values.startTime:null,
                   startDate: `${newStartDate}T20:00:00Z`,
                   endDate: `${newEndDate}T20:00:00Z`,
-                  startTime: 0,
+                  // startTime: 0,
                   endTime: 0,
                   assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
@@ -384,10 +419,10 @@ function CallForm(props) {
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 mt-3 max-sm:w-wk ">
                      
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         {/* Type */}
                         <FormattedMessage id="app.type" defaultMessage="type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
                         <Tooltip
@@ -400,9 +435,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Inbound")}
+                            className=" text-[1.375em] cursor-pointer"
                             style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
                               color:
                               Type  === "Inbound"
                                   ? "Orange"
@@ -423,9 +457,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Outbound")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                            className=" text-[1.375em] cursor-pointer"
+                            style={{                   
                               color:
                               Type === "Outbound"
                                   ? "Orange"
@@ -446,9 +479,8 @@ function CallForm(props) {
                         >
                           <div
                             onClick={() => handleTypeChange("Conference")}
-                            style={{
-                              fontSize: "1.375em",
-                              cursor: "pointer",
+                            className=" text-[1.375em] cursor-pointer"
+                            style={{                              
                               color:
                               Type === "Conference"
                                   ? "Orange"
@@ -462,12 +494,12 @@ function CallForm(props) {
                     </div>
                     <div class=" w-1/2 mt-3">
                       
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -509,12 +541,12 @@ function CallForm(props) {
                   
                   <div class=" flex mt-3 justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                             id="app.mode"
                             defaultMessage="mode"
                           />
-                      </StyledLabel>
+                      </div>
                       <Switch
                         // style={{
                         //   marginLeft: "0.3125em"
@@ -587,7 +619,15 @@ function CallForm(props) {
                   </div>
                   <div class=" flex mt-3 justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
-                      <Field
+                    {/* <input
+        type="time"
+        id="startTime"
+        name="startTime"
+        // value={startTime}
+        value={places.startTime}
+        onChange={(e) => handleStartTimeChange(e,  'startTime')}
+      /> */}
+                    <Field
                         name="startTime"
                         // label="Start Time"
                         label={
@@ -639,7 +679,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="timeZone"
+                        defaultMessage="time Zone"
                       />
                     }
                     selectType="timeZone"
@@ -698,7 +738,7 @@ function CallForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -706,7 +746,7 @@ function CallForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -716,7 +756,7 @@ function CallForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -767,7 +807,7 @@ function CallForm(props) {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -990,6 +1030,7 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
+  assignedToList:employee.assignedToList,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
   employees: employee.employees,
@@ -1009,7 +1050,7 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
+      getAssignedToList,
       getAllOpportunityData,
       getFilteredEmailContact,
       setClearbitCandidateData, 

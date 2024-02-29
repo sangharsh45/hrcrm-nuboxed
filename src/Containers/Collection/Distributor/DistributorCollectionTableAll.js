@@ -1,177 +1,66 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Input, Button, Space } from "antd";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Spacer } from "../../../Components/UI/Elements";
+import { Tooltip} from "antd";
 import { getAllDistributorsList } from "../CollectionAction";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { CurrencySymbol } from "../../../Components/Common";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import moment from "moment";
-// import { getAllSalesUser } from "../../Leads/LeadsAction";
+import { FormattedMessage } from "react-intl";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class AllDistributorList extends Component {
-  componentDidMount() {
-    this.props.getAllDistributorsList();
-    // this.props.getAllSalesUser();
-  }
 
   state = {
     searchText: "",
     searchedColumn: "",
+    page:0,
+    hasMore:true
   };
 
-  getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            this.handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              this.setState({
-                searchText: selectedKeys[0],
-                searchedColumn: dataIndex,
-              });
-            }}
-          >
-            Filter
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-        : "",
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: (text) =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
+  componentDidMount() {
+    this.setState({page:this.state.page+1})
+    this.props.getAllDistributorsList(this.state.page);
+  }
 
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
-    });
-  };
-
-  handleReset = (clearFilters) => {
-    clearFilters();
-    this.setState({ searchText: "" });
-  };
+  handleLoadMore = () => {
+    this.setState({page:this.state.page+1})
+    this.props.getAllDistributorsList(this.state.page);
+  }
 
   render() {
-    // const salesOption = this.props.allSalesUsers.sort(function (a, b) 
-    // {
-    //   var nameA = a.salesExecutive.toUpperCase(); 
-    //   var nameB = b.salesExecutive.toUpperCase(); 
-    //   if (nameA < nameB) {
-    //     return -1;
-    //   }
-    //   if (nameA > nameB) {
-    //     return 1;
-    //   }
-    
-    //   return 0;
-    // }).map((item) => {
-    //   return {
-    //     text: item.salesExecutive,
-    //     value: item.salesExecutive,
-    //   };
-    // });
    
     if (this.props.fetchingAllDistributorsError) {
       return <APIFailed />;
     }
 
-    const tab = document.querySelector(".ant-layout-sider-children");
-    const tableHeight = tab && tab.offsetHeight - 200;
 
     return (
       <>
-   <div className=' flex justify-end sticky top-28 z-auto'>
+   <div className='flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Mobile</div>
-        <div className=" md:w-[6.8rem] ">Website</div>
-        <div className="md:w-[5.9rem]">Address</div>
-        <div className="md:w-[7.8rem]">Pin Code</div>
-        <div className="md:w-[7.9rem]">City</div>
-        <div className="md:w-[6.2rem]">Owner </div>
-        <div className="md:w-[11.3rem]">Balance</div>
-        <div className="md:w-[11.3rem]">Previous</div>
-        {/* <div className="w-[3.8rem]">Action</div> */}
+        <div className=" md:w-[8.1rem]"><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
+        <div className=" md:w-[5.1rem]"><FormattedMessage id="app.mobile" defaultMessage="Mobile"/></div>
+        <div className=" md:w-[6.8rem] "><FormattedMessage id="app.website" defaultMessage="Website"/></div>
+        <div className="md:w-[5.9rem]"><FormattedMessage id="app.address" defaultMessage="Address"/></div>
+        <div className="md:w-[7.8rem]"><FormattedMessage id="app.pincode" defaultMessage="Pin Code"/></div>
+        <div className="md:w-[7.9rem]"><FormattedMessage id="app.city" defaultMessage="City"/></div>
+        <div className="md:w-[6.2rem]"><FormattedMessage id="app.owner" defaultMessage="Owner"/> </div>
+        <div className="md:w-[11.3rem]"><FormattedMessage id="app.balance" defaultMessage="Balance"/></div>
+        <div className="md:w-[11.3rem]"><FormattedMessage id="app.previous" defaultMessage="Previous"/></div>
+
 
       </div>
-        {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        <InfiniteScroll
+        dataLength={this.props.allDistributors.length}
+        next={this.handleLoadMore}
+        hasMore={this.state.hasMore}
+        loader={this.props.fetchingAllDistributors?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
-      > */}
+      >
       
       {this.props.allDistributors.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
@@ -205,10 +94,10 @@ class AllDistributorList extends Component {
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`distributor/${item.distributorId}`}
@@ -225,7 +114,7 @@ class AllDistributorList extends Component {
           </span>
         ) : null}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                               
@@ -233,17 +122,17 @@ class AllDistributorList extends Component {
 
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                  {item.phoneNo}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
                              
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.url}
@@ -251,7 +140,7 @@ class AllDistributorList extends Component {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {/* { `${item.addresses[0].address1 || ""} ${item.addresses[0]
@@ -263,7 +152,7 @@ class AllDistributorList extends Component {
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                    {/* {`${(item.addresses &&
@@ -279,24 +168,24 @@ class AllDistributorList extends Component {
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                           <div class=" text-xs text-cardBody font-poppins">   
                            <span>
                            <CurrencySymbol currencyType={"INR"} />
                            {item.totalPayableAmount.toFixed(2)}
                          </span>
-                           </h4>
+                           </div>
                        
                        </div> 
                        <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                           <div class=" text-xs text-cardBody font-poppins">   
                            <span>
                            <CurrencySymbol currencyType={"INR"} />
                            {item.totalPayablePrev.toFixed(2)}
                          </span>
-                           </h4>
+                           </div>
                        
                        </div> 
                        </div>
@@ -308,24 +197,9 @@ class AllDistributorList extends Component {
 
                     )
                 })}
-                {/* </InfiniteScroll> */}
+                </InfiniteScroll>
       </OnlyWrapCard>
       </div>
-
-        {/* <StyledTable
-          rowKey="distributorId"
-          columns={columns}
-          dataSource={this.props.allDistributors}
-          loading={
-            this.props.fetchingAllDistributors ||
-            this.props.fetchingAllDistributorsError ||
-            this.props.fetchingAllDistributorData
-          }
-          pagination={false}
-          scroll={{ y: tableHeight }}
-          rowSelection={this.props.rowSelectionForDistributor}
-        /> */}
-     
       </>
     );
   }
@@ -343,7 +217,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getAllDistributorsList,
-    //   getAllSalesUser,
+
     },
     dispatch
   );

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { } from "react";
 import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-import moment from "moment";
-import { Button, Switch } from "antd";
+import { Button, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addPickupDate } from "../../../InventoryAction";
@@ -36,7 +35,7 @@ function PickUpForm(props) {
           ...rest
         }) => (
           <Form>
-            <div style={{ width: "50%" }}>
+            <div class=" w-[50%]" >
               <Field
                 name="dispatchReceivedDate"
                 label="Date"

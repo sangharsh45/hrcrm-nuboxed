@@ -5,9 +5,9 @@ import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { getAssignedToList } from "../../../../Employees/EmployeeAction";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import dayjs from "dayjs";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
@@ -23,7 +23,6 @@ import {addinvestActivityEvent} from "../../../InvestorAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { getEvents } from "../../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import { Listbox } from '@headlessui/react'
@@ -57,18 +56,14 @@ function InvestorEventActivityForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
    props.getEvents();
+   props.getAssignedToList(props.orgId);
    props.getAllCustomerData(userId)
-//    props.getOpportunityListByCustomerId(props.customer.customerId);
-//    props.getContactListByCustomerId(props.customer.customerId);
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
-        // label: `${item.salutation || ""} ${item.firstName ||
-        //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -104,10 +99,10 @@ function InvestorEventActivityForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName, fullName,empName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
       addingEvent,
@@ -133,11 +128,12 @@ const {
     return (
       <>
         <Formik
-          enableReinitialize
+          // enableReinitialize
           initialValues={
-            isEditing
-              ? prefillEvent
-              : {
+            // isEditing
+            //   ? prefillEvent
+            //   :
+             {
                   eventType: "",
                   eventTypeId: "",
                   eventSubject: "",
@@ -293,7 +289,7 @@ const {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+             <div class="mt-3">
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -308,6 +304,7 @@ const {
                     isColumn
                     inlineLabel
                   />
+                  </div>
                   <Field
                     isRequired
                     name="eventSubject"
@@ -323,9 +320,8 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
                   <div>
-                    <div class=" flex justify-between">
+                    <div class=" flex justify-between mt-3">
                       <div class=" w-1/2">
                         <Field
                           isRequired
@@ -444,8 +440,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+   
                   
                     {/* <Field
                       name="employeesId"
@@ -469,7 +464,8 @@ const {
                       }}
                       inlineLabel
                     /> */}
-                 <Listbox value={selected} onChange={setSelected}>
+                    <div class="mt-3">
+                 <Listbox value={selected} onChange={setSelected} >
         {({ open }) => (
           <>
             <Listbox.Label className="block text-sm font-semibold text-gray-700">
@@ -484,7 +480,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -492,7 +488,7 @@ const {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -502,7 +498,7 @@ const {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -537,7 +533,8 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+      </div>
+      <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -553,12 +550,12 @@ const {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
-                  
-                  <Spacer />
+                </div>
+                 
             
                   {/* <Field
                     disabled="true"
@@ -592,8 +589,8 @@ const {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+                <div class=" h-full w-w47.5 max-sm:w-wk mt-3">
+        
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -604,7 +601,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+            <div class="mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -616,12 +613,13 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+               
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
                         <div>
-                          <StyledLabel>Set Reminder </StyledLabel>
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder </div>
                         </div>
                         <div>
                           <Switch
@@ -659,8 +657,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+          
+              <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -701,15 +699,17 @@ const {
       </>
     );
 }
-const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, candidate }) => ({
+const mapStateToProps = ({ auth, event,customer,employee, opportunity, events, candidate }) => ({
   addingEvent: event.addingEvent,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
+  sales: opportunity.sales,
+  orgId: auth.userDetails.organizationId,
+  assignedToList:employee.assignedToList,
   user: auth.userDetails,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
   events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
@@ -720,15 +720,12 @@ const mapDispatchToProps = (dispatch) =>
     {
       addinvestActivityEvent,
       deleteEvent,
+      getAssignedToList,
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
       getEvents,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       getAllCustomerData,
-  
       setClearbitCandidateData,
     },
     dispatch

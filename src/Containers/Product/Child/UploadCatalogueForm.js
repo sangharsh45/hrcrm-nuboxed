@@ -1,11 +1,8 @@
-import React, { Component, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip } from "antd";
-import * as Yup from "yup";
-import { Formik, Form, Field, FastField } from "formik";
-import { Spacer } from "../../../Components/UI/Elements";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Button } from "antd";
+import { Formik, Form, Field, } from "formik";
 import { uploadCatalogueList } from "../ProductAction"
 import DraggableUpload1 from "../../../Components/Forms/Formik/DraggableUpload1";
 
@@ -16,7 +13,6 @@ function UploadCatalogueForm(props) {
         <>
             <Formik
                 initialValues={{
-                    // orderPhoneId: props.orderDetailsId,
                     excelId: "",
                     userId: props.userId,
                 }}
@@ -42,13 +38,8 @@ function UploadCatalogueForm(props) {
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
                         <Form class="form-background">
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "47%",
-                                    }}
-                                ><Spacer />
+                        <div class="flex justify-between">
+                                <div class="h-full w-full mt-4">
                                     <Field
                                         name="excelId"
                                         isRequired
@@ -57,16 +48,14 @@ function UploadCatalogueForm(props) {
                                 </div>
 
                             </div>
-                            <Spacer />
-                            <FlexContainer justifyContent="flex-end">
+                            <div class="flex justify-between mt-4">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                // loading={props.uploadDocumentById}
                                 >
                                     Upload
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     </div>
                 )}

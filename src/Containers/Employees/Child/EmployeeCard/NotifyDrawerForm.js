@@ -8,6 +8,7 @@ import { Button,Switch} from "antd";
 import dayjs from "dayjs";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import {UpdateAdminUser,getAdminUser} from "../../EmployeeAction";
+import moment from "moment";
 
 function NotifyDrawerForm(props){
     useEffect(()=>{
@@ -32,7 +33,6 @@ function NotifyDrawerForm(props){
         setAdmini((prevAdmini) => !prevAdmini);
         };
    
- 
         return (
           <>
         <Formik
@@ -40,18 +40,24 @@ function NotifyDrawerForm(props){
             userId: props.userId,
             startDate: startDate || dayjs(),
             endDate: endDate || null,
+            endDate: dayjs(),
+            // startDate: dayjs(props.userAdminnoti.startDate) || "",
+            // endDate: props.userAdminnoti.endDate || null,
             adminInd: admini ? "true" : "false", 
             employeeId:props.currentEmployeeId.employeeId,
             orgId:props.orgId,
     
         }}
-        
         onSubmit={(values, { resetForm }) => {
-          let timeZoneFirst = values.timeZone;
-          console.log(timeZone);
-    
+          // let newStartDate = moment(values.startDate).format("YYYY-MM-DD");
+          console.log(values);
+          console.log(values);
+
+          let timeZoneFirst = "GMT+05:30";
+
           let mytimeZone = timeZoneFirst.substring(4, 10);
           console.log(mytimeZone);
+
           var a = mytimeZone.split(":");
           console.log(a);
           var timeZoneminutes = +a[0] * 60 + +a[1];
@@ -66,53 +72,72 @@ function NotifyDrawerForm(props){
             "HH:mm:ss.SSS[Z]"
           ); // getting start time from form input
           console.log(firstStartTime);
+
           let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
           console.log(firstStartHours);
-    
+
           let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
           console.log(timeEndPart);
-    
+
           var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
           console.log(firstStartTimeSplit);
+
           var minutes =
             +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
           console.log(minutes);
-    
+
           var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
           console.log(firstStartTimeminutes);
-    
+
           let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
           let m = firstStartTimeminutes % 60;
           h = h < 10 ? "0" + h : h;
           m = m < 10 ? "0" + m : m;
           let finalStartTime = `${h}:${m}`;
-    
+          console.log(finalStartTime);
+
           let newStartTime = `${finalStartTime}${timeEndPart}`;
-    
+          console.log(newStartTime);
+
           let newEndDate = dayjs(values.endDate).format("YYYY-MM-DD");
           let firstEndTime = dayjs(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
+          console.log(firstEndTime);
           let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
+          console.log(firstEndHours);
+
           var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
+          console.log(firstEndTimeSplit);
           var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
           console.log(endMinutes);
           var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
           console.log(firstEndTimeminutes);
           let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
+          console.log(hr);
           let mi = firstEndTimeminutes % 60;
+          console.log(hr);
           hr = hr < 10 ? "0" + hr : hr;
           mi = mi < 10 ? "0" + mi : mi;
           let finalEndTime = `${hr}:${mi}`;
-          let newEndTime = `${finalEndTime}${timeEndPart}`;
-                props.UpdateAdminUser(
-                    {
-                        ...values,
-                        startDate: `${newStartDate}T${newStartTime}`,
-                        endDate: `${newEndDate}T${newEndTime}`,
-                        adminInd: admini ? "true" : "false",
-                    },);
+          console.log(finalEndTime);
+          console.log(timeEndPart);
+          console.log(`${finalEndTime}${timeEndPart}`);
 
-                resetForm()
-        }}
+          let newEndTime = `${finalEndTime}${timeEndPart}`;
+
+        
+          props.UpdateAdminUser(
+                {
+                  ...values,
+                  startDate: `${newStartDate}T00:00:00Z`,
+                  endDate: `${newEndDate}T00:00:00Z`,
+                
+                  adminInd: admini ? "true" : "false",
+                },
+          
+              );
+       resetForm();
+        }} 
+       
     >
         {({
             errors,
@@ -125,11 +150,39 @@ function NotifyDrawerForm(props){
         }) => (
             <MainWrapper style={{ minHeight: "50%" }}>
                 <Form>
-                    <div class="flex justify-between" >
-                        <div class=" h-full w-[45%]">
+                  
+                    <div>
+                            <Switch
+                              style={{ width: "6.25em" }}
+                              checked={props.userAdminnoti.adminInd||admini}
+                              onChange={handleAdmini}
+                              checkedChildren="Admin"
+                              unCheckedChildren="User"
+                            />
+                          </div>
+                          
+                          {admini && (
+                          <div class="flex justify-between mt-4" >
+                        <div class=" h-full w-[35%]">
+                     
                             <div class="justify-between">
                             <div class=" w-1/2">
                             <Field
+                      isRequired
+                      name="startDate"
+                      //label="Start "
+                      label={
+                        <FormattedMessage
+                          id="app.startdate"
+                          defaultMessage="Start Date"
+                        />
+                      }
+                      component={DatePicker}
+                      value={values.startDate}
+                      isColumn
+                      inlineLabel
+                    />
+                            {/* <Field
                               isRequired
                               name="startDate"
                               label={
@@ -140,23 +193,53 @@ function NotifyDrawerForm(props){
                               }
                               isColumn
                               component={DatePicker}
-                            //   defaultValue={{
-                            //     label: props.userAdminnoti.dayjs(startDate),
-                            //     // value: props.userAdminnoti.startDate,
-                            //   }}
+                              value={values.startDate}
+                              // defaultValue={{
+                              //   // label: props.userAdminnoti.dayjs(startDate),
+                              //    value: props.userAdminnoti.startDate,
+                              // }}
                               inlineLabel
                               style={{
                                 width: "100%",
                               }}
-                            />
+                            /> */}
                           </div>
-                         
+                        
                     </div>
                         </div>
-                        <div class=" h-full w-[45%]">
+                        <div class=" h-full w-[35%]">
                             <div class="justify-between">
                             <div class=" w-1/2">
-                          <Field
+                            <Field
+                      isRequired
+                      name="endDate"
+                      // label="End Date"
+                      label={
+                        <FormattedMessage
+                          id="app.enddate"
+                          defaultMessage="End Date"
+                        />
+                      }
+                      isColumn
+                      component={DatePicker}
+                      // value={values.endDate}
+                      value={values.endDate || values.startDate}
+                      inlineLabel
+                      disabledDate={(currentDate) => {
+                        if (values.startDate) {
+                          if (
+                            dayjs(currentDate).isBefore(
+                              dayjs(values.startDate)
+                            )
+                          ) {
+                            return true;
+                          } else {
+                            return false;
+                          }
+                        }
+                      }}
+                    />
+                          {/* <Field
                             isRequired
                             name="endDate"
                             // label="End "
@@ -169,7 +252,7 @@ function NotifyDrawerForm(props){
                             component={DatePicker}
                             isColumn
                             value={values.endDate || values.startDate}
-                            defaultValue={dayjs("2015-01-01")}
+
                             inlineLabel
                             style={{
                               width: "100%",
@@ -187,23 +270,16 @@ function NotifyDrawerForm(props){
                                 }
                               }
                             }}
-                          />
+                          /> */}
                         </div>
                      
                             </div>
-                            <div>
-                            <Switch
-                              style={{ width: "6.25em" }}
-                              checked={props.userAdminnoti.adminInd||admini}
-                              onChange={handleAdmini}
-                              checkedChildren="Yes"
-                              unCheckedChildren="No"
-                            />
-                          </div>
+                          
                         </div>
     
                             
                         </div>
+                          )}
              
                         <div class="flex justify-end">
                                 <Button
@@ -215,6 +291,11 @@ function NotifyDrawerForm(props){
                                     Submit
                                 </Button>
                             </div>
+                            <h4 class="mt-4">
+                Updated on{" "}
+                {moment(props.userAdminnoti.updatedOn).format("ll")} by{" "}
+                {props.userAdminnoti.updatedBy}
+              </h4>
                 </Form>
             </MainWrapper>
         )}

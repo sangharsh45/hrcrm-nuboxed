@@ -1,91 +1,105 @@
-import React, { Component } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip,Switch } from "antd";
+import { Button, Tooltip,Switch,Select } from "antd";
 import { FormattedMessage } from "react-intl";
+import {getDepartmentwiserUser} from "../../Settings/SettingsAction"
+import {getCurrency} from "../../Auth/AuthAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
-import {getCountries} from "../../Auth/AuthAction"
+import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
-import { HeaderLabel, Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { Radio } from "antd";
-import { addEmployee,getEmployeelist } from "../EmployeeAction";
+import { addEmployee,getAssignedToList } from "../EmployeeAction";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import {getRoles} from "../../Settings/Category/Role/RoleAction"
 import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
+const { Option } = Select;
 
+function EmployeeForm (props) {
 
-// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-// const documentSchema = Yup.object().shape({
-//   mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-//   phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-//   departmentId: Yup.string().required("Input needed!"),
-//   roleType: Yup.string().required("Input needed!"),
-//   reportingManager: Yup.string().required("Input needed!"),
-// });
+  const [active,setActive]=useState(false);
+  const [department, setDepartment] = useState("");
+  const [reportingManager, setreportingManager] = useState("")
+  const [checked,setChecked]=useState(true);
+  const [typeInd,setTypeInd]=useState(false);
+  const [selectedDept,setSelectedDept]=useState("");
+  const [defaultOption,setDefaultOption]=useState(props.fullName);
+  const [selected,setSelected]=useState(defaultOption);
+  const [selectedCountry,setSelectedCountry]=useState("");
+  const [locations,setLocations]=useState([]);
+  const [selectedLocation,setSelectedLocation]=useState("");
+  const [role,setRole]=useState([]);
+  const [selectedRole,setSelectedRole]=useState("");
+  const [workType,setWorkType]=useState("employee");
+ 
 
+  // const handleSelectedChange = (value) => {
+  //   setSelected(value);
+  // };
+  
+ const radioClick = (c) => {
+  setWorkType(c);
+  };
+ 
+ const handleJobType = (checked) => {
+  setActive(checked);
+  };
 
-class EmployeeForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-      checked: true,
-      typeInd:false,
-      selectedDept:"",
-      selectedCountry: '',
-      locations: [],
-      role:[],
-      selectedRole:"",
-      selectedLocation: "",
-      workType: "employee",
+  const handleType = (checked) => {
+    setTypeInd(checked);
+  };
+  const timeZoneOption = props.timeZone.map((item) => {
+    return {
+      label: item.zone_name
+      || null,
+      value: item.timezone_id
+      ,
     };
-  }
+  });
 
-  glassButtoClick = (type) => {
-    this.setState({ active: type });
-    // alert(this.state.active)
-  };
+  const handleDepartment = (val) => {
+    setDepartment(val)
+    props.getDepartmentwiserUser(val);
+}
 
-  radioClick = (c) => {
-    this.setState({ workType: c });
-  };
-  handleJobType = (checked) => {
-    this.setState({ active: checked });
-  };
-  handleType = (checked) => {
-    this.setState({ typeInd: checked });
-  };
-  handleDeptChange = (event) => {
+const handlereportingManager = (val) => {
+  setreportingManager(val)
+}
+  const handleDeptChange = (event) => {
     const selectedDept = event.target.value;
-    const filteredRoles = this.props.roles.filter((item) => item.departmentId === selectedDept);
-    this.setState({ selectedDept, role: filteredRoles });
-    
-  };
-  handleRoleChange = (event) => {
-    const selectedRole = event.target.value;
-    this.setState({ selectedRole });
-  };
-  handleCountryChange = (event) => {
-    const selectedCountry = event.target.value;
-    const filteredLocations = this.props.showLocation.filter((item) => item.country_name === selectedCountry);
-    this.setState({ selectedCountry, locations: filteredLocations });
-  };
-  handleLocationChange = (event) => {
-    const selectedLocation = event.target.value;
-    this.setState({ selectedLocation });
+    const filteredRoles = props.roles.filter((item) => item.departmentId === selectedDept);
+    setSelectedDept(selectedDept);
+    setSelectedRole(filteredRoles);  
   };
 
-  getRoleOptions(filterOptionKey, filterOptionValue) {
+  const handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    setSelectedRole(selectedRole);
+  };
+ const handleCountryChange = (event) => {
+    const selectedCountry = event.target.value;
+    const filteredLocations = props.showLocation.filter((item) => item.country_name === selectedCountry);
+    setSelectedCountry(selectedCountry);
+    setLocations(filteredLocations);
+  };
+
+ const handleLocationChange = (event) => {
+    const selectedLocation = event.target.value;
+    setLocations(selectedLocation);
+  };
+
+  const getRoleOptions=(filterOptionKey, filterOptionValue)=> {
     const roleOptions =
-      this.props.roles.length &&
-      this.props.roles
+      props.roles.length &&
+      props.roles
         .filter((option) => {
           if (
             option.departmentId === filterOptionValue &&
@@ -101,8 +115,27 @@ class EmployeeForm extends Component {
 
     return roleOptions;
   }
-  getLocationNameOption(filterOptionKey, filterOptionValue) {
-    const locationOptions = this.props.showLocation
+  const getLocationOptions=(filterOptionKey, filterOptionValue)=> {
+    const LocationOptions =
+      props.showLocation.length &&
+      props.showLocation
+        .filter((option) => {
+          if (
+            option.country_name === filterOptionValue &&
+            option.probability !== 0
+          ) {
+            return option;
+          }
+        })
+        .map((option) => ({
+          label: option.locationName || "",
+          value: option.locationDetailsId,
+        }));
+
+    return LocationOptions;
+  }
+ const getLocationNameOption=(filterOptionKey, filterOptionValue)=> {
+    const locationOptions = props.showLocation
       .filter(option => option.country_id === filterOptionValue && option.probability !== 0)
       .map(option => ({
         label: option.locationName || "",
@@ -112,21 +145,54 @@ class EmployeeForm extends Component {
     return locationOptions;
   }
   
-  
+  const WorkplaceOptions = props.countries.map((item) => {
+    return {
+      label: `${item.country_name || ""}`,
+      value: item.country_name,
+    };
+  });
 
-  componentDidMount() {
-    const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
-    console.log();
-    getRoles(this.props.organizationId);
+const sortedCurrency =props.currencies.sort((a, b) => {
+  const nameA = a.currency_name.toLowerCase();
+  const nameB = b.currency_name.toLowerCase();
+  // Compare department names
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+});
+const currencyNameOption = sortedCurrency.map((item) => {
+  return {
+    label: `${item.currency_name}`,
+    value: item.currency_id,
+  };
+});
+
+  useEffect(()=>{
+    const { getCountries ,getDepartments,getTimeZone,getCurrency,getAssignedToList,getRoles,getlocation,} = props;
+    getRoles(props.organizationId);
     getCountries(getCountries);
-    getlocation(this.props.orgId);
-    getEmployeelist();
-}
+    getlocation(props.orgId);
+    getCurrency();
+    getDepartments();
+    getAssignedToList(props.orgId)
+    getTimeZone();
+},[]);
 
-getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
+const WorkflowOptions = props.departments.map((item) => {
+  return {
+    label: `${item.departmentName || ""}`,
+    value: item.departmentId,
+  };
+});
+
+const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
   const StagesOptions =
-    this.props.employees.length &&
-    this.props.employees
+    props.employees.length &&
+    props.employees
       .filter((option) => {
         if (
           option.departmentId === filterOptionValue &&
@@ -154,35 +220,34 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
   return StagesOptions;
 }
-  render() {
-    console.log(this.state.selectedLocation);
-    const countryNameOption = this.props.countries.map((item) => {
-      return {
-          label: `${item.country_name || ""}`,
-          value: item.country_name,
-      };
-  });
-  
-   
-  
-  const WorkflowOptions = this.props.departments.map((item) => {
-    return {
-      label: `${item.departmentName || ""}`,
-      value: item.departmentId,
-    };
-  });
+    const {
+      userId,
+    } = props;
 
-  const dialCodeNameOption = this.props.countries.map((item) => {
+
+  const dialCodeNameOption = props.countries.map((item) => {
     return {
         label: `${item.country_dial_code || ""}`,
         value: item.country_dial_code,
     };
 });
 
+const DepartmentOptions = props.departments.map((item) => {
+  return {
+    label: `${item.departmentName || ""}`,
+    value: item.departmentId,
+  };
+});
+const countryNameOption = props.countries.map((item) => {
+  return {
+    label: `${item.country_name || ""}`,
+    value: item.country_name,
+  };
+});
 
-  
-    const { addEmployee, addingEmployee } = this.props;
-    const { clearbit } = this.props;
+
+    const { addEmployee, addingEmployee } = props;
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -191,31 +256,35 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             firstName: "",
             lastName: "",
             emailId: "",
-            countryDialCode: "",
-            countryDialCode1: "",
+            countryDialCode: props.userDetails.countryDialCode || "",
+            countryDialCode1: props.userDetails.countryDialCode1 || "",
+           
             phoneNo: "",
-            location:this.state.selectedLocation,
-            workplace:this.state.selectedCountry,
-            roleType:this.state.selectedRole,
-            departmentId:this.state.selectedDept,
+            // location:selectedLocation,
+            // workplace:selectedCountry,
+            // roleType:selectedRole,
+            // departmentId:selectedDept,
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
+            timeZone: "",
             country: "",
-            workplace:"",
+            location:"",
             designationTypeId:"",
             departmentId:"",
             roleType:"",
             linkedinPublicUrl:"",
             label: "",
             workplace: "",
-            job_type: this.state.active ? "Full Time" : "Part Time",
-            type: this.state.typeInd ? "true" : "false",
-            employee_type: this.state.workType,
-            // job_type: this.state.active,
-            reportingManager: this.props.userDetails.userId
-              ? this.props.userDetails.userId
-              : "",
+            assignedTo: selectedOption ? selectedOption.employeeId : userId,
+            job_type: active ? "Full Time" : "Part Time",
+            type: typeInd ? "true" : "false",
+            employee_type: workType,
+            // job_type: active,
+         
+            // reportingManager: props.userDetails.userId
+            //   ? props.userDetails.userId
+            //   : "",
             address: [
               {
                 addressType: "",
@@ -231,19 +300,19 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               },
             ],
           }}
-          // validationSchema={documentSchema}
           onSubmit={(values, { resetForm }) => {
-            // console.log({ ...values, job_type: this.state.active });
-            this.props.addEmployee({
+            props.addEmployee({
               ...values,
-              location:this.state.selectedLocation,
-              workplace:this.state.selectedCountry,
-              roleType:this.state.selectedRole,
-              departmentId:this.state.selectedDept,
-              job_type: this.state.active ? "Full Time" : "Part Time",
-              type: this.state.typeInd ? "true" : "false",
-              // job_type: this.state.active,
-              employee_type: this.state.workType,
+              reportingManagerDeptId:department,
+            reportingManager:reportingManager,
+              // location:selectedLocation,
+              // workplace:selectedCountry,
+              // roleType:selectedRole,
+              // departmentId:selectedDept,
+              job_type: active ? "Full Time" : "Part Time",
+              type: typeInd ? "true" : "false",
+              assignedTo: selectedOption ? selectedOption.employeeId : userId,
+              employee_type: workType,
             },"cretiondate");
             resetForm();
           }}
@@ -261,9 +330,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             <Form className="form-background">
                   <div class="flex justify-between  pr-2 max-sm:flex-col">
                 <div class=" w-[47.5%] max-sm:w-wk">
-                  <Spacer />
-                  <div class=" flex flex-nowrap justify-between" >
-                  <FastField name="imageId" component={Upload} />
+                 
+                  <div class=" flex flex-nowrap justify-between mt-3" >
+                  {/* <FastField name="imageId" component={Upload} /> */}
+                  <FastField name="imageId" component={PostImageUpld} />
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
                     {/* <div class=" w-1/3 max-sm:w-full">
@@ -331,7 +401,9 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
                   </div>
                   </div>
-                  <div>
+                
+                  <div class=" flex justify-between" >
+                  <div class=" w-[70%] flex flex-col max-sm:w-wk">
                     <Field
                       isRequired
                       name="emailId"
@@ -345,9 +417,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       inlineLabel
                       />
                   </div>
-                  <div class=" flex justify-between" >
-                  
-                    <div class="w-w47.5 max-sm:w-wk">
+                    <div class=" max-sm:w-wk">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -357,9 +427,14 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                           defaultMessage="Currency"
                         />}
                         isColumn
-                        selectType="currencyName"
+                        // selectType="currencyName"
                         isRequired
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
                       
                       />
                     </div>
@@ -367,31 +442,28 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   <div class="flex justify-between max-sm:flex-col">
                   <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk " >
                     <div class=" w-w47.5 max-sm:w-wk ">
-                      <Field
+                    <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
-                        label={<FormattedMessage
-                          id="app.personal"
-                          defaultMessage="Personal"
-                        />}
-                        placeholder="Select"
-                        isColumn
-                        options={
-                          Array.isArray(dialCodeNameOption)
-                            ? dialCodeNameOption
-                            : []
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
+                          />
                         }
-                        component={SelectComponent}
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
-                        />
+                      />
                         </div>
                          <div class=" w-w47.5 max-sm:w-wk">
                       <Field
                         type="text"
                         name="mobileNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                         label="Personal"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -403,30 +475,28 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
                   <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk" >
                     <div class="w-w47.5 max-sm:w-wk">
-                      <Field
+                    <FastField
                         name="countryDialCode1"
                         isColumnWithoutNoCreate
-                        label={<FormattedMessage
-                          id="app.countryDialCode1"
-                          defaultMessage="Work #"
-                        />}
-                        placeholder="Select"
-                        isColumn
-                        options={
-                          Array.isArray(dialCodeNameOption)
-                            ? dialCodeNameOption
-                            : []
+                        label={
+                          <FormattedMessage
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
+                          />
                         }
-                        component={SelectComponent}
+                        isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
+                        component={SearchSelect}
                         inlineLabel
-                        />
+                      />
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                       <Field
                         type="text"
                         name="phoneNo"
-                        label="Mobile #"
-                        placeholder="Mobile #"
+                         label="Work #"
+                        placeholder="Input"
                         component={InputComponent}
                         inlineLabel
                         width={"100%"}
@@ -437,11 +507,11 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
                   <div class=" flex justify-between max-sm:flex-col" >
                   <div class=" w-w48 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofjoining"
                       defaultMessage=" Date Of Joining"
                     />
-                    </StyledLabel> */}
+                    </div> */}
                     <Field
                       isRequired
                       name="dateOfJoining"
@@ -459,11 +529,11 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     />
                   </div>
                   <div class=" w-w47.5 max-sm:w-wk">
-                    {/* <StyledLabel><FormattedMessage
+                    {/* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.dateofbirth"
                       defaultMessage=" Date Of Birth"
                     />
-                    </StyledLabel> */}
+                    </div> */}
                     <Field
                       isRequired
                       name="dob"
@@ -502,12 +572,12 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)",marginTop:"0.5rem" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
-                  Address for  Correspondence</HeaderLabel>
+                      <div class=" text-[white] text-xs" >
+                  Address for  Correspondence</div>
                   </div>
                     </div>
              
-                  {/* <Spacer /> */}
+              
                   <FieldArray
                     name="address"
                     label="Address"
@@ -523,37 +593,128 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
  
 
                 </div>
-                <div class=" w-[47.5%] max-sm:w-wk ">
 
-<div class=" flex justify-between max-sm:flex-col" >
-                      <div class=" w-w48 flex flex flex-col max-sm:w-wk">
-                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
-                      <select 
-                        style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleDeptChange}>
+          
+                <div class=" w-[47.5%] max-sm:w-wk ">
+                <div class=" w-full mt-2">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Time Zone</div>
+                    <Field
+                      name="timeZone"
+                      type="text"
+                      placeholder="Select Time Zone"
+                      noLabel
+                      // disabled={!values.productionInd && !values.inventoryInd}
+                      isRequired
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(timeZoneOption) ? timeZoneOption : []
+                      }
+                    />
+                  </div>
+                {/* <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] m-[0.1rem 0 0.02rem 0.2rem] ">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-[0.1rem]">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.assignedToList.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.empName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.empName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox> */}
+<div class=" flex justify-between max-sm:flex-col mt-4" >
+                      <div class=" w-w48 flex flex-col max-sm:w-wk">
+                   {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+                      <select  className="customize-select"
+                      
+                      onChange={handleDeptChange}>
           <option value="">Select </option>
-          {this.props.departments.map((item, index) => (
+          {props.departments.map((item, index) => (
             <option 
            
             key={index} value={item.departmentId}>
               {item.departmentName}
             </option>
           ))}
-        </select>
-                      {/* <Field
-  isRequired  // This makes the field mandatory
-  name="departmentId"
-  label={<FormattedMessage
-    id="app.department"
-    defaultMessage="Department"
-  />}
-  isColumnWithoutNoCreate
-  component={SearchSelect}
-  value={values.departmentId}
-  selectType="departmentName"
-  isColumn
-  inlineLabel
-/> */}
+        </select> */}
+          <Field
+                          name="departmentId"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.Department"
+                              defaultMessage="Department"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(DepartmentOptions)
+                              ? DepartmentOptions
+                              : []
+                          }
+                          value={values.departmentId}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
+
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                     <FastField
@@ -574,26 +735,27 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
                   <div class=" flex justify-between " >
                   <div class=" w-w48 flex flex-col max-sm:w-wk">
-                  <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
+                  {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
                 
                   <select
                  
-                 style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleRoleChange}
+                 className="customize-select"
+                      onChange={handleRoleChange}
                     >
           <option value="">Select </option>
-          {this.state.role.map((item, index) => (
+          {props.roles.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
              value={item.roleTypeId}>
               {item.roleType}
             </option>
           ))}
-        </select>
+        </select> */}
         </div>
         </div>
 
-{/* <Field
+        <div class=" w-w48 max-sm:w-wk">
+ <Field
                     name="roleType"
                     label={<FormattedMessage
                       id="app.role"
@@ -603,12 +765,12 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     component={SelectComponent}
                     options={
                       Array.isArray(
-                        this.getRoleOptions(
+                        getRoleOptions(
                           "departmentId",
                           values.departmentId
                         )
                       )
-                        ? this.getRoleOptions(
+                        ? getRoleOptions(
                             "departmentId",
                             values.departmentId
                           )
@@ -628,75 +790,97 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     // width={"100%"}
                     // isColumn
                     // selectType="roleType"
-                     /> */}
+                     /> 
+                      </div>
+               
                     
                       <div class=" flex justify-between max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
-                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
+                      <div class=" w-w48 flex flex-col max-sm:w-wk">
+                      {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select 
-                        style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleCountryChange}>
+                        className="customize-select"
+                      onChange={handleCountryChange}>
           <option value="">Select </option>
-          {this.props.countries.map((item, index) => (
+          {props.countries.map((item, index) => (
             <option key={index} value={item.country_name}>
               {item.country_name}
             </option>
           ))}
-        </select>
-                      {/* <Field
-                        isRequired
-                        name="workplace"
-                        isColumnWithoutNoCreate
-                        label={<FormattedMessage
-                          id="app.workPlace"
-                          defaultMessage="Work Place "
-                        />}
-                        isColumn
-                        placeholder='+31'
-                        options={
-                          Array.isArray(countryNameOption)
-                            ? countryNameOption
-                            : []
-                        }
-                        component={SelectComponent}
-                        inlineLabel
-                      /> */}
+        </select> */}
+                     <Field
+                          name="workplace"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.Workplace"
+                              defaultMessage="Workplace"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(WorkplaceOptions)
+                              ? WorkplaceOptions
+                              : []
+                          }
+                          value={values.workplace}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
                     </div>
                
-                    <div class=" w-w48 flex flex-col max-sm:w-wk">
-                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
-                    <select
-                 style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleLocationChange}
+                    <div class=" w-w47.5 flex flex-col max-sm:w-wk">
+                    {/* <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
+                    <select  className="customize-select"
+                //  style={{ border: "0.06em solid #aaa" }}
+                      onChange={handleLocationChange}
                     >
           <option value="">Select </option>
-          {this.state.locations.map((item, index) => (
+          {props.showLocation.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
              value={item.locationDetailsId}>
               {item.locationName}
             </option>
           ))}
-        </select>
-                    {/* <Field
-  name="location"
-  label={<FormattedMessage id="app.location" defaultMessage="Location" />}
-  isColumnWithoutNoCreate
-  component={SelectComponent}
-  options={
-    this.getLocationNameOption("country_id", values.country_id) || []
-  }
-  value={values.location}
-  filterOption={{
-    filterType: "country_id",
-    filterValue: values.country_id,
-  }}
-  disabled={!values.country_id}
-  isColumn
-  margintop={"0"}
-  inlineLabel
-  style={{ flexBasis: "80%" }}
-/> */}
+        </select> */}
+
+<Field
+                    name="location"
+                    label={<FormattedMessage
+                      id="app.location"
+                      defaultMessage="Location"
+                    />}
+                    isColumnWithoutNoCreate
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        getLocationOptions(
+                          "workplace",
+                          values.workplace
+                        )
+                      )
+                        ? getLocationOptions(
+                            "workplace",
+                            values.workplace
+                          )
+                        : []
+                    }
+                    value={values.location}
+                    filterOption={{
+                      filterType: "workplace",
+                      filterValue: values.workplace,
+                    }}
+                    disabled={!values.workplace}
+                    isColumn
+                    margintop={"0"}
+                    inlineLabel
+                   
+                    // value={values.roleTypeId}
+                    // width={"100%"}
+                    // isColumn
+                    // selectType="roleType"
+                     /> 
 
 
                     {/* <Field
@@ -720,58 +904,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       /> */}
                     </div>
                   </div>
-                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
-
-
-                  <div class=" flex justify-between mt-2 max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
-                      <Field
-  isRequired
-  name="departmentId"
-  label={<FormattedMessage id="app.department" defaultMessage="Department" />}
-  isColumnWithoutNoCreate
-  component={SearchSelect}
-  value={values.departmentId}
-  selectType="departmentName"
-  isColumn
-  inlineLabel
-  onChange={(selectedDepartment) => {
-    setFieldValue("departmentId", selectedDepartment);
-    // Handle other updates here, if needed
-  }}
-/>
-                     </div>
-                    
-                     <div class="w-w47.5 mt-2 max-sm:w-wk">
-                     <Field
-  name="reportingManager"
-  isColumnWithoutNoCreate
-  label={<FormattedMessage id="app.reportingManager" defaultMessage="Reporting Manager" />}
-  component={SelectComponent}
-  options={
-    values.departmentId
-      ? (Array.isArray(
-          this.getEmployeesbyDepartment("departmentId", values.departmentId)
-        )
-          ? this.getEmployeesbyDepartment(
-              "departmentId",
-              values.departmentId
-            )
-          : [])
-      : [] // Set it to an empty array or a default value when department is not selected
-  }
-  isColumn
-  value={values.reportingManager}
-  filterOption={{
-    filterType: "departmentId",
-    filterValue: values.departmentId,
-  }}
-  disabled={!values.departmentId}
-  inlineLabel
-/>
-
-              </div>
-              </div>
+             
                   {/* <Field
                     name="workplace"
                     label={<FormattedMessage
@@ -784,17 +917,14 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                      /> */}
                          <div class=" flex " >
                   <div>
-                    <StyledLabel>
-                      <FormattedMessage
-                        id="app.jobtype"
-                        defaultMessage="Job Type"
-                      />
-                    </StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
+                    Job Type
+                    </div>
                     <Switch
-                          checked={this.state.active}
-                          onChange={this.handleJobType}
-                          checkedChildren="Full Time"
-                          unCheckedChildren="Part Time"
+                          checked={active}
+                          onChange={handleJobType}
+                          checkedChildren="Part Time"
+                          unCheckedChildren="Full Time"
                         />
                     {/* <ButtonGroup name="job_type">
                       <StatusIcon
@@ -815,66 +945,102 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       />
                     </ButtonGroup> */}
                   </div>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-                  <div>
-                    <StyledLabel>
+        
+                  <div class=" ml-4">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <FormattedMessage
                         id="app.category"
                         defaultMessage="Category"
                       />
-                    </StyledLabel>
+                    </div>
                     <Switch
-                          checked={this.state.typeInd}
-                          onChange={this.handleType}
+                          checked={typeInd}
+                          onChange={handleType}
                           checkedChildren="External"
                           unCheckedChildren="Internal"
                         />
                
                   </div>
                   </div>
-                  <Spacer />
-                  <div>
-                    <StyledLabel><FormattedMessage
+                
+                  <div class=" mt-3">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                       id="app.employeetype"
                       defaultMessage="Employee Type"
                     />
-                    </StyledLabel>
-                    <Spacer />
+                    </div>
+                 
                     <Radio.Group
                       name="radiogroup"
-                      defaultValue={this.state.workType}
+                      defaultValue={workType}
                     >
                       <Radio
+                        style={{marginLeft:"0.5rem"}}
                         value={"Employee"}
-                        onChange={() => this.radioClick("employee")}
+                        onChange={() => radioClick("employee")}
                       >
                         Employee
                       </Radio>
-                      &nbsp;&nbsp;
+                  {typeInd === true && (
                       <Radio
+                      style={{marginLeft:"0.5rem"}}
                         value={"contractor"}
-                        onChange={() => this.radioClick("contractor")}
+                        onChange={() => radioClick("contractor")}
                       >
                         Contractor
                       </Radio>
-                      &nbsp;&nbsp;
+                    )}
                       <Radio
+                        style={{marginLeft:"0.5rem"}}
                         value={"intern"}
-                        onChange={() => this.radioClick("intern")}
+                        onChange={() => radioClick("intern")}
                       >
                         Intern
                       </Radio>
-                      &nbsp;&nbsp;
+                 
                     </Radio.Group>
                   </div>
+                  <div class="mt-2">
+                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label>
+                    </div>
+
+
+                  <div class=" flex justify-between  max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
+                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+                      <Select
+                    className="w-[250px]"
+                        value={department}
+                        onChange={(value) => handleDepartment(value)}
+                    >
+                        {props.departments.map((a) => {
+                            return <Option value={a.departmentId}>{a.departmentName}</Option>;
+                        })}
+                    </Select>
+                     </div>
+                    
+                     <div class="w-w48  max-sm:w-wk">
+                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reporting Manager</label>
+                     <Select
+                        className="w-[250px]"
+                        value={reportingManager}
+                        onChange={(value) => handlereportingManager(value)}
+                    >
+                        {props.departmentwiseUser.map((a) => {
+                            return <Option value={a.employeeId}>{a.empName}</Option>;
+                        })}
+                    </Select> 
+
+              </div>
+              </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+           
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   htmlType="submit"
                   type="primary"
-                  Loading={addingEmployee}
+                  loading={addingEmployee}
                 >
                   Submit
                 </Button>
@@ -885,11 +1051,15 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
         </Formik>
       </>
     );
-  }
+  
 }
-const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,location,currency,settings, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
+  currencies: auth.currencies,
+  timeZone: auth.timeZone,
+  fullName: auth.userDetails.fullName,
+  assignedToList:employee.assignedToList,
   organizationId: auth.userDetails.organizationId,
   orgId: auth.userDetails.organizationId,
   countries: auth.countries,
@@ -899,6 +1069,7 @@ const mapStateToProps = ({ auth,role,location, employee,designations,departments
   designationTypeId:designations.designationTypeId,
   employees:employee.employees,
   departments: departments.departments,
+  departmentwiseUser:settings.departmentwiseUser,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
@@ -906,9 +1077,12 @@ const mapDispatchToProps = (dispatch) =>
      getCountries,
      getDesignations,
       getDepartments,
+      getDepartmentwiserUser,
       getRoles,
       getlocation,
-      getEmployeelist,
+      getCurrency,
+      getTimeZone,
+      getAssignedToList,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);
 function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {

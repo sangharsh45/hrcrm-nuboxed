@@ -6,16 +6,17 @@ import { Tooltip, Button, Input } from "antd";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-import { Link } from "../../../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import { ActionIcon } from "../../../../../../Components/Utils";
 import styled from "styled-components";
 import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../../../InvestorAction";
+import { MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
+import dayjs from "dayjs";
 
 const InvestorUpdateContactModal = lazy(() =>
   import("../InvestorContact/InvestorUpdateContactModal")
@@ -163,39 +164,46 @@ class InvestorLinkedContact extends Component {
       invstrContactUpdateModal,
     } = this.props;
 
-    const columns = [
-      {
-        title: "",
-        dataIndex: "",
-        width: "5%",
-        render: (name, item, i) => {
-          console.log(item);
-        },
-      },
-      {
-        title: <FormattedMessage id="app.name" defaultMessage="Name" />,
-        width: "20%",
-        dataIndex:"fullName",
-        ...this.getColumnSearchProps("fullName"),
-        render: (name, item, i) => {
-          
-          return (
-            <>
-              {/* {fullName} */}
-              <Link
-                toUrl={`/contact/${item.contactId}`}
-                title={`${item.fullName || ""}`}
-              />
-            </>
-          );
-        },
-      },
-      {
-        title: "",
-        width: "2%",
-        render: (name, item, i) => {
-          //  console.log(props.candidateByUserId.address&&props.candidateByUserId.address.length&&props.candidateByUserId.address[0].address1)
-          const dataLoc = ` Address : ${
+  
+
+    // if (fetchingsInvestorContactError) {
+    //   return <APIFailed />;
+    // }
+    const tab = document.querySelector(".ant-layout-sider-children");
+    const tableHeight = tab && tab.offsetHeight * 0.75;
+    return (
+      <>
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[18.5rem]">
+        <FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                /></div>
+        <div className=" md:w-[13.1rem]"><FormattedMessage
+                  id="app.Email"
+                  defaultMessage="Email"
+                /></div>
+        <div className="md:w-[8.1rem]"><FormattedMessage
+                  id="app.mobile"
+                  defaultMessage="Mobile #"
+                /></div>
+        <div className="md:w-[9.2rem]"><FormattedMessage
+                  id="app.Department"
+                  defaultMessage="Department"
+                /></div>
+                     <div className="md:w-[8rem]"><FormattedMessage
+                  id="app.Designation"
+                  defaultMessage="Designation"
+                /></div>
+        
+        <div className="w-[5.2rem]"></div>
+
+      </div>
+   
+        
+      {contactsbyInvestorId.map((item) => { 
+        const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
           } 
            Street : ${
@@ -211,100 +219,112 @@ class InvestorLinkedContact extends Component {
            PostalCode : ${
              item.address && item.address.length && item.address[0].postalCode
            } `;
-          return (
-            <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+         const diff = Math.abs(
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
+          );
+        
+                    return (
+                        <div>
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                                >
+                                     
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+<div>
+                                <SubTitle>
+            <MultiAvatar2
+              primaryTitle={item.fullName}
+              imageId={item.imageId}
+              imageURL={item.imageURL}
+              imgWidth={"1.8em"}
+              imgHeight={"1.8em"}
+            />
+          </SubTitle></div>
+          &nbsp;
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[12rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`/contact/${item.contactId}`} title={item.fullName}>
+      {item.fullName}
+  </Link>                                               
+         {/* <Link
+          toUrl={`contact/${item.contactId}`}
+          title={`${item.fullName}`}
+        >{item.fullName}</Link> */}
+        &nbsp;&nbsp;
+        {date === currentdate ? (
+          <span class="text-xs"
+            style={{
+              color: "tomato",
+              fontWeight: "bold",
+            }}
+          >
+            New
+          </span>
+        ) : null}
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="flex">
+
+                             
+                                <div className=" flex font-medium flex-col md:w-[13.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                    <div class="text-sm text-cardBody font-poppins">
+                                         {item.emailId}
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-[7.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                  <div class="text-sm text-cardBody font-poppins">
+                                  {item.countryDialCode} {item.mobileNumber}
+                                  </div>
+                              </div>
+                              </div>
+                              <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+
+  <div className="text-sm text-cardBody font-poppins text-center">
+    {item.department}
+  </div>
+</div>
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.designation}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
               <span
-                style={{
-                  cursor: "pointer",
-                }}
+                className="!text-base cursor-pointer text-[#960a0a]"
               >
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
               </span>
             </Tooltip>
-          );
-        },
-      },
-      {
-        title: <FormattedMessage id="app.email" defaultMessage="Email" />,
-        width: "25%",
-        dataIndex: "emailId",
-      },
-      {
-        title: <FormattedMessage id="app.mobileno" defaultMessage="Mobile #" />,
-        width: "15%",
-        dataIndex: "mobileNumber",
-        render: (name, item, i) => {
-          return (
-            <span>
-              {item.countryDialCode} {item.mobileNumber}
-            </span>
-          );
-        },
-      },
 
-      {
-        title: (
-          <FormattedMessage id="app.department" defaultMessage="Department" />
-        ),
-        dataIndex: "department",
-        width: "15%",
-        filters: departmentNameOption,
-        onFilter: (value, record) => {
-          return record.department === value;
-        },
-        sorter: (a, b) => {
-          const departmentA = a.department;
-          const departmentB = b.department;
-          if (departmentA < departmentB) {
-            return -1;
-          }
-          if (departmentA > departmentB) {
-            return 1;
-          }
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
 
-          // names must be equal
-          return 0;
-        },
-      },
-
-      {
-        //title: "Designation",
-        title: (
-          <FormattedMessage id="app.designation" defaultMessage="Designation" />
-        ),
-        dataIndex: "designation",
-        width: "15%",
-        // defaultSortOrder: "descend",
-        filters: designationTypeOption,
-        onFilter: (value, record) => {
-          return record.designation === value;
-        },
-        sorter: (a, b) => {
-          const designationA = a.designation;
-          const designationB = b.designation;
-          if (designationA < designationB) {
-            return -1;
-          }
-          if (designationA > designationB) {
-            return 1;
-          }
-
-          // names must be equal
-          return 0;
-        },
-      },
-      {
-        title: "",
-        dataIndex: "contactId",
-        width: "2%",
-        render: (name, item, i) => {
-          console.log(name);
-          console.log(item);
-          return (
-            <Tooltip title="LinkedIn">
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <Tooltip title="LinkedIn">
               <span
                 //type="edit"
-                style={{ cursor: "pointer" }}
+                className="!text-base cursor-pointer"
                 onClick={() => {}}
               >
                 {" "}
@@ -313,39 +333,28 @@ class InvestorLinkedContact extends Component {
                 </a>
               </span>
             </Tooltip>
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <Tooltip title="Edit">
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <Tooltip title="Edit">
               <span
-                style={{ cursor: "pointer" }}
+                
                 onClick={() => {
                   this.handleRowData(item);
                  handleUpdateInvestorContactModal(true);
                 }}
               >
-                <BorderColorIcon style={{ fontSize: "0.8rem", }} />
+                <BorderColorIcon className="!text-base cursor-pointer text-[tomato]" />
               </span>
             </Tooltip>
-          );
-        },
-      },
 
-      {
-        title: "",
-        dataIndex: "contactId",
-        width: "2%",
-        render: (name, item, i) => {
-          console.log(name);
-          console.log(item);
-          return (
-            <StyledPopconfirm
+                                    </div>
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <StyledPopconfirm
               placement="bottom"
               //title="Do you wish to detach?"
               title={
@@ -372,49 +381,19 @@ class InvestorLinkedContact extends Component {
                 style={{ color: "#fb8500" }}
               />
             </StyledPopconfirm>
-          );
-        },
-      },
-      // {
-      //   title: "Portal Access",
-      //   // dataIndex: "active",
-      //   width: "12%",
-      //   // render: (name, item, i) => {
-      //   //   console.log(item.thirdPartyAccessInd);
-      //   //   return (
-      //   //     <span>
-      //   //       {item.thirdPartyAccessInd === true && (
-      //   //         <CustomerContactActiveToggle
-      //   //           accessInd={item.accessInd}
-      //   //           contactId={item.contactId}
-      //   //           emailId={item.emailId}
-      //   //           thirdPartyAccessInd={item.thirdPartyAccessInd}
-      //   //         />
-      //   //       )}
-      //   //     </span>
-      //   //   );
-      //   // },
-      // },
-    ];
 
-    // if (fetchingsInvestorContactError) {
-    //   return <APIFailed />;
-    // }
-    const tab = document.querySelector(".ant-layout-sider-children");
-    const tableHeight = tab && tab.offsetHeight * 0.75;
-    return (
-      <>
-        <StyledTable
-          // rowSelection={rowSelection}
-          rowKey="contactId"
-          columns={columns}
-          pagination={false}
-          scroll={{ y: tableHeight }}
-          dataSource={contactsbyInvestorId}
-          Loading={fetchingsInvestorContact || fetchingsInvestorContactError}
-          onChange={console.log("contact onChangeHere...")}
-  
-        />
+                                    </div>
+                                   
+                                </div>
+                             
+                            </div>
+                        </div>
+
+
+                    )
+                })}
+                    
+      </div>
         <InvestorUpdateContactModal
            currentRowData={this.state.currentRowData}
           invstrContactUpdateModal={invstrContactUpdateModal}

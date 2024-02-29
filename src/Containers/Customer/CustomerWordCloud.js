@@ -36,12 +36,7 @@ function generateRandomColor() {
         return (
         
           <>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                width: "100%",
-              }}
+            <div class=" flex flex-wrap w-full"
             >
             
 

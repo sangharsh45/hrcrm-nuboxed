@@ -1,17 +1,16 @@
-import React, {  useEffect, useState, } from "react";
+import React, { useState, lazy,} from "react";
 import { MultiAvatar2, } from '../../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Select } from "antd";
+import BadgeIcon from '@mui/icons-material/Badge';
 import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import styled from 'styled-components'
+import PhoneIcon from '@mui/icons-material/Phone';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getEmployeelist,
@@ -22,58 +21,35 @@ import {
     handleEmployeeDocumentDrawerModal,
     getEmployeeDocument,
     handleUpdateEmployeeModal,
+    handleOnboardingEmployeeModal,
     handleNotifyDrawer
   } from "../../EmployeeAction";
-import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
-import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
-import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
-import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
-import UpdateEmployeeModal from "./UpdateEmployeeModal";
-import OpenNotifyDrawer from "./OpenNotifyDrawer";
+import { Link } from 'react-router-dom';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { elipsize } from "../../../../Helpers/Function/Functions";
+const EmployeeDrawerForAdmin =lazy(()=>import("../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin"));
+const EmployeePulseDrawerModal =lazy(()=>import("../EmployeeTable/EmployeePulseDrawerModal"));
+const EmployeeDocumentDrawerModal =lazy(()=>import("./EmployeeDocumentDrawerModal"));
+const UpdateEmployeeModal =lazy(()=>import("./UpdateEmployeeModal"));
+const OpenNotifyDrawer =lazy(()=>import("./OpenNotifyDrawer"));
+const StepperEmployeeModal =lazy(()=>import("./StepperEmployeeModal"));
 
 
-const { Option } = Select;
+
 function EmployeeCardView (props) {
-  const [page, setPage] = useState(0);
-  const [storedData,setStoredData]=useState({});
-const handleStoredData=(locs)=>{
-  setStoredData(locs);
-}
-useEffect(() => {
-  props.getEmployeelist("cretiondate");
- 
-}, []);
-function handleChange(data) {
-  props.Candidatesorttype(props.userId,data);
-  
-}
 
-const [currentCandidateId, setCurrentCandidateId] = useState("");
-function handleSetCurrentCandidateId(candidateId) {
-    setCurrentCandidateId(candidateId);
-    
-    console.log(candidateId);
-  } 
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
-
+  const [isCopied, setIsCopied] = useState(false);
 
 function handleSetCurrentEmployeeId(employeeId,) {
   setCurrentEmployeeId(employeeId,);
  
 }
   if (props.fetchingEmployee) {
-    return <BundleLoader/>
-  
-    
-;
-  }
+    return <BundleLoader/>;}
+
   const {
-    fetchingEmployee,
-    type,
     user,
-    filteredData,
-    fetchingEmployeeError,
-    employees,
     handleEmployeeDrawerForAdmin,
     employeeDrawerVisibleForAdmin,
   } = props;
@@ -83,14 +59,31 @@ function handleSetCurrentEmployeeId(employeeId,) {
             <>
             
             <div class=" h-h86 overflow-auto overflow-x-auto">
-             
-              <CardWrapper>      
-              {props.filteredData.map((item) => {
-                console.log("noOfDocPending",item.noOfDocPending)
-      
+             {props.employees=="Data not Found" ? "Data not Found" :
+            <div class="flex flex-wrap  w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">  
+              {props.filteredData.length === 0 ?<span class=" flex items-center mt-8">Data Not Available</span> :props.filteredData.map((item) => {
+               
+                const handleCopyClick = () => {
+                  const emailElement = document.createElement('textarea');
+                  emailElement.value = item.emailId || "";
+                  document.body.appendChild(emailElement);
+                  emailElement.select();
+                  document.execCommand('copy');
+                  document.body.removeChild(emailElement);
+              
+                  setIsCopied(true);
+              
+                  // Reset the copied state after a short delay
+                  setTimeout(() => {
+                    setIsCopied(false);
+                  }, 1500);
+                };
+                const tooltipContent = `${item.workplace}, ${item.locationName}`;
+                const showTooltip = tooltipContent.trim() !== ''; 
                  return (
-                    <CardElement>
-                      <CardImage>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
+                  text-[#444444] my-3 p-1 ml-3 w-[16rem] flex flex-col  max-sm:w-wk max-sm:ml-0 ">
+                      <div class="flex">
                    <Tooltip 
                    title={item.country}
                    >
@@ -107,25 +100,28 @@ function handleSetCurrentEmployeeId(employeeId,) {
                             imgRadius={20}
                           />
                          </div>
-                      {/* <CardDescription> */}
-                      <div class="font-semibold ">
-                        <Header>
-                        <EmployeeDetailsView
-   employeeId={item.employeeId}
-   fullName={item.fullName}
-          />       
-                        </Header> 
+              
+                      <div>
+                            {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`employee/${item.employeeId}`}>{item.fullName}</a> */}
+                      
+
+                      <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  
+                      to={`/employee/${item.employeeId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>
+
                         </div>
                         </div> 
         
                          
-                        </CardImage>
+                        </div>
                         
                         <div class=" flex flex-row justify-evenly  w-full items-end">
                        
                         {/* <div class=" text-sm text-cardBody font-medium font-poppins">Department   </div> */}
                       <div class=" font-normal text-xs text-cardBody font-poppins">{item.department === null ? "Not Available" :item.department}</div>
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType  === null ? "Not Available" :item.roleType}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleTypeName  === null ? "Not Available" :item.roleTypeName}</div>
           
                    
                       
@@ -136,25 +132,43 @@ function handleSetCurrentEmployeeId(employeeId,) {
           
                       </div> 
                    
-                       <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
-          <div class=" font-normal text-xs  mt-2 text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
-          <div class=" font-normal text-xs mt-2 text-cardBody font-poppins ">Reports To:  {item.reportingManagerName}</div>
-          <div class=" flex flex-row justify-evenly mt-[0.3rem] w-full items-end">
+                       <div class=" font-normal text-xs text-cardBody font-poppins mt-1 "><PhoneIcon  className="!text-base cursor-pointer text-[grey]"/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
+          <div class=" font-normal text-xs  mt-1 text-cardBody font-poppins flex justify-between ">
+            <div>
+            <DraftsIcon  className="!text-base cursor-pointer text-green-400 mr-1" /> 
+          <Tooltip title={item.emailId}>
+          {elipsize(item.emailId || "", 25)}
+          </Tooltip>
+          </div>
+          <div>
+          <ContentCopyIcon
+        className={`!text-base cursor-pointer ${isCopied ? 'text-blue-400' : 'text-gray-400'}`}
+        onClick={handleCopyClick}
+      />
+      </div>
+          </div>
+          <div class=" font-normal text-xs mt-1 text-cardBody font-poppins ">Reports To:    <span>
+          {item.reportingManagerName 
+                        ? `${item.reportingManagerName}`
+                        : <label class="text-[red]" >Not Assigned</label>}
+                      </span>
+         </div>
+          <div class=" flex flex-row justify-between mt-[0.5rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
        
-          <span
-              style={{ cursor: "pointer" }}
+          <span class=" cursor-pointer"
             
             >
               
-              {item.location}
+              {item.locationName}
          
      </span>
    
            </div>
+           <div class="flex">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
-          <span
-              style={{ cursor: "pointer" }}
+          <span class=" cursor-pointer"
+         
               onClick={() => {
                 // props.getCandidateById(item.candidateId);
                  props.getEmployeeDocument(item.employeeId);
@@ -163,13 +177,15 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 handleSetCurrentEmployeeId(item)
               }}
             >
-              <MonitorHeartIcon  style={{ fontSize: "1rem", color: "#df9697" }}/>
+               <Tooltip title="Pulse">
+              <MonitorHeartIcon className="!text-base cursor-pointer text-[#df9697]" />
+              </Tooltip>
      </span>
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
             {/* {user.userAccessPlusInd === true ?( */}
           <span
-              style={{ cursor: "pointer" }}
+              className=" cursor-pointer"
               onClick={() => {
                
                 props.handleEmployeeDocumentDrawerModal(true);
@@ -181,29 +197,28 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 count={item.noOfDocPending}
                 overflowCount={999}
               > 
-              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+                  <Tooltip title="Required Documents">
+              <InsertDriveFileIcon  className="!text-base cursor-pointer"/>
+              </Tooltip>
               </Badge>
      </span>
             {/* ):null} */}
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
-           <Tooltip 
-                   title={`${item.workplace} , ${item.location}`}
-                   >
-          <span
-              style={{ cursor: "pointer" }}
-            
-            >
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+           <Tooltip title={showTooltip ? tooltipContent : 'Not available'}>
+                   {/* title={`${item.workplace} , ${item.location}`}
+                   > */}
+           <span>
               
-              <PlaceIcon  style={{ fontSize: "1rem", }}/>
+              <PlaceIcon  className=" !text-base cursor-pointer text-[#960a0a]"/>
          
      </span>
      </Tooltip>
            </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
-           <Tooltip title="Notify">
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+           <Tooltip title="Assign as Admin">
            <CircleNotificationsIcon
-           style={{ cursor: "pointer",fontSize: "1rem" }}
+          className=" !text-base cursor-pointer text-[gold]"
            onClick={() => {
             handleSetCurrentEmployeeId(item);
             props.handleNotifyDrawer(true);
@@ -211,21 +226,32 @@ function handleSetCurrentEmployeeId(employeeId,) {
            />
            </Tooltip>
             </div>
-           <div class=" font-normal text-xs text-cardBody font-poppins ">
-           {user.userUpdateInd === true || user.role === "ADMIN"  && (
-            <Tooltip title="Edit">
-              <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+          
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+            <Tooltip title="Onboarding">
+              <BadgeIcon   className=" !text-base cursor-pointer text-[#709ab3]"
                 onClick={() => {
-                    props.setEditEmployee(item);
-                    handleStoredData(item);
-                    props.handleUpdateEmployeeModal(true);
+                    props.handleOnboardingEmployeeModal(true);
                     handleSetCurrentEmployeeId(item);
                   
                 }}
               />
             </Tooltip>
-            )}
+           </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ml-[0.15rem]">
+           {user.userUpdateInd === true || user.role === "ADMIN"  ? (
+            <Tooltip title="Edit">
+              <BorderColorIcon
+                className=" !text-base cursor-pointer text-[tomato]"
+                onClick={() => {
+                  props.handleUpdateEmployeeModal(true); 
+                  handleSetCurrentEmployeeId(item);
+                   
+                }}
+              />
+            </Tooltip>
+            ):null}
+           </div>
            </div>
            </div>
          
@@ -279,17 +305,25 @@ function handleSetCurrentEmployeeId(employeeId,) {
        
                         </div>  */}
 
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
               </div>
+}
+              </div>
+
               <UpdateEmployeeModal
-                storedData={storedData}
-               singleEmployee={props.singleEmployee}
-       employeeName={currentEmployeeId}
+       currentEmployeeId={currentEmployeeId}
         updateEmployeeModal={props.updateEmployeeModal}
         handleUpdateEmployeeModal={props.handleUpdateEmployeeModal}
+      />
+               <StepperEmployeeModal
+               currentEmployeeId={currentEmployeeId}
+               employeeName={currentEmployeeId}
+              //  singleEmployee={props.singleEmployee}
+              //  employeeName={currentEmployeeId}
+       onboardingEmployeeModal={props.onboardingEmployeeModal}
+        handleOnboardingEmployeeModal={props.handleOnboardingEmployeeModal}
         handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
       />
               <EmployeeDrawerForAdmin
@@ -320,13 +354,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
             </>
       
     
-    )
+    );
               
 }
 
 const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     userId: auth.userDetails.userId,
     updateEmployeeModal:employee.updateEmployeeModal,
+    onboardingEmployeeModal:employee.onboardingEmployeeModal,
     employees: employee.employees,
     user: auth.userDetails,
     roles: role.roles,
@@ -352,6 +387,7 @@ const mapDispatchToProps = (dispatch) =>
         handleEmployeePulseDrawerModal,
         handleEmployeeDocumentDrawerModal,
         handleUpdateEmployeeModal,
+        handleOnboardingEmployeeModal,
         getEmployeeTreeMap,
         getEmployeeDocument,
         handleNotifyDrawer
@@ -360,139 +396,3 @@ const mapDispatchToProps = (dispatch) =>
   )
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeCardView)
-
-const MainWrapper = styled.div`
-  /* */
-  margin: 0px 20px;
-  @media only screen and (max-width: 600px) {
-  }
-`
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.35rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 9.5rem;
-    color: rgb(68,68,68);
-    margin: 1rem;
-    padding: 0.2rem;
-    width: 19vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: 22rem;
-    
-  }
-`
-const CardDescription = styled.div`
-  
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-const CardImage = styled.div`
-  
-  width:200;
-  display:flex;
-  height:200
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    flex-direction:column
-  }
-`
-const WithOutImage = styled.div`
-  
-  width:200px;
-  height:200px;
-  display:flex;
-    align-items: center;
-    flex-direction:column
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction:column
-  }
-`
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`
-const Desc = styled.p`
-  height: 0px;
-`
-const Price = styled.div`
-  height: 1.5em;
-  font-weight: 700;
-  font-family: Poppins;
-  font-size: 1em;
-  white-space: nowrap;
-`
-
-const AppIcon = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "123%" }}
-  ></i>
-);
-
-const AppIcon1 = (props) => (
-  <i
-    className={`fas fa-heartbeat ${props.className}`}
-    style={{ fontSize: "145%" }}
-  ></i>
-);
-
-const PulseIcon = styled(AppIcon)`
-  color: #df9697;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;
-const PulseIcon1 = styled(AppIcon1)`
-  color: green;
-  &:hover {
-    // background: yellow;
-    color: blue;
-  }
-`;

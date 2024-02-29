@@ -11,6 +11,9 @@ const initialState = {
   fetchingInventoryListError: false,
   inventory: [],
 
+  addMaterialReceived: false,
+
+  addAwbNo: false,
   addingpickupdate: false,
   addingpickupdateError: false,
 
@@ -23,6 +26,10 @@ const initialState = {
   fetchingInventoryByIdError: false,
   inventoryDetailById: [],
 
+  fetchingPartNoByItem: false,
+  fetchingPartNoByItemError: false,
+  partNoByitem: [],
+
   // add inventory output
   addingInventoryOutput: false,
   addingInventoryOutputError: false,
@@ -32,10 +39,15 @@ const initialState = {
   updatingValidationInRecive: false,
   updatingValidationInReciveError: false,
 
+  transferingPoGrnToStock: false,
+  transferingPoGrnToStockError: false,
   //output table
   fetchingAllInventoryOutput: false,
   fetchingAllInventoryOutputError: false,
   allInventoryOutput: [],
+
+  generatingGrnForPo: false,
+  generatingGrnForPoError: false,
 
   //consumption table
   fetchingAllInventoryConsumption: false,
@@ -46,6 +58,8 @@ const initialState = {
   addingInventoryConsumption: false,
   addingInventoryConsumptionError: false,
 
+  updatingReceivedDamagedUnit: false,
+  updatingReceivedDamagedUnitError: false,
   //edit
   setEditingInventory: {},
   //received
@@ -92,6 +106,8 @@ const initialState = {
   fetchingReceivedDetailsList: false,
   fetchingReceivedDetailsListError: false,
   receivedDetailsList: [],
+
+  addReceiveUnit: false,
 
   //dispatchModal
   dispatchModal: false,
@@ -141,6 +157,8 @@ const initialState = {
   fetchingShipperDetailsList: false,
   fetchingShipperDetailsListError: false,
   shipperDetailsList: [],
+
+  viewType1: "repair",
 
   //delivery date
   addDeliverDate: false,
@@ -200,9 +218,39 @@ const initialState = {
 
   dispatchPhoneData: false,
 
-  fetchingRefurbishProduct:false,
-  fetchingRefurbishProductError:false,
-  refurbishProduct:[],
+  fetchingRefurbishProduct: false,
+  fetchingRefurbishProductError: false,
+  refurbishProduct: [],
+
+  fetchingMaterialReceiveData: false,
+  fetchingMaterialReceiveDataError: false,
+  materialReceiveData: [],
+
+  fetchingMaterialReceiveDetailData: false,
+  fetchingMaterialReceiveDetailDataError: false,
+  receivedDetailData: [],
+
+  fetchingGrnListOfAPo: false,
+  fetchingGrnListOfAPoError: false,
+  poGrnList: [],
+
+  fetchingGrnNoByPoId: false,
+  fetchingGrnNoByPoIdError: true,
+  grnNoByPo: [],
+
+  updatingPartIdOfAnItem: false,
+  updatingPartIdOfAnItemError: false,
+
+  fetchingReceivedUnitOfAnItem: false,
+  fetchingReceivedUnitOfAnItemError: false,
+  reciveUnitData: [],
+
+  showGrnListOfPo: false,
+
+  showStockItem: false,
+
+  fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: false,
+  productionDispatchByLocsId: [],
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -210,8 +258,20 @@ export const inventoryReducer = (state = initialState, action) => {
     case types.SET_INVENTORY_VIEW_TYPE:
       return { ...state, viewType: action.payload };
 
+    case types.SET_INVENTORY_DETAIL_VIEW_TYPE:
+      return {
+        ...state,
+        viewType1: action.payload
+      };
+
     case types.HANDLE_INVENTORY_MODAL:
       return { ...state, addInventoryModal: action.payload };
+
+    case types.HANDLE_RECEIVED_UNIT_MODAL:
+      return { ...state, addReceiveUnit: action.payload };
+
+    case types.HANDLE_MATERIAL_RECEIVED_MODAL:
+      return { ...state, addMaterialReceived: action.payload };
 
     //add Inventory
 
@@ -350,7 +410,8 @@ export const inventoryReducer = (state = initialState, action) => {
       return {
         ...state,
         addingReceivedUser: false,
-        addCreateAwb: false
+        addCreateAwb: false,
+        addAwbNo: false
       };
     case types.ADD_RECEIVED_FAILURE:
       return {
@@ -1001,24 +1062,203 @@ export const inventoryReducer = (state = initialState, action) => {
     case types.HANDLE_PICKUP_MODAL:
       return { ...state, pickUpModal: action.payload };
 
-      case types.HANDLE_CREATE_AWB_MODAL:
+    case types.HANDLE_ADD_AWB_MODAL:
+      return { ...state, addAwbNo: action.payload };
+
+    case types.HANDLE_CREATE_AWB_MODAL:
       return { ...state, addCreateAwb: action.payload };
 
-      case types.GET_PRODUCT_REFURBISH_REQUEST:
-        return { ...state, fetchingRefurbishProduct: true };
-      case types.GET_PRODUCT_REFURBISH_SUCCESS:
-        return {
-          ...state,
-          fetchingRefurbishProduct: false,
-          refurbishProduct: action.payload
-        };
-      case types.GET_PRODUCT_REFURBISH_FAILURE:
-        return {
-          ...state,
-          fetchingRefurbishProduct: false,
-          fetchingRefurbishProductError: true,
-        };
+    case types.GET_PRODUCT_REFURBISH_REQUEST:
+      return { ...state, fetchingRefurbishProduct: true };
+    case types.GET_PRODUCT_REFURBISH_SUCCESS:
+      return {
+        ...state,
+        fetchingRefurbishProduct: false,
+        refurbishProduct: action.payload
+      };
+    case types.GET_PRODUCT_REFURBISH_FAILURE:
+      return {
+        ...state,
+        fetchingRefurbishProduct: false,
+        fetchingRefurbishProductError: true,
+      };
 
+    case types.GET_MATERIAL_RECEIVE_DATA_REQUEST:
+      return { ...state, fetchingMaterialReceiveData: true };
+    case types.GET_MATERIAL_RECEIVE_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceiveData: false,
+        materialReceiveData: action.payload
+      };
+    case types.GET_MATERIAL_RECEIVE_DATA_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceiveData: false,
+        fetchingMaterialReceiveDataError: true,
+      };
+
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_REQUEST:
+      return { ...state, fetchingMaterialReceiveDetailData: true };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        receivedDetailData: action.payload
+      };
+    case types.GET_MATERIAL_RECEIVE_DETAIL_DATA_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialReceiveDetailData: false,
+        fetchingMaterialReceiveDetailDataError: true,
+
+      };
+
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_REQUEST:
+      return { ...state, updatingReceivedDamagedUnit: true };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_SUCCESS:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+        receivedDetailData: state.receivedDetailData.map((item) =>
+          item.suppliesId === action.payload.suppliesId
+            ? action.payload : item
+        ),
+      };
+    case types.UPDATE_RECEIVED_DAMAGED_UNIT_FAILURE:
+      return {
+        ...state,
+        updatingReceivedDamagedUnit: false,
+        updatingReceivedDamagedUnitError: true,
+      };
+
+
+
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_REQUEST:
+      return { ...state, fetchingDispatchProductionLocId: true, fetchingDispatchProductionLocIdError: false };
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_SUCCESS:
+      return { ...state, fetchingDispatchProductionLocId: false, productionDispatchByLocsId: action.payload };
+    case types.GET_DISPATCH_PRODUCTION_BYLOC_ID_FAILURE:
+      return { ...state, fetchingDispatchProductionLocId: false, fetchingDispatchProductionLocIdError: true };
+
+    case types.GENERATE_GRN_FOR_PO_REQUEST:
+      return { ...state, generatingGrnForPo: true };
+    case types.GENERATE_GRN_FOR_PO_SUCCESS:
+      return {
+        ...state,
+        generatingGrnForPo: false,
+        addMaterialReceived: false
+      };
+    case types.GENERATE_GRN_FOR_PO_FAILURE:
+      return {
+        ...state,
+        generatingGrnForPo: false,
+        generatingGrnForPoError: true,
+      };
+
+    case types.GET_PART_NO_BY_ITEM_REQUEST:
+      return { ...state, fetchingPartNoByItem: true };
+    case types.GET_PART_NO_BY_ITEM_SUCCESS:
+      return {
+        ...state,
+        fetchingPartNoByItem: false,
+        partNoByitem: action.payload
+      };
+    case types.GET_PART_NO_BY_ITEM_FAILURE:
+      return {
+        ...state,
+        fetchingPartNoByItem: false,
+        fetchingPartNoByItemError: true,
+
+      };
+
+    case types.HANDLE_GRN_LIST_MODAL:
+      return { ...state, showGrnListOfPo: action.payload };
+
+    case types.HANDLE_STOCK_ITEM_MODAL:
+      return { ...state, showStockItem: action.payload };
+
+    case types.GET_GRN_LIST_OF_A_PO_REQUEST:
+      return { ...state, fetchingGrnListOfAPo: true };
+    case types.GET_GRN_LIST_OF_A_PO_SUCCESS:
+      return {
+        ...state,
+        fetchingGrnListOfAPo: false,
+        poGrnList: action.payload
+      };
+    case types.GET_GRN_LIST_OF_A_PO_FAILURE:
+      return {
+        ...state,
+        fetchingGrnListOfAPo: false,
+        fetchingGrnListOfAPoError: true,
+
+      };
+
+    case types.TRANSFER_PO_GRN_TO_STOCK_REQUEST:
+      return { ...state, transferingPoGrnToStock: true };
+    case types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS:
+      return {
+        ...state,
+        transferingPoGrnToStock: false,
+        receivedDetailData: state.receivedDetailData.map((item) =>
+          item.poSupplierSuppliesId === action.payload.poSupplierSuppliesId ? action.payload : item
+        ),
+      };
+    case types.TRANSFER_PO_GRN_TO_STOCK_FAILURE:
+      return {
+        ...state,
+        transferingPoGrnToStock: false,
+        transferingPoGrnToStockError: true,
+      };
+
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_REQUEST:
+      return { ...state, fetchingReceivedUnitOfAnItem: true };
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_SUCCESS:
+      return {
+        ...state,
+        fetchingReceivedUnitOfAnItem: false,
+        reciveUnitData: action.payload
+      };
+    case types.GET_RECEIVED_UNIT_OF_AN_ITEM_FAILURE:
+      return {
+        ...state,
+        fetchingReceivedUnitOfAnItem: false,
+        fetchingReceivedUnitOfAnItemError: true,
+      };
+
+    case types.UPDATE_PART_ID_OF_AN_ITEM_REQUEST:
+      return { ...state, updatingPartIdOfAnItem: true };
+    case types.UPDATE_PART_ID_OF_AN_ITEM_SUCCESS:
+      return {
+        ...state,
+        updatingPartIdOfAnItem: false,
+        reciveUnitData: state.reciveUnitData.map((item) =>
+          item.supplierSuppliesUniqueNumberId === action.payload.supplierSuppliesUniqueNumberId
+            ? action.payload : item
+        ),
+      };
+    case types.UPDATE_PART_ID_OF_AN_ITEM_FAILURE:
+      return {
+        ...state,
+        updatingPartIdOfAnItem: false,
+        updatingPartIdOfAnItemError: true,
+      };
+
+    case types.GET_GRN_NO_BY_PO_ID_REQUEST:
+      return { ...state, fetchingGrnNoByPoId: true };
+    case types.GET_GRN_NO_BY_PO_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingGrnNoByPoId: false,
+        grnNoByPo: action.payload
+      };
+    case types.GET_GRN_NO_BY_PO_ID_FAILURE:
+      return {
+        ...state,
+        fetchingGrnNoByPoId: false,
+        fetchingGrnNoByPoIdError: true,
+
+      };
     default:
       return state;
   }

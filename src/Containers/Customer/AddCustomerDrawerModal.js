@@ -1,12 +1,12 @@
-import React, { Component,Suspense } from "react";
+import React, { Component,Suspense,lazy } from "react";
 import { BundleLoader } from "../../Components/Placeholder";
 import { connect } from "react-redux";
 import { handleCustomerDrawerModal } from "../Customer/CustomerAction";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../Components/UI/Antd";
- import CustomerWordCloud from "./CustomerWordCloud";
-import CustomerDocumentView from "./CustomerDocumentView";
-import Customerbutton from "./Customerbutton";
+const CustomerWordCloud =lazy(()=> import("./CustomerWordCloud"));
+const CustomerDocumentView =lazy(()=> import("./CustomerDocumentView"));
+const Customerbutton =lazy(()=> import("./Customerbutton"));
  
 class AddCustomerDrawerModal extends Component {
 
@@ -23,12 +23,7 @@ class AddCustomerDrawerModal extends Component {
  <StyledDrawer 
           title={name}
           width={400}
-          style={{marginTop:"5rem"}}
           visible={this.props.addDrawerCustomerModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() =>
           this.props.handleCustomerDrawerModal(this.props.customerDrawerProps, false)
         }

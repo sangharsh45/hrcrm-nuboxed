@@ -10,14 +10,9 @@ const LeaveNoteDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Note - ${leavesItems.leaveId}`}
-        width="35vw"
+        width="60%"
         visible={noteLeaveDrawer}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleLeaveNoteDrawer(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <LeaveNote leavesItems={leavesItems} />{" "} 

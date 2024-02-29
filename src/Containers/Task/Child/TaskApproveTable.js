@@ -34,6 +34,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
@@ -48,18 +50,43 @@ const TaskApproveTable = (props) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     setPage(page + 1);
     props.getAprrovalTaskTable(props.employeeId,page);
-    // props.getProviderCustomerData(props.provider.serviceId, page);
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
   const handleLoadMore = () => {
+    const taskPageMapd = props.approvalTaskTable && props.approvalTaskTable.length && props.approvalTaskTable[0].pageCount
     setTimeout(() => {
-      setPage(page + 1);
-      props.getAprrovalTaskTable(props.employeeId,page);
-      // props.getProviderCustomerData(props.provider.serviceId, page);
+      const {
+        getAprrovalTaskTable,
+        userDetails: { employeeId },
+      } = props;
+
+      if  (props.approvalTaskTable)
+      {
+        if (page < taskPageMapd) {
+          setPage(page + 1);
+          getAprrovalTaskTable(employeeId,page);
+      }
+      if (page === taskPageMapd){
+        setHasMore(false)
+      }
+    }
+      
     }, 100);
   };
+
   function handleSetTaskNameId(item) {
     setCurrentNameId(item);
   }
@@ -68,108 +95,6 @@ const TaskApproveTable = (props) => {
      console.log(item);
    }
   
-
-  const handleIconClick = (data) => {
-    setData(data);
-  };
-
-  const handleNotesClick = (data1) => {
-    setData1(data1);
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-
-        <Button
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Search
-        </Button>
-        <Button
-          onClick={() => handleReset(clearFilters)}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Reset
-        </Button>
-        <Button
-          type="link"
-          size="small"
-          onClick={() => {
-            confirm({ closeDropdown: false });
-            setSearchText(selectedKeys[0]);
-            setSearchedColumn(dataIndex);
-          }}
-        >
-          Filter
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        type="search"
-        style={{ color: filtered ? "#1890ff" : undefined }}
-      />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
 
   const {
     fetchingApproveTaskTable,
@@ -187,27 +112,211 @@ const TaskApproveTable = (props) => {
     userDetails: { employeeId },
   } = props;
 
+  if (isMobile){
+    return (
+      <>
+        
+            <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        
+  <InfiniteScroll
+          dataLength={approvalTaskTable.length}
+          next={handleLoadMore}
+        hasMore={hasMore}
+          loader={fetchingApproveTaskTable?<div class="flex items-center" >Loading...</div>:null}
+          height={"75vh"}
+          endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+        >
+            {approvalTaskTable.map((item) => { 
+          const currentDate = moment();
+          const completionDate = moment(item.completionDate);
+          const endDate = moment(item.endDate);
+          const difference = currentDate.diff(endDate, 'days');
+          const incompleteDeviationDate = endDate.diff(currentDate, 'days');
+          const completeDeviation = endDate.diff(completionDate, 'days');
+           console.log("difference",difference)
+           console.log("deviationDate",incompleteDeviationDate)
+                      return (
+                          <div>
+                               <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+                                       <div class="flex justify-between items-center">
+                                  
+  <div className="flex  items-center"> 
+  {item.priority === "High" && (
+                        <div
+                        class="rounded-[50%] h-[2.1875em] w-[2.5rem] bg-[red]"
+                        ></div>
+                      )}
+                      {item.priority === "Medium" && (
+                        <div
+                        class="rounded-[50%] h-[2rem] w-[3rem] bg-[orange]"
+                        ></div>
+                      )}
+                      {item.priority === "Low" && (
+                        <div
+                        class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[teal]"
+                        ></div>
+                      )}
+                      <div class=" w-1"></div>
+          
+                                          <Tooltip>
+                                          <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
+                                             
+                                              <div class="text-xs text-cardBody font-poppins cursor-pointer">                                       
+                                              {item.taskType}
+         
+                                              </div>
+                                           </div>
+                                          </Tooltip>
+                                          
+                                          </div>
+                                
+  
+                                 
+                                      {/* <div class=" text-sm text-cardBody  font-poppins max-sm:hidden"> Name </div> */}
+                                      <div class=" text-xs text-cardBody font-semibold  font-poppins">   
+                                      <span   
+                  onClick={() => {
+                    props.handleTaskopenModal(true);               
+                    handleSetCurrentProcessName(item)
+                    // this.props.setCurrentOpportunityRecruitMentData(item);
+                  }}
+                  className="cursor-pointer text-[#042E8A]"        
+                 >
+  
+                   {`${item.taskName} `} &nbsp;
+  
+  
+                 </span>
+                                      </div>
+                                  
+                                  </div>
+                 
+                     
+                                  <div class="flex justify-between items-center">
+                                  <div class="text-xs text-cardBody font-poppins ">
+                                      <MultiAvatar
+                                      // style={{marginBottom:"0.25rem"}}
+                    primaryTitle={item.submittedBy}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                                      </div>
+                                      <div class="text-xs text-cardBody font-poppins ">
+                                      <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
+                                      </div>
+
+
+                                    </div>
+    
+    
+                    
+                     <div class="flex w-44 ">
+                     <div class="flex flex-col md:w-40 justify-center  max-sm:flex-row w-full">
+                      <div class=" w-36">
+                      {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
+      <>
+        <div>
+          <Button
+          onClick={() => approveTaskByTaskId(item.taskId, props.employeeId)}
+            style={{ backgroundColor: "teal", color: "white" }}
+          >
+            <FormattedMessage id="app.approve" defaultMessage="Approve" />
+          </Button>
+          <Button
+            style={{
+              backgroundColor: "rgb(233, 79, 79)",
+              color: "white",
+            }}
+            onClick={() => rejectTaskByTaskId(item.taskId)}
+          >
+            <FormattedMessage id="app.reject" defaultMessage="Reject" />
+          </Button>
+        </div>
+      </>
+    ) : (
+      <>
+         {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
+          <CheckCircleOutlined
+            type="check-circle"
+            theme="twoTone"
+            twoToneColor="#52c41a"
+            size={140}
+            style={{ fontSize: "1rem" }}
+          />
+          ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
+          <CloseCircleOutlined
+            type="close-circle"
+            theme="twoTone"
+            twoToneColor="red"
+            size={140}
+            style={{ fontSize: "1rem" }}
+          />
+        ) : (
+          <></>
+        )}
+      </>
+    )}
+    </div>
+  </div>
+  
+                            
+                      <div class=" ml-2"></div>
+                      <div class="flex flex-col justify-evenly  ">
+                      <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleTaskNotesDrawerModal(true);
+                    handleSetTaskNameId(item);
+                  }}
+                  className="!text-base cursor-pointer text-[#green]"
+                />
+             </Tooltip>
+    
+              </div>
+                     
+                        </div> 
+  
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+                      </InfiniteScroll>
+        </div>
+  
+  <UpdateTaskModal
+            updateTaskModal={updateTaskModal}
+            handleUpdateTaskModal={handleUpdateTaskModal}
+          />
+     
+  
+          <AddTaskProjectDrawerModal
+            handleTaskProjectDrawerModal={props.handleTaskProjectDrawerModal}
+            addDrawerTaskProjectModal={props.addDrawerTaskProjectModal}
+            data={data}
+          />
+  <AddTaskNotesDrawerModal
+  handleSetTaskNameId={handleSetTaskNameId}
+    handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
+    addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
+    currentNameId={currentNameId}
+    // taskName={currentprocessName.taskName} // Pass taskName as a prop
+  
+  />
+  
+  </>
+  ); 
+  }
+
   return (
     <>
-      {page < props.noOfPages ?
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
-            <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
-            <Button
-              style={{
-                color: "#1f92e2",
-                fontWeight: "600",
-                fontSize: "15px",
-                padding: "4px 12px",
-                boxShadow: "0px 0px 5px 2px #d2e2ed",
-                borderRadius: "22px"
-              }}
-              onClick={() => handleLoadMore()}
-            >Load More</Button>
-            </FloatButton.Group>
-          </div> : null}
-          <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
+      
+          <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-          <div className=" md:w-[14rem]"><FormattedMessage
+          <div className=" md:w-[10rem]"><FormattedMessage
                           id="app.type"
                           defaultMessage="type"
                         /></div>
@@ -231,6 +340,14 @@ const TaskApproveTable = (props) => {
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>
 </div>
+<InfiniteScroll
+        dataLength={approvalTaskTable.length}
+        next={handleLoadMore}
+      hasMore={hasMore}
+        loader={fetchingApproveTaskTable?<div class="flex items-center" >Loading...</div>:null}
+        height={"75vh"}
+        endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+      >
           {approvalTaskTable.map((item) => { 
         const currentDate = moment();
         const completionDate = moment(item.completionDate);
@@ -242,45 +359,27 @@ const TaskApproveTable = (props) => {
          console.log("deviationDate",incompleteDeviationDate)
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
-                                style={{
-                                 
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-[12.1rem] max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "red",
-                        }}
+                      class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[red]"
                       ></div>
                     )}
                     {item.priority === "Medium" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "orange",
-                        }}
+                      class="rounded-[50%] h-[2rem] w-[2rem] bg-[orange]"
                       ></div>
                     )}
                     {item.priority === "Low" && (
                       <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "teal",
-                        }}
+                      class="rounded-[50%] h-[2.1875em] w-[2.1875em] bg-[teal]"
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div class=" w-[7.1rem] max-sm:w-full">
+          <div class=" flex w-[7.1rem] items-center max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
                                             {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">
@@ -296,7 +395,7 @@ const TaskApproveTable = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[10.3rem] max-sm:flex-row w-full ">
+                                <div className=" flex font-medium  items-center  md:w-[33.3rem] max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody  font-poppins max-sm:hidden"> Name </div> */}
                                     <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   
@@ -305,10 +404,7 @@ const TaskApproveTable = (props) => {
                   handleSetCurrentProcessName(item)
                   // this.props.setCurrentOpportunityRecruitMentData(item);
                 }}
-                style={{
-                  cursor: "pointer",
-                  color: "#042E8A",
-                }}          
+                className="cursor-pointer text-[#042E8A]"        
                >
 
                  {`${item.taskName} `} &nbsp;
@@ -324,7 +420,7 @@ const TaskApproveTable = (props) => {
                     <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
                                     {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Submitted By</div> */}
-                                    <div class="text-xs text-cardBody font-poppins mb-2">
+                                    <div class="text-xs text-cardBody font-poppins ">
                                     <MultiAvatar
                                     // style={{marginBottom:"0.25rem"}}
                   primaryTitle={item.submittedBy}
@@ -373,7 +469,7 @@ const TaskApproveTable = (props) => {
                    <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned On</div> */}
-                                    <div class="text-xs text-cardBody font-poppins mb-2">
+                                    <div class="text-xs text-cardBody font-poppins ">
                                     <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
                                     </div>
                                 </div>
@@ -444,7 +540,7 @@ const TaskApproveTable = (props) => {
                   handleTaskNotesDrawerModal(true);
                   handleSetTaskNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[#green]"
               />
            </Tooltip>
   
@@ -458,7 +554,8 @@ const TaskApproveTable = (props) => {
 
                     )
                 })}
-      </OnlyWrapCard>
+                    </InfiniteScroll>
+      </div>
 
 <UpdateTaskModal
           updateTaskModal={updateTaskModal}
@@ -480,10 +577,10 @@ handleSetTaskNameId={handleSetTaskNameId}
 
 />
 
+</>
+);
+   
 
-      {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
-    </>
-  );
 };
   const mapStateToProps = ({ auth, task, opportunity }) => ({
     userDetails: auth.userDetails,
@@ -493,10 +590,10 @@ handleSetTaskNameId={handleSetTaskNameId}
     employeeId: auth.userDetails.employeeId,
     addDrawerTaskProjectModal: task.addDrawerTaskProjectModal,
     updateTaskModal: task.updateTaskModal,
-    noOfPages: task.approvalTaskTable.length && task.approvalTaskTable[0].noOfPages || "",
+    pageCount: task.approvalTaskTable.length && task.approvalTaskTable[0].pageCount || "",
     fetchingApproveTaskTable: task.fetchingApproveTaskTable,
     fetchingApproveTaskTableError: task.fetchingApproveTaskTableError,
-
+noOfPages:task.approvalTaskTable.length && task.approvalTaskTable[0].noOfPages
   });
   
   const mapDispatchToProps = (dispatch) =>

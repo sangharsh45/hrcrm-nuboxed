@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { JumpStartBox } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 
 class LeaveJumpstart extends React.Component {
   render() {
@@ -17,10 +16,10 @@ class LeaveJumpstart extends React.Component {
     } = this.props;
      console.log(leaveBalance);
     return (
-      <FlexContainer flexDirection="column" style={{ width: "100%" }}>
-            <div class=" flex w-full flex-row  md:ml-[9%] max-sm:ml-0 max-sm:justify-between">
-
-                <div class="md:w-1/5 max-sm:w-[24%]">
+      <div class=" flex flex-col w-full items-center" >
+            <div class=" flex w-full flex-row  md:ml-[9%] max-sm:ml-0 max-sm:justify-between max-sm:flex-col">
+<div class="flex w-wk">
+                <div class="md:w-[35%] max-sm:w-wk">
                 <JumpStartBox
                 // bgColor="#005075"
                 title="Annual Leaves"
@@ -30,8 +29,8 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox
+                <div class="md:w-[35%] max-sm:w-wk">
+                <JumpStartBox1
                 // bgColor="#0073a8"
                 stringValue
                 noProgress
@@ -39,9 +38,10 @@ class LeaveJumpstart extends React.Component {
                 value={totalAppliedLeaves}
                 />
                 </div>
-
-                <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox
+                </div>
+                <div class="flex w-wk">
+                <div class="md:w-[35%] max-sm:w-wk">
+                <JumpStartBox2
                 // bgColor="#0093d7"
                 // title="Pending"
                 title="Approved"
@@ -51,8 +51,8 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div class="md:w-1/5 max-sm:w-[24%]">
-                <JumpStartBox   
+                <div class="md:w-[35%] max-sm:w-wk">
+                <JumpStartBox3
                 // bgColor="#24b9fe"
                 title="Leave Balance"
                 stringValue
@@ -60,8 +60,9 @@ class LeaveJumpstart extends React.Component {
                 value={leaveBalance}
                 />
                 </div>
+                </div>
             </div>
-        </FlexContainer>
+        </div>
     );
   }
 }

@@ -2,16 +2,16 @@
 import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,getJumpBulblist3,getavgHour} from "../../DashboardAction";
 import { FormattedMessage } from "react-intl";
 
 class DashboardBulbJumpstart extends React.Component{
   constructor() {
     super();
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
+    const startDate = dayjs().startOf("month"); 
+    const endDate = dayjs();
     var today = new Date(),
     date =
       today.getFullYear() +
@@ -87,7 +87,7 @@ render() {
             isLoading={this.props.user.fetchingJumpstartBulb}
           />
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={
               <FormattedMessage
@@ -105,7 +105,7 @@ render() {
     
           />
 
-          <JumpStartBox
+          <JumpStartBox2
             noProgress
             title={
               <FormattedMessage
@@ -121,7 +121,7 @@ render() {
              isLoading={this.props.fetchingJumpstartBulb2}
             
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={
               <FormattedMessage

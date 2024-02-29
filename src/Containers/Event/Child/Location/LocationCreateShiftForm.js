@@ -1,11 +1,9 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Tooltip } from "antd";
+import { Button, } from "antd";
 import { Formik, Form, Field,  } from "formik";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import dayjs from "dayjs";
 import { createShitLocation } from "./LocationAction";
@@ -137,22 +135,21 @@ function LocationCreateShiftForm(props) {
         }) => (
             <div class="overflow-y-auto h-[30rem] overflow-x-hidden">
                 <Form class="form-background">
-                <div class="flex justify-between">
-                <div class="w-wk">
+               
+                    <div class=" flex flex-row justify-between">
+                    <div class="w-[60%]">
                     <Field
                       name="shiftName"
                       label="Name"
                       type="text"
-                      width={"100%"}
+                       width={"80%"}
                       component={InputComponent}
                       isColumn
                       inlineLabel
                       isRequired
                     />
                   </div>
-                    </div>
-                    <div class=" flex justify-between">
-                      <div class=" w-1/2">
+                      <div class=" w-[25%]">
                         <Field
                           isRequired
                           name="startDate"
@@ -167,12 +164,12 @@ function LocationCreateShiftForm(props) {
                           component={DatePicker}
                           value={values.startDate}
                           inlineLabel
-                          style={{
-                            width: "100%",
-                          }}
+                          // style={{
+                          //   width: "100%",
+                          // }}
                         />
                       </div>
-                      <div class=" w-1/2">
+                      <div class=" w-[26%]">
                       <Field
                         isRequired
                         name="endDate"
@@ -186,9 +183,9 @@ function LocationCreateShiftForm(props) {
                         isColumn
                         value={values.endDate || values.startDate}
                         inlineLabel
-                        style={{
-                          width: "100%",
-                        }}
+                        // style={{
+                        //   width: "100%",
+                        // }}
                         disabledDate={(currentDate) => {
                           if (values.startDate) {
                             if (
@@ -206,7 +203,7 @@ function LocationCreateShiftForm(props) {
                     </div>
                     </div>
 
-                    <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+                    <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"

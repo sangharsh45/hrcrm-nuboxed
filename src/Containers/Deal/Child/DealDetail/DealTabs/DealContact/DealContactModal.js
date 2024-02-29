@@ -15,12 +15,7 @@ const DealContactModal = (props) => {
         />}
         width="60%"
         visible={openDealContactModal}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => handleDealContactModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <DealContactForm {...formProps} />

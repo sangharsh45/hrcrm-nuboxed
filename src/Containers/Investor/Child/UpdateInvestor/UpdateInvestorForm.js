@@ -6,10 +6,7 @@ import { Button} from "antd";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import {getAllEmployeelist} from "../../InvestorAction"
-import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
-import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
-import { Spacer } from "../../../../Components/UI/Elements";
+import {getAllEmployeelist,getDialCode} from "../../InvestorAction"
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -30,15 +27,33 @@ function UpdateInvestorForm (props) {
   
   useEffect(() => {
     props.getAllEmployeelist();
-    // props.getAllCustomerEmployeelist();
-    props.getSectors();
     props.getInvestorList(props.orgId)
+    props.getDialCode();
   }, []);
 
 
   const handleReset = (resetForm) => {
     resetForm();
   };
+
+  const sortedCountry =props.dialCodeList.sort((a, b) => {
+    const nameA = a.country_dial_code.toLowerCase();
+    const nameB = b.country_dial_code.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const countryNameOption = sortedCountry.map((item) => {
+    return {
+      label: `+${item.country_dial_code}`,
+      value: item.country_dial_code,
+    };
+  });
   
     const {
       accounts,
@@ -48,12 +63,7 @@ function UpdateInvestorForm (props) {
       RowData,
       userId
     } = props;
-    const employeesData = props.allEmployeeList.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.employeeId,
-      };
-    });
+
     const investorType = props.investorListData.map((item) => {
       return {
         label: item.name || "",
@@ -63,7 +73,6 @@ function UpdateInvestorForm (props) {
     const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
-    console.log(props.RowData)
     return (
       <>
         <Formik
@@ -102,7 +111,7 @@ function UpdateInvestorForm (props) {
               {
                 ...values,
                 investorId: RowData.investorId,
-                source: RowData.source,
+                // source: RowData.source,
                 assignedTo:selectedOption ? selectedOption.employeeId:props.RowData.employeeId,
               },
               RowData.investorId,
@@ -121,10 +130,11 @@ function UpdateInvestorForm (props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-around max-sm:flex-col">
+              <div class=" flex justify-between max-sm:flex-col">
                 <div class=" w-w47.5 max-sm:w-wk" >
-                    <Spacer/>
-                   <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
+                  
+                   <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
+                    <FormattedMessage id="app.name" defaultMessage="Name" /></div>
                   <Field
                     isRequired
                     name="name"
@@ -148,8 +158,7 @@ function UpdateInvestorForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                  <Spacer />
-                  <Spacer />
+                  
                   {/* <Field
                     name="email"
                     type="text"                   
@@ -161,23 +170,23 @@ function UpdateInvestorForm (props) {
                     component={InputComponent}
                     inlineLabel
                     /> */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-6">
                    <div class=" w-3/12 max-sm:w-[30%]">
-                      <FastField
+                   <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
-                            defaultMessage="Dial Code "
+                            id="app.dialCode"
+                            defaultMessage="Dial Code"
                           />
                         }
                         isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
                         component={SearchSelect}
-                        // value={values.countryDialCode1}
                         inlineLabel
-                       />
+                      />
                     </div>
                     <div class=" w-8/12">
                       <FastField
@@ -192,9 +201,9 @@ function UpdateInvestorForm (props) {
                         />                   
                          </div>
                   </div>
-                  <Spacer/>
                   
-                     <div class=" flex justify-between max-sm:flex-col">
+                  
+                     <div class=" flex justify-between max-sm:flex-col mt-3">
                   <div class=" w-w47.5 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
@@ -221,11 +230,14 @@ function UpdateInvestorForm (props) {
                                 defaultMessage="Source"
                               />
                             }
+                            defaultValue={{
+                              label:RowData.source,
+                            }}
                           
                             selectType="sourceName"
                             component={SearchSelect}
                             // value={values.source}
-                            defaultValue={RowData.source}
+                            // defaultValue={RowData.source}
                             isColumn
                           />
 
@@ -233,7 +245,7 @@ function UpdateInvestorForm (props) {
                  </div>
                  <div class=" flex justify-between">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="investorCategoryId"
                             label={
                               <FormattedMessage
@@ -247,10 +259,12 @@ function UpdateInvestorForm (props) {
                             options={
                               Array.isArray(investorType) ? investorType : []
                             }
+                            defaultValue={RowData.investorId}
                           />
                     </div>
                     </div> 
-                 <Spacer/>
+               
+                 <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -260,13 +274,14 @@ function UpdateInvestorForm (props) {
                     width={"100%"}
                     isColumn
                     component={TextareaComponent}
-                    />   
+                    /> 
+                    </div>  
                  </div>
 
                  <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
-                   <Spacer/>
-                   <div class=" flex justify-between">
+                  
+                   <div class=" flex justify-between mt-3">
                    <div class=" h-full w-full">
                    <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -375,13 +390,13 @@ function UpdateInvestorForm (props) {
                       />
                     </div>                    
                     </div>
-                   <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-3 w-full" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                      <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" >Corporate Address</div>
                   </div>
                     </div>
-                  <Spacer /><Spacer />
+                <div class="mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -390,12 +405,14 @@ function UpdateInvestorForm (props) {
                         arrayHelpers={arrayHelpers}
                         values={values}
                       />
+                      
                     )}
-                  />                 
+                  />    
+                  </div>             
                 </div>
               </div>
-              <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -418,6 +435,7 @@ const mapStateToProps = ({ auth,investor,investorList,employee }) => ({
   updateInvestorById: investor.updateInvestorById,
   updateInvestorByIdError: investor.updateInvestorByIdError,
   user: auth.userDetails,
+  dialCodeList:investor.dialCodeList,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   employees: employee.employees,
@@ -429,9 +447,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       UpdateInvestor,
-      getSectors,
       getAllEmployeelist,
-      getInvestorList
+      getInvestorList,
+      getDialCode
     },
     dispatch
   );

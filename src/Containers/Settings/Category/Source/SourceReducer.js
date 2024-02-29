@@ -48,7 +48,8 @@ export const sourceReducer = (state = initialState, action) => {
     return {
       ...state,
       addingSources: false,
-      sources: [...state.sources, action.payload],
+      sources:[action.payload,...state.sources]
+      // sources: [...state.sources, action.payload],
       
     };
   case types.ADD_SOURCE_FAILURE:

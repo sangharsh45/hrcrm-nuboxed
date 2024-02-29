@@ -5,7 +5,6 @@ class SingleEmployee extends Component {
   render() {
     const { employee } = this.props;
     const employeeId = employee.employeeId;
-    console.log(employee.role);
 
     return (
       <>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -7,20 +7,17 @@ import {
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import DownloadIcon from '@mui/icons-material/Download';
-// import { BundleLoader } from "../../../../../../../Components/Placeholder";
-import { Icon } from "antd";
 import {
   getTrainingDetails,
   setEditTraining,
   handleUpdateTrainingModal,
-  deleteDocument,
 } from "../../../../ProfileAction";
 import { deleteTrainingTable } from "../../../../ProfileAction";
-import UpdateTrainingModal from "./UpdateTrainingModal";
 import moment from "moment";
 import { base_url } from "../../../../../../Config/Auth";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined, DownloadOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const UpdateTrainingModal = lazy(() => import("./UpdateTrainingModal"));
 
 class TrainingTable extends Component {
   componentDidMount() {

@@ -2,8 +2,8 @@
 import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
   getJumpBulblist3,getavgHour,getJumpTasklist,getTasklist,getJumpTask2list} from "../../DashboardAction";
 import { FormattedMessage } from "react-intl";
@@ -11,8 +11,8 @@ import { FormattedMessage } from "react-intl";
 class DashboardTaskOrganizationJumpstart extends React.Component{
   constructor() {
     super();
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
+    const startDate = dayjs().startOf("month"); 
+    const endDate = dayjs();
     var today = new Date(),
     date =
       today.getFullYear() +
@@ -73,8 +73,8 @@ render() {
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   return(
       <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
-        
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={   <FormattedMessage
@@ -87,7 +87,7 @@ render() {
             isLoading={this.props.fetchingTaskper}
           />
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={   <FormattedMessage
               id="app.tasksDeadline"
@@ -99,8 +99,9 @@ render() {
      
     
           />
-
-          <JumpStartBox
+</div>
+<div class="flex w-wk">
+          <JumpStartBox2
             noProgress
             title={   <FormattedMessage
               id="app.highPriorityTasks"
@@ -110,7 +111,7 @@ render() {
             value={ this.props.jumpstartTasklistCount.no}
             isLoading={this.props.fetchingJumpstartTasklist}
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={   <FormattedMessage
               id="app.status"
@@ -121,6 +122,7 @@ render() {
             
             // isLoading={this.props.fetchingJumpstartBulb3}
           />
+           </div>
         </div>
      
     

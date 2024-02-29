@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ViewEditCard } from "../../../../Components/UI/Elements";
-import PersonalView from "./PersonalView";
-import PersonalEdit from "./PersonalEdit";
+const PersonalView = lazy(() => import("./PersonalView"))
+const PersonalEdit = lazy(() => import("./PersonalEdit"))
 
 class PersonalCard extends Component {
   render() {

@@ -2,8 +2,6 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import CustomerWhiteTable from "../Customer/Child/CustomerTable/CustomerWhiteTable";
-import CustomerBlueTable from "../Customer/Child/CustomerTable/CustomerBlueTable";
 import {
     handleCustomerModal,
     getCustomerListByUserId,
@@ -15,12 +13,11 @@ import {
     getCustomerFilterData,   
   } from "./CustomerAction";
 import CustomerMap from "./CustomerMap"
-import moment from "moment";
-import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";
-import CustomerMobileCardList from "./Child/CustomerTable/CustomerMobileCardList";
-import CustomerAllMobileCardList from "./Child/CustomerTable/CustomerAllMobileCardList";
-import CustomerMobileTeamCardList from "./Child/CustomerTable/CustomerMobileTeamCardList";
-import CustomerMapView from "./CustomerMapView";
+import dayjs from "dayjs";
+const CustomerWhiteTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerWhiteTable"));
+const CustomerBlueTable =lazy(()=> import("../Customer/Child/CustomerTable/CustomerBlueTable"));
+const CustomerTeamCardList =lazy(()=> import("./Child/CustomerTable/CustomerTeamCardList"));
+const CustomerMapView =lazy(()=> import("./CustomerMapView"));
 const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
@@ -32,10 +29,10 @@ class Customer extends Component {
   currentUser:"",
   isMobile: false, };
   handleClear = () => {
-    const startDate = moment()
+    const startDate = dayjs()
       .startOf("month")
       .toISOString();
-    const endDate = moment()
+    const endDate = dayjs()
       .endOf("month")
       .toISOString();
     this.setState({ currentData: "" });
@@ -116,25 +113,19 @@ class Customer extends Component {
           <CustomerMapView/>:
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
-             this.props.viewType === "table" ?(isMobile ?
-              <CustomerMobileCardList
-              filter={this.state.filter}
-              currentUser={this.state.currentUser} />:
+             this.props.viewType === "table" ?(
              <CustomerCardList
              filter={this.state.filter}
              currentUser={this.state.currentUser} 
              /> ):
           this.props.viewType==="map"?
           <CustomerMap/>:
-          this.props.viewType==="all" ?(isMobile ?
-            <CustomerAllMobileCardList
-            filter={this.state.filter}
-            currentUser={this.state.currentUser} />:
+          this.props.viewType==="all" ?(
             <CustomerAllCardList 
             filter={this.state.filter}
              currentUser={this.state.currentUser} 
             />)
-            :this.props.viewType==="teams" ? (isMobile ?<CustomerMobileTeamCardList/>:<CustomerTeamCardList/>)
+            :this.props.viewType==="teams" ? (<CustomerTeamCardList/>)
             : null} 
         </Suspense> 
         {/* <FloatButton.Group

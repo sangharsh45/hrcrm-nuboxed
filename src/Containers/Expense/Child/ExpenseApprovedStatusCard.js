@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,lazy, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
+import {  Tooltip } from "antd";
 import { getExpenseById,handleExpenseVoucherIdDrawer,getApprovedExpense } from "../ExpenseAction";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import styled from 'styled-components';
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
-import Expense from "../Expense";
+const ExpenseVoucherIdDrawer=lazy(()=>import("./ExpenseVoucherIdDrawer"));
+
+
 
 function ExpenseApprovedStatusCard(props) {
   const [expand, setExpand] = useState(false);
@@ -45,7 +39,7 @@ function ExpenseApprovedStatusCard(props) {
 
     return (
       <>
-         <OnlyWrapCard width="25rem" className="h-[32rem]">  
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE] max-sm:w-wk">
          <div className="p-0.5 inline-flex items-center rounded-md w-max ml-1">
             <span className="pl-2 pr-4 relative">
               <span
@@ -67,16 +61,16 @@ function ExpenseApprovedStatusCard(props) {
 
                          
                               <Tooltip >
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <div class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
-                                  </h4>
-                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  </div>
+                                  <div class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
-         </h4>
+         </div>
 
 </Tooltip>
 <div className=" flex font-medium flex-col w-[9rem] ">  
@@ -97,21 +91,21 @@ function ExpenseApprovedStatusCard(props) {
 </div>
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-xs text-cardBody font-poppins">
+                           <div class=" text-sm text-cardBody font-poppins"> Voucher Date </div>
+                           <div class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
 
-                           </h4>
+                           </div>
                        </div>
                        <div className=" flex font-medium flex-col w-32 ml-2 ">
                                   
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-sm text-cardBody font-poppins">Amount</div>
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
-                                  </h4>
+                                  </div>
                               </div>
                              
                         </div>
@@ -119,7 +113,7 @@ function ExpenseApprovedStatusCard(props) {
                         </div>
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       
 
         <ExpenseVoucherIdDrawer

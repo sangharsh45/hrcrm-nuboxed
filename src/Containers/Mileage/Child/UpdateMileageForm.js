@@ -1,26 +1,14 @@
-import { Button, DatePicker, Icon, message } from "antd";
+import { Button, DatePicker, message } from "antd";
 import React, { useState, useEffect } from "react";
-import { FormattedMessage } from "react-intl";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import { TextInput } from "../../../Components/UI/Elements";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import {
-  Formik,
-  Form,
-  Field,
-  FieldArray,
-  FastField,
-  validateYupSchema,
-} from "formik";
 import { updateMileage, 
-    // getMileageByUserId 
 } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import * as Yup from "yup";
 import { Select } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -62,7 +50,7 @@ function UpdateMileageForm(props) {
     
         if (`${row.id}date` === id) {
           console.log(dateString);
-          return { ...row, mileageDate: moment(dateString).toISOString() };
+          return { ...row, mileageDate: dayjs(dateString).toISOString() };
         } else {
           return row;
         }
@@ -202,7 +190,7 @@ function UpdateMileageForm(props) {
     if (status === "Success") {
       props.getMileageByUserId(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {
@@ -351,7 +339,7 @@ function UpdateMileageForm(props) {
           {/* ); */}
         {/* })} */}
       </table>
-      <Spacer />
+  <div class=" mt-3">
       <Button
         style={{ float: "right" }}
         type="primary"
@@ -360,6 +348,7 @@ function UpdateMileageForm(props) {
       >
         Submit
       </Button>
+      </div>
       {/* &nbsp; &nbsp; &nbsp;
       <Button
         style={{ float: "right", marginRight: "1%" }}

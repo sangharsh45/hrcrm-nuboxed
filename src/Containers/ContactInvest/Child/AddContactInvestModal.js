@@ -13,14 +13,12 @@ function AddContactInvestModal (props) {
       <StyledDrawer
         title={<FormattedMessage
           id="app.contactinvest "
-          defaultMessage="contactinvest"
+          defaultMessage="Contact - Investor"
         />}
         width={drawerWidth}
         visible={addContactInvestModal}
         closable
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => handleContactInvestModal(false)}
         footer={null}
       >

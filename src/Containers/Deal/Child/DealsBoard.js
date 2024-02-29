@@ -50,19 +50,6 @@ const StageColumn = styled.div`
   /* min-height: 43.12em; */
 `;
 
-const WonColumn = styled.div`
-  position: fixed;
-  bottom: 0;
-  display: ${(props) => (props.isDraggingOver ? "flex" : "flex")};
-  /* width: 43.12em; */
-  height: 5em;
-  /* background-color: lightgreen; */
-  color: #fff;
-  /* border: 0.06em solid ${(props) => props.theme.backgroundColor}; */
-  transition: 0.3s all linear;
-  margin-bottom:2.5em;
-`;
-
 
 const StageHeader = styled.div`
   background-color: rgb(214, 144, 149);
@@ -78,21 +65,10 @@ const StageHeader = styled.div`
   border-bottom: 2px solid ${(props) => props.theme.borderColor};
   /* position:fixed; */
 `;
-const DragDropContextDiv = styled.div`
-  background-color: whitesmoke;
-  color: ${(props) => props.theme.color};
-  font-size: 1.2em;
-  height: 600px;
-  width: 56.25em;
-  justify-content: center;
-  align-items: center;
-  padding: 0.2rem;
-  border-bottom: 2px solid ${(props) => props.theme.borderColor};
-  /* position:fixed; */
-`;
+
 
 function DealsBoard(props) {
-  const { userId, opportunities, process, ProcessStages, udatingOpp } = props;
+  const { udatingOpp } = props;
 
 
 
@@ -103,14 +79,11 @@ function DealsBoard(props) {
   }, [props.dealsProcess]);
 
   useEffect(() => {
-    //debugger;
-    // if (!processData) return;
     props.getProcessForDeals(props.orgId);
      props.getAllDealsbyUserId(props.userId)
   }, []);
 
   useEffect(() => {
-    //debugger;
     if (!processData) return;
     props.getProcessStagesForDeals(processData.investorOppWorkflowId);
   }, [processData]);
@@ -134,9 +107,6 @@ function DealsBoard(props) {
     }
 
     const { draggableId, destination, source } = result;
-    console.log(destination);
-    console.log("drag",draggableId);
-    // did not move anywhere - can bail early
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -146,10 +116,6 @@ function DealsBoard(props) {
 
     const {
       updateDealdragstage,
-      getOpportunityRelatedData,
-      userId,
-      startDate,
-      endDate,
     } = props;
     let data={
         investorOppStagesId:destination.droppableId,
@@ -159,7 +125,6 @@ function DealsBoard(props) {
       source.droppableId,
       destination.droppableId,
       draggableId,
-      //handleCallback
     );
   }
 
@@ -169,12 +134,6 @@ function DealsBoard(props) {
   function dragUpdate() {
     setIsDragging(false);
   }
-//   useEffect(() => {
-//     if (!userId) return;
-//     props.getProcess();
-//     props.getOpportunities(userId);
-//     props.getAccounts(userId);
-//   }, [userId]);
 
   function handleProcessClick(item) {
     setCurrentProcess(item);
@@ -193,8 +152,6 @@ function DealsBoard(props) {
       >
         <div class=" flex" >
           <StyledTabs
-            // defaultActiveKey={this.state.activeKey}
-            // onChange={handleTabChange}
             type="card"
           >
             {props.dealsProcess.map((item, i) => {
@@ -211,9 +168,7 @@ function DealsBoard(props) {
             })}
           </StyledTabs>
         </div>
-        {/* {!props.opportunities.length ? (
-          <BundleLoader />
-        ) : ( */}
+
           
             <div class=" flex flex-no-wrap justify-center" >
               <DragDropContext
@@ -259,7 +214,6 @@ function DealsBoard(props) {
                                             opp.invOpportunityStagesId === stage.investorOppStagesId
                                         )
                                         .map((opp, index) => {
-                                          console.log("oPPr",opp)
                                           return (
                                             <DealStageColumn
                                               key={index}
@@ -298,19 +252,8 @@ const mapStateToProps = ({
 }) => ({
     dealsProcess: settings.dealsProcess,
     orgId: auth.userDetails && auth.userDetails.organizationId,
-//   fetchingOpportunities: opportunity.fetchingOpportunities,
-//   startDate: dashboard.startDate,
-//   endDate: dashboard.endDate,
    userId: auth.userDetails.userId,
    aLLdealsList:deal.aLLdealsList,
-  //  dealsByuserId:deal.dealsByuserId,
-//   process: settings.Process,
-//   tradeCurrency: auth.userDetails.tradeCurrency,
-//   opportunities: opportunitySelector(opportunity, account),
-//   ProcessStages: settings.ProcessStages,
-//   stages: opportunity.stages,
-//   fetchingProcessStages: settings.fetchingProcessStages,
-//   udatingOpp: opportunity.udatingOpp,
 dealsProcessStages: settings.dealsProcessStages,
 });
 const mapDispatchToProps = (dispatch) =>

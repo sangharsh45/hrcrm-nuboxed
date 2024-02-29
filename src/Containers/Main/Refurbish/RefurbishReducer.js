@@ -48,6 +48,13 @@ const initialState = {
   addingProductBuilderById: false,
   addingProductBuilderByIdError: false,
 
+  addingTaskByPhoneById: false,
+  addingTaskByPhoneByIdError: false,
+
+  fetchingTaskByPhoneId: false,
+  fetchingTaskByPhoneIdError: false,
+  taskByPhone: [],
+
   fetchingProductBuilderById: false,
   fetchingProductBuilderByIdError: false,
   builderByManufatureId: [],
@@ -59,6 +66,10 @@ const initialState = {
   //add output
   addingProductionOutput: false,
   addingProductionOutputError: false,
+
+  fetchingNoOfPhoneInQcById: false,
+  fetchingNoOfPhoneInQcByIdError: false,
+  phoneByTechId: [],
 
   fetchingShiftsByUserId: false,
   fetchingShiftsByUserIdError: false,
@@ -86,6 +97,10 @@ const initialState = {
   updatingRepairStatusError: false,
 
   showPhoneList: false,
+
+  fetchingNoOfPhoneInRepair: false,
+  fetchingNoOfPhoneInRepairError: true,
+  repairPhoneByTechId: [],
 
   fetchingProductionUserById: false,
   fetchingProductionUserByIdError: false,
@@ -200,6 +215,18 @@ const initialState = {
   fetchingTagInProcess: false,
   fetchingTagInProcessError: false,
   tagInPros: [],
+
+  approvingSpare: false,
+  approvingSpareError: false,
+
+  updatingProcessTask: false,
+  updatingProcessTaskError: false,
+
+
+  fetchingItemTaskCount: false,
+  fetchingItemTaskCountError: false,
+  itemTaskcount:{}
+
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -490,6 +517,38 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingNoofTecnician: false,
         fetchingNoofTecnicianError: true,
+      };
+
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_REQUEST:
+      return { ...state, fetchingNoOfPhoneInQcById: true };
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_SUCCESS:
+      return {
+        ...state,
+        fetchingNoOfPhoneInQcById: false,
+        phoneByTechId: action.payload
+      };
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_FAILURE:
+      return {
+        ...state,
+        fetchingNoOfPhoneInQcById: false,
+        fetchingNoOfPhoneInQcByIdError: true,
+
+      };
+
+    case types.GET_NO_OF_PHONE_IN_REPAIR_REQUEST:
+      return { ...state, fetchingNoOfPhoneInRepair: true };
+    case types.GET_NO_OF_PHONE_IN_REPAIR_SUCCESS:
+      return {
+        ...state,
+        fetchingNoOfPhoneInRepair: false,
+        repairPhoneByTechId: action.payload
+      };
+    case types.GET_NO_OF_PHONE_IN_REPAIR_FAILURE:
+      return {
+        ...state,
+        fetchingNoOfPhoneInRepair: false,
+        fetchingNoOfPhoneInRepairError: true,
+
       };
 
     case types.HANDLE_PHONE_BY_TECHNICIAN_MODAL:
@@ -941,6 +1000,84 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingTagInProcess: false,
         fetchingTagInProcessError: true,
       };
+
+    case types.ADD_TASK_BY_PHONE_ID_REQUEST:
+      return { ...state, addingTaskByPhoneById: true };
+    case types.ADD_TASK_BY_PHONE_ID_SUCCESS:
+      return {
+        ...state,
+        addingTaskByPhoneById: false,
+      };
+    case types.ADD_TASK_BY_PHONE_ID_FAILURE:
+      return {
+        ...state,
+        addingTaskByPhoneById: false,
+        addingTaskByPhoneByIdError: true,
+      };
+
+    case types.GET_TASK_BY_PHONEID_REQUEST:
+      return { ...state, fetchingTaskByPhoneId: true };
+    case types.GET_TASK_BY_PHONEID_SUCCESS:
+      return {
+        ...state,
+        fetchingTaskByPhoneId: false,
+        taskByPhone: action.payload
+      };
+    case types.GET_TASK_BY_PHONEID_FAILURE:
+      return {
+        ...state,
+        fetchingTaskByPhoneId: false,
+        fetchingTaskByPhoneIdError: true,
+      };
+
+      case types.APPROVE_SPARE_REQUEST:
+        return { ...state, approvingSpare: true };
+      case types.APPROVE_SPARE_SUCCESS:
+        return {
+          ...state,
+          approvingSpare: false,
+          allSpareById: state.allSpareById.filter(
+            (item) => item.phoneSpareId !== action.payload.phoneSpareId
+          ),
+        };
+      case types.APPROVE_SPARE_FAILURE:
+        return {
+          ...state,
+          approvingSpare: false,
+          approvingSpareError: true,
+        };  
+        
+        case types.UPDATE_PROCESS_TASK_REQUEST:
+          return { ...state, updatingProcessTask: true };
+        case types.UPDATE_PROCESS_TASK_SUCCESS:
+          return {
+            ...state,
+            updatingProcessTask: false,
+            taskByPhone: state.taskByPhone.filter(
+              (item) => item.phoneTaskId !== action.payload.phoneTaskId
+            ),
+          };
+        case types.UPDATE_PROCESS_TASK_FAILURE:
+          return {
+            ...state,
+            updatingProcessTask: false,
+            updatingProcessTaskError: true,
+          };  
+
+          case types.GET_TASK_ITEM_COUNT_REQUEST:
+            return { ...state, fetchingItemTaskCount: true };
+          case types.GET_TASK_ITEM_COUNT_SUCCESS:
+            return {
+              ...state,
+              fetchingItemTaskCount: false,
+              itemTaskcount: action.payload,
+            };
+          case types.GET_TASK_ITEM_COUNT_FAILURE:
+            return {
+              ...state,
+              fetchingItemTaskCount: false,
+              fetchingItemTaskCountError: true,
+            };
 
     default:
       return state;

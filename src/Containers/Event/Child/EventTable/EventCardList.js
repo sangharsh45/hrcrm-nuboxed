@@ -1,33 +1,32 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
-import { SearchOutlined,
-} from '@ant-design/icons';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Empty, Tooltip, Input, Button, Avatar } from "antd";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Tooltip,  Avatar } from "antd";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   deleteEvent, getEventListRangeByUserId,
   handleUpdateEventModal,
   setEditEvents,
 } from "../../EventAction";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
-import { getAllSalesList} from "../../../Opportunity/OpportunityAction";
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { OnlyWrapCard } from '../../../../Components/UI/Layout';
 import { MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
-import { BundleLoader } from "../../../../Components/Placeholder";
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 const UpdateEventModal = lazy(() => import("../UpdateEventModal"));
 
 function EventCardList (props) {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isCopied, setIsCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+
+ 
   useEffect(() => {
     const {
       getEventListRangeByUserId,
@@ -35,11 +34,18 @@ function EventCardList (props) {
          } = props;
          getEventListRangeByUserId(employeeId,page);
         setPage(page + 1);
-        props.getEmployeelist();
-    props.getAllSalesList();;
+
   }, []);
  ;
-
+ useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  window.addEventListener('resize', handleResize);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
  const handleLoadMore = () => {
     const {
       getEventListRangeByUserId,
@@ -47,8 +53,6 @@ function EventCardList (props) {
          } = props;
          getEventListRangeByUserId(employeeId,page);
         setPage(page + 1);
-        props.getEmployeelist();
-    props.getAllSalesList();;
 }
 
 
@@ -62,60 +66,274 @@ function EventCardList (props) {
       handleUpdateEventModal,
       userDetails: { employeeId },
     } = props;
-    const assignToTypeOption = props.employees.map((item) => {
-      return {
-        text: item.assignToName,
-        value: item.assignToName,
-      };
-    });
-   const ownerlistType = props.sales.map((sales) => {
-          return {
-            text: sales.fullName || "",
-            value: sales.fullName,
-          };
-        });
+
+    console.log(eventListRangeByUserId)
+    if (isMobile){
+      return (
+        <>
+        <div className=' flex justify-end sticky top-28 z-auto'>
+        <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+     
+          
+        <InfiniteScroll
+          dataLength={eventListRangeByUserId.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingEventListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+        {eventListRangeByUserId.map((item) => { 
+              const handleCopyClick = () => {
+                const textToCopy = item.eventDescription;
+                navigator.clipboard.writeText(textToCopy)
+                  .then(() => setIsCopied(true))
+                  .catch((err) => console.error('Unable to copy text', err));
+                 
+              };
+                      return (
+                          <div>
+                              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+                                      <div class="flex items-center  justify-between">
+                                 
+ 
+           
+                                          <Tooltip>
+                                         
+                                            
+                                              <div class="text-[0.82rem] text-cardBody font-poppins cursor-pointer">                                       
+                                              {item.eventType}
+         
+                                              </div>
+                                                
+                                          </Tooltip>
+                                         
+                                         
+                                 
   
-// if (fetchingEventListRangeByUserId) 
-//    {
-//     return <BundleLoader/>
-//    }
+                                 
+                                     
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">   
+                                      {item.eventSubject}
+                                      </div>
+                                  
+                                  </div>
+                                  <div class="flex  items-center justify-between">
+                                  
+                                    
+                                      <div class="text-[0.82rem] text-cardBody font-poppins">
+                                      {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
+                                      </div>
+                                 
+                                 
+                                      
+                                      <div class="text-[0.82rem] text-cardBody font-poppins">
+                                      {` ${dayjs(item.endDate).format('YYYY-MM-DD')}`}
+                                      </div>
+                                 
+                                 
+                                     
+                                  
+                                 
+                                    
+  
+                                      <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                      <Avatar.Group
+                     maxCount={7}
+                    maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+                  >
+                  {item.included &&
+                    item.included.map((candidate, i) => {
+                       const data1 = candidate.fullName
+                       .slice(0,2)
+                      //  .split("")[0]
+                       .toUpperCase();
+                     console.log("datas", data1);
+                      return (
+                        <Tooltip title={candidate.fullName} key={i}>
+                        <Avatar style={{ backgroundColor: "#f56a00" }}>
+                        {data1}
+                      
+                      </Avatar>
+                      </Tooltip>
+                       
+  
+                     
+                      );
+                    })}
+              </Avatar.Group>
+                                      </div>
+                                 
+                                  
+                                     
+  
+                                      <div class="text-[0.82rem] text-cardBody font-poppins">
+                                      
+              
+                <span>
+                {item.assignedToName === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedToName === item.woner ? (
+                    
+                    null
+                  ) : (
+                  <MultiAvatar2
+                    primaryTitle={item.assignedToName}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                  )}
+                  </>
+                )}
+              </span>
+                
+                                      </div>
+                                 
+                                  </div>
+                                  <div class="flex  justify-between items-center">
+                                  <MultiAvatar2
+                primaryTitle={item.woner}
+                imageId={item.ownerImageId}
+                imageURL={item.imageURL}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                 <div class="">
+                      {item.rating === 0 ? (<StarBorderIcon
+                       className="!text-base cursor-pointer text-[#eeeedd]"
+                  />)
+                  : (
+                    <span>
+                      {item.rating}{<StarBorderIcon 
+                      className="!text-base cursor-pointer text-[#FFD700]"/>}
+                    </span>)}
+                          </div>                 
+                          <div>
+                          {item.completionInd === false ? (
+                  <CheckCircleIcon 
+                  className="!text-base cursor-pointer text-[#eeeedd]"
+                    />
+                ) : (
+                  <span><CheckCircleIcon 
+                  className="!text-base cursor-pointer text-[#67d239]"
+                   />
+                  </span>
+                )}
+          
+                          </div>
+                        
+                          <div>
+                        
+                        <Tooltip title={
+     <div>
+       {item.eventDescription}
+       <br />
+       <FileCopyIcon
+         className={`!text-base cursor-pointer ${isCopied ? 'text-white' : ''}`}
+         onClick={handleCopyClick}
+       />
+       {/* {isCopied && <span className="text-green-500 ml-2">Copied!</span>} */}
+     </div>
+   }>
+     <EventNoteIcon className="text-base cursor-pointer" />
+   </Tooltip>
+                   </div>
+                   
+                   <Tooltip title="Edit">
+                <BorderColorIcon
+                  type="edit"
+                  className="!text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                    props.setEditEvents(item);
+                    handleUpdateEventModal(true);
+                  }}
+                />
+              </Tooltip>
+             
+              <div>
+             
+             <StyledPopconfirm
+               // title="Do you want to delete?"
+               title={<FormattedMessage id="app.doyouwanttodelete" defaultMessage="Do you want to delete" />}
+               onConfirm={() => deleteEvent(item.eventId, employeeId)}
+             >
+                <Tooltip title="Delete">
+               <DeleteOutlined  type="delete"
+                 className="!text-base cursor-pointer text-[red]"
+               />
+               </Tooltip>
+             </StyledPopconfirm>
+       
+             </div>
+             
+            
+                     
+                               
+                        </div>
+                      
+                       
+                      
+                          
+                        
+                     
+                      
+                    
+         
+            
+            
+              
+                       
+                       
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+                     </InfiniteScroll>
+        </div>
+        </div>
+       
+          <UpdateEventModal
+            updateEventModal={updateEventModal}
+            handleUpdateEventModal={handleUpdateEventModal}
+          />
+        </>
+      ); 
+    }
+
     return (
       <>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-       <InfiniteScroll
-        dataLength={eventListRangeByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingEventListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      >
-         <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[6.2rem]"><FormattedMessage
+      <div className=' flex justify-end sticky top-28 z-auto'>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+   
+         <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[8.8rem]"><FormattedMessage
                   id="app.type"
                   defaultMessage="type"
                 /></div>
-        <div className=" md:w-[6.23rem]"><FormattedMessage
+        <div className=" md:w-[13.23rem]"><FormattedMessage
                   id="app.subject"
                   defaultMessage="subject"
                 /></div>
-        <div className=" md:w-[7.25rem] "><FormattedMessage
+        <div className=" md:w-[9.25rem] "><FormattedMessage
                   id="app.start"
                   defaultMessage="start"
                 /></div>
-        <div className=" md:w-[7.43rem] "><FormattedMessage
+        <div className=" md:w-[13.43rem] "><FormattedMessage
                   id="app.end"
                   defaultMessage="end"
                 /></div>
-        <div className="md:w-[4.2rem]"><FormattedMessage
-                  id="app.team"
-                  defaultMessage="team"
-                /></div>
-        <div className="md:w-[4.32rem]"><FormattedMessage
+     
+        <div className="md:w-[6.32rem]"><FormattedMessage
                   id="app.include"
                   defaultMessage="include"
                 /></div>
      
-        <div className="md:w-[5.15rem]"><FormattedMessage
+        <div className="md:w-[8.15rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
@@ -123,19 +341,33 @@ function EventCardList (props) {
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-                   <div className="md:w-[5%]"><FormattedMessage
+                   {/* <div className="md:w-[5%]"><FormattedMessage
                   id="app.rating"
                   defaultMessage="rating"
                 /></div>
         <div className="w-12"><FormattedMessage
                   id="app.action"
                   defaultMessage="action"
-                /></div>
+                /></div> */}
       </div>
+      <InfiniteScroll
+        dataLength={eventListRangeByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingEventListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
+        height={"75vh"}
+      >
       {eventListRangeByUserId.map((item) => { 
+            const handleCopyClick = () => {
+              const textToCopy = item.eventDescription;
+              navigator.clipboard.writeText(textToCopy)
+                .then(() => setIsCopied(true))
+                .catch((err) => console.error('Unable to copy text', err));
+               
+            };
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
+                            <div className="flex rounded-xl  mt-4 bg-white h-[2.75rem] items-center p-3"
                                 style={{
                                     // borderBottom: "3px dotted #515050"
                                 }}>
@@ -158,7 +390,7 @@ function EventCardList (props) {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[5.26rem] max-sm:flex-row  w-full ">
+                                <div className=" flex font-medium flex-col  md:w-[12.26rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
@@ -166,19 +398,21 @@ function EventCardList (props) {
                                 </div>
                                 </div>
                                 <div class="flex  items-center md:w-[55rem]">
-                                <div className=" flex font-medium flex-col md:w-[11.23rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[8.9rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
-                                    {` ${moment(item.startDate).format("llll")}`}
+                                    {` ${dayjs(item.startDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[12.32rem] max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[5.32rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
-                                    {` ${moment(item.startDate).format("llll")}`}
+                                    {` ${dayjs(item.endDate).format('YYYY-MM-DD')}`}
                                     </div>
                                 </div>
-                               
+                                <div className=" flex font-medium flex-col md:w-[9.32rem] max-sm:flex-row  w-full">
+                                   
+                                </div>
                                 <div className=" flex font-medium flex-col md:w-[7.31rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div> */}
 
@@ -191,14 +425,16 @@ function EventCardList (props) {
                   item.included.map((candidate, i) => {
                      const data1 = candidate.fullName
                      .slice(0,2)
-                     .split("")[0]
+                    //  .split("")[0]
                      .toUpperCase();
                    console.log("datas", data1);
                     return (
+                      <Tooltip title={candidate.fullName} key={i}>
                       <Avatar style={{ backgroundColor: "#f56a00" }}>
                       {data1}
                     
                     </Avatar>
+                    </Tooltip>
                      
 
                    
@@ -207,32 +443,43 @@ function EventCardList (props) {
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-[3.69rem] max-sm:flex-row  w-full ">
+                                <div className="flex font-medium flex-col md:w-[4.69rem] max-sm:flex-row  w-full ">
                                     {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
-                                    <Tooltip title={item.assignedToName}>
+                                    {/* <Tooltip title={item.assignedToName}> */}
               <SubTitle>
+              <span>
+              {item.assignedToName === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedToName === item.woner ? (
+                  
+                  null
+                ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedToName}
-                  imageId={item.imageId}
-                  imageURL={item.imageURL}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
                 />
+                )}
+                </>
+              )}
+            </span>
               </SubTitle>
-             </Tooltip>
+             {/* </Tooltip> */}
                                     </div>
                                 </div>
                                 </div>
-                                <div class="flex md:w-[24rem]">
+                                <div class="flex md:w-[14rem]">
                                
                                 <div className="flex font-medium flex-col md:w-[4.12rem] max-sm:flex-row  w-full ">
                        
                        {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    <div class="max-sm:flex justify-end">
-              <Tooltip title={item.ownerName}>
+              {/* <Tooltip title={item.woner}> */}
             <SubTitle>
               <MultiAvatar2
               primaryTitle={item.woner}
@@ -242,7 +489,7 @@ function EventCardList (props) {
                 imgHeight={"1.8rem"}
               />
             </SubTitle>
-          </Tooltip>
+          {/* </Tooltip> */}
           </div>
                    </div>
                              
@@ -251,33 +498,46 @@ function EventCardList (props) {
                       <div class="flex  md: max-sm:flex-row items-center justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
-                style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
+                     className="!text-base cursor-pointer text-[#eeeedd]"
+                />)
                 : (
                   <span>
                     {item.rating}{<StarBorderIcon 
-                      style={{ color: "#FFD700", fontSize: "1.5em" }} />}
+                    className="!text-base cursor-pointer text-[#FFD700]"/>}
                   </span>)}
                         </div>
                         <div>
                         {item.completionInd === false ? (
                 <CheckCircleIcon 
-               
-                  style={{
-                    color: "#eeeedd",
-                    fontSize: "1.5em"
-                  }} />
+                className="!text-base cursor-pointer text-[#eeeedd]"
+                  />
               ) : (
                 <span><CheckCircleIcon 
-                  style={{ color: "#67d239", fontSize: "1.5em" }} />
+                className="!text-base cursor-pointer text-[#67d239]"
+                 />
                 </span>
               )}
         
                         </div>
                         <div>
-                        <Tooltip title={item.eventDescription}>  
+                        {/* <Tooltip title={item.eventDescription}>  
                         <EventNoteIcon
-                        style={{ cursor: "pointer", fontSize:"0.8rem"}}/>
-                        </Tooltip>
+                          className="!text-base cursor-pointer"
+                       />
+                        </Tooltip> */}
+                         <Tooltip title={
+      <div>
+        {item.eventDescription}
+        <br />
+        <FileCopyIcon
+          className={`!text-base cursor-pointer ${isCopied ? 'text-white' : ''}`}
+          onClick={handleCopyClick}
+        />
+        {/* {isCopied && <span className="text-green-500 ml-2">Copied!</span>} */}
+      </div>
+    }>
+      <EventNoteIcon className="!text-base cursor-pointer" />
+    </Tooltip>
                     </div>
                     </div>
                     
@@ -286,7 +546,7 @@ function EventCardList (props) {
           <Tooltip title="Edit">
               <BorderColorIcon
                 type="edit"
-                style={{ cursor: "pointer", fontSize:"0.8rem"}}
+                className="!text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                   props.setEditEvents(item);
                   handleUpdateEventModal(true);
@@ -301,7 +561,11 @@ function EventCardList (props) {
               title={<FormattedMessage id="app.doyouwanttodelete" defaultMessage="Do you want to delete" />}
               onConfirm={() => deleteEvent(item.eventId, employeeId)}
             >
-              <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"0.8rem" }} />
+               <Tooltip title="Delete">
+              <DeleteOutlined  type="delete"
+                className="!text-base cursor-pointer text-[red]"
+              />
+              </Tooltip>
             </StyledPopconfirm>
       
             </div>
@@ -314,7 +578,8 @@ function EventCardList (props) {
                     )
                 })}
                    </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
+      </div>
      
         <UpdateEventModal
           updateEventModal={updateEventModal}
@@ -331,8 +596,7 @@ const mapStateToProps = ({ auth, event, employee,opportunity}) => ({
     event.fetchingEventListRangeByUserIdError,
   eventListRangeByUserId: event.eventListRangeByUserId,
   updateEventModal: event.updateEventModal,
-  employees: employee.employees,
-  sales: opportunity.sales,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -341,8 +605,6 @@ const mapDispatchToProps = (dispatch) =>
       deleteEvent,
       handleUpdateEventModal,
       setEditEvents,
-      getEmployeelist,
-      getAllSalesList,
 
     },
     dispatch

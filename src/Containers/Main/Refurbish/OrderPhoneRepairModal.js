@@ -5,24 +5,22 @@ const CatalogueListForOrder = lazy(() => import("./CatalogueListForOrder"));
 const PhoneListForRepair = lazy(() => import("./PhoneListForRepair"));
 
 const OrderPhoneRepairModal = (props) => {
-    const { showRepairPhoneList, handleRepairPhone, ...formProps } = props;
+    const { showRepairPhoneList, handleRepairPhone, rowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title="Assign"
-                width="80%"
+                title={(`Order # - ${rowData.newOrderNo}`)}
+                width="85%"
                 visible={showRepairPhoneList}
                 closable
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop: "3rem" }}
                 onClose={() => handleRepairPhone(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
                     {props.inspectionRequiredInd ?
-                        <CatalogueListForOrder rowData={props.rowData} /> :
-                        <PhoneListForRepair rowData={props.rowData} />}
+                        <CatalogueListForOrder rowData={rowData} /> :
+                        <PhoneListForRepair rowData={rowData} />}
                 </Suspense>
             </StyledDrawer>
         </>

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import styled from 'styled-components';
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeExpense} from "../Expense/ExpenseAction"
 import { TextInput } from "../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
 class SingleExpenses extends Component {
@@ -17,20 +20,26 @@ class SingleExpenses extends Component {
         }
     }
     render() {
-        const { expense: { expenseType, expenseTypeId }, handleChange, name, value, linkedExpenses,
+        const { expense: { expenseType,creationDate, expenseTypeId }, handleChange, name, value, linkedExpenses,
             updatingExpenses, handleUpdateExpense, handleDeleteExpense } = this.props;
         console.log(linkedExpenses)
+        const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(creationDate).format("DD/MM/YYYY");
         // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
         return (
-            <ExpenseWrapper>
+            <div class=" w-full cursor-pointer">
                 <ViewEditCard>
                     {({ viewType }, toggleViewType) => (
                         viewType === 'view'
                             ?
                             <div class=" flex justify-between" >
-                                <ExpenseName style={{ flexBasis: '85%' }}>
-                                    {expenseType}
-                                </ExpenseName>
+                                <div class=" font-semibold" >
+                                    {expenseType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                                </div>
                                 <div>
                                     {this.props.expense.editInd?
                          <BorderColorIcon 
@@ -39,28 +48,28 @@ class SingleExpenses extends Component {
                             onClick={toggleViewType}
                             style={{fontSize:"1rem"}}
                                />:null}
-                                &nbsp;
+                              
                                 <Tooltip title="Delete">
-                    <DeleteIcon
+                                <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeExpense(expenseTypeId )}
+                        >
+                    <DeleteOutlined
 
-                      onClick={() => handleDeleteExpense(expenseTypeId)}
-                      size="14px"
+                    //   onClick={() => handleDeleteExpense(expenseTypeId)}
+                  
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                                {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
-                                    
+                            
                                   
                                 </div>
                             </div>
@@ -73,8 +82,7 @@ class SingleExpenses extends Component {
                                     onChange={handleChange}
                                     style={{ width: '60%' }}
                                 />
-                                <br />
-                                <br />
+                              
                                 <div class=" ml-auto" >
                                 <Button
                                     type='primary'
@@ -88,10 +96,11 @@ class SingleExpenses extends Component {
                                        id="app.update"
                                        defaultMessage="Update"
                                     />
-                                </Button>&nbsp;
+                                </Button>
                                 <Button
                                     type='primary'
                                     ghost
+                                  
                                     onClick={() => toggleViewType()}
                                 >
                                     {/* Cancel */}
@@ -104,22 +113,22 @@ class SingleExpenses extends Component {
                             </div>
                     )}
                 </ViewEditCard>
-            </ExpenseWrapper>
+            </div>
         )
     }
 }
 
-export default SingleExpenses;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const ExpenseWrapper = styled.div`
-    width: 100%;
-    cursor: pointer;
-`
-const ExpenseName = styled.h3`
-    color:  ${props => props.theme.color || 'teal'};
-    font-weight: 600;
-`
-const ExpenseValue = styled.h3`
-    color: #999;
-    font-size: 1.3rem;
-`
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+        removeExpense,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleExpenses);
+
+
+

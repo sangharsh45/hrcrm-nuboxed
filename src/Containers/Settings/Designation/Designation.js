@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleDesignation from "./Child/SingleDesignation";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getDesignations,
   addDesignations,
@@ -16,6 +14,9 @@ import {
   searchDesignationName,
   ClearReducerDataOfDesignation
 } from "./DesignationAction";
+const SingleDesignation = lazy(() =>
+  import("./Child/SingleDesignation")
+);
 
 class Designation extends Component {
   constructor(props) {
@@ -146,6 +147,7 @@ class Designation extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
                       <div class=" flex w-[18vw]" >
                       <Input
          placeholder="Search by Name"
@@ -157,31 +159,11 @@ class Designation extends Component {
           />
        
         </div>
-        <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {designations.length &&
-                  designations.map((designation, i) => (
-                    <SingleDesignation
-                      key={i}
-                      value={singleDesignation}
-                      name="singleDesignation"
-                      designation={designation}
-                      linkedDesignations={linkedDesignations}
-                      updatingDesignations={updatingDesignations}
-                      handleChange={this.handleChange}
-                      handleUpdateDesignation={this.handleUpdateDesignation}
-                       handleDeleteDesignation={this.handleDeleteDesignation}
-                    />
-                  ))}
-              </MainWrapper>
-            </div>
-            {isTextInputOpen ? (
+        {isTextInputOpen ? (
              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
              >
-                <br />
-                <br />
+               
                 <TextInput
                   placeholder="Add Designation"
                   name="designationType"
@@ -202,17 +184,16 @@ class Designation extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   Cancel
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+               
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingDesignations}
                     onClick={this.toggleInput}
@@ -223,34 +204,37 @@ class Designation extends Component {
                
               </>
             )}
+            </div>
+        <div class=" flex flex-col" >
+        <MainWrapper className="!h-[69vh] !mt-2" >
+              {designations.length ? (
+  designations
+    .slice() 
+    .sort((a, b) => a.designationType.localeCompare(b.designationType)) 
+    .map((designation, i) => (
+                    <SingleDesignation
+                      key={i}
+                      value={singleDesignation}
+                      name="singleDesignation"
+                      designation={designation}
+                      linkedDesignations={linkedDesignations}
+                      updatingDesignations={updatingDesignations}
+                      handleChange={this.handleChange}
+                      handleUpdateDesignation={this.handleUpdateDesignation}
+                       handleDeleteDesignation={this.handleDeleteDesignation}
+                    />
+                    ))
+                    ) : (
+                      <p>No Data Available</p>
+                    )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+    
+        
         </div>
-        <h4>Updated on {moment(this.props.designations && this.props.designations.length && this.props.designations[0].updationDate).format("ll")} by {this.props.designations && this.props.designations.length && this.props.designations[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.designations && this.props.designations.length && this.props.designations[0].updationDate).format('YYYY-MM-DD')} by {this.props.designations && this.props.designations.length && this.props.designations[0].name}</div>
       </>
     );
   }

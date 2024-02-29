@@ -5,8 +5,9 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
+import dayjs from "dayjs";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import ContactsIcon from '@mui/icons-material/Contacts';
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select,Button ,Popconfirm} from "antd";
@@ -14,9 +15,8 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
 } from "../../../../Components/UI/Elements";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import {
   getCustomerListByUserId,
   handleUpdateCustomerModal,
@@ -31,16 +31,31 @@ import {
   emptyCustomer,
   customerToAccount,
   handleCustomerPulseDrawerModal,
+  handleCustomerContactDrawerModal,
+  handleCustomerOpportunityDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
-import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
-
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
+import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
+const AddCustomerDrawerModal = lazy(() =>
+  import("../../AddCustomerDrawerModal")
+);
+const AddCustomerEmailDrawerModal = lazy(() =>
+  import("../UpdateCustomer/AddCustomerEmailDrawerModal")
+);
+const AddCustomerNotesDrawerModal = lazy(() =>
+  import("../CustomerDetail/AddCustomerNotesDrawerModal")
+);
+const CustomerPulseDrawerModal = lazy(() =>
+  import("./CustomerPulseDrawerModal")
+);
+const CustomerContactDrawerModal = lazy(() =>
+  import("./CustomerContactDrawerModal")
+);
+const CustomerOpportunityDrawerModal = lazy(() =>
+  import("./CustomerOpportunityDrawerModal")
+);
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
 );
@@ -55,6 +70,7 @@ function CustomerCardList(props) {
   const [hasMore, setHasMore] = useState(true);
  
   const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -83,7 +99,15 @@ function CustomerCardList(props) {
     return () => props.emptyCustomer();
   }, []);
 
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
 const [rowdata, setrowdata] = useState("");
   const [currentCustomerId, setCurrentCustomerId] = useState("");
@@ -117,7 +141,11 @@ const [rowdata, setrowdata] = useState("");
     customerByUserId,
     handleUpdateCustomerModal,
     addDrawerCustomerPulseModal,
+    addDrawerCustomerContactModal,
+    addDrawerCustomerOpportunityModal,
     handleCustomerPulseDrawerModal,
+    handleCustomerContactDrawerModal,
+    handleCustomerOpportunityDrawerModal,
     updateCustomerModal,
     fetchingCustomersError,
     fetchingAllCustomers,
@@ -131,35 +159,366 @@ const [rowdata, setrowdata] = useState("");
   // if (fetchingCustomers) {
   //   return <BundleLoader />;
   // }
+  if (isMobile){
+    return (
+      <>
+      
+   
+           <div className=' flex justify-end sticky top-28 z-auto'>
+           <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          
+          <InfiniteScroll
+          dataLength={customerByUserId.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingCustomers?<div class="flex justify-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+        
+        {customerByUserId.map((item) => { 
+           const currentdate = dayjs().format("DD/MM/YYYY");
+           const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+           const countryCode = item.address[0].countryAlpha2Code
+           const diff = Math.abs(
+              dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+             Street : ${
+               item.address && item.address.length && item.address[0].street
+             }   
+            State : ${item.address && item.address.length && item.address[0].state}
+           Country : ${
+             (item.address && item.address.length && item.address[0].country) || ""
+           } 
+             PostalCode : ${
+               item.address && item.address.length && item.address[0].postalCode
+             } `;
+                      return (
+                          <div>
+                              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                                   <div class="flex justify-between items-center w-wk ">
+                                     <div className=" flex font-medium ">
+                                     <div className="flex ">
+                        <div>
+                        
+                            <MultiAvatar
+                              primaryTitle={item.name}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                         
+                        </div>
+                      
+                        <div class="w-full flex items-center">
+                        <Tooltip>
+                                            <div >
+                                              <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                  
+           <Link
+            toUrl={`customer/${item.customerId}`}
+            title={`${item.name}`}
+          >{item.name}</Link>&nbsp;&nbsp;
+          {date === currentdate ? (
+            <div class="text-xs text-[tomato] font-bold"
+            >
+              New
+            </div>
+          ) : null}
+         
+                                              </div>
+                                              </div>
+                                          </Tooltip>
+                        </div>
+                      </div>
+                                      </div> 
+                                  <div className=" flex font-medium    ">
+                             
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                      <div class=" text-xs text-cardBody font-poppins">   
+                                      {item.sector}
+                                      </div>
+                                  
+                                  </div> 
+                                  <div className=" flex font-medium ">
+                                    
+  
+                                      {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                      <div class=" text-sm text-cardBody font-poppins">
+                                      <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="flex justify-between items-center w-wk ">
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.oppNo}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.totalProposalValue}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.weight}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      
+  
+                                      <div class=" text-xs text-cardBody font-poppins">
+                                      
+                                      <div>
+                                    {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
+                <MultiAvatar2
+                  primaryTitle={item.assignedTo}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              )}
+              </>
+              )}
+            </div>
+               
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                         
+                         {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+  
+                         <Tooltip title={item.ownerName}>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </Tooltip>
+                     </div>
+                     </div>
+                     <div class="flex justify-between items-center w-wk ">
+                         
+                     <div className=" flex font-medium  ">
+                         
+                         <div class=" text-sm text-cardBody font-poppins"></div>
+                         <Popconfirm
+    title="Change status to Account?"
+    onConfirm={() => handleConfirm(item.customerId)}
+    okText="Yes"
+    cancelText="No"
+  >
+                         <Button type="primary">
+                       <div class="text-sm" >
+                       <FormattedMessage
+                          id="app.convertAsCustomer"
+                          defaultMessage="Convert as Customer"
+                        />
+                       
+                        
+                        </div>
+                          </Button>
+                          </Popconfirm>
+                     </div>
+                     
+                    
+                                  <div>
+                                  <Tooltip title={item.url}>
+                {item.url !== "" ? (
+                  <div
+                    //type="edit"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {}}
+                  >
+                    {" "}
+                    <a href={`https://${item.url}`} target="_blank">
+                      <ExploreIcon
+                       className=" !text-base cursor-pointer text-[green]"
+                      />
+                    </a>
+                  </div>
+                )
+                :<div class=" w-3">
+                        
+                </div>
+                }
+              </Tooltip>
+          
+              </div>
+                          <div>
+                          <div
+                style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+                onClick={() => {
+                  props.getCustomerDetailsById(item.customerId);
+                  props.getCustomerKeySkill(item.customerId);
+                  //   this.props.getCustomerDocument(item.customerId );
+  
+                  props.handleCustomerDrawerModal(item, true);
+                }}
+              >
+                {" "}
+                {user.pulseAccessInd === true && <MonitorHeartIcon  className=" !text-base cursor-pointer text-[#df9697]"/>}
+              </div> 
+                          </div>
+                          <div>
+              
+  
+                      </div>
+                      
+                    
+                          <div>
+                          <Tooltip title="Pulse">
+         <MonitorHeartIcon
+                  onClick={() => {
+                    handleCustomerPulseDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#df9697]"
+                />
+             </Tooltip>
+                          </div>
+                          <div>
+                          <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleCustomerNotesDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                    handleRowData(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#4bc076]"
+                />
+             </Tooltip>
+  
+                      </div>
+                     
+                
+                    
+                      <div >
+                      <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+  
+  <LocationOnIcon    className=" !text-base cursor-pointer text-[red]"/>
+  
+  </Tooltip>
+  </div>
+  <div>
+  {props.user.customerUpdateInd === true && user.crmInd === true && (
+              <Tooltip title="Edit">
+                <BorderColorIcon
+                 className=" !text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                      props.setEditCustomer(item);
+                      handleUpdateCustomerModal(true);
+                      handleSetCurrentCustomerId(item.customerId);
+                    
+                  }}
+                />
+              </Tooltip>
+              )}
+  
+  </div>
+             
+  
+                        </div>
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+                  </InfiniteScroll>
+        </div>
+        </div>
+        
+    
+        <AddCustomerDrawerModal
+          addDrawerCustomerModal={props.addDrawerCustomerModal}
+          handleCustomerDrawerModal={props.handleCustomerDrawerModal}
+        />
+  
+        <UpdateCustomerModal
+          customerId={currentCustomerId}
+          updateCustomerModal={updateCustomerModal}
+          handleUpdateCustomerModal={handleUpdateCustomerModal}
+          handleSetCurrentCustomerId={handleSetCurrentCustomerId}
+        />
+           <CustomerPulseDrawerModal
+      customer={currentCustomer}
+          addDrawerCustomerPulseModal={addDrawerCustomerPulseModal}
+          handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+        <AddCustomerEmailDrawerModal
+          // contactById={props.contactById}
+          addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
+          handleCustomerEmailDrawerModal={props.handleCustomerEmailDrawerModal}
+        />
+  
+        
+  <AddCustomerNotesDrawerModal
+          customer={currentCustomer}
+          rowdata={rowdata}
+          addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
+          handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+      </>
+    );
+  }
+
+
 
   return (
     <>
     
  
          <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[17.7rem]"> 
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex  w-[92.5%] justify-between p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[18.7rem]"> 
          <FormattedMessage
                         id="app.name"
                         defaultMessage="Name"
                       />
                       </div>
-                      <div className=" md:w-[4.1rem]">
+                      <div className=" md:w-[4.5rem]">
         <FormattedMessage
-                        id="app.phone"
-                        defaultMessage="Phone #"
+                        id="app.work"
+                        defaultMessage="Work"
                       />
           
           </div>
-        <div className=" md:w-[5.1rem]">
+        <div className=" md:w-[6.1rem]">
         <FormattedMessage
                         id="app.sector"
                         defaultMessage="Sector"
                       />
           
           </div>
-          <div className=" md:w-[5.1rem]">
+          <div className=" md:w-[6.12rem]">
         <FormattedMessage
                         id="app.source"
                         defaultMessage="Source"
@@ -173,14 +532,14 @@ const [rowdata, setrowdata] = useState("");
                       />
           
           </div>
-        <div className="md:w-[5.9rem]">
+        <div className="md:w-[6.9rem]">
         <FormattedMessage
                         id="app.opportunity"
                         defaultMessage="Opportunity"
                       />
 
           </div>
-        <div className="md:w-[2.8rem]">
+        <div className="md:w-[3.8rem]">
         <FormattedMessage
                         id="app.pipeline"
                         defaultMessage="Pipeline"
@@ -201,7 +560,7 @@ const [rowdata, setrowdata] = useState("");
                       />
    
           </div>
-        <div className="md:w-[11.8rem]">
+        <div className="md:w-[10.8rem]">
         <FormattedMessage
                         id="app.owner"
                         defaultMessage="Owner"
@@ -215,15 +574,16 @@ const [rowdata, setrowdata] = useState("");
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCustomers?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
       
       {customerByUserId.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+         const countryCode = item.address[0].countryAlpha2Code
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -240,7 +600,7 @@ const [rowdata, setrowdata] = useState("");
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
+                            <div className="flex rounded-xl justify-between  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -249,7 +609,7 @@ const [rowdata, setrowdata] = useState("");
                                    <div className=" flex font-medium flex-col w-[18rem]   max-sm:w-full">
                                    <div className="flex max-sm:w-full">
                       <div>
-                        <SubTitle>
+                       
                           <MultiAvatar
                             primaryTitle={item.name}
                             imageId={item.imageId}
@@ -257,90 +617,93 @@ const [rowdata, setrowdata] = useState("");
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
-                        </SubTitle>
+                        
                       </div>
                       <div class="w-[4%]"></div>
 
                       <div class="max-sm:w-full md:flex items-center">
                       <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
-         <Link
-          toUrl={`customer/${item.customerId}`}
-          title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`customer/${item.customerId}`} title={item.name}>
+      {item.name}
+    </Link>
+        
+        &nbsp;&nbsp;
         {date === currentdate ? (
-          <span class="text-xs"
+    <div class="text-xs text-[tomato] font-bold"
+    >
+            New
+          </div>
+        ) : null} 
+                                    {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`customer/${item.customerId}`}>{item.name} </a>
+                              &nbsp;&nbsp;
+        {date === currentdate ? (
+          <div class="text-xs"
             style={{
               color: "tomato",
               fontWeight: "bold",
             }}
           >
             New
-          </span>
+          </div>
         ) : null}
-       
-                                            </h4>
+        */}
+                                            </div>
                                             </div>
                                         </Tooltip>
                       </div>
                     </div>
                                     </div> 
-                                    <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                    <div className=" flex font-medium  items-center  md:w-[5.24rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
 
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           <div class=" text-xs text-cardBody font-poppins">   
                            {item.phoneNumber}
-                           </h4>
+                           </div>
                        
                        </div>
-                                <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
 
-                                <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-[6.215rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                          
-                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           <div class=" text-xs text-cardBody font-poppins">   
                            {item.source}
-                           </h4>
+                           </div>
                        
                        </div> 
-                                <div className=" flex font-medium flex-col justify-center md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col justify-center md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                    <h4 class=" text-sm text-cardBody font-poppins">
-                                    <ReactCountryFlag
-                          countryCode={item.address && item.address.length && item.address[0].country_alpha2_code}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                        />
-                        &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
-                                    </h4>
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</div> */}
+                                    <div class=" text-sm text-cardBody font-poppins">
+                                    <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                                    </div>
                                 </div>
                                 </div>
                              
-                                <div className=" flex font-medium flex-col md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                <div className=" flex font-medium flex-col md:w-[5.82rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -356,42 +719,48 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div> */}
                                 <div className=" flex font-medium items-center  flex-col md:w-[3rem] max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
-                                    <span>
-              {item.assignedTo === null ? (
-                "None"
+                                    <div>
+                                    {item.assignedTo === null ? (
+                "Not available"
               ) : (
+                <>
+                {item.assignedTo === item.ownerName ? (
+                  
+                  null
+                ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
               )}
-            </span>
+              </>
+              )}
+            </div>
              
                                     </div>
                                 </div>
                                 <div class="flex md:items-center"> 
                                 <div className=" flex font-medium items-center flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between max-sm:mb-2 ">
                        
-                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                       {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
+                       <Tooltip title={item.ownerName}>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </Tooltip>
                    </div>
-                   <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
+                   <div className=" flex font-medium justify-center flex-col w-[9.1rem] max-sm:flex-row  ">
                        
-                       <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                       <div class=" text-sm text-cardBody font-poppins"></div>
                        <Popconfirm
   title="Change status to Account?"
   onConfirm={() => handleConfirm(item.customerId)}
@@ -399,25 +768,26 @@ const [rowdata, setrowdata] = useState("");
   cancelText="No"
 >
 { user.erpInd === true && (
-                       <Button type="primary">
-                     <span class="text-sm" >
+                       <Button type="primary"
+                       style={{width:"8rem"}}>
+                     <div class="text-xs" >
                      <FormattedMessage
-                        id="app.convertAsCustomer"
-                        defaultMessage="Convert as Customer"
+                        id="app.addascustomer"
+                        defaultMessage="Add as Customer"
                       />
                      
                       
-                      </span>
+                      </div>
                         </Button>
                           )}
                         </Popconfirm>
                    </div>
                    
-                   <div class="flex flex-col w-[10%] ml-1 max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-6 ml-1 max-sm:flex-row max-sm:w-[10%]">
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
-                <span
+                <div
                   //type="edit"
                   style={{ cursor: "pointer" }}
                   onClick={() => {}}
@@ -425,10 +795,11 @@ const [rowdata, setrowdata] = useState("");
                   {" "}
                   <a href={`https://${item.url}`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green",fontSize: "1rem", }}
+                                   className=" !text-base cursor-pointer text-[green]"
+
                     />
                   </a>
-                </span>
+                </div>
               )
               :<div class=" w-3">
                       
@@ -438,8 +809,8 @@ const [rowdata, setrowdata] = useState("");
         
             </div>
                         <div>
-                        <span
-              style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+                        <div
+              style={{ fontSize: "0.8rem"}}
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
                 props.getCustomerKeySkill(item.customerId);
@@ -449,52 +820,82 @@ const [rowdata, setrowdata] = useState("");
               }}
             >
               {" "}
-              {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
-                cursor: "pointer",
-                fontSize: "1rem",
-                color: "#df9697"}}/>}
-            </span> 
+              {user.pulseAccessInd === true && <MonitorHeartIcon  
+               className=" !text-base cursor-pointer text-[#df9697]"
+                />}
+            </div> 
                         </div>
                         <div>
             
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%] ">
+
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
+                        <div>
+                        <Tooltip title="Contact">
+       <ContactsIcon
+               className=" !text-base cursor-pointer text-[#709ab3]"
+                onClick={() => {
+                  handleCustomerContactDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                }}
+               
+              />
+           </Tooltip>
+                        </div>
+                        <div>
+                        <Tooltip title="Opportunity">
+       <LightbulbIcon
+        className=" !text-base cursor-pointer text-[#AF5910]"
+                onClick={() => {
+                  handleCustomerOpportunityDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                  handleRowData(item);
+                }}
+               
+              />
+           </Tooltip>
+
+                    </div>
+                    </div>
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
+               className=" !text-base cursor-pointer text-[#df9697]"
                 onClick={() => {
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", color: "#df9697" }}
+
               />
            </Tooltip>
                         </div>
                         <div>
                         <Tooltip title="Notes">
        <NoteAltIcon
+         className=" !text-base cursor-pointer text-[#4bc076]"
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+               
               />
            </Tooltip>
 
                     </div>
                     </div>
               
-                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
-<LocationOnIcon   style={{
-    cursor: "pointer",
-    fontSize: "1rem"
-  }}/>
+<LocationOnIcon  
+className=" !text-base cursor-pointer text-[#960A0A]"
+
+/>
 
 </Tooltip>
 </div>
@@ -502,7 +903,8 @@ const [rowdata, setrowdata] = useState("");
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
+               className=" !text-base cursor-pointer text-[tomato]"
+               
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);
@@ -533,7 +935,7 @@ const [rowdata, setrowdata] = useState("");
                     )
                 })}
                 </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       
   
@@ -554,6 +956,18 @@ const [rowdata, setrowdata] = useState("");
         handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
         handleSetCurrentCustomer={handleSetCurrentCustomer}
       />
+      <CustomerContactDrawerModal
+      customer={currentCustomer}
+      addDrawerCustomerContactModal={addDrawerCustomerContactModal}
+          handleCustomerContactDrawerModal={handleCustomerContactDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+           <CustomerOpportunityDrawerModal
+      customer={currentCustomer}
+      addDrawerCustomerOpportunityModal={addDrawerCustomerOpportunityModal}
+      handleCustomerOpportunityDrawerModal={handleCustomerOpportunityDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
       <AddCustomerEmailDrawerModal
         // contactById={props.contactById}
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
@@ -580,6 +994,8 @@ const mapStateToProps = ({
   employee,
 }) => ({
   userId: auth.userDetails.userId,
+  addDrawerCustomerContactModal:customer.addDrawerCustomerContactModal,
+  addDrawerCustomerOpportunityModal:customer.addDrawerCustomerOpportunityModal,
   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
   sales: opportunity.sales,
@@ -602,6 +1018,8 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerListByUserId,
       handleUpdateCustomerModal,
       handleCustomerPulseDrawerModal,
+      handleCustomerContactDrawerModal,
+      handleCustomerOpportunityDrawerModal,
       setEditCustomer,
       getSectors,
       customerToAccount,

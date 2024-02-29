@@ -3,7 +3,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 
-  const LeadsForm = lazy(() => import("../Child/LeadsForm"));
+const LeadsForm = lazy(() => import("../Child/LeadsForm"));
 const TabPane = StyledTabs.TabPane;
 
 class AddLeadsModal extends Component {
@@ -11,6 +11,9 @@ class AddLeadsModal extends Component {
     const { addLeadsModal, handleLeadsModal, ...formProps } = this.props;
     const isSmallScreen = window.innerWidth <= 600;
     const drawerWidth = isSmallScreen ? "90%" : "60%";
+    const handleClose = () => {
+      window.location.reload(true);
+    };
     return (
       <>
         <StyledDrawer
@@ -18,14 +21,11 @@ class AddLeadsModal extends Component {
             id="app.leads"
             defaultMessage="Add Leads"
           />}
-
           width={drawerWidth}
           visible={addLeadsModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"3rem"}}
-          onClose={() => handleLeadsModal(false)}
+          onClose={() =>{
+            handleClose();
+             handleLeadsModal(false)}}
           footer={null}
         >
         <Suspense fallback={<BundleLoader />}>

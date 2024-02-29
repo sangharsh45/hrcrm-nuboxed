@@ -4,17 +4,12 @@ import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
 import {addOrganization} from "../../../Auth/AuthAction"
 import { StyledLabel } from "../../../../Components/UI/Elements";
-import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
-import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import ClearbitImage from "../../../../Components/Forms/Autocomplete/ClearbitImage";
-import { Listbox, } from '@headlessui/react'
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -383,7 +378,7 @@ function AddOrganizationForm (props) {
                     </div>
                  
                   </div>
-                  <Spacer />
+               
                
                  
              
@@ -405,13 +400,12 @@ function AddOrganizationForm (props) {
                     )}
                   />
                   </StyledLabel>
-                  
-                 <Spacer />
+          
               
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+         
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

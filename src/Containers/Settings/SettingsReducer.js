@@ -9,6 +9,17 @@ const initialState = {
   addProcessTaskModal: false,
   candidateSequenceModal: false,
 
+  fetchingMatrixData:false,
+  fetchingMatrixDataError:false,
+  matrixData:[],
+
+  fetchingProcessForOnboarding: false,
+  fetchingProcessForOnboardingError: false,
+  onboardingProcess: [],
+
+  addingProcessForOnboarding: false,
+  addingProcessForOnboardingError: false,
+
   fetchingDepartmentWiseUser: false, 
   fetchingDepartmentWiseUserError: false,
   departmentwiseUser:[],
@@ -117,6 +128,9 @@ const initialState = {
   updatingProcessTask: false,
   updatingProcessTaskError: false,
 
+  addingProcessStagesForOnboarding: false,
+  addingProcessStagesForOnboardingError: false,
+
   addingTaskWorkflow: false,
   addingTaskWorkflowError: false,
 
@@ -124,9 +138,15 @@ const initialState = {
   fetchingDefaultProcessError: false,
   defaultProcess: [],
 
+  updatingStagesForOnboarding: false,
+  updatingStagesForOnboardingError: false,
+
   fetchingDepartmentRoleData: false,
   fetchingDepartmentRoleDataError: false,
   departmentRoleData: [],
+
+  deletingOnboardingStagesData: false, 
+  deletingOnboardingStagesDataError: false,
 
   removingStages: false,
   removingStagesError: false,
@@ -135,6 +155,10 @@ const initialState = {
   fetchingProcessStages: false,
   fetchingProcessStagesError: false,
   ProcessStages: [],
+
+  fetchingProcessStagesForOnboarding: false,
+  fetchingProcessStagesForOnboardingError: false,
+  onboardingProcessStages: [],
 
   updateProcessNameForDeals: false,
   updateProcessNameForDealsError: false,
@@ -185,6 +209,10 @@ const initialState = {
   fetchingLevels: false,
   fetchingLevelsError: false,
   levels: [],
+
+  linkingOnboardingStagesPublish: false,
+  linkingOnboardingStagesPublishError: false,
+  onboardingStagesPublish:[],
 
   //recruiter
   fetchingProcessForRecruit: false,
@@ -241,6 +269,9 @@ const initialState = {
   fetchingOrganizationLeadsError: false,
   leaveData: [],
 
+  deleteOnboardingProcessData: false,
+   deleteOnboardingProcessDataError: false,
+
   addingApprove: false,
   addingApproveError: false,
 
@@ -251,6 +282,10 @@ const initialState = {
   linkingDealsStagesPublish: false,
   linkingDealsStagesPublishError: false,
   dealsStagesPublish: [],
+
+  linkingOnboardingProcessPublish: false,
+  linkingOnboardingProcessPublishError: false,
+  onboardingProcessPublish:[],
 
   addingTaskForRecruit: false,
   addingTaskForRecruitError: false,
@@ -466,6 +501,9 @@ const initialState = {
   fetchingProcessForOpportunityError: false,
   opportunityProcess: [],
 
+
+  addingSkillLevel:false,
+
   fetchingLeadAging: false,
   fetchingLeadAgingError: false,
   leadAging: [],
@@ -478,6 +516,13 @@ const initialState = {
   gettingNotificationConfig: false,
   gettingNotificationConfigError:false,
   notificationConfig:{},
+
+  creatingCurrencyConversion: false,
+  creatingCurrencyConversionError: false,
+
+  fetchingCurrencyConversion: false,
+  fetchingCurrencyConversionError: false,
+  conversionCurrencies:[]
 
 };
 export const settingsReducer = (state = initialState, action) => {
@@ -2115,6 +2160,30 @@ export const settingsReducer = (state = initialState, action) => {
       };
 
 
+
+
+      case types.ADD_SKILL_LEVEL_REQUEST:
+      return { ...state, addingSkillLevel: true };
+    case types.ADD_SKILL_LEVEL_SUCCESS:
+      return { ...state, 
+        addingSkillLevel: false, 
+       
+    
+      };
+    case types.ADD_SKILL_LEVEL_FAILURE:
+      return { ...state, addingSkillLevel: false, 
+       
+      };
+
+
+      case types.GET_MATRIX_DATA_REQUEST:
+        return { ...state, fetchingMatrixData: true };
+      case types.GET_MATRIX_DATA_SUCCESS:
+        return { ...state, fetchingMatrixData: false, matrixData: action.payload };
+      case types.GET_MATRIX_DATA_FAILURE:
+        return { ...state, fetchingMatrixData: false, fetchingMatrixDataError: true };
+
+
     case types.ADD_PROCESS_STAGE_FOR_OPPORTUNITY_REQUEST:
       return { ...state, addingProcessStagesForOpportunity: true };
     case types.ADD_PROCESS_STAGE_FOR_OPPORTUNITY_SUCCESS:
@@ -2127,7 +2196,7 @@ export const settingsReducer = (state = initialState, action) => {
       return {
         ...state,
         addingProcessStagesForOpportunity: false,
-        addingProcessStagesForOpportunity: true,
+        addingProcessStagesForOpportunityError: true,
       };
 
     case types.GET_PROCESS_STAGES_FOR_OPPORTUNITY_REQUEST:
@@ -2923,6 +2992,241 @@ export const settingsReducer = (state = initialState, action) => {
             ...state,
             gettingNotificationConfig: false,
             gettingNotificationConfigError: true,
+          };
+
+
+          case types.ADD_PROCESS_FOR_ONBOARDING_REQUEST:
+            return {
+              ...state,
+              addingProcessForOnboarding: true,
+              addingProcessForOnboardingError: false,
+            };
+          case types.ADD_PROCESS_FOR_ONBOARDING_SUCCESS:
+            return {
+              ...state,
+              addingProcessForOnboarding: false,
+              addingProcessForOnboardingError: false,
+              // addProcessHiringModal: false,
+            };
+          case types.ADD_PROCESS_FOR_ONBOARDING_FAILURE:
+            return {
+              ...state,
+              addingProcessForOnboarding: false,
+              addingProcessForOnboardingError: true,
+              // addProcessHiringModal: false,
+            };
+
+
+            case types.GET_PROCESS_FOR_ONBOARDING_REQUEST:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: true,
+                fetchingProcessForOnboardingError: false,
+              };
+            case types.GET_PROCESS_FOR_ONBOARDING_SUCCESS:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: false,
+                fetchingProcessForOnboardingError: false,
+                onboardingProcess: action.payload,
+              };
+            case types.GET_PROCESS_FOR_ONBOARDING_FAILURE:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: false,
+                fetchingProcessForOnboardingError: true,
+              };
+
+
+              
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_REQUEST:
+      return { ...state, updateProcessNameForOnboarding: true };
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_SUCCESS:
+      // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+      return {
+        ...state,
+        updateProcessNameForOnboarding: false,
+        onboardingProcess: state.onboardingProcess.map((state) =>
+          state.unboardingWorkflowDetailsId === action.payload.unboardingWorkflowDetailsId
+            ? action.payload
+            : state
+        ),
+      };
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_FAILURE:
+      return {
+        ...state,
+        updateProcessNameForOnboarding: false,
+        updateProcessNameForOnboardingError: true,
+      };
+
+      case types.DELETE_ONBOARDING_PROCESS_DATA_REQUEST:
+        return { ...state, deleteOnboardingProcessData: true };
+      case types.DELETE_ONBOARDING_PROCESS_DATA_SUCCESS:
+        return {
+          ...state,
+          deleteOnboardingProcessData: false,
+          onboardingProcess: state.onboardingProcess.filter(
+            (item) => item.unboardingWorkflowDetailsId !== action.payload
+          ),
+        };
+      case types.DELETE_ONBOARDING_PROCESS_DATA_FAILURE:
+        return { ...state, deleteOnboardingProcessData: false, deleteOnboardingProcessDataError: false };
+
+
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_REQUEST:
+          return { ...state, addingProcessStagesForOnboarding: true };
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_SUCCESS:
+          return {
+            ...state,
+            addingProcessStagesForOnboarding: false,
+            onboardingProcessStages: [...state.onboardingProcessStages, action.payload],
+          };
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_FAILURE:
+          return {
+            ...state,
+            addingProcessStagesForOnboarding: false,
+            addingProcessStagesForOnboardingError: true,
+          };
+
+
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_REQUEST:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: true,
+              fetchingProcessStagesForOnboardingError: false,
+            };
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_SUCCESS:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: false,
+              fetchingProcessStagesForOnboardingError: false,
+              onboardingProcessStages: action.payload,
+            };
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_FAILURE:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: false,
+              fetchingProcessStagesForOnboardingError: true,
+            };
+
+            case types.UPDATE_STAGE_FOR_ONBOARDING_REQUEST:
+              return { ...state, updatingStagesForOnboarding: true };
+            case types.UPDATE_STAGE_FOR_ONBOARDING_SUCCESS:
+              // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+              return {
+                ...state,
+                updatingStagesForOnboarding: false,
+                onboardingProcessStages: state.onboardingProcessStages.map((state) =>
+                  state.unboardingStagesId === action.payload.unboardingStagesId ? action.payload : state
+                ),
+              };
+            case types.UPDATE_STAGE_FOR_ONBOARDING_FAILURE:
+              return {
+                ...state,
+                updatingStagesForOnboarding: false,
+                updatingStagesForOnboardingError: true,
+              };
+
+              case types.DELETE_ONBOARDING_STAGES_DATA_REQUEST:
+                return { ...state, deletingOnboardingStagesData: true };
+              case types.DELETE_ONBOARDING_STAGES_DATA_SUCCESS:
+                return {
+                  ...state,
+                  deletingOnboardingStagesData: false,
+                  onboardingProcessStages: state.onboardingProcessStages.filter(
+                    (item) => item.unboardingStagesId !== action.payload
+                  ),
+                };
+              case types.DELETE_ONBOARDING_STAGES_DATA_FAILURE:
+                return { ...state, deletingOnboardingStagesData: false, deletingOnboardingStagesDataError: false };
+
+
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_REQUEST:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: true,
+                  };
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_SUCCESS:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: false,
+                    onboardingStagesPublish: state.onboardingStagesPublish.map((item) => {
+                      if (item.unboardingStagesId === action.payload.unboardingStagesId) {
+                        return action.payload;
+                      } else {
+                        return item;
+                      }
+                    }),
+                  };
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_FAILURE:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: false,
+                    linkingOnboardingStagesPublishError: true,
+                  };
+
+
+                  
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_REQUEST:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: true,
+      };
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_SUCCESS:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: false,
+        onboardingProcessPublish: state.onboardingProcessPublish.map((item) => {
+          if (
+            item.unboardingWorkflowDetailsId === action.payload.unboardingWorkflowDetailsId
+          ) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_FAILURE:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: false,
+        linkingOnboardingProcessPublishError: true,
+      };
+          
+      case types.CREATE_CURRENCY_CONVERSION_REQUEST:
+        return { ...state, creatingCurrencyConversion: true };
+    case types.CREATE_CURRENCY_CONVERSION_SUCCESS:
+        return {
+            ...state,
+            creatingCurrencyConversion: false,
+
+        };
+    case types.CREATE_CURRENCY_CONVERSION_FAILURE:
+        return {
+            ...state,
+            creatingCurrencyConversion: false,
+            creatingCurrencyConversionError: true,
+            // conversionCurrencies:[action.payload,...state.conversionCurrencies]   
+        };
+
+        case types.GET_CURRENCY_CONVERSION_REQUEST:
+          return {
+            ...state,
+            fetchingCurrencyConversion: true,
+            fetchingCurrencyConversionError: false,
+          };
+        case types.GET_CURRENCY_CONVERSION_SUCCESS:
+          return {
+            ...state,
+            fetchingCurrencyConversion: false,
+            fetchingCurrencyConversionError: false,
+            conversionCurrencies: [...state.conversionCurrencies, ...action.payload],
+          };
+        case types.GET_CURRENCY_CONVERSION_FAILURE:
+          return {
+            ...state,
+            fetchingCurrencyConversion: false,
+            fetchingCurrencyConversionError: true,
           };
 
     default:

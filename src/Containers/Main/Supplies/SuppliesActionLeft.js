@@ -1,11 +1,11 @@
 import React from "react";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {  AppstoreOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import { Tooltip,Badge } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import { getSuppliesCount } from "./SuppliesAction";
+
 class SuppliesActionLeft extends React.Component {
    
     componentDidMount(){
@@ -19,7 +19,7 @@ class SuppliesActionLeft extends React.Component {
         } = this.props;
 
         return (
-            <FlexContainer alignItems="center">
+            <div class="flex items-center">
 
 
                 <Tooltip title="All Materials">
@@ -29,12 +29,10 @@ class SuppliesActionLeft extends React.Component {
         overflowCount={999}
       >
                     <TocIcon
+                    className="!text-2xl cursor-pointer"
                         style={{
-                            fontSize: "1.4rem",
                             color: viewType === "all" && "#1890ff",
                         }}
-                        // iconType="appstore-o"
-                        // tooltipTitle="Supplies Library"
                         onClick={() => setSuppliesViewType("all")}
                     />
                        </Badge>
@@ -43,23 +41,21 @@ class SuppliesActionLeft extends React.Component {
                 <Tooltip title="Deleted Materials">
                 <Badge
         size="small"
-        // count={(props.viewType === "card" && props.pitchCount.InvestorLeadsDetails) || 0}
-        
         overflowCount={999}
       >
                                         <DeleteOutlined
+                                        className="!text-2xl cursor-pointer"
                         style={{
-                            marginRight: "0.5rem",
+                          
                             color: viewType === "dashboard" && "red",
                         }}
-                        // iconType="book"
-                        // tooltipTitle="All"
+
                         onClick={() => setSuppliesViewType("dashboard")}
                     />
                        </Badge>
                 </Tooltip>
 
-            </FlexContainer>
+            </div>
         );
     }
 }

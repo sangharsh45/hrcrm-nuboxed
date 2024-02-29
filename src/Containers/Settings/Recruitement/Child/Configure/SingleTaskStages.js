@@ -106,7 +106,7 @@ class SingleTaskStages extends Component {
                 <StageName>
                 {`${ moment(endDate).format("DD/MM/YYYY")}`}
                 </StageName> */}
-                <div class=" flex justify-between ml-margin65 w-4">
+                <div class=" flex justify-between ml-[5rem] w-4">
                   <>
                     <Tooltip title="Edit">
                       <BorderColorIcon
@@ -181,7 +181,7 @@ class SingleTaskStages extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
 
-                <Button type="primary" ghost onClick={() => toggleViewType()}>
+                <Button      type="cancel" onClick={() => toggleViewType()}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>

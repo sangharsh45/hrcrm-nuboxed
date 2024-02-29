@@ -3,16 +3,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { addSuppliers } from "../SuppliersAction";
 import {getEmployeelistAsErp} from "../../Shipper/ShipperAction"
 import { Listbox } from '@headlessui/react';
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { FormattedMessage } from "react-intl";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -35,14 +32,6 @@ function AddSuppliersForm (props) {
   const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.employeeAsErp.find((item) => item.empName === selected);
-    
-    const shipByOptions = props.ShipByData.map((item) => {
-      return {
-        label: item.name || "",
-        value: item.shipById,
-      };
-    });
-
     return (
       <>
         <Formik
@@ -147,7 +136,7 @@ function AddSuppliersForm (props) {
                       />
                     </div>
                   </div>
-                  <div style={{ width: "100%" }}>
+                  <div class="w-full">
                     <FastField
                       type="email"
                       name="emailId"
@@ -168,9 +157,7 @@ function AddSuppliersForm (props) {
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
-            // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
-            >
+            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2 ">
             
                         <FormattedMessage id="app.assignedto" defaultMessage="Assigned to" />
                   
@@ -240,7 +227,7 @@ function AddSuppliersForm (props) {
       </Listbox>
       </div>
                   <div>
-                    <Spacer />
+                    <div class="mt-3">
                     <FieldArray
                       name="address"
                       render={(arrayHelpers) => (
@@ -251,20 +238,20 @@ function AddSuppliersForm (props) {
                         />
                       )}
                     />
+                    </div>
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+
+              <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
                   loading={props.addingSuppliers}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
-                  
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
             </div>
           )}

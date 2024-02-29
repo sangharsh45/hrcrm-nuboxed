@@ -6,12 +6,7 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-<<<<<<< HEAD
 import { addPaidOrder, getPaymentMode } from "../../../Account/AccountAction";
-import * as Yup from "yup";
-=======
-import { addPaidOrder } from "../../../Account/AccountAction";
->>>>>>> 8f778a0e45a5d32dabcc57c89174fcf1eade90bb
 import moment from "moment";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { FormattedMessage } from "react-intl";
@@ -28,8 +23,8 @@ function DistributorPaidForm(props) {
   });
   const payOption = props.paymentModee.map((item) => {
     return {
-      label: item.currencyName || "",
-      value: item.currencyId,
+      label: item.name || "",
+      value: item.paymentCatagoryId,
     };
   });
   useEffect(() => {
@@ -50,7 +45,7 @@ function DistributorPaidForm(props) {
           userId: props.userId,
           orderPaymentType: "PhonePayment",
           transactionNumber: "",
-          orderCurrencyId: "",
+          orderCurrencyId:props.particularRowData.orderCurrencyName || "",
           paymentMode: "",
           approveByFinanceInd: false,
           orderId: props.particularRowData.orderId,
@@ -79,10 +74,10 @@ function DistributorPaidForm(props) {
           ...rest
         }) => (
           <Form>
-            <div class="justify-between flex">
-              <div class="h-full w-full">
-                <div class="justify-between">
-                  <div class="w-[47%]">
+            <div class="flex justify-around max-sm:flex-col">
+            <div class=" h-full w-w47.5 max-sm:w-wk">
+            <div class="flex justify-between">
+                  <div class="w-[31%]">
                     <Field
                       name="paymentAmount"
                       label={
@@ -98,8 +93,9 @@ function DistributorPaidForm(props) {
                       value={values.paymentAmount}
                     />
                   </div>
-                  <div style={{ width: "31%" }}>
-                    <FastField
+                  <div class="w-[31%]">
+                    <Field
+                    disabled
                       name="orderCurrencyId"
                       label={
                         <FormattedMessage
@@ -114,14 +110,10 @@ function DistributorPaidForm(props) {
                       options={Array.isArray(currencyOption) ? currencyOption : []}
                     />
                   </div>
-                  <div style={{ width: "31%" }}>
+                  <div  class="w-[31%]">
                     <Field
                       name="date"
-                      label={
-                        <FormattedMessage
-                          id="app.date"
-                          defaultMessage="Date"
-                        />}
+                      label="Date "
                       isColumn
                       inlineLabel
                       width={"100%"}
@@ -129,12 +121,22 @@ function DistributorPaidForm(props) {
                       value={values.date}
                     />
                   </div>
-
                 </div>
-
-
-                <div class="flex justify-between mt-2">
-                  <div class="w-[47%]">
+                <div class="w-full">
+                    <Field
+                      name="remarks"
+                      label={
+                        <FormattedMessage
+                          id="app.reason"
+                          defaultMessage="Reason"
+                        />}
+                      component={TextareaComponent}
+                    />
+                  </div>
+              </div>
+<div class=" h-full w-w47.5 max-sm:w-wk">
+<div class="flex justify-between">
+                  <div class="w-[48%]">
                     <Field
                       name="transactionNumber"
                       label={
@@ -151,7 +153,7 @@ function DistributorPaidForm(props) {
                     />
                   </div>
 
-                  <div class="w-[47%]">
+                  <div class="w-[48%]">
                     <Field
                       name="paymentMode"
                       label={
@@ -165,26 +167,11 @@ function DistributorPaidForm(props) {
                       width={"100%"}
                       component={SelectComponent}
                       options={Array.isArray(payOption) ? payOption : []}
-                      style={{
-                        borderRight: "0.18em solid red",
-                      }}
-                    />
-                  </div>
-                </div>
-                <div class="flex justify-between mt-2">
-                  <div class="w-[47%]">
-                    <Field
-                      name="remarks"
-                      label={
-                        <FormattedMessage
-                          id="app.reason"
-                          defaultMessage="Reason"
-                        />}
-                      component={TextareaComponent}
 
                     />
                   </div>
-                  <div class="w-[47%]">
+                </div>
+                <div class="w-full">
                     <Field
                       name="docId"
                       label={
@@ -197,10 +184,9 @@ function DistributorPaidForm(props) {
                       component={DragableUpload}
                     />
                   </div>
-                </div>
-
               </div>
-            </div>
+              </div>
+           
 
             <div class="flex justify-end mt-3">
               <Button

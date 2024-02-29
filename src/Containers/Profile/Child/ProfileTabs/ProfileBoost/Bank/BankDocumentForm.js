@@ -1,17 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 import Upload from "../../../../../../Components/Forms/Formik/Upload";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { addBankDetails } from "../../../../ProfileAction";
 import { FormattedMessage } from "react-intl";
 
@@ -52,13 +46,11 @@ class BankDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                   }}
+              <div class=" w-full"
               >
                   <FastField name="imageId" component={Upload} />
-                <div style={{ width: "100%" }}>
+                  <div class=" w-full"
+              >
                   <FastField
                     name="accountName"
                     //label="Account Number"
@@ -75,8 +67,9 @@ class BankDocumentForm extends Component {
                     //style={{ flexBasis: "80%", width: "100%" }}
                   />
                 </div>
-                <Spacer/>
-                <div style={{ width: "100%" }}>
+               
+                <div class=" w-full mt-3"
+              >
                   <FastField
                     name="accountNo"
                     //label="Account Number"
@@ -94,9 +87,8 @@ class BankDocumentForm extends Component {
                    // style={{ flexBasis: "80%", width: "100%" }}
                   />
                 </div>
-                <Spacer />
-                <FlexContainer>
-                  <div style={{ width: "47%" }}>
+                <div class=" flex mt-3">
+                  <div class=" w-[47%]" >
                     <FastField
                       name="ifscCode"
                       //label="IFSC CODE"
@@ -113,8 +105,8 @@ class BankDocumentForm extends Component {
                       inlineLabel
                       />
                   </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "50%" }}>
+                  
+                  <div class=" w-[50%] ml-2" >
                     <FastField
                       name="branchName"
                       // label="Branch Name"
@@ -131,9 +123,9 @@ class BankDocumentForm extends Component {
                       inlineLabel
                       />
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <div style={{ width: "100%" }}>
+                </div>
+                
+                <div class=" mt-3 w-full" >
                   <FastField
                     isRequired
                     name="bankName"
@@ -153,8 +145,8 @@ class BankDocumentForm extends Component {
                 </div>
               </div>
 
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -162,7 +154,7 @@ class BankDocumentForm extends Component {
                 >
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

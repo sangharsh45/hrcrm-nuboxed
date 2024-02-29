@@ -2,8 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import ProjectsForm from "./ProjectsForm";
-
+const ProjectsForm =lazy(()=> import('./ProjectsForm'));
 
 const AddProjectsModal = (props) => {
   return (
@@ -14,7 +13,7 @@ const AddProjectsModal = (props) => {
           defaultMessage="Project"
         />}
         width="60%"
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.addProjectsModal}
         closable
         destroyOnClose

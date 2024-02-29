@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense,lazy } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -8,6 +8,8 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import BorderColorOutlined from "@mui/icons-material/BorderColor";
+import DeleteIcon from '@mui/icons-material/Delete';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
@@ -17,21 +19,25 @@ import {
     handleStatusOfOrder,
     updateOfferPrice,
     handleAccountProduction,
-    handleUpdateOrder
+    handleUpdateOrder,
+    setEditOrder,
+    removeOrderAcc,
+    deleteDistributorData
 } from "../../AccountAction";
 import { FormattedMessage } from 'react-intl';
 import { Button, Input, Tooltip } from 'antd';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
-import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import { BundleLoader } from '../../../../../Components/Placeholder';
+import { CurrencySymbol } from '../../../../../Components/Common';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-const AddLocationInOrder =lazy(()=>import('./AddLocationInOrder'));
-const AccountOrderDetailsModal =lazy(()=>import('./AccountOrderDetailsModal'));
-const StatusOfOrderModal =lazy(()=>import('./StatusOfOrderModal'));
-const AddNotesOrderModal =lazy(()=>import('./AddNotesOrderModal'));
-const PaidButtonModal =lazy(()=>import('./PaidButtonModal'));
-const AccountproductionModal =lazy(()=>import('./AccountProductionModal'));
-const UpdateOrderModal =lazy(()=>import('./UpdateAccountOrder/UpdateOrderModal'));
+const AddLocationInOrder = lazy(() => import('./AddLocationInOrder'));
+const AccountOrderDetailsModal = lazy(() => import('./AccountOrderDetailsModal'));
+const StatusOfOrderModal = lazy(() => import('./StatusOfOrderModal'));
+const AddNotesOrderModal = lazy(() => import('./AddNotesOrderModal'));
+const PaidButtonModal = lazy(() => import('./PaidButtonModal'));
+const AccountproductionModal = lazy(() => import('./AccountProductionModal'));
+const UpdateOrderModal = lazy(() => import('./UpdateAccountOrder/UpdateOrderModal'));
 
 
 const AccountOrderTable = (props) => {
@@ -45,7 +51,11 @@ const AccountOrderTable = (props) => {
     function handleSetParticularOrderData(item) {
         setParticularRowData(item);
     }
-
+    const [hasMore, setHasMore] = useState(true);
+    const handleLoadMore = () => {
+        setPage(page + 1);
+        props.getDistributorOrderByDistributorId(props.distributorId, page)
+    };
     const [visible, setVisible] = useState(false)
     const handleUpdateRevisePrice = () => {
         setVisible(!visible)
@@ -71,412 +81,399 @@ const AccountOrderTable = (props) => {
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
-                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[7.4rem]">
-                        <FormattedMessage
-                                        id="app.orderno"
-                                        defaultMessage="Order No"
-                                       />
-                            </div>
-                        <div className=" md:w-[5.1rem]">
-                        <FormattedMessage
-                                        id="app.created"
-                                        defaultMessage="Created"
-                                       />
-                            </div>
-                        <div className=" md:w-[8.8rem]">
-                        <FormattedMessage
-                                        id="app.location"
-                                        defaultMessage="Location"
-                                       />
-                            </div>
-                        <div className="md:w-[3.8rem]">
-                        <FormattedMessage
-                                        id="app.units"
-                                        defaultMessage="Units"
-                                       />
-                            </div>
-                        <div className="md:w-[2.9rem]">
-                        <FormattedMessage
-                                        id="app.contact"
-                                        defaultMessage="Contact"
-                                       />
-                            </div>
-                        <div className="md:w-[6.12rem]">
-                        <FormattedMessage
-                                        id="app.expectedprice"
-                                        defaultMessage="Expected Price"
-                                       />
-                            </div>
+                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+                    <div className=" flex  w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[9.41rem]">
+                            <FormattedMessage
+                                id="app.orderno"
+                                defaultMessage="Order No"
+                            />
+                        </div>
+                        <div className=" md:w-[8.1rem]">
+                            <FormattedMessage
+                                id="app.created"
+                                defaultMessage="Created"
+                            />
+                        </div>
+                        <div className=" md:w-[11.2rem]">
+                            <FormattedMessage
+                                id="app.location"
+                                defaultMessage="Location"
+                            />
+                        </div>
+                        <div className="md:w-[5.8rem]">
+                            <FormattedMessage
+                                id="app.units"
+                                defaultMessage="Units"
+                            />
+                        </div>
+                        <div className="md:w-[5.9rem]">
+                            <FormattedMessage
+                                id="app.contact"
+                                defaultMessage="Contact"
+                            />
+                        </div>
+                        <div className="md:w-[9.12rem]">
+                            <FormattedMessage
+                                id="app.expectedprice"
+                                defaultMessage="Expected Price"
+                            />
+                        </div>
                         <div className="md:w-[4.31rem]">
-                        <FormattedMessage
-                                        id="app.finalprice"
-                                        defaultMessage="Final Price"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.finalprice"
+                                defaultMessage="Final"
+                            />
+                        </div>
                         <div className="w-[5.8rem]">
-                        <FormattedMessage
-                                        id="app.revisedprice"
-                                        defaultMessage="Revised Price"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.revisedprice"
+                                defaultMessage="Revised"
+                            />
+                        </div>
 
                     </div>
-                    {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      > */}
+
                     <div class="overflow-x-auto h-[64vh]">
-                        {props.distributorOrder.map((item) => {
-                            const currentdate = moment().format("DD/MM/YYYY");
-                            const date = moment(item.creationDate).format("DD/MM/YYYY");
-                            const diff = Math.abs(
-                                moment().diff(moment(item.lastRequirementOn), "days")
-                            );
-                            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
-                                } 
-           Street : ${item.address && item.address.length && item.address[0].street
-                                }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${(item.address && item.address.length && item.address[0].country) || ""
-                                } 
-           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
-                                } `;
-                            return (
-                                <div >
-                                    <div className="flex rounded-xl  mt-2 bg-white h-[2.75rem] items-center p-3">
-                                        <div class="flex w-3/4">
-                                            <div className=" flex font-medium flex-col md:w-[1.56rem] max-sm:w-full  ">
-                                                <Tooltip>
-                                                    <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                                        <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-
-                                                            {item.priority === "High" && (
-                                                                <div
-                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[red]"></div>
-                                                            )}
-                                                            {item.priority === "Medium" && (
-                                                                <div
-                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[orange]"></div>)}
-                                                            {item.priority === "Low" && (
-                                                                <div class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[teal]"></div>)}
-                                                        </h4>
-                                                    </div>
-                                                </Tooltip>
-                                            </div>
-
-                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">                                                
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    <span
-                                                    class="underline cursor-pointer text-[#1890ff]"
-                                                        onClick={() => {
-                                                            handleSetParticularOrderData(item);
-                                                            props.handleOrderDetailsModal(true);
-                                                        }}
-                                                    >{item.newOrderNo}</span>
-                                                    &nbsp;&nbsp;
-                                                    {date === currentdate ? (
-                                                        <span
-                                                        class="text-[tomato] font-bold">
-                                                           {<FormattedMessage
-                                        id="app.new"
-                                        defaultMessage="New"
-                                       />} 
-                                                        </span>
-                                                    ) : null}
-                                                </h4>
-
-                                            </div>
+                        <InfiniteScroll
+                            dataLength={props.distributorOrder.length}
+                            next={handleLoadMore}
+                            hasMore={hasMore}
+                            loader={props.fetchingDistributorByDistributorId ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
+                            height={"75vh"}
+                        >
+                            {props.distributorOrder.map((item) => {
+                                const currentdate = moment().format("DD/MM/YYYY");
+                                const date = moment(item.creationDate).format("DD/MM/YYYY");
 
 
+                                return (
+                                    <div >
+                                        <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3">
+                                            <div class="flex w-3/4">
+                                                <div className=" flex font-medium flex-col md:w-[1.56rem] max-sm:w-full  ">
+                                                    <Tooltip>
+                                                        <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
-                                            <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                                <div class=" text-xs text-cardBody font-poppins text-center">
-                                                    <MultiAvatar2
-                                                        primaryTitle={item.userName}
-                                                        imageURL={item.imageURL}
-                                                        imgWidth={"1.8rem"}
-                                                        imgHeight={"1.8rem"}
-                                                    />
-
-                                                </div>
-                                            </div>
-                                            <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                               
-
-                                                <div class=" text-xs text-cardBody font-poppins text-center">
-                                                    {item.type === "Catalogue" ?
-                                                        item.productionLocationDetailsViewDTO && item.productionLocationDetailsViewDTO.name || "" :
-                                                        item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
-                                                </div>
-                                            </div>
-
-                                            <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-
-                                                <div class=" text-xs text-cardBody font-poppins text-center">
-                                                    {item.count}
-
-                                                </div>
-                                            </div>
-
-
-
-                                          
-                                            <div className=" flex font-medium flex-col  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                               
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    <MultiAvatar2
-                                                        primaryTitle={item.contactPersonName}
-                                                        imageURL={item.imageURL}
-                                                        imgWidth={"1.8em"}
-                                                        imgHeight={"1.8em"}
-                                                    />
-                                                </h4>
-
-                                            </div>
-
-
-                                            <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.expectedPrice}
-                                                </h4>
-
-                                            </div>
-                                            <div className=" flex font-medium flex-col  md:w-[4.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                                
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.suggestedPrice}
-                                                </h4>
-
-                                            </div>
-
-
-                                            <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                               
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {visible && (item.orderId === particularRowData.orderId) ?
-                                                        <Input
-                                                            type='text'
-                                                            value={price}
-                                                            onChange={(e) => handleChange(e.target.value)}
-                                                        />
-                                                        : item.offerPrice}
-                                                </h4>
-
-                                            </div>
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-
-                                                {visible && (item.orderId === particularRowData.orderId) ? (
-                                                    <>
-                                                        <div className=" flex justify-between flex-col">
-                                                            <Button onClick={() => {
-                                                                handleSubmitPrice()
-                                                            }} >
-                                                               <FormattedMessage
-                 id="app.save"
-                 defaultMessage="Save"
-                />    
-                                                                </Button>
-                                                            <Button onClick={() => handleUpdateRevisePrice(false)}><FormattedMessage
-                                                             id="app.cancel"
-                 defaultMessage="Cancel"
-                /></Button>
+                                                                {item.priority === "High" && (
+                                                                    <div
+                                                                        class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[red]"></div>
+                                                                )}
+                                                                {item.priority === "Medium" && (
+                                                                    <div
+                                                                        class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[orange]"></div>)}
+                                                                {item.priority === "Low" && (
+                                                                    <div class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[teal]"></div>)}
+                                                            </div>
                                                         </div>
-                                                    </>
-                                                ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title={<FormattedMessage
-                                                    id="app.updaterevisedprice"
-                                                    defaultMessage="Update Revised Price"
-                                                   />}>
-                                                    <BorderColorOutlined
-                                                        onClick={() => {
-                                                            handleUpdateRevisePrice()
-                                                            handleSetParticularOrderData(item)
-                                                        }}
-                                                        style={{cursor:"pointer",fontSize: "1rem"}} />
-                                                </Tooltip> : null}
+                                                    </Tooltip>
+                                                </div>
 
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                        id="app.notes"
-                                        defaultMessage="Notes"
-                                       />}>
-                                                    <NoteAltIcon
-                                                        class="cursor-pointer"
-                                                        style={{ color: "green", fontSize: "1rem" }}
-                                                        onClick={() => {
-
-                                                            props.handleNotesModalInOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-
-                                                </Tooltip>
-                                            </h4>
-
-                                        </div>
-
-
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                        id="app.status"
-                                        defaultMessage="Status"
-                                       />}>
-                                                    <EventRepeatIcon
-                                                    class="cursor-pointer"
-                                                    style={{fontSize: "1rem"}}
-                                                        onClick={() => {
-                                                            props.handleStatusOfOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-                                                </Tooltip>
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Collection">
-                                                    <PaidIcon
-                                                    class="cursor-pointer"
-                                                    style={{fontSize: "1rem"}}
-                                                        onClick={() => {
-                                                            props.handlePaidModal(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                 
-                                                    />
-                                                </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-
-
-                                        <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            {props.inspectionRequiredInd ?
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.transferInd === 0 ? (
-                                                        <Tooltip title="Send To Refurbish">
-                                                            <Button
-                                                            class="cursor-pointer bg-[#3096e9] text-white"
-                                                            style={{fontSize: "13px"}}
-                                                                // style={{ fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                <div class="flex">
+                                                    <div className="ml-1 font-medium flex-col md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
+                                                        <div class=" text-xs text-cardBody font-poppins">
+                                                            <span
+                                                                class="underline cursor-pointer text-[#1890ff]"
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
-                                                                    props.handleAccountProduction(true);
+                                                                    props.handleOrderDetailsModal(true);
                                                                 }}
-                                                            >
-                                                                <FormattedMessage
-                                        id="app.sendtostore"
-                                        defaultMessage="Send To Store"
-                                       />
-                                                                
-                                                            </Button>
-                                                        </Tooltip>
+                                                            >{item.newOrderNo}</span>
+                                                            &nbsp;&nbsp;
+                                                            {date === currentdate ? (
+                                                                <span
+                                                                    class="text-[tomato] font-bold">
+                                                                    {<FormattedMessage
+                                                                        id="app.new"
+                                                                        defaultMessage="New"
+                                                                    />}
+                                                                </span>
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                    ) : null
-                                                    }
-                                                </h4>
-                                                :
-                                                <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.transferInd === 0 ? (
+
+
+                                                <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                    <div class=" text-xs text-cardBody font-poppins text-center">
+                                                        <MultiAvatar2
+                                                            primaryTitle={item.userName}
+                                                            imageURL={item.imageURL}
+                                                            imgWidth={"1.8rem"}
+                                                            imgHeight={"1.8rem"}
+                                                        />
+
+                                                    </div>
+                                                </div>
+                                                <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                                                    <div class=" text-xs text-cardBody font-poppins text-center">
+                                                        {item.type === "Catalogue" ?
+                                                            item.productionLocationDetailsViewDTO && item.productionLocationDetailsViewDTO.name || "" :
+                                                            item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
+                                                    </div>
+                                                </div>
+
+                                                <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+                                                    <div class=" text-xs text-cardBody font-poppins text-center">
+                                                        {item.count}
+
+                                                    </div>
+                                                </div>
+                                                <div className=" flex font-medium flex-col  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        <MultiAvatar2
+                                                            primaryTitle={item.contactPersonName}
+                                                            imageURL={item.imageURL}
+                                                            imgWidth={"1.8em"}
+                                                            imgHeight={"1.8em"}
+                                                        />
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        <CurrencySymbol currencyType={item.orderCurrencyName} />{item.expectedPrice}
+                                                    </div>
+
+                                                </div>
+                                                <div className=" flex font-medium flex-col  md:w-[4.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        <CurrencySymbol currencyType={item.orderCurrencyName} />{item.finalPrice}
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        <CurrencySymbol currencyType={item.orderCurrencyName} />{visible && (item.orderId === particularRowData.orderId) ?
+                                                            <Input
+                                                                type='text'
+                                                                value={price}
+                                                                onChange={(e) => handleChange(e.target.value)}
+                                                            />
+                                                            : item.offerPrice}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+
+                                                <div class=" text-xs text-cardBody font-poppins">
+
+                                                    {visible && (item.orderId === particularRowData.orderId) ? (
+                                                        <>
+                                                            <div className=" flex justify-between flex-col">
+                                                                <Button onClick={() => {
+                                                                    handleSubmitPrice()
+                                                                }} >
+                                                                    <FormattedMessage
+                                                                        id="app.save"
+                                                                        defaultMessage="Save"
+                                                                    />
+                                                                </Button>
+                                                                <Button onClick={() => handleUpdateRevisePrice(false)}><FormattedMessage
+                                                                    id="app.cancel"
+                                                                    defaultMessage="Cancel"
+                                                                /></Button>
+                                                            </div>
+                                                        </>
+                                                    ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title={<FormattedMessage
+                                                        id="app.updaterevisedprice"
+                                                        defaultMessage="Update Revised Price"
+                                                    />}>
+                                                        <PublishedWithChangesIcon
+                                                            onClick={() => {
+                                                                handleUpdateRevisePrice()
+                                                                handleSetParticularOrderData(item)
+                                                            }}
+                                                            className="!text-base cursor-pointer"
+                                                        />
+                                                    </Tooltip> : null}
+
+                                                </div>
+
+                                            </div>
+                                            <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                                {props.inspectionRequiredInd ?
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        {item.transferInd === 0 ? (
+                                                            <Tooltip title="Send To Refurbish">
+                                                                <Button
+                                                                    class="cursor-pointer bg-[#3096e9] text-white text-base"
+                                                                    onClick={() => {
+                                                                        handleSetParticularOrderData(item);
+                                                                        props.handleAccountProduction(true);
+                                                                    }}
+                                                                >
+                                                                    <FormattedMessage
+                                                                        id="app.sendtostore"
+                                                                        defaultMessage="Send To Store"
+                                                                    />
+
+                                                                </Button>
+                                                            </Tooltip>
+
+                                                        ) : null
+                                                        }
+                                                    </div>
+                                                    :
+                                                    <div class=" text-xs text-cardBody font-poppins">
+                                                        {item.transferInd === 0 ? (
+                                                            <Tooltip title={<FormattedMessage
+                                                                id="app.selectinventorylocation"
+                                                                defaultMessage="Select Inventory Location"
+                                                            />}>
+                                                                <Button
+                                                                    type='primary'
+                                                                    className="cursor-pointer text-sm bg-[#3096e9] text-white"
+                                                                    onClick={() => {
+                                                                        handleSetParticularOrderData(item);
+                                                                        props.handleInventoryLocationInOrder(true);
+                                                                    }}
+                                                                >
+                                                                    <FormattedMessage
+                                                                        id="app.orderpickup"
+                                                                        defaultMessage="Pickup"
+                                                                    />
+
+                                                                </Button>
+                                                            </Tooltip>
+
+                                                        ) : null
+                                                        }
+                                                    </div>}
+
+
+                                            </div>
+                                            <div class="flex justify-end">
+                                                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                    <div>
                                                         <Tooltip title={<FormattedMessage
-                                                        id="app.addinventorylocation"
-                                                        defaultMessage="Add Inventory Location"
-                                                       />}>
-                                                            <Button
-                                                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                            id="app.notes"
+                                                            defaultMessage="Notes"
+                                                        />}>
+                                                            <NoteAltIcon
+                                                                className="!text-base cursor-pointer text-[green]"
                                                                 onClick={() => {
+                                                                    props.handleNotesModalInOrder(true);
                                                                     handleSetParticularOrderData(item);
-                                                                    props.handleInventoryLocationInOrder(true);
                                                                 }}
-                                                            >
-                                                                <FormattedMessage
-                                        id="app.orderpickup"
-                                        defaultMessage="Order Pickup"
-                                       />
-                                                                
-                                                            </Button>
+                                                            />
+
+                                                        </Tooltip>
+                                                    </div>
+
+                                                    <div>
+                                                        <Tooltip title={<FormattedMessage
+                                                            id="app.status"
+                                                            defaultMessage="Status"
+                                                        />}>
+                                                            <EventRepeatIcon
+
+                                                                className="!text-base cursor-pointer"
+                                                                onClick={() => {
+                                                                    props.handleStatusOfOrder(true);
+                                                                    handleSetParticularOrderData(item);
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    </div>
+
+                                                </div>
+                                                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+
+                                                    <div>
+                                                        <Tooltip title="Collection">
+                                                            <PaidIcon
+                                                                className="!text-base cursor-pointer"
+                                                                onClick={() => {
+                                                                    props.handlePaidModal(true);
+                                                                    handleSetParticularOrderData(item);
+                                                                }}
+
+                                                            />
                                                         </Tooltip>
 
-                                                    ) : null
-                                                    }
-                                                </h4>}
+                                                    </div>
+                                                    <div>
+                                                        <Tooltip title={<FormattedMessage
+                                                            id="app.updateorder"
+                                                            defaultMessage="Update Order"
+                                                        />}>
+                                                            <BorderColorOutlined
+                                                                onClick={() => {
+                                                                    props.setEditOrder(item)
+                                                                    props.handleUpdateOrder(true)
+                                                                    handleSetParticularOrderData(item)
+                                                                }}
+                                                                className="!text-base cursor-pointer" />
+                                                        </Tooltip>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                    <div>
+                                                        <Tooltip title={<FormattedMessage
+                                                            id="app.rating"
+                                                            defaultMessage="Rating"
+                                                        />}>
+                                                            <StarBorderIcon
 
+                                                                className="!text-base cursor-pointer" />
+                                                        </Tooltip>
+
+                                                    </div>
+                                                    <div>
+                                                        <Tooltip title={<FormattedMessage
+                                                            id="app.feedback"
+                                                            defaultMessage="Feedback"
+                                                        />}>
+                                                            <FeedbackIcon
+                                                                className="!text-base cursor-pointer"
+                                                            />
+                                                        </Tooltip>
+
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                                                    <div>
+                                                        <Tooltip title={<FormattedMessage
+                                                            id="app.delete"
+                                                            defaultMessage="Detele"
+                                                        />}>
+                                                            <DeleteIcon
+                                                                className="!text-base cursor-pointer text-[red]"
+                                                                onClick={() => { props.removeOrderAcc(item.orderId) }}
+                                                            />
+                                                        </Tooltip>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                        id="app.updateorder"
-                                        defaultMessage="Update Order"
-                                       />}>
-                                                    <BorderColorOutlined
-                                                        onClick={() => {
-                                                            props.handleUpdateOrder(true)
-                                                            handleSetParticularOrderData(item)
-                                                        }}
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
-                                                </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                        id="app.rating"
-                                        defaultMessage="Rating"
-                                       />}>
-                                                    <StarBorderIcon
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
-                                                </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                        id="app.feedback"
-                                        defaultMessage="Feedback"
-                                       />}>
-                                                    <FeedbackIcon
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
-                                                </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-
-
-
                                     </div>
-                                </div>
 
 
-                            )
-                        })}
+                                )
+                            })}
+                        </InfiniteScroll>
                     </div>
-                </OnlyWrapCard>
+                </div>
             </div>
             <Suspense fallback={<BundleLoader />}>
                 <AddLocationInOrder
@@ -537,7 +534,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handleNotesModalInOrder,
     updateOfferPrice,
     handleAccountProduction,
-    handleUpdateOrder
+    handleUpdateOrder,
+    setEditOrder,
+    removeOrderAcc,
+    deleteDistributorData
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
@@ -768,7 +768,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
 //                     {/* <FontAwesomeIcon icon="fas fa-stream" /> */}
 //                     <Tooltip title="Status">
 //                         <EventRepeatIcon
-//                             style={{ cursor: "pointer", fontSize: "1rem", }}
+//                             className="!text-base cursor-pointer"
 //                             onClick={() => {
 //                                 props.handleStatusOfOrder(true);
 //                                 handleSetParticularOrderData(item);
@@ -787,7 +787,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
 //                 <>
 //                     <Tooltip title="Collection">
 //                         <PaidIcon
-//                             style={{ cursor: "pointer", fontSize: "1rem", }}
+//                             className="!text-base cursor-pointer"
 //                             onClick={() => {
 //                                 props.handlePaidModal(true);
 //                                 handleSetParticularOrderData(item);
@@ -832,7 +832,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
 //                 <>
 //                     <Tooltip title="Rating">
 //                         <StarBorderIcon
-//                             style={{ cursor: "pointer", fontSize: "1rem", }} />
+//                             className="!text-base cursor-pointer" />
 //                     </Tooltip>
 //                 </>
 //             )
@@ -845,7 +845,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
 //                 <>
 //                     <Tooltip title="Feedback">
 //                         <FeedbackIcon
-//                             style={{ cursor: "pointer", fontSize: "1rem", }} />
+//                             className="!text-base cursor-pointer" />
 //                     </Tooltip>
 //                 </>
 //             )

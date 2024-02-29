@@ -1,12 +1,11 @@
-import { Button, DatePicker, Icon, message, Select } from "antd";
+import { Button, DatePicker, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
-// import { FormattedMessage } from "react-intl";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
-import moment from "moment";
+import {  TextInput } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
+import {getCurrencyList} from "../../../Settings/Category/Currency/CurrencyAction"
 import { connect } from "react-redux";
 import { getExpenses } from "../../../Settings/Expense/ExpenseAction";
-// import { getCurrency } from "../../Auth/AuthAction";
 import { updateExpense  } from "../../ExpenseAction";
 import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
@@ -32,7 +31,7 @@ function UpdateExpenseForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, expenseDate: moment(dateString).toISOString() };
+          return { ...data, expenseDate: dayjs(dateString).toISOString() };
         } else {
           return data;
         }
@@ -69,6 +68,7 @@ function UpdateExpenseForm(props) {
   }
   useEffect(() => {
     props.getExpenses();
+    props.getCurrencyList();
   }, []);
   function handleCurrencyChange(currency, id) {
     console.log(currency);
@@ -166,7 +166,7 @@ function UpdateExpenseForm(props) {
     if (status === "Success") {
       props.getExpenseById(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {
@@ -276,10 +276,12 @@ function UpdateExpenseForm(props) {
                   disabled
                   defaultValue={props.user.currency}
                 >
-                  {props.currencies.map((item) => {
+                 {props.currencyList.map((item) => {
                     return (
-                      <Option value={item.currencyName} defaultValue={props.user.address[0].country}>
-                        {item.currencyName}
+                      <Option value={item.currency_name} 
+                      // defaultValue={props.user.address[0].country}
+                       >
+                        {item.currency_name}
                       </Option>
                     );
                   })}
@@ -305,7 +307,6 @@ function UpdateExpenseForm(props) {
           );
         })}
       </table>
-      <Spacer />
       <Button
         style={{ float: "right", marginTop:"-1%" }}
         type="primary"
@@ -327,11 +328,11 @@ function UpdateExpenseForm(props) {
   );
 }
 
-const mapStateToProps = ({ expense, auth,expenses }) => ({
+const mapStateToProps = ({ expense, auth,currency,expenses }) => ({
   // addingExpense: expense.addingExpense,
   updateExpense:expense.updateExpense,
   updateExpenseError:expense.updateExpenseError,
-  currencies: auth.currencies,
+  currencyList: currency.currencyList,
   userId: auth.userDetails.userId,
   user: auth.userDetails,
   setEditingExpense:expense.setEditingExpense,
@@ -341,7 +342,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
        updateExpense,
-    //   getExpenseById,
+       getCurrencyList,
       getExpenses,
     },
     dispatch

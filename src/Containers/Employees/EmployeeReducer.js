@@ -16,9 +16,18 @@ const initialState = {
   fetchingTopicsByUserIdError: false,
   topicsByUserId: [],
 
+  fetchingAssignedToList: false,
+  fetchingAssignedToListError: false,
+  assignedToList:[],
+
   fetchingEmployeeTreeMap: false,
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
+
+  addWorkflowEmployee: false,
+  addWorkflowEmployeeError: false,
+
+  onboardingEmployeeModal:false,
 
   fetchingFilterEmployee: false,
    fetchingFilterEmployeeError: false,
@@ -46,9 +55,19 @@ const initialState = {
   fetchingEmployeeByIdError: false,
   singleEmployee: {},
 
+  addOnboadingEmpl: false,
+  addOnboadingEmplError: false,
+
+  fetchingProcessDropdownForOnboarding: false,
+  fetchingProcessDropdownForOnboardingError: false,
+  onboardingDropdownProcess:[],
+
   fetchingCertificationByUserId: false,
   fetchingCertificationByUserIdError: false,
   certificationByUserId:[],
+
+  deletingEmployeeData: false,
+   deletingEmployeeDataError: false ,
 
   updatingEmployeeById: false,
   updatingEmployeeByIdError: false,
@@ -78,9 +97,17 @@ const initialState = {
   fetchingEmployeeInputSearchDataError: false,
   inputData: [],
 
+  fetchingUserStageList: false, 
+  fetchingUserStageListError: false,
+  userStageList:[],
+
   fetchingAllDocumentsByEmployeeId: false,
   fetchingAllDocumentsByEmployeeIdError: false,
   allDocumentsByEmployeeId:[],
+
+  fetchingUserKpi: false, 
+  fetchingUserKpiError: false,
+  userKpiList:[],
 
   userAdmin:false,
   userAdminError:false,
@@ -91,8 +118,8 @@ const initialState = {
   fetchingPermissionsListError: false,
   permissionsDataList: [],
 
-  updateEmployee: false,
-  updateEmployeeError: false,
+  updatingEmployee: false,
+  updatingEmployeeError: false,
 
   fetchingallCustomerEmployeeList:false,
   fetchingallCustomerEmployeeListError:false,
@@ -155,14 +182,21 @@ export const EmployeeReducer = (state = initialState, action) => {
     case types.ADD_EMPLOYEE_REQUEST:
       return { ...state, addingEmployee: true };
     case types.ADD_EMPLOYEE_SUCCESS:
-      return { ...state, addingEmployee: false, addEmployeeModal: false };
+      return { ...state, addingEmployee: false, addEmployeeModal: false,
+        employees:[action.payload,...state.employees]
+       };
     case types.ADD_EMPLOYEE_FAILURE:
       return { ...state, addingEmployee: false, addingEmployeeError: true };
 
     case types.GET_EMPLOYEE_LIST_REQUEST:
       return { ...state, fetchingEmployee: true };
     case types.GET_EMPLOYEE_LIST_SUCCESS:
-      return { ...state, fetchingEmployee: false, employees: action.payload };
+      return { ...state, fetchingEmployee: false,
+         employees: action.payload 
+        // employees: [
+        //   ...state.employees,
+        //   ...action.payload],
+        };
     case types.GET_EMPLOYEE_LIST_FAILURE:
       return { ...state, fetchingEmployee: false, fetchingEmployeeError: true };
 
@@ -317,7 +351,14 @@ export const EmployeeReducer = (state = initialState, action) => {
       return {
         ...state,
         suspendedEmployee: false,
-        addTeamTransferModal: false,
+        // addTeamTransferModal: false,
+        employees: state.employees.map((item) => {
+          if (item.employeeId === action.payload.employeeId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.SUSPEND_EMPLOYEE_FAILURE:
       return {
@@ -678,17 +719,20 @@ export const EmployeeReducer = (state = initialState, action) => {
                                   case types.HANDLE_UPDATE_EMPLOYEE_MODAL:
                                     return { ...state, updateEmployeeModal: action.payload };
 
+                                    case types.HANDLE_ONBOARDING_EMPLOYEE_MODAL:
+                                      return { ...state, onboardingEmployeeModal: action.payload };
+
 
                                     case types.SET_EMPLOYEE_EDIT:
       return { ...state, setEditingEmployee: action.payload };
                             
 
       case types.UPDATE_EMPLOYEE_REQUEST:
-        return { ...state, updateEmployee: true };
+        return { ...state, updatingEmployee: true };
       case types.UPDATE_EMPLOYEE_SUCCESS:
         return {
           ...state,
-          updateEmployee: false,
+          updatingEmployee: false,
           updateEmployeeModal: false,
           employees: state.employees.map((item) => {
             if (item.employeeId === action.payload.employeeId) {
@@ -701,8 +745,8 @@ export const EmployeeReducer = (state = initialState, action) => {
       case types.UPDATE_EMPLOYEE_FAILURE:
         return {
           ...state,
-          updateEmployee: false,
-          updateEmployeeError: true,
+          updatingEmployee: false,
+          updatingEmployeeError: true,
         };
 
         case types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE:
@@ -750,6 +794,128 @@ case types.GET_ADMIN_USER_FAILURE:
     fetchingUserAdmin: false,
     fetchingUserAdminError: true,
   };
+
+  case types.GET_ASSIGENED_TO_REQUEST:
+    return { ...state, fetchingAssignedToList: true };
+  case types.GET_ASSIGENED_TO_SUCCESS:
+    return {
+      ...state,
+      fetchingAssignedToList: false,
+      assignedToList: action.payload,           
+    };
+  case types.GET_ASSIGENED_TO_FAILURE:
+    return {
+      ...state,
+      fetchingAssignedToList: false,
+      fetchingAssignedToListError: true,
+    };
+
+
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: true,
+        fetchingProcessDropdownForOnboardingError: false,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: false,
+        onboardingDropdownProcess: action.payload,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: true,
+      };
+
+      case types.ADD_ONBOARDING_EMPLOYEE_REQUEST:
+        return { ...state, addOnboadingEmpl: true };
+      case types.ADD_ONBOARDING_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          addOnboadingEmpl: false,
+          onboardingEmployeeModal: false,
+          // employees: state.employees.map((item) => {
+          //   if (item.employeeId === action.payload.employeeId) {
+          //     return action.payload;
+          //   } else {
+          //     return item;
+          //   }
+          // }),
+        };
+      case types.ADD_ONBOARDING_EMPLOYEE_FAILURE:
+        return {
+          ...state,
+          onboardingEmployeeModal:false,
+          addOnboadingEmpl: false,
+          addOnboadingEmplError: true,
+        };
+
+        case types.DELETE_EMPLOYEE_DATA_REQUEST:
+          return { ...state, deletingEmployeeData: true };
+        case types.DELETE_EMPLOYEE_DATA_SUCCESS:
+          return {
+            ...state,
+            deletingEmployeeData: false,
+            employees: state.employees.filter(
+              (item) => item.userId !== action.payload
+            ),
+          };
+        case types.DELETE_EMPLOYEE_DATA_FAILURE:
+          return { ...state, deletingEmployeeData: false, deletingEmployeeDataError: false };
+
+
+
+          case types.GET_USER_KPI_LIST_REQUEST:
+            return { ...state, fetchingUserKpi: true };
+          case types.GET_USER_KPI_LIST_SUCCESS:
+            return { ...state, fetchingUserKpi: false, 
+              userKpiList: action.payload };
+          case types.GET_USER_KPI_LIST_FAILURE:
+            return { ...state, 
+              fetchingUserKpi: false, 
+              fetchingUserKpiError: true };
+
+
+              case types.GET_USER_STAGE_LIST_REQUEST:
+                return { ...state, fetchingUserStageList: true };
+              case types.GET_USER_STAGE_LIST_SUCCESS:
+                return { ...state, fetchingUserStageList: false, 
+                  userStageList: action.payload };
+              case types.GET_USER_STAGE_LIST_FAILURE:
+                return { ...state, 
+                  fetchingUserStageList: false, 
+                  fetchingUserStageListError: true };
+
+
+
+                  case types.ADD_WORKFLOW_EMPLOYEE_REQUEST:
+                    return { ...state, addWorkflowEmployee: true };
+                  case types.ADD_WORKFLOW_EMPLOYEE_SUCCESS:
+                    return {
+                      ...state,
+                      addWorkflowEmployee: false,
+                      // onboardingEmployeeModal: false,
+                      // employees: state.employees.map((item) => {
+                      //   if (item.employeeId === action.payload.employeeId) {
+                      //     return action.payload;
+                      //   } else {
+                      //     return item;
+                      //   }
+                      // }),
+                    };
+                  case types.ADD_WORKFLOW_EMPLOYEE_FAILURE:
+                    return {
+                      ...state,
+                      // onboardingEmployeeModal:false,
+                      addWorkflowEmployee: false,
+                      addWorkflowEmployeeError: true,
+                    };
+
+
     default:
       return state;
   }

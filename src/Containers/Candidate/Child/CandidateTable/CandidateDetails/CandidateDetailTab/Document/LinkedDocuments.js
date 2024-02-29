@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import { base_url } from "../../../../../../../Config/Auth";
 import {
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
-import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import {
   getCandidateDocument,
   deleteDocument,
 } from "../../../../../CandidateAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import { elipsize } from "../../../../../../../Helpers/Function/Functions";
-import { DeleteOutlined, } from "@ant-design/icons";
+
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -39,7 +38,7 @@ class LinkedDocuments extends Component {
     return (
       <>
            <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+           <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[2.5rem]">Date</div>
        <div className=" md:w-[1.1rem]">Name</div>
@@ -62,7 +61,7 @@ class LinkedDocuments extends Component {
                             </div> */}
        
                             <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
-                            <span>{` ${moment(item.creationDate).format("ll")}`}</span>
+                            <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>
                             </div>
                          
        
@@ -145,7 +144,7 @@ class LinkedDocuments extends Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
         {/* {true && (
           <StyledTable

@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
+import { Button,Select } from "antd";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import {getCurrency} from "../../../Auth/AuthAction"
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { updateOpportunity, getAllSalesList } from "../../OpportunityAction";
@@ -17,6 +18,10 @@ import { getCustomerData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
 import { Listbox } from "@headlessui/react";
 import { getCrm} from "../../../Leads/LeadsAction";
+import {getAssignedToList} from "../../../Employees/EmployeeAction"
+import { getAllEmployeelist } from "../../../Investor/InvestorAction";
+
+const { Option } = Select;
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -33,18 +38,57 @@ const UpdateOpportunitySchema = Yup.object().shape({
 function UpdateOpportunityForm (props) {
 
   useEffect(()=> {
-    props.getAllSalesList();
     props.getCustomerData(props.userId);
     props.getContactData(props.userId);
     props.getOppLinkedWorkflow(props.orgId);
     props.getOppLinkedStages(props.orgId);
     props. getCrm();
+    props.getAllEmployeelist();
+    props.getAssignedToList(props.orgId);
+    props.getCurrency();
   },[]);
+//   const includeOption = opportunities.map(opportunity => opportunity.included);
+// const allIncluded = mappedIncluded.flat();
+  useEffect(() => {
+    console.log("helo")
+    const includeOption = props.setEditingOpportunity.included===null?[]: props.setEditingOpportunity.included.map((item) => {
+      return item.empName
+    })
 
+    
+   
+    setInclude(includeOption)
+    console.log("test", includeOption)
+  
+  }, [props.setEditingOpportunity]);
+  console.log(includeNames)
 
-  // function handletext(e) {
-  //   setText(e.target.value);
-  // }
+  const sortedCurrency =props.currencies.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
+  const includeOption = props.setEditingOpportunity.included===null?[]: props.setEditingOpportunity.included.map((item) => {
+    return item.empName
+  })
+  const [includeNames, setInclude] = useState(includeOption);
+  function handleChangeInclude(value) {
+    setInclude(value)
+  }
+
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.oppLinkStages.length &&
@@ -73,13 +117,6 @@ function UpdateOpportunityForm (props) {
 
     return StagesOptions;
   }
-
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
 
     const customerNameOption = props.customerData
       .sort((a, b) => {
@@ -129,7 +166,12 @@ function UpdateOpportunityForm (props) {
       };
     });
   
-  
+    const AllEmplo = props.assignedToList.map((item) => {
+      return {
+        label: `${item.empName || ""}`,
+        value: item.employeeId,
+      };
+    });
     // const {
     //   transcript,
     //   listening,
@@ -141,11 +183,19 @@ function UpdateOpportunityForm (props) {
     //   return <span>Browser doesn't support speech recognition.</span>;
     // }
 
-    const { updateOpportunityById, updateOpportunity, startDate, endDate } =props;
+    const {
+      user: { userId,empName, },
+      updateOpportunityById,
+      startDate,
+      endDate,
+      employeeId,
+    } = props;
+
+
     // const [text, setText] = useState("");
       const [defaultOption, setDefaultOption] = useState(props.setEditingOpportunity.assignedTo);
       const [selected, setSelected] = useState(defaultOption);
-      const selectedOption = props.sales.find((item) => item.fullName === selected);
+      const selectedOption = props.crmAllData.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -166,6 +216,8 @@ function UpdateOpportunityForm (props) {
             salesUserIds: selectedOption ? selectedOption.employeeId:props.setEditingOpportunity.salesUserIds,
             customerId: props.setEditingOpportunity.customerId || "",
             contactId: props.setEditingOpportunity.contactId || "",
+            // included:[],
+            included: includeNames,
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -245,6 +297,7 @@ function UpdateOpportunityForm (props) {
             props.updateOpportunity(
               {
                 ...values,
+                included: includeNames,
                 opportunityId: props.opportunityId,
                 orgId: props.organizationId,
                 // description: transcript ? transcript : text,
@@ -381,9 +434,14 @@ function UpdateOpportunityForm (props) {
                         defaultValue={{
                           value: props.user.currency,
                         }}
-                        selectType="currencyName"
+                        // selectType="currencyName"
                         isRequired
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
                       />
 
                     
@@ -501,6 +559,43 @@ function UpdateOpportunityForm (props) {
         </>
       )}
     </Listbox>
+    <div>
+    <label class=" text-[#444] font-bold text-[0.75rem]" >Include</label>
+    <Select
+                        name="included"
+                        mode="multiple"
+                        style={{ width: '100%' }}
+                        placeholder="Select"
+                        defaultValue={includeNames}
+                        onChange={handleChangeInclude}
+                      >
+  
+                        {props.assignedToList.map((item, i) => {
+                          return (
+                            <Option value={item.employeeId}>{item.empName}</Option>
+                          )
+                        })}
+                      </Select>
+    {/* <Field
+                    name="included"
+                    // label="Include"
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="include"
+                      />
+                    }
+                    mode
+                    placeholder="Select"
+                    component={SelectComponent}
+                    options={Array.isArray(AllEmplo) ? AllEmplo : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${empName || ""} `,
+                      value: employeeId,
+                    }}
+                  /> */}
+    </div>
     <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">       
     <div class=" w-2/5 max-sm:w-wk">
                   <Field
@@ -641,7 +736,7 @@ function UpdateOpportunityForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth, opportunity, customer,leads, contact }) => ({
+const mapStateToProps = ({ auth, opportunity,currency,employee, customer,leads, contact,investor }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -654,6 +749,9 @@ const mapStateToProps = ({ auth, opportunity, customer,leads, contact }) => ({
   customerData: customer.customerData,
   crmAllData:leads.crmAllData,
   orgId: auth.userDetails.organizationId,
+  allEmployeeList:investor.allEmployeeList,
+  assignedToList:employee.assignedToList,
+  currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -666,6 +764,9 @@ const mapDispatchToProps = (dispatch) =>
       getContactData,
       getCustomerData,
       getCrm,
+      getAssignedToList,
+      getAllEmployeelist,
+      getCurrency
     },
     dispatch
   );

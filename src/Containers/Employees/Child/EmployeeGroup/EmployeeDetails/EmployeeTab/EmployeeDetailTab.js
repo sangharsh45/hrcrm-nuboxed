@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import { MailOutlined
+} from '@ant-design/icons';
 import { PlusOutlined } from "@ant-design/icons";
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import PaymentIcon from '@mui/icons-material/Payment';
@@ -15,7 +17,6 @@ import ContrastIcon from '@mui/icons-material/Contrast';
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import SchoolIcon from '@mui/icons-material/School';
-
 import {
   handlePersonalModal,
   handleEmploymentModal,
@@ -28,26 +29,28 @@ import {
   handleDocumentUploadModal,
   handleContractModal,
 } from "../../../../../Profile/ProfileAction";
-import AddPersonalModal from "../EmployeeTab/Personal/AddPersonalModal";
-import AddEducationModal from "./Education/AddEducationModal";
-import AddTrainingModal from "./Training/AddTrainingModal";
-import AddEmploymentModal from "./Employment/AddEmploymentModal";
-import AddBankModal from "./Bank/AddBankModal";
-import PersonalDetailsTable from "./PersonalDetails/PersonalDetailsTable";
-import AddPersonalDetailsModal from "./PersonalDetails/AddPersonalDetailsModal";
-import AddSalaryModal from "./Salary/AddSalaryModal";
-import SalaryTable from "./Salary/SalaryTable";
-import AddContractModal from "./Contract/AddContractModal";
-import ContractTable from "./Contract/ContractTable";
-import ContactsIcon from '@mui/icons-material/Contacts';
-import CandidateTable from "../../../../../Candidate/Child/CandidateTable/CandidateTable";
-import OpportunityTable from "../../../../../Opportunity/Child/OpportunityTable/OpportunityTable";
-import CustomerTable from "../../../../../Customer/Child/CustomerTable/CustomerTable";
-import PartnerTable from "../../../../../Partner/child/PartnerTable/PartnerTable"
-import RecruitmentTable from "../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentTable";
-import EmployeeExperienceForm from "./Experience/EmployeeExperienceForm";
-import AddVisaModal from "./Visa/AddVisaModal";
-import VisaTable from "./Visa/VisaTable";
+
+const EmployeePerformanceTable =lazy(()=>import("./Performance/EmployeePerformanceTable"));
+const AddPersonalModal =lazy(()=>import("../EmployeeTab/Personal/AddPersonalModal"));
+const AddEducationModal =lazy(()=>import("./Education/AddEducationModal"));
+const AddTrainingModal =lazy(()=>import("./Training/AddTrainingModal"));
+const AddEmploymentModal =lazy(()=>import("./Employment/AddEmploymentModal"));
+const AddBankModal =lazy(()=>import("./Bank/AddBankModal"));
+const PersonalDetailsTable =lazy(()=>import("./PersonalDetails/PersonalDetailsTable"));
+const AddPersonalDetailsModal =lazy(()=>import("./PersonalDetails/AddPersonalDetailsModal"));
+const AddSalaryModal =lazy(()=>import("./Salary/AddSalaryModal"));
+const SalaryTable =lazy(()=>import("./Salary/SalaryTable"));
+const AddContractModal =lazy(()=>import("./Contract/AddContractModal"));
+const ContractTable =lazy(()=>import("./Contract/ContractTable"));
+const ContactsIcon =lazy(()=>import("@mui/icons-material/Contacts"));
+const CandidateTable =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateTable"));
+const OpportunityTable =lazy(()=>import("../../../../../Opportunity/Child/OpportunityTable/OpportunityTable"));
+const CustomerTable =lazy(()=>import("../../../../../Customer/Child/CustomerTable/CustomerTable"));
+const PartnerTable =lazy(()=>import("../../../../../Partner/child/PartnerTable/PartnerTable"));
+const RecruitmentTable =lazy(()=>import("../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentTable"));
+const EmployeeExperienceForm =lazy(()=>import("./Experience/EmployeeExperienceForm"));
+const AddVisaModal =lazy(()=>import("./Visa/AddVisaModal"));
+const VisaTable =lazy(()=>import("./Visa/VisaTable"));
 const BankTable = lazy(() => import("./Bank/BankTable"));
 const EducationTable = lazy(() => import("./Education/EducationTable"));
 const EmploymentTable = lazy(() => import("./Employment/EmploymentTable"));
@@ -96,22 +99,41 @@ componentDidMount(){
       handleContractModal,
       user
     } = this.props;
-    console.log(this.props.employeeId);
 
-    console.log("sos", this.props.singleEmployee.suspendInd)
     return (
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
+
+          <TabPane
+              tab={
+                <>
+                  <span class=" ml-2">
+                    <MailOutlined type="mail" />
+                    Performance
+                  </span>
+                 
+                   
+                </>
+              }
+              key="1"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <EmployeePerformanceTable 
+                singleEmployee={this.props.singleEmployee}
+                />
+              </Suspense>
+            </TabPane>
             <TabPane
               tab={
                 <>
                 <SchoolIcon   style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-2" >
                     
                   Education
                   </span>
-                  {activeKey === "1" && user.userCreateInd === true &&(
+                  {activeKey === "2" && user.userCreateInd === true &&(
                     <>
                        <PlusOutlined
                         type="plus"
@@ -124,7 +146,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="1"
+              key="2"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -137,10 +159,10 @@ componentDidMount(){
                   
                   <HeadphonesIcon   style={{fontSize:"1.1rem"}}
                   />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Training
+                   <span class=" font-poppins ml-2" >Training
                     
                   </span>
-                  {activeKey === "2" &&  user.userCreateInd === true && (
+                  {activeKey === "3" &&  user.userCreateInd === true && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -153,7 +175,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="2"
+              key="3"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -165,14 +187,14 @@ componentDidMount(){
               tab={
                 <>
                   <AccountBalanceIcon   style={{fontSize:"1.1rem"}} />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-2" >
                     
                     <FormattedMessage
                       id="app.employment"
                       defaultMessage="Employment"
                     />
                   </span>
-                  {activeKey === "3" && user.userCreateInd === true &&(
+                  {activeKey === "4" && user.userCreateInd === true &&(
                     <>
                       <PlusOutlined
                         type="plus"
@@ -185,7 +207,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="3"
+              key="4"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -200,27 +222,28 @@ componentDidMount(){
                 <PhoneIcon 
                  style={{fontSize:"1.1rem"}}
                  />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                     <FormattedMessage
                       id="app.emergency"
                       defaultMessage="Emergency"
                     />
                   </span>
-                  {activeKey === "4" && user.userCreateInd === true && (
+                  {activeKey === "5" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
                         tooltipTitle="Add"
                         onClick={() => handlePersonalModal(true)}
                         size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
+                        class="ml-1"
+                        style={{ verticalAlign: "center" }}
                       />
                     </>
                   )}
                 </>
               }
-              key="4"
+              key="5"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -233,10 +256,9 @@ componentDidMount(){
               tab={
                 <>
                 <AccountBalanceIcon   style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Bank Details
-                   {/*  &nbsp;*/} 
+                  <span class=" font-poppins ml-1">Bank Details
                   </span>
-                  {activeKey === "5" && user.userCreateInd === true && (
+                  {activeKey === "6" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -249,7 +271,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="5"
+              key="6"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -262,9 +284,9 @@ componentDidMount(){
               tab={
                 <>
                 <RecentActorsIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Personal Details
+                  <span class=" font-poppins ml-1">Personal Details
                   </span>
-                  {activeKey === "6" && user.userCreateInd === true && (
+                  {activeKey === "7" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -277,7 +299,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="6"
+              key="7"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -289,19 +311,17 @@ componentDidMount(){
               tab={
                 <>
                 <NoteAltIcon  style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>
-                   {/* &nbsp; */} 
-                   
+                  <span class="ml-1">  
                     <FormattedMessage id="app.notes" defaultMessage="Notes" />
                   </span>
-                  {activeKey === "7" && (
+                  {activeKey === "8" && (
                     <>
                      
                     </>
                   )}
                 </>
               }
-              key="7"
+              key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -314,9 +334,9 @@ componentDidMount(){
               tab={
                 <>
                  <PaymentIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Salary
+                  <span class=" font-poppins ml-1">Salary
                   </span>
-                  {activeKey === "8" && user.userCreateInd === true && (
+                  {activeKey === "9" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -329,7 +349,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="8"
+              key="9"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -341,7 +361,7 @@ componentDidMount(){
               tab={
                 <>
                 <FileCopyIcon   style={{fontSize:"1.1rem"}} />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                     <FormattedMessage
                       id="app.documents"
@@ -364,7 +384,7 @@ componentDidMount(){
                   )} */}
                 </>
               }
-              key="9"
+              key="10"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -376,7 +396,7 @@ componentDidMount(){
               tab={
                 <>
                 <ContrastIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                    
                     <FormattedMessage
@@ -384,7 +404,7 @@ componentDidMount(){
                       defaultMessage="Contract"
                     />
                   </span>
-                  {activeKey === "10" && user.userCreateInd === true && (
+                  {activeKey === "11" && user.userCreateInd === true && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -397,7 +417,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="10"
+              key="11"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -410,7 +430,7 @@ componentDidMount(){
               tab={
                 <>
                <i class="fas fa-portrait" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                    
                     <FormattedMessage
@@ -418,20 +438,14 @@ componentDidMount(){
                       defaultMessage="Talent"
                     />
                   </span>
-                  {activeKey === "11" && (
+                  {activeKey === "12" && (
                     <>
-                      {/* <ActionIcon
-                        type="plus"
-                        tooltipTitle="Add"
-                        handleIconClick={() => handleTalentModal(true)}
-                        size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
-                      /> */}
+                      
                     </>
                   )}
                 </>
               }
-              key="11"
+              key="12"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -445,41 +459,10 @@ componentDidMount(){
               tab={
                 <>
                  <i class="far fa-lightbulb" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1" >
                   <FormattedMessage
                 id="app.opportunity"
                 defaultMessage="Opportunity"
-              />
-                  </span>
-                  {activeKey === "12" && (
-                    <>
-                      {/* <ActionIcon
-                        type="plus"
-                        tooltipTitle="Add"
-                        handleIconClick={() => handleTalentModal(true)}
-                        size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
-                      /> */}
-                    </>
-                  )}
-                </>
-              }
-              key="12"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <OpportunityTable />
-              </Suspense>
-            </TabPane>:null}
-            {this.props.singleEmployee.suspendInd? 
-            <TabPane
-              tab={
-                <>
-                 <i class="far fa-building" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
-                  <FormattedMessage
-                id="app.customer"
-                defaultMessage="Customer"
               />
                   </span>
                   {activeKey === "13" && (
@@ -499,19 +482,19 @@ componentDidMount(){
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <CustomerTable />
+                <OpportunityTable />
               </Suspense>
             </TabPane>:null}
             {this.props.singleEmployee.suspendInd? 
             <TabPane
               tab={
                 <>
-                <ContactsIcon/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                 <i class="far fa-building" aria-hidden="true"></i>
+                  <span class=" font-poppins ml-1">
                   <FormattedMessage
-                  id="app.requirement"
-                  defaultMessage="Requirement"
-                />
+                id="app.customer"
+                defaultMessage="Customer"
+              />
                   </span>
                   {activeKey === "14" && (
                     <>
@@ -530,6 +513,31 @@ componentDidMount(){
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
+                <CustomerTable />
+              </Suspense>
+            </TabPane>:null}
+            {this.props.singleEmployee.suspendInd? 
+            <TabPane
+              tab={
+                <>
+                <ContactsIcon/>
+                  <span class=" font-poppins ml-1">
+                  <FormattedMessage
+                  id="app.requirement"
+                  defaultMessage="Requirement"
+                />
+                  </span>
+                  {activeKey === "15" && (
+                    <>
+                  
+                    </>
+                  )}
+                </>
+              }
+              key="15"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
                 <RecruitmentTable />
               </Suspense>
             </TabPane>:null}
@@ -538,13 +546,13 @@ componentDidMount(){
               tab={
                 <>
                  <i class="far fa-handshake" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                   <FormattedMessage
                 id="app.vendor"
                 defaultMessage="Vendor"
               />
                   </span>
-                  {activeKey === "15" && (
+                  {activeKey === "16" && (
                     <>
                       {/* <ActionIcon
                         type="plus"
@@ -557,7 +565,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="15"
+              key="16"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -570,12 +578,12 @@ componentDidMount(){
                 <>
                 
                <WorkspacePremiumIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>                  
+                  <span class=" font-poppins ml-1">                  
                 Experience
                   </span>                 
                 </>
               }
-              key="16"
+              key="17"
             >
              
               {/* <LinkedExperience/> */}
@@ -589,11 +597,11 @@ componentDidMount(){
               tab={
                 <>
                 <SchoolIcon   style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                  Visa
                   </span>
-                  {activeKey === "17" && user.userCreateInd === true && (
+                  {activeKey === "18" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -606,7 +614,7 @@ componentDidMount(){
                   )}
                 </>
               }
-              key="17"
+              key="18"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}

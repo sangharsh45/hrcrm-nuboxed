@@ -1,25 +1,57 @@
-import React, {  } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
+import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field,} from "formik";
+import { getCurrency } from "../../../../Auth/AuthAction";
+import { createCurrencyConversion } from "../../../SettingsAction";
+import { Select, StyledLabel } from "../../../../../Components/UI/Elements";
 
-function CurrencyCoversionForm(props)  {
+const { Option } = Select;
 
-        const { distributorStartDate, distributorEndDate } = props;
-        return (
-            <>
-                <Formik
-                    enableReinitialize
+const CurrencyCoversionForm = (props) => {
+    useEffect(()=>{
+        props.getCurrency();
+    },[]);
+
+    const[reportingCurrency,setReportingCurrency]=useState("");
+    const[conversionCurrency,setConversionCurrency]=useState("");
+
+   const reportCurr = props.currencies
+  
+    const handleSelect1Change = (value) => {
+      setReportingCurrency(value);
+      setConversionCurrency('');
+    };
+  
+    const handleSelect2Change = (value) => {
+      setConversionCurrency(value);
+    };
+  
+    const convoCurr = reportCurr.filter(option => option.currency_name !== reportingCurrency);
+
+    return (
+      <>
+       <Formik
+
                     initialValues={{
-                        currency:"",
-
+                        reportingCurrency:reportingCurrency,
+                        conversionCurrency:conversionCurrency,
+                        conversionFactor:"",
+                        reportingFactor:"1",
+                        userId:props.userId,
+                        orgId:props.orgId
                     }}
                     onSubmit={(values, { resetForm }) => {
-                        // this.props.addDistributorOffer({
-                        //     ...values,
-                        // });
+                        props.createCurrencyConversion({
+                            ...values,
+                            reportingCurrency:reportingCurrency,
+                        conversionCurrency:conversionCurrency,
+                        },
+                        props.orgId
+                        );
                         resetForm();
                     }
                     }
@@ -35,30 +67,50 @@ function CurrencyCoversionForm(props)  {
                     }) => (
                         <Form>
                             <div class=" flex" >
-                                <div class=" w-full h-full"
-                                 
-                                >
+                                <div class=" w-full h-full">
 
                                     <div class="flex justify-between">
-                                        <div class=" w-[18%]" >
+                                    <div class=" w-[18%]">
+                                        <StyledLabel>Reporting Currency</StyledLabel>
+        <Select value={reportingCurrency} onChange={handleSelect1Change}>
+          {reportCurr.map((option) => {
+          return   <Option key={option.currency_id} value={option.currency_name}>
+             {option.currency_name}
+           </Option>
+})}
+        </Select>
+        </div>
+
+        <div class=" w-[18%]">
+        <StyledLabel>Conversion Currency</StyledLabel>
+        <Select value={conversionCurrency} onChange={handleSelect2Change}>
+          
+          {convoCurr.map((option) => {
+            return <Option key={option.currency_id} value={option.currency_name}>
+          {option.currency_name}
+             </Option>
+})}
+        </Select>
+        </div>
+        <div class=" w-[18%]" >
                                             <Field
                                                 isRequired
-                                                name="currency"
+                                                name="conversionFactor"
                                                 isColumn
-                                                label="Reporting Currency"
-                                                component={SelectComponent}
+                                                label="Conversion Factor"
+                                                component={InputComponent}
                                                 inlineLabel
-                                               options={["USD","EUR","GBP","INR"]}
                                                 style={{
                                                     flexBasis: "80%",
                                                 }}
                                             />
                                         </div>
-                                        <div>
+        <div>
+                                        
                                         <Button
                                     type="primary"
                                     htmlType="submit"
-                                    // loading={this.props.addingDistributorOffer}
+                                    loading={props.creatingCurrencyConversion}
                                     style={{
                                         marginTop: "20px",
                                         marginLeft: "286px",
@@ -75,20 +127,22 @@ function CurrencyCoversionForm(props)  {
                         </Form>
                     )}
                 </Formik>
-            </>
-        );
-}
+      </>
+    );
+   }
 
-
-const mapStateToProps = ({ product }) => ({
-    // addingDistributorOffer: product.addingDistributorOffer,
+const mapStateToProps = ({ auth,settings }) => ({
+    userId: auth.userDetails.userId,
+    orgId:auth.userDetails.organizationId,
+    currencies: auth.currencies,
+    creatingCurrencyConversion:settings.creatingCurrencyConversion
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // setClearbitProductDistributorData,
-            // addDistributorOffer,
+            createCurrencyConversion,
+            getCurrency,
         },
         dispatch
     );

@@ -130,7 +130,7 @@ function ProjectsForm(props) {
             </div>
 
             <Spacer />
-            <div class=" flex justify-end">
+            <div class=" flex justify-end"> 
               <Button type="primary" htmlType="submit" loading={addingProjectsData}>
                 <FormattedMessage id="app.create" defaultMessage="Create" />
                 {/*                     

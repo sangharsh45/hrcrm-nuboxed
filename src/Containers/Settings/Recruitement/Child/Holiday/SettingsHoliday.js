@@ -1,8 +1,8 @@
-import React, { Component,  } from "react";
+import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleHolidayModal } from "../../../../Holiday/HolidayAction";
-import SettingsHolidayPage from "../../../../Settings/Recruitement/Child/Holiday/SettingsHolidayPage";
+const SettingsHolidayPage = lazy(() => import("../../../../Settings/Recruitement/Child/Holiday/SettingsHolidayPage"));
 
 
 class SettingsHoliday extends Component {

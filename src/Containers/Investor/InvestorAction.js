@@ -767,4 +767,268 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       type: types.HANDLE_CLAER_REDUCER_DATA_INVESTOR,
     });
   };
+
+  export const handleInvestorContModal=(modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_CONT_MODAL,
+      payload: modalProps,
+    });
+  };
   
+
+  export const getInvestorDeals = (investorId) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_INVESTOR_DEALS_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorOpportunity/details/investor/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_DEALS_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTOR_DEALS_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getDialCode = (investorId) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_DIAL_CODE_REQUEST,
+    });
+    axios
+      .get(`${base_url}/countries/all/dail-code/list`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_DIAL_CODE_SUCCESS,
+          payload: res.data,
+        })
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_DIAL_CODE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleInvestorPulseDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_PULSE_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const getInvestorOppValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_OPP_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_INVESTOR_OPP_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_OPP_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getWonInvestorOppValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_INVESTOR_OPP_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/won/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_INVESTOR_OPP_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_INVESTOR_OPP_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getInvestorPipeLineValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_PIPELINE_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/proposal/value/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_INVESTOR_PIPELINE_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_PIPELINE_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
+  export const getWonInvestorPipeLineValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_INVESTOR_PIPELINE_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/won/proposal/value/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_INVESTOR_PIPELINE_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_INVESTOR_PIPELINE_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getInvestorWeightedValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_WEIGHTED_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/weighted/value/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_INVESTOR_WEIGHTED_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_WEIGHTED_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getWonInvestorWeightedValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_INVESTOR_WEIGHTED_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/opportunity/won/weighted/value/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_INVESTOR_WEIGHTED_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_INVESTOR_WEIGHTED_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getInvestorContactValue = (investorId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_CONTACT_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/investor/contact/count/${investorId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_INVESTOR_CONTACT_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_CONTACT_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };

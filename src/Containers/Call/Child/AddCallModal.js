@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import CallForm from "./CallForm";
 import { FormattedMessage } from "react-intl";
+const CallForm = lazy(() => import("./CallForm"));
 const AddCallModal = (props) => {
   const { addCallModal, handleCallModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
@@ -16,12 +16,7 @@ const AddCallModal = (props) => {
         />}
         width={drawerWidth}
         visible={addCallModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleCallModal(false)}
-        style={{marginTop:"3rem"}}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <CallForm {...formProps} selectedCall={props.selectedCall} />

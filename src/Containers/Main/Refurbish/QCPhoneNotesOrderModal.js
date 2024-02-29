@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { connect } from "react-redux";
@@ -11,12 +11,8 @@ const QCPhoneNotesOrderModal = (props) => {
         <>
             <StyledDrawer
                 title={`Notes`}
-                width="35vw"
                 visible={props.phoNotesQCOrderModal}
-                closable
-                destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                width="40%"
                 onClose={() => props.handleQCPhoneNotesOrderModal(false)}
                 footer={null}
             >

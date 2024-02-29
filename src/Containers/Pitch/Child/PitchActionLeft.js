@@ -7,9 +7,9 @@ import { withRouter } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { } from 'react-speech-recognition';
-import { Input, Tooltip,Badge } from "antd";
+import { Input, Tooltip,Badge,Avatar } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
-import {getPitchRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
+import {getPitchRecords,getPitchAllRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
 import { FormattedMessage } from "react-intl";
 const { Search } = Input;
 const Option = StyledSelect.Option;
@@ -35,16 +35,17 @@ const PitchActionLeft = (props) => {
     }
   };
   const dummy = ["cloud", "azure", "fgfdg"];
-  // useEffect(() => {
-  //   if (props.viewType === "card") {
-  //     props.getPitchRecords(props.userId);
-  //   } else if (props.viewType === "all") {
-  //     props.getPitchRecords(props.userId);
-  //   }
-  // }, [props.viewType, props.userId]);
   useEffect(() => {
-    props.getPitchCount(props.userId)
-    }, [props.userId]);
+    if (props.viewType === "card") {
+      props.getPitchCount(props.userId);
+    } else if (props.viewType === "all") {
+      props.getPitchAllRecords();
+    }
+  }, [props.viewType, props.userId]);
+  // useEffect(() => {
+  //   props.getPitchCount(props.userId)
+  //   props.getPitchAllRecords
+  //   }, [props.userId]);
  
  
   const suffix = (
@@ -71,13 +72,15 @@ const PitchActionLeft = (props) => {
         
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("card")}
           style={{
            color: props.viewType === "card" && "#1890ff",
           }}
         >
+          <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
         <TocIcon />
+        </Avatar>
         </span>
         </Badge>
       </Tooltip>
@@ -94,38 +97,44 @@ const PitchActionLeft = (props) => {
         
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("teams")}
           style={{
            color: props.viewType === "teams" && "#1890ff",
           }}
         >
+          <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
          <PeopleIcon/>
+         </Avatar>
         </span>
         </Badge>
       </Tooltip>
+      {(props.user.pitchFullListInd===true || props.user.role==="ADMIN") && (
+
       <Tooltip
         title= "All"
       >
              <Badge
         size="small"
-        count={(props.viewType === "all" && props.pitchCount.InvestorLeadsDetails) || 0}
+        count={(props.viewType === "all" && props.pitchAllRecord.InvestorLeadsDetails) || 0}
         overflowCount={999}
       >
-        <span   class=" mr-2 text-sm cursor-pointer"
+        <span   class=" mr-1 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("all")}
           style={{
            color: props.viewType === "all" && "#1890ff",
           }}
         >
+           <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
-        
+        </Avatar>
         </span>
         </Badge>
       </Tooltip>
+           )}
       {/* <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
@@ -175,7 +184,7 @@ const PitchActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
       
         </Button> */}
-        <div class="w-[22%] mt-1">
+          <div style={{ width: "40%",marginTop:"0.5rem" }}>
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
            <Option value="CreationDate">Creation Date</Option> 
             <Option value="ascending">A To Z</Option>
@@ -190,6 +199,8 @@ const mapStateToProps = ({pitch,auth}) => ({
   pitchRecord:pitch.pitchRecord,
   pitchCount:pitch.pitchCount,
   userId: auth.userDetails.userId,
+  user:auth.userDetails,
+  pitchAllRecord:pitch.pitchAllRecord,
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -197,7 +208,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   ClearReducerDataOfPitch,
   getPitch,
   getPitchCount,
-  searchPitchName
+  searchPitchName,
+  getPitchAllRecords
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PitchActionLeft));

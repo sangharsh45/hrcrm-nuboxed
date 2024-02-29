@@ -49,7 +49,7 @@ export const addCustomer = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getCustomer(orgId));
+        // dispatch(getCustomer(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("CUSTOMER has been added successfully!");
@@ -173,5 +173,7 @@ export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
       type: types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER,
     });
   };
+
+
 
   

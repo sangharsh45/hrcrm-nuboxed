@@ -3,30 +3,30 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field, FieldArray, FastField,setFieldValue  } from "formik";
 import * as Yup from "yup";
-import { StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
-  addLeads,
+  addLeads, 
   setClearbitData,
   getCrm
 } from "../../Leads/LeadsAction";
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-import { Listbox, } from '@headlessui/react'
+import { Listbox, } from '@headlessui/react';
+// import {getDialCode} from "../../Investor/InvestorAction";
+import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
+
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const LeadsSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
   email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  // phoneNumber:Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  phoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function LeadsForm (props) {
@@ -37,6 +37,7 @@ function LeadsForm (props) {
  
   useEffect(()=> {
 props. getCrm();
+// props.getDialCode();
   },[]);
 
     const {
@@ -56,13 +57,21 @@ props. getCrm();
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
 
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //     ,
+    //   };
+    // });
+    
     return (
       <>
         <Formik
           // enableReinitialize
           initialValues={{
             partnerName: "",
-            
+            source: "",
             url: "",
             sectorId: "",
             email: "",
@@ -79,6 +88,7 @@ props. getCrm();
             lastName:"",
             proposalValue:"",
             opportunityName:"",
+            countryDialCode:"",
             address: [
               {
                 address1: "",
@@ -100,9 +110,21 @@ props. getCrm();
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
-          () =>{ handleReset(resetForm);
-              }
             );
+            resetForm()
+  //           setFieldValue("sectorId", "");
+
+  // // Reset address fields
+  // setFieldValue("address", [
+  //   {
+  //     address1: "",
+  //     address2: "",
+  //     street: "",
+  //     city: "",
+  //     state: "",
+  //     postalCode: "",
+  //   },
+  // ]);
           }}
         >
           {({
@@ -222,6 +244,7 @@ props. getCrm();
                   </div>
 
                   <Field
+                    isRequired
                     name="email"
                     type="text"
                     label={
@@ -239,6 +262,9 @@ props. getCrm();
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
+                        component={SearchSelect}
+                        value={values.countryDialCode1}
+                        
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -247,14 +273,16 @@ props. getCrm();
                           />
                         }
                         isColumn
-                        component={SearchSelect}
-                        value={values.countryDialCode1}
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                       />
                   
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -264,13 +292,13 @@ props. getCrm();
                         inlineLabel
                         width={"100%"}
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <StyledLabel>
+              
+                  <div class=" mt-3">
                   <Field
-                    isRequired
+                  
                     name="companyName"
                     type="text"
                     label={
@@ -283,8 +311,8 @@ props. getCrm();
                     accounts={accounts}
                     inlineLabel
                   />
-                  </StyledLabel>
-                  <StyledLabel>
+                  </div>
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="url"
                     type="text"
@@ -294,10 +322,10 @@ props. getCrm();
                     component={InputComponent}
                     inlineLabel
                   />
-                  </StyledLabel>
+                  </div>
                          
-                  <Spacer />
-                  <div class=" flex justify-between">
+                 
+                  <div class=" flex justify-between mt-3">
                    <div class=" w-w47.5">
                
                       <FastField
@@ -336,11 +364,11 @@ props. getCrm();
                           />
                         </div>
                     </div>
-                  <Spacer/>
+               
                  
-                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" flex justify-between mt-3 max-sm:flex-col">
                     <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="vatNo"
                         type="text"
@@ -355,10 +383,10 @@ props. getCrm();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class="w-w47.5">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -374,10 +402,10 @@ props. getCrm();
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
+             
 
                   {/* <div class=" w-1/2">
                     <StyledLabel>
@@ -485,8 +513,8 @@ props. getCrm();
       )}
     </Listbox>
              
-                  <Spacer />
-                  <StyledLabel>
+                
+                  <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -497,9 +525,9 @@ props. getCrm();
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                   
-                 <Spacer />
+                <div class=" mt-3">
                   <Field
                     name="notes"
                     label={
@@ -509,10 +537,11 @@ props. getCrm();
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+            
+              <div class="flex justify-end mt-3 w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -531,14 +560,15 @@ props. getCrm();
     );
 }
 
-const mapStateToProps = ({ auth, leads,employee }) => ({
+const mapStateToProps = ({ auth, leads,investor }) => ({
   addingLeads: leads.addingLeads,
   crmAllData:leads.crmAllData,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -547,6 +577,7 @@ const mapDispatchToProps = (dispatch) =>
        addLeads,
        getCrm,
       setClearbitData,
+      // getDialCode,
     },
     dispatch
   );

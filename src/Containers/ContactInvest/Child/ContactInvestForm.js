@@ -5,18 +5,18 @@ import { Button, Select, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../Components/UI/Elements";
+import {getSources} from "../../Settings/Category/Source/SourceAction"
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { addLinkContactByOpportunityId } from "../../Contact/ContactAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../Settings/Department/DepartmentAction";
 import {addContactInvest} from "../ContactInvestAction";
-import {getInvestorData} from "../../Investor/InvestorAction";
+import {getInvestorData,getDialCode} from "../../Investor/InvestorAction";
 
 const { Option } = Select;
 /**
@@ -34,6 +34,8 @@ const ContactSchema = Yup.object().shape({
 class ContactInvestForm extends Component {
   componentDidMount() {
     this.props.getInvestorData(this.props.userId);
+    this.props.getSources(this.props.orgId);
+    this.props.getDialCode();
   }
 
   constructor(props) {
@@ -49,6 +51,7 @@ class ContactInvestForm extends Component {
       availability: false,
     };
   }
+
   handleCandidate = (checked) => {
     this.setState({ candidate: checked });
   };
@@ -92,6 +95,32 @@ class ContactInvestForm extends Component {
   };
 
   render() {
+    // const sortedCountry =this.props.dialCodeList.sort((a, b) => {
+    //   const nameA = a.country_dial_code.toLowerCase();
+    //   const nameB = b.country_dial_code.toLowerCase();
+    //   // Compare department names
+    //   if (nameA < nameB) {
+    //     return -1;
+    //   }
+    //   if (nameA > nameB) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
+    const countryNameOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
+  const sourceOption = this.props.sources.map((item) => {
+    return {
+      label: item.name
+      || null,
+      value: item.sourceId
+      ,
+    };
+  });
     const {
       user: { userId, firstName, lastName },
       addContactInvest,
@@ -153,7 +182,7 @@ class ContactInvestForm extends Component {
             middleName: "",
             lastName: "",
             countryDialCode: this.props.user.countryDialCode,
-            countryDialCode1: this.props.user.countryDialCode,
+            countryDialCode1: this.props.user.countryDialCode1,
             phoneNumber: "",
             mobileNumber: "",
             emailId: "",
@@ -205,10 +234,10 @@ class ContactInvestForm extends Component {
               <div class=" flex justify-around max-sm:flex-col ">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
                   <div class=" flex justify-between  flex-nowrap">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-wk">
+                        {/* <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="salutation"
                             type="text"
@@ -224,8 +253,8 @@ class ContactInvestForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-wk">
+                        </div> */}
+                        <div class=" w-full max-sm:w-wk">
                           <FastField
                             isRequired
                             name="firstName"
@@ -305,24 +334,22 @@ class ContactInvestForm extends Component {
                   </div>               
                   <div class=" flex justify-between">
                     <div class=" w-2/6">
-                      <FastField
+                    <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
                         label={
                           <FormattedMessage
                             id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${user.countryDialCode}`,
+                        }}
                         isColumn
+                        // width={"100%"}
                         selectType="dialCode"
                         component={SearchSelect}
-                        placeholder='+31'
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
                         inlineLabel
                       />
                     </div>
@@ -358,27 +385,30 @@ class ContactInvestForm extends Component {
                     <div class=" w-2/4">
                       {" "}
                       {this.state.whatsapp && (
-                        <FastField
-                          name="countryDialCode1"
-                          selectType="dialCode"
-                          isColumnWithoutNoCreate
-                          //label="Phone No #"
-                          placeholder='+31'
-                          label={
-                            <FormattedMessage
-                              id="app.dialCode"
-                              defaultMessage="dialCode"
-
-                            />
-                          }
-                          isColumn
-                          component={SearchSelect}
-                          defaultValue={{
-                            value: this.props.user.countryDialCode,
-                          }}
-                          value={values.countryDialCode1}
-                          inlineLabel
-                        />
+                         <Field
+                         name="countryDialCode1"
+                         selectType="dialCode"
+                         isColumnWithoutNoCreate
+                         // label="Phone #"
+                         label={
+                           <FormattedMessage
+                             id="app.phone"
+                             defaultMessage="Dial Code"
+                           />
+                         }
+                         defaultValue={{
+                          label:`+${user.countryDialCode1}`,
+                        }}
+                         isColumn
+                         component={SelectComponent}
+                         options={
+                           Array.isArray(countryNameOption)
+                             ? countryNameOption
+                             : []
+                         }
+                         // value={values.countryDialCode1}
+                         inlineLabel
+                       />
                       )}
                     </div>
                     <div class=" w-2/4">
@@ -401,8 +431,8 @@ class ContactInvestForm extends Component {
                       )}
                     </div>
                   </div>
-                  <Spacer />
-                  < div class=" flex justify-between">
+                 
+                  < div class=" flex justify-between mt-3">
                     <div class=" w-full">
                       <FastField
                         type="text"
@@ -421,7 +451,7 @@ class ContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -432,7 +462,7 @@ class ContactInvestForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />
-
+</div>
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk " >
                   <div class=" flex  justify-between">
@@ -475,8 +505,8 @@ class ContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">         
+                
+                  <div class=" flex justify-between mt-3">         
                   <div class="w-w47.5">
                     <FastField
                       name="departmentId"
@@ -496,7 +526,7 @@ class ContactInvestForm extends Component {
                     />
                   </div>
                   <div class=" w-w47.5">
-                  <FastField
+                  <Field
                             name="sourceId"
                              label={
                               <FormattedMessage
@@ -505,17 +535,19 @@ class ContactInvestForm extends Component {
                               />
                             }
                             isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.sourceId}
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(sourceOption) ? sourceOption : []
+                            }
                             isColumn
                           />
                         </div>
                   </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="w-full mt-3 "
+                   style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
+                  <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" > Address</div>
                   </div>
                     </div>
                   <FieldArray
@@ -529,7 +561,7 @@ class ContactInvestForm extends Component {
                     )}
                   />
 
-                  <Spacer />
+                  
                   {/* <Field
                     name="address[0].address1"
                     // label="Address"
@@ -543,7 +575,7 @@ class ContactInvestForm extends Component {
                     isColumn
                     width="100%"
                   />
-                  <Spacer /> */}
+                   */}
                   {/* <Field
                     name="address[0].street"
                     //label="Street"
@@ -558,8 +590,8 @@ class ContactInvestForm extends Component {
                     isColumn
                     width="100%"
                   /> */}
-                  <Spacer />
-                  <div class=" flex  justify-between">
+                  
+                  <div class=" flex  justify-between mt-6">
                     {/* <div style={{ width: "47%" }}>
                       <Field
                         name="address[0].city"
@@ -576,7 +608,7 @@ class ContactInvestForm extends Component {
                       />
                     </div> */}
                   </div>
-                  <Spacer />
+                 
                   {/* <FlexContainer justifyContent="space-between">
                     <div style={{ width: "47%" }}>
                       <Field
@@ -613,8 +645,8 @@ class ContactInvestForm extends Component {
                   </FlexContainer> */}
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-4 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -634,10 +666,13 @@ class ContactInvestForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer,investor, opportunity, departments, designations }) => ({
+const mapStateToProps = ({ auth, contact,source, customer,investor, opportunity, departments, designations }) => ({
   addingContact: contact.addingContact,
   addingContactError: contact.addingContactError,
   user: auth.userDetails,
+  sources: source.sources,
+  dialCodeList:investor.dialCodeList,
+  orgId:auth.userDetails.organizationId,
   userId: auth.userDetails.userId,
   investorData:investor.investorData,
   investorId: investor.investorDetails.investorId,
@@ -653,6 +688,8 @@ const mapDispatchToProps = (dispatch) =>
       addContactInvest,
       addLinkContactByOpportunityId,
       getDesignations,
+      getSources,
+      getDialCode,
       getInvestorData,
       getDepartments,
     },

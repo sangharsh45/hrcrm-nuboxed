@@ -69,7 +69,7 @@ function ReceivedPhoneList(props) {
                             <div style={{ width: "47%" }}>
                                 <Field
                                     name="receiveCompany"
-                                    label="Company"
+                                    label="OEM"
                                     type="number"
                                     placeholder={"Value"}
                                     isColumn

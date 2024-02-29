@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Button ,Tooltip} from "antd";
+import { Button ,Popconfirm,Tooltip} from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeTalentRole} from "../Role/RoleAction"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
 const { Option } = Select;
@@ -21,7 +24,7 @@ class SingleRoleTalent extends Component {
   }
   render() {
     const {
-        talentRole: { roleType, roleTypeExternalId,departmentName,departmentId },
+        talentRole: { roleType,creationDate, roleTypeExternalId,departmentName,departmentId },
       handleChange,
       name,
       value,
@@ -33,16 +36,22 @@ class SingleRoleTalent extends Component {
     //   handleDeleteDepartment,
     } = this.props;
      console.log(linkedRoles);
+     const currentdate = dayjs().format("DD/MM/YYYY");
+     const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <RoleWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <RoleType style={{ flexBasis: "43%" }}>
-                  {roleType}
-                </RoleType>
+                  <div class=" font-semibold" >
+                  {roleType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
              
                 <div>
                   {this.props.talentRole.editInd ? (
@@ -54,18 +63,26 @@ class SingleRoleTalent extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeTalentRole(roleTypeExternalId )}
+                        >
+                    <DeleteOutlined
                   
-                        onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
-                      size="14px"
+                        // onClick={() => handleDeleteTalentRole(roleTypeExternalId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                     </Popconfirm>
                   </Tooltip>
                 </div>
               </div>
@@ -80,7 +97,7 @@ class SingleRoleTalent extends Component {
                   />
              
              
-                  <br />
+                 
                   <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -92,7 +109,7 @@ class SingleRoleTalent extends Component {
                     Update
             
                 </Button> 
-                &nbsp;
+             
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                      Cancel 
             
@@ -102,22 +119,22 @@ class SingleRoleTalent extends Component {
               )
           }
         </ViewEditCard>
-      </RoleWrapper>
+      </div>
     );
   }
 }
 
-export default SingleRoleTalent;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const RoleWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const RoleType = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeTalentRole
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleRoleTalent);
+
+
+

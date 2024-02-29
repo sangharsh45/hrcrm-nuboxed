@@ -1,19 +1,12 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import Upload from "../../../../../../Components/Forms/Formik/Upload";
-import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
-import { DatePicker } from "antd";
-import { profileReducer } from "../../../../ProfileReducer";
 import { updatePersonalDetails } from "../../../../ProfileAction";
 import { FormattedMessage } from "react-intl";
 function onChange(date, dateString) {}
@@ -90,20 +83,9 @@ class UpdatePersonalForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  // border: "0.125em solid red",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "100%",
-                    // border: "0.125em solid green"
-                  }}
+                <div class=" w-full"
                 >
                   {/* <FlexContainer flexWrap="no-wrap"> */}
 
@@ -140,12 +122,9 @@ class UpdatePersonalForm extends Component {
                                                 <DatePicker onChange={onChange} />
                                             </div>
                                         </FlexContainer> */}
-                  <Spacer />
 
-                  <Spacer />
-
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "25%" }}>
+                  <div class=" flex justify-between mt-6" >
+                    <div class=" w-[25%]" >
                       <FastField
                         name="contactSalutation"
                         type="text"
@@ -169,7 +148,7 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "67%" }}>
+                    <div class=" w-[67%]" >
                       <FastField
                         isRequired
                         name="contactFirstName"
@@ -192,12 +171,10 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <Spacer />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "55%" }}>
+                  <div class=" flex justify-between mt-6" >
+                  <div class=" w-[55%]" >
                       <FastField
                         name="contactLastName"
                         // label="Last Name"
@@ -219,7 +196,7 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "38%" }}>
+                    <div class=" w-[38%]" >
                       <FastField
                         name="contactMiddleName"
                         // label="Middle "
@@ -241,11 +218,11 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   {/* </FlexContainer> */}
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                 
+                  <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
                       <Field
                         name="countryDialCode"
                         // label="Mobile #"
@@ -263,7 +240,7 @@ class UpdatePersonalForm extends Component {
                         style={{ flexBasis: "80%" }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         type="text"
                         name="mobileNo"
@@ -285,11 +262,11 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+                
 
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
                       <Field
                         name="countryDialCode1"
                         //  label="Phone #"
@@ -307,7 +284,7 @@ class UpdatePersonalForm extends Component {
                         style={{ flexBasis: "80%" }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         type="text"
                         name="phoneNo"
@@ -329,13 +306,11 @@ class UpdatePersonalForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   {/* <FlexContainer justifyContent="space-between"> */}
 
                   {/* </FlexContainer> */}
-                  <Spacer />
-
-                  <Spacer />
+               
                 </div>
 
                 {/* <div
@@ -357,10 +332,10 @@ class UpdatePersonalForm extends Component {
 
                   <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div> */}
-                <Spacer />
+           
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+             
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -368,7 +343,7 @@ class UpdatePersonalForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable, StyledModal } from "../../../../../../Components/UI/Antd";
+import { StyledTable, } from "../../../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { Icon, Switch } from "antd";
 import { getEmailProfileCredentials } from "../../../../ProfileAction";
-import UpdateEmailModal from "./UpdateEmailModal";
 import { handleUpdateEmailModal } from "../../../../../Profile/ProfileAction";
 import { setEditEmail } from "../../../../../Profile/ProfileAction";
-import EmailStatusToggle from "./EmailStatusToggle";
-import { profileReducer } from "../../../../ProfileReducer";
 import { EditOutlined } from "@ant-design/icons";
+const UpdateEmailModal = lazy(() => import("./UpdateEmailModal"));
+const EmailStatusToggle = lazy(() => import("./EmailStatusToggle"));
 class EmailTable extends Component {
   componentDidMount() {
     const { getEmailProfileCredentials } = this.props;

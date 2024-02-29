@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip } from "antd";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import { Spacer } from "../../../Components/UI/Elements";
 import { Link } from "../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
@@ -55,21 +53,21 @@ function AccountTable(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-          <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-            <div className=" md:w-[13.12rem]">  <FormattedMessage
+        <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex  w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+            <div className=" md:w-[15.12rem]">  <FormattedMessage
               id="app.name"
               defaultMessage="name"
             /></div>
-            <div className=" md:w-[13.121rem]"><FormattedMessage
+            <div className=" md:w-[8.121rem]"><FormattedMessage
               id="app.work#"
               defaultMessage="work#"
             /></div>
-            <div className=" md:w-[11.825rem] "><FormattedMessage
+            <div className=" md:w-[8.825rem] "><FormattedMessage
               id="app.website"
               defaultMessage="website"
             /></div>
-            <div className="md:w-[8.95rem]"><FormattedMessage
+            <div className="md:w-[6.95rem]"><FormattedMessage
               id="app.type"
               defaultMessage="type"
             /></div>
@@ -81,7 +79,7 @@ function AccountTable(props) {
               id="app.vat"
               defaultMessage="vat"
             /></div>
-            <div className="md:w-[8.21rem]"><FormattedMessage
+            <div className="md:w-[14.21rem]"><FormattedMessage
               id="app.billingaddress"
               defaultMessage="billingaddress"
             /></div>
@@ -95,7 +93,7 @@ function AccountTable(props) {
             dataLength={props.allDistributors.length}
             next={handleLoadMore}
             hasMore={hasMore}
-            loader={props.fetchingAllDistributors ? <h4 style={{ textAlign: 'center' }}>Loading...</h4> : null}
+            loader={props.fetchingAllDistributors ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
             height={"75vh"}
           >
 
@@ -116,21 +114,21 @@ function AccountTable(props) {
             `;
               return (
                 <div>
-                  <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
+                  <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 "
                   // style={{
                   //     borderBottom: "3px dotted #515050"
                   // }}
                   >
                     <div class="flex">
-                      <div className=" flex font-medium flex-col md:w-[12.6rem] max-sm:w-full  ">
+                      <div className=" flex font-medium flex-col md:w-[13.6rem] max-sm:w-full  ">
 
 
                         <Tooltip>
                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
                               <Link
                                 toUrl={`distributor/${item.distributorId}`}
@@ -147,7 +145,7 @@ function AccountTable(props) {
                                 </span>
                               ) : null}
 
-                            </h4>
+                            </div>
                           </div>
                         </Tooltip>
 
@@ -155,25 +153,25 @@ function AccountTable(props) {
 
                       <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.dialCode} {item.phoneNo}
-                        </h4>
+                        </div>
 
                       </div>
 
                     </div>
 
-                    <div className=" flex font-medium flex-col md:w-[7.55rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                    <div className=" flex font-medium flex-col md:w-[8.55rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.url}
 
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-[6.24rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                    <div className=" flex font-medium flex-col md:w-[7.24rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.clientName}
@@ -181,8 +179,8 @@ function AccountTable(props) {
                       </div>
                     </div>
 
-                    <div className=" flex font-medium flex-col md:w-[4.23rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                    <div className=" flex font-medium flex-col md:w-[10.23rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.payment}
@@ -192,29 +190,29 @@ function AccountTable(props) {
 
                     <div class="flex md:items-center">
 
-                      <div className=" flex font-medium flex-col  md:w-[7.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.countryValue}
-                        </h4>
+                        </div>
 
                       </div>
-                      <div className=" flex font-medium flex-col  md:w-[8.95rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[15.25rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {dataLoc}
-                        </h4>
+                        </div>
 
                       </div>
 
-                      <div className=" flex font-medium flex-col  md:w-[1.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[6.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                        <h4 class=" text-xs text-cardBody font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.address && item.address.length && item.address[0].postalCode}
-                        </h4>
+                        </div>
 
                       </div>
                     </div>
@@ -223,11 +221,11 @@ function AccountTable(props) {
 
 
 
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                      <h4 class=" text-xs text-cardBody font-poppins">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                      <div class=" text-xs text-cardBody font-poppins">
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                            style={{ color: "grey", fontSize: "0.8rem", padding: "2px", fontSize: "1rem", cursor: "pointer" }}
+                            className=" !text-base cursor-pointer text-[gray]"
                             onClick={() => {
                               props.setEditDistributor(item)
                               handleUpdateAccountModal(true);
@@ -236,7 +234,7 @@ function AccountTable(props) {
                           />
 
                         </Tooltip>
-                      </h4>
+                      </div>
 
 
                     </div>
@@ -247,7 +245,7 @@ function AccountTable(props) {
               )
             })}
           </InfiniteScroll>
-        </OnlyWrapCard>
+        </div>
       </div>
       <UpdateAccountModal
         RowData={RowData}
@@ -255,7 +253,7 @@ function AccountTable(props) {
         handleUpdateAccountModal={handleUpdateAccountModal}
       />
 
-      <Spacer />
+
     </>
   );
 }
@@ -290,228 +288,3 @@ const mapDispatchToProps = (dispatch) =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);
 
-
-// const columns = [
-//   {
-//     title: "",
-//     width: "1%",
-//   },
-//   {
-//     title: "Name",
-//     width: "12%",
-//     defaultSortOrder: "descend",
-//     dataIndex: "name",
-//     sorter: (a, b) => {
-//       var nameA = a.name.toLowerCase(); // ignore upper and lowercase
-//       var nameB = b.name.toLowerCase(); // ignore upper and lowercase
-//       if (nameA < nameB) {
-//         return -1;
-//       }
-//       if (nameA > nameB) {
-//         return 1;
-//       }
-
-//       return 0;
-//     },
-//     render: (name, item, i) => {
-//       const currentdate = moment().format("DD/MM/YYYY");
-//       const date = moment(item.creationDate).format("DD/MM/YYYY");
-//       return (
-//         <>
-//           <AccountDetailsView
-//             distributorId={item.distributorId}
-//             name={item.name}
-//           />
-//           &nbsp;&nbsp;
-//           {date === currentdate ? (
-//             <span
-//               style={{
-//                 color: "tomato",
-//                 fontWeight: "bold",
-//               }}
-//             >
-//               New
-//             </span>
-//           ) : null}
-//         </>
-//       );
-//     },
-//   },
-
-//   {
-//     title: "Work",
-//     dataIndex: "phoneNo",
-//     render: (name, item, i) => {
-//       return (
-//         <>
-//           {item.dialCode} {item.phoneNo}
-//         </>
-//       );
-//     },
-//     width: "10%",
-//   },
-//   {
-//     title: "Website",
-//     dataIndex: "url",
-//     width: "15%",
-//   },
-//   {
-//     title: "Type",
-//     dataIndex: "clientName",
-//     width: "10%",
-//     textAlign: "center"
-//   },
-//   {
-//     title: "Payment",
-//     dataIndex: "payment",
-//     width: "10%",
-//     textAlign: "center"
-//   },
-//   {
-//     title: "VAT",
-//     dataIndex: "",
-//     textAlign: "center",
-//     width: "8%",
-
-//     render: (text, item) => {
-//       return (
-//         <>
-//           {item.countryName}
-//         </>
-//       )
-//     }
-//   },
-
-//   {
-//     title: "Billing Address",
-//     // render: (name, item, i) => {
-//     //   return `${item.addresses[0].address1 || ""} ${item.addresses[0]
-//     //     .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
-//     // },
-//     width: "22%",
-//   },
-
-//   {
-//     title: "Pin Code",
-//     // render: (name, item, i) => {
-//     //   return `${item.addresses[0].pinCode || ""}`;
-//     // },
-//     width: "6%",
-//   },
-//   // {
-//   //   title: "",
-//   //   dataIndex: "",
-//   //   render: (name, item, i) => {
-//   //     return (
-//   //       <Tooltip title="Add Shipping Address">
-//   //         <PlusOutlined
-//   //           onClick={() => {
-//   //             handleBillingAddressModal(true)
-//   //             handleSetCurrentDistributorId(item.distributorId);
-//   //           }}
-//   //         />
-//   //       </Tooltip>
-//   //     );
-//   //   },
-//   //   width: "4%",
-//   // },
-//   {
-//     title: "",
-//     width: "3%",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Contacts">
-//           <div
-//           // onClick={() => {
-//           //   handleBillingAddressModal(true)
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           >
-//           </div>
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     width: "2%",
-//     dataIndex: "documentId",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Order">
-
-//           <div
-//           // onClick={() => {
-//           //   props.handleDistributorOrderModal(true);
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           />
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     dataIndex: "documentId",
-//     width: "2%",
-//     render: (name, item, i) => {
-//       return (
-//         <Tooltip title="Activity">
-//           <span>
-//             <i
-//               class="fab fa-connectdevelop"
-//               style={{ cursor: "pointer" }}
-//             // onClick={() => {
-//             //   props.handleDistributorActivityTableModal(true);
-//             //   handleSetCurrentDistributorId(item.distributorId);
-//             // }}
-//             ></i>
-//           </span>
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     dataIndex: "documentId",
-//     width: "2%",
-//     render: (name, item, i) => {
-//       //debugger
-//       return (
-//         <Tooltip title="Edit">
-//           <div
-//             style={{ cursor: "pointer" }}
-//           // onClick={() => {
-//           //   props.setEditDistributor(item);
-//           //   handleUpdateDistributorModal(true);
-//           //   handleSetCurrentDistributorId(item.distributorId);
-//           // }}
-//           />
-//         </Tooltip>
-//       );
-//     },
-//   },
-//   {
-//     title: "",
-//     width: "3%",
-//     render: (name, item, i) => {
-//       //debugger
-//       return (
-//         <>
-//           <Tooltip title="Delete Client">
-//             <Popconfirm
-//               title="Do you want to delete?"
-//             // onConfirm={() => props.deleteDistributorData(item.distributorId)}
-//             >
-//               <DeleteOutlined
-
-//                 style={{ cursor: "pointer", color: "red" }}
-//               />
-//             </Popconfirm>
-//           </Tooltip>
-
-//         </>
-//       );
-//     },
-//   },
-// ];

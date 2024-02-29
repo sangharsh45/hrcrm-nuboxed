@@ -5,11 +5,11 @@ import { bindActionCreators } from "redux";
 import { Button, Switch,Select } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import {getAllCustomerData} from "../../Customer/CustomerAction"
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -43,7 +43,7 @@ function UpdateEventForm (props) {
   //   };
   // }
   const includeOption = props.setEditingEvents.included===null?[]: props.setEditingEvents.included.map((item) => {
-    return item.employeeId
+    return item.fullName
   })
   const [includeNames, setInclude] = useState(includeOption);
  function  handleCallback ()  {
@@ -58,6 +58,7 @@ function UpdateEventForm (props) {
   useEffect(()=> {
 
     props.getAllCustomerData(props.userId)
+    props.getAssignedToList(props.orgId);
     props.getAllOpportunityData(props.userId)
     props.getFilteredEmailContact(props.userId);
    },[])
@@ -65,7 +66,7 @@ function UpdateEventForm (props) {
   useEffect(() => {
     console.log("helo")
     const includeOption = props.setEditingEvents.included===null?[]: props.setEditingEvents.included.map((item) => {
-      return item.employeeId
+      return item.fullName
     })
 
     
@@ -126,9 +127,9 @@ function UpdateEventForm (props) {
         value: item.customerId,
       };
     });
-    const employeeOption = props.employees.map((item) => {
+    const employeeOption = props.assignedToList.map((item) => {
       return {
-        label: item.fullName,
+        label: item.empName,
         value: item.employeeId,
       };
     });
@@ -297,7 +298,7 @@ function UpdateEventForm (props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-          <div class=" flex justify-around max-sm:flex-col">
+          <div class=" flex justify-between max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <Field
                     isRequired
@@ -317,7 +318,8 @@ function UpdateEventForm (props) {
                     }}
                   // defaultValue='low'
                   />
-                  <Spacer />
+                 
+                  <div class="mt-3">
                   <Field
                     isRequired
                     name="eventSubject"
@@ -338,8 +340,9 @@ function UpdateEventForm (props) {
                       // marginTop: "0.25em",
                     }}
                   />
-                  <Spacer  />
-                  <div class=" flex justify-between" >
+                  </div>
+                 
+                  <div class=" flex justify-between mt-3" >
                       <div class=" w-1/2">
                       <Field
                         isRequired
@@ -384,8 +387,8 @@ function UpdateEventForm (props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between" >
+                
+                  <div class=" flex justify-between mt-3" >
                     <div class=" w-1/2">
                       <Field
                         isRequired
@@ -445,7 +448,7 @@ function UpdateEventForm (props) {
                     </div>
                   </div>
 
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -466,7 +469,8 @@ function UpdateEventForm (props) {
                     inlineLabel
                     style={{ flexBasis: "50%" }}
                   />
-                  <Spacer />
+                  </div>
+                  <div class="mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"yy
@@ -485,8 +489,9 @@ function UpdateEventForm (props) {
                       height: "5em",
                     }}
                   />
-  <Spacer />
-                  <div>
+                  </div>
+  
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="customerId"
@@ -512,8 +517,8 @@ function UpdateEventForm (props) {
                />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -539,8 +544,8 @@ function UpdateEventForm (props) {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+                 
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunityId"
@@ -566,7 +571,7 @@ function UpdateEventForm (props) {
                />
                   )} 
                   </div>
-                  <Spacer />
+                  
                   {/* <Spacer />
                   {startDate ? (
                     <span>
@@ -586,7 +591,7 @@ function UpdateEventForm (props) {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk"   >
+                <div class=" h-full w-w47.5 max-sm:w-wk mt-3"   >
               
 
               <Field
@@ -609,7 +614,7 @@ function UpdateEventForm (props) {
                   // }}
                   inlineLabel
                 />
-                  <Spacer />
+                  
                   {/* <Field
                     name="included"
                     // label="Include"
@@ -629,8 +634,8 @@ function UpdateEventForm (props) {
                       value: employeeId,
                     }}
                   /> */}
-                     <div style={{ width: "100%" }}>
-                       <StyledLabel>Include</StyledLabel> 
+                     <div class="w-full mt-3">
+                     <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Include</div> 
   
                       <Select
                         name="included"
@@ -641,15 +646,15 @@ function UpdateEventForm (props) {
                         onChange={handleChangeInclude}
                       >
   
-                        {props.employees.map((item, i) => {
+                        {props.assignedToList.map((item, i) => {
                           return (
-                            <Option value={item.employeeId}>{item.fullName}</Option>
+                            <Option value={item.employeeId}>{item.empName}</Option>
                           )
                         })}
                       </Select>
   
                     </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     name="candidateId"
@@ -663,7 +668,8 @@ function UpdateEventForm (props) {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer  />
+                  </div>
+                  <div class="mt-3">
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -674,12 +680,10 @@ function UpdateEventForm (props) {
                       />
                     )}
                   />
-                  <Spacer  />
-                  <StyledLabel style={{
-                    fontWeight: "bold",
-                  }}>
+                  </div>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3 "> 
                     Set Reminder
-                  </StyledLabel>
+                  </div>
                   <div class=" flex justify-between max-sm:justify-around" >
 
                     <Switch
@@ -714,8 +718,8 @@ function UpdateEventForm (props) {
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+             
+              <div class=" flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -742,11 +746,13 @@ const mapStateToProps = ({ auth, event,opportunity,candidate, employee, customer
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  orgId: auth.userDetails.organizationId,
   userId:auth.userDetails.userId,
   filteredContact: candidate.filteredContact,
   setEditingEvents: event.setEditingEvents,
   allOpportunityData:opportunity.allOpportunityData,
   employees: employee.employees,
+  assignedToList:employee.assignedToList,
   events: events.events,
 });
 
@@ -755,6 +761,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllCustomerData,
       getAllOpportunityData,
+      getAssignedToList,
       updateEvent,
       handleChooserModal,
       handleEventModal,

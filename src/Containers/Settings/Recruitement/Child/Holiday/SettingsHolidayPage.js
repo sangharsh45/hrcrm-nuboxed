@@ -1,4 +1,4 @@
-import React, {} from "react";
+import React, {lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../../../../Holiday/HolidayAction";
@@ -7,10 +7,10 @@ import { MainWrapper } from "../../../../../Components/UI/Layout";
 import {  TextInput } from "../../../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import moment from "moment";
-import SettingsSingleHoliday from "./SettingsSingleHoliday";
 import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DatePicker } from "antd";
+const SettingsSingleHoliday = lazy(() => import("./SettingsSingleHoliday"));
 
 const TabPane = StyledTabs.TabPane;
 

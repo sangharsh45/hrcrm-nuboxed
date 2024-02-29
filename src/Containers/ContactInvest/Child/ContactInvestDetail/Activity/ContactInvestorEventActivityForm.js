@@ -23,8 +23,6 @@ import {addContactinvestActivityEvent} from "../../../ContactInvestAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
-import { getEvents } from "../../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import { Listbox} from '@headlessui/react'
 
@@ -57,52 +55,17 @@ function ContactInvestorEventActivityForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
-   props.getEvents();
    props.getAllCustomerData(userId)
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
-        // label: `${item.salutation || ""} ${item.firstName ||
-        //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+   
+const selectedOption = props.sales.find((item) => item.fullName === selected);
    
 const {
       user: { userId, firstName, fullName, middleName, lastName, timeZone },
@@ -131,11 +94,9 @@ const {
     return (
       <>
         <Formik
-          enableReinitialize
+          // enableReinitialize
           initialValues={
-            isEditing
-              ? prefillEvent
-              : {
+             {
                   eventType: "",
                   eventTypeId: "",
                   eventSubject: "",
@@ -176,8 +137,6 @@ const {
                       longitude: "",
                     },
                   ],
-                  // employeesIds: [],
-                  // ownerIds: [],
                 }
           }
           validationSchema={EventSchema}
@@ -291,7 +250,7 @@ const {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+        
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -321,9 +280,9 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
+              
                   <div>
-                    <div class=" flex justify-between">
+                    <div class="mt-3 flex justify-between">
                       <div class=" w-1/2">
                         <Field
                           isRequired
@@ -442,8 +401,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+
                   
                     {/* <Field
                       name="employeesId"
@@ -482,7 +440,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -535,7 +493,7 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -555,9 +513,9 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
+                  </div>
                 
-                  <Spacer />
+                
                   {/* <Field
                     disabled="true"
                     isRequired
@@ -591,7 +549,7 @@ const {
                   )} */}
                 </div>
                 <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+          
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -602,7 +560,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+           
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -614,7 +572,7 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+           
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
@@ -657,8 +615,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+      
+              <div class="mt-3 flex justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -707,8 +665,7 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
-  events: events.events,
+  sales: opportunity.sales,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
 });
@@ -721,12 +678,7 @@ const mapDispatchToProps = (dispatch) =>
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
-      getEvents,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       getAllCustomerData,
-  
       setClearbitCandidateData,
     },
     dispatch

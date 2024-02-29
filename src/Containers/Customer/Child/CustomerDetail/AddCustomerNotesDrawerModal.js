@@ -1,9 +1,10 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense ,lazy} from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import LinkedNotes from "./CustomerTab/Notes/LinkedNotes";
+const LinkedNotes =lazy(()=> import("./CustomerTab/Notes/LinkedNotes"));
+
 
 
 
@@ -17,12 +18,7 @@ console.log(this.props.rowdata)
         // title="Notes"
           title={this.props.customer.name}
           width="64%"
-          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerCustomerNotesModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleCustomerNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

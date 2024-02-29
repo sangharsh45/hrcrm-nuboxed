@@ -5,11 +5,8 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select } from "antd";
 
@@ -18,7 +15,7 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import {
   updateOwnercustomerById,
   handleCustomerDrawerModal,
@@ -27,7 +24,6 @@ import {
   handleCustomerEmailDrawerModal,
   getCustomerById,
 } from "../../../Customer/CustomerAction";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import ReactCountryFlag from 'react-country-flag';
 import {getTeamInvestor,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
 const AddInvestorNotesDrawerModal = lazy(() =>
@@ -65,9 +61,6 @@ function InvestorTeamCardList(props) {
     })
     props.getTeamInvestor(props.userId, page,"creationdate");
     setPage(page + 1);
-    props.getSectors();
-    props.getCountries();
-    props.getAllCustomerEmployeelist();
   }, []);
 
   useEffect(() => {
@@ -109,16 +102,16 @@ function InvestorTeamCardList(props) {
   return (
     <>
   
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-40">Sector</div>
-        <div className=" md:w-28 ">Country</div>
-        <div className="md:w-36"># Deals</div>
-        <div className="md:w-24">Pipeline Value</div>
-        <div className="md:w-28">Assigned to</div>
-        <div className="md:w-24">Owner</div>
-        <div className="md:w-24">Source</div>
+  <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[13.4rem]">Name</div>
+        <div className=" md:w-[13.1rem]">Sector</div>
+        <div className=" md:w-[6.2rem] ">Country</div>
+        <div className="md:w-[7.12rem]"># Deals</div>
+        <div className="md:w-[8.2rem]">Pipeline Value</div>
+        <div className="md:w-[7.3rem]">Assigned to</div>
+        <div className="md:w-[8.21rem]">Owner</div>
+        <div className="md:w-[6.34rem]">Source</div>
         {/* <div className="w-12">Action</div> */}
 
       </div>
@@ -131,10 +124,10 @@ function InvestorTeamCardList(props) {
       >
         
       {teamInvestor.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+          dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -151,7 +144,7 @@ function InvestorTeamCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
+                            <div className="flex rounded-xl  mt-2 bg-white h-11 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -179,11 +172,16 @@ function InvestorTeamCardList(props) {
                                             Name
                                             </h4> */}
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
-                                                
+
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`investor/${item.investorId}`} title={item.name}>
+      {item.name}
+  </Link>  
+{/*                                                 
          <Link
           toUrl={`investor/${item.investorId}`}
           title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+        >{item.name}</Link> */}
+        &nbsp;&nbsp;
         {date === currentdate ? (
           <span
             style={{
@@ -336,7 +334,7 @@ function InvestorTeamCardList(props) {
               {" "}
               {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
                 cursor: "pointer",
-                fontSize: "0.8rem",
+                fontSize: "1rem",
                 color: "#df9697"}}/>}
             </span> 
                         </div>
@@ -345,7 +343,7 @@ function InvestorTeamCardList(props) {
 
                     </div>
     
-                    <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%] ">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -357,7 +355,7 @@ function InvestorTeamCardList(props) {
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -365,7 +363,7 @@ function InvestorTeamCardList(props) {
           {/* <div><Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                   props.getCustomerById(item.customerId);
                   props.handleCustomerEmailDrawerModal(true);
@@ -376,7 +374,7 @@ function InvestorTeamCardList(props) {
             {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ color: "grey",fontSize:"0.8rem",padding:"2px" }}
+                style={{ color: "grey",fontSize:"1rem",padding:"2px" }}
                 onClick={() => {
                     handleUpdateInvestorModal(true);
                     handleCurrentRowData(item);
@@ -396,7 +394,7 @@ function InvestorTeamCardList(props) {
                     )
                 })}
      </InfiniteScroll> 
-     </OnlyWrapCard>
+     </div>
      
 
       <UpdateInvestorModal
@@ -434,9 +432,7 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   teamInvestor:investor.teamInvestor,
-  sales: opportunity.sales,
   addDrawerInvestorNotesModal:investor.addDrawerInvestorNotesModal,
-  recruiterName: opportunity.recruiterName,
   fetchingAllCustomers: customer.fetchingAllCustomers,
   sectors: sector.sectors,
   fetchingTeamInvestor: investor.fetchingTeamInvestor,
@@ -444,8 +440,6 @@ const mapStateToProps = ({
   updateInvestorModal: investor.updateInvestorModal,
   user: auth.userDetails,
   employees: employee.employees,
-  countries: auth.countries,
-  allCustomerEmployeeList: employee.allCustomerEmployeeList,
   addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -453,7 +447,6 @@ const mapDispatchToProps = (dispatch) =>
     {
         getTeamInvestor,
       handleUpdateInvestorModal,
-      getSectors,
       emptyInvestor,
       handleInvestorNotesDrawerModal,
       updateOwnercustomerById,
@@ -462,8 +455,6 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerKeySkill,
       handleCustomerEmailDrawerModal,
       getCustomerById,
-      getCountries,
-      getAllCustomerEmployeelist,
     },
     dispatch
   );

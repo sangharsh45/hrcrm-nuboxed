@@ -1,12 +1,10 @@
-import React, { Component ,lazy} from "react";
+import React, {lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../HolidayAction";
+import { addHoliday, getHolidayyear, updateHoliday,deleteHoliday } from "../HolidayAction";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper } from "../../../Components/UI/Layout";
 import dayjs from "dayjs";
-import moment from "moment";
-import SingleHoliday2 from "./SingleHoliday2"; 
 import { BundleLoader } from "../../../Components/Placeholder";
 import { DatePicker } from "antd";
 const SingleHoliday=lazy(()=>import("./SingleHoliday"));
@@ -26,7 +24,7 @@ class HolidayPage extends React.Component {
   componentDidMount() {
     const currentYear = new Date().getFullYear();
     // const country=this.props.address && this.props.address.length && this.props.address[0].country
-    this.props.getHoliday(this.props.workplace,currentYear);
+    this.props.getHolidayyear(this.props.workplace,currentYear);
   }
   handleChangeHolidayTime = (checked) => {
     this.setState({
@@ -54,7 +52,7 @@ class HolidayPage extends React.Component {
   };
   handleCallBack = (status) => {
     if (status === "Success") {
-      this.props.getHoliday();
+      this.props.getHolidayyear();
     } else {
       alert("error");
     }
@@ -89,7 +87,7 @@ class HolidayPage extends React.Component {
      
       console.log('Selected Year:', selectedYear);
       this.setState({ selectedYear });
-      this.props.getHoliday(this.props.workplace,selectedYear);
+      this.props.getHolidayyear(this.props.workplace,selectedYear);
     }
    
   };
@@ -107,7 +105,7 @@ class HolidayPage extends React.Component {
     this.setState({ holidayType: "", singleHoliday: "" });
 };
   render() {
-    const currentYear = moment().format('YYYY');
+    const currentYear = dayjs().format('YYYY');
    
     const { selectedYear } = this.state;
     console.log(this.props.workplace)
@@ -121,37 +119,45 @@ class HolidayPage extends React.Component {
     if (fetchingHoliday) {
       return <BundleLoader />;
     }
-
+    const firstItem = this.props.holidaysYear[0];
+console.log(this.props.holidaysYear)
     return (
       <>
-        <FlexContainer>
+        <div class=" flex">
           <div  class="max-sm:w-[24rem] md:w-2/4">
             <MainWrapper>
-              <h1
-                style={{
-                  display: "flex",
-                  justifyContent: "left",
-                  fontSize: "1.25em",
-                  color: "white",
-                  backgroundColor: "#40A9FF",
-                }}
+              <div class=" flex justify-left text-[1rem] text-[white] bg-[#40A9FF]"
+            
               >
                 Holiday List-<div>
                 <DatePicker 
                 //  format="YYYY"
-                defaultValue={moment(currentYear, 'YYYY')}
-                // value={this.state.selectedYear ? moment(this.state.selectedYear, 'YYYY') : null}
+                defaultValue={dayjs(currentYear, 'YYYY')}
+                // value={this.state.selectedYear ? dayjs(this.state.selectedYear, 'YYYY') : null}
                     //  value={selectedYear}
                  onChange={this.onChange}
                   picker="year" />
                  </div>
+                 <div className=" ml-4">
+      {firstItem && (
+        <>
+          <div>{firstItem.userOptnlHolidayApplied}/{firstItem.orgOptnlHoliday}</div>
+        </>
+      )}
+    </div>
+                 {/* {this.props.holidaysYear.map((item, i) => (
+                  <>
+                  <div>{item.userOptnlHolidayApplied}/{item.orgOptnlHoliday} </div>
+                  
+                  </>
+                ))} */}
               {/* <div
                 style={{
                   marginLeft:"326px"
                 }}>
                 Mandatory-10
               </div> */}
-              </h1>
+              </div>
             
               {/* <FlexContainer
                 justifyContent="space-between"
@@ -189,9 +195,9 @@ class HolidayPage extends React.Component {
                 </div>
               )} */}
               <div>
-                {this.props.holidays.map((item, i) => (
+                {this.props.holidaysYear.map((item, i) => (
                   <SingleHoliday
-                    holidays={item}
+                  holidaysYear={item}
                     newHolidayName="holidayName"
                     handleUpdateHoliday={this.handleUpdateHoliday}
                     handleDeleteHoliday={this.handleDeleteHoliday}
@@ -267,13 +273,13 @@ class HolidayPage extends React.Component {
                 )} */}
             </MainWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }
 }
 const mapStateToProps = ({ holiday, auth }) => ({
-  holidays: holiday.holidays,
+  holidaysYear: holiday.holidaysYear,
   fetchingHoliday:holiday.fetchingHoliday,
   addingHoliday: holiday.addingHoliday,
   userType: auth.userDetails,
@@ -286,5 +292,5 @@ const mapStateToProps = ({ holiday, auth }) => ({
 
 });
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addHoliday, getHoliday, updateHoliday,  deleteHoliday }, dispatch);
+  bindActionCreators({ addHoliday, getHolidayyear, updateHoliday,  deleteHoliday }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(HolidayPage);

@@ -1,16 +1,12 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
+import { Button,} from "antd";
+import { Formik, Form, Field,  FastField } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-// import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-// import { addBankDetails } from "../../../../ProfileAction";
 
 const documentSchema = Yup.object().shape({
   documentId: Yup.string().required("Input needed !"),
@@ -64,14 +60,10 @@ class HolidayForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                  // margin: "0.9375em 3.125em",
-                  // border: "0.125em solid green"
-                }}
+              <div class=" w-full"
+               
               >
-                <div style={{ width: "100%" }}>
+                <div class=" w-full" >
                   <FastField
                     name="accountNo"
                     // label="Holiday Name"
@@ -89,9 +81,9 @@ class HolidayForm extends Component {
                     style={{ flexBasis: "80%", width: "100%" }}
                   />
                 </div>
-                <Spacer />
-                <FlexContainer>
-                  <div style={{ width: "47%" }}>
+               
+                <div class=" flex mt-3">
+                  <div class=" w-[47%]" >
                     <Field
                       name="startDate"
                       // label="Start Date"
@@ -115,11 +107,11 @@ class HolidayForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "50%" }}></div>
-                </FlexContainer>
-                <Spacer />
-                <div style={{ width: "100%" }}>
+                
+                  <div class=" w-[50%] ml-4" ></div>
+                </div>
+               
+                <div class=" w-full mt-3" >
                   {/* <Switch
                                         style={{ width: "6.25em", marginLeft: "0.625em" }}
                                         onChange={this.handleChange}
@@ -130,8 +122,8 @@ class HolidayForm extends Component {
                 </div>
               </div>
 
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -140,7 +132,7 @@ class HolidayForm extends Component {
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                   {/* Submit */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

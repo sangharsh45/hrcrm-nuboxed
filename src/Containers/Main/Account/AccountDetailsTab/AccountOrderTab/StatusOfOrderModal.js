@@ -9,26 +9,25 @@ class StatusOfOrderModal extends Component {
         const {
             addStatusOfOrder,
             handleStatusOfOrder,
+            particularRowData,
             ...formProps
         } = this.props;
         return (
             <>
                 <StyledDrawer
-                    title={<FormattedMessage
-                        id="app.statusoforder"
-                        defaultMessage="Status of Order"
-                       />}
-                    width="60%"
+                title={ <div class="flex items-center">
+                      <FormattedMessage id="app.statusoforder" defaultMessage="Status of Order"/> -
+                         {particularRowData.newOrderNo}
+                        </div>}
+                        width="60%"
                     visible={addStatusOfOrder}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"3rem"}}
                     onClose={() => handleStatusOfOrder(false)}
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <StatusOfOrder particularRowData={this.props.particularRowData} />
+                        <StatusOfOrder particularRowData={particularRowData} />
                     </Suspense>
                 </StyledDrawer>
             </>

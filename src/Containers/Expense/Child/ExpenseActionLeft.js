@@ -1,28 +1,30 @@
 import React from 'react'
-import { FlexContainer } from '../../../Components/UI/Layout'
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
-import CategoryIcon from '@mui/icons-material/Category';
+import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
+import { Tooltip,Avatar } from "antd";
+import { connect } from "react-redux";
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 
 const ExpenseActionLeft = (props) => {
     return (
-        <FlexContainer alignItems='center'>
+        <div class=" flex items-center" >
           <Tooltip
         title={<FormattedMessage id="app.card" defaultMessage="Card" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("card")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "card" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
             }}
           >
-            <GridViewIcon style={{fontSize:"1.4rem"}}  />
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <GridViewIcon   />
+            </Avatar>
           </span>
        
       </Tooltip>
@@ -31,44 +33,75 @@ const ExpenseActionLeft = (props) => {
         title={<FormattedMessage id="app.list" defaultMessage="List" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("tile")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "tile" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
+
             }}
           >
-            
+           <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <TocIcon  
             // icon={solid('users')}
              />
+             </Avatar> 
           </span>
     
       </Tooltip>
       <Tooltip
-        title="Group"
+        title="Category"
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("list")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "list" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
-            
-            <CategoryIcon  
+            <Avatar style={{ background: props.viewType === "list" ? "#f279ab" : "#4bc076" }}>
+            <ViewWeekIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>
-        </FlexContainer>
+      {props.user.expenseFullListInd === true && (
+      <Tooltip
+        title="All"
+      >
+       
+       <span class=" mr-2 cursor-pointer text-[1rem]"
+            onClick={() => props.setExpenseViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+            <ListAltIcon  
+            // icon={solid('users')}
+             />
+             </Avatar>
+          </span>
+    
+      </Tooltip>
+       )}
+        </div>
     )
 }
 
-export default ExpenseActionLeft; 
+const mapStateToProps = ({ customer, auth, candidate }) => ({
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+
+    },
+    dispatch
+  );
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ExpenseActionLeft)
+);

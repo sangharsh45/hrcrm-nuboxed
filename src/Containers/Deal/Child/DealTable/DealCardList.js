@@ -4,25 +4,23 @@ import { bindActionCreators } from "redux";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
 import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip,  Menu, Dropdown, Progress } from "antd";
-import { CurrencySymbol, Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
+import { CurrencySymbol, } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
  } from "../../../../Components/UI/Elements";
 import {
   getRecruiterList,
   setEditOpportunity,
-  deleteOpportunityData,
   getOpportunityInitiativeSKillDetails,
   updateOwneroppById,
-  getAllSalesList,
+
   handleOpportunityDrawerModal,
   getAllRecruitmentByOppId,
   getAllRecruitmentPositionByOppId,
@@ -42,7 +40,9 @@ import {
   handleDealsNotesDrawerModal,
   LinkStageDeal,
   sendToWon,
+  deleteDealsData
 } from "../../DealAction";
+import NodataFoundPage from "../../../../Helpers/ErrorBoundary/NodataFoundPage";
 const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
 const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
 const DealSelectStages =lazy(()=>import("./DealSelectStages"));
@@ -57,7 +57,6 @@ function DealCardList(props) {
       props.getDealListbyUserId(props.userId, page);
       setPage(page + 1);
     }
-    props.getAllSalesList();
   }, []);
 
   const handleLoadMore = () => {
@@ -80,7 +79,7 @@ function DealCardList(props) {
     dealsByuserId,
     handleUpdateDealModal,
     openupdateDealModal,
-    deleteOpportunityData,
+    deleteDealsData,
     history,
     fetchingDeal,
   } = props;
@@ -93,14 +92,14 @@ function DealCardList(props) {
         hasMore={hasMore}
         loader={
           fetchingDeal ? (
-            <h4 style={{ textAlign: "center" }}>Loading...</h4>
+            <div class="flex justify-center">Loading...</div>
           ) : null
         }
-        height={"75vh"}
+        height={"87vh"}
       >
-        <CardWrapper>
+        <div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center justify-center">
 
-          {dealsByuserId.map((item) => {
+        { !fetchingDeal && dealsByuserId.length === 0 ?<NodataFoundPage />:dealsByuserId.map((item,index) =>  {
             var findProbability = item.probability;
             item.stageList.forEach((element) => {
               if (element.oppStage === item.oppStage) {
@@ -108,12 +107,11 @@ function DealCardList(props) {
               }
             });
             return (
-              <CardElement>
-                <div class=" flex flex-no-wrap items-center h-[2.81em]"
+              <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[8rem] 
+              text-[#444444] m-2 p-1 w-[16vw] flex flex-col justify-center max-sm:w-wk  ">
+                <div class=" flex  flex-nowrap items-center h-[2.81em]"
                 >
-                  <div class=" mr-[0.2rem]"
-                    style={{ flexBasis: "15%",}}
-                  >
+                  <div class=" mr-[0.2rem] flex basis-[15%]">
                     <MultiAvatar
                       primaryTitle={item.opportunityName}
                       imageId={item.imageId}
@@ -123,60 +121,48 @@ function DealCardList(props) {
                     />
                   </div>
                   &nbsp;
-                  <div class=" flex flex-col"
-                    style={{ flexBasis: "83%", overflow: "hidden" }}
+                  <div class=" flex flex-col basis-[100%] overflow-hidden"
                   >
-                    <div
-                      class="font-semibold "
-                      style={{
-                        color: "#337df4",
-                        cursor: "pointer",
-                        fontSize: "1em",
-                      }}
-                    >
-                      <Link
+                    <div 
+                      class="font-semibold text-[#337df4] cursor-pointer text-sm ">
+                                                               <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`dealDetails/${item.invOpportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>
+                      {/* <Link
                         toUrl={`dealDetails/${item.invOpportunityId}`}
                         title={`${item.opportunityName}`}
                       >
                         {item.opportunityName}
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-around">
                   <div>
-                    {item.customer && (
-                      <SubTitle
-                        overflow="hidden"
-                        textOverflow="ellipsis"
-                        style={{
-                          cursor: "pointer",
-                          fontSize: "0.9375em",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                        // onClick={handleSecondaryTitleClick || null}
-                      >
-                        {item.customer || ""}
-                      </SubTitle>
+                    {item.investor && (
+                      <div class="overflow-hidden text-ellipsis cursor-pointer text-xs flex items-center">
+                        {item.investor || ""}
+                      </div>
                     )}
                   </div>
                   <div>
-                    <SubTitle
-                      style={{
-                        fontWeight: 500,
-                        fontSize: "0.9375em",
-                        // marginTop: "-0.37em",
-                        marginBottom: "-0.18em",
-                      }}
+                    <div class="font-medium text-xs ml-1 "
+                     
                     >
-                      &nbsp;&nbsp;
+                     
                       {<CurrencySymbol currencyType={item.currency} />}
                       &nbsp;{item.proposalAmount || ""}
-                    </SubTitle>
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-around">
+                <div className="flex ">
+        
+        <div>
+        <div class="font-medium text-xs ">
+        </div>
+        </div>
+        </div>
+                <div className="flex justify-around mt-1">
                   <div>
                     <span>
                       <Dropdown
@@ -235,14 +221,8 @@ function DealCardList(props) {
                   </span>
                 </div>
 
-                <div
-                  style={{
-                    width: "100%",
-                    paddingLeft: "0.5em",
-                    marginTop: "-0.18em",
-                  }}
-                >
-                  <div class="flex justify-between w-wk">
+                <div class="w-full ">
+                  <div class="flex justify-between w-wk mt-1">
                     <div>
                       {item.approveInd && item.opportunityOwner ? (
                         <>
@@ -346,11 +326,7 @@ function DealCardList(props) {
                           }}
                         >
                           <NoteAltIcon
-                            style={{
-                              color: "green",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                           className="!text-base cursor-pointer text-[green]"
                           />
                         </span>
                       </Tooltip>
@@ -364,15 +340,14 @@ function DealCardList(props) {
                         }
                       >
                         {user.imInd === true && user.dealUpdateInd === true && (
-                          <span
-                            style={{ cursor: "pointer", color: "blue" }}
+                          <span class="cursor-pointer text-[blue]"
                             onClick={() => {
                               handleUpdateDealModal(true);
                               handleSetCurrentItem(item);
                             }}
                           >
                             <BorderColorIcon
-                              style={{ color: "grey", fontSize: "1rem" }}
+                             className="!text-base cursor-pointer text-[tomato]"
                             />
                           </span>
                         )}
@@ -380,27 +355,25 @@ function DealCardList(props) {
                       <StyledPopconfirm
                         title="Do you want to delete?"
                         onConfirm={() =>
-                          deleteOpportunityData(item.opportunityId)
+                          deleteDealsData(item.invOpportunityId)
                         }
                       >
+                         <Tooltip title="Delete">
                         {user.imInd === true && user.dealDeleteInd === true && (
                           <DeleteOutlined
                             type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base text-[red] cursor-pointer"
                           />
                         )}
+                        </Tooltip>
                       </StyledPopconfirm>
                     </div>
                   </div>
                 </div>
-              </CardElement>
+              </div>
             );
           })}
-        </CardWrapper>
+        </div>
       </InfiniteScroll>
 
       <UpdateDealModal
@@ -443,7 +416,6 @@ const mapStateToProps = ({ auth, deal, opportunity }) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
   opportunitySkills: opportunity.opportunitySkills,
-  sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
   recruiterList: opportunity.recruiterList,
   fetchingRecruiterList: opportunity.fetchingRecruiterList,
@@ -476,12 +448,11 @@ const mapDispatchToProps = (dispatch) =>
       getRecruiterList,
       getOpportunitySKill,
       getOpportunityForecast,
-      getAllSalesList,
       handleUpdateDealModal,
       handleOpportunityDrawerModal,
       handleDealsNotesDrawerModal,
       setEditOpportunity,
-      deleteOpportunityData,
+      deleteDealsData,
       updateOwneroppById,
       getAllRecruitmentByOppId,
       getAllRecruitmentPositionByOppId,
@@ -498,57 +469,3 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(DealCardList);
-
-const Header = styled.div`
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-  overflow: hidden;
-  height: 2em;
-  font-size: 1em;
-padding:4px;
-  color:blue;
-  cursor:pointer;
-  // font-family: Poppins;
-  //font-weight: 700;
-  @media only screen and (max-width: 600px) {
-    text-overflow: ellipsis;
-
-white-space: nowrap;
-overflow: hidden;
-height: 2em;
-font-size: 1.3em;
-font-family: Poppins;
-font-weight: 700;
-width:100%
-
-text-align:center
-  }
-`;
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-const CardElement = styled.div`
-  border-radius: 0.35rem;
-  border: 3px solid #eeeeee;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0.25em 0.62em #aaa;
-  height: 7rem;
-  color: rgb(68, 68, 68);
-  margin: 1em;
-  padding: 0.2rem;
-  width: 19vw;
-  display: flex;
-  flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: -webkit-fill-available;
-  }
-`;

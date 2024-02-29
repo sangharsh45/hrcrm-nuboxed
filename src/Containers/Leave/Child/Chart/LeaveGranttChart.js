@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
+import { Gantt} from 'gantt-task-react';
 import "gantt-task-react/dist/index.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import {getTasksListByOpportunityId} from "../../../OpportunityAction";
-import moment from "moment"
 import OnlyWrapCard1 from "../../../../Components/UI/Layout/OnlyWrapCard1";
 
 

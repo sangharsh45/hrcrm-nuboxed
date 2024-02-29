@@ -42,7 +42,7 @@ class TaskOrganizationTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">
+               <span class=" ml-1 font-semibold">
                <FormattedMessage
           id="app.tasks"
           defaultMessage="Tasks"

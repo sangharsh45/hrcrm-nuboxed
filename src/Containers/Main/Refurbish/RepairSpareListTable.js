@@ -1,7 +1,8 @@
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {Button} from "antd";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getSpareListByPhoneId } from "../Account/AccountAction";
 
@@ -34,11 +35,20 @@ function RepairSpareListTable(props) {
         {
             title: "Cost",
             dataIndex: "extraCost",
-
+            render: (text, item) => {
+                return (
+                    <>{item.extraCost} {item.spareCurrency}</>
+                )
+            }
         },
         {
             title: "Total",
             dataIndex: "total",
+            render: (text, item) => {
+                return (
+                    <>{item.total} {item.spareCurrency}</>
+                )
+            }
         },
 
     ];
@@ -51,7 +61,11 @@ function RepairSpareListTable(props) {
                 pagination={false}
                 loading={props.fetchingSpareListByPhoneId}
             />
-
+<Button 
+className="w-12"
+type="primary">
+    Add Spares
+</Button>
         </>
     );
 }

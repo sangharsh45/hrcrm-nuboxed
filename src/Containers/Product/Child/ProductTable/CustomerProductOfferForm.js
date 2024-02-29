@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useMemo, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button} from "antd";
 import { Formik, Form, Field, } from "formik";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { setClearbitProductData } from "../../../Product/ProductAction";
-import * as Yup from "yup";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-// import ProductClearbit from "../../../../Components/Forms/Autocomplete/ProductClearbit";
 import { addCustomerOffer } from "../../ProductAction";
 
 class CustomerProductOfferForm extends Component {
@@ -126,15 +122,10 @@ class CustomerProductOfferForm extends Component {
                         ...rest
                     }) => (
                         <Form>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "100%",
-                                    }}
-                                >
+                            <div class="flex justify-between">
+                                <div class="h-full w-full">
 
-                                    <FlexContainer justifyContent="space-between">
+                                <div class="flex justify-between">
                                         <div style={{ width: "12%" }}>
                                             <Field
                                                 isRequired
@@ -205,12 +196,11 @@ class CustomerProductOfferForm extends Component {
                                                 style={{ flexBasis: "80%" }}
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
 
 
-                                    <Spacer style={{ marginBottom: "15px" }} />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                    <div class="flex justify-between mt-3">
+                                        <div class="w-[47%]">
                                             <Field
                                                 isRequired
                                                 name="startDate"
@@ -219,15 +209,9 @@ class CustomerProductOfferForm extends Component {
                                                 component={DatePicker}
                                                 value={values.startDate}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class="w-[47%]">
                                             <Field
                                                 isRequired
                                                 name="endDate"
@@ -237,12 +221,6 @@ class CustomerProductOfferForm extends Component {
                                                 value={values.endDate || values.startDate}
                                                 defaultValue={moment("2015-01-01")}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
                                                 disabledDate={(currentDate) => {
                                                     if (values.startDate) {
                                                         if (
@@ -258,23 +236,20 @@ class CustomerProductOfferForm extends Component {
                                                 }}
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
                                 </div>
                             </div>
 
-                            <FlexContainer justifyContent="flex-end">
+                            <div class="flex justify-end">
                                 <Button
+                                className="mt-5 ml-[286px]"
                                     type="primary"
                                     htmlType="submit"
                                     loading={this.props.addingOffer}
-                                    style={{
-                                        marginTop: "20px",
-                                        marginLeft: "286px",
-                                    }}
                                 >
                                     Submit
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     )}
                 </Formik>
@@ -283,7 +258,7 @@ class CustomerProductOfferForm extends Component {
     }
 }
 
-const mapStateToProps = ({ product, distributor }) => ({
+const mapStateToProps = ({ product }) => ({
     addingOffer: product.addingOffer,
 });
 

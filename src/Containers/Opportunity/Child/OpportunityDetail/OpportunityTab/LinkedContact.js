@@ -364,7 +364,7 @@ class LinkedContact extends Component {
       {
         //title: "Email #",
         title: <FormattedMessage id="app.email" defaultMessage="Email #" />,
-        width: "15%",
+        width: "18%",
         dataIndex: "emailId",
       },
       {

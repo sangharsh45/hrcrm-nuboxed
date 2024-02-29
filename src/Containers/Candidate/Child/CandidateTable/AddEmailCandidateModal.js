@@ -122,16 +122,7 @@ class AddEmailCandidateModal extends Component {
           title="Email to"
           width="70%"
           visible={this.props.addCandidateEmailModal}
-          //   maskClosable={false}
-          closable
-          placement="right"
-          destroyOnClose
-          style={{marginTop:"3rem"}}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          //   onCancel={() => this.props.handleCandidateEmailModal(false)}
           onClose={() => this.props.handleCandidateEmailModal(false)}
-        //style={{ top: 40 }}
-        //   footer={null}
 
         >
         

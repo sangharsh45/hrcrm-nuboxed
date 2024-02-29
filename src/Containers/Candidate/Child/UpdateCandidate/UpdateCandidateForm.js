@@ -5,7 +5,6 @@ import { FormattedMessage } from "react-intl";
 import { Button, Select, Switch,Checkbox} from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-import { HeaderLabel, Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
@@ -220,8 +219,8 @@ class UpdateCandidateForm extends Component {
                             />
                         </div>
                       </div>
-                      <Spacer />
-                      <div class=" flex justify-between" >
+                    
+                      <div class=" flex justify-between mt-3" >
                         <div class=" w-[30%]" >
                           <FastField
                             name="middleName"
@@ -259,13 +258,13 @@ class UpdateCandidateForm extends Component {
                       </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class=" w-full mt-3" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
+                      <div class=" text-[white] text-xs" >
                   Communication
                    
-                    </HeaderLabel>
+                    </div>
                     </div>
                     </div>
                     <div class=" flex justify-between">
@@ -325,12 +324,7 @@ class UpdateCandidateForm extends Component {
                         isColumn
                         />
                     </div>
-                    <div
-                      style={{
-                        width: "22%",
-                        fontWeight: "bold",
-                       // marginTop: "2px",
-                      }}
+                    <div class=" w-[22%] text-bold"
                     >
                       WhatsApp
                       <Switch
@@ -342,12 +336,12 @@ class UpdateCandidateForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+              
+                  <div class=" w-full mt-3" style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >
+                      <div class=" text-[white] text-xs" >
                   Identity
-                    </HeaderLabel>
+                    </div>
                     </div>
                     </div>           
                     <div class=" flex justify-between" >
@@ -538,11 +532,11 @@ class UpdateCandidateForm extends Component {
                     </div>               
                   </div>
                   </div>  
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+
+                  <div class=" w-full mt-3" style={{ backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}}>
-                    Correspondence</HeaderLabel>
+                      <div class=" text-[white] text-xs" >
+                    Correspondence</div>
                   </div>
                     </div>
                   <FieldArray
@@ -587,8 +581,8 @@ class UpdateCandidateForm extends Component {
                 
                 <div class=" h-[70%] w-[47.5%]"
                 >                 
-                   <Spacer style={{ marginTop: "1em" }} />
-                   <div class=" flex justify-between" >
+                  
+                   <div class=" flex justify-between mt-3" >
                    <div class=" w-[47%]">
                     <FastField
                       // name="department"
@@ -702,8 +696,8 @@ class UpdateCandidateForm extends Component {
                     </div> 
                   </div>
 
-                  <Spacer />
-                  <div class=" flex justify-between" >
+               
+                  <div class=" flex justify-between mt-3" >
                     <div class=" w-[47.5%]">
                     <div class=" flex justify-between" >
                     <div class=" w-[48.5%]">
@@ -741,8 +735,8 @@ class UpdateCandidateForm extends Component {
                       </div>
                       </div>
                     </div>
-                  <Spacer style={{ marginTop: "1em" }} />                   
-                  <div class=" flex justify-between" >
+                                  
+                  <div class=" flex justify-between mt-3" >
                   <div class=" w-[47.5%]">
                   <div class=" flex justify-between" >
                   <div class=" w-[25%]">
@@ -823,8 +817,8 @@ class UpdateCandidateForm extends Component {
                         />
                       </div> */}
                       </div>
-                      <Spacer style={{marginTop:"1.25em"}}/>
-                      <div class=" flex justify-between" >
+                    
+                      <div class=" flex justify-between mt-3" >
                     <div class=" w-[47.5%]">
                     <div class=" flex justify-between" >
                     <div class=" w-[48%]">
@@ -989,10 +983,10 @@ class UpdateCandidateForm extends Component {
                     </div>
                 </div>
                 </div> 
-              <Spacer style={{ marginTop: "1.25em" }} />
+             
               
               
-              <div class=" flex justify-end" >
+              <div class=" flex justify-end mt-3" >
                 <Button
                   type="primary"
                   htmlType="submit"

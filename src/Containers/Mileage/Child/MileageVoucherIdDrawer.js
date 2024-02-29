@@ -14,13 +14,8 @@ const MileageVoucherIdDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Mileage: ${voucherId}`}
-        width="80%"
-        style={{marginTop:"5rem"}}
+        width="70%"
         visible={mileageVoucherIdDrawer}
-        destroyOnClose
-        closable
-        placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           handleMileageVoucherIdDrwer(false);
           props.getMileageByUserId(props.userId)

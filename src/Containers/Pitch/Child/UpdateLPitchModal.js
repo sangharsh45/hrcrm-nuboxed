@@ -20,8 +20,6 @@ console.log(props.item)
         visible={props.updatePitchModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem" }}
         onClose={() => props.handleUpdatePitchModal(false)}
         footer={null}
       >

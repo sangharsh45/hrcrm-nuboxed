@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleEvent from "./SingleEvent";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getEvents,
   addEvents,
@@ -15,6 +14,9 @@ import {
   searchEventName,
   ClearReducerDataOfEvent
 } from "./EventAction";
+const SingleEvent = lazy(() =>
+  import("./SingleEvent")
+);
 
 class Event extends Component {
   constructor(props) {
@@ -119,6 +121,15 @@ class Event extends Component {
     getEvents();
   }
   render() {
+    // const eventData = events && events.length > 0
+    // ? [...events].sort((a, b) => {
+    //     console.log(a.eventType, b.eventType); // Add this line for debugging
+    //     return a.eventType.localeCompare(b.eventType);
+    //   })
+    // : [];
+
+   
+    // console.log("eventData",eventData)
     const {
       fetchingEvents,
       fetchingEventsError,
@@ -145,6 +156,7 @@ class Event extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
          <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -155,38 +167,11 @@ class Event extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {events.length ? (
-                  events.map((event, i) => (
-                    <SingleEvent
-                      key={i}
-                      value={singleEvent}
-                      name="singleEvent"
-                      event={event}
-                      linkedEvents={linkedEvents}
-                      updatingEvents={updatingEvents}
-                      handleChange={this.handleChange}
-                      handleUpdateEvent={this.handleUpdateEvent}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteEvent={this.handleDeleteEvent}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+               
                 <TextInput
                   placeholder="Add Event"
                   name="eventType"
@@ -207,17 +192,16 @@ class Event extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   Cancel
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+             
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingEvents}
                     onClick={this.toggleInput}
@@ -228,34 +212,39 @@ class Event extends Component {
                
               </>
             )}
+              </div>
+            <div class=" flex flex-col" >
+            <MainWrapper className="!h-[69vh] !mt-2" >
+              {events.length ? (
+  events
+    .slice() 
+    .sort((a, b) => a.eventType.localeCompare(b.eventType)) 
+    .map((event, i) => (
+      <SingleEvent
+        key={i}
+        value={singleEvent}
+        name="singleEvent"
+        event={event}
+        linkedEvents={linkedEvents}
+        updatingEvents={updatingEvents}
+        handleChange={this.handleChange}
+        handleUpdateEvent={this.handleUpdateEvent}
+        handleClear={this.handleClear}
+        handleSearchChange={this.handleSearchChange}
+        currentData={this.state.currentData}
+        setCurrentData={this.setCurrentData}
+        handleDeleteEvent={this.handleDeleteEvent}
+      />
+    ))
+) : (
+  <p>No Data Available</p>
+)}
+              </MainWrapper>
+            </div>
+         
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.events && this.props.events.length && this.props.events[0].updationDate).format("ll")} by {this.props.events && this.props.events.length && this.props.events[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.events && this.props.events.length && this.props.events[0].updationDate).format('YYYY-MM-DD')} by {this.props.events && this.props.events.length && this.props.events[0].name}</div>
       </>
     );
   }

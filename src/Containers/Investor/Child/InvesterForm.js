@@ -6,12 +6,11 @@ import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
+import {getCountries} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../InvestorAction"
-import { HeaderLabel} from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import {AddInvestor} from "../InvestorAction";
+import {AddInvestor,getDialCode} from "../InvestorAction";
 import {setClearbitData} from "../../Customer/CustomerAction";
 import { Listbox} from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -26,7 +25,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
  // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  // phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+   phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function InvesterForm(props) {
@@ -49,6 +48,8 @@ function InvesterForm(props) {
   useEffect(() => {
     props.getSectors();
      props.getAllEmployeelist();
+     props.getCountries();
+     props.getDialCode();
      props.getInvestorList(props.orgId)
   }, []);
 
@@ -60,19 +61,65 @@ function InvesterForm(props) {
       AddInvestor,
       clearbit,
     } = props;
-   
-    const sectorOption = props.sectors.map((item) => {
+    const sortedSector =props.sectors.sort((a, b) => {
+      const nameA = a.sectorName.toLowerCase();
+      const nameB = b.sectorName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const sectorOption = sortedSector.map((item) => {
       return {
-        label: item.sectorName || "",
+        label: `${item.sectorName}`,
         value: item.sectorId,
       };
     });
-    const investorType = props.investorListData.map((item) => {
+
+    const sortedInvest =props.investorListData.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const investorType = sortedInvest.map((item) => {
       return {
-        label: item.name || "",
+        label: `${item.name}`,
         value: item.investorCategoryId,
       };
     });
+   
+
+ 
+    const sortedCountry =props.dialCodeList.sort((a, b) => {
+      const nameA = a.country_dial_code.toLowerCase();
+      const nameB = b.country_dial_code.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const countryNameOption = sortedCountry.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
+
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
@@ -89,7 +136,7 @@ function InvesterForm(props) {
             country: props.user.country,
             email: "",
             source: "",
-            countryDialCode: props.user.countryDialCode,
+            countryDialCode:  user.countryDialCode || "",
             phoneNumber: "",
             fullName:"",
             category: checked ? "Both" : whiteblue ? "White" : "Blue",
@@ -136,7 +183,7 @@ function InvesterForm(props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-            <div class=" flex justify-around max-sm:flex-col">
+            <div class=" flex justify-between max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
@@ -188,7 +235,7 @@ function InvesterForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                 
                   {/* <Field
                     name="email"
                     type="text"
@@ -201,22 +248,25 @@ function InvesterForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />                   */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-3">
                     <div class=" w-3/12 max-sm:w-[30%]">
-                      <FastField
+                    <FastField
                         name="countryDialCode"
-                        selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${user.countryDialCode}`,
+                        }}
+                        // value={values.countryDialCode}
                         isColumn
+                        // width={"100%"}
+                        selectType="dialCode"
                         component={SearchSelect}
-                        value={values.countryDialCode1}
                         inlineLabel
                       />
                     </div>
@@ -233,10 +283,10 @@ function InvesterForm(props) {
                     </div>
                   </div>
 
-                  <Spacer/>
-                  <div class=" flex justify-between">
+                  
+                  <div class=" flex justify-between mt-3">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="sectorId"
                             label={
                               <FormattedMessage
@@ -246,11 +296,14 @@ function InvesterForm(props) {
                             }
                             isColumn
                             placeholder="Sector"
-                            component={SelectComponent}
+                          
                             value={values.sectorId}
-                            options={
-                              Array.isArray(sectorOption) ? sectorOption : []
-                            }
+                            component={SelectComponent}
+                        options={
+                          Array.isArray(sectorOption)
+                            ? sectorOption
+                            : []
+                        }
                           />
                     </div>
                     <div class=" w-w47.5">
@@ -272,7 +325,7 @@ function InvesterForm(props) {
                   </div>
                   <div class=" flex justify-between">
                   <div class=" w-w47.5">
-                  <FastField                     
+                  <Field                     
                             name="investorCategoryId"
                             label={
                               <FormattedMessage
@@ -282,16 +335,20 @@ function InvesterForm(props) {
                             }
                             isColumn
                             placeholder="Type"
-                            component={SelectComponent}
+                           
                             value={values.investorCategoryId}
+                            component={SelectComponent}
                             options={
-                              Array.isArray(investorType) ? investorType : []
+                              Array.isArray(investorType)
+                                ? investorType
+                                : []
                             }
+                             
                           />
                     </div>
                     </div> 
                  
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -302,6 +359,7 @@ function InvesterForm(props) {
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
@@ -378,8 +436,8 @@ function InvesterForm(props) {
       </Listbox>
                   </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between max-sm:flex-col">
+                    
+                    <div class=" flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
@@ -414,13 +472,14 @@ function InvesterForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-3 w-full" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                      <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" >Corporate Address</div>
                   </div>
                     </div>
-                  <Spacer />
+                 
+                  <div class="mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -431,11 +490,12 @@ function InvesterForm(props) {
                       />
                     )}
                   />
+              </div>
                 </div>
               </div>
-              <Spacer />
+           
              
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -457,18 +517,22 @@ const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector
   addingInvestor: investor.addingInvestor,
   clearbit: customer.clearbit,
   user: auth.userDetails,
+  countries:auth.countries,
+  dialCodeList:investor.dialCodeList,
   allEmployeeList:investor.allEmployeeList,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
   fullName: auth.userDetails.fullName,
-  investorListData:investorList.investorListData,
+  investorListData: investorList.investorListData,
   orgId:auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      getCountries,
+      getDialCode,
         AddInvestor,
       setClearbitData,
       getSectors,

@@ -1,21 +1,10 @@
 import React, { Component,lazy } from "react";
-import styled from "styled-components";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Draggable } from "react-beautiful-dnd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import {deleteDealsData} from "../DealAction";
 const DealGroupCard =lazy(()=>import("./DealGroupCard"));
 
-
-const StageContainer = styled.div`
-  padding: 0.8rem 1.5rem;
-  margin: 0.2rem;
-  background-color: ${(props) => (props.isDragging ? "lightgreen" : "#1890ff")}
-  border: 0.06em solid ${(props) => props.theme.borderColor};
-  border-radius: 0.2rem;
-`;
-const Stage = styled.h3`
-  color: #fff;
-  font-size: 1.46em;;
-`;
 class DealStageColumn extends Component {
   render() {
     const { dealDetailsbyID, index, history } = this.props;
@@ -35,20 +24,11 @@ class DealStageColumn extends Component {
   
             <DealGroupCard
               isDragging={snapshot.isDragging}
-              // imageURL={
-              //   opportunity.metaData &&
-              //   opportunity.metaData.account &&
-              //   opportunity.metaData.account.imageURL
-              // }
-              // imageId={
-              //   opportunity.metaData &&
-              //   opportunity.metaData.account &&
-              //   opportunity.metaData.account.imageId
-              // }
               primaryTitle={`${dealDetailsbyID.opportunityName || ""}`}
               secondaryTitle={`${dealDetailsbyID.proposalAmount} `}
               currencyType={dealDetailsbyID.currency}
-            //   subtitle1={opportunity.description || "-"}
+              user={this.props.user}
+              investorName={dealDetailsbyID.investor}
             //   subtitle2={opportunity.phoneNo || "-"}
               // handlePreview={() => this.props.handleContactDrawer(opportunity, true)}
               handleClick={() =>
@@ -57,6 +37,7 @@ class DealStageColumn extends Component {
                   state: { dealDetail: dealDetailsbyID },
                 })
               }
+              handleDelete={() => this.props.deleteDealsData(dealDetailsbyID.invOpportunityId)}
             />
             </div>
             )}
@@ -65,4 +46,16 @@ class DealStageColumn extends Component {
     );
   }
 }
-export default DealStageColumn;
+const mapStateToProps = ({ auth }) => ({
+  userId: auth.userDetails.userId,
+  user: auth.userDetails,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+    
+      deleteDealsData
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(DealStageColumn);

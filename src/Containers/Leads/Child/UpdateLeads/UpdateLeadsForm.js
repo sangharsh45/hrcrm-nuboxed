@@ -7,14 +7,12 @@ import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getSources} from "../../../Settings/Category/Source/SourceAction"
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import { StyledLabel } from "../../../../Components/UI/Elements";
-import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import {
     updateLeads,
     setEditLeads,
-    setClearbitData,
+    setClearbitData, 
     getCrm
 } from "../../../Leads/LeadsAction";
 import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
@@ -22,13 +20,14 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Listbox } from '@headlessui/react'
+// import {getDialCode} from "../../../Investor/InvestorAction";
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateLeadsSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
   email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  // phoneNumber:  Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  phoneNumber:  Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function UpdateLeadsForm (props) {
@@ -42,6 +41,7 @@ function UpdateLeadsForm (props) {
     props.getAllCustomerEmployeelist();
     props.getSources(props.orgId)
     props. getCrm();
+    // props.getDialCode();
   },[])
  
 
@@ -63,9 +63,16 @@ function UpdateLeadsForm (props) {
       };
     });
 
-    const [defaultOption, setDefaultOption] = useState(props.setEditingLeads.assignedTo);
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.crmAllData.find((item) => item.empName === selected);
+    
+    // const dialCodeOption = props.dialCodeList.map((item) => {
+    //   return {
+    //     label: `+${item.country_dial_code || ""}`,
+    //     value: item.country_dial_code
+    //   };  });
+    
     return (
       <>
         <Formik
@@ -114,8 +121,8 @@ function UpdateLeadsForm (props) {
                 assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingLeads.employeeId,
               },
               props.leadsId,
-              () => handleReset(resetForm)
             );
+          this.handleReset(resetForm)
           }}
         >
           {({
@@ -131,8 +138,8 @@ function UpdateLeadsForm (props) {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col ">
                 <div class=" h-full w-[47.5%] max-sm:w-wk"   >
-                    <Spacer/>
-                    <div class=" flex  flex-nowrap">
+                   
+                    <div class=" flex  flex-nowrap mt-3">
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
@@ -210,7 +217,7 @@ function UpdateLeadsForm (props) {
                       </div>
                     </div>
                   </div>
-                    <StyledLabel>
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="email"
                     type="text"                   
@@ -222,13 +229,14 @@ function UpdateLeadsForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
+                    </div>
                     <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[35%]">
                   
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
+                        component={SearchSelect}
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -237,13 +245,16 @@ function UpdateLeadsForm (props) {
                           />
                         }
                         isColumn
-                        component={SearchSelect}
+                        // component={SelectComponent}
+                        // options={
+                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        // }
                         inlineLabel
                        />
                       
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <FastField
                         //isRequired
                         type="text"
@@ -254,11 +265,11 @@ function UpdateLeadsForm (props) {
                         inlineLabel
                         width={"100%"}
                         />     
-                        </StyledLabel>              
+                        </div>              
                          </div>
                   </div>
-                  <Spacer/>
-                    <StyledLabel>
+
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <Field
                     isRequired
                     name="companyName"
@@ -275,8 +286,8 @@ function UpdateLeadsForm (props) {
                     accounts={accounts}
                     inlineLabel
                     />
-                    </StyledLabel>
-                    <StyledLabel>
+                    </div>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                   <Field
                     name="url"
                     type="text"
@@ -289,10 +300,10 @@ function UpdateLeadsForm (props) {
                     component={InputComponent}
                     inlineLabel
                     />
-                    </StyledLabel>
-                  <Spacer />
+                    </div>
                   
-                  <div class=" flex justify-between">
+                  
+                  <div class=" flex justify-between mt-3">
                    <div class=" w-1/2 max-sm:w-wk">
                       <FastField
                         name="sectorId"
@@ -332,11 +343,11 @@ function UpdateLeadsForm (props) {
            </div>
                 </div>
               
-                     <Spacer/>
+                   
           
-                <div class=" flex justify-between max-sm:flex-col">
+                <div class=" flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-1/2 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="vatNo"
                         type="text" 
@@ -352,10 +363,10 @@ function UpdateLeadsForm (props) {
                         component={InputComponent}
                         inlineLabel
                         />
-                        </StyledLabel>
+                        </div>
                     </div>
                     <div class=" w-2/5 max-sm:w-wk">
-                    <StyledLabel>
+                    <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold ">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -371,15 +382,15 @@ function UpdateLeadsForm (props) {
                         component={InputComponent}
                         inlineLabel
                       />
-                      </StyledLabel>
+                      </div>
                     </div>                    
                     </div>
                  </div>
 
                  <div class=" h-3/4 w-[47.5%] max-sm:w-wk "   >
-                   <Spacer/>
+                  
                    
-                    <div class="">
+                    <div class=" mt-3">
                     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
@@ -447,8 +458,8 @@ function UpdateLeadsForm (props) {
       )}
     </Listbox>
                     </div>
-                  <Spacer />
-                  <StyledLabel>
+                 
+                  <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -459,10 +470,10 @@ function UpdateLeadsForm (props) {
                       />
                     )}
                   />
-                  </StyledLabel>
+                  </div>
                  
-                 <Spacer/>
-                 <StyledLabel>
+               
+                 <div class="m-[0.1rem_0_0.02rem_0.2rem] text-xs flex flex-col font-bold mt-3 ">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -473,11 +484,11 @@ function UpdateLeadsForm (props) {
                     isColumn
                     component={TextareaComponent}
                     /> 
-                    </StyledLabel>                 
+                    </div>                 
                 </div>
               </div>
-              <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -496,7 +507,7 @@ function UpdateLeadsForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, leads,employee,source }) => ({
+const mapStateToProps = ({ auth, leads,employee,source,investor }) => ({
     setEditingLeads: leads.setEditingLeads,
     updateLeadsById: leads.updateLeadsById,
     updateLeadsByIdError: leads.updateLeadsByIdError,
@@ -506,8 +517,10 @@ const mapStateToProps = ({ auth, leads,employee,source }) => ({
     orgId: auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
+    fullName: auth.userDetails.fullName,
     allCustomerEmployeeList:employee.allCustomerEmployeeList,
     crmAllData:leads.crmAllData,
+    // dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -518,7 +531,8 @@ const mapDispatchToProps = (dispatch) =>
       getAllCustomerEmployeelist,
       setClearbitData,
       getSources,
-      getCrm
+      getCrm,
+      // getDialCode,
     },
     dispatch
   );

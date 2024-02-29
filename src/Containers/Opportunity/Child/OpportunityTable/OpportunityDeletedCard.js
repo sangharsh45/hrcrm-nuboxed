@@ -4,7 +4,8 @@ import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import { Tooltip, Menu, Dropdown, Progress } from "antd";
-import { CurrencySymbol,Link } from "../../../../Components/Common";
+import { CurrencySymbol, } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import moment from "moment";
 import {
   MultiAvatar,
@@ -44,25 +45,24 @@ function OpportunityDeletedCard(props) {
         dataLength={deletedOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingDeletedOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
+        loader={fetchingDeletedOpportunity?<div class="flex justify-center">Loading...</div>:null}
+        height={"86vh"}
       >
- <CardWrapper>      
+<div class="flex  justify-center flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center">       
               {deletedOpportunity.map((item) => {
                  
                  var findProbability = 0;
                  return (
 
-                    <CardElement>
+                  <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[16rem] 
+                  text-[#444444] m-3 p-1 w-[20vw] flex flex-col max-sm:w-wk  ">
 
                       <div class="flex items-center justify-between ">
-                      <h4>Name</h4>
+                      <div>Name</div>
                         <Header>
-                        <Link
-          toUrl={`opportunity/${item.opportunityId}`}
-          title={`${item.opportunityName}`}>
-         {item.opportunityName}
-         </Link>
+                        <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`opportunity/${item.opportunityId}`} title={item.opportunityName}>
+      {item.opportunityName}
+    </Link>
                         </Header> 
                        
                
@@ -75,11 +75,11 @@ function OpportunityDeletedCard(props) {
            
                         <div class="flex  justify-between">
                             <h3>Customer</h3>
-                            <h4>{item.customer}</h4>
+                            <div>{item.customer}</div>
                         </div>
                         <div class="flex justify-between">
                             <div>
-                    <h4>Sponsor</h4> 
+                    <div>Sponsor</div> 
                     </div>
                     <div>
                     <SubTitle>
@@ -96,20 +96,20 @@ function OpportunityDeletedCard(props) {
             </div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Start Date</h4> 
-            <h4>{moment(item.startDate).format("ll")}</h4>
+                    <div>Start Date</div> 
+            <div>{moment(item.startDate).format("ll")}</div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Proposal Amount</h4> 
-            <h4><span>
+                    <div>Proposal Amount</div> 
+            <div><span>
             <CurrencySymbol currencyType={item.currency} />
             &nbsp;
             {item.proposalAmount}
-          </span></h4>
+          </span></div>
                     </div>
                     <div class="flex justify-between">
-                    <h4>Stages</h4> 
-            <h4><span>
+                    <div>Stages</div> 
+            <div><span>
             <Dropdown
           overlay={
             <div>
@@ -141,12 +141,12 @@ function OpportunityDeletedCard(props) {
              {/* )}  */}
           </Tooltip>
         </Dropdown>
-          </span></h4>
+          </span></div>
                     </div>  
                     <div class="flex  justify-between" >
-    <h4>
+    <div>
     Sales Rep
-    </h4>
+    </div>
     <span>
             <MultiAvatar
               primaryTitle={item.assignedTo}
@@ -156,9 +156,9 @@ function OpportunityDeletedCard(props) {
             </span>
 </div>
 <div class="flex  justify-between" >
-    <h4>
+    <div>
     Owner
-    </h4>
+    </div>
     <Tooltip title={item.ownerName}>
           <span>
             <MultiAvatar
@@ -180,10 +180,10 @@ function OpportunityDeletedCard(props) {
                       
                        
                         
-                    </CardElement>
+                    </div>
                  )  
             })}
-              </CardWrapper>
+              </div>
   
 
       </InfiniteScroll>
@@ -234,34 +234,5 @@ font-weight: 700;
 width:100%
 
 text-align:center
-  }
-`
-const CardWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  
-  @media only screen and (max-width: 600px) {
-    -webkit-justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-const CardElement = styled.div`
- 
-border-radius: 0.75rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 17rem;
-    color: rgb(68,68,68);
-    margin: 1em;
-    padding: 0.2rem;
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-  @media only screen and (max-width: 600px) {
-    width: -webkit-fill-available;
-    
   }
 `

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
+import { Switch, Popconfirm } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productPublishToggle } from "../../ProductAction";
@@ -35,7 +35,7 @@ class ProductPublishToggle extends Component {
                         cancelText="Cancel"
                     >
                         <Switch
-                            checked={this.props.item.publishInd}
+                            checked={this.props.publishInd}
                             //   disabled={this.props.collectInd}
                             checkedChildren="Publish"
                             unCheckedChildren="UnPublish"

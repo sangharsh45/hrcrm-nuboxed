@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../../Components/UI/Elements/ViewEditCard";
+import moment from "moment";
+import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 
 class SingleCertification extends Component {
   constructor(props) {
@@ -18,7 +20,7 @@ class SingleCertification extends Component {
   }
   render() {
     const {
-      certification: { name, certificationId },
+      certification: { name,creationDate, certificationId },
       handleChange,
       value,
       data,
@@ -29,6 +31,8 @@ class SingleCertification extends Component {
       
     } = this.props;
     console.log();
+    const currentdate = moment().format("DD/MM/YYYY");
+        const date = moment(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
       <CertificationWrapper>
@@ -36,7 +40,7 @@ class SingleCertification extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <CertificationName style={{ flexBasis: "85%" }}>{name}</CertificationName>
+                <CertificationName style={{ flexBasis: "85%" }}>{name} &nbsp;&nbsp;{date === currentdate ? <span className="blink">New</span> : null}</CertificationName>
                 <div>
                   {this.props.certification.editInd ? (
        <BorderColorIcon
@@ -49,9 +53,14 @@ class SingleCertification extends Component {
                   ) : null}
                   &nbsp;
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <StyledPopconfirm
+              // title="Do you want to delete?"
+              title={<FormattedMessage id="app.doyouwanttodelete" defaultMessage="Do you want to delete" />}
+              onConfirm={() => handleDeleteCertification(certificationId)}
+            >
+                    <DeleteOutlined
                      
-                      onClick={() => handleDeleteCertification(certificationId)}
+                      // onClick={() => handleDeleteCertification(certificationId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -59,6 +68,7 @@ class SingleCertification extends Component {
                         color: "red",
                       }}
                     />
+                     </StyledPopconfirm>
                   </Tooltip>
                 </div>
               </div>

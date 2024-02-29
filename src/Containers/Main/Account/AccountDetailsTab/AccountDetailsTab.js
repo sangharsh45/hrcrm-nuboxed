@@ -13,14 +13,16 @@ import {
 } from "../AccountAction";
 import { Tooltip, Badge } from "antd";
 import AddIcon from '@mui/icons-material/Add';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+const AccountOrder1Table = lazy(() => import("./AccountOrder1Tab/AccountOrder1Table"));
 const AccountOrderTable = lazy(() => import("./AccountOrderTab/AccountOrderTable"));
 const AddAccountModal = lazy(() => import("./AccountOrderTab/AddAccountModal"));
 const AccountActivityModal = lazy(() => import("./AccountActivityTab/AccountActivityModal"));
 const AddDistributorDocumentModal = lazy(() => import("./AccountDocumentTab/AddDistributorDocumentModal"));
 const DistributorDocumentTable = lazy(() => import("./AccountDocumentTab/DistributorDocumentTable"));
 const LinkedDistributorNotes = lazy(() => import("./AccountNoteTab/LinkedDistributorNotes"));
-const OrderGenerateModal = lazy(() => import("./AccountOrder1Tab/OrderGenerateModal"));
+// const OrderGenerateModal = lazy(() => import("./AccountOrder1Tab/OrderGenerateModal"));
 const CatalogueOrderModal = lazy(() => import("./AccountOrder1Tab/CatalogueOrderModal"));
 const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
 const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountContact"))
@@ -46,7 +48,35 @@ function AccountDetailsTab(props) {
         <>
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" onChange={handleTabChange}>
-                    <TabPane
+
+                    {props.orderCreatProductionInd && <TabPane
+                        tab={
+                            <>
+                                <span onClick={() => handleOrderCreateClick(false)}>
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span class="ml-1">Order</span>
+                                </span>
+                                {activeKey === "1" && (
+                                    <>
+                                        <Tooltip title="Create">
+                                            <AddShoppingCartIcon
+                                                type="plus"
+                                                tooltipTitle="Create"
+                                                onClick={() => {
+                                                    props.handleAddOrderModal(true);
+                                                }}
+                                                className="!text-base cursor-pointer ml-1"
+                                            />
+                                        </Tooltip>
+                                    </>
+                                )}</>}
+                        key="1"
+                    >
+                        <Suspense fallback={"Loading ..."}>
+                            <AccountOrder1Table distributorId={props.distributorData.distributorId} />
+                        </Suspense>
+                    </TabPane>}
+                    {props.orderCreatRepairInd && <TabPane
                         tab={
                             <>
                                 <Badge
@@ -55,115 +85,35 @@ function AccountDetailsTab(props) {
                                     overflowCount={999}
                                 >
                                     <span >
-                                        <i class="fas fa-shopping-bag"></i>
-                                        <span style={{ marginLeft: "0.25em" }}>Order</span>
+                                        <DynamicFeedIcon
+                                            className="!text-base cursor-pointer"
+                                        />
+                                        <span class="ml-1">Repair</span>
                                     </span>
                                 </Badge>
-                                {activeKey === "1" && (
+                                {activeKey === "2" && (
                                     <>
                                         <Tooltip title="Add Order">
-                                            <AddIcon
+                                            <AddShoppingCartIcon
                                                 type="plus"
                                                 tooltipTitle="Create"
                                                 onClick={() => {
                                                     props.handleLinkDistributorOrderConfigureModal(true);
                                                 }}
-                                                size="14px"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
                                 )}
                             </>
                         }
-                        key="1"
+                        key="2"
                     >
 
                         <Suspense fallback={"Loading ..."}>
                             <AccountOrderTable distributorId={props.distributorData.distributorId} />
                         </Suspense>
-                    </TabPane>
-                    {/* <TabPane
-                        tab={
-                            <>
-                                <span onClick={() => handleOrderCreateClick(false)}>
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Order 1</span>
-                                </span>
-                                {activeKey === "2" && (
-                                    <>
-                                        <Tooltip title="Create">
-                                            <PlusOutlined
-                                                onClick={() => handleOrderCreateClick(true)}
-                                                size="0.875em"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "0.25em",
-                                                }}
-                                            />
-                                        </Tooltip>
-                                    </>
-                                )}</>}
-                        key="2"
-                    >
-                        {breadCumb ? (
-                            <>
-                                <Breadcrumb
-                                    style={{
-                                        marginBottom: "0.625em",
-                                        marginTop: "0.625em",
-                                        marginLeft: "0.625em",
-                                    }}
-                                >
-                                    <Breadcrumb.Item>
-                                        <b>Click on Cart to add items from Catalogue</b>
-                                        <Tooltip title="Create">
-                                            <ShoppingCartOutlined
-                                                onClick={() => {
-                                                    props.handleAddOrderModal(true);
-                                                }}
-                                                style={{
-                                                    marginLeft: "0.25em",
-                                                    verticalAlign: "center",
-                                                    color: "tomato",
-                                                    fontSize: "2em",
-                                                    marginTop: "-2px",
-                                                }}
-                                            />
-                                        </Tooltip>
-
-                                    </Breadcrumb.Item>
-                                </Breadcrumb>
-                                <Suspense fallback={"Loading..."}>
-                                    <AccountOrderGenerateTable />
-                                </Suspense>
-                                <FlexContainer
-                                    justifyContent="flex-end"
-                                    style={{ marginTop: "0.3125em" }}
-                                >
-                                    <Button
-                                        className="ant-btn-generate-order"
-                                        type="primary"
-                                        //   disabled={!this.props.orderForGenerating.length}
-                                        onClick={() =>
-                                            props.handleOrderGenerateModal(
-                                                true
-                                            )
-                                        }
-                                    >
-                                        Generate Order
-                                    </Button>
-                                </FlexContainer>
-                            </>
-                        ) : (
-                            <Suspense fallback={"Loading..."}>
-                                <AccountOrder1Table />
-                            </Suspense>
-                        )}
-                    </TabPane> */}
+                    </TabPane>}
                     <TabPane
                         tab={
                             <>
@@ -180,11 +130,7 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleDistributorContactModal(true);
                                                 }}
-                                                size="14px"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -202,7 +148,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="fab fa-connectdevelop"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Activity</span>
+                                    <span class="ml-1">Activity</span>
                                 </span>
                                 {activeKey === "4" && (
                                     <>
@@ -213,12 +159,7 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleDistributorActivityModal(true);
                                                 }}
-                                                size="14px"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "5px",
-                                                }}
-
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -237,7 +178,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i className="fa fa-sticky-note" aria-hidden="true"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Notes</span>
+                                    <span class="ml-1">Notes</span>
                                 </span>
                             </>
                         }
@@ -253,7 +194,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="fas fa-history"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>History</span>
+                                    <span class="ml-1">History</span>
                                 </span>
                             </>
                         }
@@ -269,7 +210,7 @@ function AccountDetailsTab(props) {
                             <>
                                 <span>
                                     <i class="far fa-file"></i>
-                                    <span style={{ marginLeft: "0.25em" }}>Documents</span>
+                                    <span class="ml-1">Documents</span>
                                 </span>
                                 {activeKey === "6" && (
                                     <>
@@ -282,11 +223,7 @@ function AccountDetailsTab(props) {
                                                         true
                                                     )
                                                 }
-                                                size="0.875em"
-                                                style={{
-                                                    verticalAlign: "center",
-                                                    marginLeft: "0.25em",
-                                                }}
+                                                className="!text-base cursor-pointer ml-1"
                                             />
                                         </Tooltip>
                                     </>
@@ -327,13 +264,14 @@ function AccountDetailsTab(props) {
                 addDistributorActivityModal={props.addDistributorActivityModal}
                 handleDistributorActivityModal={props.handleDistributorActivityModal} />
             <CatalogueOrderModal
+                distributorId={props.distributorData.distributorId}
                 handleAddOrderModal={props.handleAddOrderModal}
                 addCatalogueOrderModal={props.addCatalogueOrderModal}
             />
-            <OrderGenerateModal
+            {/* <OrderGenerateModal
                 generateOrderModal={props.generateOrderModal}
                 handleOrderGenerateModal={props.handleOrderGenerateModal}
-            />
+            /> */}
         </>
     );
 }
@@ -345,7 +283,9 @@ const mapStateToProps = ({ distributor, auth }) => ({
     distributorDocumentUploadModal: distributor.distributorDocumentUploadModal,
     addDistributorActivityModal: distributor.addDistributorActivityModal,
     generateOrderModal: distributor.generateOrderModal,
-    addCatalogueOrderModal: distributor.addCatalogueOrderModal
+    addCatalogueOrderModal: distributor.addCatalogueOrderModal,
+    orderCreatProductionInd: auth.userDetails.orderCreatProductionInd,
+    orderCreatRepairInd: auth.userDetails.orderCreatRepairInd,
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -1,13 +1,12 @@
-import { Button, DatePicker, Icon, message, Select } from "antd";
+import { Button, DatePicker, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import {  TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
-import moment from "moment";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {DeleteOutlined} from '@ant-design/icons';
-import { getCurrency } from "../../Auth/AuthAction";
+import {getCurrencyList} from "../../Settings/Category/Currency/CurrencyAction"
 import { addExpense, getExpenseById } from "../ExpenseAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 const { Option } = Select;
@@ -37,7 +36,7 @@ function ExpenseForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, expenseDate: moment(dateString).toISOString() };
+          return { ...data, expenseDate: dayjs(dateString).toISOString() };
         } else {
           return data;
         }
@@ -73,7 +72,7 @@ function ExpenseForm(props) {
     });
   }
   useEffect(() => {
-    props.getCurrency();
+    props.getCurrencyList();
     props.getExpenses();
   }, []);
   function handleCurrencyChange(currency, id) {
@@ -233,7 +232,7 @@ function ExpenseForm(props) {
     if (status === "Success") {
       props.getExpenseById(props.userId);
     } else {
-      message.error("Some Error Occourd");
+      message.error("Something went wrong! Occourd");
     }
   }
   function handleSubmit() {
@@ -267,8 +266,8 @@ function ExpenseForm(props) {
       <div>
       Name
       </div>
-         <input
-                  style={{ width: "34%",border:"2px solid grey" }}
+         <input className="customize-select"
+                  style={{ width: "24%",boxShadow: "0 0.15em 0.3em #aaa" }}
                   value={name}
                   onChange={handleNmae}
                   // name={`${item.id}attribute`}
@@ -277,16 +276,15 @@ function ExpenseForm(props) {
                 />
       <table>
       
-             
+        <div class=" mt-4">    
             
-        <th class="font-poppins">Date</th>
+        <th class="font-poppins ">Date</th>
         <th class="font-poppins">Cost Code</th>
 
         <th class="font-poppins">Expense Type</th>
         <th class="font-poppins">More Information</th>
         <th class="font-poppins">Amount</th>
         <th class="font-poppins">Currency</th>
-        <th class="font-poppins">Image</th>
         {row.map((item) => {
           return (
             <tr>
@@ -360,23 +358,27 @@ function ExpenseForm(props) {
 
                   defaultValue={props.user.currency}
                 >
-                  {props.currencies.map((item) => {
+                  {props.currencyList.map((item) => {
                     return (
-                      <Option value={item.currencyName} 
+                      <Option value={item.currency_name} 
                       // defaultValue={props.user.address[0].country}
                        >
-                        {item.currencyName}
+                        {item.currency_name}
                       </Option>
                     );
                   })}
                 </Select>
               </td>
-              <td>
+              <div class=" ml-2">
+              <td >
                 <Upload 
                handleImageUpload={(documentId) => handleImageUpload(documentId, item.id)}
                 />
               
               </td>
+              </div>
+       
+          
               {row.length > 1 && (
                 <DeleteOutlined
                   style={{
@@ -388,22 +390,22 @@ function ExpenseForm(props) {
                   onClick={() => handleDelete(item)}
                 />
               )}
+     
             </tr>
           );
         })}
+        </div>
       </table>
-      <Spacer />
       <Button
-        style={{ float: "right" }}
+        style={{ float: "right",marginTop:"3rem" }}
         type="primary"
         onClick={handleSubmit}
         Loading={addingExpense}
       >
         Submit
       </Button>
-      &nbsp; &nbsp; &nbsp;
       <Button
-        style={{ float: "right", marginRight: "1%" }}
+        style={{ float: "right", marginRight: "1%",marginLeft:"1rem" }}
         type="primary"
         onClick={handleAddRowClick}
         // Loading={addingExpense}
@@ -414,9 +416,9 @@ function ExpenseForm(props) {
   );
 }
 
-const mapStateToProps = ({ expense, auth,expenses }) => ({
+const mapStateToProps = ({ expense,currency, auth,expenses }) => ({
   addingExpense: expense.addingExpense,
-  currencies: auth.currencies,
+  currencyList: currency.currencyList,
   userId: auth.userDetails.userId,
   expenses: expenses.expenses,
   user: auth.userDetails,
@@ -427,7 +429,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       addExpense,
       getExpenseById,
-      getCurrency,
+      getCurrencyList,
       getExpenses
     },
     dispatch

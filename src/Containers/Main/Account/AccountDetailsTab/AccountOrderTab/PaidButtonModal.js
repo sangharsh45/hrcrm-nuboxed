@@ -18,12 +18,10 @@ class PaidButtonModal extends Component {
                         id="app.collection"
                         defaultMessage="Collection"
                        />}
-                    width="60%"
+                    width="70%"
                     visible={addPaidButtonModal}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"3rem"}}
                     onClose={() => handlePaidModal(false)}
                     footer={null}
                 >

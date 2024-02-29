@@ -1,10 +1,12 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, lazy,Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import ModuleList from "./ModuleList";
+const ModuleList = lazy(() =>
+  import("./ModuleList")
+);
 const TabPane = StyledTabs.TabPane;
 
 class ModuleTab extends Component {
@@ -27,7 +29,7 @@ class ModuleTab extends Component {
     return (
       <>
            <div class="flex flex-nowrap" >
-          <div class ="w-[70%]" >
+          <div class ="w-[100%]" >
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
                 <TabPane

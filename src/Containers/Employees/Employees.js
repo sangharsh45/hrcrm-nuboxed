@@ -1,9 +1,10 @@
-import React, { Component, lazy } from "react";
+import React, { Component,Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import EmployeesHeader from "./Child/EmployeesHeader";
-import AddEmploymentModal from "./Child/AddEmployeeModal";
+import { BundleLoader} from "../../Components/Placeholder";
 import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
+const EmployeesHeader = lazy(() => import("./Child/EmployeesHeader"));
+const AddEmployeeModal = lazy(() => import("./Child/AddEmployeeModal"));
 const EmployeeCardView = lazy(() => import("./Child/EmployeeCard/EmployeeCardView"));
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
 
@@ -22,9 +23,7 @@ class Employees extends Component {
     this.setState({ currentData: e.target.value })
    
   };
-  // handleDropdownChange = (e) => {
-  //   this.setState({ selectedLocation: e.target.value });
-  // };
+
   handleLocationChange = (event) => {
     const locationName = event.target.value;
     this.setState({ selectedLocation: locationName });
@@ -41,22 +40,9 @@ class Employees extends Component {
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
-  // filterData = (locationName, departmentName) => {
-   
 
-  //   if (locationName && departmentName) {
-  //     const filtered = this.props.employees.filter((employee) => (
-  //       employee.location === locationName && employee.department === departmentName
-  //     ));
-  //     this.setState({ filteredData: filtered });
-  //   } else {
-  //     // If either location or department is not selected, show all data
-  //     this.setState({ filteredData: this.props.employees });
-  //   }
-  // };
   filterData = (locationName, departmentName) => {
     const filtered = this.props.employees.filter((employee) => (
       (!locationName || employee.location === locationName) &&
@@ -74,9 +60,7 @@ class Employees extends Component {
     this.props.getEmployeelist("cretiondate");
   }
   render() {
-    // const filteredData = this.props.employees.filter((item) =>
-    //   this.state.selectedLocation === '' || item.location === this.state.selectedLocation
-    // );
+ 
     const {
       setEmployeeViewType,
       addEmployeeModal,
@@ -102,31 +86,25 @@ class Employees extends Component {
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
         />
-        <AddEmploymentModal
+        <AddEmployeeModal
           addEmployeeModal={addEmployeeModal}
           handleEmployeeModal={handleEmployeeModal}
         />
-        {/* <EmployeeTable /> */}
+       <Suspense fallback={<BundleLoader />}>
         { this.props.viewType==="tile"?
         <EmployeeCardView
-        // filteredData={filteredData}
         filteredData={this.state.filteredData}
         filter={this.state.filter}
            viewType={viewType}
         />:
-        // this.props.viewType === "table" ?
-        // <EmployeeTable 
-        // // filteredData={filteredData}
-        // viewType={viewType}
-        // />:
         this.props.viewType === "table" ?
         <EmployeeTable 
         filteredData={this.state.filteredData}
-        // filteredData={filteredData}
         filter={this.state.filter}
         viewType={viewType}
         />:
         null}
+              </Suspense>
       </React.Fragment>
     );
   }

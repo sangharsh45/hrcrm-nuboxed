@@ -1,9 +1,9 @@
-import React, { Component, useState } from "react";
+import React, {lazy,  useState } from "react";
 import { Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handlePickupModal } from "../../../InventoryAction"
-import PickUpDateModal from "./PickUpDateModal";
+const PickUpDateModal = lazy(() => import("./PickUpDateModal"));
 
 function DispatchValidationToggle(props) {
 

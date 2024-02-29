@@ -2,6 +2,7 @@ import * as types from "./RefurbishActionTypes";
 import { base_url2, base_url } from "../../../Config/Auth";
 import axios from "axios";
 import { message } from "antd";
+import Swal from 'sweetalert2'
 
 export const setProductionViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_PRODUCTION_VIEW_TYPE, payload: viewType });
@@ -517,13 +518,38 @@ export const getNoOfTechnicianById = (orderPhoneId) => (dispatch) => {
       });
     });
 };
+export const getNoOfPhoneInQCById = (orderPhoneId, technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NO_OF_PHONE_IN_QC_BYID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_QC_BYID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_QC_BYID_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
   dispatch({
     type: types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/REPAIR/${orderPhoneId}`, {
+    .get(`${base_url2}/AllRepairPhoneList/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -543,7 +569,31 @@ export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
       });
     });
 };
-
+export const getNoOfphoneInRepair = (orderPhoneId, technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NO_OF_PHONE_IN_REPAIR_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/RepairPhoneList/${orderPhoneId}/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_REPAIR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_REPAIR_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 export const handlePhoneByTechnician = (modalProps) => (dispatch) => {
   dispatch({
@@ -781,7 +831,11 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Repair Status Updated Successfully',
+        showConfirmButton: true,
+      })
       dispatch(getRepairPhoneByUser(orderPhoneId, userId))
       dispatch(getRepairOrderByUser(locationDetailsId, userId))
       dispatch({
@@ -789,7 +843,6 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
         payload: res.data,
       });
       cb && cb();
-      message.success("Repair status updated!!")
     })
     .catch((err) => {
       console.log(err);
@@ -928,7 +981,7 @@ export const getAllSpareList = (orderId) => (dispatch) => {
     type: types.GET_ALL_SPARE_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/get-allspare/${orderId}`, {
+    .get(`${base_url2}/phoneSpare/allSpareDetails/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1301,6 +1354,134 @@ export const getTagInProcess = (productRepurbishId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_TAGIN_PROCESS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addTaskByPhoneId = (data, id) => (dispatch) => {
+  dispatch({
+    type: types.ADD_TASK_BY_PHONE_ID_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/itemTask`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getTaskByPhoneId(id))
+      dispatch({
+        type: types.ADD_TASK_BY_PHONE_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_TASK_BY_PHONE_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getTaskByPhoneId = (phoneId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_BY_PHONEID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/itemTask/itemTaskDetail/${phoneId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_BY_PHONEID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_BY_PHONEID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const approveSpare = (data, phoneSpareId) => (dispatch) => {
+  dispatch({
+    type: types.APPROVE_SPARE_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/phoneSpare/approveSpare/${phoneSpareId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.APPROVE_SPARE_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.APPROVE_SPARE_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+export const updateProcessTask = (data, phoneTaskId) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_PROCESS_TASK_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PROCESS_TASK_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_TASK_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+export const gettASKItemCounts = (phoneId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_ITEM_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/itemTask/remainingTaskCount/${phoneId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_ITEM_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_TASK_ITEM_COUNT_FAILURE,
         payload: err,
       });
     });

@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button,Input } from "antd";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput,  } from "../../../Components/UI/Elements";
-import SingleExpenses from "./SingleExpenses";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getExpenses,
@@ -15,7 +14,10 @@ import {
   searchExpenseName,
   ClearReducerDataOfExpense
 } from "./ExpenseAction";
-import moment from "moment";
+import dayjs from "dayjs";
+const SingleExpenses = lazy(() =>
+  import("./SingleExpenses")
+);
 
 class Expense extends Component {
   constructor(props) {
@@ -150,6 +152,7 @@ class Expense extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
         <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -160,33 +163,11 @@ class Expense extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {expenses.length ? (
-                  expenses.map((expense, i) => (
-                    <SingleExpenses
-                      key={i}
-                      value={singleExpense}
-                      name="singleExpense"
-                      expense={expense}
-                      linkedExpenses={linkedExpenses}
-                      updatingExpenses={updatingExpenses}
-                      handleChange={this.handleChange}
-                      handleUpdateExpense={this.handleUpdateExpense}
-                         handleDeleteExpense={this.handleDeleteExpense}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Expense"
                   name="expenseType"
@@ -208,18 +189,17 @@ class Expense extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+                
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                    Loading={addingExpenses}
                     onClick={this.toggleInput}
@@ -234,6 +214,32 @@ class Expense extends Component {
                 
               </>
             )}
+              </div>
+            <div class=" flex flex-col" >
+            <MainWrapper className="!h-[69vh] !mt-2" >
+              {expenses.length ? (
+  expenses
+    .slice() 
+    .sort((a, b) => a.expenseType.localeCompare(b.expenseType)) 
+    .map((expense, i) => (
+                    <SingleExpenses
+                      key={i}
+                      value={singleExpense}
+                      name="singleExpense"
+                      expense={expense}
+                      linkedExpenses={linkedExpenses}
+                      updatingExpenses={updatingExpenses}
+                      handleChange={this.handleChange}
+                      handleUpdateExpense={this.handleUpdateExpense}
+                         handleDeleteExpense={this.handleDeleteExpense}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
           {/* <MainWrapper>
             <FlexContainer
@@ -261,7 +267,7 @@ class Expense extends Component {
             </FlexContainer>
           </MainWrapper> */}
         </div>
-        <h4>Updated on {moment(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format("ll")} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.expenses && this.props.expenses.length && this.props.expenses[0].updationDate).format('YYYY-MM-DD')} by {this.props.expenses && this.props.expenses.length && this.props.expenses[0].name}</div>
       </>
     );
   }

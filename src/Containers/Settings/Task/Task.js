@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -7,8 +7,7 @@ import { Button,Input} from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleTasks from "./SingleTasks";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getTasks,
   addTasks,
@@ -17,6 +16,9 @@ import {
   searchTaskName,
   ClearReducerDataOfTask
 } from "./TaskAction";
+const SingleTasks = lazy(() =>
+  import("./SingleTasks")
+);
 
 class Task extends Component {
   constructor(props) {
@@ -152,6 +154,7 @@ class Task extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
          <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -162,33 +165,11 @@ class Task extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              {tasks.length ? (
-                  tasks.map((task, i) => (
-                    <SingleTasks
-                      key={i}
-                      value={singleTask}
-                      name="singleTask"
-                      task={task}
-                      linkedTasks={linkedTasks}
-                      updatingTasks={updatingTasks}
-                      handleChange={this.handleChange}
-                      handleUpdateTask={this.handleUpdateTask}
-                         handleDeleteTask={this.handleDeleteTask}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
                <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
                >
-                <br />
-                <br />
+             
                 <TextInput
                   placeholder="Add Task"
                   name="taskType"
@@ -210,18 +191,17 @@ class Task extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingTasks}
                     onClick={this.toggleInput}
@@ -236,34 +216,36 @@ class Task extends Component {
                
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+            <MainWrapper className="!h-[69vh] !mt-2" >
+              {tasks.length ? (
+  tasks
+    .slice() 
+    .sort((a, b) => a.taskType.localeCompare(b.taskType)) 
+    .map((task, i) => (
+                    <SingleTasks
+                      key={i}
+                      value={singleTask}
+                      name="singleTask"
+                      task={task}
+                      linkedTasks={linkedTasks}
+                      updatingTasks={updatingTasks}
+                      handleChange={this.handleChange}
+                      handleUpdateTask={this.handleUpdateTask}
+                         handleDeleteTask={this.handleDeleteTask}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+          
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+     
         </div>
-        <h4>Updated on {moment(this.props.tasks && this.props.tasks.length && this.props.tasks[0].updationDate).format("ll")} by {this.props.tasks && this.props.tasks.length && this.props.tasks[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.tasks && this.props.tasks.length && this.props.tasks[0].updationDate).format('YYYY-MM-DD')} by {this.props.tasks && this.props.tasks.length && this.props.tasks[0].name}</div>
       </>
     );
   }

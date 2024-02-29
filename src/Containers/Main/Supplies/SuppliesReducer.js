@@ -67,6 +67,26 @@ const initialState = {
     fetchingSuppliescount:false,
     fetchingSuppliescountError:false,
     suppliesCount:{},
+
+    materialBuildrawer:false,
+
+    addingMaterialBuilder: false,
+    // addedMateriBuilder:{},
+    addingMaterialBuilderError:false,
+
+    fetchingMaterialBuilderbyId: false,
+    builderMaterialbyId:[],
+    fetchingMaterialBuilderbyIdError: false,
+
+    fetchingSearchedMaterialBuilders: false,
+    fetchingSearchedMaterialBuildersError:false,
+    searchedMaterialBuilders:[],
+
+    removingMaterialBuilder: false,
+    removingMaterialBuilderError:false,
+
+    updatingMaterialBuilder: false,
+    updatingMaterialBuilderError:false,
 };
 
 export const suppliesReducer = (state = initialState, action) => {
@@ -330,7 +350,97 @@ export const suppliesReducer = (state = initialState, action) => {
                 case types.GET_SUPPLIES_COUNT_FAILURE:
                     return { ...state, fetchingSuppliescount: false, fetchingSuppliescountError: true };
     
+                    case types.HANDLE_MATERIAL_BUILDER_DRAWER:
+                        return { ...state, materialBuildrawer: action.payload };
 
+                        case types.ADD_MATERIAL_BUILDER_REQUEST:
+                            return { ...state, addingMaterialBuilder: true };
+                          case types.ADD_MATERIAL_BUILDER_SUCCESS:
+                            return {
+                              ...state,
+                              addingMaterialBuilder: false,
+                            //   addedMateriBuilder:action.payload,
+                            builderMaterialbyId:[action.payload,...state.builderMaterialbyId]
+                            };
+                          case types.ADD_MATERIAL_BUILDER_FAILURE:
+                            return {
+                              ...state,
+                              addingMaterialBuilder: false,
+                              addingMaterialBuilderError: true,
+                            };
+
+     case types.GET_MATERIAL_BUILDER_BYID_REQUEST:
+      return {
+        ...state,
+        fetchingMaterialBuilderbyId: true,
+        fetchingMaterialBuilderbyIdError: false,
+      };
+    case types.GET_MATERIAL_BUILDER_BYID_SUCCESS:
+      return {
+        ...state,
+        fetchingMaterialBuilderbyId: false,
+        builderMaterialbyId: action.payload,
+      };
+    case types.GET_MATERIAL_BUILDER_BYID_FAILURE:
+      return {
+        ...state,
+        fetchingMaterialBuilderbyId: false,
+        fetchingMaterialBuilderbyIdError: true,
+      };
+
+      case types.GET_SEARCH_MATERIAL_BUILDER_REQUEST:
+        return { ...state, fetchingSearchedMaterialBuilders: true };
+      case types.GET_SEARCH_MATERIAL_BUILDER_SUCCESS:
+        return { ...state, 
+          fetchingSearchedMaterialBuilders: false,
+          searchedMaterialBuilders: action.payload,
+        };
+      case types.GET_SEARCH_MATERIAL_BUILDER_FAILURE:
+        return {
+          ...state,
+          fetchingSearchedMaterialBuilders: false,
+          fetchingSearchedMaterialBuildersError: true,
+        };
+
+        case types.REMOVE_MATERIAL_BUILDER_REQUEST:
+            return { ...state, removingMaterialBuilder: true };
+          case types.REMOVE_MATERIAL_BUILDER_SUCCESS:
+            return {
+              ...state,
+              removingMaterialBuilder: false,
+              builderMaterialbyId: state.builderMaterialbyId.filter(
+                (item) => item.supplySupplyLinkId !== action.payload.supplySupplyLinkId
+              ),
+            };
+          case types.REMOVE_MATERIAL_BUILDER_FAILURE:
+            return {
+              ...state,
+              removingMaterialBuilder: false,
+              removingMaterialBuilderError: true,
+            };  
+    
+            case types.UPDATE_MATERIAL_BUILDER_REQUEST:
+              return { ...state, updatingMaterialBuilder: true };
+            case types.UPDATE_MATERIAL_BUILDER_SUCCESS:
+              return {
+                ...state,
+                updatingMaterialBuilder: false,
+                builderMaterialbyId: state.builderMaterialbyId.map((item) => {
+                    if (item.linkSuppliesId === action.payload.linkSuppliesId) {
+                      return action.payload;
+                    } else {
+                      return item;
+                    }
+                  }),
+
+              };
+            case types.UPDATE_MATERIAL_BUILDER_FAILURE:
+              return {
+                ...state,
+                updatingMaterialBuilder: false,
+                updatingMaterialBuilderError: true,
+              };
+    
         default:
             return state;
     }

@@ -64,6 +64,32 @@ export const getHoliday = (countryName,year) => (dispatch) => {
     });
 };
 
+export const getHolidayyear = (countryName,year) => (dispatch) => {
+  dispatch({
+    type: types.GET_HOLIDAYYEAR_REQUEST,
+  });
+
+  axios
+    .get(`${base_url}/holidays/user/${countryName}/${year}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_HOLIDAYYEAR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_HOLIDAYYEAR_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const handleHolidayModal = (modalProps) => (dispatch) => {
   console.log(modalProps);
   dispatch({
@@ -189,3 +215,61 @@ export const getPlannerHoliday = (userId,year) => (dispatch) => {
 // };
 
 
+// export const addapplyOffer = (data) => (dispatch) => {
+//   dispatch({
+//     type: types.ADD_APPLY_OFFER_REQUEST,
+//   });
+//   axios
+//     .post(`${base_url}/holiday/user/apply/optional/holiday`, data ,{
+//       headers: {
+//         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+//       },
+//     })
+    
+//     .then((res) => {
+//       console.log(res);
+//       //message.success('Applied Sucessfully')
+//       dispatch({
+//         type: types.ADD_APPLY_OFFER_SUCCESS,
+//         payload: res.data,
+//       });
+//       // cb();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       dispatch({
+//         type: types.ADD_APPLY_OFFER_FAILURE,
+//         payload: err,
+//       });
+//     });
+// };
+export const addapplyOffer = (data) => (dispatch) => {
+  dispatch({
+    type: types.ADD_APPLY_OFFER_REQUEST,
+  });
+  console.log(data);
+
+  axios
+    .post(`${base_url}/holiday/user/apply/optional/holiday`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // dispatch(getHolidayDetails(employeeId));
+      dispatch({
+        type: types.ADD_APPLY_OFFER_SUCCESS,
+        payload: res.data,
+      });
+     // cb && cb("Success");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_APPLY_OFFER_FAILURE,
+        payload: err,
+      });
+     // cb && cb("Failure");
+    });
+};

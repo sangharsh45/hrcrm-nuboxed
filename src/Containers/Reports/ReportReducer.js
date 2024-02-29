@@ -6,6 +6,10 @@ const initialState = {
     fetchingOrganisationReportError: false,
     organisationReportData: [],
 
+    fetchingAllReportInvestors: false,
+     fetchingAllReportInvestorsError: false,
+     allReportInvestors:[],
+
     fetchingMyViewReport: false,
     fetchingMyViewReportError: false,
     myViewReportData: [],
@@ -16,21 +20,40 @@ const initialState = {
 
     reportViewType: "ME",
     dateRangeList: [
+        // {
+        //     id: 1,
+        //     type: "Today",
+        //     value: "Today",
+        //     starter: false,
+        //     isSelected: true,
+        //     startDate: dayjs()
+        //         // .subtract(1, "days")
+        //         .toISOString(),
+        //     endDate: dayjs().toISOString(),
+        // },
         {
             id: 1,
-            type: "Today",
-            value: "Today",
+            type: "Lastmonth",
+            value: "MTD",
             starter: false,
-            isSelected: true,
-            startDate: dayjs()
-                // .subtract(1, "days")
-                .toISOString(),
+            isSelected: false,
+            startDate: dayjs().startOf("month").toISOString(),
             endDate: dayjs().toISOString(),
         },
         {
             id: 2,
+            type: "Thismonth",
+            value: "QTD",
+            starter: false,
+            isSelected: false,
+            startDate: dayjs().startOf("week").toISOString(),
+            endDate: dayjs().toISOString(),
+        },
+    
+        {
+            id: 3,
             type: "Yesterday",
-            value: "Yesterday",
+            value: "YTD",
             starter: false,
             isSelected: false,
             startDate: dayjs()
@@ -39,49 +62,31 @@ const initialState = {
                 .toISOString(),
             endDate: dayjs().toISOString(),
         },
-        {
-            id: 3,
-            type: "Last7days",
-            value: "Last 7 days",
-            starter: false,
-            isSelected: false,
-            startDate: dayjs()
-                .subtract(7, "days")
+     
+        // {
+        //     id: 3,
+        //     type: "Last7days",
+        //     value: "1W",
+        //     starter: false,
+        //     isSelected: false,
+        //     startDate: dayjs()
+        //         .subtract(7, "days")
 
-                .toISOString(),
-            endDate: dayjs().toISOString(),
-        },
+        //         .toISOString(),
+        //     endDate: dayjs().toISOString(),
+        // },
 
-        {
-            id: 4,
-            type: "Last30days",
-            value: "Last 30 days",
-            starter: false,
-            isSelected: false,
-            startDate: dayjs()
-                .subtract(30, "days")
-
-                .toISOString(),
-            endDate: dayjs().toISOString(),
-        },
-        {
-            id: 5,
-            type: "Thismonth",
-            value: "This month",
-            starter: false,
-            isSelected: false,
-            startDate: dayjs().startOf("week").toISOString(),
-            endDate: dayjs().toISOString(),
-        },
-        {
-            id: 6,
-            type: "Lastmonth",
-            value: "Last month",
-            starter: false,
-            isSelected: false,
-            startDate: dayjs().startOf("month").toISOString(),
-            endDate: dayjs().toISOString(),
-        },
+      
+     
+        // {
+        //     id: 6,
+        //     type: "Lastmonth",
+        //     value: "MTD",
+        //     starter: false,
+        //     isSelected: false,
+        //     startDate: dayjs().startOf("month").toISOString(),
+        //     endDate: dayjs().toISOString(),
+        // },
     ],
     isCustomSelected: false,
     // startDate: dayjs()
@@ -91,8 +96,12 @@ const initialState = {
     //     .endOf("year")
     //     .toISOString(),
 
-    reportTypes: ["Requirement", "Selected"],
+    investorTypes: ["Investor List","Investor all contacts","All Deals","Open Deals","Closed Deals","Pitch"],
+    prospect: ["Prospect List","Prospect all contacts","All Opportunities","Open Opportunities","Closed Opportunities","Pitch"],
+    recruitProType: ["Requirement", "Selected"],
+    hr: ["Employee","Suspended Employee","All Attendedance","Expenses","Mileages","Leaves"],
     reportType: ["Requirement", "Selected"],
+    reportTypes: ["Requirement", "Selected"],
     selectedReportType: "Select Report",
 
     selectedSubReportType: "Select",
@@ -196,6 +205,15 @@ export const reportReducer = (state = initialState, action) => {
                 fetchingSalesReports: false,
                 fetchingSalesReportsError: true,
             };
+
+
+            case types.GET_ALL_REPORT_INVESTORS_REQUEST:
+                return { ...state, fetchingAllReportInvestors: true };
+              case types.GET_ALL_REPORT_INVESTORS_SUCCESS:
+                return { ...state, fetchingAllReportInvestors: false, allReportInvestors: action.payload };
+              case types.GET_ALL_REPORT_INVESTORS_FAILURE:
+                return { ...state, fetchingAllReportInvestors: false, fetchingAllReportInvestorsError: true };
+          
         default:
             return state;
     }

@@ -1,6 +1,5 @@
-import React from "react";
-import { StyledLabel } from "../../Components/UI/Elements";
-import PermissionsDetails from "./PermissionsDetails";
+import React,{lazy} from "react";
+const PermissionsDetails = lazy(() => import("./PermissionsDetails"));
 function Permissions(props) {
   return (              
     <div>

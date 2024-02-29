@@ -5,19 +5,18 @@ import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer,StyledLabel } from "../../../../../../Components/UI/Elements";
+import {getCurrencyList} from "../../../../../Settings/Category/Currency/CurrencyAction"
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { updateCustomerOpportunity } from "../../../../CustomerAction";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { Fragment } from 'react'
 import { Listbox } from '@headlessui/react'
+import { getCrm} from "../../../../../Leads/LeadsAction";
 import {
-  getAllSalesList, getWorkflow, getStages,
+ getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";
 /**
  * yup validation scheme for creating a opportunity
@@ -31,8 +30,8 @@ const OpportunitySchema = Yup.object().shape({
 function UpdateCustomerOpportunityForm(props) {
 
   useEffect(() => {
-   
-    props.getAllSalesList();
+    props.getCrm();
+   props.getCurrencyList();
     props.getWorkflow(props.orgId);
     props.getStages(props.orgId);
   }, []);
@@ -102,6 +101,25 @@ function UpdateCustomerOpportunityForm(props) {
       return {
         label: `${item.workflowName || ""}`,
         value: item.opportunityWorkflowDetailsId,
+      };
+    });
+
+    const sortedCurrency =props.currencyList.sort((a, b) => {
+      const nameA = a.currency_name.toLowerCase();
+      const nameB = b.currency_name.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const currencyNameOption = sortedCurrency.map((item) => {
+      return {
+        label: `${item.currency_name}`,
+        value: item.currency_id,
       };
     });
     const [defaultOption, setDefaultOption] = useState(props.setEditingCustomerOpportunity.assignedTo);
@@ -231,13 +249,10 @@ console.log("hh",customerId)
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                ><Spacer />
+              <div class=" flex justify-between" >
+                <div class=" h-full w-[47.5%] mt-3"
+                >
+                 
                   <Field
                     isRequired
                     name="opportunityName"
@@ -258,9 +273,9 @@ console.log("hh",customerId)
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                 
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="startDate"
@@ -277,7 +292,7 @@ console.log("hh",customerId)
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="endDate"
@@ -308,18 +323,18 @@ console.log("hh",customerId)
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                 
+                  <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
                       <Field
                         name="proposalAmount"
                         //label="Proposal Amount"
 
                         label={
                           <FormattedMessage
-                            id="app.proposalAmount"
-                            defaultMessage="Proposal Amount"
+                            id="app.Value"
+                            defaultMessage="Value"
                           />
                         }
                         isColumn
@@ -327,28 +342,32 @@ console.log("hh",customerId)
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
+                    <div class=" w-[47%]" >
+                    <Field
                         name="currency"
+                        // defaultValue={{
+                        //   value: props.user.currency,
+                        // }}
                         isColumnWithoutNoCreate
-                        // label="Currency"
-                        label={
-                          <FormattedMessage
-                            id="app.currency"
-                            defaultMessage="Currency"
-                          />
-                        }
-                        width="100%"
+                        placeholder="Currency"
+                        label={<FormattedMessage
+                          id="app.currency"
+                          defaultMessage="Currency"
+                        />}
                         isColumn
-                        selectType="currencyName"
+                        // selectType="currencyName"
                         isRequired
-                        component={SearchSelect}
-                      // flag={values.currency}
-                      // options={Array.isArray(currency) ? currency : []}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
+                      
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+                <div class=" mt-3">
                   <Field
                     name="description"
                     // label="Notes"
@@ -359,27 +378,28 @@ console.log("hh",customerId)
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+                <div class=" h-full w-[47.5%]"
                 >
-                                <Listbox value={selected} onChange={setSelected}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
+            >
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -387,7 +407,7 @@ console.log("hh",customerId)
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -397,7 +417,7 @@ console.log("hh",customerId)
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -429,9 +449,9 @@ console.log("hh",customerId)
                 </Listbox.Options>
               )}
             </div>
-        </>
-      )}
-    </Listbox>
+          </>
+        )}
+      </Listbox>
                   {/* <Field
                     name="salesUserIds"
                     // selectType="employee"
@@ -456,6 +476,7 @@ console.log("hh",customerId)
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   /> */}
+                  <div class="mt-3">
                   <Field
                     name="customerId"
                     isColumnWithoutNoCreate
@@ -478,7 +499,8 @@ console.log("hh",customerId)
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer />
+                  </div>
+               <div class=" mt-3">
                   <Field
                     name="contactId"
                     isColumnWithoutNoCreate
@@ -501,10 +523,11 @@ console.log("hh",customerId)
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{width:"47%"}}>
-                    <StyledLabel>
+                  </div>
+                 
+                  <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                    <Field
                     name="oppWorkflow"
                    // selectType="contactListFilter"
@@ -527,11 +550,11 @@ console.log("hh",customerId)
                     inlineLabel
                    
                   />
-                    </StyledLabel>
+                    </div>
                   </div>
-                   <Spacer />
-                   <div style={{width:"47%"}}>
-                   <StyledLabel>
+                
+                   <div class=" w-[47%] " >
+                   <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                      <Field
                      name="oppStage"
                      //selectType="initiativeName"
@@ -561,13 +584,13 @@ console.log("hh",customerId)
                     inlineLabel
                    
                   />
-                    </StyledLabel>
+                    </div>
                   </div>
-                  </FlexContainer>
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+             
+              <div class=" flex justify-end mt-3" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -576,7 +599,7 @@ console.log("hh",customerId)
                   <FormattedMessage id="app.update" defaultMessage="Upsate" />
                   {/* Create */}
                 </Button>
-              </FlexContainer>
+                </div>
             </Form>
           )}
         </Formik>
@@ -584,9 +607,10 @@ console.log("hh",customerId)
     );
   }
 
-const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
+const mapStateToProps = ({ auth,leads, opportunity,currency, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
+  currencyList: currency.currencyList,
   organizationId: auth.userDetails.organizationId,
   contactId: contact.contactByUserId.contactId,
   customerId: customer.customer.customerId,
@@ -595,9 +619,11 @@ const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
   updatingCustomerOpportunityError: customer.updatingCustomerOpportunity,
   setEditingCustomerOpportunity: customer.setEditingCustomerOpportunity,
   workflow: opportunity.workflow,
+  fullName: auth.userDetails.fullName,
   stages: opportunity.stages,
   orgId: auth.userDetails.organizationId,
   sales: opportunity.sales,
+  crmAllData:leads.crmAllData,
 
 
 });
@@ -606,7 +632,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateCustomerOpportunity,
-      getAllSalesList,
+      getCrm,
+      getCurrencyList,
       getWorkflow,
       getStages,
     },

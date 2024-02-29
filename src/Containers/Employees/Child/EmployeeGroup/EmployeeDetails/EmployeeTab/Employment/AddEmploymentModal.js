@@ -19,15 +19,9 @@ class AddEmploymentModal extends Component {
                         defaultMessage="Employment"
                     />}
                     width="55%"
-
                     visible={addEmploymentModal}
-                    destroyOnClose
-
-                    maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"5rem"}}
                     onClose={() => handleEmploymentModal(false)}
-                    footer={null}
+          
                 >
                     <Suspense fallback={<BundleLoader />}>
                         <EmploymentDocumentForm />

@@ -8,7 +8,7 @@ const TextInput = styled.input.attrs({
      border:0.0625em solid #d9d9d9;
     background-color: ${props => props.theme.backgroundColor};
     color: ${props => props.theme.color};
-     box-shadow:${props => (props.isShadow ? "" : "0 0.25em 0.62em #aaa")} ; 
+     box-shadow:${props => (props.isShadow ? "" : "0 0.15em 0.3em #aaa")} ; 
     display: block;
     margin: 0 0 0.42rem 0;
      font-size:0.75rem;

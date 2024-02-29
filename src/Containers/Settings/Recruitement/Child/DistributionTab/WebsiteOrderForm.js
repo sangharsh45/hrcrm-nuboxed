@@ -94,7 +94,7 @@ const handleDeptChange = (event) => {
             
         
              
-              <div class=" flex  w-[74%]"
+            <div class=" flex  flex-col w-[44%]"
               >
                    <p class=" w-[6rem]">Assigned To</p>
                 <div>
@@ -116,11 +116,11 @@ const handleDeptChange = (event) => {
                     </div>
               </div>
       
-              <div class=" flex justify-between ml-4" >
+              <div class=" flex justify-between width-[50%] ml-4 " >
                                                     <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Department</label>
                       <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                       className="customize-select"
                       onChange={handleDeptChange}>
           <option value="">Select Department</option>
           {props.departments.map((item, index) => (
@@ -138,7 +138,7 @@ const handleDeptChange = (event) => {
             <div class=" w-[35%]" >
             <label class=" text-[#444] font-bold text-[0.75rem]" >User</label>
             <select
-           style={{ border: "0.06em solid #aaa" }}
+            className="customize-select"
                  onChange={handleUserChange}
               >
     <option value="">select user</option>
@@ -154,16 +154,18 @@ const handleDeptChange = (event) => {
   </div> 
 
 ):(   
-  <div class=" w-[35%]" >
+  <div class=" w-[35%] ml-8" >
+  <label class=" text-[#444] font-bold text-[0.75rem]" >User</label>
    <Field
                name="multyAsignedTOId"
                // label="Include"
-               label={
-                 <FormattedMessage
-                   id="app.multyAsignedTOId"
-                   defaultMessage="User"
-                 />
-               }
+               style={{width:"10rem"}}
+              //  label={
+              //    <FormattedMessage
+              //      id="app.multyAsignedTOId"
+              //      defaultMessage="User"
+              //    />
+              //  }
                mode
                placeholder="Select"
                component={SelectComponent}
@@ -191,11 +193,11 @@ const handleDeptChange = (event) => {
                   {/* Update */}
                 </Button>
               </div>
-              <h4 class="mt-4">
+              <div class="mt-4">
                 Updated on{" "}
                 {moment(props.distributionAutomation.updationDate).format("ll")} by{" "}
                 {props.distributionAutomation.updatedBy}
-              </h4>
+              </div>
         </Form>
       </MainWrapper>
         )}

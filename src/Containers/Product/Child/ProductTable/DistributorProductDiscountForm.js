@@ -1,9 +1,7 @@
 import React, {Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-    Button, Switch,
-} from "antd";
+import {Button, Switch} from "antd";
 import { Formik, Form, Field} from "formik";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";

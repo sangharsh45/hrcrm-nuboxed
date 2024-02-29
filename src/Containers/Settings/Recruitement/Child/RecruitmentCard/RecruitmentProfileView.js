@@ -1,24 +1,14 @@
 import React from "react";
-import { Icon, Tooltip, Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 
 function RecruitmentProfileView(props) {
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
-            fontSize: "1.25em",
-            color: "#40A9FF",
-            fontFamily:"poppins"
-          }}
+      <div class=" flex justify-around">
+        <h1 class=" flex justify-center items-center text-poppins text-[#40A9FF] "
         >
           Theme
         </h1>
@@ -30,9 +20,7 @@ function RecruitmentProfileView(props) {
             <ViewEditCard>
               {({ viewType }, toggleViewType) =>
                 viewType === "view" ? (
-                  <FlexContainer
-                    justifyContent="center"
-                    alignItems="center"
+                  <div class=" flex justify-center items-center "
                     onClick={
                       () => props.handleRuleClick(item)
                     }
@@ -56,7 +44,7 @@ function RecruitmentProfileView(props) {
                       
                       }
                     </StageName>
-                  </FlexContainer>
+                  </div>
                 ) : null
               }
             </ViewEditCard>

@@ -3,20 +3,12 @@ import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
-import { StyledLabel } from '../../../Components/UI/Elements'
-import { StyledTable,StyledPopconfirm } from "../../../Components/UI/Antd";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { getMileageByUserId,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
-import { CurrencySymbol } from "../../../Components/Common";
-import styled from 'styled-components'
-import { FlexContainer,OnlyWrapCard } from '../../../Components/UI/Layout'
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined,UpCircleOutlined } from "@ant-design/icons";
-import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { DeleteOutlined } from "@ant-design/icons";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
-const MileageTable2=lazy(()=>import("./MileageTable2"));
+const MileageVoucherIdDrawer=lazy(()=>import("./MileageVoucherIdDrawer"));
 
 class MileageCard2 extends React.Component {
   state = {
@@ -42,8 +34,9 @@ class MileageCard2 extends React.Component {
     if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
       <>
-         <div class=" h-h86 overflow-auto overflow-x-auto">
-      <OnlyWrapCard>
+         <div class=" h-[86vh] overflow-hidden overflow-x-hidden max-sm:h-h86">
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto h-[37rem] shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE] 
+         max-sm:w-wk max-sm:overflow-auto max-sm:h-[32rem]">
       {MileageDat.map((item) => { 
                     return (
                         <div>
@@ -57,16 +50,16 @@ class MileageCard2 extends React.Component {
                                    
                                         <Tooltip >
                                           <div class="flex max-sm:justify-between w-full flex-row md:flex-col">
-                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                            <div class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
-                                            </h4>
-                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div>
+                                            <div class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                             <div onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                               
@@ -74,27 +67,27 @@ class MileageCard2 extends React.Component {
 
                                 <div className=" flex font-medium flex-col   md:w-52  max-sm:justify-between w-full max-sm:flex-row  ">
                            
-                                    <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins"> Voucher Date </div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         
                                     
                                     {dayjs(item.voucherDate).format("MMM Do YY")}
 
-                                    </h4>
+                                    </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:justify-between w-full max-sm:flex-row ">
                                   
 
-                                    <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">Amount</div>
+                                    <div class=" text-xs text-cardBody font-poppins">
                                         € {item.amount}
-                                    </h4>
+                                    </div>
                                 </div>
                                 {/* <div className=" flex font-medium flex-col w-20 ">
                        
-                                    <h4 class=" text-xs text-cardBody font-poppins">Approve</h4>
+                                    <div class=" text-xs text-cardBody font-poppins">Approve</div>
 
-                                    <h4 class=" text-xs text-cardBody font-poppins"
+                                    <div class=" text-xs text-cardBody font-poppins"
                                       onClick={() => {
                         props.handleLoadCarModal(true)
                          props.setRequirementsData(item);
@@ -106,49 +99,24 @@ class MileageCard2 extends React.Component {
                       
                                     >
                                         <u>Nixa</u>
-                                    </h4>
+                                    </div>
                                 </div> */}
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:justify-between w-full max-sm:flex-row ">
-                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
+                                    {/* <div class=" text-sm text-cardBody font-poppins">Status</div> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
-                 <div
-                 style={{
-                   border: "2px solid green",
-                   padding: "0px 0.62em",
-                   textAlign: "center",
-                   margin: "2px",
-                   borderRadius: "0.62em",
-                 }}
-               >
+                 <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-green-500 p-[0px_0.62em]"  >
                 <div className="text-[green]">{item.status}</div>
                </div>
               )}
             
               {item.status === "Rejected" && (
-                <div
-                style={{
-                  border: "2px solid red",
-                  padding: "0px 0.62em",
-                  textAlign: "center",
-                  margin: "2px",
-                  borderRadius: "0.62em",
-                }}
-              >
+                <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-red-500 p-[0px_0.62em]">
                <div className="text-[red]">{item.status}</div></div>
               )}
               {item.status === "Pending" && (
-                  <div
-                  style={{
-                    border: "2px solid #e1d16c",
-                    padding: "0px 0.62em",
-                    textAlign: "center",
-                    margin: "2px",
-                    borderRadius: "0.62em",
-                    width:"12rem"
-                  }}
-                >
+                 <div className=" w-[12rem] rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-[#e1d16c] p-[0px_0.62em]">
                   <div className="text-[#e1d16c]">Waiting for approval</div></div>
               )}
                                     </div>
@@ -181,7 +149,7 @@ class MileageCard2 extends React.Component {
          >
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer",color:"red" }}
+                className="!text-base cursor-pointer text-[red]" 
                 // onClick={() => {
                 // this.props.deleteMileageVoucher(item.voucherId);
                   
@@ -208,7 +176,7 @@ class MileageCard2 extends React.Component {
 
                     )
                 })}
-      </OnlyWrapCard>
+      </div>
       </div>
 
 

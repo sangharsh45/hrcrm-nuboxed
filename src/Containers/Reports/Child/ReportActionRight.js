@@ -1,8 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
-import { Tag, Tooltip, Select, Popover } from "antd";
+import { Popover } from "antd";
 import { StyledSelect, StyledRangePicker } from "../../../Components/UI/Antd";
 import dayjs from "dayjs";
 import {
@@ -13,7 +12,6 @@ import {
   setSubSelectedReportType,
 } from "../ReportAction";
 import { TimeInterval } from "../../../Utils";
-import { FlexContainer } from "../../../Components/UI/Layout";
 const Option = StyledSelect.Option;
 class ReportActionLeft extends React.Component {
   render() {
@@ -41,14 +39,14 @@ class ReportActionLeft extends React.Component {
     console.log(selectedSubReportType)
     return (
       <>
-          <FlexContainer alignItems="center">
+          <div class=" flex items-center" >
             {/* <div style={{ width: user.department === "MANAGEMENT" ? "45%" : "45%" }}> */}
               <TimeInterval
                 times={dateRangeList}
                 handleClick={setSelectedTimeIntervalReport}
               />
             {/* </div> */}
-            <Popover>
+            {/* <Popover>
               <StyledRangePicker
                 style={{width:"35%"}}
                 // style={{ marginLeft: 8, marginRight: 8 }}
@@ -59,8 +57,8 @@ class ReportActionLeft extends React.Component {
                   dayjs(date).isAfter(dayjs())
                 }
               />
-            </Popover>
-          </FlexContainer>
+            </Popover> */}
+          </div>
       </>
     );
   }

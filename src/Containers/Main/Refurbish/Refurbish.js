@@ -8,16 +8,11 @@ const RefurbishMainTable=lazy(()=>import('./RefurbishMainTable'));
 const OrderPhoneTab =lazy(()=> import('./OrderPhoneTab'));
 
 const Refurbish = (props) => {
-  useEffect(() => {
-    props.getShifts(props.userId);
-  }, []);
+
   return (
     <div>
       <RefurbishHeader
-        // shiftsData={shiftsData}
-        // shiftId={shiftsData.shiftId}
-        // handlesetCurrentShift={handlesetCurrentShift}
-        setProductionViewType={props.setProductionViewType}
+       setProductionViewType={props.setProductionViewType}
         viewType={props.viewType}
       />
          <Suspense fallback={<BundleLoader/>}>

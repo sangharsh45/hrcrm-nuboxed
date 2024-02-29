@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
@@ -8,14 +8,13 @@ import {
   updateDispatchInspectionButton,
 } from "../../../InventoryAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { Button, Switch, Tooltip } from "antd";
-import { EditOutlined, FileDoneOutlined } from "@ant-design/icons";
-import * as Yup from "yup";
-import QRCodeModal from "../../../../../../Components/UI/Elements/QRCodeModal";
+import { Button, Tooltip } from "antd";
+import { FileDoneOutlined } from "@ant-design/icons";
 import { SubTitle } from "../../../../../../Components/UI/Elements";
-import DispatchReceiveToggle from "./DispatchReceiveToggle";
 import moment from "moment";
-import DispatchTaskTable from "./DispatchTaskTable";
+const QRCodeModal = lazy(() => import("../../../../../../Components/UI/Elements/QRCodeModal"));
+const DispatchTaskTable = lazy(() => import("./DispatchTaskTable"))
+const DispatchReceiveToggle = lazy(() => import("./DispatchReceiveToggle"));
 
 
 function OpenReceivedOrderIdForm(props) {
@@ -41,7 +40,7 @@ function OpenReceivedOrderIdForm(props) {
       width: "1%",
     },
     {
-      title: "Company",
+      title: "OEM",
       dataIndex: "company",
       width: "9%",
 
@@ -178,10 +177,10 @@ function OpenReceivedOrderIdForm(props) {
         pagination={false}
         scroll={{ y: tableHeight }}
       />
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div class=" flex justify-end" >
         {props.rowData.dispatchInspectionInd === 1 && <Button type="primary">Pause</Button>}
         {props.rowData.dispatchInspectionInd === 1 &&
-          <div style={{ marginLeft: '10px' }}>
+          <div class=" ml-[10px]" >
             <Button
               onClick={() => props.updateDispatchInspectionButton({
                 dispatchInspectionInd: 2,

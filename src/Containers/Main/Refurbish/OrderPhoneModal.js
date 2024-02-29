@@ -4,22 +4,18 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const OrderPhoneListById = lazy(() => import("./OrderPhoneListById"));
 
 const OrderPhoneModal = (props) => {
-    const { showPhoneList, handleOrderPhoneModal, ...formProps } = props;
+    const { showPhoneList, handleOrderPhoneModal,rowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title="QC"
-                width="85%"              
+                title= {(`Order# - ${rowData.newOrderNo}`)}
+                width="80%"
                 visible={showPhoneList}
-                closable
-                destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"5rem" }}
                 onClose={() => handleOrderPhoneModal(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <OrderPhoneListById rowData={props.rowData} />
+                    <OrderPhoneListById rowData={rowData} />
                 </Suspense>
             </StyledDrawer>
         </>

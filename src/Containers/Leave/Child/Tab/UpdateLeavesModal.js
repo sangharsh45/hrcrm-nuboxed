@@ -14,15 +14,10 @@ const UpdateLeavesModal = (props) => {
           id="app.applyforleaves"
           defaultMessage="Update Leaves"
         />}
-        width="55vw"
+        width="60%"
         visible={updateLeaveModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        // style={{ top: 40 }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleUpdateLeaveModal(false)}
-        footer={null}
+
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateLeavesForm leaveId={props.leaveId} />{" "} 

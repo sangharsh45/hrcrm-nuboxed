@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../Components/UI/Layout";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { getMileageNotes } from "../MileageAction";
-import MileageNoteForm from "./MileageNoteForm";
 import { SingleNote } from "../../../Components/Common";
+const MileageNoteForm =lazy(()=>import("./MileageNoteForm"));
 
 class MileageNote extends Component {
     componentDidMount() {

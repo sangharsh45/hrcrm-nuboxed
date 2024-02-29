@@ -11,7 +11,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Highlighter from "react-highlight-words";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getCountries } from "../../../Auth/AuthAction";
+// import { getCountries } from "../../../Auth/AuthAction";
 import {
   getLeads,
   deleteLeadsData,
@@ -38,7 +38,7 @@ const LeadsTable = (props) => {
   useEffect(() => {
     props.getLeads(props.userId);
     props.getSectors();
-    props.getCountries();
+    // props.getCountries();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -56,12 +56,12 @@ const LeadsTable = (props) => {
     };
   });
 
-  const CountryTypeOption = props.countries.map((item) => {
-    return {
-      text: item.countryAlpha3Code || "",
-      value: item.countryAlpha3Code,
-    };
-  });
+  // const CountryTypeOption = props.countries.map((item) => {
+  //   return {
+  //     text: item.countryAlpha3Code || "",
+  //     value: item.countryAlpha3Code,
+  //   };
+  // });
 
   const ownerlistType = useMemo(() => {
     if (!props.sales) return [];
@@ -504,7 +504,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateLeadsModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      getCountries,
+      // getCountries,
     },
     dispatch
   );

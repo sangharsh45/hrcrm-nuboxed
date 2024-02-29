@@ -24,12 +24,7 @@ class UpdateContractModal extends Component {
           />}
           width="25%"
           visible={updateContractModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
           onClose={() => handleUpdateContractModal(false)}
-          footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <UpdateContractForm />

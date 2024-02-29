@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Tooltip, Badge } from "antd";
+import { Tooltip, Badge,Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PeopleIcon from '@mui/icons-material/People';
@@ -79,8 +79,8 @@ const InvestorActionLeft = (props) => {
   }, [props.viewType, props.userId, transcript]);
 
   return (
-    <div class=" flex items-center"
-    >
+    <div class=" flex items-center">
+    
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -88,17 +88,19 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("list")}
             style={{
               color: props.viewType === "list" && "#1890ff",
             }}
           >
+             <Avatar style={{ background: props.viewType === "list" ? "#f279ab" : "#4bc076" }}>
             <TocIcon />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
-
+   
       
       <Tooltip 
       title={<FormattedMessage id="app.teams" defaultMessage="Teams" />}
@@ -109,16 +111,19 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
           <PeopleIcon/>
+          </Avatar>
           </span>
         </Badge>
       </Tooltip>
+      {(props.user.investorFullListInd===true || props.user.role==="ADMIN") && (
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
@@ -126,16 +131,19 @@ const InvestorActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
             }}
           >
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
          <FormattedMessage id="app.all" defaultMessage="ALL" />
+         </Avatar>
           </span>
         </Badge>
       </Tooltip>
+  )}
       {/* <Tooltip>
         <Badge
           size="small"
@@ -201,7 +209,7 @@ const InvestorActionLeft = (props) => {
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
         </Button> */}
-        <div style={{ width: "25%",marginTop:"0.5rem" }}>
+        <div class=" w-[40%] mt-2 ml-2" >
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

@@ -10,6 +10,7 @@ import { BundleLoader } from '../../Components/Placeholder';
 
 
 
+
 const FunnelChartAll = (props) => {
   useEffect(() => {
       props.getAllDashboardFunnelRecord(props.userId,props.department);
@@ -55,6 +56,7 @@ const FunnelChartAll = (props) => {
     // legend: false,
   };
   return <Funnel {...config} />;
+
 };
 
 const mapStateToProps = ({ dashboard, auth }) => ({

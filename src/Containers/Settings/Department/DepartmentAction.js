@@ -1,6 +1,5 @@
 import * as types from "./DepartmentActionTypes";
 import axios from "axios";
-import dayjs from "dayjs";
 import { base_url } from "../../../Config/Auth";
 import { message } from "antd";
 /**
@@ -381,4 +380,62 @@ export const ClearReducerDataOfDepartment = () => (dispatch) => {
   dispatch({
     type: types.HANDLE_CLAER_REDUCER_DATA_DEPARTMENT,
   });
+};
+
+export const linkElearningToggle = ( data,departmentId,cb) => (dispatch) => {
+  dispatch({
+    type: types.LINK_ELEARNING_TOGGLE_REQUEST,
+  });
+  axios
+  .put(`${base_url}/department/all/indicator/${departmentId}`, data, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+
+    .then((res) => {
+      console.log(res);
+      dispatch(getDepartments())
+      dispatch({
+        type: types.LINK_ELEARNING_TOGGLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_ELEARNING_TOGGLE_FAILURE,
+        payload: err,
+      });
+    })
+};
+
+export const addingDeptModules = (data, departmentId) => (dispatch, getState) => {
+  //console.log(permissions, userId);
+  const userId = getState().auth.userDetails.userId;
+  dispatch({
+    type: types.ADDING_MODULE_REQUEST,
+  });
+  axios
+    .put(`${base_url}/department/all/indicator/${departmentId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDepartments())
+      dispatch({
+        type: types.ADDING_MODULE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADDING_MODULE_FAILURE,
+        payload: err,
+      });
+    });
 };

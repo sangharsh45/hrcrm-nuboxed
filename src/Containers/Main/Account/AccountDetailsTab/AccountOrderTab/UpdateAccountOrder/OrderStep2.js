@@ -8,9 +8,9 @@ import DraggableUpload1 from "../../../../../../Components/Forms/Formik/Draggabl
 import { FormattedMessage } from 'react-intl';
 
 function OrderStep2(props) {
-    const [keepdata, setKeepdata] = useState(false)
+    const [xlUpdateInd, setxlUpdateInd] = useState(true)
     const handleKeepData = () => {
-        setKeepdata(true)
+        setxlUpdateInd(!xlUpdateInd)
     }
     return (
         <>
@@ -27,7 +27,8 @@ function OrderStep2(props) {
 
                         {
                             ...values,
-                            type: "Non-Catalogue"
+                            type: "Non-Catalogue",
+                            xlUpdateInd: xlUpdateInd ? false : true
                         },
                         props.distributorId
                     );
@@ -45,43 +46,43 @@ function OrderStep2(props) {
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
                         <Form class="form-background">
-                            <div  class="justify-between flex">
+                            <div class="justify-between flex w-5/12 mt-1">
                                 <h2>
-                                <FormattedMessage
-                 id="app.Keepearlieruploadeddata"
-                 defaultMessage="Keep earlier uploaded data?"
-                />
-                                    </h2>
+                                    <FormattedMessage
+                                        id="app.Keepearlieruploadeddata"
+                                        defaultMessage="Keep earlier uploaded data?"
+                                    />
+                                </h2>
                                 <Switch
                                     onChange={handleKeepData}
-                                    checked={keepdata}
+                                    checked={xlUpdateInd}
                                     checkedChildren="Yes"
                                     unCheckedChildren="No"
                                 />
                             </div>
                             <div class="justify-between flex">
-                                <div class="h-full w-[47%]"> 
-    <div class="mt-3">
-                                    <Field
-                                        name="excelId"
-                                        isRequired
-                                        component={DraggableUpload1}
-                                    />
+                                <div class="h-full w-[47%]">
+                                    <div class="mt-3">
+                                        <Field
+                                            name="excelId"
+                                            isRequired
+                                            component={DraggableUpload1}
+                                        />
                                     </div>
                                 </div>
 
                             </div>
-                           
+
                             <div class="justify-end flex mt-3">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
                                     loading={props.addingCar}
                                 >
-                                     <FormattedMessage
-                 id="app.finish"
-                 defaultMessage="Finish"
-                />  
+                                    <FormattedMessage
+                                        id="app.finish"
+                                        defaultMessage="Finish"
+                                    />
                                 </Button>
                             </div>
                         </Form>

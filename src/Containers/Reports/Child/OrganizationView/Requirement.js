@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
@@ -6,16 +6,9 @@ import { base_url } from "../../../../Config/Auth";
 import { Empty, Button, Tooltip, Modal } from "antd";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import {
-    HeaderText,
-    Spacer,
-    SubTitle,
-} from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
-// import { getAllLatestContacts } from "../../../Contact/ContactAction";
 import { OrganizationReport } from "../../ReportAction";
 import styled from "styled-components";
 async function getDataUrl(url) {
@@ -276,7 +269,7 @@ class Requirement extends React.Component {
         const tab = document.querySelector(".ant-layout-sider-children");
         const tableHeight = tab && tab.offsetHeight - 100;
         return (
-            <FlexContainer>
+            <div class=" flex">
                 <PDFPreviewTable>
                     <StyledTable
                         // rowSelection={rowSelection}
@@ -296,9 +289,9 @@ class Requirement extends React.Component {
                         pagination={false}
                         scroll={{ y: tableHeight }}
                     />
-                    <Spacer />
-                    <FlexContainer
-                        justifyContent="flex-end"
+                   
+                    <div class=" flex justify-end mt-3"
+                       
                         style={{ padding: "0em 1.25em" }}
                     >
                         <Tooltip title={"Generate PDF"}>
@@ -329,7 +322,7 @@ class Requirement extends React.Component {
             </Modal>
           
                         </Tooltip>
-                        &nbsp;&nbsp;
+                   
                         <Tooltip title={"Generate XL"}>
                             <Button
                                 icon="file-excel"
@@ -342,12 +335,13 @@ class Requirement extends React.Component {
                                     color: "white",
                                     border: "0.125em solid green",
                                     fontSize: "1.125em",
+                                    marginLeft:"1rem",
                                     // padding: "0.4375em",
                                     backgroundColor: "green",
                                 }}
                             ></Button>
                         </Tooltip>
-                        &nbsp;&nbsp;
+                     
                         <Tooltip title={"Generate CSV"}>
                             <Button
                                 icon="file-text"
@@ -356,14 +350,15 @@ class Requirement extends React.Component {
                                     color: "white",
                                     border: "0.125em solid green",
                                     fontSize: "1.125em",
+                                    marginLeft:"1rem",
                                     // padding: "0.4375em",
                                     backgroundColor: "blue",
                                 }}
                             ></Button>
                         </Tooltip>
-                    </FlexContainer>
+                    </div>
                 </PDFPreviewTable>
-            </FlexContainer>
+            </div>
         );
     }
 }

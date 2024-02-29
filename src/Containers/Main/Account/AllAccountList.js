@@ -1,575 +1,225 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip } from "antd";
-import { getAllDistributorsList,emptyDistributor } from "./AccountAction";
-import { CurrencySymbol } from "../../../Components/Common";
-import moment from "moment";
 import { Link } from "../../../Components/Common";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {
+  getAllDistributorsList,
+} from "./AccountAction";
+import dayjs from "dayjs";
+import { FormattedMessage } from "react-intl";
+const UpdateAccountModal = lazy(() => import("./UpdateAccountModal"));
 
-function AllAccountList(props) {
+
+function AccountTable(props) {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     props.getAllDistributorsList(page);
     setPage(page + 1);
   }, []);
+
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getAllDistributorsList(props.currentUser?props.currentUser:page,
-      );
-}
+    props.getAllDistributorsList(props.currentUser ? props.currentUser : page,
+    );
+  }
 
   useEffect(() => {
     return () => props.emptyDistributor();
   }, []);
 
-
+  const tab = document.querySelector(".ant-layout-sider-children");
+  const tableHeight = tab && tab.offsetHeight * 1.2;
   return (
     <>
-        <div className=' flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-         <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
-         <div className=""></div>
-         <div className=" md:w-[7%]">Name</div>
-        <div className=" md:w-[6.1rem]">Mobile</div>
-        <div className=" md:w-[4.2rem] ">Website</div>
-        <div className="md:w-[5.8rem]">Address</div>
-        <div className="md:w-[8.5rem]">City</div>
-                <div className="md:w-[5.2rem]">Pin Code</div>
-                <div className="md:w-[5.2rem]">Balance</div>
-                <div className="md:w-[5.2remb]">Previous</div>
-                <div className="md:w-[5.2rem]">Owner</div>
-        <div className="w-12"></div>
-            </div>
-        <InfiniteScroll
-        dataLength={props.allDistributors.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={props.fetchingAllDistributors?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      >
-             {props.allDistributors.map((item) => {
-               const currentdate = moment().format("DD/MM/YYYY");
-                       const date = moment(item.creationDate).format("DD/MM/YYYY");
-          return (
-<div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
-       <div class="flex">
-   
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-    <Link
-          toUrl={`distributor/${item.distributorId}`}
-          title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
-        {date === currentdate ? (
-          <span class="text-xs"
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
+      <div className=' flex justify-end sticky top-28 z-auto'>
+        <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex  w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+            <div className=" md:w-[15.12rem]">  <FormattedMessage
+              id="app.name"
+              defaultMessage="name"
+            /></div>
+            <div className=" md:w-[8.121rem]"><FormattedMessage
+              id="app.work#"
+              defaultMessage="work#"
+            /></div>
+            <div className=" md:w-[8.825rem] "><FormattedMessage
+              id="app.website"
+              defaultMessage="website"
+            /></div>
+            <div className="md:w-[6.95rem]"><FormattedMessage
+              id="app.type"
+              defaultMessage="type"
+            /></div>
+            <div className="md:w-[7.8rem]"><FormattedMessage
+              id="app.Paymentdays"
+              defaultMessage="Paymentdays"
+            /></div>
+            <div className="md:w-[6.94rem]"><FormattedMessage
+              id="app.vat"
+              defaultMessage="vat"
+            /></div>
+            <div className="md:w-[14.21rem]"><FormattedMessage
+              id="app.billingaddress"
+              defaultMessage="billingaddress"
+            /></div>
+            <div className="md:w-[7.32rem]"><FormattedMessage
+              id="app.pincode"
+              defaultMessage="pincode"
+            /></div>
+
+          </div>
+          <InfiniteScroll
+            dataLength={props.allDistributors.length}
+            next={handleLoadMore}
+            hasMore={hasMore}
+            loader={props.fetchingAllDistributors ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
+            height={"75vh"}
           >
-            New
-          </span>
-        ) : null}
-                            </h4>
-    </div>
 
-    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+            {props.allDistributors.map((item) => {
+              const currentdate = dayjs().format("DD/MM/YYYY");
+              const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+              const diff = Math.abs(
+                dayjs().diff(dayjs(item.lastRequirementOn), "days")
+              );
+              const dataLoc = `${item.address && item.address.length && item.address[0].address1
+                } 
+            ${item.address && item.address.length && item.address[0].street
+                }   
+           ${item.address && item.address.length && item.address[0].state}
+          ${(item.address && item.address.length && item.address[0].country) || ""
+                } 
+           
+            `;
+              return (
+                <div>
+                  <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 "
+                  // style={{
+                  //     borderBottom: "3px dotted #515050"
+                  // }}
+                  >
+                    <div class="flex">
+                      <div className=" flex font-medium flex-col md:w-[13.6rem] max-sm:w-full  ">
 
-    <h4 class=" text-xs text-cardBody font-poppins">
-    {item.dialCode} {item.phoneNo} 
-                    </h4>
-    
-    </div> 
- 
-    </div>
-    
-    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
-                      
-                      {item.url}
-                    </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.address[0].address1 || ""} {item.address[0]
-          .address2 || ""} {item.address[0].street || ""} 
-                {item.address[0].city || ""}  
-                    </h4>
-    </div>
-    
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.address[0].city || ""}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.address[0].pinCode || ""}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        <CurrencySymbol currencyType={"INR"} />
-            {item.totalPayableAmount.toFixed(2)}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        <CurrencySymbol currencyType={"INR"} />
-        {item.totalPayablePrev.toFixed(2)}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.salesExecutive}
-             </h4>
-    </div>
-    <div class="flex md:items-center"> 
 
-</div>
-<div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[6%]">
-                   <div>
-                   <Tooltip title={item.salesExecutiveMobileNo}>
-               <span>
-                 <i class="fas fa-phone"></i>
-               </span>
-             </Tooltip>
-                   </div>
-                   
-                   <div>
-                   <Tooltip title={item.salesExecutiveEmail}>
-               <span>
-                 <i class="far fa-envelope"></i>
-               </span>
-             </Tooltip>
+                        <Tooltip>
+                          <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            Name
+                                            </div> */}
+                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                              {item.name}&nbsp;&nbsp;
+                              {date === currentdate ? (
+                                <span class="text-xs"
+                                  style={{
+                                    color: "tomato",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  New
+                                </span>
+                              ) : null}
+
+                            </div>
+                          </div>
+                        </Tooltip>
+
+                      </div>
+
+                      <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
+                          {item.dialCode} {item.phoneNo}
                         </div>
-            </div>
 
-</div>
-</div>
-          );
-        })}
-              </InfiniteScroll> 
-              </OnlyWrapCard>
-              </div>
+                      </div>
+
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-[8.55rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
+
+                      <div class=" text-xs text-cardBody font-poppins text-center">
+                        {item.url}
+
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-[7.24rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</div> */}
+
+                      <div class=" text-xs text-cardBody font-poppins text-center">
+                        {item.clientName}
+
+                      </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-[10.23rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</div> */}
+
+                      <div class=" text-xs text-cardBody font-poppins text-center">
+                        {item.payment}
+
+                      </div>
+                    </div>
+
+                    <div class="flex md:items-center">
+
+                      <div className=" flex font-medium flex-col  md:w-[6.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
+                          {item.countryValue}
+                        </div>
+
+                      </div>
+                      <div className=" flex font-medium flex-col  md:w-[15.25rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
+                          {dataLoc}
+                        </div>
+
+                      </div>
+
+                      <div className=" flex font-medium flex-col  md:w-[6.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                        <div class=" text-xs text-cardBody font-poppins">
+                          {item.address && item.address.length && item.address[0].postalCode}
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              )
+            })}
+          </InfiniteScroll>
+        </div>
+      </div>
     </>
   );
 }
-const mapStateToProps = ({ distributor, auth, leads }) => ({
+const mapStateToProps = ({ distributor, auth }) => ({
   allDistributors: distributor.allDistributors,
   fetchingAllDistributors: distributor.fetchingAllDistributors,
-  fetchingAllDistributorsError: distributor.fetchingAllDistributorsError,
   userId: auth.userDetails.userId,
-  allSalesUsers: leads.allSalesUsers,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getAllDistributorsList,
-      emptyDistributor,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllAccountList);
-
-
-// import React, { Component, useEffect, useMemo, useState } from "react";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { StyledTable } from "../../../Components/UI/Antd";
-// import { Tooltip, Input, Button, Space } from "antd";
-// import { MainWrapper, Spacer } from "../../../Components/UI/Elements";
-// import { SearchOutlined } from "@ant-design/icons";
-// import Highlighter from "react-highlight-words";
-// import { getAllDistributorsList,emptyDistributor } from "./AccountAction";
-// import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-// import { CurrencySymbol } from "../../../Components/Common";
-// // import { getAllSalesUser } from "../../../Leads/LeadsAction";
-// import moment from "moment";
-// import AccountDetailsView from "./AccountDetailsView";
-
-// function AllAccountList(props) {
-//   const [page, setPage] = useState(0);
-//   const [hasMore, setHasMore] = useState(true);
-//   useEffect(() => {
-//     props.getAllDistributorsList(page);
-//     setPage(page + 1);
-//    // props.getAllSalesUser();
-//   }, []);
-//   const handleLoadMore = () => {
-//     setPage(page + 1);
-//     props.getAllDistributorsList(props.currentUser?props.currentUser:page,
-
-
-//       );
-// }
-
-//   const [searchText, setSearchText] = useState("");
-//   const [searchedColumn, setSearchedColumn] = useState("");
-//   const [selectedRow, setselectedRow] = useState([]);
-
-//   const rowSelection = {
-//     onChange: (selectedRowKeys, selectedRows) => {
-//       setselectedRow(selectedRows);
-//       console.log(
-//         `selectedRowKeys: ${selectedRowKeys}`,
-//         "selectedRows: ",
-//         selectedRows
-//       );
-//     },
-//   };
-
-//   function getColumnSearchProps(dataIndex) {
-//     return {
-//       filterDropdown: ({
-//         setSelectedKeys,
-//         selectedKeys,
-//         confirm,
-//         clearFilters,
-//       }) => (
-//         <div style={{ padding: 8 }}>
-//           <Input
-//             placeholder={`Search ${dataIndex}`}
-//             value={selectedKeys[0]}
-//             onChange={(e) =>
-//               setSelectedKeys(e.target.value ? [e.target.value] : [])
-//             }
-//             onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-//             style={{ width: 240, marginBottom: 8, display: "block" }}
-//           />
-//           <Space>
-//             <Button
-//               type="primary"
-//               onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-//               icon={<SearchOutlined />}
-//               size="small"
-//               style={{ width: 90 }}
-//             >
-//               Search
-//             </Button>
-//             <Button
-//               onClick={() => handleReset(clearFilters)}
-//               size="small"
-//               style={{ width: 90 }}
-//             >
-//               Reset
-//             </Button>
-//             <Button
-//               type="link"
-//               size="small"
-//               onClick={() => {
-//                 confirm({ closeDropdown: false });
-//                 setSearchText(selectedKeys[0]);
-//                 setSearchedColumn(dataIndex);
-//               }}
-//             >
-//               Filter
-//             </Button>
-//           </Space>
-//         </div>
-//       ),
-//       filterIcon: (filtered) => (
-//         <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-//       ),
-//       onFilter: (value, record) =>
-//         record[dataIndex]
-//           .toString()
-//           .toLowerCase()
-//           .includes(value.toLowerCase()),
-//       onFilterDropdownVisibleChange: (visible) => {
-//         if (visible) {
-//           // setTimeout(() => this.searchInput.select());
-//         }
-//       },
-//       render: (text) =>
-//         searchedColumn === dataIndex ? (
-//           <Highlighter
-//             highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-//             searchWords={[searchText]}
-//             autoEscape
-//             textToHighlight={text.toString()}
-//           />
-//         ) : (
-//           text
-//         ),
-//     };
-//   }
-
-//   function handleSearch(selectedKeys, confirm, dataIndex) {
-//     confirm();
-//     setSearchText(selectedKeys[0]);
-//     setSearchedColumn(dataIndex);
-//   }
-
-//   function handleReset(clearFilters) {
-//     clearFilters();
-//     setSearchText("");
-//   }
-
-//   const salesOption = useMemo(() => {
-//     if (!props.allSalesUsers) return [];
-//     return (
-//       props.allSalesUsers.length &&
-//       props.allSalesUsers
-//         .sort(function (a, b) {
-//           var nameA = a.salesExecutive.toUpperCase(); // ignore upper and lowercase
-//           var nameB = b.salesExecutive.toUpperCase(); // ignore upper and lowercase
-//           if (nameA < nameB) {
-//             return -1;
-//           }
-//           if (nameA > nameB) {
-//             return 1;
-//           }
-//           // names must be equal
-//           return 0;
-//         })
-//         .map((allSalesUsers) => {
-//           return {
-//             text: allSalesUsers.salesExecutive || "",
-//             value: allSalesUsers.salesExecutive,
-//           };
-//         })
-//     );
-//   }, [props.allSalesUsers]);
-
-//   function handleDistributorCheck() {
-//     setselectedRow([]);
-//   }
-//   useEffect(() => {
-//     return () => props.emptyDistributor();
-//   }, []);
-
-//   const result = selectedRow.reduce((acc, item) => {
-//     acc = acc + item.totalPayableAmount;
-//     return acc;
-//   }, 0);
-
-//   const columns = [
-
-//     {
-//       title: "Name",
-//       width: "15%",
-//       defaultSortOrder: "descend",
-//       ...getColumnSearchProps("name"),
-//       render: (name, item, i) => {
-//         const currentdate = moment().format("DD/MM/YYYY");
-//         const date = moment(item.creationDate).format("DD/MM/YYYY");
-//         return (
-//           <>
-//             <AccountDetailsView
-//               distributorId={item.distributorId}
-//               name={item.name}
-//             />
-//             &nbsp;&nbsp;
-//             {date === currentdate ? (
-//               <span
-//                 style={{
-//                   color: "tomato",
-//                   fontWeight: "bold",
-//                 }}
-//               >
-//                 New
-//               </span>
-//             ) : null}
-//           </>
-//         );
-//       },
-
-//     },
-
-//     {
-//       title: "Mobile",
-//       dataIndex: "phoneNo",
-//       width: "10%",
-//     },
-//     {
-//       title: "Website",
-//       dataIndex: "url",
-//       width: "14%",
-//     },
-//     {
-//       title: "Address",
-//       // render: (name, item, i) => {
-//       //   return `${item.address[0].address1 || ""} ${item.address[0]
-//       //     .address2 || ""} ${item.address[0].street || ""} 
-//       //           ${item.address[0].city || ""}
-//       //               `;
-//       // },
-//       width: "18%",
-//     },
-
-//     {
-//       title: "City",
-//       // render: (name, item, i) => {
-//       //   return <>
-//       //     {item.address[0].city === "Null" ? "" :
-//       //       <span>
-//       //         {item.address[0].city || ""}
-//       //       </span>
-//       //     }
-//       //   </>
-//       // },
-//       // sorter: (a, b) => {
-//       //   var nameA = a.address && a.address.length && a.address[0].city; // ignore upper and lowercase
-//       //   var nameB = b.address && b.address.length && b.address[0].city; // ignore upper and lowercase
-//       //   if (nameA < nameB) {
-//       //     return -1;
-//       //   }
-//       //   if (nameA > nameB) {
-//       //     return 1;
-//       //   }
-
-//       //   return 0;
-//       // },
-//       width: "8%",
-//     },
-//     {
-//       title: "Pin Code",
-//       // render: (name, item, i) => {
-//       //   return `${item.address[0].pinCode || ""}`;
-//       // },
-//       width: "6%",
-//     },
-//     {
-//       title: "Balance",
-//       align: "right",
-//       render: (name, item, i) => {
-//         return (
-//           <span>
-//             <CurrencySymbol currencyType={"INR"} />
-//             {item.totalPayableAmount.toFixed(2)}
-//           </span>
-//         );
-//       },
-//       defaultSortOrder: "descend",
-//       sorter: (a, b) => a.totalPayableAmount - b.totalPayableAmount,
-//       width: "7%",
-//     },
-//     {
-//       title: "Previous",
-//       dataIndex: "totalPayablePrev",
-//       align: "right",
-//       render: (name, item, i) => {
-//         return (
-//           <span>
-//             <CurrencySymbol currencyType={"INR"} />
-//             {item.totalPayablePrev.toFixed(2)}
-//           </span>
-//         );
-//       },
-//       defaultSortOrder: "descend",
-//       sorter: (a, b) => a.totalPayablePrev - b.totalPayablePrev,
-//       width: "8%",
-//     },
-
-//     {
-//       title: "",
-//       width: "1%",
-//     },
-//     {
-//       title: "Owner",
-//       width: "10%",
-//       dataIndex: "salesExecutive",
-//       sorter: (a, b) => {
-//         var nameA = a.salesExecutive.toLowerCase();
-//         var nameB = b.salesExecutive.toLowerCase();
-//         if (nameA < nameB) {
-//           return -1;
-//         }
-//         if (nameA > nameB) {
-//           return 1;
-//         }
-
-//         return 0;
-//       },
-//       filters: salesOption,
-//       onFilter: (value, record) => {
-//         return record.salesExecutive === value;
-//       },
-//       render: (name, item, i) => {
-//         return {
-//           props: {},
-
-//           children: <span>{item.salesExecutive}</span>,
-//         };
-//       },
-//     },
-
-//     {
-//       title: "",
-//       render: (name, item, i) => {
-//         return (
-//           <>
-//             <Tooltip title={item.salesExecutiveMobileNo}>
-//               <span>
-//                 <i class="fas fa-phone"></i>
-//               </span>
-//             </Tooltip>
-//           </>
-//         );
-//       },
-//       width: "2%",
-//     },
-//     {
-//       title: "",
-//       width: "2%",
-//       render: (name, item, i) => {
-//         return (
-//           <>
-//             <Tooltip title={item.salesExecutiveEmail}>
-//               <span>
-//                 <i class="far fa-envelope"></i>
-//               </span>
-//             </Tooltip>
-//           </>
-//         );
-//       },
-//     },
-//   ];
-//   if (props.fetchingAllDistributorsError) {
-//     return <APIFailed />;
-//   }
-//   const tab = document.querySelector(".ant-layout-sider-children");
-//   const tableHeight = tab && tab.offsetHeight * 1.2;
-//   return (
-//     <>
-//       <StyledTable
-//         rowKey="distributorId"
-//         rowSelection={rowSelection}
-//         columns={columns}
-//         dataSource={props.allDistributors}
-//         loading={
-//           props.fetchingAllDistributors || props.fetchingAllDistributorsError
-//         }
-//         pagination={false}
-//         scroll={{ y: tableHeight }}
-//       />
-//       <Spacer />
-//     </>
-//   );
-// }
-// const mapStateToProps = ({ distributor, auth, leads }) => ({
-//   allDistributors: distributor.allDistributors,
-//   fetchingAllDistributors: distributor.fetchingAllDistributors,
-//   fetchingAllDistributorsError: distributor.fetchingAllDistributorsError,
-//   userId: auth.userDetails.userId,
-//   allSalesUsers: leads.allSalesUsers,
-// });
-
-// const mapDispatchToProps = (dispatch) =>
-//   bindActionCreators(
-//     {
-//       getAllDistributorsList,
-//       emptyDistributor,
-//     },
-//     dispatch
-//   );
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AllAccountList);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);

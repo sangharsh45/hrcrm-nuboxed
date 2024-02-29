@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
-import SingleRole from "./SingleRole";
-import moment from "moment";
+import dayjs from "dayjs";
 import {
   getRoles,
   addRoles,
@@ -18,6 +16,9 @@ import * as Yup from "yup";
 
 import { getDepartments } from "../../Department/DepartmentAction";
 import { Select } from "../../../../Components/UI/Elements";
+const SingleRole = lazy(() =>
+  import("./SingleRole")
+);
 const { Option } = Select;
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -214,6 +215,7 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
             <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -224,41 +226,11 @@ class Department extends Component {
             // value={currentData}
           />
             </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {roles.length ? (
-                  roles.map((role, i) => (
-                    <SingleRole
-                      key={i}
-                      value={singleRole}
-                      name="singleRole"
-                      role={role}
-                      linkedRoles={linkedRoles}
-                      updatinRoles={updatingRoles}
-                      handleChange={this.handleChange}
-                      handleUpdateRole={this.handleUpdateRole}
-                      departments={this.props.departments}
-                      departmentId={this.state.departmentId}
-                      handleDepartment={this.handleDepartment}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                      handleDeleteRole={this.handleDeleteRole}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Role"
                   name="roleType"
@@ -297,17 +269,16 @@ class Department extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   Cancel
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+              
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingRoles}
                     onClick={this.toggleInput}
@@ -318,34 +289,45 @@ class Department extends Component {
                
               </>
             )}
+                </div>
+            <div class=" flex flex-col" >
+         
+            <MainWrapper className="!h-[69vh] !mt-2" >
+              {roles.length ? (
+  roles
+    .slice() 
+    .sort((a, b) => a.roleType.localeCompare(b.roleType)) 
+    .map((role, i) => (
+                    <SingleRole
+                      key={i}
+                      value={singleRole}
+                      name="singleRole"
+                      role={role}
+                      linkedRoles={linkedRoles}
+                      updatinRoles={updatingRoles}
+                      handleChange={this.handleChange}
+                      handleUpdateRole={this.handleUpdateRole}
+                      departments={this.props.departments}
+                      departmentId={this.state.departmentId}
+                      handleDepartment={this.handleDepartment}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                      handleDeleteRole={this.handleDeleteRole}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+           
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+       
+         
         </div>
-        <h4>Updated on {moment(this.props.roles && this.props.roles.length && this.props.roles[0].updationDate).format("ll")} by {this.props.roles && this.props.roles.length && this.props.roles[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.roles && this.props.roles.length && this.props.roles[0].updationDate).format('YYYY-MM-DD')} by {this.props.roles && this.props.roles.length && this.props.roles[0].name}</div>
       </>
     );
   }

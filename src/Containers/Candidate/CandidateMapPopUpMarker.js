@@ -1,6 +1,5 @@
 import React from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
-import { FlexContainer } from "../../Components/UI/Layout";
+import {  Marker, Popup } from "react-leaflet";
 import { Avatar } from "antd";
 import SkillsLoadMore from "../Candidate/Child/CandidateTable/SkillsLoadMore"
 import dayjs from "dayjs";
@@ -10,7 +9,6 @@ import {
   Title,
   SubTitle,
   JumpStartBox,
-  Spacer,
 } from "../../Components/UI/Elements";
 import { AddressComponent, CurrencySymbol } from "../../Components/Common";
 import L from "leaflet";
@@ -150,14 +148,14 @@ export default function CandidateMapPopUpMarker({ mark }) {
             {(state && state) || ""} */}
           </div>
         </div>
-        <div style={{ display: "flex" }}>
+        <div class=" flex" >
           {/* {(country && country) || ""}&nbsp;
           {(pinCode && pinCode) || ""}&nbsp; */}
         </div>
       </div>
 
-        <Spacer />
-        <FlexContainer style={{ width: "100%" }} justifyContent="space-between">
+
+        <div class=" flex justify-between w-full mt-3" >
           <div
             style={{
               width: "49%",
@@ -215,12 +213,7 @@ export default function CandidateMapPopUpMarker({ mark }) {
           {newSkill&&newSkill.map((option,i) => {
             return (
               <>
-               <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                width: "100%",
-              }}
+               <div class=" flex flex-wrap w-full"
             >
              
                 <div key={i} style={{
@@ -272,7 +265,7 @@ export default function CandidateMapPopUpMarker({ mark }) {
                 title="Win / Loss"
                 bgColor="#24B47E"
               /> */}
-        </FlexContainer>
+        </div>
       </Popup>
     </Marker>
   );

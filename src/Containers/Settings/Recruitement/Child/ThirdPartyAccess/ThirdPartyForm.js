@@ -174,7 +174,7 @@ function ThirdPartyForm(props) {
           </Popconfirm>
         </div>
       </FlexContainer> 
-      <h4>Updated on {dayjs(props.thirdPartyAccess.lastUpdatedOn).format("ll")} by {props.thirdPartyAccess.name}</h4>
+      <div>Updated on {dayjs(props.thirdPartyAccess.lastUpdatedOn).format("ll")} by {props.thirdPartyAccess.name}</div>
     </MainWrapper>
   );
 }

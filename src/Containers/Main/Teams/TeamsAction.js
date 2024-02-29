@@ -130,7 +130,7 @@ export const getTeamList = (userId) => (dispatch) => {
     type: types.GET_TEAM_REQUEST,
   });
   axios
-    .get(`${base_url}/team/${userId}`, {
+    .get(`${base_url}/team/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -150,6 +150,34 @@ export const getTeamList = (userId) => (dispatch) => {
       });
     });
 };
+
+export const getTeamteamsList = (teamLead) => (dispatch) => {
+  dispatch({
+    type: types.GET_TEAMTEAM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/team/teamLead/${teamLead}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TEAMTEAM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TEAMTEAM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
 
 export const getTeamByTeamId = (teamId) => (dispatch) => {
   dispatch({
@@ -255,7 +283,7 @@ export const linkSalesUserToTeam = (team, teamId, cb) => (dispatch) => {
       // cb && cb("success", res.data.message);
     })
     .catch((err) => {
-      message.error("some error occoured");
+      message.error("Something went wrong! occoured");
       console.log(err);
       dispatch({
         type: types.LINK_SALES_USER_TO_TEAM_FAILURE,
@@ -555,6 +583,33 @@ export const getTeamMemberlist = (filter) => (dispatch) => {
     });
 };
 
+export const getreportingManager = (reptMngrId) => (dispatch) => {
+  dispatch({
+    type: types.GET_REPORTING_MANAGER_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/user-list/reptMngr/${reptMngrId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_REPORTING_MANAGER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_REPORTING_MANAGER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const addTeams = (customer) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
 
@@ -590,3 +645,206 @@ export const addTeams = (customer) => (dispatch, getState) => {
     });
 };
 
+export const handleperformanceDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PERFORMANE_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getKpilist = (departmentId) => (dispatch) => {
+  dispatch({
+    type: types.GET_KPILIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/performanceManagement/department/${departmentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_KPILIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_KPILIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addKpi = (data) => (dispatch) => {
+  dispatch({
+    type: types.ADD_KPI_REQUEST,
+  });
+  axios
+    .post(`${base_url}/employee/kpi-with-user/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+     
+      dispatch({
+        type: types.ADD_KPI_SUCCESS,
+        payload: res.data,
+      });
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_KPI_FAILURE,
+        payload: err,
+      });
+     
+    });
+};
+
+export const getEmployeeKpiList = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_EMPLOYEE_KPI_LIST_REQUEST,
+  });
+    axios
+  .get(`${base_url}/employee/kpi-list/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_EMPLOYEE_KPI_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_EMPLOYEE_KPI_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getperformanceRecord = (reptMngrId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PERFORMANCE_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/user-count/reptMngr/${reptMngrId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PERFORMANCE_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PERFORMANCE_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteKpiData = (employeeKpiLinkId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_KPI_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/employee/delete/kpi/${employeeKpiLinkId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_KPI_DATA_SUCCESS,
+        payload: employeeKpiLinkId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_KPI_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateCompletedValue= (data,employeeId, cb) => (dispatch) => {
+  // console.log(leadDocumentsId, DocumentsName);
+  dispatch({
+    type: types.UPDATE_COMPLETED_VALUE_REQUEST,
+  });
+  axios
+    .post(
+      `${base_url}/employee/kpi-completed-value/save`,data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Value has been updated successfully!");
+      console.log(res);
+       dispatch(getEmployeeKpiList(employeeId));
+      dispatch({
+        type: types.UPDATE_COMPLETED_VALUE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_COMPLETED_VALUE_FAILURE,
+      });
+    });
+};
+
+export const updateAssignedValue= (data,employeeId, cb) => (dispatch) => {
+  // console.log(leadDocumentsId, DocumentsName);
+  dispatch({
+    type: types.UPDATE_ASSIGNED_VALUE_REQUEST,
+  });
+  axios
+    .post(
+      `${base_url}/employee/kpi-assigned-value/save`,data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Value has been updated successfully!");
+      console.log(res);
+       dispatch(getEmployeeKpiList(employeeId));
+      dispatch({
+        type: types.UPDATE_ASSIGNED_VALUE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ASSIGNED_VALUE_FAILURE,
+      });
+    });
+};

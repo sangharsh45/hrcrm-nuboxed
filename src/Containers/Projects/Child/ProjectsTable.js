@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useMemo, lazy } from "react";
-import { StyledTable ,StyledPopconfirm} from "../../../Components/UI/Antd";
+import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import {
   MultiAvatar2,
 } from "../../../Components/UI/Elements";
+import { Link } from 'react-router-dom';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
@@ -21,9 +22,10 @@ import "jspdf-autotable";
   handleInvoiceProjectModal
 } from "../../Projects/ProjectsAction";
 import { BundleLoader } from "../../../Components/Placeholder";
-import ProjectsDetailsView from "./ProjectsDetail/ProjectsDetailsView";
-import UpdateProjectsModal from "./UpdateProject/UpdateProjectsModal";
-import AddInvoiceProjectsModal from "./ProjectsDetail/AddInvoiceProjectsModal";
+import { OnlyWrapCard } from "../../../Components/UI/Layout";
+const UpdateProjectsModal =lazy(()=> import('./UpdateProject/UpdateProjectsModal'));
+const AddInvoiceProjectsModal =lazy(()=> import('./ProjectsDetail/AddInvoiceProjectsModal'));
+
 
 function ProjectsTable(props) {
   useEffect(() => {
@@ -147,48 +149,61 @@ function ProjectsTable(props) {
     updateProjectsModal
   } = props;
 
-  const columns = [
-    {
-      title: "",
-      //dataIndex: "logo",
-      width: "2%",
-    },
-    {
-      title: <FormattedMessage id="app.projectName" defaultMessage="Project Name" />,
-       dataIndex: "projectName",
-      width: "8%",
-      render: (name, item, id) => {
-        const currentdate = moment().format("DD/MM/YYYY");
-        const date = moment(item.creationDate).format("DD/MM/YYYY");
-        return (
-          <>
-            <ProjectsDetailsView
-              projectId={item.projectId}
-              projectName={item.projectName}
-            />
-            &nbsp;&nbsp;
-            {date === currentdate ? (
-              <span
-                style={{
+  return (
+    <>
+        <div className=' flex justify-end sticky top-28 z-auto'>
+            <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                <div className=" flex  w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                    <div className=" md:w-[21.1rem]"><FormattedMessage
+                        id="app.project"
+                        defaultMessage="project"
+                    /></div>
+                    <div className=" md:w-[27.1rem]"><FormattedMessage
+                        id="app.customer"
+                        defaultMessage="customer"
+                    /></div>
+                    <div className=" md:w-[9.8rem] "><FormattedMessage
+                        id="app.creator"
+                        defaultMessage="Creator"
+                    /></div>
+                    <div className="md:w-[5.8rem]"></div>
+                    
+                </div>
+                {props.projectsData.map((item) => {
+                    const currentdate = moment().format("DD/MM/YYYY");
+                    const date = moment(item.creationDate).format("DD/MM/YYYY");
+                    return (
+                        <div>
+                            <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 "
+
+                            >
+                                <div class="flex">
+                                    <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
+                                    <>
+                                    <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`projects/${item.projectId}`} title={item.projectName}>
+      {item.projectName}
+    </Link>
+             {/* <ProjectsDetailsView
+               projectId={item.projectId}
+               projectName={item.projectName}
+             /> */}
+             &nbsp;&nbsp;
+             {date === currentdate ? (
+               <span
+                 style={{
                   color: "tomato",
-                  fontWeight: "bold",
-                }}
-              >
-                New
-              </span>
+                   fontWeight: "bold",
+                 }}
+               >
+                 New
+               </span>
             ) : null}
-          </>
-        );
-      },
-    },
-    {
-      title: "Customer Name",
-      dataIndex: "customerName",
-      width: "8%",
-      render: (name, item, i) => {
-        return (
-          <>
-            <span>
+         </>
+                                    </div>
+
+                                    <div className=" flex font-medium   md:w-[26.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div class=" text-xs text-cardBody font-poppins">
+                                        <span>
             {item.customerName === null ? (
                 ""
               ) : (
@@ -199,37 +214,27 @@ function ProjectsTable(props) {
                 />
                 )}
             </span>
-          </>
-        );
-      },
-    },
-    {
-      title: "Creator Name",
-      dataIndex: "creatorName",
-      width: "8%",
-      render: (name, item, i) => {
-        return (
-          <>
-            <span>
-                <MultiAvatar2
+                                        </div>
+
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+
+                                        <div class=" text-sm text-cardBody font-poppins">
+                                        <span>
+                 <MultiAvatar2
                   primaryTitle={item.creatorName}
                   imgWidth={"1.8em"}
                   imgHeight={"1.8em"}
                 />
             </span>
-          </>
-        );
-      },
-    },
-
-    {
-      width:"2%",
-      //  title:"Comments",
-       render:(name,item,i)=> {
-
-         return (
-          <Tooltip title="Create Invoice">
-           <ReceiptIcon
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <Tooltip title="Create Invoice">
+            <ReceiptIcon
            onClick={()=>{
              props.handleInvoiceProjectModal(true);
             // handlePassRowData(item);
@@ -241,19 +246,12 @@ function ProjectsTable(props) {
            
            />
             </Tooltip>
-         );
-        }
-       
-     },
-    {
-      title: "",
-      dataIndex: "documentId",
-      width: "2%",
-      render: (name, item, i) => {
-        //debugger
-        return (
-          <Tooltip title="Edit">
-            <BorderColorIcon 
+
+                                  
+                                </div>
+                                <div className=" flex font-medium  md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <Tooltip title="Edit">
+             <BorderColorIcon 
               type="edit"
               style={{ cursor: "pointer", fontSize:"0.8rem"}}
               onClick={() => {
@@ -263,43 +261,23 @@ function ProjectsTable(props) {
              }}
             />
           </Tooltip>
-        );
-      },
-    },
-
-    {
-      title: "",
-      dataIndex: "id",
-      width: "2%",
-      render: (name, item, i) => {
-        return (
-          <StyledPopconfirm
+                                </div>
+                                <div className=" flex font-medium  md:w-[10.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <StyledPopconfirm
             title="Do you want to delete?"
              onConfirm={() => removeProjectData(item.projectId)}
           >
             <DeleteIcon
             type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }} />
           </StyledPopconfirm>
-        );
-      },
-    },
-  
-  ];
+                                </div>
 
-  if (props.fetchingProjectsData) {
-    return <BundleLoader />;
-  }
-  return (
-   
-    <>
-      <StyledTable
-        columns={columns}
-         dataSource={props.projectsData}
-        pagination={false}
-        scroll={{ y: 600 }}
-      />
-
-        <AddInvoiceProjectsModal
+                            </div>
+                        </div>
+                    )
+                })}
+            </OnlyWrapCard>
+            <AddInvoiceProjectsModal
         // rowDataPass={rowDataPass}
         invoiceProjectModal={props.invoiceProjectModal}
         handleInvoiceProjectModal={props.handleInvoiceProjectModal}
@@ -311,8 +289,10 @@ function ProjectsTable(props) {
         handleUpdateProjectsModal={handleUpdateProjectsModal}
         handleSetCurrentProjectId={handleSetCurrentProjectId}
       />
+        </div>
+      
     </>
-  );
+)
 }
 
 const mapStateToProps = ({ projects,auth }) => ({

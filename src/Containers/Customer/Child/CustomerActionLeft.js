@@ -5,8 +5,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import PeopleIcon from '@mui/icons-material/People';
 import {getCustomerListByUserId} from "../CustomerAction"
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Button, Tooltip, Badge } from "antd";
-import LanguageIcon from '@mui/icons-material/Language';
+import { Tooltip, Badge ,Avatar} from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -99,13 +98,15 @@ function  handleFilterChange(data){
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setCustomerViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <TocIcon />
+             <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <TocIcon className="text-white" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -116,13 +117,15 @@ function  handleFilterChange(data){
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setCustomerViewType("card")}
             style={{
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <GridViewIcon />
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <GridViewIcon className="text-white"/>
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -134,18 +137,20 @@ function  handleFilterChange(data){
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setCustomerViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-           <PeopleIcon/>
+             <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+           <PeopleIcon className="text-white"/>
+           </Avatar>
           </span>
         </Badge>
       </Tooltip>
       )}
-      {user.crmInd=== true && user.customerFullListInd===true && ( 
+      {(user.crmInd=== true && user.customerFullListInd===true || user.role === "ADMIN") && ( 
       <Tooltip>
         <Badge
           size="All"
@@ -153,16 +158,18 @@ function  handleFilterChange(data){
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setCustomerViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
             }}
           >
+               <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
                <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
+                      </Avatar>
            
           </span>
         </Badge>
@@ -178,7 +185,7 @@ function  handleFilterChange(data){
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setCustomerViewType("mapView")}
             style={{
               color: props.viewType === "mapView" && "#1890ff",
@@ -196,7 +203,7 @@ function  handleFilterChange(data){
           count={(props.viewType === "map" && props.recordData.customer) || 0}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             style={{
               color: props.viewType === "map" && "#1890ff",
             }}
@@ -218,32 +225,8 @@ function  handleFilterChange(data){
             onChange={handleChange}
             // value={currentData}
           />
-          {/* <Input
-            placeholder="Search by Name or Sector"
-            width={"100%"}
-            suffix={suffix}
-            onChange={(e) => props.handleChange(e)}
-            value={props.currentData}
-          /> */}
         </div>
-        {/* <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.inputCustomerDataSearch(props.currentData);
-          }}
-        >
-          Submit
-        </Button> */}
-        {/* <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          
-        </Button> */}
-        <div class="w-[22%] mt-2 ml-2 max-sm:w-[45%]">
+        <div class="w-[40%] mt-2 ml-2 max-sm:w-[45%]">
           <StyledSelect       placeholder={
           <span>
                    <FormattedMessage

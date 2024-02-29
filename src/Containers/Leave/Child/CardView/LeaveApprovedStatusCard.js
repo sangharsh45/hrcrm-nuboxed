@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import {  OnlyWrapCard } from "../../../../Components/UI/Layout";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
   getLeaveListRangeByUserId,
@@ -11,7 +10,7 @@ import {
   setEditLeave,
   handleUpdateLeaveModal,
 } from "../../LeavesAction";
-import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+const UpdateLeavesModal = lazy(() => import("../Tab/UpdateLeavesModal"));
 const { Option } = Select;
 
 function LeaveApprovedStatusCard(props) {
@@ -34,12 +33,12 @@ function LeaveApprovedStatusCard(props) {
 
   return (
     <>
-      <OnlyWrapCard div className="h-[32rem]">
+       <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
         {props.leaveListRangeByUserId
           .filter((sts) => sts.status === "Approved")
           .map((item) => {
-            const currentdate = moment().format("DD/MM/YYYY");
-            const date = moment(item.creationDate).format("DD/MM/YYYY");
+            const currentdate = dayjs().format("DD/MM/YYYY");
+            const date = dayjs(item.creationDate).format("DD/MM/YYYY");
 
             return (
               <>
@@ -58,7 +57,7 @@ function LeaveApprovedStatusCard(props) {
                         </div>
 
                         <div class=" font-normal text-xs text-cardBody font-poppins">
-                          {` ${moment.utc(item.startDate).format("ll")}`}
+                          {` ${dayjs(item.startDate).format("DD/MM/YYYY")}`}
                         </div>
                         <div className=" flex font-medium flex-col w-40">
                         <div class=" text-sm text-cardBody font-medium font-poppins">
@@ -77,7 +76,7 @@ function LeaveApprovedStatusCard(props) {
                         </div>
 
                         <div class=" font-normal text-xs text-cardBody font-poppins">
-                          {` ${moment.utc(item.endDate).format("ll")}`}
+                          {` ${dayjs(item.endDate).format("DD/MM/YYYY")}`}
                         </div>
 
                         {/* </Tooltip>   */}
@@ -117,7 +116,7 @@ function LeaveApprovedStatusCard(props) {
               </>
             );
           })}
-      </OnlyWrapCard>
+      </div>
 
       <UpdateLeavesModal
         leaveId={currentLeaveId}

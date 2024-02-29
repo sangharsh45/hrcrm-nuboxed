@@ -16,12 +16,7 @@ const UpdateEventModal = (props) => {
         />}
         width={drawerWidth}
         visible={updateEventModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateEventModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateEventForm {...formProps} />

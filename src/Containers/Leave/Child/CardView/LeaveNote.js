@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getLeaveNotes } from "../../LeavesAction";
-import LeaveNoteForm from "./LeaveNoteForm";
 import { SingleNote } from "../../../../Components/Common";
-
+const LeaveNoteForm =lazy(()=>import("./LeaveNoteForm"))
 class LeaveNote extends Component {
     componentDidMount() {
         this.props.getLeaveNotes(this.props.leavesItems.leaveId);

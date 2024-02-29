@@ -2,7 +2,7 @@ import React, {} from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
  import {getAllSalesDateWiseList,
 } from "../../DashboardAction";
 
@@ -53,8 +53,8 @@ render() {
   const { showDatelist, fetchingDatewiseReport } = this.props;
   return(
     <div class=" flex flex-row w-full" >
-    <div class="flex w-full" >
-        
+    <div class="flex w-full max-sm:flex-col" >
+      <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={
@@ -78,7 +78,7 @@ render() {
             }
           />
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={
               <FormattedMessage
@@ -100,6 +100,7 @@ render() {
             }
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           />
+          </div> 
           {/* <JumpStartBox
             noProgress
             title="Profiles Submitted"
@@ -107,7 +108,8 @@ render() {
             value={this.props.showDatelist.taggedProfile}
             isLoading={this.props.fetchingDatewiseReport}
           /> */}
-          <JumpStartBox
+           <div class="flex w-wk">
+          <JumpStartBox2
             noProgress
             title={
               <FormattedMessage
@@ -133,7 +135,7 @@ render() {
             }
             
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={
               <FormattedMessage
@@ -159,7 +161,7 @@ render() {
             // }
             
           />
-           
+           </div>
            {/* <JumpStartBox
             noProgress
             title="DashBoard6"

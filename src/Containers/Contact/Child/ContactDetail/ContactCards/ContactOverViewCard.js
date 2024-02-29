@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import ContactOverView from "./ContactOverView";
+const ContactOverView=lazy(()=> import("./ContactOverView"));
+
 
 class ContactOverviewCard extends Component {
   render() {

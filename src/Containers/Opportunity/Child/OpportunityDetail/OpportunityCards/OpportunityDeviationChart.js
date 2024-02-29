@@ -29,7 +29,7 @@ class OpportunityDeviationChart extends Component {
     } = opportunityDeviation;
     if (fetchingOpportunityDeviation) return <BundleLoader />;
     if (fetchingOpportunityDeviationError)
-      return <Empty description="Some error occoured" />;
+      return <Empty description="Something went wrong! occoured" />;
     return (
       <MainWrapper >
         <HeaderText style={{ fontSize: 15, textAlign: "center" }}>

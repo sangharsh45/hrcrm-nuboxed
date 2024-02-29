@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { handleTeamsModal, setTeamsViewType } from "./TeamsAction";
-import TeamsHeader from "./TeamsHeader";
-import TeamsModal from "./TeamsModal";
-import TeamsTable from "./TeamsTable";
-import TeamsAllocationTable from "./TeamsAllocationTable";
-import TeamsClientTable from "./TeamsClientTable";
-import TeamsInventoryTable from "./TeamsInventoryTable";
-import TeamsCardList from "./TeamsCard.js/TeamsCardList";
+const TeamsList =lazy(()=> import('./TeamsList'));
+const PerformanceManagement =lazy(()=> import('./PerformanceManagement'));
+const TeamsHeader =lazy(()=> import('./TeamsHeader'));
+const TeamsModal =lazy(()=> import('./TeamsModal'));
+const TeamsTable =lazy(()=> import('./TeamsTable'));
+const TeamsAllocationTable =lazy(()=> import('./TeamsAllocationTable'));
+const TeamsClientTable =lazy(()=> import('./TeamsClientTable'));
+const TeamsInventoryTable =lazy(()=> import('./TeamsInventoryTable'));
+const TeamsCardList =lazy(()=> import('./TeamsCard.js/TeamsCardList'));
 
 class Teams extends Component {
   render() {
@@ -35,9 +37,11 @@ class Teams extends Component {
         <Suspense fallback={<BundleLoader />}>
         {  viewType === "table" ?
          <TeamsCardList/>
+         :viewType==="teams" ?
+         <TeamsList/> 
  
-  // :viewType==="all" ?
-//  <TeamsAllCardList  /> 
+  :viewType==="client" ?
+ <PerformanceManagement/> 
 
           :null}
       

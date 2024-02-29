@@ -1,18 +1,17 @@
 
-import React, { Component, Suspense } from "react";
+import React, { Component,lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { PlusOutlined,  
 } from '@ant-design/icons';
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import AddTemplateModal from "./AddTemplateModal";
-import AddTemplateNotificatonModal from "../AddTemplateNotificatonModal";
 import { handleTemplateModal,handleTemplateNotificatonModal } from "../../../../Rules/RulesAction";
 import TemplateTable from "./TemplateTable";
 import { Tooltip } from "antd";
-
 import DraftsIcon from '@mui/icons-material/Drafts';
+const AddTemplateModal = lazy(() => import("./AddTemplateModal"));
+const AddTemplateNotificatonModal = lazy(() => import("../AddTemplateNotificatonModal"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -58,7 +57,7 @@ class TemplateTab extends Component {
                 <>
                   <span onClick={this.handleRecruitClick}>
                   <DraftsIcon  />
-                    <span style={{ marginLeft: '0.25em' }}>Email</span>
+                    <span class=" ml-[0.25em]" >Email</span>
                   </span>
                   {}
                   {activeKey === "1" && (

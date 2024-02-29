@@ -1,22 +1,21 @@
-import React from "react";
+import React,{lazy} from "react";
 import { connect } from "react-redux";
 import {
   getCertification,
 } from "../../../../../Settings/Recruitement/Child/Certification/CertificationAction";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
+import { Tag, Input, Tooltip, } from "antd";
+import { PlusOutlined,
 } from '@ant-design/icons';
-import { ViewEditCard, Title, Spacer } from "../../../../../../Components/UI/Elements";
+import { ViewEditCard, } from "../../../../../../Components/UI/Elements";
 import {
   addCertificationByUserId,
   getCertificationByUserId,
   deleteCertificationByUserId,
 } from "../../../../EmployeeAction";
-
 import { Select } from "antd";
-import EmployeeCertificationSelect from "./EmployeeCertificationSelect";
+const EmployeeCertificationSelect = lazy(() => import("./EmployeeCertificationSelect"));
+
 // import CertificationSelect from "./CertificationSelect";
 
 const { Option } = Select;
@@ -105,14 +104,13 @@ class EmployeeCertificationLibrary extends React.Component {
       <ViewEditCard>
         {({ viewType }, toggleViewType) =>
           viewType === "view" ? (
-            <div style={{ height: "11em" }}>
-               <div style={{display:"flex"}}>
-              <Title
-                fontSize="0.875em"
-                style={{ fontWeight: 600, marginBottom: "0.2rem" }}
+            <div class=" h-[11rem]" >
+           <div class=" flex justify-between" >
+               <div class=" font-semibold mb-[0.2rem] text-[0.875em]"
+              
               >
                 Certification{" "}
-              </Title>
+              </div>
             
               <div>
                       <EmployeeCertificationSelect

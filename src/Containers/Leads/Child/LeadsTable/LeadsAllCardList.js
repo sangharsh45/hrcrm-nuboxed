@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy,Suspense } from "react";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
-import { getCountries } from "../../../Auth/AuthAction";
 import {
   getAllLeads,
   deleteLeadsData,
@@ -26,32 +24,40 @@ import {
   emptyLeads,
 } from "../../../Leads/LeadsAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ReactCountryFlag from "react-country-flag";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
 import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
-import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
-import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenCETmodal from "./OpenCETmodal";
-import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
+import { BundleLoader } from "../../../../Components/Placeholder";
+const UpdateLeadsModal =lazy(()=>import("../UpdateLeads/UpdateLeadsModal"));
+const AddLeadsEmailDrawerModal =lazy(()=>import("../UpdateLeads/AddLeadsEmailDrawerModal"));
+const BorderColorIcon =lazy(()=>import("@mui/icons-material/BorderColor"));
+const OpenCETmodal =lazy(()=>import("./OpenCETmodal"));
+const AddLeadsNotesDrawerModal =lazy(()=>import("../AddLeadsNotesDrawerModal"));
 
 const ButtonGroup = Button.Group;
 
 const LeadsAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     setPage(page + 1);
     props.getAllLeads(page,"creationdate");
-    props.getSectors();
-    props.getCountries();
+
   }, []);
   useEffect(() => {
     return () => props.emptyLeads();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState({});
 
@@ -75,20 +81,395 @@ const LeadsAllCardList = (props) => {
     user,
   } = props;
 
+  if (isMobile){
+    return (
+      <>
+       <div className=' flex  sticky top-28 z-auto'>
+       <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <InfiniteScroll
+          dataLength={allleadsInfo.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingAllLeads?<div class="items-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+          {allleadsInfo.map((item) => {
+            const currentdate = moment().format("DD/MM/YYYY");
+            const date = moment(item.creationDate).format("DD/MM/YYYY");
+            const countryCode = item.address[0].country_alpha2_code
+            const diff = Math.abs(
+              moment().diff(moment(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+                 Street : ${
+                   item.address && item.address.length && item.address[0].street
+                 }   
+                State : ${
+                  item.address && item.address.length && item.address[0].state
+                }
+               Country : ${
+                 (item.address &&
+                   item.address.length &&
+                   item.address[0].country) ||
+                 ""
+               } 
+                 PostalCode : ${
+                   item.address &&
+                   item.address.length &&
+                   item.address[0].postalCode
+                 } `;
+            return (
+              <div>
+                <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                 <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
+                      <div className="flex max-sm:w-full ">
+                        <div>
+                         
+                            <MultiAvatar
+                              primaryTitle={item.name}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                         
+                        </div>
+                        <div class="w-[4%]"></div>
+  
+                        <div class="w-full flex items-center">
+                          <Tooltip>
+                            <div class="max-sm:w-full justify-between flex md:flex-col">
+                             
+                              <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                                {item.name}
+                                &nbsp;&nbsp;
+                                {date === currentdate ? (
+                                  <div class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Warm"
+                            iconType="	fas fa-burn"
+                       
+                            tooltip={
+                              <FormattedMessage
+                                id="app.warm"
+                                defaultMessage="Warm"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Warm";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+  
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Hot"
+                            iconType="fas fa-mug-hot"
+                           
+                            tooltip={
+                              <FormattedMessage
+                                id="app.hot"
+                                defaultMessage="Hot"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Hot";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+                      <div>
+                        <ButtonGroup>
+                          <RoleButton
+                            type="Cold"
+                            iconType="far fa-snowflake"
+                      
+                            tooltip={
+                              <FormattedMessage
+                                id="app.cold"
+                                defaultMessage="Cold"
+                              />
+                            }
+                            role={item.type}
+                            onClick={() => {
+                              const typ = "Cold";
+                              props.updateTypeForLead(item.leadsId, typ);
+                            }}
+                          />
+                        </ButtonGroup>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium  ">
+             
+                      <div class=" text-xs text-cardBody font-poppins">
+                        {item.countryDialCode && item.phoneNumber
+                          ? `${item.countryDialCode} ${item.phoneNumber}`
+                          : "Not Available"}
+                       
+                      </div>
+                    </div>
+                    <div className=" flex font-medium ">
+                     
+                      <div class=" text-xs text-cardBody font-poppins">
+                      <CountryFlag1 countryCode={countryCode} />
+                      &nbsp;
+                      {countryCode}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium  ">
+                    
+                      <div class=" text-xs text-cardBody font-semibold  font-poppins">
+                        {item.companyName || "Not Available"}
+                      </div>
+                    </div>
+                    <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
+                      {item.url !== null ? (
+                        <Tooltip title={item.url}>
+                          <div
+                         
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {}}
+                          >
+                            {" "}
+                            <a href={`https://www.${item.url}`} target="_blank">
+                              <OpenInBrowserIcon
+                                 className=" !text-base cursor-pointer text-green-800"
+                              />
+                            </a>
+                          </div>
+                        </Tooltip>
+                      ) : null}
+                    </div>
+  
+                    <div className=" flex font-medium  ">
+                     
+                      <div class=" text-xs text-cardBody font-poppins">
+                        {item.sector}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium  ">
+                     
+                     <div class=" text-xs text-cardBody font-poppins">
+                       {item.source}
+                     </div>
+                   </div>
+                  </div>
+                  <div class="flex justify-between items-center w-wk ">
+                    <div className=" flex font-medium  ">
+                    
+  
+                      <div class=" text-xs text-cardBody font-poppins">
+                        <div>
+                          {item.assignedTo === null ? (
+                            "None"
+                          ) : (
+                            <MultiAvatar
+                              primaryTitle={item.assignedTo}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" flex font-medium ">
+                     
+                    <Tooltip title={item.ownerName}>
+                      <div>
+                        <MultiAvatar
+                          primaryTitle={item.ownerName}
+                          imageId={item.ownerImageId}
+                          imgWidth={"1.8rem"}
+                          imgHeight={"1.8rem"}
+                        />
+                      </div>
+                      </Tooltip>
+                    </div>
+                    <div className=" flex font-medium ">
+                     
+  
+                      <div class=" text-xs text-cardBody font-poppins"></div>
+                      <div>
+                        <StatusCustomerToggle
+                          type={props.convertInd ? "primary" : "danger"}
+                          leadsId={item.leadsId}
+                          convertInd={item.convertInd}
+                        />
+                      </div>
+                    </div>
+                    
+                      <div>
+                        <Tooltip title="Notes">
+                          <NoteAltIcon
+                            onClick={() => {
+                              handleLeadsNotesDrawerModal(true);
+                              handleRowData(item);
+                            }}
+                            className=" !text-base cursor-pointer text-green-800"
+                          />
+                        </Tooltip>
+                      </div>
+                      <div>
+                        <Tooltip
+                          title={
+                            <FormattedMessage
+                              id="app.activity"
+                              defaultMessage="Activity"
+                            />
+                          }
+                        >
+                          <AddchartIcon
+                            className="!text-base cursor-pointer text-blue-500"
+                            onClick={() => {
+                              props.handleCETmodal(true);
+                              handleRowData(item);
+                            }}
+                          />
+                        </Tooltip>
+                      </div>
+                   
+  
+                    
+                      {user.leadsUpdateInd === true && user.crmInd === true && (
+                        <div>
+                          <Tooltip title="Edit">
+                            <BorderColorIcon
+                              className="!text-base cursor-pointer text-[tomato]"
+                              onClick={() => {
+                                props.setEditLeads(item);
+                                handleUpdateLeadsModal(true);
+                                handleSetCurrentLeadsId(item);
+                              }}
+                            />
+                          </Tooltip>
+                        </div>
+                      )}
+                      {user.leadsDeleteInd === true && user.crmInd === true && (
+                        <div>
+                          <StyledPopconfirm
+                            title="Do you want to delete?"
+                            onConfirm={() => deleteLeadsData(item.leadsId)}
+                          >
+                          
+                            <DeleteOutlined
+                              type="delete"
+                              className=" !text-base cursor-pointer text-[red]"
+                            />
+                       
+                          </StyledPopconfirm>
+                        </div>
+                      )}
+                      <div></div>
+                  
+                   
+                      <div>
+                        <Tooltip
+                          overlayStyle={{ maxWidth: "300px" }}
+                          title={dataLoc}
+                        >
+                          <div class="cursor-pointer"
+                          >
+                            <LocationOnIcon
+                              className="!text-base cursor-pointer text-[#960a0a]"
+                            />
+                          </div>
+                        </Tooltip>
+                      </div>
+                      <div>
+                        <Tooltip title={item.email}>
+                          <MailOutlineIcon
+                            type="mail"
+                            className="!text-base cursor-pointer text-green-400"
+                            onClick={() => {
+                              handleSetCurrentLeadsId(item);
+                              props.handleLeadsEmailDrawerModal(true);
+                            }}
+                          />
+                        </Tooltip>{" "}
+                      </div>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+  
+            );
+          })}
+           </InfiniteScroll>
+        </div>
+        </div>
+        <UpdateLeadsModal
+          item={currentLeadsId}
+          updateLeadsModal={updateLeadsModal}
+          handleUpdateLeadsModal={handleUpdateLeadsModal}
+          handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+        />
+        <AddLeadsEmailDrawerModal
+          item={currentLeadsId}
+          handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+          addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
+          handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
+        />
+        <OpenCETmodal
+          rowdata={rowdata}
+          // item={currentLeadsId}
+          // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
+          openCETmodal={props.openCETmodal}
+          handleCETmodal={props.handleCETmodal}
+        />
+        <AddLeadsNotesDrawerModal
+          rowdata={rowdata}
+          addDrawerLeadsNotesModal={props.addDrawerLeadsNotesModal}
+          handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
+        />
+      </>
+    );
+  }
+
   return (
     <>
-     <div className=' flex justify-end sticky top-28 z-auto'>
-      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[9.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]"></div>
-        <div className=" md:w-[4.2rem] ">Phone #</div>
+     <div className=' flex justify-center sticky top-28 z-auto'>
+     <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      <div className=" flex  w-[92%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" md:w-[12.12rem]">Name</div>
+        <div className=" md:w-[9.1rem]"></div>
+        <div className=" md:w-[7.5rem] ">Phone #</div>
         <div className="md:w-[5.8rem]">Country</div>
-        <div className="md:w-[8.5rem]">Company</div>
-        <div className="md:w-[3.8rem]">Sector</div> 
-        <div className="md:w-[5.2rem]">Assigned to</div>
-        <div className="md:w-[1.5rem]">Owner</div>
-        <div className="md:w-[3.3rem]">Qualify</div>
+        <div className="md:w-[10.5rem]">Company</div>
+        <div className="md:w-[8.8rem]">Sector</div> 
+        <div className="md:w-[8.8rem]">Source</div> 
+        <div className="md:w-[6rem]">Assigned to</div>
+        <div className="md:w-[5.5rem]">Owner</div>
+        {/* <div className="md:w-[3.3rem]">Qualify</div> */}
         <div className="w-12"></div>
 
       </div>
@@ -96,13 +477,13 @@ const LeadsAllCardList = (props) => {
         dataLength={allleadsInfo.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllLeads?<div  class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
         {allleadsInfo.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
-
+          const countryCode = item.address[0].country_alpha2_code
           const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -129,13 +510,13 @@ const LeadsAllCardList = (props) => {
           return (
             <div>
               <div
-                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-2 h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
-                  <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                  <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                     <div className="flex max-sm:w-full ">
                       <div>
-                        <SubTitle>
+                       
                           <MultiAvatar
                             primaryTitle={item.name}
                             imageId={item.imageId}
@@ -143,7 +524,7 @@ const LeadsAllCardList = (props) => {
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
-                        </SubTitle>
+                        
                       </div>
                       <div class="w-[4%]"></div>
 
@@ -151,20 +532,17 @@ const LeadsAllCardList = (props) => {
                         <Tooltip>
                           <div class="max-sm:w-full justify-between flex md:flex-col">
                            
-                            <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                            <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.name}
                               &nbsp;&nbsp;
                               {date === currentdate ? (
-                                <span class="text-xs"
-                                  style={{
-                                    color: "tomato",
-                                    fontWeight: "bold",
-                                  }}
+                                <div class="text-xs text-[tomato] font-bold"
+                                  
                                 >
                                   New
-                                </span>
+                                </div>
                               ) : null}
-                            </h4>
+                            </div>
                           </div>
                         </Tooltip>
                       </div>
@@ -173,6 +551,28 @@ const LeadsAllCardList = (props) => {
 
                   <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
                     <div>
+                      
+                    </div>
+                    <ButtonGroup>
+                        <RoleButton
+                          type="Hot"
+                          iconType="fas fa-mug-hot"
+                         
+                          tooltip={
+                            <FormattedMessage
+                              id="app.hot"
+                              defaultMessage="Hot"
+                            />
+                          }
+                          role={item.type}
+                          onClick={() => {
+                            const typ = "Hot";
+                            props.updateTypeForLead(item.leadsId, typ);
+                          }}
+                        />
+                      </ButtonGroup>
+                    <div>
+                 
                       <ButtonGroup>
                         <RoleButton
                           type="Warm"
@@ -187,27 +587,6 @@ const LeadsAllCardList = (props) => {
                           role={item.type}
                           onClick={() => {
                             const typ = "Warm";
-                            props.updateTypeForLead(item.leadsId, typ);
-                          }}
-                        />
-                      </ButtonGroup>
-                    </div>
-
-                    <div>
-                      <ButtonGroup>
-                        <RoleButton
-                          type="Hot"
-                          iconType="fas fa-mug-hot"
-                         
-                          tooltip={
-                            <FormattedMessage
-                              id="app.hot"
-                              defaultMessage="Hot"
-                            />
-                          }
-                          role={item.type}
-                          onClick={() => {
-                            const typ = "Hot";
                             props.updateTypeForLead(item.leadsId, typ);
                           }}
                         />
@@ -236,77 +615,69 @@ const LeadsAllCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
            
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
                         ? `${item.countryDialCode} ${item.phoneNumber}`
                         : "Not Available"}
                      
-                    </h4>
+                    </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[3rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
-                    <h4 class=" text-xs text-cardBody font-poppins">
-                      <ReactCountryFlag
-                        countryCode={item.countryAlpha2Code}
-                        svg
-                        style={{
-                          width: "1em",
-                          height: "1em",
-                        }}
-                        title={item.country}
-                      />
+                    <div class=" text-xs text-cardBody font-poppins">
+                    <CountryFlag1 countryCode={countryCode} />
                       &nbsp;
-                      {item.address &&
-                        item.address.length &&
-                        item.address[0].country}
-                    </h4>
+                      {countryCode}
+                    </div>
                   </div>
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
                   
-                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                    <div class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.companyName || "Not Available"}
-                    </h4>
+                    </div>
                   </div>
                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
-                        <span
+                        <div
                        
-                          style={{ cursor: "pointer" }}
+                       class="cursor-pointer"
                           onClick={() => {}}
                         >
                           {" "}
                           <a href={`https://www.${item.url}`} target="_blank">
                             <OpenInBrowserIcon
-                              style={{
-                                cursor: "pointer",
-                                color: "green",
-                                fontSize: "1rem",
-                              }}
+                               className=" !text-base cursor-pointer text-[green]"
                             />
                           </a>
-                        </span>
+                        </div>
                       </Tooltip>
                     ) : null}
                   </div>
 
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                    
-                    <h4 class=" text-xs text-cardBody font-poppins">
+                    <div class=" text-xs text-cardBody font-poppins">
                       {item.sector}
-                    </h4>
+                    </div>
                   </div>
+                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                   
+                   <div class=" text-xs text-cardBody font-poppins">
+                     {item.source}
+                   </div>
+                 </div>
                 </div>
                 <div class="flex md:items-center ">
-                  <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                   
 
                     <div class=" text-xs text-cardBody font-poppins">
-                      <span>
+                      <div>
                         {item.assignedTo === null ? (
                           "None"
                         ) : (
@@ -316,23 +687,22 @@ const LeadsAllCardList = (props) => {
                             imgHeight={"1.8rem"}
                           />
                         )}
-                      </span>
+                      </div>
                     </div>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                  <div className=" flex font-medium flex-col md:w-16  max-sm:flex-row w-full max-sm:justify-between">
                    
 
-                    <span>
+                  <Tooltip title={item.ownerName}>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
                         imageId={item.ownerImageId}
-                        imageURL={item.imageURL}
                         imgWidth={"1.8rem"}
                         imgHeight={"1.8rem"}
                       />
-                    </span>
+                      </Tooltip>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  {/* <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                    
 
                     <div class=" text-xs text-cardBody font-poppins"></div>
@@ -343,20 +713,17 @@ const LeadsAllCardList = (props) => {
                         convertInd={item.convertInd}
                       />
                     </div>
-                  </div>
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  </div> */}
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
+                        className="!text-base cursor-pointer text-green-800"
                           onClick={() => {
                             handleLeadsNotesDrawerModal(true);
                             handleRowData(item);
                           }}
-                          style={{
-                            color: "green",
-                            cursor: "pointer",
-                            fontSize: "1rem",
-                          }}
+                          
                         />
                       </Tooltip>
                     </div>
@@ -370,7 +737,7 @@ const LeadsAllCardList = (props) => {
                         }
                       >
                         <AddchartIcon
-                          style={{ fontSize: "1rem", cursor: "pointer" }}
+                        className="!text-base cursor-pointer text-blue-500"
                           onClick={() => {
                             props.handleCETmodal(true);
                             handleRowData(item);
@@ -380,16 +747,12 @@ const LeadsAllCardList = (props) => {
                     </div>
                   </div>
 
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  {/* <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     {user.leadsUpdateInd === true && user.crmInd === true && (
                       <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
-                            style={{
-                              color: "grey",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base cursor-pointer text-[tomato]"
                             onClick={() => {
                               props.setEditLeads(item);
                               handleUpdateLeadsModal(true);
@@ -405,47 +768,37 @@ const LeadsAllCardList = (props) => {
                           title="Do you want to delete?"
                           onConfirm={() => deleteLeadsData(item.leadsId)}
                         >
-                        
+                           <Tooltip title="Delete">
                           <DeleteOutlined
                             type="delete"
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                              fontSize: "1rem",
-                            }}
+                            className=" !text-base cursor-pointer text-[red]"
                           />
-                     
+                     </Tooltip>
                         </StyledPopconfirm>
                       </div>
                     )}
                     <div></div>
-                  </div>
+                  </div> */}
                   <div class="flex flex-col w-[4%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip
                         overlayStyle={{ maxWidth: "300px" }}
                         title={dataLoc}
                       >
-                        <span
-                          style={{
+                        <div
                           
-                            cursor: "pointer",
-                          }}
                         >
                           <LocationOnIcon
-                            style={{
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}
+                            className="!text-base cursor-pointer text-[#960a0a]"
                           />
-                        </span>
+                        </div>
                       </Tooltip>
                     </div>
                     <div>
                       <Tooltip title={item.email}>
                         <MailOutlineIcon
                           type="mail"
-                          style={{ cursor: "pointer", fontSize: "1rem" }}
+                          className="!text-base cursor-pointer text-green-400"
                           onClick={() => {
                             handleSetCurrentLeadsId(item);
                             props.handleLeadsEmailDrawerModal(true);
@@ -454,7 +807,7 @@ const LeadsAllCardList = (props) => {
                       </Tooltip>{" "}
                     </div>
                   </div>
-                  <div class="w-[2%]"></div>
+           
                 </div>
               </div>
             </div>
@@ -462,8 +815,9 @@ const LeadsAllCardList = (props) => {
           );
         })}
          </InfiniteScroll>
-      </OnlyWrapCard>
       </div>
+      </div>
+      <Suspense fallback={<BundleLoader/>}>
       <UpdateLeadsModal
         item={currentLeadsId}
         updateLeadsModal={updateLeadsModal}
@@ -478,8 +832,6 @@ const LeadsAllCardList = (props) => {
       />
       <OpenCETmodal
         rowdata={rowdata}
-        // item={currentLeadsId}
-        // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
         openCETmodal={props.openCETmodal}
         handleCETmodal={props.handleCETmodal}
       />
@@ -488,6 +840,7 @@ const LeadsAllCardList = (props) => {
         addDrawerLeadsNotesModal={props.addDrawerLeadsNotesModal}
         handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
       />
+      </Suspense>
     </>
   );
 };
@@ -497,8 +850,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  countries: auth.countries,
-  sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingAllLeads: leads.fetchingAllLeads,
@@ -510,14 +861,12 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllLeads,
       emptyLeads,
-      getSectors,
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,
       handleLeadsNotesDrawerModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      getCountries,
       updateTypeForLead,
       handleCETmodal,
     },

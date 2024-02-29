@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
-import { Button,Tooltip } from "antd";
+import { Button,Tooltip ,Popconfirm} from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeEvents} from "../Event/EventAction"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
 
@@ -19,7 +22,7 @@ class SingleEvent extends Component {
   }
   render() {
     const {
-        event: { eventType, eventTypeId },
+        event: { eventType,creationDate, eventTypeId },
       handleChange,
       name,
       value,
@@ -29,16 +32,22 @@ class SingleEvent extends Component {
       handleDeleteEvent,
     } = this.props;
     console.log(linkedEvents);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+        const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <EventWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <EventName style={{ flexBasis: "85%" }}>
-                  {eventType}
-                </EventName>
+                <div class=" font-semibold" >
+                  {eventType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
                   {this.props.event.editInd?
                 <BorderColorIcon 
@@ -47,18 +56,26 @@ class SingleEvent extends Component {
                     onClick={toggleViewType}
                     style={{fontSize:"1rem"}}
                   />:null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeEvents(eventTypeId )}
+                        >
+                    <DeleteOutlined
                  
-                        onClick={() => handleDeleteEvent(eventTypeId)}
-                      size="14px"
+                        // onClick={() => handleDeleteEvent(eventTypeId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
                   {/* {disableDelete && <ActionIcon
                                         tooltipTitle='Delete'
@@ -87,8 +104,7 @@ class SingleEvent extends Component {
                     onChange={handleChange}
                     style={{ width: "60%" }}
                   />
-                  <br />
-                  <br />
+                
                   <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -103,7 +119,7 @@ class SingleEvent extends Component {
               defaultMessage="Update"
             />
                 </Button>
-                &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage
@@ -116,22 +132,22 @@ class SingleEvent extends Component {
               )
           }
         </ViewEditCard>
-      </EventWrapper>
+      </div>
     );
   }
 }
 
-export default SingleEvent;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const EventWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EventName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const EventValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeEvents,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEvent);
+
+
+

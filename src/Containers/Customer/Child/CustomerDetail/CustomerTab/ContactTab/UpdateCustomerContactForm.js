@@ -5,13 +5,11 @@ import { FormattedMessage } from "react-intl";
 import { Button, Select, } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { updateCustomerContact } from "../../../../CustomerAction";
-import Upload from "../../../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import {getDesignations} from "../../../../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../../../../Settings/Department/DepartmentAction";
@@ -178,13 +176,13 @@ class UpdateCustomerContactForm extends Component {
           }) => (
               <Form className="form-background">
                 <div  class=" flex justify-between">
-                  <div class=" h-full w-2/4"
-                  ><Spacer />
-                    <div  class=" flex flex-nowrap">
-                      <FastField name="imageId" component={Upload} />
+                <div class=" h-full w-[47.5%] mt-3"
+                >
+                    <div  class=" flex flex-nowrap mt-3">
+                      <FastField name="imageId" component={PostImageUpld} />
                       <div>
                       <div class=" flex justify-between">
-                          <div class =" w-2/6">
+                          {/* <div class =" w-2/6">
                             <FastField
                               name="salutation"
                               type="text"
@@ -201,8 +199,8 @@ class UpdateCustomerContactForm extends Component {
                               className="field"
                               isColumn
                             />
-                          </div>
-                          <div class=" w-3/5">
+                          </div> */}
+                          <div class=" w-full">
                             <FastField
                               isRequired
                               name="firstName"
@@ -221,8 +219,8 @@ class UpdateCustomerContactForm extends Component {
                               />
                           </div>
                         </div>
-                        <Spacer />
-                        <div class=" flex justify-between">
+                        
+                        <div class=" flex justify-between mt-3">
                           <div class=" w-2/5">
                             <FastField
                               name="middleName"
@@ -341,8 +339,8 @@ class UpdateCustomerContactForm extends Component {
                       </div>
                     </div>
 
-                    <Spacer />
-                    <div class=" flex justify-between">
+                  
+                    <div class=" flex justify-between mt-3">
                       <div class=" w-full">
                         <FastField
                           isRequired
@@ -363,8 +361,8 @@ class UpdateCustomerContactForm extends Component {
                          />
                       </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between">
+              
+                    <div class=" flex justify-between mt-3">
                       <div class=" w-full">
                         <FastField
                           type="text"
@@ -383,9 +381,9 @@ class UpdateCustomerContactForm extends Component {
                          />
                       </div>
                     </div>
-                    <Spacer />
+                
 
-                    <div class=" flex justify-between">
+                    <div class=" flex justify-between mt-3">
                       <div class=" w-2/5">
                         <>
                         <Field
@@ -446,13 +444,13 @@ class UpdateCustomerContactForm extends Component {
                         />
                     </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between"></div>
+                   
+                    <div class=" flex justify-between mt-3"></div>
                   </div>
-                &nbsp;
-                <div class=" h-2/3 w-2/5"
-                  >                  
-                    <Spacer/>
+              
+                  <div class=" h-full w-[47.5%]"
+                >                
+                   
                     <FieldArray
                     name="address"
                     label="Address"
@@ -463,7 +461,7 @@ class UpdateCustomerContactForm extends Component {
                       />
                     )}
                   />
-                    <Spacer  />                  
+                  <div class=" mt-3">          
                     <Field
                       name="notes"
                       // label="Notes"
@@ -474,6 +472,7 @@ class UpdateCustomerContactForm extends Component {
                       isColumn
                       component={TextareaComponent}
                       />
+                      </div>  
                   </div>
                 </div>
                 

@@ -1,7 +1,6 @@
 import React from "react";
 import error from "../../Assets/Images/i.png";
 import { Button } from "antd";
-import { Spacer } from "../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
 class AppErrorBoundary extends React.Component {
@@ -27,59 +26,29 @@ class AppErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "4.6875em 1.25em"
-            }}
+        <div class="flex justify-center items-center px-[5rem] py-[1.25rem]"
           >
-            <div
-              style={{
-                width: "25em",
-                height: "25em",
-                padding: "0.3125em 1.25em",
-                /* border-radius: "50%"; */
-                boxShadow: " 0 0.8125em 1.6875em -0.3125em rgba(50, 50, 93, 0.25)",
-                backgroundColor: " #f5f5f5",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center"
-                // margin-bottom: 0.625em;
-                // margin-top: 0.625em;
-              }}
+         <div class=" flex  flex-col justify-center items-center w-[25rem] h-[25rem] px-[0.5rem] py-[1.25rem] bg-[#f5f5f5]"
+            style={{ boxShadow: " 0 0.8125em 1.6875em -0.3125em rgba(50, 50, 93, 0.25)"}}
             >
               <img
                 src={error}
                 style={{ height: "3.125em", width: "3.125em", borderRadius: "50%" }}
               ></img>
               <div>
-                <h1
-                  style={{
-                    fontSize: "2.5em",
-                    fontWeight: "37.5em",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
+              <div class=" flex text-lg text-[blue] font-bold font-poppins justify-center items-center mt-2"
+
+>
                   OOPS !
-                </h1>
-                <h1
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
+                </div>
+                <div class=" flex justify-center text-lg font-bold font-poppins items-center mt-2 ml-4"
                 >
-                  &nbsp; &nbsp; It is a problem with us.
+                  It is a problem with us.
                   <br />
                   Please refresh your browser
-                </h1>
+                </div>
               </div>
-              <Spacer />
+           <div class=" mt-3">
               <Button
                 type="primary"
               
@@ -91,6 +60,7 @@ class AppErrorBoundary extends React.Component {
                 />
                 {/* Retry */}
               </Button>
+              </div>
             </div>
           </div>
         </>

@@ -1,6 +1,5 @@
 import * as types from "./LocationActionType";
 import axios from "axios";
-import dayjs from "dayjs";
 import { base_url,base_url2 } from "../../../../Config/Auth";
 import Swal from 'sweetalert2';
 
@@ -97,6 +96,12 @@ export const setLocationViewType = (viewType) => (dispatch) => {
           type: types.UPDATE_LOCATIONS_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Info Updated Succefully',
+          showConfirmButton: false,
+          timer: 1500
+        })
         cb();
       })
       .catch((err) => {
@@ -260,3 +265,33 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         });
       });
   }; 
+
+  export const addingLocationToggle = (data,orgId) => (dispatch) => {
+    //console.log(permissions, userId);
+   // const userId = getState().auth.userDetails.userId;
+    dispatch({
+      type: types.ADDING_LOCATION_TOGGLE_REQUEST,
+    });
+    axios
+      .put(`${base_url}/locationDetails/update/all-indicators`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+  
+      .then((res) => {
+        console.log(res);
+       dispatch(getlocation(orgId))
+        dispatch({
+          type: types.ADDING_LOCATION_TOGGLE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADDING_LOCATION_TOGGLE_FAILURE,
+          payload: err,
+        });
+      });
+  };

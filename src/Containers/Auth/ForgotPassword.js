@@ -114,16 +114,9 @@ import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import styled from "styled-components";
-import { CheckCircleTwoTone, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import {
-  // doSignUp,
-  // getCountries,
-  // verifyEmailurL,
-  //validateOtpurL,
-} from "./AuthAction";
-import RandomImageScreen from "./RandomImageScreen";
-
-//import { tick } from "../../Assets/Images/Logo.png";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import FWLogo from "../../Assets/Images/name.jpg";  // for CT
+import FWLogo2 from "../../Assets/Images/nuboxnew.jpg";  // for NB
 
 /**
  * yup validation scheme for set Password
@@ -144,6 +137,7 @@ class ForgotPassword extends Component {
     show1: Boolean(),
     show2: Boolean(),
     show: Boolean(),
+    sendOtpClicked: false,
   };
   handleClick = () =>
     this.setState(({ type, prevState }) => ({
@@ -177,174 +171,183 @@ class ForgotPassword extends Component {
   render() {
     return (
       <>
-      <div className="main" style={{display:"flex",justifyContent:"space-evenly"}}>
-      <div className="forgot_password">
-      <FlexContainer>
-          <AuthContainer
-            style={{
-              backgroundColor: "white",
-              flexDirection: "column",
-              width: "100%",
-            }}
-          >
-            <FormWrapper>
-              <Title>Forgot Password</Title>
-              <SubTitle>Link will be sent to your registered email id</SubTitle>
-              <Spacer />
-              <Formik
-                initialValues={{
-                  email: "",
-                  otp:"",
-                  password:"",
-                  confirmPassword:"",
-                }}
-                // validationSchema={ChangePasswordSchema}
-                onSubmit={(values) => {
-                  console.log(values);
-                  this.props.forgetPassword(
-                    {
-                      email: this.props.email,
-                    },
-                    this.callback
-                  );
+        <div className="main" style={{ display: "flex", justifyContent: "space-evenly" }}>
+
+          <div className="forgot_password">
+
+            <FlexContainer>
+              <AuthContainer
+                style={{
+                  backgroundColor: "white",
+                  flexDirection: "column",
+                  width: "100%",
                 }}
               >
-                {({ errors, touched, values, isSubmitting }) => (
-                  <Form style={{ width: "25vw" }}>
-                    <div >
-                      <div style={{ width: "100%",display:"flex" }}>
-                      <div style={{ width: "75%" }}>
-                      <Field
-                        // type="defaultUser.email"
-                        placeholder="Enter your email"
-                        name="defaultUser.email"
-                        // label="Verify Email"
-                        // className="field"
-                        isColumn
-                        width={"100%"}
-                        component={this.InputComponent}
-                        inlineLabel
-                      />
-                      </div>
-                      <div style={{ width: "25%", }}>
-                      <Button
-                        type="primary"
-                        // htmlType="submit"
-                        //disabled={!values.defaultUser.email.length}
-                        // loading={isSubmitting}
-                        onClick={() => {
-                        this.props.verifyEmailurL({
-                        emailId: values.defaultUser.email,
-                            otp: 0,
-                          });
-                          // this.handleOtpField()
-                        }}
-                        style={{
-                          width: "100%",
-                          margin: "7%",
-                        }}
-                        // disabled={!this.state.checked}
-                      >
-                        Send OTP
-                      </Button>
-                      </div>
-                      </div>
+                <img
+                  className="big-logo"
+                  src={FWLogo2}
+                  style={{ width: 200 }}
+                  alt="Tekorero logo"
+                />
+                <FormWrapper>
+                  <Title>Forgot Password</Title>
+                  <SubTitle>Link will be sent to your registered email id</SubTitle>
+                  <Spacer />
+                  <Formik
+                    initialValues={{
+                      email: "",
+                      otp: "",
+                      password: "",
+                      confirmPassword: "",
+                    }}
+                    // validationSchema={ChangePasswordSchema}
+                    onSubmit={(values) => {
+                      console.log(values);
+                      this.props.forgetPassword(
+                        {
+                          email: this.props.email,
+                        },
+                        this.callback
+                      );
+                    }}
+                  >
+                    {({ errors, touched, values, isSubmitting }) => (
+                      <Form style={{ width: "25vw" }}>
+                        <div >
+                          <div className="flex w-full">
+                            <div className="w-[75%]" >
+                              <Field
+                                // type="defaultUser.email"
+                                placeholder="Enter your email"
+                                name="defaultUser.email"
+                                // label="Verify Email"
+                                // className="field"
+                                isColumn
+                                width={"100%"}
+                                component={this.InputComponent}
+                                inlineLabel
+                              />
+                            </div>
+                            <div className="w-[25%]" >
+                              <Button
+                                type="primary"
+                                // htmlType="submit"
+                                //disabled={!values.defaultUser.email.length}
+                                // loading={isSubmitting}
+                                onClick={() => {
+                                  this.setState({ sendOtpClicked: true });
+                                  this.props.verifyEmailurL({
+                                    emailId: values.defaultUser.email,
+                                    otp: 0,
+                                  });
+                                  // this.handleOtpField()
+                                }}
+                                style={{
+                                  width: "100%",
+                                  margin: "7%",
+                                }}
+                              // disabled={!this.state.checked}
+                              >
+                                Send OTP
+                              </Button>
+                            </div>
+                          </div>
 
-                      <div style={{ width: "100%",display:"flex" }}>
-                        <div style={{ width: "75%" }}>
-                      <Field
-                        // disabled={!this.state.otp}
-                        name="defaultUser.validateotp"
-                        // label="Validate OTP*"
-                        placeholder="Validate OTP"
-                        isColumn
-                        component={this.InputComponent}
-                      />
-                        </div>
-                      <div style={{ width: "25%" }}>
-                      <Button
-                        type="primary"
-                        // htmlType="submit"
-                        //disabled={!values.defaultUser.validateotp.length}
-                        onClick={() => {
-                        //   this.props.validateOtpurL({
-                        //     emailId: values.defaultUser.email,
-                        //     otp: values.defaultUser.validateotp,
-                        //   });
-                          
-                        }}
-                        style={{
-                          width: "100%",
-                          margin: "7%",
-                        }}
-                        
-                        // disabled={!this.state.checked}
-                      >
-                        Validate
-                      </Button>
-                      </div>
-                      </div>
+                          <div className="w-full flex" >
+                            <div className="w-[75%]" >
+                              <Field
+                                // disabled={!this.state.otp}
+                                name="defaultUser.validateotp"
+                                // label="Validate OTP*"
+                                placeholder="Validate OTP"
+                                isColumn
+                                component={this.InputComponent}
+                              />
+                            </div>
+                            <div className="w-[25%]">
+                              <Button
+                                type="primary"
+                                // htmlType="submit"
+                                //disabled={!values.defaultUser.validateotp.length}
+                                onClick={() => {
+                                  //   this.props.validateOtpurL({
+                                  //     emailId: values.defaultUser.email,
+                                  //     otp: values.defaultUser.validateotp,
+                                  //   });
 
-                      <div style={{ width: "100%",display:"flex" }}>
-                      
-                      <div style={{ width: "100%" }}>
-                        <Field
-                          name="password"
-                          //type={this.state.type}
-                          placeholder=" New password"
-                          component={this.InputComponent}
-                        />
-                      </div>
-                      {this.state.show ? (
-                        <EyeOutlined
-                          type="eye"
-                          onClick={this.handleClick}
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
-                          size="24"
-                        />
-                      ) : (
-                          <EyeInvisibleOutlined
-                            type="eye-invisible"
-                            onClick={this.handleClick}
-                            size="24"
-                            style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
-                          />
-                   )} 
-                    
-                      </div>
+                                }}
+                                style={{
+                                  width: "100%",
+                                  margin: "7%",
+                                }}
+                                disabled={!this.state.sendOtpClicked}
+                              // disabled={!this.state.checked}
+                              >
+                                Validate
+                              </Button>
+                            </div>
+                          </div>
 
-                      <div style={{ width: "100%",display:"flex" }}>
-                  
-                      <div style={{ width: "100%" }}>
-                        <Field
-                          name="confirmPassword"
-                          type={this.state.type1}
-                          placeholder="Confirm new password"
-                          component={this.InputComponent}
-                        />
-                      </div>
-                      {this.state.show1 ? (
-                        <EyeOutlined
-                          type="eye"
-                          onClick={this.handleClick1}
-                          style={{
-                            marginLeft: "-1.25em",
-                            marginTop: "1.25em",
-                          }}
-                        // style={{ size: 24 }}
-                        />
-                      ) : (
-                          <EyeInvisibleOutlined
-                            type="eye-invisible"
-                            onClick={this.handleClick1}
-                            style={{
-                              marginLeft: "-1.25em",
-                              marginTop: "1.25em",
-                            }}
-                          // style={{ size: 24 }}
-                          />
-                        )}
-                      {/* {values.password.length &&
+                          <div className="w-full flex" >
+
+                            <div className="w-full" >
+                              <Field
+                                name="password"
+                                //type={this.state.type}
+                                placeholder=" New password"
+                                component={this.InputComponent}
+                              />
+                            </div>
+                            {this.state.show ? (
+                              <EyeOutlined
+                                type="eye"
+                                onClick={this.handleClick}
+                                style={{ marginLeft: "-1.25em", marginTop: "-0.25em" }}
+                                size="24"
+                              />
+                            ) : (
+                              <EyeInvisibleOutlined
+                                type="eye-invisible"
+                                onClick={this.handleClick}
+                                size="24"
+                                style={{ marginLeft: "-1.25em", marginTop: "-0.25em" }}
+                              />
+                            )}
+
+                          </div>
+
+                          <div className="w-full flex" >
+
+                            <div className="w-full " >
+                              <Field
+                                name="confirmPassword"
+                                type={this.state.type1}
+                                placeholder="Confirm new password"
+                                component={this.InputComponent}
+                              />
+                            </div>
+                            {this.state.show1 ? (
+                              <EyeOutlined
+                                type="eye"
+                                onClick={this.handleClick1}
+                                style={{
+                                  marginLeft: "-1.25em",
+                                  marginTop: "-0.25em",
+                                }}
+                              // style={{ size: 24 }}
+                              />
+                            ) : (
+                              <EyeInvisibleOutlined
+                                type="eye-invisible"
+                                onClick={this.handleClick1}
+                                style={{
+                                  marginLeft: "-1.25em",
+                                  marginTop: "-0.25em",
+                                }}
+                              // style={{ size: 24 }}
+                              />
+                            )}
+                            {/* {values.password.length &&
                         values.password === values.confirmPassword ? (
                           <CheckCircleTwoTone
                             type="check-circle"
@@ -358,73 +361,63 @@ class ForgotPassword extends Component {
                             }}
                           />
                         ) : null} */}
-                    
-                      </div>
-                      
-                      </div>
-                      <Spacer style={{ marginBottom: "1em" }} />
-                      <div>
-                        <span
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "flex-start",
-                          }}
-                        >
-                          {" "}
-                          <Link
-                            to="/login"
-                            style={{ textAlign: "center", fontSize: 14 }}
-                          >
-                            Back to login
-                          </Link>
 
-                          
-                        </span>
+                          </div>
 
-                        <Button
-                      type="primary"
-                      htmlType="submit"
-                      Loading={this.props.changingPassword}
-                      style={{ width: "15.875em", height: "2.5em" }}
-                    // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
-                    >
-                      Save Password
-                    </Button>
-                      </span>
-                    </div>
-                    {/* <Spacer style={{ marginBottom: "1em" }} /> */}
-                    
-                  </Form>
-                )}
-              </Formik>
-              {/* <Spacer style={{ marginBottom: -40 }} />
-              <Link to='/login' style={{ textAlign: 'center', fontSize: 16, marginLeft: "0.625em" }}>Back to login</Link> */}
-        
-            </FormWrapper>
-            <div className="footer1"
-                             style={{
-                                textAlign: 'center',
-                                 fontSize: '12x', fontFamily: 'SFS, Arial, sans-serif', position: 'absolute', bottom: 0
-                             }}>
-                             © {new Date().getFullYear()},  {` `} teKorero.com, All rights reserved.
                         </div>
-          </AuthContainer>
-          
-        </FlexContainer>
-        </div>
-        {/* <div className="Image">
+
+                        <div className="mt-4">
+                          <span className="flex justify-between">
+
+                            <span className=" font-bold flex justify-start">
+                              {" "}
+                              <Link
+                                to="/login"
+                                style={{ textAlign: "center", fontSize: 14 }}
+                              >
+                                Back to login
+                              </Link>
+
+
+                            </span>
+
+                            <Button
+                              type="primary"
+                              htmlType="submit"
+                              Loading={this.props.changingPassword}
+                              style={{ width: "15.875em", height: "2.5em" }}
+                            // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
+                            >
+                              Save Password
+                            </Button>
+                          </span>
+                        </div>
+                        {/* <Spacer style={{ marginBottom: "1em" }} /> */}
+
+                      </Form>
+                    )}
+                  </Formik>
+                  {/* <Spacer style={{ marginBottom: -40 }} />
+              <Link to='/login' style={{ textAlign: 'center', fontSize: 16, marginLeft: "0.625em" }}>Back to login</Link> */}
+
+                </FormWrapper>
+                <div className="footer1"
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '12x', fontFamily: 'SFS, Arial, sans-serif', position: 'absolute', bottom: 0
+                  }}>
+                  © {new Date().getFullYear()},  {` `} teKorero.com, All rights reserved.
+                </div>
+              </AuthContainer>
+
+            </FlexContainer>
+          </div>
+          {/* <div className="Image">
         <RandomImageScreen />
         </div> */}
-      </div>
-        
-        
+        </div>
+
+
       </>
     );
   }
@@ -440,7 +433,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       // changePassword,
-     // validateOtpurL,
+      // validateOtpurL,
     },
     dispatch
   );

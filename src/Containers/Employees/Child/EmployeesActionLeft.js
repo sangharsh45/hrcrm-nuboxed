@@ -5,7 +5,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { withRouter } from "react-router-dom";
 import { inputEmployeeDataSearch,getEmployeelist,ClearReducerDataOfEmployee, getRecords } from "../EmployeeAction";
-import {  Input, Tooltip, Badge } from "antd";
+import {  Input, Tooltip, Badge,Avatar } from "antd";
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, {  } from 'react-speech-recognition';
 import { FormattedMessage } from "react-intl";
@@ -75,37 +75,19 @@ const EmployeesActionLeft = (props) => {
           overflowCount={999}
         >
       <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setEmployeeViewType("tile")}
             style={{
               color: props.viewType === "tile" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <GridViewIcon />
+            </Avatar>
           </span>
           </Badge> 
       </Tooltip>
-      {/* <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "table" &&
-              props.employeerecordData.EmployeeListByLiveInd) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setEmployeeViewType("table")}
-            style={{
-              color: props.viewType === "table" && "#1890ff",
-            }}
-          >
-            <GroupsIcon />
-          </span>
-        </Badge>
-      </Tooltip> */}
+  
       <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
       <Badge
           size="small"
@@ -117,18 +99,20 @@ const EmployeesActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setEmployeeViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",
             }}
           >
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
             <TocIcon />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
 
-      <div class=" ml-6 h-6 w-60">
+      <div class=" ml-6 h-6 w-72">
       <Input
      placeholder="Search By Name"
       width={"100%"}
@@ -175,7 +159,7 @@ const EmployeesActionLeft = (props) => {
                      value={props.selectedDepartment}
                     //  disabled={!props.selectedLocation}
                   >
-                    <option value="">All Department</option>
+                    <option value="">All Departments</option>
                     {props.departments.map((item) => {
                       return (
                         <option value={item.departmentName}>

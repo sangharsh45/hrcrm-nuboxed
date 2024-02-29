@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import {
   List,
   Popconfirm,
-  Button,
+  Rate,
 } from "antd";
 import {
   getTodos,
@@ -194,7 +194,7 @@ class Todo extends Component {
    
       }}
       > */}
-      <div class=" h-[100vh] overflow-auto" >
+      <div  >
 
         <TimeInterval
           times={this.props.dateTodoRangeList}
@@ -202,13 +202,14 @@ class Todo extends Component {
         />
 
         {todos.length ? 
-                <div class=" flex">
+                <div class=" flex flex-col ">
           {todos &&
             todos.slice(0, 5).map((todo, i) => {
               return (
                 <List.Item key={todo.id} style={{ width: "100%"
                 //, overflow:"scroll"
                  }}>
+                  <div class=" flex flex-row justify-between">
                   <TodoItem
                     key={todo.id}
                     todo={todo}
@@ -220,6 +221,8 @@ class Todo extends Component {
                     getTodos={getTodos}
 
                   />
+                                     <div class=" flex justify-end" 
+>
                   <Popconfirm
                     placement="topRight"
                     title={"Done"
@@ -235,9 +238,9 @@ class Todo extends Component {
                     />}
                     onCancel={this.confirm}
                   >
-                    <div class=" flex justify-end" 
->
-                      <Button
+ 
+                      <button
+                      className="button-borderless"
                         style={{ padding: "0px 0.37em", border: "none" }}
                         // disabled={todo.completionInd === "false"}
                         onClick={() => setId(todo)}
@@ -245,7 +248,7 @@ class Todo extends Component {
 
                       >
 
-                        {/* <Rate
+                        <Rate
                           allowHalf
                           style={{ color: "orange" }}
                           tooltips={desc}
@@ -255,10 +258,12 @@ class Todo extends Component {
                           value={`${todo.rating} `}
                           title={text}
 
-                        /> */}
-                      </Button>
-                    </div>
+                        />
+                      </button>
+                  
                   </Popconfirm>
+                  </div>
+                  </div>
                   {/* <RatingBox
                         handleChange={this.handleChange}
                         todo={todo}

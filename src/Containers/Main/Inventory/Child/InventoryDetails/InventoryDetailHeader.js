@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, lazy } from "react";
 import { ActionHeader } from "../../../../../Components/Utils";
-import InventoryDetailActionLeft from "./InventoryDetailActionLeft";
+import InventoryDetailsActionRight from "./InventoryDetailsActionRight";
+const InventoryDetailActionLeft = lazy(() => import("./InventoryDetailActionLeft"));
 
 class InventoryDetailHeader extends Component {
   render() {
@@ -9,11 +10,16 @@ class InventoryDetailHeader extends Component {
         <ActionHeader
           leftComponent={
             <InventoryDetailActionLeft
-            inventory={this.props.inventory}
+              viewType1={this.props.viewType1}
+              setInventoryDetailViewType={this.props.setInventoryDetailViewType}
+              inventory={this.props.inventory}
               handleResetTab={this.props.handleResetTab}
             />
           }
-          rightComponent={<></>}
+          rightComponent={<InventoryDetailsActionRight
+            inventory={this.props.inventory}
+            handleResetTab={this.props.handleResetTab} />
+          }
         />
       </div>
     );

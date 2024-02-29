@@ -14,6 +14,9 @@ const initialState = {
     addingRecruitToggle: false,
     addingRecruitToggleError: false,
 
+    addingElearningToggle: false,
+    addingElearningToggleError: false,
+
     addingDepartments: false,
     addingDepartmentsError: false,
 
@@ -67,7 +70,8 @@ export const departmentsReducer = (state = initialState, action) => {
         return {
           ...state,
           addingDepartments: false,
-          departments: [...state.departments, action.payload],
+          departments:[action.payload,...state.departments]
+          // departments: [...state.departments, action.payload],
         };
       case types.ADD_DEPARTMENTS_FAILURE:
         return { ...state, addingDepartments: false, addingDepartmentsError: true };
@@ -273,12 +277,59 @@ export const departmentsReducer = (state = initialState, action) => {
                   addingRecruitToggleError: true,
                 };
 
+                case types.LINK_ELEARNING_TOGGLE_REQUEST:
+                  return { ...state, addingElearningToggle: true };
+                case types.LINK_ELEARNING_TOGGLE_SUCCESS:
+                  return {
+                    ...state,
+                    addingElearningToggle: false,
+                    departments:action.payload,
+                    // departments: state.departments.map((item) => {
+                    //   if (item.departmentId === action.payload.departmentId) {
+                    //     return action.payload;
+                    //   } else {
+                    //     return item;
+                    //   }
+                    // }),
+                  };
+                case types.LINK_ELEARNING_TOGGLE_FAILURE:
+                  return {
+                    ...state,
+                    addingElearningToggle: false,
+                    addingElearningToggleError: true,
+                  };
+
                 
               case types.HANDLE_CLAER_REDUCER_DATA_DEPARTMENT:
                 return { ...state, 
                   departments: [], 
                   // deletedTruck: [] 
                 };
+
+                
+        case types.ADDING_MODULE_REQUEST:
+          return { ...state, addingModules: true };
+        case types.ADDING_MODULE_SUCCESS:
+          return {
+            ...state,
+            addingModules: false,
+            departments:[action.payload,...state.departments]
+            // departments: state.departments.map((item) => {
+            //   if (item.departmentId
+            //     === action.payload.departmentId
+            //   ) {
+            //     return action.payload;
+            //   } else {
+            //     return item;
+            //   }
+            // }),
+          };
+        case types.ADDING_MODULE_FAILURE:
+          return {
+            ...state,
+            addingModules: false,
+            addingModulesError: true,
+          };
     
 
         default:

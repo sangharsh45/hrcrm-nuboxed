@@ -49,7 +49,7 @@ export const addSources = (source,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getSources(orgId));
+        // dispatch(getSources(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("source has been added successfully!");
@@ -105,7 +105,7 @@ export const removeSource = ( sourceId) => (dispatch) => {
   /**
  *update label of sector
  */
-export const updateSource = ( sourceId,name,cb) => (dispatch) => {
+export const updateSource = ( sourceId,name,listType,cb) => (dispatch) => {
     
     dispatch({
       type: types.UPDATE_SOURCE_REQUEST,
@@ -113,7 +113,7 @@ export const updateSource = ( sourceId,name,cb) => (dispatch) => {
     axios
       .put(
         `${base_url}/source/${sourceId}`,
-        { name,sourceId,editInd:true },
+        { name,sourceId,listType,editInd:true },
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",

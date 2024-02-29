@@ -1,7 +1,7 @@
 import * as types from "./OpportunityActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "stage",
+  viewType: "table",
 
   addOpportunityModal: false,
   addRecruiterModal:false,
@@ -661,14 +661,21 @@ export const OpportunityReducer = (state = initialState, action) => {
         ...state,
         updateOpportunityById: false,
         updateOpportunityModal: false,
-        opportunity:action.payload,
-        // opportunity: state.opportunity.map((item) => {
-        //   if (item.opportunityId === action.payload.opportunityId) {
-        //     return action.payload;
-        //   } else {
-        //     return item;
-        //   }
-        // }),
+        // opportunity:action.payload,
+        opportunityByUserId: state.opportunityByUserId.map((item) => {
+          if (item.opportunityId === action.payload.opportunityId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+        allOpportunity:state.allOpportunity.map((item) => {
+          if (item.opportunityId === action.payload.opportunityId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.UPDATE_OPPORTUNITY_BY_ID_FAILURE:
       return {

@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { Button,Select } from "antd";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import { Formik, Form, Field, } from "formik";
-import { Spacer ,StyledLabel} from "../../../../Components/UI/Elements";
+import { StyledLabel} from "../../../../Components/UI/Elements";
 import {
     addDonotcall
 }
@@ -88,12 +88,8 @@ function DonotCallForm (props){
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+              <div class=" flex justify-between" >
+                <div class=" h-full w-[45%]"
                 >
                    <StyledLabel>Parameter</StyledLabel> 
                    <Select
@@ -290,8 +286,8 @@ function DonotCallForm (props){
                 </div>
                
               </div>
-              <Spacer />
-              <div class=" flex justify-end" >
+        
+              <div class=" flex justify-end mt-3" >
                 <Button
                   type="primary"
                   htmlType="submit"

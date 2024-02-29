@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip, Popconfirm} from "antd";
 import { FormattedMessage } from "react-intl";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeInvestor} from "../InvestorTab/InvestorListAction"
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
-
+import dayjs from "dayjs";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
 class SingleInvestorList extends Component {
@@ -19,7 +21,7 @@ class SingleInvestorList extends Component {
   }
   render() {
     const {
-      investor: { name, investorCategoryId, EditInd },
+      investor: { name,creationDate, investorCategoryId,editInd, EditInd },
       handleChange,
       name1,
       value,
@@ -30,18 +32,25 @@ class SingleInvestorList extends Component {
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
+    
     return (
-      <SectorWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <SectorName style={{ flexBasis: "85%" }}>
-                  {name}
-                </SectorName>
+                 <div class=" font-semibold" >
+                  {name}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
-                  {/* {this.props.source.editInd ? ( */}
+                  {this.props.investor.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -49,27 +58,28 @@ class SingleInvestorList extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null}  */}
-                  &nbsp;
+                 ) : null} 
+               
                   <Tooltip title="Delete">
-                    <DeleteIcon
-                        onClick={() => handleDeleteInvestor(investorCategoryId)}
-                      size="14px"
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeInvestor(investorCategoryId )}
+                        >
+                    <DeleteOutlined
+                        // onClick={() => handleDeleteInvestor(investorCategoryId)}
+                   
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+    
                 </div>
               </div>
             ) : (
@@ -81,8 +91,7 @@ class SingleInvestorList extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -98,7 +107,7 @@ class SingleInvestorList extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -108,22 +117,22 @@ class SingleInvestorList extends Component {
             )
           }
         </ViewEditCard>
-      </SectorWrapper>
+      </div>
     );
   }
 }
 
-export default SingleInvestorList;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const SectorWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const SectorName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const SectorValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeInvestor,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleInvestorList);
+
+
+

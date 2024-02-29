@@ -27,8 +27,8 @@ const ShipperDocumentTable = lazy(() =>
 const ShipperActivityTable = lazy(() =>import("./ShipperActivityTab/ShipperActivityTable")
 );
 
-const AddContactModal = lazy(() =>
-  import("./ShipperContactTab/AddContactModal")
+const AddShipperContactModal = lazy(() =>
+  import("./ShipperContactTab/AddShipperContactModal")
 );
 const ContactShipperTable = lazy(() =>
   import("./ShipperContactTab/ContactShipperTable")
@@ -317,7 +317,7 @@ class ShipperDetailsTab extends Component {
               this.props.handleShipperDocumentUploadModal
             }
           /> 
-          <AddContactModal
+          <AddShipperContactModal
             shipperContactModal={this.props.shipperContactModal}
             handleShipperContactModal={this.props.handleShipperContactModal}
           />

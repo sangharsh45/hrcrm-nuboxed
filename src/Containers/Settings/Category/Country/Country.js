@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
-import SingleCountry from "./SingleCountry";
 import { getCountry ,
   allCountryMandatory} from "../Country/CountryAction";
 import { Button, } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
+const SingleCountry = lazy(() =>
+  import("./SingleCountry")
+);
+
 
 
 class Country extends Component {
@@ -190,7 +193,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Country);
 // import React, { Component } from "react";
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
-// import moment from "moment";
+// import dayjs from "dayjs";
 // import { MainWrapper } from "../../../../Components/UI/Layout";
 // import { getCountry,allCountryMandatory } from "../Country/CountryAction";
 // import SingleCountry from "./SingleCountry";
@@ -279,7 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Country);
 //             </div>
 //           </div>
 //         </div>
-//         <h4>Updated on {moment(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</h4>
+//         <div>Updated on {dayjs(this.props.country && this.props.country.length && this.props.country[0].updationDate).format("ll")} by {this.props.country && this.props.country.length && this.props.country[0].name}</div>
 //       </>
 //     );
 //   }

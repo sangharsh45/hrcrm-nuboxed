@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DownloadIcon from '@mui/icons-material/Download';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Highlighter from "react-highlight-words";
 import { base_url } from "../../../../../../Config/Auth";
-import { getDocuments } from "../../../../../Settings/Documents/DocumentsAction";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -23,11 +22,11 @@ import {
   getCustomerDocument,
   deleteDocument,
 } from "../../../../CustomerAction";
-import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import { FormattedMessage } from "react-intl";
-import { DeleteOutlined } from "@ant-design/icons";
-import moment from "moment";
-import ContractToggle from "./ContractToggle";
+import { elipsize } from "../../../../../../Helpers/Function/Functions";
+import dayjs from "dayjs";
+const ContractToggle =lazy(()=>import("./ContractToggle")); 
+
 class LinkedDocuments extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +41,7 @@ class LinkedDocuments extends Component {
       getCustomerDocument,
     } = this.props;
     getCustomerDocument(customerId);
-    this.props.getDocuments();
+    // this.props.getDocuments();
   }
 
   getColumnSearchProps = (dataIndex) => ({
@@ -137,142 +136,7 @@ class LinkedDocuments extends Component {
         value: item.documentTypeName,
       };
     });
-    const columns = [
-      {
-        title: <FormattedMessage id="app.date" defaultMessage="Date" />,
-        dataIndex: "creationDate",
-        sorter: (a, b) => {
-          var creationDateA = a.creationDate; // ignore upper and lowercase
-          var creationDateB = b.creationDate; // ignore upper and lowercase
-          if (creationDateA < creationDateB) {
-            return -1;
-          }
-          if (creationDateA > creationDateB) {
-            return 1;
-          }
 
-          return 0;
-        },
-        render: (name, item, i) => {
-          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
-        },
-      },
-      {
-        //title: "Name",
-        title: <FormattedMessage id="app.name" defaultMessage="Name" />,
-        dataIndex: "documentTitle",
-        ...this.getColumnSearchProps("documentTitle"),
-      },
-      {
-        title: <FormattedMessage id="app.type" defaultMessage="Type" />,
-        dataIndex: "documentTitle",
-        filters: documentTypeOption,
-        onFilter: (value, record) => {
-          return record.documentTitle === value;
-        },
-      },
-      {
-        //title: "Description",
-        title: (
-          <FormattedMessage id="app.description" defaultMessage="Description" />
-        ),
-        dataIndex: "documentDescription",
-        width: "20%",
-        render: (name, item, i) => {
-          console.log(item);
-          return <span>{elipsize(item.documentDescription || "", 15)}</span>;
-        },
-        onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-        sorter: (a, b) => a.taskType.length - b.taskType.length,
-      },
-      {
-        //title: "Uploaded By",
-        title: (
-          <FormattedMessage id="app.uploadedBy" defaultMessage="Uploaded By" />
-        ),
-        dataIndex: "uploadedBy",
-        render: (name, item, i) => {
-          return (
-            <Tooltip title={item.uploadedBy}>
-              <SubTitle>
-                <MultiAvatar
-                  primaryTitle={item.uploadedBy}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
-                />
-              </SubTitle>
-            </Tooltip>
-          );
-        },
-      },
-      {
-        //title: "Name",
-        title: <FormattedMessage
-          id="app.fileName"
-          defaultMessage="File Name"
-        />,
-        dataIndex: "fileName",
-     
-      },
-      {
-        //title: "Description",
-        title: <FormattedMessage
-          id="app.contract"
-          defaultMessage="Contract"
-        />,
-        // dataIndex: "documentDescription",
-        width: "20%",
-        render: (name, item, i) => {
-          return (
-            <ContractToggle
-            contractInd={item.contractInd}
-            documentId={item.documentId}
-          />
-          );
-        },
-      },
-      {
-        title: "",
-        width: "5%",
-        render: (name, item, i) => {
-          return (
-            <a
-              href={`${base_url}/document/${item.documentId}`}
-              // target="_blank"
-            >
-              <DownloadIcon
-                type="download"
-                style={{ cursor: "pointer",fontSize:"0.8rem" }}
-              />
-            </a>
-          );
-        },
-      },
-      {
-        title: "",
-        // dataIndex: "documentTypeId",
-        dataIndex: "documentId",
-        width: "5%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title={
-                <FormattedMessage
-                  id="app.doyouwanttodelete?"
-                  defaultMessage="Do you want to delete?"
-                />
-              }
-              onConfirm={() => deleteDocument(item.documentId)}
-            >
-              <DeleteOutlined
-                type="delete"
-                style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }}
-              />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
 
     // if (fetchingDocumentsByCustomerIdError) {
     //   return <APIFailed />;
@@ -281,25 +145,154 @@ class LinkedDocuments extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
-        {true && (
-          <StyledTable
-            // rowSelection={rowSelection}
-            pagination={false}
-            scroll={{ y: tableHeight }}
-            expandedRowRender={(record) => {
-              //debugger;
-              return <p style={{ margin: 0 }}>{record.documentDescription}</p>;
-            }}
-            rowKey="CustomerId"
-            columns={columns}
-            dataSource={documentsByCustomerId}
-            // Loading={
-            //   fetchingDocumentsByCustomerId ||
-            //   fetchingDocumentsByCustomerIdError
-            // }
-            onChange={console.log("task onChangeHere...")}
-          />
-        )}
+        <div class="rounded-lg m-5 p-2 w-[98%] overflow-scroll  shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          
+        <div className=" md:w-[5rem]">
+        <FormattedMessage
+                  id="app.date"
+                  defaultMessage="Date"
+                /></div>
+                <div className=" md:w-[6.1rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                /></div>
+        <div className=" md:w-[6.1rem]"><FormattedMessage
+                  id="app.description"
+                  defaultMessage="Description"
+                /></div>
+        <div className="md:w-[5.1rem]"><FormattedMessage
+                  id="app.Uploadedby"
+                  defaultMessage="Uploaded By"
+                /></div>
+        <div className="md:w-[6.2rem]"><FormattedMessage
+                  id="app.filename"
+                  defaultMessage="File Name"
+                /></div>
+                     <div className="md:w-[5.2rem]"><FormattedMessage
+                  id="app.contract"
+                  defaultMessage="Contract"
+                /></div>
+        
+        
+      </div>
+   
+        
+      {documentsByCustomerId.map((item) => { 
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+        
+                    return (
+                      <div>
+                      <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                          >
+                               
+                          <div className=" flex font-medium flex-col md:w-[8rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+    <div class="max-sm:w-full">
+    <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                
+                                            <span>{` ${dayjs(item.creationDate).format("DD/MM/YYYY")}`}</span>
+     
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                  </div>
+                                  </div>
+                          </div>
+                          <div class="flex">
+
+                       
+                          <div className=" flex font-medium flex-col md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                             
+                              <div class="text-sm text-cardBody font-poppins">
+                                   {item.documentTitle}
+                                   &nbsp;&nbsp;
+        {date === currentdate ? (
+    <span class="text-xs text-[tomato] font-bold"
+    >
+            New
+          </span>
+        ) : null} 
+                              </div>
+                          </div>
+                          <div className=" flex font-medium flex-col md:w-[10.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                          
+                            <div class="text-sm text-cardBody font-poppins">
+                            {elipsize(item.documentDescription || "", 15)}
+                            </div>
+                        </div>
+                        </div>
+                        <div className="flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+
+<div className="text-sm text-cardBody font-poppins text-center">
+<div className="font-normal text-sm text-cardBody font-poppins">
+                     <Tooltip title={item.uploadedBy}>
+            <SubTitle>
+              <MultiAvatar
+                primaryTitle={item.uploadedBy}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+            </SubTitle>
+          </Tooltip>
+                     </div>
+</div>
+</div>
+<div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                              <div class=" text-sm text-cardBody font-poppins text-center">
+                              {item.fileName}
+
+                              </div>
+                          </div>
+                          <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                              <div class=" text-sm text-cardBody font-poppins text-center">
+                              <ContractToggle
+          contractInd={item.contractInd}
+          documentId={item.documentId}
+        />
+
+                              </div>
+                          </div>
+                          <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
+                              
+
+                              <div>
+                              <a
+            href={`${base_url}/document/${item.documentId}`}
+            // target="_blank"
+          >
+            <DownloadIcon
+            className="cursor-pointer !text-base"
+            />
+          </a>            </div>
+          <div>
+          <StyledPopconfirm
+            title={
+              <FormattedMessage
+                id="app.doyouwanttodelete?"
+                defaultMessage="Do you want to delete?"
+              />
+            }
+            onConfirm={() => deleteDocument(item.documentId)}
+          >
+            <DeleteIcon
+className="cursor-pointer !text-base text-[red]"
+            />
+          </StyledPopconfirm>
+            </div>
+                          </div>
+                      </div>
+                  </div>
+)
+                })}
+                    
+      </div>
       </>
     );
   }
@@ -319,15 +312,12 @@ const mapDispatchToProps = (dispatch) =>
     {
       getCustomerDocument,
       deleteDocument,
-      getDocuments,
+      // getDocuments,
     },
     dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinkedDocuments);
 
-// function startDownload() {
-//   var url =
-//     "http://korero-env1.eba-sywkcsdt.eu-west-3.elasticbeanstalk.com/api/v2.0/Korero_logo1.png";
-//   window.open(url, "Download");
-// }
+
+

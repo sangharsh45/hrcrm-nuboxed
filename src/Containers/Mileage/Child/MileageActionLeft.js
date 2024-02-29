@@ -1,68 +1,101 @@
 import React from 'react'
-import { FlexContainer } from '../../../Components/UI/Layout'
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
-import CategoryIcon from '@mui/icons-material/Category';
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
+import ViewWeekIcon from '@mui/icons-material/ViewWeek';
+import { Tooltip,Avatar } from "antd";
+import { connect } from "react-redux";
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 
 const MileageActionLeft = (props) => {
     return (
-        <FlexContainer alignItems='center'>
+        <div class=" flex items-center" >
           <Tooltip
         title={<FormattedMessage id="app.card" defaultMessage="Card" />}
       >
        
-          <span
+          <span class=" mr-2 cursor-pointer"
             onClick={() => props.setMileageViewType("card")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "card" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
             }}
           >
-            <GridViewIcon style={{fontSize:"1.4rem"}}  />
+             <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <GridViewIcon   />
+            </Avatar>
           </span>
        
       </Tooltip>
 
       <Tooltip
-        title={<FormattedMessage id="app.all" defaultMessage="All" />}
+        title={<FormattedMessage id="app.List" defaultMessage="List" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setMileageViewType("tile")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "tile" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
-            
+            <Avatar style={{ background: props.viewType === "tile" ? "#f279ab" : "#4bc076" }}>
             <TocIcon  
             // icon={solid('users')}
              />
+             </Avatar>
           </span>
     
       </Tooltip>
-      <Tooltip title="Group">
-          <span
+      <Tooltip title="Category">
+      <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setMileageViewType("list")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "list" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
-            <CategoryIcon/>
+              <Avatar style={{ background: props.viewType === "list" ? "#f279ab" : "#4bc076" }}>
+            <ViewWeekIcon/>
+            </Avatar>
           </span>
       </Tooltip>
+      {props.user.mileageFullListInd === true && (
+      <Tooltip
+        title="All"
+      >
+       
+       <span class=" mr-2 cursor-pointer text-[1rem]"
+            onClick={() => props.setExpenseViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+            <ListAltIcon  
+            // icon={solid('users')}
+             />
+             </Avatar>
+          </span>
+    
+      </Tooltip>
+       )}
 
-        </FlexContainer>
+        </div>
     )
 }
 
-export default MileageActionLeft; 
+const mapStateToProps = ({ customer, auth, candidate }) => ({
+  user: auth.userDetails,
+  userId: auth.userDetails.userId,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+
+    },
+    dispatch
+  );
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MileageActionLeft)
+);

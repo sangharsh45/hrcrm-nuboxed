@@ -14,14 +14,13 @@ import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import {
   addOpportunity,
-  getRecruiterName,
-  getAllSalesList,
   getInitiative,
   getOppLinkedWorkflow,
   getOppLinkedStages,
-  
 } from "../OpportunityAction";
+import {getAssignedToList} from "../../Employees/EmployeeAction"
 import { getCrm} from "../../Leads/LeadsAction";
+import {getCurrency} from "../../Auth/AuthAction"
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
@@ -29,8 +28,8 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
+import { getAllEmployeelist } from "../../Investor/InvestorAction";
 
 /**
  * yup validation scheme for creating a opportunity
@@ -40,23 +39,43 @@ const OpportunitySchema = Yup.object().shape({
   opportunityName: Yup.string().required("Input needed!"),
   oppWorkflow: Yup.string().required("Input needed!"),
   currency: Yup.string().required("Input needed!"),
-  // oppStage: Yup.string().required("Input needed!"),
+  oppStage: Yup.string().required("Input needed!"),
   customerId:Yup.string().required("Input needed!"),
 });
 function OpportunityForm(props) {
   useEffect(() => {
-    props.getRecruiterName();
-    props.getAllSalesList();
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
      props.getOppLinkedStages(props.orgId);
      props.getOppLinkedWorkflow(props.orgId);
-     props. getCrm();
+     props.getCrm();
+     props.getAssignedToList(props.orgId);
+     props.getAllEmployeelist();
+     props.getCurrency();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
+
+  const sortedCurrency =props.currencies.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
 
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
@@ -78,32 +97,6 @@ function OpportunityForm(props) {
     return contactOptions;
   }
   
-
-
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.oppLinkStages.length &&
@@ -153,28 +146,6 @@ function OpportunityForm(props) {
     };
   });
 
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length &&
-      props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
-
-        .map((option) => {
-          console.log("option1", option);
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-        });
-
-    return skillOptions;
-  }
-
   const customerNameOption = props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -196,19 +167,13 @@ function OpportunityForm(props) {
       };
     });
 
-  const recruiterNameOption = props.recruiterName.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
+const AllEmplo = props.assignedToList.map((item) => {
+  return {
+    label: `${item.empName || ""}`,
+    value: item.employeeId,
+  };
+});
 
-  const salesNameOption = props.sales.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
   const [text, setText] = useState("");
   function handletext(e) {
     setText(e.target.value);
@@ -225,20 +190,13 @@ function OpportunityForm(props) {
   }
 
   const {
-    user: { userId },
+    user: { userId,empName, },
     addingOpportunity,
-    employeeId,
-    salesUserIds,
-    fullName,
-    contactId,
-    customerId,
     startDate,
+    employeeId,
     endDate,
-    defaultCustomers,
-    defaultContacts,
-    name,
   } = props;
-  const selectedOption = props.sales.find((item) => item.fullName === selected);
+  const selectedOption = props.crmAllData.find((item) => item.empName === selected);
   
   return (
     <>
@@ -260,6 +218,7 @@ function OpportunityForm(props) {
           oppInnitiative: "",
           oppStage: "",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
+          included: [],
         }}
         validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
@@ -362,8 +321,8 @@ function OpportunityForm(props) {
           <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
             <div class=" flex justify-between max-sm:flex-col">
-              <div class=" h-full w-[47.5%] max-sm:w-wk">
-                <Spacer />
+              <div class=" h-full w-[47.5%] mt-3 max-sm:w-wk">
+               
                 <Field
                   isRequired
                   name="opportunityName"
@@ -459,10 +418,14 @@ function OpportunityForm(props) {
                       }
                       width="100%"
                       isColumn
-                      selectType="currencyName"
-                      value={values.currencyName}
+                      // selectType="currencyName"
                       isRequired
-                      component={SearchSelect}
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
                     />
                   </div>
                 </div>
@@ -582,7 +545,27 @@ function OpportunityForm(props) {
         )}
       </Listbox>
 
-               
+       <div class=" mt-2">
+       <Field
+                    name="included"
+                    // label="Include"
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="include"
+                      />
+                    }
+                    mode
+                    placeholder="Select"
+                    component={SelectComponent}
+                    options={Array.isArray(AllEmplo) ? AllEmplo : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${empName || ""} `,
+                      value: employeeId,
+                    }}
+                  />
+        </div>        
 <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">
 <div class=" w-w47.5 max-sm:w-wk">
                   <Field
@@ -758,7 +741,7 @@ function OpportunityForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
+const mapStateToProps = ({ auth, opportunity,employee,currency,investor, contact, customer,leads }) => ({
   user: auth.userDetails,
   crmAllData:leads.crmAllData,
   userId: auth.userDetails.userId,
@@ -768,13 +751,9 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   initiativesByCustomerId: customer.initiativesByCustomerId,
   addingOpportunity: opportunity.addingOpportunity,
   addingOpportunityError: opportunity.addingOpportunityError,
-  recruiterName: opportunity.recruiterName,
   orgId: auth.userDetails.organizationId,
-  // salesUserIds:auth.userDetails.userId,
-  sales: opportunity.sales,
   oppLinkStages: opportunity.oppLinkStages,
   stages:opportunity.stages,
-  currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
@@ -782,8 +761,10 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   oppLinkWorkflow: opportunity.oppLinkWorkflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
-  fullName: auth.userDetails.fullName
-  // opportunitySkills:opportunity.opportunitySkills
+  fullName: auth.userDetails.fullName,
+  allEmployeeList:investor.allEmployeeList,
+  assignedToList:employee.assignedToList,
+  currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -791,15 +772,14 @@ const mapDispatchToProps = (dispatch) =>
     {
       addOpportunity,
       getContactData,
-      getRecruiterName,
-      getAllSalesList,
-      // getInitiativeByCustomerId,
       getCustomerData,
       getInitiative,
       getOppLinkedWorkflow,
-      // getOpportunitySKill
       getOppLinkedStages,
       getCrm,
+      getAllEmployeelist,
+      getAssignedToList,
+      getCurrency
     },
     dispatch
   );

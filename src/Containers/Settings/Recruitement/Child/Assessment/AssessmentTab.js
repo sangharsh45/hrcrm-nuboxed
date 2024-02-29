@@ -76,10 +76,10 @@ function AssessmentTab(props) {
           </Popconfirm>
         </div>
       </FlexContainer>
-      <h4>
+      <div>
         Updated on {moment(props.assessmentAccess.lastUpdatedOn).format("ll")}{" "}
         by {props.assessmentAccess.name}
-      </h4>
+      </div>
     </MainWrapper>
   );
 }

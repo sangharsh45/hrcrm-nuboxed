@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { Tooltip, Select,Button } from "antd"
+import {  Select, Tooltip } from "antd"
 import {getTeamList} from "../TeamsAction"
-import moment from "moment";
+import { FormattedMessage } from "react-intl";
+import { MultiAvatar2 } from "../../../../Components/UI/Elements";
 const Option = Select;
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -26,16 +26,6 @@ function TeamsCardList(props) {
     setRowData(datas);
   }
 
-//   const handleLoadMore = () => {
-
-//       setPage(page + 1);
-//       props.getInvestorsbyId(
-//         props.currentUser ? props.currentUser : props.userId,
-//         page,
-//         props.filter?props.filter:"creationdate"
-//       );
-//   };
-
   const {
     fetchingInvestors,
     investorsbyId,
@@ -55,61 +45,93 @@ function TeamsCardList(props) {
   return (
     <>
   
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[5rem]">Name</div>
-        <div className=" md:w-[5rem]">Sector</div>
-      
-        {/* <div className="w-12">Action</div> */}
+  <div class="rounded-lg m-5 p-2 w-[98%] overflow-y-auto overflow-x-hidden shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+<div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+<div className=" md:w-[70.5rem]">
+<FormattedMessage
+        id="app.Name"
+        defaultMessage="Name"
+      /></div>
 
-      </div>
-      {props.teamList.map((item) => { 
-        
-  
-                   return (
-                       <div>
-                           <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
-                               // style={{
-                               //     borderBottom: "3px dotted #515050"
-                               // }}
-                               >
-                                    
-                               <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
-<div className="flex max-sm:w-full"> 
+<div className="md:w-[71.12rem]"> 
+ <FormattedMessage id="app.Sector" defaultMessage="Team Lead" /></div>
 
-         &nbsp;
-         <div class="max-sm:w-full">
-                                       
-                                         <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                           <div class="text-xs text-cardBody font-poppins max-sm:hidden">
-                                           Name
-                                           </div>
-                                           <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                               
-    {item.teamName}
-      
-                                           </div>
-                                           </div>
-                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                           <div class="text-xs text-cardBody font-poppins max-sm:hidden">
-                                           Name
-                                           </div>
-                                           <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-     {item.teamMember}
-      
-                                           </div>
-                                           </div>
-                                       </div>
-                                       </div>
-                               </div>
-               
-                           </div>
-                       </div>
+ <div className="md:w-[23.1rem]"> 
+ <FormattedMessage id="app.Sector" defaultMessage="Team Members" /></div>
 
 
-                   )
-               })}
-     </OnlyWrapCard>
+
+
+</div>
+
+
+{props.teamList.map((item) => { 
+const firstTeamMember = item.teamMemberIds && item.teamMemberIds.length > 0 ? item.teamMemberIds[0] : null;
+const empName = firstTeamMember ? firstTeamMember.empName : null;
+console.log(empName)
+          return (
+              <div>
+                  <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                      >
+                           
+                           <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+<div class="max-sm:w-full">
+                              <Tooltip>
+                                <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                
+                                  <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                      
+{item.teamName}
+
+
+                                  </div>
+                                  </div>
+                              </Tooltip>
+                              </div>
+                              </div>
+                      </div>
+                     
+
+                   
+                    
+                      <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                      
+                        
+                        <div >
+                          <MultiAvatar2
+
+                           primaryTitle= {item.teamLead}
+                          
+                            imgHeight={"1.8rem"}
+                            imgWidth={"1.8rem"}
+                            imgRadius={20}
+                          />
+                         </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                      
+                        <div class="text-sm text-cardBody font-poppins">
+                        {empName}
+                        </div>
+                    </div>
+
+                 
+                   
+            
+
+                    
+                   
+                  </div>
+              </div>
+
+
+          )
+      })}
+          
+</div>
      
 
    

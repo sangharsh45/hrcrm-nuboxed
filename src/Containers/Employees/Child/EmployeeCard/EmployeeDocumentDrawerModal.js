@@ -22,19 +22,10 @@ class EmployeeDocumentDrawerModal extends Component {
     return (
       <div>
  <StyledDrawer
-           title={employeeName.fullName}
-          width={"50vw"}
+           title={`${employeeName.fullName}-Required Documents`}
+          width={"60%"}
           visible={this.props.addDrawerEmployeeDocumentModal}
-        //   maskClosable={false}
-          closable
-          placement="right"
-          destroyOnClose
-          style={{marginTop:"5rem"}}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}          
-        //   onCancel={() => this.props.handleCandidateEmailModal(false)}
         onClose={() => this.props.handleEmployeeDocumentDrawerModal(false)}
-          //style={{ top: 40 }}
-        //   footer={null}
         
         >
           <Suspense fallback={<BundleLoader />}>

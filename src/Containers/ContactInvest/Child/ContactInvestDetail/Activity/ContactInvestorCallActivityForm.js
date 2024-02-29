@@ -24,12 +24,10 @@ import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Fragment } from 'react'
-import { Listbox, } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 
 const ButtonGroup = Button.Group;
 const suffix = (
@@ -70,12 +68,10 @@ function ContactInvestorCallActivityForm(props) {
   
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
   const[reminder,setReminder] =useState(true)
-  console.log("category",category);
   const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
   function handleCategoryChange (data)  {
     debugger;
-
     setCategory(  data );
   };
  function handleTypeChange  (data) {
@@ -83,11 +79,7 @@ function ContactInvestorCallActivityForm(props) {
     setType( data );
 
   };
-  function handleReminderChange (checked) {
-    setReminder(
-       checked,
-    );
-  };
+
   function handleCallback (resetForm)  {
     const { handleChooserModal, handleCallModal, callback } = props;
     handleChooserModal(false);
@@ -96,73 +88,24 @@ function ContactInvestorCallActivityForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
-    // props.getOpportunityListByCustomerId(props.customer.customerId);
-    // props.getContactListByCustomerId(props.customer.customerId);
-    // props.getAllOpportunityData(userId)
+
   }, []);
 
   
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
 
-    const {
-      handleCallNotesModal
 
-    } = props;
-
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
-
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
 
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
-    // console.log(this.state.category);
+
     const {
       user: { userId, firstName, middleName, fullName, lastName, timeZone },
       isEditing,
@@ -190,8 +133,7 @@ function ContactInvestorCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("bn",selectedOption,selected)
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
    return (
       <>
         <Formik
@@ -346,11 +288,10 @@ function ContactInvestorCallActivityForm(props) {
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
-                      <StyledLabel>
-                        {/* Type */}
+                     
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage id="app.type" defaultMessage="Type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
                         <Tooltip
@@ -424,13 +365,13 @@ function ContactInvestorCallActivityForm(props) {
                       </div>
                     </div>
                     <div class=" w-1/2">
-                      <Spacer />
-                      <StyledLabel>
+                     
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="Category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -449,18 +390,9 @@ function ContactInvestorCallActivityForm(props) {
                         </Button>
                         <Button
                           onClick={() => handleCategoryChange("Follow up")}
-                          style={{
-                            backgroundColor:
-                            category === "Follow up"
-                                ? "orange"
-                                : "white",
-                            color:
-                            category === "Follow up"
-                                ? "white"
-                                : "black",
-                          }}
+                          className={`cursor-pointer ${category==="Follow up" ? "bg-[orange] text-[white]" :"bg-[white] text-[black]"}`}
                         >
-                          {/* Follow up */}
+
                           <FormattedMessage
                             id="app.followup"
                             defaultMessage="Follow up"
@@ -469,12 +401,12 @@ function ContactInvestorCallActivityForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
+
+                  <div class="mt-3 flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       Mode
-                      </StyledLabel>
+                      </div>
                       <Switch
                         // style={{
                         //   marginLeft: "0.3125em"
@@ -528,7 +460,7 @@ function ContactInvestorCallActivityForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+          
                   <Field
                     name="startDate"
                     // label="Date"
@@ -541,8 +473,8 @@ function ContactInvestorCallActivityForm(props) {
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+           
+                  <div class="mt-3 flex justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -605,7 +537,7 @@ function ContactInvestorCallActivityForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
+                 
                   {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -635,7 +567,7 @@ function ContactInvestorCallActivityForm(props) {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk mt-3" 
                 >
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -650,7 +582,7 @@ function ContactInvestorCallActivityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -703,7 +635,7 @@ function ContactInvestorCallActivityForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+                      <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -723,8 +655,8 @@ function ContactInvestorCallActivityForm(props) {
                       value: employeeId,
                     }}
                   />
+                 </div>
                  
-                  <Spacer />
                 
                   {/* <div >
                   <Field
@@ -747,7 +679,7 @@ function ContactInvestorCallActivityForm(props) {
                   />
                    </div>
                   <Spacer /> */}
-                  <div>
+                  <div class="mt-3">
                     <div class=" w-full"><Field
                       name="callDescription"
                       // label="Notes"
@@ -761,7 +693,7 @@ function ContactInvestorCallActivityForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+                  
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
@@ -805,8 +737,7 @@ function ContactInvestorCallActivityForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+                <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -865,13 +796,10 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
-  // candidateByuserId:candidate.candidateByuserId
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -884,9 +812,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       setClearbitCandidateData, 
       handleCallNotesModal,
     },

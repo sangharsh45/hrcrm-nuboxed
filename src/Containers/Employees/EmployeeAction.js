@@ -1,7 +1,8 @@
 import * as types from "./EmployeeActionType";
 import axios from "axios";
-import dayjs from "dayjs";
+import Swal from 'sweetalert2'
 import { base_url } from "../../Config/Auth";
+import { message } from "antd";
 
 export const setEmployeeViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_EMPLOYEE_VIEW_TYPE, payload: viewType });
@@ -46,7 +47,7 @@ export const addEmployee = (employee,cretiondate) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getEmployeelist("cretiondate"));
+      // dispatch(getEmployeelist("cretiondate"));
       dispatch({
         type: types.ADD_EMPLOYEE_SUCCESS,
         payload: res.data,
@@ -79,14 +80,12 @@ export const getEmployeelist = (filter) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_FAILURE,
         payload: err,
@@ -356,15 +355,16 @@ export const handleEmployeeDrawerForAdmin = (isVisible) => (dispatch) => {
 };
 
 //suspend
-export const suspendEmployee = (data, cb,employeeId) => (dispatch) => {
+export const suspendEmployee = ( employeeId,suspendInd) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.SUSPEND_EMPLOYEE_REQUEST,
   });
   axios
-    .put(`${base_url}/suspend/employee/${employeeId}`, data,{
+    .put(`${base_url}/suspend/employee/${employeeId}/${suspendInd}`,{},{
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          
         },
       })
     .then((res) => {
@@ -372,7 +372,7 @@ export const suspendEmployee = (data, cb,employeeId) => (dispatch) => {
         type: types.SUSPEND_EMPLOYEE_SUCCESS,
         payload: res.data,
       });
-      cb && cb("success", res.data.message, res.data.assignInd);
+      // cb && cb("success", res.data.message, res.data.assignInd);
     })
     .catch((err) => {
       // debugger;
@@ -381,7 +381,7 @@ export const suspendEmployee = (data, cb,employeeId) => (dispatch) => {
         type: types.SUSPEND_EMPLOYEE_FAILURE,
         payload: err,
       });
-      cb && cb("failuer", null, null);
+      // cb && cb("failuer", null, null);
     });
 };
 
@@ -398,10 +398,11 @@ export const inputEmployeeDataSearch = (name) => (dispatch) => {
       },
     })
     .then((res) => {
-      if (res.data.employeeId) {
-        console.log(res.data);
-        // dispatch(getAllLatestContactsForLazyLoading(res.data));
-      }
+      // message.success(res.data);
+      // if (res.data.employeeId) {
+      //   console.log(res.data);
+      //   // dispatch(getAllLatestContactsForLazyLoading(res.data));
+      // }
 
       dispatch({
         type: types.INPUT_EMPLOYEE_SEARCH_DATA_SUCCESS,
@@ -967,6 +968,13 @@ export const handleUpdateEmployeeModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleOnboardingEmployeeModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ONBOARDING_EMPLOYEE_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const setEditEmployee = (name) => (dispatch) => {
   dispatch({
     type: types.SET_EMPLOYEE_EDIT,
@@ -988,6 +996,12 @@ export const updateEmployee = (data, employeeId) => (dispatch) => {
         type: types.UPDATE_EMPLOYEE_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Info Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -1060,3 +1074,191 @@ export const getAdminUser = (employeeId) => (dispatch) => {
       });
     });
 };
+
+export const getAssignedToList = (orgId) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ASSIGENED_TO_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/active/user/drop-down/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ASSIGENED_TO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ASSIGENED_TO_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getProcessDropdownForOnboarding = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .get(`${base_url}/unboardingWorkflow/for_dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addOnboardingEmployee = (employeeId,data) => (dispatch) => {
+  dispatch({ type: types.ADD_ONBOARDING_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/onboarding/${employeeId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data);
+      console.log(res);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteEmployeeData = (userId,orgId) => (dispatch, getState) => {
+  // const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_EMPLOYEE_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/employee/hard-delete/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_EMPLOYEE_DATA_SUCCESS,
+        payload: userId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_EMPLOYEE_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getUserKpiList = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_USER_KPI_LIST_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/kpi-list/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_USER_KPI_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_USER_KPI_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getUserStageList = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_USER_STAGE_LIST_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/workflow-stage/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_USER_STAGE_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_USER_STAGE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addEmployeeWorkflow = (data,employeeId,) => (dispatch) => {
+  dispatch({ type: types.ADD_WORKFLOW_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/add/workflow/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data);
+      console.log(res);
+      dispatch({
+        type: types.ADD_WORKFLOW_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_WORKFLOW_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+

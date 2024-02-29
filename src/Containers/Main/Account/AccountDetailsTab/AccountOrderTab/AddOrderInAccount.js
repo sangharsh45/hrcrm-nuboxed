@@ -17,6 +17,7 @@ import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFi
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
+    orderCurrencyId: Yup.string().required("Input needed!"),
 })
 function AddOrderInAccount(props) {
     const contactOption = props.contactDistributor.map((item) => {
@@ -38,8 +39,8 @@ function AddOrderInAccount(props) {
     }
     const currencyOption = props.currencies.map((item) => {
         return {
-            label: item.currencyName || "",
-            value: item.currencyName,
+            label: item.currency_name || "",
+            value: item.currency_id,
         };
     });
     return (
@@ -51,14 +52,16 @@ function AddOrderInAccount(props) {
                 paymentInTerms: "",
                 comments: "",
                 awbNo: "",
+                orderCurrencyId: "",
                 deliverToBusinessInd: "",
                 fullLoadTruckInd: "",
                 privateInd: "",
-                advancePayment: "",
+                advancePayment: 50,
                 distributorId: props.distributorId,
                 userId: props.userId,
                 orderId: "",
                 priority: priority || "",
+                xlUpdateInd: false,
                 loadingAddress: [
                     {
                         address1: "",
@@ -92,7 +95,7 @@ function AddOrderInAccount(props) {
             validationSchema={FormSchema}
             onSubmit={(values, { resetForm }) => {
                 console.log(priority)
-              
+
                 if (values.advancePayment < 100) {
                     props.addOrderForm({
                         ...values,
@@ -105,13 +108,13 @@ function AddOrderInAccount(props) {
             }}
         >
             {({ values, handleChange }) => (
-                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                <div class="overflow-y-auto h-[28rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
                             <StyledLabel><h3> <FormattedMessage
-                 id="app.pickupaddress"
-                 defaultMessage="Pickup Address"
-                /></h3></StyledLabel>
+                                id="app.pickupaddress"
+                                defaultMessage="Pickup Address"
+                            /></h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -172,7 +175,7 @@ function AddOrderInAccount(props) {
                                 />
                             </div>
                         </div> */}
-                    
+
                             <div class="justify-between flex mt-3">
                                 <div class="w-[30%]">
                                     <Field
@@ -207,7 +210,7 @@ function AddOrderInAccount(props) {
                                     />
                                 </div>
                             </div>
-                     
+
                             <div class="justify-between flex mt-3">
                                 <div class="w-[22%]">
                                     <Field
@@ -221,7 +224,7 @@ function AddOrderInAccount(props) {
                                 </div>
                                 <div class="w-[22%]">
                                     <Field
-                                        name="currency"
+                                        name="orderCurrencyId"
                                         label="Currency"
                                         isColumn
                                         inlineLabel
@@ -238,23 +241,23 @@ function AddOrderInAccount(props) {
                                         width={"100%"}
                                         component={DatePicker}
                                         value={values.deliveryDate}
-                                  
+
                                     />
                                 </div>
 
                                 <div class="w-[22%]">
                                     <StyledLabel><FormattedMessage
-                                            id="app.priority"
-                                            defaultMessage="Priority"
-                                           /></StyledLabel>
+                                        id="app.priority"
+                                        defaultMessage="Priority"
+                                    /></StyledLabel>
                                     <div class="justify-between flex">
                                         <div>
                                             <Tooltip title={<FormattedMessage
-                                            id="app.high"
-                                            defaultMessage="High"
-                                           />}>
+                                                id="app.high"
+                                                defaultMessage="High"
+                                            />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("High")}
@@ -271,11 +274,11 @@ function AddOrderInAccount(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.medium"
-                                            defaultMessage="Medium"
-                                           />}>
+                                                id="app.medium"
+                                                defaultMessage="Medium"
+                                            />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Medium")}
@@ -292,11 +295,11 @@ function AddOrderInAccount(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.low"
-                                            defaultMessage="Low"
-                                           />}>
+                                                id="app.low"
+                                                defaultMessage="Low"
+                                            />}>
                                                 <Button
-                                                    type="primary"
+                                                    // type="primary"
                                                     shape="circle"
                                                     icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
                                                     onClick={() => handleButtonClick("Low")}
@@ -316,12 +319,12 @@ function AddOrderInAccount(props) {
                                 </div>
 
                             </div>
-             
+
                             <div class=" mt-3 justify-between flex">
                                 <div class="w-[30%]">
                                     <Field
                                         name="comments"
-                                        label="Comment"
+                                        label="Notes"
                                         width={"100%"}
                                         isColumn
                                         component={TextareaComponent}
@@ -330,16 +333,16 @@ function AddOrderInAccount(props) {
 
                                 <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
-                                    className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
-                                    htmlType="Submit"
+                                        className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
+                                        htmlType="Submit"
                                     >
                                         <FormattedMessage
                                             id="app.save"
                                             defaultMessage="Save"
-                                           />
-                                        
+                                        />
+
                                     </Button>
-                                    
+
                                 </div>
                             </div>
                         </div>

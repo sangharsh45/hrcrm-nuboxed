@@ -728,3 +728,84 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
       });
     });
 };
+
+export const deleteDealsData = (invOpportunityId) => (dispatch) => {
+  dispatch({
+    type: types.DELETE_DEAL_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunity/delete/${invOpportunityId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.DELETE_DEAL_DATA_SUCCESS,
+        payload: invOpportunityId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEAL_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const removeDealDocuments = ( documentId) => (dispatch) => {
+  // console.log(typeId);
+  dispatch({
+    type: types.REMOVE_DEAL_DOCUMENT_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunity/document/${documentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success("Document has been deleted successfully!");
+      console.log(res);
+      dispatch({
+        type: types.REMOVE_DEAL_DOCUMENT_SUCCESS,
+        payload:documentId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_DEAL_DOCUMENT_FAILURE,
+      });
+    });
+};
+
+
+export const setContactRoleForDeals = (
+  data,
+  contactId,
+  
+ 
+) => (dispatch) => {
+  //console.log(opportunityId, contactId, role);
+  console.log(sessionStorage.getItem("token"));
+  axios
+    .put(
+      `${base_url}/opportunity/update/contact/Role/${contactId}`,data,
+      {
+      
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
+};

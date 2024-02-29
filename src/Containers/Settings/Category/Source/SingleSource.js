@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Button, Tooltip, } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
-
+import { Select } from "../../../../Components/UI/Elements";
+import {removeSource} from "../Source/SourceAction"
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
 class SingleSource extends Component {
@@ -14,12 +17,15 @@ class SingleSource extends Component {
     this.state = {
       type: "",
       name: "",
+      listType:"",
       editInd: true,
     };
   }
+  handleType=(value)=>
+  this.setState({listType:value});
   render() {
     const {
-      source: { name, sourceId, EditInd },
+      source: { name,creationDate, sourceId,listType, EditInd },
       handleChange,
       name1,
       value,
@@ -30,18 +36,24 @@ class SingleSource extends Component {
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <SectorWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <SectorName style={{ flexBasis: "85%" }}>
-                  {name}
-                </SectorName>
+                <div class=" font-semibold" >
+                  {name}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
-                  {/* {this.props.source.editInd ? ( */}
+                  {this.props.source.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -49,27 +61,27 @@ class SingleSource extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null}  */}
-                  &nbsp;
+                  ) : null}  
+                 
                   <Tooltip title="Delete">
-                    <DeleteIcon
-                        onClick={() => handleDeleteSource(sourceId)}
-                      size="14px"
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeSource(sourceId )}
+                        >
+                    <DeleteOutlined
+                        // onClick={() => handleDeleteSource(sourceId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
                 </div>
               </div>
             ) : (
@@ -79,10 +91,20 @@ class SingleSource extends Component {
                   // value={value || sectorName}
                   defaultValue={name}
                   onChange={handleChange}
-                  style={{ width: "60%" }}
+                  style={{ width: "45%" }}
                 />
-                <br />
-                <br />
+               
+                <Select 
+              defaultValue={listType}
+               style={{width:"25%",marginLeft:"0.5rem"}}
+               placeholder="Select Type"
+               onChange={this.handleType}
+               >
+           <option value="Event">Event</option>
+                      <option value="Employee">Employee</option>
+                      <option value="Customer">Customer</option>
+                  <option value="Investor">Investor</option>
+               </Select>
                 <div style={{ marginLeft: "auto" }}>
                   <Button
                     type="primary"
@@ -91,14 +113,16 @@ class SingleSource extends Component {
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleUpdateSource(sourceId, value, toggleViewType());
+                      handleUpdateSource(sourceId, value,
+                        this.state.listType,
+                         toggleViewType());
                     }}>
 
                   
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -108,22 +132,22 @@ class SingleSource extends Component {
             )
           }
         </ViewEditCard>
-      </SectorWrapper>
+      </div>
     );
   }
 }
 
-export default SingleSource;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const SectorWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const SectorName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const SectorValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeSource,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleSource);
+
+
+

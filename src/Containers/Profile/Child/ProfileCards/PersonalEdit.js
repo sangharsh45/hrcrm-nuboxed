@@ -4,11 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { updateUserById } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
-import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 import EditableDatePicker from "../../../../Components/Forms/Edit/EditableDatePicker";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import EditableSelect from "../../../../Components/Forms/Edit/EditableSelect";
 
 class PersonalEdit extends Component {
@@ -48,11 +44,10 @@ class PersonalEdit extends Component {
         } = this.props;
         return (
             <>
-                <FlexContainer
-                    flexDirection="column"
+                <div class=" flex flex-col"
                     style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
                 >
-                    <div style={{ width: "100%" }}>
+                    <div class=" w-full" >
                         <EditableSelect
                             isRequired
                             defaultValue={bloodGroup}
@@ -74,7 +69,7 @@ class PersonalEdit extends Component {
                             style={{ width: "100%" }}
                         />
                     </div>
-                    <Spacer style={{ margin: "0.125em" }} />
+                  
                     {/* <EditableInput
                         isRequired
                         defaultValue={dob}
@@ -85,7 +80,7 @@ class PersonalEdit extends Component {
                         value={this.state.fields.dob}
                         width="100%"
                     /> */}
-                    <div style={{ width: "100%" }}>
+                    <div class=" w-full m-[0.125em]" >
                         <EditableDatePicker
                             defaultValue={dob}
                             handleChange={this.handleChange}
@@ -97,10 +92,10 @@ class PersonalEdit extends Component {
 
                         />
                     </div>
-                </FlexContainer>
-                <Spacer style={{ margin: "0.125em" }} />
+                </div>
 
-                <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+
+                <div class=" flex justify-end mr-[1.25em] m-[0.125em]" >
                     <Button
                         type="primary"
                         Loading={updatingUserById}
@@ -120,7 +115,7 @@ class PersonalEdit extends Component {
               defaultMessage="Cancel"
             />
           </Button>
-                </FlexContainer>
+                </div>
             </>
         );
     }

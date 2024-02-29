@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
-import { FlexContainer, MainWrapper } from "../../../../../../Components/UI/Elements";
+import { MainWrapper } from "../../../../../../Components/UI/Elements";
 import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import moment from "moment";
@@ -50,22 +50,10 @@ function ConsumptionReasonForm(props) {
           <Form class="form-background">
             <MainWrapper>
             {/* <FlexContainer justifyContent="space-between"> */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent:"space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "end"
-                }}
+              <div class=" flex justify-evenly h-full w-full items-end"
+
               >
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "35%",
-                   // marginTop: "24px",
-                   // marginLeft: "3%",
-                  }}
+                <div class=" w-[35%]"
                 >
                   <Field
                     name="reasonId"
@@ -80,12 +68,7 @@ function ConsumptionReasonForm(props) {
                    // style={{ flexBasis: "80%" }}
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "11%",
-                   // margin: "2% 0%",
-                  }}
+                <div class=" w-[11%]"
                 >
                   <Field
                     disabled="true"
@@ -98,12 +81,7 @@ function ConsumptionReasonForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{
-                    //height: "100%",
-                    width: "11%",
-                  // margin: "2% 0%",
-                  }}
+                <div class=" w-[11%]"
                 >
                   <Field
                     name="units"
@@ -117,12 +95,7 @@ function ConsumptionReasonForm(props) {
                     isRequired
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "17%",
-                   // margin: "2% 0%",
-                  }}
+                <div class=" w-[17%]"
                 >
                   <Field
                     name="date"
@@ -154,11 +127,7 @@ function ConsumptionReasonForm(props) {
                     // }}
                   />
                 </div>
-                <div
-                  style={{
-                    //margin: "4% 0%",
-                    width: "8%",
-                  }}
+                <div class=" w-[8%]"
                 >
                   <Button
                     type="primary"

@@ -13,8 +13,6 @@ const AddLocationInOrder = (props) => {
                 visible={props.addInventoryInOrder}
                 maskClosable={false}
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop: "5rem" }}
                 onClose={() => props.handleInventoryLocationInOrder(false)}
                 footer={null}
             >

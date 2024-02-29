@@ -1,14 +1,15 @@
 import React from "react";
-import {  Button,Tooltip, Popconfirm } from "antd";
+import { Tooltip, Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
 import { StopTwoTone} from "@ant-design/icons";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
 import {
   MultiAvatar,
   Title,
   SubTitle,
 } from "../../../Components/UI/Elements";
-import { CheckCircleTwoTone } from "@ant-design/icons";
+import { CheckCircleTwoTone,DeleteOutlined } from "@ant-design/icons";
 import { CurrencySymbol } from "../../../Components/Common";
 
 
@@ -19,8 +20,11 @@ const DealGroupCard = (props) => {
     primaryTitle,
     secondaryTitle,
     currencyType,
+    handleDelete,
+    invOpportunityId,
+    investorName,
+    user
   } = props;
-  console.log("...>>>>>>>>>>>.......<<<<<<<<<<<<<<", imageURL);
   return (
     <FlexContainer flexDirection="column" style={{ borderRadius: 3 }}>
       <MainWrapper>
@@ -49,6 +53,9 @@ const DealGroupCard = (props) => {
             >
               {primaryTitle || ""}
             </Title>
+            <div class="text-xs">
+              {investorName}
+            </div>
             <SubTitle>
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
@@ -102,7 +109,23 @@ const DealGroupCard = (props) => {
         />
         </Tooltip>
     </Popconfirm>
-              <Button style={{marginLeft:"0.25rem"}}>Drop</Button>
+               <StyledPopconfirm
+                        title="Do you want to delete?"
+                        onConfirm={() =>
+                          handleDelete(invOpportunityId)
+                        }
+                      >
+                        {user.imInd === true && user.dealDeleteInd === true && (
+                          <DeleteOutlined
+                            type="delete"
+                            style={{
+                              cursor: "pointer",
+                              color: "red",
+                              fontSize: "1rem",
+                            }}
+                          />
+                        )}
+                      </StyledPopconfirm>
             </SubTitle>
           </FlexContainer>
           <FlexContainer

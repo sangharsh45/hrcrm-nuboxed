@@ -1,15 +1,16 @@
-import React from 'react'
-import RepairSpareListTable from './RepairSpareListTable'
+import React,{lazy,Suspense} from 'react'
+import { BundleLoader } from '../../../Components/Placeholder';
+const RepairSpareListTable=lazy(()=>import("./RepairSpareListTable")); 
 
 const AddingRepairSpareList = (props) => {
     return (
         <>
-
+<Suspense fallback={<BundleLoader/>}>
             <RepairSpareListTable
                 phoneId={props.phoneId}
                 RowData={props.RowData}
             />
-
+</Suspense>
         </>
     )
 }

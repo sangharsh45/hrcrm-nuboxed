@@ -1,16 +1,11 @@
 import React, { lazy, Suspense, useEffect, useState, } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import AddCustomerModal from "../Customer/Child/AddCustomerModal";
-import { handleCustomerModal } from "../Customer/CustomerAction";
-import { handleTaskModal } from "../Task/TaskAction";
-import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
-import StartStop from "./Start&Stop/StartStop";
 import { bindActionCreators } from "redux";
-import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
+
 import {
   Layout,
   message,
@@ -21,64 +16,154 @@ import {
   LayoutWrapper,
   NavbarWrapper,
 } from "../../Components/UI/Layout";
+import { Select } from "antd";
+import { updateUserById,handleActionDrawerModal,getActionRequiredCount } from "../Auth/AuthAction";
+import { setLanguage } from "../../Language/LanguageAction";
+import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
+import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
+import { handleCallModal } from "../Call/CallAction";
+import { getSupportedLanguages } from '../Translate/TranslateService';
 import { handlePartnerModal } from "../Partner/PartnerAction";
 import { BundleLoader } from "../../Components/Placeholder";
 import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
-import NavMenu from "./NavMenu";
-import ProfileDropdown from "./ProfileDropdown";
-import SettingsDropdown from "../Settings/SettingsDropdown";
-import Rules from "../Rules/Rules";
-import Template from "../Template/Template";
 import { getPresentNotifications } from "../Notification/NotificationAction";
 import { MultiAvatar } from "../../Components/UI/Elements";
-import Call from "../Call/Call";
-import Holiday from "../Holiday/Holiday";
-import Reports from "../Reports/Reports";
-import Partner from "../Partner/Partner";
-import Category from "../Settings/Category/Category";
-import { handleContactModal } from "../Contact/ContactAction";
-import Recruitment from "../Settings/Recruitement/Recruitment";
-import { Select } from "antd";
-import { updateUserById } from "../Auth/AuthAction";
-import { setLanguage } from "../../Language/LanguageAction";
-import { handleOpportunityModal } from "../Opportunity/OpportunityAction";
-import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
-import CategoryTab from "../Settings/Category/CategoryTab";
-import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
-import LiveMesssageModal from "../LiveMessages/LiveMesssageModal";
-import AssessmentDetails from "../Accessment/Child/AssessmentDetails/AssessmentDetails";
-import Leads from "../Leads/Leads";
-import LeadDetails from "../Leads/Child/LeadsDetailTab/LeadDetails";
-import Program from "../Program/Program";
-import Course from "../Course/Course";
-import Billing from "../../Components/Billing/Billing";
-import AddCallModal from "../Call/Child/AddCallModal";
-import { handleCallModal } from "../Call/CallAction";
-import { handleEventModal } from "../Event/EventAction";
-import AddEventModal from "../Event/Child/AddEventModal";
-import CourseDetails from "../Course/Child/CourseDetailsTab/CourseDetails";
-import ProgramDetails from "../Program/Child/ProgramDetails/ProgramDetails";
-import Projects from "../Projects/Projects";
-import ProjectsDetail from "../Projects/Child/ProjectsDetail/ProjectsDetail";
-import Invoice from "../Invoice/Invoice";
-import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
-import { getSupportedLanguages } from '../Translate/TranslateService';
-import Location from "../Event/Child/Location/Location";
-import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
-import Navmenu2 from "./Navmenu2";
-import Teams from "./Teams/Teams";
-import RepositoryData from "./RepositoryData";
-import Inventory from "./Inventory/Inventory";
-import Order from "./Order/Order";
-import Supplies from "./Supplies/Supplies";
-import Shipper from "./Shipper/Shipper";
-import Account from "./Account/Account";
-import ShipperDetails from "./Shipper/ShipperDetails";
-import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
-import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
-import Refurbish from "./Refurbish/Refurbish";
-import Suppliers from "./Suppliers/Suppliers";
-import SupplierDetails from "./Suppliers/Child/SupplierDetails/SupplierDetails";
+import AddActionModal from "./AddActionModal";
+const NavMenu = lazy(() =>
+  import("./NavMenu")
+);
+const AddCandidateResumeModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateResumeModal")
+);
+const StartStop = lazy(() =>
+  import("./Start&Stop/StartStop")
+);
+const ProfileDropdown = lazy(() =>
+  import("./ProfileDropdown")
+);
+const SettingsDropdown = lazy(() =>
+  import("../Settings/SettingsDropdown")
+);
+const Rules = lazy(() =>
+  import("../Rules/Rules")
+);
+const Template = lazy(() =>
+  import("../Template/Template")
+);
+const Call = lazy(() =>
+  import("../Call/Call")
+);
+const Holiday = lazy(() =>
+  import("../Holiday/Holiday")
+);
+
+const Reports = lazy(() =>
+  import("../Reports/Reports")
+);
+const Partner = lazy(() =>
+  import("../Partner/Partner")
+);
+const Category = lazy(() =>
+  import("../Settings/Category/Category")
+);
+const Recruitment = lazy(() =>
+  import("../Settings/Recruitement/Recruitment")
+);
+const CategoryTab = lazy(() =>
+  import("../Settings/Category/CategoryTab")
+);
+
+const LiveMesssageModal = lazy(() =>
+  import("../LiveMessages/LiveMesssageModal")
+);
+const AssessmentDetails = lazy(() =>
+  import("../Accessment/Child/AssessmentDetails/AssessmentDetails")
+);
+const Leads = lazy(() =>
+  import("../Leads/Leads")
+);
+const LeadDetails = lazy(() =>
+  import("../Leads/Child/LeadsDetailTab/LeadDetails")
+);
+const Program = lazy(() =>
+  import("../Program/Program")
+);
+
+
+const Course = lazy(() =>
+  import("../Course/Course")
+);
+const Billing = lazy(() =>
+  import("../../Components/Billing/Billing")
+);
+const CourseDetails = lazy(() =>
+  import("../Course/Child/CourseDetailsTab/CourseDetails")
+);
+const ProgramDetails = lazy(() =>
+  import("../Program/Child/ProgramDetails/ProgramDetails")
+);
+const Projects = lazy(() =>
+  import("../Projects/Projects")
+);
+const ProjectsDetail = lazy(() =>
+  import("../Projects/Child/ProjectsDetail/ProjectsDetail")
+);
+
+const Invoice = lazy(() =>
+  import("../Invoice/Invoice")
+);
+const CandidateTotalBilling = lazy(() =>
+  import("../Projects/Child/ProjectDetailsTab/CandidateTotalBilling")
+);
+const Location = lazy(() =>
+  import("../Event/Child/Location/Location")
+);
+const PitchDetails = lazy(() =>
+  import("../Pitch/Child/PitchDetails/PitchDetails")
+);
+const Navmenu2 = lazy(() =>
+  import("./Navmenu2")
+);
+const Teams = lazy(() =>
+  import("./Teams/Teams")
+);
+const RepositoryData = lazy(() =>
+  import("./RepositoryData")
+);
+const Inventory = lazy(() =>
+  import("./Inventory/Inventory")
+);
+const Order = lazy(() =>
+  import("./Order/Order")
+);
+const Supplies = lazy(() =>
+  import("./Supplies/Supplies")
+);
+const Shipper = lazy(() =>
+  import("./Shipper/Shipper")
+);
+const Account = lazy(() =>
+  import("./Account/Account")
+);
+const ShipperDetails = lazy(() =>
+  import("./Shipper/ShipperDetails")
+);
+const AccountDetails = lazy(() =>
+  import("./Account/AccountDetailsTab/AccountDetails")
+);
+const InventoryDetail = lazy(() =>
+  import("./Inventory/Child/InventoryDetails/InventoryDetail")
+);
+const Refurbish = lazy(() =>
+  import("./Refurbish/Refurbish")
+);
+const Suppliers = lazy(() =>
+  import("./Suppliers/Suppliers")
+);
+
+const SupplierDetails = lazy(() =>
+  import("./Suppliers/Child/SupplierDetails/SupplierDetails")
+);
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -94,12 +179,8 @@ const CandidateDetails = lazy(() =>
 );
 
 const Customer = lazy(() => import("../Customer/Customer"));
-const AddOpportunityModal = lazy(() =>
-  import("../Opportunity/Child/AddOpportunityModal")
-);
 const Publish = lazy(() => import("../Publish/Publish"));
 const Opportunity = lazy(() => import("../Opportunity/Opportunity"));
-
 const { Option } = Select;
 
 const { Header, Sider, Content } = Layout;
@@ -140,7 +221,6 @@ const PartnerDetail = lazy(() =>
 const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
-const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
 const Pitch = lazy(() => import("../Pitch/Pitch"));
 const Deal = lazy(() => import("../Deal/Deal"));
 const ContactInvest = lazy(() => import("../ContactInvest/ContactInvest"));
@@ -153,6 +233,8 @@ const Collection = lazy(() => import("../Collection/Collection"));
 const Plant =lazy(()=>import("../Plant/Plant"));
 const PlantDetail =lazy(()=>import("../Plant/Child/PlantDetail/PlantDetail"));
 const Procurement =lazy(()=>import("../Procurement/Procurement"));
+const Subscription=lazy(()=>import("../Subscription/Subscription"));
+const Production=lazy(()=>import("../Production/Production"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -164,6 +246,7 @@ function MainApp(props) {
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
+    props.getActionRequiredCount(props.userId)
   }, []);
 
 
@@ -236,8 +319,11 @@ function MainApp(props) {
     // primaryTitle={organizationName}
     />
   );
+
   return (
+    
     <>
+    
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
           <div class="max-sm:hidden overflow-x-auto">
@@ -262,12 +348,11 @@ function MainApp(props) {
               height: 50,
             }}
           > */}
-              <div 
+              <div class=" h-3 ml-[2.5rem] "
                  className="logo1"
                 style={{
                   justifyContent: !collapsed ? "center" : "center",
-                  height: 50,
-                  marginLeft: "40px",
+               
                 }}
               >
                 {collapsed && organizationLogo}
@@ -310,23 +395,16 @@ function MainApp(props) {
             }}>
               <Header>
                 <div class="md:hidden"><Navmenu2 selectedLanguage={selectedLanguage} /></div>
-                <div
-                  style={{
-                    height: "100%",
-                    display: "flex",
-                    alignSelf: "flex-start",
-                    alignItems: "center",
-                  }}
+                <div class=" flex items-center h-full self-start "
                 >
-                  &nbsp;&nbsp;
-                  <div style={{ marginLeft: "0.625em" }} class="max-sm:hidden">
+                  <div class=" ml-3 max-sm:hidden " >
                   <Select
                     value={props.preferedLanguage}
-                    style={{ width: 120 }}
+                    style={{ width: "3.8rem" }}
                     onChange={(value) => handleLanguageSelect(value)}
                   >
-                    <Option value="English">English</Option>
-                    <Option value="Dutch">Dutch</Option>
+                    <Option value="English">EN</Option>
+                    <Option value="Dutch">NL</Option>
                   </Select>
                 </div>
                 </div>
@@ -463,6 +541,23 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
+                  <div  class=" text-base cursor-pointer font-semibold text-[blue] max-sm:hidden"
+                      onClick={() => {
+                        // handleRowData(item);
+                        props.handleActionDrawerModal(true);
+                     
+                      }}
+            >Action Required {props.actionCount.ActionRecordCount}</div>
+                  <div class=" text-white bg-mainclr h-[1.75rem] ml-8 mr-3 max-sm:hidden"
+                    style={{
+                      border: "1px solid tomato",
+                      borderRadius: "5px",
+                      lineHeight: "24px",
+                      padding: "0px 10px",
+                    }}
+                  >
+                    {props.role}
+                  </div>
 
                   <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
@@ -485,13 +580,10 @@ function MainApp(props) {
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
-                  {user.role === "ADMIN" ?
-                  
-
-                      <SettingsDropdown />
-
-                  
-                   : null} 
+                  {user.settingsAccessInd === true || user.role === "ADMIN" ?
+  <SettingsDropdown />
+  : null
+}
                   {/* {user.role === "ADMIN" ?
                     <IsAuthorized>
 
@@ -506,7 +598,7 @@ function MainApp(props) {
                                             </Badge>
                                         </FlexContainer>
                                     </a> */}
-                  <a href="#" style={{ height: 45, marginRight: 10 }}>
+                  <a href="#" style={{  marginRight: 10 }}>
                     <div  class=" flex items-center h-full"
                     >
                       <NotificationPopover />
@@ -745,6 +837,9 @@ function MainApp(props) {
                       <Route exact path="/contactinvest/:contactId" component={ContactInvestDetail} />
                       <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
                       <Route exact path="/product" component={Product} />
+                      <Route exact path="/subscription" component={Subscription}/>
+                      <Route exact path="/production" component={Production}/>
+                      
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>
@@ -754,24 +849,15 @@ function MainApp(props) {
           </LayoutWrapper>
         </LayoutWrapper>
       </ThemeProvider>
+      <AddActionModal
+        // rowdata={rowdata}
+        addDrawerActionModal={props.addDrawerActionModal}
+        handleActionDrawerModal={props.handleActionDrawerModal}
+      />
       <LiveMesssageModal
         addMessageModal={props.addMessageModal}
         handleMessageModal={props.handleMessageModal}
       />
-      <AddCustomerModal
-        addCustomerModal={props.addCustomerModal}
-        handleCustomerModal={props.handleCustomerModal}
-      />
-      <AddContactModal
-        addContactModal={props.addContactModal}
-        handleContactModal={props.handleContactModal}
-      />
-
-      <AddOpportunityModal
-        addOpportunityModal={props.addOpportunityModal}
-        handleOpportunityModal={props.handleOpportunityModal}
-      />
-
       <AddPartnerModal
         addPartnerModal={props.addPartnerModal}
         handlePartnerModal={props.handlePartnerModal}
@@ -781,21 +867,6 @@ function MainApp(props) {
         handleCandidateResumeModal={props.handleCandidateResumeModal}
       // handleResponseData={this.handleResponseData}
       // responseData={this.state.responseData}
-      />
-
-      <AddCallModal
-        addCallModal={props.addCallModal}
-        handleCallModal={props.handleCallModal}
-      />
-
-      <AddEventModal
-        addEventModal={props.addEventModal}
-        handleEventModal={props.handleEventModal}
-      />
-
-      <AddTaskModal
-        addTaskModal={props.addTaskModal}
-        handleTaskModal={props.handleTaskModal}
       />
     </>
   );
@@ -817,11 +888,9 @@ const mapStateToProps = ({
   message,
 }) => ({
   language: language.language,
-  addCustomerModal: customer.addCustomerModal,
-  addOpportunityModal: opportunity.addOpportunityModal,
-  addContactModal: contact.addContactModal,
   user: auth.userDetails,
   userDetails: auth.userDetails,
+  addDrawerActionModal:auth.addDrawerActionModal,
   addMessageModal: opportunity.addMessageModal,
   // employeeId: auth.userDetails.employeeId,
   userId: auth.userDetails.employeeId,
@@ -832,6 +901,7 @@ const mapStateToProps = ({
     auth.userDetails.metaData.organization,
   department: auth.userDetails && auth.userDetails.department,
   roleType: auth.userDetails && auth.userDetails.roleType,
+  role: auth.userDetails && auth.userDetails.role,
   // orgImageId:auth.userDetails.orgImageId,
 
   imageId:
@@ -851,28 +921,22 @@ const mapStateToProps = ({
   organizationDetails: auth.organizationDetails,
   addCandidateResumeModal: candidate.addCandidateResumeModal,
   addCallModal: call.addCallModal,
-  addEventModal: event.addEventModal,
-  addTaskModal: task.addTaskModal,
   user: auth.userDetails,
+  actionCount:auth.actionCount,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getPresentNotifications,
-      handleEventModal,
-
       handlePartnerModal,
-      handleTaskModal,
       updateUserById,
-      handleCustomerModal,
-      handleOpportunityModal,
       handleCandidateResumeModal,
-      handleContactModal,
       handleCallModal,
       setLanguage,
       getOpportunityRecord,
-      // getRequirementRecord,
+      getActionRequiredCount,
       handleMessageModal,
+      handleActionDrawerModal,
     },
     dispatch
   );

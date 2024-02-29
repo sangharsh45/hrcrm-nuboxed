@@ -12,15 +12,9 @@ class AddCallNotesDrawerModal extends Component {
     return (
       <div>
         <StyledDrawer
-        // title="Notes"
           title={this.props.currentNameId.callType}
-          width="64%"
-          style={{ marginTop: "5rem" }}
+          width="60%"
           visible={this.props.addDrawerCallNotesModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleCallNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

@@ -4,15 +4,13 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import { TabsWrapper } from "../../Components/UI/Layout";
-import DnsIcon from '@mui/icons-material/Dns';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import {getTodosCount} from "./DashboardAction";
 import { Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 const UpcomingEvents=lazy(() => import("./Child/UpcomingEvents"));
 const DashboardTodo=lazy(() => import("./Child/DashboardTodo"));
-const DashboardTable2=lazy(() => import("./Child/DashboardTable2"));
-const DashboardAllTable2=lazy(() => import("./DashboardAllTable2"));
+
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -68,7 +66,7 @@ class TodoDashboardTab extends Component {
                 count={this.props.todosCount.todo}
                 overflowCount={999}
               > 
-               <span class=" ml-1">
+               <span class=" ml-1 font-semibold">
                <FormattedMessage
                 id="app.toDo"
                 defaultMessage="ToDo"
@@ -90,19 +88,19 @@ class TodoDashboardTab extends Component {
                 <DashboardTodo style={{ overflow: "scroll" }} />
               </Suspense>
             </TabPane>
-            {this.props.user.dashboardrecruitDashInd === true &&(
+            {/* {this.props.user.dashboardrecruitDashInd === true &&(
             <TabPane
               tab={
                 <>
                   <DnsIcon 
                    style={{fontSize:"1.1rem"}}
                   />
-                    <span class=" ml-1">
+                    <span class=" ml-1 font-semibold">
                     <FormattedMessage
                 id="app.openRequirements"
                 defaultMessage="Open Requirements"
               />
-                      {/* Open Requirements */}
+                
                       </span>
                   
                   {activeKey === "2" && (
@@ -115,9 +113,7 @@ class TodoDashboardTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                    {/* {this.props.user.dashboardrecruitDashInd === true &&(
-                   <DashboardTable2/>
-                    )} */}
+                
                                   
                                                    {this.props.viewType==="ME"  ?(
                    <DashboardAllTable2/>
@@ -129,7 +125,7 @@ class TodoDashboardTab extends Component {
           )} 
               </Suspense>
     </TabPane>
-            )}
+            )} */}
             {/* <TabPane
               tab={
                 <>

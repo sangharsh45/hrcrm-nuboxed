@@ -5,8 +5,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
-import moment from "moment";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
+import dayjs from "dayjs";
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select,Button ,Popconfirm} from "antd";
@@ -14,9 +13,9 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
   MultiAvatar2,
-  SubTitle,
+ 
 } from "../../../../Components/UI/Elements";
-import { Link } from "../../../../Components/Common";
+import { Link } from 'react-router-dom';
 import {
   getAllCustomerlIST,
   handleUpdateCustomerModal,
@@ -33,13 +32,13 @@ import {
   handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 
+const AddCustomerDrawerModal =lazy(()=> import("../../AddCustomerDrawerModal"));
+const AddCustomerEmailDrawerModal =lazy(()=> import("../UpdateCustomer/AddCustomerEmailDrawerModal"));
+const AddCustomerNotesDrawerModal =lazy(()=> import("../CustomerDetail/AddCustomerNotesDrawerModal"));
+const CustomerPulseDrawerModal =lazy(()=> import("./CustomerPulseDrawerModal"));
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
 );
@@ -52,7 +51,7 @@ function CustomerAllCardList(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [hasMore, setHasMore] = useState(true);
- 
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   const [page, setPage] = useState(0);
   useEffect(() => {
     window.addEventListener('error', e => {
@@ -81,7 +80,15 @@ function CustomerAllCardList(props) {
   useEffect(() => {
     return () => props.emptyCustomer();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
 
 const [rowdata, setrowdata] = useState("");
@@ -127,14 +134,337 @@ const [rowdata, setrowdata] = useState("");
   // if (fetchingAllCustomerList) {
   //   return <BundleLoader />;
   // }
+  if (isMobile){
+    return (
+      <>
+      
+   
+           <div className=' flex justify-end sticky top-28 z-auto'>
+           <div class="rounded-lg  p-2 w-full overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          
+          <InfiniteScroll
+          dataLength={allCustomers.length}
+          next={handleLoadMore}
+          hasMore={hasMore}
+          loader={fetchingAllCustomerList?<div class="flex justify-center">Loading...</div>:null}
+          height={"75vh"}
+        >
+        
+        {allCustomers.map((item) => { 
+           const currentdate = dayjs().format("DD/MM/YYYY");
+           const date = dayjs(item.creationDate).format("DD/MM/YYYY");
+           const diff = Math.abs(
+              dayjs().diff(dayjs(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${
+              item.address && item.address.length && item.address[0].address1
+            } 
+             Street : ${
+               item.address && item.address.length && item.address[0].street
+             }   
+            State : ${item.address && item.address.length && item.address[0].state}
+           Country : ${
+             (item.address && item.address.length && item.address[0].country) || ""
+           } 
+             PostalCode : ${
+               item.address && item.address.length && item.address[0].postalCode
+             } `;
+                      return (
+                          <div>
+                              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
+                >
+                                   <div class="flex justify-between items-center w-wk ">
+                                     <div className=" flex font-medium ">
+                                     <div className="flex max-sm:w-full">
+                        <div>
+                        
+                            <MultiAvatar
+                              primaryTitle={item.name}
+                              imageId={item.imageId}
+                              imageURL={item.imageURL}
+                              imgWidth={"1.8rem"}
+                              imgHeight={"1.8rem"}
+                            />
+                          
+                        </div>
+                       
+  
+                        <div class="w-full flex items-center">
+                        <Tooltip>
+                                            <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                                              <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                  
+           <Link
+            toUrl={`customer/${item.customerId}`}
+            title={`${item.name}`}
+          >{item.name}</Link>&nbsp;&nbsp;
+          {date === currentdate ? (
+            <div class="text-xs text-[tomato] font-bold"
+            >
+              New
+            </div>
+          ) : null}
+         
+                                              </div>
+                                              </div>
+                                          </Tooltip>
+                        </div>
+                      </div>
+                                      </div> 
+                                  <div className=" flex font-medium  ">
+                             
+                                     
+                                      <div class=" text-xs text-cardBody font-poppins">   
+                                      {item.sector}
+                                      </div>
+                                  
+                                  </div> 
+                                  <div className=" flex font-medium  ">
+                                    
+  
+                                      
+                                      <div class=" text-sm text-cardBody font-poppins">
+                                      <ReactCountryFlag
+                            countryCode={item.countryAlpha2Code}
+                            svg
+                            style={{
+                              width: '1em',
+                              height: '1em',
+                            }}
+                          />
+                          &nbsp;
+                         {item.address && item.address.length && item.address[0].country}
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="flex justify-between items-center w-wk ">
+                                  <div className=" flex font-medium  ">
+                                     
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.oppNo}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                    
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.totalProposalValue}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                      
+  
+                                      <div class=" text-xs text-cardBody font-poppins text-center">
+                                      {item.weight}
+  
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                                    
+  
+                                      <div class=" text-xs text-cardBody font-poppins">
+                                      
+                                      <div>
+                {item.assignedTo === null ? (
+                  "None"
+                ) : (
+                  <MultiAvatar2
+                    primaryTitle={item.assignedTo}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                )}
+              </div>
+               
+                                      </div>
+                                  </div>
+                                  <div className=" flex font-medium  ">
+                         
+                       
+  
+                                  <Tooltip title={item.ownerName}>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </Tooltip>
+                     </div>
+                     </div>
+                     <div class="flex justify-between items-center w-wk ">
+                                 
+                   
+                         
+                         <div class=" text-sm text-cardBody font-poppins"></div>
+                         <Popconfirm
+    title="Change status to Account?"
+    onConfirm={() => handleConfirm(item.customerId)}
+    okText="Yes"
+    cancelText="No"
+  >
+                         <Button type="primary">
+                       <div class="text-sm" >Convert as Customer</div>
+                          </Button>
+                          </Popconfirm>
+                   
+                     
+                   
+                                  <div>
+                                  <Tooltip title={item.url}>
+                {item.url !== "" ? (
+                  <div
+                    
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {}}
+                  >
+                    {" "}
+                    <a href={`https://${item.url}`} target="_blank">
+                      <ExploreIcon
+                        className=" !text-base cursor-pointer text-[green]"
+                      />
+                    </a>
+                  </div>
+                )
+                :<div class=" w-3">
+                        
+                </div>
+                }
+              </Tooltip>
+          
+              </div>
+                          <div>
+                          <div  className="!text-base cursor-pointer"
+                
+                onClick={() => {
+                  props.getCustomerDetailsById(item.customerId);
+                  props.getCustomerKeySkill(item.customerId);
+                  
+  
+                  props.handleCustomerDrawerModal(item, true);
+                }}
+              >
+                {" "}
+                {user.pulseAccessInd === true && <MonitorHeartIcon  className=" !text-base cursor-pointer text-[#df9697]"/>}
+              </div> 
+                          </div>
+                          <div>
+              
+  
+                      </div>
+                     
+                     
+                          <div>
+                          <Tooltip title="Pulse">
+         <MonitorHeartIcon
+                  onClick={() => {
+                    handleCustomerPulseDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#df9697]"
+                />
+             </Tooltip>
+                          </div>
+                          <div>
+                          <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleCustomerNotesDrawerModal(true);
+                    handleSetCurrentCustomer(item);
+                    handleRowData(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#4bc076]"
+                />
+             </Tooltip>
+  
+                      </div>
+                      
+                
+                     
+                      <div >
+                      <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
+  
+  <LocationOnIcon   className=" !text-base cursor-pointer text-[#960A0A]"/>
+  
+  </Tooltip>
+  </div>
+  <div>
+  {props.user.customerUpdateInd === true && user.crmInd === true && (
+              <Tooltip title="Edit">
+                <BorderColorIcon
+                 className=" !text-base cursor-pointer text-[tomato]"
+                  onClick={() => {
+                      props.setEditCustomer(item);
+                      handleUpdateCustomerModal(true);
+                      handleSetCurrentCustomerId(item.customerId);
+                    
+                  }}
+                />
+              </Tooltip>
+              )}
+  </div>
+              
+  
+                        </div>
+                              </div>
+                          </div>
+  
+  
+                      )
+                  })}
+                  </InfiniteScroll>
+        </div>
+        </div>
+        
+    
+        <AddCustomerDrawerModal
+          addDrawerCustomerModal={props.addDrawerCustomerModal}
+          handleCustomerDrawerModal={props.handleCustomerDrawerModal}
+        />
+  
+        <UpdateCustomerModal
+          customerId={currentCustomerId}
+          updateCustomerModal={updateCustomerModal}
+          handleUpdateCustomerModal={handleUpdateCustomerModal}
+          handleSetCurrentCustomerId={handleSetCurrentCustomerId}
+        />
+           <CustomerPulseDrawerModal
+      customer={currentCustomer}
+          addDrawerCustomerPulseModal={addDrawerCustomerPulseModal}
+          handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
+        <AddCustomerEmailDrawerModal
+          // contactById={props.contactById}
+          addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
+          handleCustomerEmailDrawerModal={props.handleCustomerEmailDrawerModal}
+        />
+  
+        
+  <AddCustomerNotesDrawerModal
+          customer={currentCustomer}
+          rowdata={rowdata}
+          addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
+          handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        /> 
+      </>
+    );
+  }
+
+
 
   return (
     <>
     
  
          <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+         <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+        <div className=" flex justify-between w-[94.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[17.6rem]">Name</div>
         <div className=" md:w-[5.1rem]">Sector</div>
         <div className=" md:w-[5.8rem] ">Country</div>
@@ -150,15 +480,15 @@ const [rowdata, setrowdata] = useState("");
         dataLength={allCustomers.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingAllCustomerList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllCustomerList?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
       
       {allCustomers.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+         const currentdate = dayjs().format("DD/MM/YYYY");
+         const date = dayjs(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
+            dayjs().diff(dayjs(item.lastRequirementOn), "days")
           );
           const dataLoc = ` Address : ${
             item.address && item.address.length && item.address[0].address1
@@ -178,10 +508,10 @@ const [rowdata, setrowdata] = useState("");
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col w-[17rem]   max-sm:w-full">
+                                   <div className=" flex font-medium flex-col w-[16rem]   max-sm:w-full">
                                    <div className="flex max-sm:w-full">
                       <div>
-                        <SubTitle>
+                        
                           <MultiAvatar
                             primaryTitle={item.name}
                             imageId={item.imageId}
@@ -189,49 +519,48 @@ const [rowdata, setrowdata] = useState("");
                             imgWidth={"1.8rem"}
                             imgHeight={"1.8rem"}
                           />
-                        </SubTitle>
+                       
                       </div>
                       <div class="w-[4%]"></div>
 
                       <div class="max-sm:w-full md:flex items-center">
                       <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-         <Link
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`customer/${item.customerId}`} title={item.name}>
+      {item.name}
+    </Link>                                   
+         {/* <Link
           toUrl={`customer/${item.customerId}`}
           title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
+        >{item.name}</Link> */}
+               &nbsp;&nbsp;
         {date === currentdate ? (
-          <span class="text-xs"
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
-          >
+    <div class="text-xs text-[tomato] font-bold"
+    >
             New
-          </span>
+          </div>
         ) : null}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                       </div>
                     </div>
                                     </div> 
-                                <div className=" flex font-medium flex-col items-center  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col items-center  md:w-[8rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                    
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
+                                    <div class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
-                                    </h4>
+                                    </div>
                                 
                                 </div> 
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     
-                                    <h4 class=" text-sm text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -242,7 +571,7 @@ const [rowdata, setrowdata] = useState("");
                         />
                         &nbsp;
                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
+                                    </div>
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
@@ -274,7 +603,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
-                                    <span>
+                                    <div>
               {item.assignedTo === null ? (
                 "None"
               ) : (
@@ -284,7 +613,7 @@ const [rowdata, setrowdata] = useState("");
                   imgHeight={"1.8rem"}
                 />
               )}
-            </span>
+            </div>
              
                                     </div>
                                 </div>
@@ -293,19 +622,18 @@ const [rowdata, setrowdata] = useState("");
                        
                      
 
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
+                                <Tooltip title={item.ownerName}>
+                <MultiAvatar
+                  primaryTitle={item.ownerName}
+                  imageId={item.ownerImageId}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+              </Tooltip>
                    </div>
                    <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
-                       <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                       <div class=" text-sm text-cardBody font-poppins"></div>
                        <Popconfirm
   title="Change status to Account?"
   onConfirm={() => handleConfirm(item.customerId)}
@@ -313,7 +641,7 @@ const [rowdata, setrowdata] = useState("");
   cancelText="No"
 >
                        <Button type="primary">
-                     <span class="text-sm" >Convert as Customer</span>
+                     <div class="text-sm" >Convert as Customer</div>
                         </Button>
                         </Popconfirm>
                    </div>
@@ -322,7 +650,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
-                <span
+                <div
                   
                   style={{ cursor: "pointer" }}
                   onClick={() => {}}
@@ -330,10 +658,10 @@ const [rowdata, setrowdata] = useState("");
                   {" "}
                   <a href={`https://${item.url}`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green",fontSize: "1rem", }}
+                        className=" !text-base cursor-pointer text-[green]"
                     />
                   </a>
-                </span>
+                </div>
               )
               :<div class=" w-3">
                       
@@ -343,8 +671,8 @@ const [rowdata, setrowdata] = useState("");
         
             </div>
                         <div>
-                        <span
-              style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+                        <div
+              style={{ cursor: "pointer" ,fontSize: "1rem"}}
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
                 props.getCustomerKeySkill(item.customerId);
@@ -354,60 +682,60 @@ const [rowdata, setrowdata] = useState("");
               }}
             >
               {" "}
-              {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
-                cursor: "pointer",
-                fontSize: "1rem",
-                color: "#df9697"}}/>}
-            </span> 
+              {user.pulseAccessInd === true && <MonitorHeartIcon  
+            className=" !text-base cursor-pointer text-[#df9697]"
+                />}
+            </div> 
                         </div>
                         <div>
             
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%] ">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
+         className=" !text-base cursor-pointer text-[#df9697]"
                 onClick={() => {
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", color: "#df9697" }}
+
               />
            </Tooltip>
                         </div>
                         <div>
                         <Tooltip title="Notes">
        <NoteAltIcon
+         className=" !text-base cursor-pointer text-[#4bc076]"
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              
               />
            </Tooltip>
 
                     </div>
                     </div>
               
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
-<LocationOnIcon   style={{
-    cursor: "pointer",
-    fontSize: "1rem"
-  }}/>
+<LocationOnIcon   
+      className=" !text-base cursor-pointer text-[#960A0A]"
+  />
 
 </Tooltip>
 </div>
-<div>
+{/* <div>
 {props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
+             className=" !text-base cursor-pointer text-[tomato]"
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);
@@ -417,7 +745,7 @@ const [rowdata, setrowdata] = useState("");
               />
             </Tooltip>
             )}
-</div>
+</div> */}
             </div> 
 
                       </div>
@@ -428,7 +756,7 @@ const [rowdata, setrowdata] = useState("");
                     )
                 })}
                 </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       
   

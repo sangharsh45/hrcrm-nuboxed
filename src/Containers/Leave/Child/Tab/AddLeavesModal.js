@@ -6,7 +6,7 @@ const LeaveForm = lazy(() => import("./LeaveForm"));
 const AddLeavesModal = (props) => {
   const { addLeaveModal, handleLeavesModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -16,13 +16,8 @@ const AddLeavesModal = (props) => {
           defaultMessage="Apply for Leaves"
         />}
         width={drawerWidth}
-        visible={addLeaveModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        visible={addLeaveModal}    
         onClose={() => handleLeavesModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <LeaveForm {...formProps} />

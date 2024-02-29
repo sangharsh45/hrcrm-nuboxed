@@ -43,12 +43,7 @@ class AddPlayerModal extends Component {
              />}
           width="60%"
           visible={addPlayerModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"3rem"}}
-          onCancel={() => handlePlayerModal(false)}
-          footer={null}
+          onClose={() => handlePlayerModal(false)}
         >
              <Player
             autoPlay

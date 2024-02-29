@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Popconfirm, Select, Typography, message } from 'antd'
+import { Button, DatePicker, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
@@ -12,8 +12,9 @@ import {
 import { getCatalogueListById } from "../Account/AccountAction"
 
 const { Option } = Select;
+
 const AssignCatalogueRepairForm = (props) => {
-    const [user, setUser] = useState("")
+    
     const [technician, setTechnician] = useState("")
     const [department, setDepartment] = useState("")
     const [selectedRow, setselectedRow] = useState([]);
@@ -43,8 +44,6 @@ const AssignCatalogueRepairForm = (props) => {
         setDepartment(val)
         props.getProductionUsersById(val, props.locationId);
     }
-    console.log(user)
-
 
     useEffect(() => {
         props.getProductionUsersById(props.rowData.departmentId, props.locationId);
@@ -99,13 +98,9 @@ const AssignCatalogueRepairForm = (props) => {
     return (
         <div>
 
-            <div style={{ margin: "10px 0", display: "flex", justifyContent: "space-between" }}>
+<div class="mt-[10px] flex justify-between">
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "8px",
-                    }}>Department</label>
+                <label class="text-[15px] font-semibold m-[10px]">Department</label>
                     <Select
                         style={{
                             width: 170,
@@ -119,11 +114,7 @@ const AssignCatalogueRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "8px",
-                    }}>Technician</label>
+                <label class="text-[15px] font-semibold m-[10px]">Technician</label>
                     <Select
                         style={{
                             width: 170,
@@ -137,11 +128,7 @@ const AssignCatalogueRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "8px",
-                    }}>Catalogue</label>
+                <label class="text-[15px] font-semibold m-[10px]">Catalogue</label>
                     <Select
                         style={{
                             width: 200,
@@ -156,11 +143,7 @@ const AssignCatalogueRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "8px",
-                    }}>Due Date</label>
+                <label class="text-[15px] font-semibold m-[10px]">Due Date</label>
                     <DatePicker
                         style={{
                             width: 150,

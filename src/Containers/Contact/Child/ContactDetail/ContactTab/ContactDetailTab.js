@@ -4,15 +4,15 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { PlusOutlined } from "@ant-design/icons";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import ReactContactSpeechModal from "../ReactContactSpeechModal"
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { handleDocumentUploadModal } from "../../../ContactAction";
-import LinkedDocuments from "./Document/LinkedDocuments";
-import AddDocumentModal from "./Document/AddDocumentModal";
 import { handleContactOpportunityModal,handleContactReactSpeechModal } from "../../../ContactAction";
-import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
 import { getOpportunityListByContactId } from "../../../ContactAction";
+const AddDocumentModal =lazy(()=>import("./Document/AddDocumentModal"));
+const LinkedDocuments =lazy(()=>import("./Document/LinkedDocuments"));
+const ReactContactSpeechModal =lazy(()=>import("../ReactContactSpeechModal"));
+const AddContactOpportunityModal =lazy(()=>import("../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal"));
 
 const TabPane = StyledTabs.TabPane;
 

@@ -1,13 +1,11 @@
-import React, { Component, useMemo, useState,useEffect } from "react";
+import React, {  useState } from "react";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import { bindActionCreators } from "redux";
 import {
     addCertificationByUserId,
-
 } from "../../../../EmployeeAction";
-//import { getCertification } from "../../../../../Settings/Recruitement/Child/Certification/CertificationAction";
-import { StyledSelect } from "../../../../../../Components/UI/Antd";
+
 const { Option } = Select;
 function EmployeeCertificationSelect(props) {
   const [selectType, setSelectType] = useState("");

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Menu, Icon, Avatar } from "antd";
+import React, { Component,lazy } from "react";
+import { Menu, Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -10,9 +10,9 @@ import {
   StyledMenuItem
 } from "../../Components/UI/Antd";
 import { ApplicationWrapper, MainWrapper } from "../../Components/UI/Layout";
-import Theme from "../Settings/Theme/Theme";
 import { logout } from "../Auth/AuthAction";
 import { FormattedMessage } from "react-intl";
+const Theme = lazy(() => import("../Settings/Theme/Theme"));
 
 
 const ProfileMenu = ({ logout, history }) => (

@@ -49,7 +49,8 @@ export const investorListReducer = (state = initialState, action) => {
     return {
       ...state,
       addingInvestorData: false,
-      investorListData: [...state.investorListData, action.payload],
+      investorListData:[action.payload,...state.investorListData]
+      // investorListData: [...state.investorListData, action.payload],
       
     };
   case types.ADD_INVESTOR_DATA_FAILURE:

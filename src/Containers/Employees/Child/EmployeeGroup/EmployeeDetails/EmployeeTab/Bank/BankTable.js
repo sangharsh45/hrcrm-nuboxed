@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import {
-  StyledTable,
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import UpdateBankModal from "../../../../../../Employees/Child/EmployeeGroup/EmployeeDetails/EmployeeTab/Bank/UpdateBankModal";
 import {
   handleUpdateBankModal,
   setEditBank,
@@ -17,7 +14,10 @@ import {
 import { getBankDetails } from "../../../../../../Profile/ProfileAction";
 import { deleteBankTable } from "../../../../../../Profile/ProfileAction";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
-import DefultToggle from "./DefultToggle";
+import { Tooltip } from "antd";
+const DefultToggle = lazy(() => import("./DefultToggle"));
+const UpdateBankModal = lazy(() => import("../../../../../../Employees/Child/EmployeeGroup/EmployeeDetails/EmployeeTab/Bank/UpdateBankModal"));
+
 
 class BankTable extends Component {
  
@@ -35,95 +35,7 @@ class BankTable extends Component {
       setEditBank,
       deleteBankTable,
     } = this.props;
-    const columns = [
-      {
-        title: (
-          <FormattedMessage id="app.bankName" defaultMessage="Account Holder" />
-        ),
-        dataIndex: "accountHolderName",
-      },
-      {
-        title: (
-          <FormattedMessage id="app.bankName" defaultMessage="Bank Name" />
-        ),
-        dataIndex: "bankName",
-        // width: "35%"
-      },
-
-      {
-        title: (
-          <FormattedMessage id="app.branchName" defaultMessage="Branch Name" />
-        ),
-        dataIndex: "branchName",
-      },
-
-      {
-        title: (
-          <FormattedMessage id="app.accountNo" defaultMessage=" Account#" />
-        ),
-        dataIndex: "accountNo",
-      },
-
-      {
-        title: (
-          <FormattedMessage id="app.ifscCode" defaultMessage="SWIFT Code" />
-        ),
-        dataIndex: "ifscCode",
-      },
-      {
-        title: "",
-        width: "7%",
-        
-  
-        render: (name, item, i) => {
-          return (
-            <>
-          
-              <DefultToggle
-                // partnerId={item.partnerId}
-                 defaultInd={item.defaultInd}
-                // assignedIndicator={item.assignedInd}
-                id={item.id}
-              />
-            </>
-          );
-        },
-      },
-
-      {
-        title: "",
-        width: "2%",
-        dataIndex: "documentId",
-        render: (name, item, i) => {
-          //debugger
-          return (
-            <BorderColorIcon 
-              type="edit"
-              style={{ cursor: "pointer",fontSize:"0.8rem", }}
-              onClick={() => {
-                setEditBank(item);
-                handleUpdateBankModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-              onConfirm={() => deleteBankTable(item.id)}
-            >
-                 <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"0.8rem", color: "red" }} />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+   
 
     if (fetchingBankDetailsError) {
       return <APIFailed />;
@@ -132,15 +44,157 @@ class BankTable extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
+             <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[6.5rem]">
+        <FormattedMessage
+                  id="app.bankName"
+                  defaultMessage="Account Holder"
+                /></div>
+ 
+        <div className="md:w-[6.1rem]">  <FormattedMessage id="app.bankName" defaultMessage="Bank Name" /></div>
+                 <div className="md:w-[10.1rem]">
+                 <FormattedMessage
+          id="app.branchName"
+          defaultMessage="Branch Name"
+        /></div>
+                       <div className=" md:w-[8.1rem]">
+                       <FormattedMessage id="app.accountNo" defaultMessage="Account#" /></div>
+
+                       <div className=" md:w-[8.1rem]">
+                       <FormattedMessage id="app.ifscCode" defaultMessage="SWIFT Code" /></div>
+       
+        
+        <div className="w-[10.2rem]"></div>
+
+      </div>
+   
+        
+      {bank =="" ? "No data":bank.map((item) => { 
+        
+        
+                    return (
+                        <div>
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                                >
+                                     
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                
+      {item.accountHolderName}
+     
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="flex">
+
+                             
+                              
+                                <div className=" flex font-medium flex-col md:w-[9.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                  <div class="text-sm text-cardBody font-poppins">
+                                  {item.bankName}
+                                  </div>
+                              </div>
+
+                              <div className=" flex font-medium flex-col md:w-[10.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                {item.branchName}
+                                </div>
+                            </div>
+                            <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                   <div class="text-sm text-cardBody font-poppins">
+                 
+                     <div className="font-normal text-sm text-cardBody font-poppins">
+                       <span>{item.accountNo}</span>
+                     </div>
+                 
+                                   </div>
+                               </div>
+
+                               <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                <span>
+              {item.ifscCode} 
+            </span>
+                                </div>
+                            </div>
+                              </div>
+                              <div className=" flex  " style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+                   
+                              <>
+                              <DefultToggle
+              // partnerId={item.partnerId}
+               defaultInd={item.defaultInd}
+              // assignedIndicator={item.assignedInd}
+              id={item.id}
+            />
+          </>
+                 
+                  </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <BorderColorIcon 
+            style={{ cursor: "pointer", fontSize: "1rem" }}
+            onClick={() => {
+              setEditBank(item);
+              handleUpdateBankModal(true);
+            }}
+          />
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteBankTable(item.id)}
+          >
+            <DeleteIcon
+              type="delete"
+              style={{ cursor: "pointer", fontSize: "1rem", color: "red" }}
+            />
+          </StyledPopconfirm>
+
+                                    </div>
+                                </div>
+
+                              
+                             
+                            </div>
+                        </div>
+
+
+                    )
+                })}
+                    
+      </div>
         {/* {emailCredential && ( */}
-        <StyledTable
+        {/* <StyledTable
           columns={columns}
           dataSource={bank}
           Loading={fetchingBankDetails || fetchingBankDetailsError}
           onChange={console.log("task onChangeHere...")}
           scroll={{ y: tableHeight }}
           pagination={false}
-        />
+        /> */}
 
         <UpdateBankModal
           updateBankModal={updateBankModal}

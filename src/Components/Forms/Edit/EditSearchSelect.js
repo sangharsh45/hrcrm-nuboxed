@@ -5,7 +5,7 @@ import { StyledReactSelect, StyledLabel } from "../../UI/Elements";
 
 import { get, uniqBy } from "lodash";
 
-import { getCountries, getTimeZone } from "../../../Containers/Auth/AuthAction";
+import { getCountries,getCurrency, getTimeZone } from "../../../Containers/Auth/AuthAction";
 
 class EditSearchSelect extends Component {
   componentDidMount() {
@@ -13,12 +13,14 @@ class EditSearchSelect extends Component {
       selectType,
 
       getCountries,
+      getCurrency,
 
       getTimeZone,
     } = this.props;
 
     if (selectType === "country" || "currency" || "dialCode") {
       getCountries();
+      getCurrency();
     }
     if (selectType === "timeZone") {
       getTimeZone();
@@ -55,6 +57,7 @@ class EditSearchSelect extends Component {
       sources,
       stages,
       countries,
+      currencies,
       selectType,
       defaultValue,
       placeholder,
@@ -117,6 +120,7 @@ class EditSearchSelect extends Component {
 
       // const customOption = ({ label, value }) => <h3>{`${label}---${value}`}</h3>
     }
+    
     if (selectType === "source") {
       options = sources.map((item, i) => ({
         value: item.leadSourceId,
@@ -139,27 +143,26 @@ class EditSearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
     }
     if (selectType === "currency") {
-      options = countries.map((item, i) => ({
-        value: item.countryCurrencyCode,
-        label: item.countryCurrencyCode,
-        flag: item.countryFlag,
+      options = currencies.map((item, i) => ({
+        value: item.currency_name,
+        label: item.currency_name,
       }));
       // options.filter((item, i) => options.indexOf())
-      options = uniqBy(options, "value").filter((opt) => {
-        console.log(opt);
-        if (
-          opt.value === "EUR" ||
-          opt.value === "INR" ||
-          opt.value === "USD" ||
-          opt.value === "AUD" ||
-          opt.value === "CAD" ||
-          opt.value === "SGD" ||
-          opt.value === "BDT" ||
-          opt.value === "GBP"
-        ) {
-          return opt;
-        }
-      });
+      // options = uniqBy(options, "value").filter((opt) => {
+      //   console.log(opt);
+      //   if (
+      //     opt.value === "EUR" ||
+      //     opt.value === "INR" ||
+      //     opt.value === "USD" ||
+      //     opt.value === "AUD" ||
+      //     opt.value === "CAD" ||
+      //     opt.value === "SGD" ||
+      //     opt.value === "BDT" ||
+      //     opt.value === "GBP"
+      //   ) {
+      //     return opt;
+      //   }
+      // });
       // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
     }
     if (selectType === "timeZone") {
@@ -218,6 +221,7 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   users: auth.users,
+  currencies:auth.currencies,
   countries: auth.countries,
   timeZone: auth.timeZone,
   fetchingTimeZone: auth.fetchingTimeZone,
@@ -227,7 +231,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getCountries,
-
+      getCurrency,
       getTimeZone,
     },
     dispatch

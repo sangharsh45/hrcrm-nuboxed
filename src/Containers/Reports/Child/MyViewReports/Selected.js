@@ -1,23 +1,15 @@
-import React, { Component } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
-
 import { base_url } from "../../../../Config/Auth";
 import { Empty, Button, Tooltip, Modal } from "antd";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import {
-  HeaderText,
-  Spacer,
-  SubTitle,
-} from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
-// import { getAllLatestContacts } from "../../../Contact/ContactAction";
 import { getSalesReports } from "../../ReportAction";
 import styled from "styled-components";
 import TableHeader from "./TableHeader";
@@ -278,7 +270,7 @@ class Selected extends React.Component {
     const tab = document.querySelector(".ant-layout-sider-children");
     const tableHeight = tab && tab.offsetHeight - 100;
     return (
-      <FlexContainer>
+      <div class=" flex">
         <PDFPreviewTable>
           <StyledTable
             // rowSelection={rowSelection}
@@ -299,9 +291,9 @@ class Selected extends React.Component {
             pagination={false}
             scroll={{ y: tableHeight }}
           />
-          <Spacer />
-          <FlexContainer
-            justifyContent="flex-end"
+       
+          <div class=" flex justify-end mt-3"
+         
             style={{ padding: "0em 1.25em" }}
           >
             {/* <Tooltip title={"Generate PDF"}>
@@ -345,19 +337,14 @@ class Selected extends React.Component {
               </Modal>
             </Tooltip>
         
-            &nbsp;&nbsp;
-            <span
+          
+            <span class=" ml-4 mr-2 cursor-pointer text-4"
             href={`${base_url}/excel/export/user/${this.props.userId
             }?type=${"expense"}&startDate=${this.props.startDate}&endDate=${this.props.endDate
             }=${this.props.userId}
           `}
            // onClick={() => props.setCandidateViewType("table")}
-            style={{
-              marginRight: "0.5rem",
-             // color: props.viewType === "table" && "#1890ff",
-              fontSize: "1.25em",
-              cursor: "pointer",
-            }}
+         
           >
             <InsertDriveFileIcon />
           </span>
@@ -378,15 +365,10 @@ class Selected extends React.Component {
                 }}
               ></Button>
             </Tooltip> */}
-            &nbsp;&nbsp;
-            <span           
+        
+        <span class=" ml-4 mr-2 cursor-pointer text-4"
            // onClick={() => props.setCandidateViewType("table")}
-            style={{
-              marginRight: "0.5rem",
-             // color: props.viewType === "table" && "#1890ff",
-              fontSize: "1.25em",
-              cursor: "pointer",
-            }}
+         
           >
            <InsertDriveFileIcon/>
           </span>
@@ -403,9 +385,9 @@ class Selected extends React.Component {
                 }}
               ></Button>
             </Tooltip> */}
-          </FlexContainer>
+          </div>
         </PDFPreviewTable>
-      </FlexContainer>
+      </div>
     );
   }
 }

@@ -30,7 +30,7 @@ class LocationShiftDrawerTab extends Component {
     const {handleCreateShiftDrawer,createShiftDrawer,  storedLoc}=this.props;
     return (
       <>
-        <TabsWrapper1>
+        <div class="w-full ">
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
@@ -91,7 +91,7 @@ class LocationShiftDrawerTab extends Component {
               </Suspense>
             </TabPane>
           </StyledTabs>
-        </TabsWrapper1>
+        </div>
         <Suspense fallback={null}>
           <LocationCreateShiftDrawer
           storedLoc={storedLoc}

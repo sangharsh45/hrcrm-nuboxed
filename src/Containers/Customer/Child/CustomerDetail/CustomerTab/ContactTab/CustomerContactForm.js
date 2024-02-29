@@ -5,13 +5,11 @@ import { FormattedMessage } from "react-intl";
 import { Button, Select, Switch } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { addCustomerContact } from "../../../../CustomerAction";
-import Upload from "../../../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
@@ -169,8 +167,8 @@ class ContactForm extends Component {
                 whatsapp: this.state.whatsapp ? "Different" : "Same",
               },
               this.props.userId,
-              () => this.handleReset(resetForm)
             );
+            this.handleReset(resetForm)
           }}
         >
           {({
@@ -184,12 +182,12 @@ class ContactForm extends Component {
             <Form className="form-background">
               <div class=" flex justify-between">
                 <div class=" h-full w-w47.5" >
-                  <Spacer />
-                  <div class=" flex flex-nowrap justify-between">
-                    <FastField name="imageId" component={Upload} />
+                 
+                  <div class=" flex flex-nowrap justify-between mt-3">
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                        {/* <div class=" w-2/5">
                           <FastField
                             name="salutation"
                             type="text"
@@ -206,8 +204,8 @@ class ContactForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-2/4">
+                        </div> */}
+                        <div class=" w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -226,8 +224,8 @@ class ContactForm extends Component {
                           />
                         </div>
                       </div>
-                      <Spacer />
-                      <div class=" flex justify-between">
+                   
+                      <div class=" flex justify-between mt-3">
                         <div class=" w-2/5">
                           <FastField
                             name="middleName"
@@ -382,8 +380,8 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">
+              
+                  <div class=" flex justify-between mt-3">
                     <div class="w-full">
                       <FastField
                         type="text"
@@ -402,9 +400,9 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
+              
 
-                  <div class=" flex justify-between">
+                  <div class=" flex justify-between mt-3">
                     <div class=" w-2/4">
                       <>
                         <Field
@@ -470,7 +468,7 @@ class ContactForm extends Component {
                   </div>
                 </div>
                 <div class=" h-4/6 w-w47.5">
-                  <Spacer />
+                  <div class=" mt-3">
                   <FieldArray
                     name="address"
                     label="Address"
@@ -481,7 +479,8 @@ class ContactForm extends Component {
                       />
                     )}
                   />
-                  <Spacer style={{ marginTop: "1.25em" }} />
+                  </div>
+                  <div class=" mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -492,10 +491,11 @@ class ContactForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />
+                   </div>
                 </div>
               </div>
-              <Spacer/>
-              <div class=" flex justify-end">
+           
+              <div class=" flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"

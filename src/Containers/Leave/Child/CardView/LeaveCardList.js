@@ -1,21 +1,20 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2, } from '../../../../Components/UI/Elements'
-import { FlexContainer, OnlyWrapCard } from '../../../../Components/UI/Layout'
+import React, { useEffect, useState,  lazy } from "react";
 import {  Button, Tooltip } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Select } from "antd";
 import styled from 'styled-components'
-import { EditOutlined,DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import moment from "moment";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getLeaveListRangeByUserId,
     updateLeaves,
     setEditLeave,
     handleUpdateLeaveModal,
     } from "../../LeavesAction";
-    import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+    const UpdateLeavesModal = lazy(() => import("../Tab/UpdateLeavesModal"));
+
 const { Option } = Select;
 function LeaveCardList (props) {
   const [page, setPage] = useState(0);
@@ -57,7 +56,7 @@ function LeaveCardList (props) {
             <>
             
 
-           <OnlyWrapCard style={{height:"70vh"}}>
+            <div class="rounded-lg m-5 p-2 w-wk h-[31rem] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE] max-sm:h-[13rem]">
         {/* <InfiniteScroll
                     dataLength={props.tableRequirement.length}
                 next={handleLoadMore}
@@ -124,7 +123,7 @@ function LeaveCardList (props) {
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
+                    <div className=" flex font-medium flex-col md:w-[25rem] max-sm:justify-between w-full max-sm:flex-row">
                     
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">
@@ -138,46 +137,21 @@ function LeaveCardList (props) {
                     </div>
  
      <div className=" flex font-medium flex-col md:w-48 max-sm:justify-between w-full max-sm:flex-row ">
-                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
+                                    {/* <div class=" text-sm text-cardBody font-poppins">Status</div> */}
 
                                     <div class=" text-base text-cardBody font-poppins">
                                     {item.status === "Approved" && (
-                 <div
-                 style={{
-                   border: "2px solid green",
-                   padding: "0px 0.62em",
-                   textAlign: "center",
-                   margin: "2px",
-                   borderRadius: "0.62em",
-                 }}
-               >
+                 <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-green-500 p-[0px_0.62em]">
                  {item.status}
                </div>
               )}
             
               {item.status === "Rejected" && (
-                <div
-                style={{
-                  border: "2px solid red",
-                  padding: "0px 0.62em",
-                  textAlign: "center",
-                  margin: "2px",
-                  borderRadius: "0.62em",
-                }}
-              >
+                <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-red-500 p-[0px_0.62em]">
                 {item.status}</div>
               )}
               {item.status === "Pending" && (
-                  <div
-                  style={{
-                    border: "2px solid #e1d16c",
-                    padding: "0px 0.62em",
-                    textAlign: "center",
-                    margin: "2px",
-                    borderRadius: "0.62em",
-                    width:"11rem"
-                  }}
-                >
+                  <div className=" rounded-[0.62em] m-[2px] items-center flex border-2 border-solid border-[#e1d16c] p-[0px_0.62em]">
                  <div className="text-[#e1d16c] text-sm"> Waiting for approval</div>
                   </div>
               )}
@@ -187,9 +161,9 @@ function LeaveCardList (props) {
                     <div >
                     {item.status === "Pending" ? 
             <Tooltip title="Edit">
-                    <EditOutlined
+                    <BorderColorIcon
            type="edit"
-           style={{ cursor: "pointer" }}
+           className="!text-base cursor-pointer text-[tomato]"
            onClick={() => {
             props.setEditLeave(item);
              handleUpdateLeaveModal(true);
@@ -199,7 +173,7 @@ function LeaveCardList (props) {
             
           >
            
-          </EditOutlined>
+          </BorderColorIcon>
           </Tooltip>
             :""}
                         </div>
@@ -209,7 +183,7 @@ function LeaveCardList (props) {
             <Tooltip title="Delete">
              <DeleteOutlined
          type="delete"
-         style={{ cursor: "pointer" }}
+         className="!text-base cursor-pointer text-[red]" 
             // onClick={() => {
             //   // props.getProviderById(item.serviceId);
             //   props.handleDrawerContactlistModal(true);
@@ -253,7 +227,7 @@ function LeaveCardList (props) {
       
         {/* </InfiniteScroll> */}
 
-      </OnlyWrapCard >
+      </div >
             
               <UpdateLeavesModal
         leaveId={currentLeaveId}

@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -14,11 +13,12 @@ import {
   setEditEducation,
 } from "../../../../../../Profile/ProfileAction";
 import DownloadIcon from "@mui/icons-material/Download";
-import UpdateEducationModal from "../../../../EmployeeGroup/EmployeeDetails/EmployeeTab/Education/UpdateEducationModal";
 import { base_url } from "../../../../../../../Config/Auth";
 import { deleteEducationTable } from "../../../../../../Profile/ProfileAction";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Tooltip } from "antd";
+const UpdateEducationModal = lazy(() => import("../../../../EmployeeGroup/EmployeeDetails/EmployeeTab/Education/UpdateEducationModal"));
 
 class EducationTable extends Component {
   componentDidMount() {
@@ -46,129 +46,7 @@ class EducationTable extends Component {
     } = this.props;
     console.log(employeeId);
 
-    const columns = [
-      {
-        title: (
-          <span className="font-poppins">
-            <FormattedMessage id="app.type" defaultMessage="Type" />
-          </span>
-        ),
-        dataIndex: "educationType",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        //title: "Course Name",
-        title: (
-          <span className="font-poppins">
-          <FormattedMessage id="app.courseName" defaultMessage="Course Name" />
-          </span>
-        ),
-        dataIndex: "courseName",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        //title: "Year of Passing",
-        title: (
-          <span className="font-poppins">
-          <FormattedMessage
-            id="app.yearOfPassing"
-            defaultMessage="Year of Passing"
-          />
-           </span>
-        ),
-        dataIndex: "yearOfPassing",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        //title: "University/Institute Name",
-        title:(
-          <span className="font-poppins">
-         <FormattedMessage id="app.college" defaultMessage="College" />
-         </span>),
-        dataIndex: "university",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
-      {
-        title: "Marks Secured",
-         dataIndex:"marksSecured",
-         render: (name, item, i) => {
-            return (
-                <span>
-                {item.marksSecured} {item.marksType}
-              </span>
-            );
-          },
-       
-    },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <>
-              {item.documentId ? (
-                <a
-                  href={`${base_url}/document/${item.documentId}`}
-                  target="_blank"
-                >
-                  {user.userAccessInd ? (
-                  <DownloadIcon
-                    type="download"
-                    // onClick={() => startDownload()}
-                    style={{ cursor: "pointer" }}
-                  />
-                  ):null}
-                </a>
-              ) : null}
-            </>
-          );
-        },
-      },
-
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <BorderColorIcon
-              style={{ cursor: "pointer", fontSize: "0.8rem" }}
-              onClick={() => {
-                setEditEducation(item);
-                handleUpdateEducationModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-              onConfirm={() => deleteEducationTable(item.id)}
-            >
-              <DeleteIcon
-                type="delete"
-                style={{ cursor: "pointer", fontSize: "0.8rem", color: "red" }}
-              />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+  
 
     if (fetchingEducationDetailsError) {
       return <APIFailed />;
@@ -177,9 +55,159 @@ class EducationTable extends Component {
     const tableHeight = tab && tab.offsetHeight * 0.75;
     return (
       <>
-        {/* {emailCredential && ( */}
-        <StyledTable
-          // rowKey="opportunityId"
+       <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" md:w-[6.5rem]">
+        <FormattedMessage
+                  id="app.type"
+                  defaultMessage="Type"
+                /></div>
+ 
+        <div className="md:w-[10.1rem]">  <FormattedMessage id="app.courseName" defaultMessage="Course Name" /></div>
+                 <div className="md:w-[10.1rem]">
+                 <FormattedMessage
+          id="app.yearOfPassing"
+          defaultMessage="Year of Passing"
+        /></div>
+                       <div className=" md:w-[8.1rem]">
+                       <FormattedMessage id="app.college" defaultMessage="School /College" /></div>
+
+                       <div className=" md:w-[8.1rem]">
+                       <FormattedMessage id="app.MarksSecured" defaultMessage="Marks Secured" /></div>
+       
+        
+        <div className="w-[10.2rem]"></div>
+
+      </div>
+   
+        
+      {eduDetails=="" ? "No data" :eduDetails.map((item) => { 
+        
+        
+                    return (
+                        <div>
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                                >
+                                     
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
+
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col w-[8rem]">
+                                          
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                                
+      {item.educationType}
+     
+       
+                                            </div>
+                                            </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="flex">
+
+                             
+                              
+                                <div className=" flex font-medium flex-col md:w-[12.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                  <div class="text-sm text-cardBody font-poppins">
+                                  {item.courseName}
+                                  </div>
+                              </div>
+
+                              <div className=" flex font-medium flex-col md:w-[10.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                {item.yearOfPassing}
+                                </div>
+                            </div>
+                            <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                   
+                                   <div class="text-sm text-cardBody font-poppins">
+                 
+                     <div className="font-normal text-sm text-cardBody font-poppins">
+                       <span>{item.university}</span>
+                     </div>
+                 
+                                   </div>
+                               </div>
+
+                               <div className=" flex font-medium flex-col md:w-[16.3rem]  max-sm:flex-row w-full max-sm:justify-between">
+                                
+                                <div class="text-sm text-cardBody font-poppins">
+                                <span>
+              {item.marksSecured} {item.marksType}
+            </span>
+                                </div>
+                            </div>
+                              </div>
+                              <div className=" flex  " style={{ filter: 'drop-shadow(0px 0px 4px rgba(0,0,0,0.1 ))' }} >
+                   
+                              <>
+            {item.documentId ? (
+              <a
+                href={`${base_url}/document/${item.documentId}`}
+                target="_blank"
+              >
+                {user.userAccessInd ? (
+                <DownloadIcon 
+                  type="download"
+                  // onClick={() => startDownload()}
+                  style={{ cursor: "pointer",fontSize: "1rem", }}
+                />
+                ):null}
+              </a>
+            ) : null}
+          </>
+                 
+                  </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <BorderColorIcon 
+            style={{ cursor: "pointer", fontSize: "1rem" }}
+            onClick={() => {
+              setEditEducation(item);
+              handleUpdateEducationModal(true);
+            }}
+          />
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium ml-2 flex-col md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteEducationTable(item.id)}
+          >
+            <DeleteIcon
+              type="delete"
+              style={{ cursor: "pointer", fontSize: "1rem", color: "red" }}
+            />
+          </StyledPopconfirm>
+
+                                    </div>
+                                </div>
+
+                              
+                             
+                            </div>
+                        </div>
+
+
+                    )
+                })}
+                    
+      </div>
+      
+        {/* <StyledTable
+     
           columns={columns}
           dataSource={eduDetails}
           Loading={fetchingEducationDetails || fetchingEducationDetailsError}
@@ -194,7 +222,7 @@ class EducationTable extends Component {
               </>
             );
           }}
-        />
+        /> */}
 
         <UpdateEducationModal
           updateEducationModal={updateEducationModal}

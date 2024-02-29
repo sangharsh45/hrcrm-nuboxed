@@ -1,4 +1,4 @@
-import React, { useEffect,lazy, useState } from "react";
+import React, { useEffect, lazy, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
@@ -9,7 +9,7 @@ import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchCo
 import { MainWrapper, } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { Button,  } from "antd";
+import { Button, } from "antd";
 import {
   updateRequirement,
   getRequirementsDuration,
@@ -46,7 +46,11 @@ function General(props) {
           orgId: props.organizationId,
           jobAniEmailInd: props.requirementDuration.jobAniEmailInd,
           birthdayEmailInd: props.requirementDuration.birthdayEmailInd,
-          inspectionRequiredInd: props.requirementDuration.inspectionRequiredInd,
+          productionInd: props.requirementDuration.productionInd,
+          repairInd: props.requirementDuration.repairInd,
+          makeToInd: props.requirementDuration.makeToInd,
+          independentInd: props.requirementDuration.independentInd,
+
         }}
         onSubmit={(values) => {
           console.log(values)
@@ -70,121 +74,168 @@ function General(props) {
       >
         {({ values }) => (
           <MainWrapper style={{ height: "525px", width: "", overflow: "auto" }}>
-            <Form className="form-background">
-            <div class=" flex justify-between w-full"
-             
-             >
-            <div class=" w-[44%] mt-[0.625em] ml-[1em]"
+            <div class=" flex flex-row ">
+              <Form className="form-background">
+
+                <div class=" flex justify-between w-[31rem]"
+
                 >
-
-<div class=" flex justify-between w-[74%] "
-               
-               >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Orders (in months)</p>
-                    <div>
-                      <Field
-                        style={{ width: "10rem" }}
-                        name="timePeriod"
-
-                        component={SelectComponent}
-                        options={["1", "2", "3", "4", "5", "Not Applicable"]}
-                        isColumn
-                      //  inlineLabel
-                      />
-                    </div>
-                  </div>
-                
-                  <div class=" flex justify-between w-[74%] mt-4"
-                 
+                  <div class=" mt-[0.625em] ml-[1em]"
                   >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Opportunities (in months)</p>
-                    <div>
-                      <Field
-                        name="oppTimePeriod"
-                        style={{ width: "10rem" }}
-                        component={SelectComponent}
-                        options={["1", "2", "3", "4", "5", "Not Applicable"]}
-                        isColumn
-                      // inlineLabel
-                      />
+
+                    <div class=" flex justify-between w-[74%] "
+
+                    >
+                      <p style={{ minWidth: "-webkit-fill-available" }}>Drop Open Orders (in months)</p>
+                      <div>
+                        <Field
+                          style={{ width: "10rem" }}
+                          name="timePeriod"
+
+                          component={SelectComponent}
+                          options={["1", "2", "3", "4", "5", "Not Applicable"]}
+                          isColumn
+                        //  inlineLabel
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div class=" flex justify-between w-[74%] mt-4"
-                 
-                 >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
-                    <div>
-    {/* <Popconfirm
+
+                    <div class=" flex justify-between w-[74%] mt-4"
+
+                    >
+                      <p style={{ minWidth: "-webkit-fill-available" }}>Drop Open Opportunities (in months)</p>
+                      <div>
+                        <Field
+                          name="oppTimePeriod"
+                          style={{ width: "10rem" }}
+                          component={SelectComponent}
+                          options={["1", "2", "3", "4", "5", "Not Applicable"]}
+                          isColumn
+                        // inlineLabel
+                        />
+                      </div>
+                    </div>
+                    <div class=" flex justify-between w-[74%] mt-4"
+
+                    >
+                      <p style={{ minWidth: "-webkit-fill-available" }}> Send Job Anniversary Email</p>
+                      <div>
+                        {/* <Popconfirm
       title="Do you wish to change the status?"
       onConfirm={() => handleAnniversay(!anniversary)}
       okText="Yes"
       cancelText="No"
     > */}
-   <Field
-                        name="jobAniEmailInd"
-                        component={SwitchComponent}
-                        data={values.jobAniEmailInd}
-                        checkedChildren={"Yes"}
-                        unCheckedChildren={"No"}
-                        width={"5em"}
-                      />
-    {/* </Popconfirm> */}
-  </div>
-                  </div>
-                  <div class=" flex justify-between w-[74%] mt-4"
-                 
-                 >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
-                    <div>
-
-                    <Field
-                        name="birthdayEmailInd"
-                        component={SwitchComponent}
-                        data={values.birthdayEmailInd}
-                        checkedChildren={"Yes"}
-                        unCheckedChildren={"No"}
-                        width={"5em"}
-                      />
- 
-  
-  </div>
-                  </div>
-                  <div class=" flex justify-between w-[74%] mt-4"
-                 
-                 >
-                    <p style={{ minWidth: "-webkit-fill-available" }}>Production Process Only</p>
-                    <div>
-                      <Field
-                        name="inspectionRequiredInd"
-                        component={SwitchComponent}
-                        data={values.inspectionRequiredInd}
-                        checkedChildren={"Yes"}
-                        unCheckedChildren={"No"}
-                        width={"5em"}
-                      />
+                        <Field
+                          name="jobAniEmailInd"
+                          component={SwitchComponent}
+                          data={values.jobAniEmailInd}
+                          checkedChildren={"Yes"}
+                          unCheckedChildren={"No"}
+                          width={"5em"}
+                        />
+                        {/* </Popconfirm> */}
+                      </div>
                     </div>
+                    <div class=" flex justify-between w-[74%] mt-4"
+
+                    >
+                      <p style={{ minWidth: "-webkit-fill-available" }}> Send BirthDay Email</p>
+                      <div>
+
+                        <Field
+                          name="birthdayEmailInd"
+                          component={SwitchComponent}
+                          data={values.birthdayEmailInd}
+                          checkedChildren={"Yes"}
+                          unCheckedChildren={"No"}
+                          width={"5em"}
+                        />
+
+
+                      </div>
+                    </div>
+                    <div class=" font-bold text-base mt-4"> Process </div>
+                    <div class=" flex flex-col justify-between w-[74%] mt-4"
+
+                    >
+
+                      <div class=" flex flex-row">
+                        <p style={{ minWidth: "-webkit-fill-available" }}> Production</p>
+                        <Field
+                          name="productionInd"
+                          component={SwitchComponent}
+                          data={values.productionInd}
+                          checkedChildren={"Yes"}
+                          unCheckedChildren={"No"}
+                          width={"5em"}
+                        />
+                      </div>
+
+                      {values.productionInd &&
+                        <>
+                          <div class=" flex flex-row">
+                            <p style={{ minWidth: "-webkit-fill-available" }}> Make To Order</p>
+                            <Field
+                              name="makeToInd"
+                              component={SwitchComponent}
+                              data={values.makeToInd}
+                              checkedChildren={"Yes"}
+                              unCheckedChildren={"No"}
+                              width={"5em"}
+                            />
+                          </div>
+                          <div class=" flex flex-row">
+                            <p style={{ minWidth: "-webkit-fill-available" }}> Independent</p>
+                            <Field
+                              name="independentInd"
+                              component={SwitchComponent}
+                              data={values.independentInd}
+                              checkedChildren={"Yes"}
+                              unCheckedChildren={"No"}
+                              width={"5em"}
+                            />
+                          </div>
+                        </>
+                      }
+
+                      <div class=" flex flex-row mt-2">
+                        <p style={{ minWidth: "-webkit-fill-available" }}>Repair</p>
+                        <Field
+                          name="repairInd"
+                          component={SwitchComponent}
+                          data={values.repairInd}
+                          checkedChildren={"Yes"}
+                          unCheckedChildren={"No"}
+                          width={"5em"}
+                        />
+                      </div>
+                    </div>
+
                   </div>
-            
+
                 </div>
-              </div>
-              <h4 class="mt-4">
-                Updated on{" "}
-                {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
-                {props.requirementDuration.ownerName}
-              </h4>
-           
-              <div class=" flex justify-end mt-[1.25em]" >
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  Loading={props.updateRequirement}
-                >
-                  <FormattedMessage id="app.update" defaultMessage="Update" />
-                  {/* Update */}
-                </Button>
-              </div>
+                <div class="mt-4">
+                  Updated on{" "}
+                  {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
+                  {props.requirementDuration.ownerName}
+                </div>
+
+                <div class=" flex justify-end mt-[1.25em]" >
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    Loading={props.updateRequirement}
+                  >
+                    <FormattedMessage id="app.update" defaultMessage="Update" />
+                    {/* Update */}
+                  </Button>
+                </div>
+
+
+              </Form>
               <Notifications />
-            </Form>
+            </div>
           </MainWrapper>
         )}
       </Formik>

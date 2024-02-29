@@ -1,18 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button, Tooltip,  } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
+import {  StyledLabel } from "../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { updateEducationDetails } from "../../../../ProfileAction";
 import { FormattedMessage } from "react-intl";
 import { getEducations } from "../../../../../Settings/Educations/EducationAction";
@@ -90,11 +85,7 @@ class UpdateEducationForm extends Component {
                     justifyContent: "space-between",
                   }}
                 > */}
-              <div
-                style={{
-                  width: "100%",
-                  // border: "0.125em solid green"
-                }}
+              <div class=" w-full"
               >
                 <FastField
                   name="educationTypeId"
@@ -119,8 +110,8 @@ class UpdateEducationForm extends Component {
                     marginTop: "0.25em",
                   }}
                 />
-                <Spacer />
-                <div>
+            
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="courseName"
@@ -143,10 +134,10 @@ class UpdateEducationForm extends Component {
                     }}
                   />
                 </div>
-                <Spacer />
-                <div>
+               
+                <div class=" mt-3">
                   <StyledLabel>Course Type</StyledLabel>
-                  <Spacer />
+                  <div class=" mt-3">
                   <ButtonGroup>
                     <StatusIcon
                       color="blue"
@@ -177,9 +168,9 @@ class UpdateEducationForm extends Component {
                       //  }
                     />
                   </ButtonGroup>
+                  </div>
                 </div>
-                <Spacer />
-                <div>
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="specialization"
@@ -202,8 +193,7 @@ class UpdateEducationForm extends Component {
                     }}
                   />
                 </div>
-                <Spacer />
-                <div>
+                <div class=" mt-3">
                   <Field
                     isRequired
                     name="university"
@@ -226,9 +216,9 @@ class UpdateEducationForm extends Component {
                     }}
                   />
                 </div>
-                <Spacer />
-                <div style={{ display: "flex" }}>
-                  <div style={{ width: "50%" }}>
+               
+                <div class=" flex mt-3" >
+                  <div class=" w-[50%]" >
                     <Field
                       name="yearOfPassing"
                       // label="Year of Passing"
@@ -251,8 +241,8 @@ class UpdateEducationForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp; &nbsp;
-                  <div style={{ width: "49%" }}>
+               
+                  <div class=" w-[49%] ml-2" >
                     <Field
                       isRequired
                       //label="Marks Secured"
@@ -274,8 +264,7 @@ class UpdateEducationForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "60%"}}>
+                  <div class=" w-[60%] ml-2" >
                     <Field
                       name="marksType"
                       label={
@@ -288,7 +277,7 @@ class UpdateEducationForm extends Component {
                       component={SelectComponent}
                       options={["%", "Out of 10", "Out of 5"]}
                       isColumn
-                      type="text"
+                    
                       width={"100%"}
                       style={{
                         flexBasis: "80%",
@@ -300,7 +289,7 @@ class UpdateEducationForm extends Component {
                   </div>
                 </div>
 
-                <Spacer />
+              
               </div>
 
               {/* <div
@@ -337,8 +326,8 @@ class UpdateEducationForm extends Component {
                   <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div> */}
               {/* </div> */}
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -346,7 +335,7 @@ class UpdateEducationForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

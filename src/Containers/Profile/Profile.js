@@ -2,8 +2,7 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
-
+import { MainWrapper, } from "../../Components/UI/Layout";
 const ProfileDetailLeft = lazy(() => import("./Child/ProfileDetailLeft"));
 const ProfileDetailRight = lazy(() => import("./Child/ProfileDetailRight"));
 
@@ -21,18 +20,18 @@ class Profile extends Component {
             <BundleLoader />
           </MainWrapper>
         ) : (
-            <FlexContainer>
+            <div class=" flex ">
               <Suspense fallback={"Loading..."}>
-                <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                  <div style={{ width: "25%", height: "100%" }}>
+              <div class=" flex flex-no-wrap w-full ">
+                  <div class=" w-[25%] h-full" >
                     <ProfileDetailLeft />
                   </div>
-                  <div style={{ width: "75%", height: "100%" }}>
+                  <div class=" w-[75%] h-full" >
                     <ProfileDetailRight />
                   </div>
-                </FlexContainer>
+                </div>
               </Suspense>
-            </FlexContainer>
+            </div>
           )}
       </>
     );

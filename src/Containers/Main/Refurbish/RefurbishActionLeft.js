@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import { Tooltip } from "antd";
+import { Avatar, Tooltip } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { AppstoreOutlined } from "@ant-design/icons";
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
-
-const TabPane = StyledTabs.TabPane;
 
 class RefurbishActionLeft extends Component {
   constructor(props) {
@@ -23,9 +20,8 @@ class RefurbishActionLeft extends Component {
   handleTabChange = (key) => this.setState({ activeKey: key });
 
   render() {
-    const { activeKey } = this.state;
 
-    const { setProductionViewType, viewType, user } = this.props
+    const { setProductionViewType, viewType, } = this.props
     return (
       <>
         <FlexContainer alignItems="center">
@@ -33,28 +29,30 @@ class RefurbishActionLeft extends Component {
           {/* {user.designation === "Executive" && */}
 
 
-          <Tooltip title="Order">
-            <span
-              style={{
-                marginRight: "0.5rem",
-                color: viewType === "list" && "red",
-              }}
-              // iconType="book"
-              // tooltipTitle="All"
+          <Tooltip title="List">
+            <span class=" md:mr-2 text-sm cursor-pointer"
               onClick={() => setProductionViewType("list")}
-            ><GridViewIcon style={{fontSize:"1.4rem"}}  /></span>
+              style={{
+                color: viewType === "list" && "#1890ff",
+              }}
+            >
+              <Avatar style={{ background: viewType === "list" ? "#f279ab" : "#4bc076" }}>
+                <TocIcon className="text-white" /></Avatar>
+
+            </span>
           </Tooltip>
           {/* {user.designation === "Manager" && */}
-          <Tooltip title="All">
-            <TocIcon
+          <Tooltip title="All Orders">
+            <span class=" md:mr-2 text-sm cursor-pointer"
+              onClick={() => setProductionViewType("all")}
               style={{
-                marginRight: "1.4rem",
                 color: viewType === "all" && "#1890ff",
               }}
-              // iconType="appstore-o"
-              // tooltipTitle="Supplies Library"
-              onClick={() => setProductionViewType("all")}
-            />
+            >
+              <Avatar style={{ background: viewType === "all" ? "#f279ab" : "#4bc076" }}>
+                <div className="text-white">ALL</div></Avatar>
+
+            </span>
           </Tooltip>
           {/* } */}
 

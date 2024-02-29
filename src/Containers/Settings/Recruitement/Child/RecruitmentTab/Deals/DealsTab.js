@@ -1,4 +1,4 @@
-import React, { Component,} from "react";
+import React, { Component,lazy} from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
@@ -24,7 +24,7 @@ import {addProcessForDeals,
 import {  StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import SingleDealsStages from "./SingleDealsStages";
+const SingleDealsStages = lazy(() => import("./SingleDealsStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
@@ -327,7 +327,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" onClick={this.toggleInput1}>
+                <Button type="cancel" onClick={this.toggleInput1}>
                   Cancel
                
                 </Button>
@@ -385,6 +385,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                         <FormattedMessage id="app.save" defaultMessage="Save" />
                       </Button>
                       <Button
+                           type="cancel"
                         style={{
                           border: "0.06em solid white",
                           color: "black",
@@ -476,11 +477,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
 
             <Spacer />
             {this.state.isTextInputOpen ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
+              <div class=" flex justify-center"
               >
                 <TextInput
                   placeholder="Stage name"
@@ -527,7 +524,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
@@ -537,7 +534,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
+                    
                     htmlType="button"
                     onClick={this.toggleInput}
                     style={{ marginTop: "0.62em" }}

@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const PriceAddTable=lazy(()=>import("./PriceAddTable"));
-// const ProductbuilderTable2=lazy(()=>import("./ProductbuilderTable2"));
 
 const PriceDrawer = (props) => {
   const { priceOpenDrawer, handlePriceDrawer,  particularDiscountData, ...formProps } = props;
@@ -17,8 +16,6 @@ const PriceDrawer = (props) => {
         destroyOnClose
         closable
         placement="right"
-        style={{marginTop:"3rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handlePriceDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

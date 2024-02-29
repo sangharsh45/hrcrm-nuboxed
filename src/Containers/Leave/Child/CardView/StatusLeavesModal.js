@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import StatusLeavesForm from "./StatusLeavesForm";
+const StatusLeavesForm = lazy(()=>import("./StatusLeavesForm"));
 
 
 const StatusLeavesModal = (props) => {
@@ -11,15 +11,9 @@ const StatusLeavesModal = (props) => {
       <StyledDrawer
         //title="Apply for Leaves"
         title={`Status - ${leaveId}`}
-        width="30vw"
+        width="60%"
         visible={updateStatusLeaveModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        // style={{ top: 40 }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleStatusLeaveModal(false)}
-        footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
           <StatusLeavesForm leaveId={props.leaveId} />{" "} 

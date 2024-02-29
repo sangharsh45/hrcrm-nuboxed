@@ -1,18 +1,14 @@
 import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Icon, Button, Input,DatePicker } from "antd";
-import { FormattedMessage } from "react-intl";
+import { Tooltip, Button,DatePicker } from "antd";
 import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEditExpense, handleUpdateExpenseModal, deleteExpenseDrawer, } from "../ExpenseAction";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
-import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout'
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { base_url } from "../../../Config/Auth";
-import { DeleteOutlined, DownloadOutlined, EditOutlined, UploadOutlined } from "@ant-design/icons";
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
 import EditUpload from "../../../Components/Forms/Edit/EditUpload";
 
 const AddDocumentModal = lazy(() => import("./AddDocumentModal"));
@@ -72,7 +68,7 @@ function ExpenseDrawerCard(props) {
     particular:newData[index].particular,
     // imageId: newimageId !== "" ? newimageId.imageId  : props.setEditingUser.imageId,
     // documentId:newimageId !== "" ? newData[index].documentId :newimageId.documentId,
-    documentId:newimageId.documentId,
+    documentId:newimageId[index].documentId,
       userId:newData[index].userId,
       expenseDate:`${newData[index].expenseDate}T20:00:00Z`
     }
@@ -92,15 +88,27 @@ function ExpenseDrawerCard(props) {
   
   return (
     <>
-       <OnlyWrapCard>
+    
+    <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+      <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" md:w-[10.1rem]"></div>
+        <div className=" md:w-[8.1rem]">ID</div>
+        <div className=" md:w-[9.5rem]">Type</div>
+        <div className=" md:w-[5.6rem] ">Date</div>
+        <div className="md:w-[5.9rem]">Cost Code</div>
+        <div className="md:w-[7.5rem]">Particulars</div>
+        <div className="md:w-[3.8rem]">Amount</div> 
+      
+        <div className="w-12"></div>
+
+      </div>
     {inputValues.map((item,index) => { 
                   return (
                       <div key={index}>
-                          <div className="flex justify-between mt-4"
-                              style={{
-                                  borderBottom: "3px dotted #515050"
-                              }}>
-                                <div className=" flex font-medium flex-col w-[6rem] ">
+                          <div
+                className="flex rounded-xl  bg-white mt-[0.5rem] h-[7rem] items-center p-3"
+              >
+                                <div className=" flex font-medium flex-col w-[7.1rem] ">
                                 {editStates[index] ? (
   <div>                           
 <EditUpload
@@ -109,42 +117,39 @@ imgWidth={100}
 imgHeight={100}
 getImage={handleSetImage}
 />
-  <button 
+  {/* <button 
   // onClick={() => 
   // deleteHandler(image)}
   >
   delete image
-</button>
+</button> */}
 </div>  
 ):(
 <img src={`${base_url}/image/${item.documentId}`}
-style={{width:"3rem",height:"3rem"}}
+style={{width:"6rem",height:"6rem"}}
 />
 )}
 </div>   
-                              <div className=" flex font-medium flex-col w-[2rem] ">
+                              <div className=" flex font-medium flex-col w-[9.3rem] ">
 
   
                                     
-                                          <h4 class=" text-sm text-cardBody font-poppins">
+                                          {/* <div class=" text-sm text-cardBody font-poppins">
                                            ID
-                                          </h4>
-                                          <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                          </div> */}
+                                          <div class=" text-xs  text-cardBody font-poppins cursor-pointer">
                                               
                                           {/* <div onClick={() => { this.handleExpand(item.voucherId) 
               this.props.handleMileageVoucherIdDrwer(true)}}>
      
-       </div> */}  <Tooltip title={item.expenseId} >
-         
-         <QuestionMarkIcon style={{fontSize:"1rem"}}/>
-         </Tooltip>                        </h4>
+       </div> */} {item.expenseId}                       </div>
 
                                      
                             
                               </div>
-                              <div className=" flex font-medium flex-col  w-20 ">
+                              <div className=" flex font-medium flex-col  w-[10.31rem] ">
                          
-                         <h4 class=" text-sm text-cardBody font-poppins"> Type </h4>
+                         {/* <div class=" text-sm text-cardBody font-poppins"> Type </div> */}
                          {editStates[index] ? (
             // <input
             //   type="text"
@@ -164,110 +169,122 @@ style={{width:"3rem",height:"3rem"}}
   ))}
 </select>
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.expenseType}
-                         </h4>
+                         </div>
                            )}
                      </div>
-                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
+                              <div className=" flex font-medium flex-col w-[7.8rem] ">
                          
-                                  <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
+                                  {/* <div class=" text-sm text-cardBody font-poppins">Date </div> */}
                                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.expenseDate)} 
     onChange={(date, dateString) =>
       handleInputChange(index, "expenseDate", dateString)
     }
-    style={{ border: "1px solid grey" }}
+    style={{ border: "1px solid lightgrey",boxShadow:"0 0.01em 0.01em ",margin:"0.25rem",height:"1.4rem" }}
   />
 ) : (
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       
                                   
                                   {dayjs(item.expenseDate).format("MMM Do YY")}
 
-                                  </h4>
+                                  </div>
                                   )}
                               </div>
-                              <div className="flex font-medium flex-col w-32">
-                              <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4>
+                              <div className="flex font-medium flex-col w-[5.12rem]">
+                              {/* <div class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </div> */}
                               {editStates[index] ? (
             <input
               type="text"
               value={item.clientName}
               onChange={(e) => handleInputChange(index, 'clientName', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.clientName}
-                         </h4>
+                         </div>
           )}
           </div>
-                         <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
+                         <div className=" flex font-medium flex-col w-[7.5rem] ">
 
                                 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4>
+                                  {/* <div class=" text-sm text-cardBody font-poppins">Particulars</div> */}
                                   {editStates[index] ? (
                                   <input
               type="text"
               value={item.particular}
               onChange={(e) => handleInputChange(index, 'particular', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
         
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                        {item.particular}
-                                  </h4>
+                                  </div>
           )}
      
                               </div>
-                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
+                              <div className=" flex font-medium flex-col w-[5.1rem] ">
                                 
                               <div className=" flex font-medium flex-col w-20 ">
 
 
-                                <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                {/* <div class=" text-sm text-cardBody font-poppins">Amount</div> */}
                                 {editStates[index] ? (
                                   <input
               type="text"
               value={item.amount}
               onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
                                                                
           
-                                <h4 class=" text-xs text-cardBody font-poppins">
-                                    {item.amount}
-                                </h4>
+                                <div class=" text-xs text-cardBody font-poppins">
+                                    {item.amount}   {item.currency}
+                                </div>
           )}
                             </div> 
 
                      </div>
-                     <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
+                     <div className=" flex font-medium flex-col w-[4.13rem] ">
 
 
-<h4 class=" text-sm text-cardBody font-poppins">Curency</h4>
+{/* <div class=" text-sm text-cardBody font-poppins">Curency</div> */}
 {editStates[index] ? (
   <input
 type="text"
 value={item.currency}
 // onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-style={{ border: "1px solid grey" }}
+style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
 />
-) : (
-                               
 
-<h4 class=" text-xs text-cardBody font-poppins">
-   {item.currency}
-</h4>
-)}
+                               
+):null}
 </div> 
 
                               <div class="flex flex-row items-center w-[10%]">
-                                <div class="flex items-center">
+                              <div class="flex items-center ml-[0.25rem]">
+                              {item.status !== 'Approved' && (
+                                <button onClick={() => toggleEdit(index)}>
+          {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
+                              color: "grey",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}/>}
+        </button>
+         )}
+        {editStates[index] && (
+          <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
+        )}
+       
+                      </div>
+                                <div class="flex items-center flex-col ml-2">
+                                {item.status !== 'Approved' && (
                                 <Tooltip title="Upload Document">
             <UploadOutlined
               type="upload"
@@ -278,6 +295,7 @@ style={{ border: "1px solid grey" }}
               }}
             />
           </Tooltip>
+                                )}
           <Tooltip title="Download Document">
           <a
           href={`${base_url}/document/${item.documentId}`}
@@ -291,26 +309,10 @@ style={{ border: "1px solid grey" }}
         </a>
           </Tooltip>
                                 </div>
-                  <div class="flex items-center ml-[0.25rem]">
-                    {/* <EditOutlined
-                      //  style={{ color: "blue" ,display:"flex",justifyItems:"center",justifyContent:"center",fontSize:"0.75rem",marginTop:"0.25rem",marginLeft:"0.25rem"}}
-                      type="edit"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                this.props.setEditExpense(item);
-                handleUpdateExpenseModal(true);
-        }} 
-                      /> */}
-                                <button onClick={() => toggleEdit(index)}>
-          {editStates[index] ? 'Cancel' : 'Edit'}
-        </button>
-        {editStates[index] && (
-          <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
-        )}
-                      </div>
+                 
                       <div >
-                      <div >
-                         {/* {item.status === "Pending" ? ( */}
+                      <div class="ml-2" >
+                      {item.status !== 'Approved' && (
                          <Tooltip title="Delete">
             <DeleteOutlined
               type="delete"
@@ -321,7 +323,7 @@ style={{ border: "1px solid grey" }}
               }}
             />
           </Tooltip>
-          {/* ):null} */}
+                      )}
            {item.status==="Rejected" && (
           <Button type="primary"
           onClick={()=>{
@@ -342,7 +344,8 @@ style={{ border: "1px solid grey" }}
                   )
               })}
 
-    </OnlyWrapCard>
+    </div>
+
         <UpdateExpenseModal
       // expenseId={currentExpenseId}
       updateExpenseModal={updateExpenseModal}

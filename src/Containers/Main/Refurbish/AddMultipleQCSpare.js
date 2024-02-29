@@ -4,15 +4,18 @@ import { getTaggedSuppliesByBrand, addSpareList } from "../Account/AccountAction
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { CloseOutlined } from "@ant-design/icons"
+import { getCurrency } from "../../Auth/AuthAction";
+import { FormattedMessage } from 'react-intl';
 const { Option } = Select;
 
 const AddMultipleQCSpare = (props) => {
 
     useEffect(() => {
+        props.getCurrency()
         props.getTaggedSuppliesByBrand(props.RowData.company, props.RowData.model)
     }, [])
 
-    const [rows, setRows] = useState([{ suppliesId: "", noOfSpare: "", hours: "", extraCost: "", id: 1 }]);
+    const [rows, setRows] = useState([{ suppliesId: "", noOfSpare: "", hours: "", extraCost: "", spareCurrency: "", id: 1 }]);
     const [id, setId] = useState(1);
     const [level, setLevel] = useState(1);
 
@@ -26,8 +29,7 @@ const AddMultipleQCSpare = (props) => {
     };
 
     function handleCallBack() {
-        // props.getPhoneOrderIdByUser()
-        setRows([{ suppliesId: "", noOfSpare: "", hours: "", extraCost: "", id: 1 }])
+        setRows([{ suppliesId: "", noOfSpare: "", hours: "", extraCost: "", spareCurrency: "", id: 1 }])
     }
 
     function handleChangeValues1(value, a) {
@@ -74,10 +76,21 @@ const AddMultipleQCSpare = (props) => {
             });
         });
     }
+    function handleChangeValues5(value, a) {
+        setRows((v) => {
+            return v.map((d) => {
+                if (`${d.id}_value` === a) {
+                    return { ...d, spareCurrency: value };
+                } else {
+                    return d;
+                }
+            });
+        });
+    }
     function handleAddRowClick() {
         setId((v) => v + 1);
         setLevel((v) => v + 1);
-        setRows((v) => [...v, { suppliesId: "", noOfSpare: "", hours: "", extraCost: "", id: id + 1, roomFullInd: 0 }]);
+        setRows((v) => [...v, { suppliesId: "", noOfSpare: "", hours: "", extraCost: "", spareCurrency: "", id: id + 1, roomFullInd: 0 }]);
     }
     function handleDelete(row) {
         setRows((v) => v.filter((d) => d.id !== row.id));
@@ -89,8 +102,8 @@ const AddMultipleQCSpare = (props) => {
             {rows.map((row, i) => {
                 return (
                     <>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "40%" }}>
+                        <div class="flex justify-between">
+                            <div class="w-[30%]">
                                 <label>{`Spare ${i + 1}`}</label>
 
                                 <Select
@@ -107,8 +120,15 @@ const AddMultipleQCSpare = (props) => {
                                 </Select>
 
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Units</label>
+
+                            <div class="w-[15%]">
+                                <label>
+                                    <FormattedMessage
+                                        id="app.units"
+                                        defaultMessage="Units"
+                                    />
+
+                                </label>
                                 <Input
                                     type='text'
                                     value={`${row.noOfSpare}`}
@@ -117,8 +137,13 @@ const AddMultipleQCSpare = (props) => {
                                     }
                                 />
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Hours</label>
+                            <div class="w-[15%]">
+                                <label>
+                                    <FormattedMessage
+                                        id="app.hours"
+                                        defaultMessage="Hours"
+                                    />
+                                </label>
                                 <Input
                                     type='text'
                                     value={`${row.hours}`}
@@ -127,8 +152,14 @@ const AddMultipleQCSpare = (props) => {
                                     }
                                 />
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Cost</label>
+                            <div class="w-[15%]">
+                                <label>
+                                    <FormattedMessage
+                                        id="app.cost"
+                                        defaultMessage="Cost"
+                                    />
+
+                                </label>
                                 <Input
                                     type='text'
                                     value={`${row.extraCost}`}
@@ -137,8 +168,25 @@ const AddMultipleQCSpare = (props) => {
                                     }
                                 />
                             </div>
+                            <div class="w-[15%]">
+                                <label>{`Currency`}</label>
+
+                                <Select
+                                    name={`${row.id}_value`}
+                                    value={`${row.spareCurrency}`}
+                                    onChange={(value) =>
+                                        handleChangeValues5(value, `${row.id}_value`)
+                                    }
+                                // placeholder={`select`}
+                                >
+                                    {props.currencies.map((a) => {
+                                        return <Option value={a.currency_name}>{a.currency_name}</Option>;
+                                    })}
+                                </Select>
+
+                            </div>
                             {rows.length > 1 && (row.id + 1 > row.id) ? (
-                                <div style={{ width: "5%", marginTop: "30px" }}>
+                                <div class="w-[5%] mt-[30px]">
                                     <CloseOutlined
                                         onClick={() => handleDelete(row)}
                                         style={{ fontSize: "16px", color: "red" }} />
@@ -149,30 +197,25 @@ const AddMultipleQCSpare = (props) => {
                     </>
                 )
             })}
-            <div style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginRight: "47px",
-                marginTop: "25px",
-            }}>
-                <Button
-                    style={{
-                        backgroundColor: "#24a3fb",
-                        marginRight: "15px",
-                        border: "none",
-                    }}
+            <div class="flex justify-end mr-[47px] mt-[25px]">
+                <Button className="bg-[#24a3fb] mr-4"
                     type="primary"
                     onClick={handleAddRowClick}
                 >
-                    Add More
+                    <FormattedMessage
+                        id="app.addmore"
+                        defaultMessage="Add More"
+                    />
                 </Button>
                 <Button
                     htmlType='submit'
                     type='primary'
                     onClick={buttonOnClick}
-                // loading={props.addingRoomAndRackInInventory}
                 >
-                    Save
+                    <FormattedMessage
+                        id="app.save"
+                        defaultMessage="Save"
+                    />
                 </Button>
             </div>
 
@@ -184,13 +227,15 @@ const AddMultipleQCSpare = (props) => {
 const mapStateToProps = ({ inventory, auth, distributor }) => ({
     addingRoomAndRackInInventory: inventory.addingRoomAndRackInInventory,
     spareByBrand: distributor.spareByBrand,
+    currencies: auth.currencies,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getTaggedSuppliesByBrand,
-            addSpareList
+            addSpareList,
+            getCurrency
         },
         dispatch
     );

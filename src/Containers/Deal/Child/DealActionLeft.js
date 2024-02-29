@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { Tooltip, Badge } from "antd";
+import { Tooltip, Badge,Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import DeleteIcon from "@mui/icons-material/Delete";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import { DeleteOutlined } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
 import { CheckCircleTwoTone } from "@ant-design/icons";
@@ -46,14 +46,16 @@ const DealActionLeft = (props) => {
           }
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
             }}
           >
             {" "}
-            <LightbulbIcon style={{color:"rgb(214, 144, 149)"}} />
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <CurrencyExchangeIcon/>
+            </Avatar>
           </span>
         </Tooltip>
       </Badge>
@@ -68,16 +70,17 @@ const DealActionLeft = (props) => {
         overflowCount={999}
       >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
               color: viewType === "stage" && "#1890ff",
             }}
             // iconType="table"
             tooltipTitle="Stage View"
             onClick={() => props.setDealViewType("stage")}
           >
+             <Avatar style={{ background: props.viewType === "stage" ? "#f279ab" : "#4bc076" }}>
            <TableOutlined/>
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
@@ -97,7 +100,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setDealViewType("won")}
             style={{
            
@@ -106,7 +109,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "won" ? "#f279ab" : "#4bc076" }}>
             <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
@@ -126,7 +131,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("close")}
             style={{
               color: props.viewType === "close" && "#1890ff",
@@ -134,7 +139,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "close" ? "#f279ab" : "#4bc076" }}>
             <LockOpenIcon />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -153,7 +160,7 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("lost")}
             style={{
               color: props.viewType === "lost" && "#1890ff",
@@ -161,7 +168,9 @@ const DealActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "lost" ? "#f279ab" : "#4bc076" }}>
             <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -183,9 +192,9 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
+        
               color: viewType === "teams" && "#1890ff",
            
             }}
@@ -193,10 +202,13 @@ const DealActionLeft = (props) => {
             tooltipTitle="Teams"
             onClick={() => props.setDealViewType("teams")}
           >
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
          <PeopleIcon/>
+         </Avatar>
           </span>
           </Badge>
         </Tooltip>
+        {(props.dealFullListInd===true || props.user.role==="ADMIN") && (
         <Tooltip
           title={   <FormattedMessage
             id="app.all"
@@ -209,9 +221,8 @@ const DealActionLeft = (props) => {
         overflowCount={999}
       >
           <span
+          class="mr-1 text-sm cursor-pointer"
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
               color: viewType === "all" && "#1890ff",
               cursor:"pointer"
             }}
@@ -219,14 +230,16 @@ const DealActionLeft = (props) => {
             tooltipTitle="All"
             onClick={() => props.setDealViewType("all")}
           >
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
             <FormattedMessage
                         id="app.all"
                         defaultMessage="ALL"
                       />
+                      </Avatar>
           </span>
           </Badge>
         </Tooltip>
-     
+     )}
       <Tooltip
         title={
           <FormattedMessage
@@ -246,14 +259,16 @@ const DealActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
               // cursor:"pointer"
               //color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
-            <DeleteIcon />
+             <Avatar style={{ background: props.viewType === "" ? "#f279ab" : "#4bc076" }}>
+            <DeleteOutlined />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -268,7 +283,7 @@ const DealActionLeft = (props) => {
         }
       >
         <span
-          class=" mr-2 text-sm cursor-pointer"
+          class=" mr-1 text-sm cursor-pointer"
           onClick={() => props.setOpportunityViewType("Map")}
           style={{
             color: props.viewType === "Map" && "#1890ff",
@@ -291,6 +306,7 @@ const mapStateToProps = ({ deal, auth, opportunity }) => ({
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
+  dealFullListInd:auth.userDetails.dealFullListInd
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

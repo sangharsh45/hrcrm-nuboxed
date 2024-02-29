@@ -1048,7 +1048,8 @@ export const getProductbuilder = () => (dispatch) => {
     type: types.GET_PRODUCT_BUILDER_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplies`, {
+    .get(`${base_url2}/supplies`,
+    {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1068,7 +1069,7 @@ export const getProductbuilder = () => (dispatch) => {
       });
     });
 };
-export const addProductBuilder = (data, productId) => (dispatch) => {
+export const addProductBuilder = (data) => (dispatch) => {
   dispatch({ type: types.ADD_PRODUCT_BUILDER_REQUEST });
   axios
     .post(`${base_url2}/productionBuilder/supplies`, data, {
@@ -1126,7 +1127,7 @@ export const handlePriceDrawer = (modalProps) => (dispatch) => {
   });
 };
 
-export const uploadCatalogueList = (data,) => (dispatch) => {
+export const uploadCatalogueList = (data) => (dispatch) => {
   dispatch({ type: types.UPLOAD_CATALOGUE_LIST_REQUEST });
   axios
     .post(`${base_url2}/excel/product-details`, data, {
@@ -1151,6 +1152,186 @@ export const uploadCatalogueList = (data,) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.UPLOAD_CATALOGUE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const removeProductBuilder = (data,productSupplyLinkId) => (dispatch) => {
+  dispatch({
+    type: types.REMOVE_PRODUCT_BUILDER_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/productionBuilder/supplies/${productSupplyLinkId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.REMOVE_PRODUCT_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_PRODUCT_BUILDER_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+
+export const updateProSupplBuilder = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_PRO_SUPPL_BUILDER_REQUEST });
+  axios
+    // .put(`${base_url2}/productionBuilder/suppliesUpdate/${productSupplyLinkId}`, data, {
+      .post(`${base_url2}/productionBuilder/supplies`, data, {
+    headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PRO_SUPPL_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.UPDATE_PRO_SUPPL_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getProductCurrency = (productId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_CURRENCY_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/product/productCurrency/${productId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCT_CURRENCY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_CURRENCY_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const createProductCurrency = (data,) => (dispatch) => {
+  dispatch({ type: types.CREATE_PRODUCT_CURRENCY_REQUEST });
+  axios
+    .post(`${base_url2}/product/saveProductCurrency`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.CREATE_PRODUCT_CURRENCY_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.CREATE_PRODUCT_CURRENCY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getSearchBuilder = (hsn) => (dispatch) => {
+  dispatch({
+    type: types.GET_SEARCH_BUILDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/supplies/suppliesList/${hsn}`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_SEARCH_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_SEARCH_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAllProductList = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_PRODUCT_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/product/all-product`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },})
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const PstoProductionBuilder = (data) => (dispatch) => {
+  dispatch({ type: types.POST_PRODUCTION_BUILDER_REQUEST });
+  axios
+      .post(`${base_url2}/production/productionProductBuilder`, data, {
+    headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.POST_PRODUCTION_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        // showConfirmButton: false,
+        // timer: 1500
+      })
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.POST_PRODUCTION_BUILDER_FAILURE,
         payload: err,
       });
     });

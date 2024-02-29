@@ -1,18 +1,11 @@
-import React, { lazy, Suspense, Component, Profiler } from "react";
+import React, {  Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button,  } from "antd";
+import { Formik, Form, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
-import Upload from "../../../../../../Components/Forms/Formik/Upload";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { updateBankDetails } from "../../../../ProfileAction";
+import {updateBankDetails} from "../../../../ProfileAction"
 import { FormattedMessage } from "react-intl";
 const documentSchema = Yup.object().shape({
   documentId: Yup.string().required("Input needed !"),
@@ -54,14 +47,10 @@ class UpdateBankForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                  // margin: "0.9375em 3.125em",
-                  // border: "0.125em solid green"
-                }}
+              <div class=" w-full"
               >
-                <div style={{ width: "100%" }}>
+                 <div class=" w-full"
+              >
                   <FastField
                     name="accountNo"
                     // label="Account Number"
@@ -79,9 +68,10 @@ class UpdateBankForm extends Component {
                     style={{ flexBasis: "80%", width: "100%" }}
                   />
                 </div>
-                <Spacer />
-                <FlexContainer>
-                  <div style={{ width: "47%" }}>
+               
+                <div class=" flex mt-3">
+                <div class=" w-[47%]"
+              >
                     <FastField
                       name="ifscCode"
                       //label="IFSC CODE"
@@ -103,8 +93,9 @@ class UpdateBankForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "50%" }}>
+              
+                  <div class=" w-[50%] ml-2"
+              >
                     <FastField
                       isRequired
                       name="branchName"
@@ -127,9 +118,10 @@ class UpdateBankForm extends Component {
                       }}
                     />
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <div style={{ width: "100%" }}>
+                </div>
+               
+                <div class=" w-full mt-3"
+              >
                   <FastField
                     isRequired
                     name="bankName"
@@ -154,8 +146,8 @@ class UpdateBankForm extends Component {
                 </div>
               </div>
 
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -163,7 +155,7 @@ class UpdateBankForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>
@@ -179,5 +171,7 @@ const mapStateToProps = ({ employee, profile }) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ updateBankDetails }, dispatch);
+  bindActionCreators({ 
+    updateBankDetails
+   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateBankForm);

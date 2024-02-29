@@ -3,7 +3,7 @@ import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLeaveStatusByLeaveId } from '../../LeavesAction';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const StatusLeavesForm = (props) => {
   useEffect(() => {
@@ -19,20 +19,31 @@ const StatusLeavesForm = (props) => {
           {leaveStatus &&
             leaveStatus.map((status, i) => (
               <Timeline.Item key={i}>
-                 {status.approvedStatus === 'Approved' ? (
-                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
-                ) : status.approvedStatus === 'Pending' ? (
-                  `Pending With ${status.employeeName}.`
-                ) : null}
-              </Timeline.Item>
+{`${status.approvedStatus} by ${status.employeeName}`}
+<br />
+{status.createdOn ? (
+  `Sent on ${dayjs(status.createdOn).format("DD-MM-YYYY")}`
+) : (
+  "Yet to be approved"
+)}
+ ||
+&nbsp;&nbsp;
+{status.approvedDate ? (
+  `Approved on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`
+) : (
+  "Yet to be approved"
+)}
+
+              {/* {`sent on ${dayjs(status.createdOn).format("DD-MM-YYYY")} | approved on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`} */}
+              {/* <br />
+              {`approved on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`} */}
+              {/* {status.approvedStatus === 'Approved' ? (
+                ` ${dayjs(status.createdOn).format("DD-MM-YYYY")} Approved By ${status.employeeName} on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`
+              ) : status.approvedStatus === 'Pending' ? (
+                `Pending With ${status.employeeName}.`
+              ) : null} */}
+            </Timeline.Item>
             ))}
-          {/* <Timeline.Item
-            dot={<ClockCircleOutlined className="timeline-clock-icon" style={{ color: 'red' }} />}
-            color="red"
-          >
-            Technical testing 2015-09-01
-          </Timeline.Item>
-          <Timeline.Item>Network problems being solved 2015-09-01</Timeline.Item> */}
         </Timeline>
       </div>
     </>
@@ -53,11 +64,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatusLeavesForm);
-
-
-
-
-
-
-
-

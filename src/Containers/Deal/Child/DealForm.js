@@ -7,12 +7,12 @@ import { FormattedMessage } from "react-intl";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import {getCurrency} from "../../Auth/AuthAction"
 import {getAllEmployeelist} from "../../Investor/InvestorAction"
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,message } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
+import {getAssignedToList} from "../../Employees/EmployeeAction"
 import {
   getRecruiterName,
   getInitiative,
@@ -31,8 +31,7 @@ import {createDeals,  getAllDealStages,
   getDealLinkedWorkflow,
   getDealLinkedStages
 } from "../DealAction";
-
-
+import Swal from 'sweetalert2'
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -42,12 +41,13 @@ const OpportunitySchema = Yup.object().shape({
   oppWorkflow: Yup.string().required("Input needed!"),
   currency: Yup.string().required("Input needed!"),
   oppStage: Yup.string().required("Input needed!"),
-  customerId:Yup.string().required("Input needed!"),
 });
 function DealForm(props) {
   useEffect(() => {
+    props.getCurrency();
     props.getRecruiterName();
     props.getAllEmployeelist();
+    props.getAssignedToList(props.orgId);
     props.getSources(props.orgId);
     props.getdealsContactdata(props.userId);
     props.getInvestorData(props.userId)
@@ -79,33 +79,7 @@ function DealForm(props) {
   
     return contactOptions;
   }
-  
 
-
-
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
@@ -145,42 +119,47 @@ function DealForm(props) {
     };
   });
 
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length &&
-      props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
+  const AllEmplo = props.assignedToList.map((item) => {
+    return {
+      label: `${item.empName || ""}`,
+      value: item.employeeId,
+    };
+  });
 
-        .map((option) => {
-          console.log("option1", option);
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-        });
+  const sortedCurrency =props.currencies.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
+    return {
+      label: `${item.currency_name}`,
+      value: item.currency_id,
+    };
+  });
 
-    return skillOptions;
-  }
 
   const customerNameOption = props.investorData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
+    // .sort((a, b) => {
+    //   const libraryNameA = a.name && a.name.toLowerCase();
+    //   const libraryNameB = b.name && b.name.toLowerCase();
+    //   if (libraryNameA < libraryNameB) {
+    //     return -1;
+    //   }
+    //   if (libraryNameA > libraryNameB) {
+    //     return 1;
+    //   }
 
-      // names must be equal
-      return 0;
-    })
+    //   // names must be equal
+    //   return 0;
+    // })
     .map((item) => {
       return {
         label: `${item.name || ""}`,
@@ -188,12 +167,6 @@ function DealForm(props) {
       };
     });
 
-  const recruiterNameOption = props.recruiterName.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
 
   const SourceOptions = props.sources.map((item) => {
     return {
@@ -202,7 +175,7 @@ function DealForm(props) {
     };
   });
 
-  const salesNameOption = props.allEmployeeList.map((item) => {
+  const allEmplo = props.allEmployeeList.map((item) => {
     return {
       label: `${item.empName || ""}`,
       value: item.employeeId,
@@ -210,7 +183,13 @@ function DealForm(props) {
   });
   const [text, setText] = useState("");
   function handletext(e) {
+  //   if (e.target.value.length === 10) {
+  //     window.alert(
+  //         "Description shouldn't exceed 10 characters"
+  //     );
+  // }
     setText(e.target.value);
+
   }
   const {
     transcript,
@@ -224,7 +203,7 @@ function DealForm(props) {
   }
 
   const {
-    user: { userId },
+    user: { userId,empName },
     creatingDeal,
     employeeId,
     salesUserIds,
@@ -260,9 +239,10 @@ function DealForm(props) {
           oppInnitiative: "",
           oppStage: "",
           source:"",
+          included:[],
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
-        // validationSchema={OpportunitySchema}
+       validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           console.log(values);
@@ -336,7 +316,7 @@ function DealForm(props) {
           console.log(`${finalEndTime}${timeEndPart}`);
 
           let newEndTime = `${finalEndTime}${timeEndPart}`;
-
+          
           props.createDeals(
             {
               ...values,
@@ -364,7 +344,7 @@ function DealForm(props) {
           <Form className="form-background">
             <div class=" flex justify-around max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk">
-                <Spacer />
+              <div class="mt-3">
                 <Field
                   isRequired
                   name="opportunityName"
@@ -380,8 +360,8 @@ function DealForm(props) {
                   // accounts={accounts}
                   inlineLabel
                 />
-                <Spacer />
-                <div class="flex justify-between max-sm:flex-col">
+               </div>
+                <div class="flex justify-between max-sm:flex-col mt-3">
                 <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="startDate"
@@ -427,8 +407,8 @@ function DealForm(props) {
                     />
                   </div>
                 </div>
-                <Spacer />
-                <div class="flex justify-between max-sm:flex-col">
+               
+                <div class="flex justify-between max-sm:flex-col mt-3">
                 <div class="  w-w47.5 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
@@ -446,7 +426,7 @@ function DealForm(props) {
                     />
                   </div>
                   <div class="  w-w47.5 max-sm:w-wk">
-                    <Field
+                  <Field
                       name="currency"
                       isColumnWithoutNoCreate
                       defaultValue={{
@@ -455,23 +435,27 @@ function DealForm(props) {
                       label={
                         <FormattedMessage
                           id="app.currency"
-                          defaultMessage="currency"
+                          defaultMessage="Currency"
                         />
                       }
                       width="100%"
                       isColumn
-                      selectType="currencyName"
-                      value={values.currencyName}
+                      // selectType="currencyName"
                       isRequired
-                      component={SearchSelect}
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
                     />
                   </div>
                 </div>
-                <Spacer />
-                <StyledLabel><FormattedMessage
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
+                  <FormattedMessage
                           id="app.description"
-                          defaultMessage="description"
-                        /></StyledLabel>
+                          defaultMessage="Description (up to 150 characters)"
+                        /></div>
                 <div>
                   <div>
                     <span onClick={SpeechRecognition.startListening}>
@@ -506,6 +490,7 @@ function DealForm(props) {
                   </div>
                   <div>
                     <textarea
+               
                       name="description"
                       className="textarea"
                       type="text"
@@ -588,11 +573,31 @@ function DealForm(props) {
           </>
         )}
       </Listbox>
-
-                <Spacer />
-<div class="flex justify-between max-sm:flex-col">
+<div>
+<Field
+                    name="included"
+                    // label="Include"
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="include"
+                      />
+                    }
+                    mode
+                    placeholder="Select"
+                    component={SelectComponent}
+                    options={Array.isArray(AllEmplo) ? AllEmplo : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${empName || ""} `,
+                      value: employeeId,
+                    }}
+                  />
+  </div>
+                
+<div class="mt-2 flex justify-between max-sm:flex-col">
 <div class=" w-w47.5 max-sm:w-wk">
-               <StyledLabel>
+<div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="investorId"
                     // selectType="customerList"
@@ -615,7 +620,7 @@ function DealForm(props) {
                     value={values.investorId}
                     inlineLabel
                   />
-                </StyledLabel>
+                </div>
             </div>
                 <div class=" w-w47.5 max-sm:w-wk">
                 <FastField
@@ -627,7 +632,6 @@ function DealForm(props) {
                               />
                             }
                             isColumnWithoutNoCreate
-                            selectType="sourceName"
                             component={SelectComponent}
                     options={
                       Array.isArray(SourceOptions)
@@ -638,7 +642,7 @@ function DealForm(props) {
                           />
                         </div>
                         </div>
-                <StyledLabel>
+                        <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                   <Field
                     name="contactId"
                     // selectType="contactListFilter"
@@ -667,7 +671,7 @@ function DealForm(props) {
                     isColumn
                     inlineLabel
                   />
-                </StyledLabel>
+                </div>
                 {/* <StyledLabel>
                   <Field
                     name="oppInnitiative"
@@ -697,11 +701,11 @@ function DealForm(props) {
                     inlineLabel
                   />
                 </StyledLabel> */}
-                <Spacer />
+               
 
-                <div class="flex justify-between max-sm:flex-col">
+                <div class="flex justify-between max-sm:flex-col mt-3">
                   <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="oppWorkflow"
                         // selectType="contactListFilter"
@@ -723,11 +727,11 @@ function DealForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
-                  <Spacer />
-                  <div class=" w-w47.5 max-sm:w-wk">
-                    <StyledLabel>
+                  
+                  <div class=" w-w47.5 max-sm:w-wk ">
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       <Field
                         name="oppStage"
                         isRequired
@@ -757,14 +761,14 @@ function DealForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
                 </div>
               </div> 
   
             </div>
-            <Spacer />
-            <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+           
+            <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute  mt-3">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -782,7 +786,7 @@ function DealForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, contact, customer }) => ({
+const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings,employee, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -810,6 +814,7 @@ const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, cont
   fullName: auth.userDetails.fullName,
   sources: source.sources,
   creatingDeal:deal.creatingDeal,
+  assignedToList:employee.assignedToList,
   // opportunitySkills:opportunity.opportunitySkills
 });
 
@@ -817,6 +822,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       createDeals,
+      getCurrency,
       getdealsContactdata,
       getRecruiterName,
       getAllEmployeelist,
@@ -824,7 +830,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getInvestorData,
       getInitiative,
-      // getOpportunitySKill
+      getAssignedToList,
       // getWorkflow,
       getStages,
       getSources,

@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { Formik, Form, Field } from "formik";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { handleMapModal } from "../../ProfileAction";
-
 import axios from "axios";
 import {
   EditOutlined,
-  EyeInvisibleOutlined, MailOutlined, SearchOutlined, UpCircleOutlined,
 } from '@ant-design/icons';
 import { base_url } from "../../../../Config/Auth";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -17,14 +15,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   Title,
-  SubTitle,
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { ActionIcon, Leaflet } from "../../../../Components/Utils";
+import {  Leaflet } from "../../../../Components/Utils";
 import { AddressComponent } from "../../../../Components/Common";
-import MapPopupMarker from "./MapPopupMarker";
 import L from "leaflet";
+const MapPopupMarker = lazy(() => import("./MapPopupMarker"))
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -104,13 +100,9 @@ class ProfileOverviewView extends Component {
       });
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "85%" }}
-          >
-            <div style={{ width: "20%" }}>
+        <div class=" flex justify-between" >
+        <div class=" flex justify-start w-[85%] flex-no-wrap" >
+            <div class=" w-[20%]" >
               <MultiAvatar
               // style={{width:"5rem"}}
                 primaryTitle={user.fullName}
@@ -118,16 +110,17 @@ class ProfileOverviewView extends Component {
                 imageURL={user.imageURL}
               />
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "80%" }}>
+         
+            <div class=" flex flex-col w-[80%] ml-4 " >
+           
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
                 fontSize={"1.375em"}
               >{`${user.fullName || ""} `}</Title>
-            </FlexContainer>
-          </FlexContainer>
-          <FlexContainer style={{ width: "15%" }} justifyContent="flex-end">
+            </div>
+          </div>
+          <div class=" flex justify-end w-[15%]" >
             {/* <ActionIcon
               tooltipTitle="Address"
               iconType="environment"
@@ -141,15 +134,16 @@ class ProfileOverviewView extends Component {
               handleIconClick={this.handleMapModalVisible}
               size="1em"
             />{" "} */}
-            &nbsp;&nbsp;
+          
             <EditOutlined
               tooltipTitle="Edit"
               iconType="edit"
               onClick={toggleViewType}
               size="1em"
+              style={{marginLeft:"1rem"}}
             />
-          </FlexContainer>
-        </FlexContainer>
+          </div>
+        </div>
 
         <StyledModal
           title={`${user.fullName || ""} `}
@@ -161,7 +155,7 @@ class ProfileOverviewView extends Component {
           footer={null}
         >
           <>
-            <FlexContainer>
+            <div class=" flex">
               {!address ? (
                 <>
                   {/* <ActionIcon
@@ -178,10 +172,7 @@ class ProfileOverviewView extends Component {
                   )}
                 </>
               ) : null}
-              <FlexContainer
-                justifyContent="space-between"
-                alignItems="flex-start"
-                flexWrap="nowrap"
+              <div class=" flex justify-between items-start flex-no-wrap"
               >
                 <div>
                   <div className="product3" style={{ width: "180" }}>
@@ -202,7 +193,7 @@ class ProfileOverviewView extends Component {
                   /> */}
                 </div>
                 <div class="vl"></div>
-                <div style={{ alignSelf: "flex-end" }}>
+                <div class=" flex self-end">
                   {markers && (
                     <Leaflet
                       height={400}
@@ -223,8 +214,8 @@ class ProfileOverviewView extends Component {
                     />
                   )}
                 </div>
-              </FlexContainer>
-            </FlexContainer>
+              </div>
+            </div>
           </>
         </StyledModal>
       </>

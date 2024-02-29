@@ -1,19 +1,14 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader } from "../../Components/Placeholder";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
-import LeaveCardList from "./Child/CardView/LeaveCardList";
-import LeaveCardView from "./Child/CardView/LeaveCardView";
-import LeaveJumpstartBoxex from "./Child/JumpStartBoxes/LeaveJumpstartBoxes";
-import LeaveHeader from "./Child/LeaveHeader";
-import LeaveTable from "./Child/Tab/LeaveTable";
 import { getleaveLeftSideDetails,setLeavesViewType } from "./LeavesAction";
-import LeaveStatusCard from "./Child/CardView/LeaveStatusCard";
-import LeaveGranttChart from "./Child/Chart/LeaveGranttChart";
+const LeaveCardList = lazy(() => import("./Child/CardView/LeaveCardList"));
+const LeaveCardView = lazy(() => import("./Child/CardView/LeaveCardView"));
+const LeaveHeader = lazy(() => import("./Child/LeaveHeader"));
+const LeaveStatusCard = lazy(() => import("./Child/CardView/LeaveStatusCard"));
+const LeaveGranttChart = lazy(() => import("./Child/Chart/LeaveGranttChart"));
 const LeaveJumpstart = lazy(() => import("./Child/JumpStartBoxes/LeaveJumpstart"));
-const LeaveDetailLeft = lazy(() => import("./Child/LeaveDetailLeft"));
-const LeaveDetailRight = lazy(() => import("./Child/LeaveDetailRight"));
+
 
 class Leave extends Component {
   state = { currentData: "",currentUser:"" };

@@ -4,14 +4,10 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import {
   handleOpportunityModal,
-  getOpportunityListByUserId,
   setOpportunityViewType,
 } from "./OpportunityAction";
-import OpportunityBoard from "./Child/OpportunityBoard"
-import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
-import OpportunityMobileWonCard from "./Child/OpportunityTable/OpportunityMobileWonCard";
-import OpportunityLostMobileCard from "./Child/OpportunityTable/OpportunityLostMobileCard";
-import OpportunityAllMobileCardList from "./Child/OpportunityTable/OpportunityAllMobileCardList";
+const OpportunityBoard = lazy(() => import("./Child/OpportunityBoard"));
+const OpportunityWonCard = lazy(() => import("./Child/OpportunityTable/OpportunityWonCard"));
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
@@ -26,7 +22,6 @@ class Opportunity extends Component {
   state = { currentData: "",isMobile: false };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getOpportunityListByUserId(this.props.userId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -71,11 +66,11 @@ class Opportunity extends Component {
           handleOpportunityModal={handleOpportunityModal}
         />
         <Suspense fallback={<BundleLoader />}>
-          {      this.props.viewType === "stage" ?
-             <OpportunityBoard/>:
-          this.props.viewType === "table" ?
-          // <OpportunityTable /> 
-          <OpportunityCardList/>
+          {  this.props.viewType === "table" ?    
+            <OpportunityCardList/> :
+          
+             this.props.viewType === "stage" ?
+             <OpportunityBoard/>
           :
           this.props.viewType === "dashboard" ?
             //  <OpportunityDeletedTable/> 
@@ -86,7 +81,7 @@ class Opportunity extends Component {
                     <OpportunityCloseCard/>
                      :
              this.props.viewType === "lost" ?
-             (isMobile ?  <OpportunityLostMobileCard/> :   <OpportunityLostCard/> )
+             (  <OpportunityLostCard/> )
                     // <OpportunitylostTable/>
                     :
                     this.props.viewType === "Map" ?
@@ -94,10 +89,10 @@ class Opportunity extends Component {
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
              this.props.viewType === "won" ?
-             (isMobile ? <OpportunityMobileWonCard /> :  <OpportunityWonCard/> )
+             ( <OpportunityWonCard/> )
              // <OpportunitylostTable/>
             : this.props.viewType==="all" ? 
-            (isMobile ?  <OpportunityAllMobileCardList/> :   <OpportunityAllCardList/> )
+            (   <OpportunityAllCardList/> )
              : null}
         </Suspense>
       </React.Fragment>
@@ -114,7 +109,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleOpportunityModal,
-      getOpportunityListByUserId,
       setOpportunityViewType,
     },
     dispatch

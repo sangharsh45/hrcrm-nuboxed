@@ -1,14 +1,14 @@
 import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
+import { Button,Select } from "antd";
+import {getCurrency} from "../../../Auth/AuthAction"
+import {getAssignedToList} from "../../../Employees/EmployeeAction"
 import {getAllEmployeelist} from "../../../Investor/InvestorAction"
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
@@ -20,6 +20,7 @@ import {
   getDealLinkedStages
 } from "../../DealAction";
 import { Listbox } from "@headlessui/react";
+const { Option } = Select;
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -36,12 +37,12 @@ const UpdateOpportunitySchema = Yup.object().shape({
 function UpdateDealForm (props) {
   useEffect(()=> {
     props.getAllEmployeelist();
+    props.getAssignedToList(props.orgId);
+    props.getCurrency();
     props.getInvestorData(props.userId);
     props.getContactData(props.userId);
     props.getDealLinkedStages(props.orgId);
     props.getDealLinkedWorkflow(props.orgId);
-    // props.getWorkflow(props.orgId);
-    // props.getStages(props.orgId);
   },[]);
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
@@ -74,8 +75,29 @@ function UpdateDealForm (props) {
 
     return StagesOptions;
   }
+  useEffect(() => {
+    console.log("helo")
+    const includeOption = props.currentItem.include===null?[]: props.currentItem.include.map((item) => {
+      return item.empName
+    })
 
-    const salesNameOption = props.allEmployeeList.map((item) => {
+    
+   
+    setInclude(includeOption)
+    console.log("test", includeOption)
+  
+  }, [props.currentItem]);
+  console.log(includeNames)
+
+  const includeOption = props.currentItem.include===null?[]: props.currentItem.include.map((item) => {
+    return item.empName
+  })
+  const [includeNames, setInclude] = useState(includeOption);
+  function handleChangeInclude(value) {
+    setInclude(value)
+  }
+
+    const allEmplo = props.allEmployeeList.map((item) => {
       return {
         label: `${item.empName || ""}`,
         value: item.employeeId,
@@ -83,19 +105,19 @@ function UpdateDealForm (props) {
     });
 
     const customerNameOption = props.investorData
-      .sort((a, b) => {
-        const libraryNameA = a.name && a.name.toLowerCase();
-        const libraryNameB = b.name && b.name.toLowerCase();
-        if (libraryNameA < libraryNameB) {
-          return -1;
-        }
-        if (libraryNameA > libraryNameB) {
-          return 1;
-        }
+      // .sort((a, b) => {
+      //   const libraryNameA = a.name && a.name.toLowerCase();
+      //   const libraryNameB = b.name && b.name.toLowerCase();
+      //   if (libraryNameA < libraryNameB) {
+      //     return -1;
+      //   }
+      //   if (libraryNameA > libraryNameB) {
+      //     return 1;
+      //   }
 
-        // names must be equal
-        return 0;
-      })
+      //   // names must be equal
+      //   return 0;
+      // })
       .map((item) => {
         return {
           label: `${item.name || ""}`,
@@ -122,6 +144,24 @@ function UpdateDealForm (props) {
 
       return contactOptions;
     };
+    const sortedCurrency =props.currencies.sort((a, b) => {
+      const nameA = a.currency_name.toLowerCase();
+      const nameB = b.currency_name.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const currencyNameOption = sortedCurrency.map((item) => {
+      return {
+        label: `${item.currency_name}`,
+        value: item.currency_id,
+      };
+    });
 
     const WorkflowOptions = props.dealLinkWorkflow.map((item) => {
       return {
@@ -153,7 +193,8 @@ function UpdateDealForm (props) {
             currency: props.currentItem.currency || "",
             salesUserIds: selectedOption ? selectedOption.employeeId:props.currentItem.salesUserIds,
             investorId: props.currentItem.investorId || "",
-            contactId: props.currentItem.contactId || "",
+            contactId: props.currentItem.contactName || "",
+            included: includeNames,
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -233,6 +274,7 @@ function UpdateDealForm (props) {
             props.updateDeal(
               {
                 ...values,
+                included: includeNames,
                 invOpportunityId: props.currentItem.invOpportunityId,
                 orgId: props.organizationId,
                 investorId: props.investorId,
@@ -259,8 +301,7 @@ function UpdateDealForm (props) {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
-                  <StyledLabel>
+                <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                     <Field
                       isRequired
                       name="opportunityName"
@@ -275,11 +316,11 @@ function UpdateDealForm (props) {
                       // accounts={accounts}
                       inlineLabel
                     />
-                  </StyledLabel>
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+                  </div>
+                
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           isRequired
                           name="startDate"
@@ -295,10 +336,10 @@ function UpdateDealForm (props) {
                           isColumn
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           isRequired
                           name="endDate"
@@ -327,13 +368,13 @@ function UpdateDealForm (props) {
                             }
                           }}
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+                
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           name="proposalAmount"
                           // label="Proposal Amount"
@@ -348,29 +389,34 @@ function UpdateDealForm (props) {
                           width={"100%"}
                           component={InputComponent}
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <Field
-                        name="currency"
-                        isColumnWithoutNoCreate
-                        // label="currencyName"
-                        label={
-                          <FormattedMessage
+                    <Field
+                      name="currency"
+                      isColumnWithoutNoCreate
+                      defaultValue={{
+                        value: props.user.currency,
+                      }}
+                      label={
+                        <FormattedMessage
                           id="app.currency"
-                          defaultMessage="currency"
+                          defaultMessage="Currency"
                         />
-                        }
-                        isColumn
-                        defaultValue={{
-                          value: props.user.currency,
-                        }}
-                        selectType="currencyName"
-                        isRequired
-                        component={SearchSelect}
-                      />
+                      }
+                      width="100%"
+                      isColumn
+                      // selectType="currencyName"
+                      isRequired
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(currencyNameOption)
+                          ? currencyNameOption
+                          : []
+                      }
+                    />
 
-                      <Spacer />
+                      
                     </div>
                   </div>
                 </div>
@@ -444,7 +490,43 @@ function UpdateDealForm (props) {
         </>
       )}
     </Listbox>
-                  <Spacer />
+    <div>
+    <label class=" text-[#444] font-bold text-[0.75rem]" >Include</label>
+    <Select
+                        name="included"
+                        mode="multiple"
+                        style={{ width: '100%' }}
+                        placeholder="Select"
+                        defaultValue={includeNames}
+                        onChange={handleChangeInclude}
+                      >
+  
+                        {props.assignedToList.map((item, i) => {
+                          return (
+                            <Option value={item.employeeId}>{item.empName}</Option>
+                          )
+                        })}
+                      </Select>
+{/* <Field
+                    name="include"
+                    isColumnWithoutNoCreate
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="Include"
+                      />
+                    }
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(allEmplo)
+                        ? allEmplo
+                        : []
+                    }
+                    isColumn
+                    value={values.employeeId}
+                    inlineLabel
+                  /> */}
+  </div>
 
                   <Field
                     name="investorId"
@@ -467,8 +549,8 @@ function UpdateDealForm (props) {
                     inlineLabel
                   />
 
-                  <Spacer />
-
+                 
+<div class="mt-3">
                   <Field
                     name="contactId"
                     isColumnWithoutNoCreate
@@ -495,11 +577,11 @@ function UpdateDealForm (props) {
                     value={values.contactId}
                     inlineLabel
                   />
-
-                  <Spacer />
-                  <div class="flex justify-between max-sm:flex-col">
+</div>
+              
+                  <div class="flex justify-between max-sm:flex-col mt-3">
                     <div class=" w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <Field
                           name="oppWorkflow"
                           isColumnWithoutNoCreate
@@ -520,11 +602,11 @@ function UpdateDealForm (props) {
                           margintop={"0"}
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
-                    <Spacer />
-                    <div class="w-w47.5 max-sm:w-wk">
-                      <StyledLabel>
+    
+                    <div class="w-w47.5 max-sm:w-wk ">
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col ">
                         <Field
                           name="oppStage"
                           isColumnWithoutNoCreate
@@ -548,7 +630,7 @@ function UpdateDealForm (props) {
                                 )
                               : []
                           }
-                          value={values.oppStage}
+                          // value={values.oppStage}
                           filterOption={{
                             filterType: "oppWorkflow",
                             filterValue: values.oppWorkflow,
@@ -558,14 +640,14 @@ function UpdateDealForm (props) {
                           margintop={"0"}
                           inlineLabel
                         />
-                      </StyledLabel>
+                      </div>
                     </div>
                   </div>
-                  <Spacer />
+                
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-3 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -583,14 +665,15 @@ function UpdateDealForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth,deal,investor, opportunity, customer, contact }) => ({
+const mapStateToProps = ({ auth,deal,investor,employee, opportunity, customer, contact }) => ({
   user: auth.userDetails,
+  currencies: auth.currencies,
   allEmployeeList:investor.allEmployeeList,
+  assignedToList:employee.assignedToList,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
   setEditingOpportunity: opportunity.setEditingOpportunity,
   updateOpportunityById: opportunity.updateOpportunityById,
-  sales: opportunity.sales,
   dealLinkWorkflow:deal.dealLinkWorkflow,
   dealLinkStages:deal.dealLinkStages,
   workflow: opportunity.workflow,
@@ -604,9 +687,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateDeal,
+      getCurrency,
       getAllEmployeelist,
-      // getWorkflow,
-      // getStages,
+      getAssignedToList,
       getDealLinkedWorkflow,
       getDealLinkedStages,
       getContactData,

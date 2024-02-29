@@ -52,12 +52,8 @@ class WebsiteForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                    }}
+                <div class=" flex justify-between" >
+                  <div class=" w-full h-full"
                   >
                     <Field
                        name="website"

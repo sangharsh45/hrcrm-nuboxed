@@ -2,15 +2,16 @@ import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import moment from "moment";
-import { JumpStartBox, } from "../../../../Components/UI/Elements";
-import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
+import dayjs from "dayjs";
+import {getleaveLeftSideDetails} from "../../../Leave/LeavesAction"
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
+import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour,} from "../../DashboardAction";
 
 class DashboardJumpStart extends React.Component{
   constructor() {
     super();
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
+    const startDate = dayjs().startOf("month"); 
+    const endDate = dayjs();
     var today = new Date(),
     date =
       today.getFullYear() +
@@ -61,6 +62,7 @@ componentDidMount() {
   const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
   this.props.getTasklist(this.props.userId)
    this.props.getavgHour(this.props.userId, startDate, endDate);
+   this.props.getleaveLeftSideDetails(this.props.userId);
   console.log(`Start Date: ${this.state.startDate.format("ll")}`);
   console.log(`End Date: ${this.state.endDate.format("ll")}`);
 }
@@ -69,18 +71,18 @@ componentDidMount() {
 // }, [props.startDate, props.endDate, props.type]);
   
 render() {
-  const formattedDate = moment(this.props.dateOfJoining).format('YYYY-MM-DD'); // Format the date as per your requirement
+  const formattedDate = dayjs(this.props.dateOfJoining).format('DD-MM-YYYY'); // Format the date as per your requirement
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
-   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+   const startDate = `${this.state.startDate.format('DD-MM-YYYY')}T20:00:00Z`
   //   const endDate = new Date(this.state.endDate);
 
   console.log(startDate)
-  console.log(this.state.endDate.format("YYYY MM DD"))
+  console.log(this.state.endDate.format('DD-MM-YYYY'))
   return(
     <div class=" flex flex-row w-full" >
-    <div class="flex w-full" >
-        
+    <div class="flex w-full max-sm:flex-col" >
+    <div class="flex w-wk">
         <JumpStartBox
             noProgress
             title={
@@ -89,11 +91,12 @@ render() {
                 defaultMessage="Leave Balance"
               />
             }
-            value={
-              this.props.user.department === "Recruiter"
-                ? this.props.showDatelist.openRequirement
-                : this.props.showSalesDatelist.openRequirement
-            }
+            value={this.props.leaveFetching.leaveBalance}
+            // value={
+            //   this.props.user.department === "Recruiter"
+            //     ? this.props.showDatelist.openRequirement
+            //     : this.props.showSalesDatelist.openRequirement
+            // }
             isLoading={
               this.props.user.department === "Recruiter"
                 ? this.props.fetchingDatewiseReport
@@ -102,12 +105,12 @@ render() {
           />
   
        
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={
               <FormattedMessage
                 id="app.avHoursThisMonth"
-                defaultMessage="AV hours this month"
+                defaultMessage="Average work hours"
               />
             }
             // title="AV hours this month  "
@@ -125,6 +128,7 @@ render() {
             // }
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           />
+          </div>
           {/* <JumpStartBox
             noProgress
             title="Profiles Submitted"
@@ -132,7 +136,8 @@ render() {
             value={this.props.showDatelist.taggedProfile}
             isLoading={this.props.fetchingDatewiseReport}
           /> */}
-          <JumpStartBox
+          <div class="flex w-wk">
+          <JumpStartBox2
             noProgress
             // title="Open Tasks"
             title={
@@ -157,7 +162,7 @@ render() {
             // }
             
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={
               <FormattedMessage
@@ -185,7 +190,7 @@ render() {
             }
             
           />
-           
+           </div>
            {/* <JumpStartBox
             noProgress
             title="DashBoard6"
@@ -236,9 +241,10 @@ render() {
   ); 
 }
 }
-const mapStateToProps = ({ dashboard,auth }) => ({
+const mapStateToProps = ({ dashboard,auth ,leave}) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
+  leaveFetching:leave.leaveFetching,
   showDatelist:dashboard.showDatelist,
   orgId:auth.userDetails.organizationId,
   showSalesDatelist:dashboard.showSalesDatelist,
@@ -259,7 +265,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getDateWiseList,
   getSalesDateWiseList,
   getTasklist,
-  getavgHour
+  getavgHour,
+  getleaveLeftSideDetails
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardJumpStart);

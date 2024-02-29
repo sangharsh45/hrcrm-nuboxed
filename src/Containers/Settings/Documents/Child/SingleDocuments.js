@@ -1,15 +1,17 @@
-import React, { Component, } from "react";
-import styled from "styled-components";
+import React, { Component,lazy } from "react";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {linkTypeToggle} from "../DocumentsAction";
+import { DeleteOutlined } from "@ant-design/icons";
+import {linkTypeToggle,removeDocuments} from "../DocumentsAction";
 import { connect } from "react-redux";
+import dayjs from "dayjs";
 import { bindActionCreators } from "redux";
-import { Button,Tooltip, Select } from "antd";
+import { Button,Tooltip, Select,Popconfirm } from "antd";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
-import DocumentStatusToggle from "./DocumentStatusToggle";
+const DocumentStatusToggle = lazy(() =>
+  import("./DocumentStatusToggle")
+);
 class SingleDocuments extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +36,7 @@ class SingleDocuments extends Component {
 
   render() {
     const {
-      document: { documentTypeName,editInd, mandatoryInd, userType, documentTypeId },
+      document: { documentTypeName,creationDate,editInd, mandatoryInd, userType, documentTypeId },
       handleChange,
       name,
       value,
@@ -45,22 +47,28 @@ class SingleDocuments extends Component {
       handleUpdateDocument,
       handleDeleteDocument,
     } = this.props;
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     console.log(linkedDocuments);
     return (
-      <DocumentWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div>
                 <div class=" flex" >
                   <div class=" w-60">
-                  <DocumentName style={{ flexBasis: "90%" }}>
-                    {documentTypeName}
-                  </DocumentName>
+                  <div class=" font-semibold" >
+                    {documentTypeName}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                  </div>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
                   <div class="flex justify-between w-96">
-                  <div  >
+                  <div class=" w-[8rem]"  >
                     <Select style={{ width: "100%"}}
                 onChange={this.handleStageType}
                 value={userType}
@@ -69,6 +77,7 @@ class SingleDocuments extends Component {
                 >
                   <option value="User">User</option>
         <option value="Customer">Customer</option>
+        <option value="Supplier">Supplier</option>
       
                 </Select> 
                     </div>
@@ -82,7 +91,7 @@ class SingleDocuments extends Component {
                     </div>
                   
                     <div >               
-                   {this.props.document.editInd === true &&(
+                   {editInd && !mandatoryInd &&(
                       <BorderColorIcon
                       
                         tooltipTitle="Edit"
@@ -92,18 +101,26 @@ class SingleDocuments extends Component {
                       />
                     ) }  
                  
-                    {this.props.document.editInd === true &&(
+                 {editInd && !mandatoryInd &&(
                      <Tooltip title="Delete">
-                    <DeleteIcon
+                        <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeDocuments(documentTypeId )}
+                        >
+                    <DeleteOutlined
                     
-                      onClick={() => handleDeleteDocument(documentTypeId)}
-                      size="14px"
+                      // onClick={() => handleDeleteDocument(documentTypeId)}
+                     
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                    </Popconfirm>
                   </Tooltip>  
                       ) }                
                   </div>
@@ -120,8 +137,7 @@ class SingleDocuments extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                {/* <br />
-                <br /> */}
+              
               <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -139,7 +155,7 @@ class SingleDocuments extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -149,7 +165,7 @@ class SingleDocuments extends Component {
             )
           }
         </ViewEditCard>
-      </DocumentWrapper>
+      </div>
     );
   }
 }
@@ -159,22 +175,11 @@ const mapStateToProps = ({ document }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      linkTypeToggle
+      linkTypeToggle,
+      removeDocuments
     },
     dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDocuments);
 
-const DocumentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DocumentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DocumentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

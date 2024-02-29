@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -6,13 +6,14 @@ import { Formik, Form, Field } from "formik";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import LevelApproveForm from "./LevelApproveForm";
  import { addApprove, getApproveData } from "../../../../Settings/SettingsAction";
 import {getDepartments} from "../../../Department/DepartmentAction"
 import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
-import { FormattedMessage } from "react-intl";class ApproveForm extends Component {
+import { FormattedMessage } from "react-intl";
+const LevelApproveForm = lazy(() => import("./LevelApproveForm"));
+class ApproveForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -123,11 +124,8 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                         ...rest
                     }) => (
                         <Form >
-                            <div
-                                style={{
-                                    minHeight: "40vh",
-                                    width: "70%"
-                                }}>
+                            <div class=" w-[70%] min-h-{40vh}"
+                             >
 
                                 <div>
                                     <div class=" flex justify-between">

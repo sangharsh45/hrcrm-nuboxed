@@ -11,32 +11,28 @@ import { FormattedMessage } from "react-intl";
 class SupplierOverViewView extends Component {
   render() {
     const {
-        supplier: { shipperName },
+        supplier: { name },
       toggleViewType,
       handleFeedbackModal,
       feedbackModal,
     } = this.props;
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "70%" }}
-          >
-            <div style={{ width: "25%" }}>
+        <div class="flex justify-between">
+          <div class="flex start-0 flex-nowrap w-full">
+            <div>
               <MultiAvatar />
             </div>
             &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "70%" }}>
+            <div class="flex-col w-wk">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
-                // fontSize={"22px"}
+                fontSize={"0.875rem"}
               >
-                {`${shipperName || ""}`}
+                {`${name || ""}`}
               </Title>
-            </FlexContainer>
+            </div>
             <Tooltip title={<FormattedMessage id="app.feedback" defaultMessage="Feedback" />}>
               <span
                 onClick={() => handleFeedbackModal(true)}
@@ -44,12 +40,12 @@ class SupplierOverViewView extends Component {
               >
                 <i
                   class="far fa-comment-alt"
-                  style={{ fontSize: "15px", marginTop: "4px" }}
+                  style={{ fontSize: "15px" }}
                 ></i>
               </span>
             </Tooltip>
-          </FlexContainer>
-        </FlexContainer>
+          </div>
+        </div>
         {/* <ShipperFeedbackModal
           handleFeedbackModal={handleFeedbackModal}
           feedbackModal={feedbackModal}

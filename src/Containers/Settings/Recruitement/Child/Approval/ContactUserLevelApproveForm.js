@@ -157,11 +157,11 @@ function ContactUserLevelApproveForm(props) {
                   </Select>
                 </div>
                 <div className="w-full flex font-bold ">
-                <div style={{ width:"5rem"}}>
+                <div class=" w-[5rem]" >
                 
                 </div>
                 { row.level === "Management" ?
-                <div style={{ width: "100%" }}>
+                <div class=" w-full" >
                 <Field
                       name="roleTypeId"
                       isRequired

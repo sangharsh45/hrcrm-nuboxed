@@ -1,5 +1,5 @@
-import React, { Component, Suspense, lazy } from "react";
-import NotificationSetting from "./Notification/NotificationSetting";
+import React, { Component, lazy } from "react";
+const NotificationSetting = lazy(() => import( "./Notification/NotificationSetting"));
 const AddRecruitmentDrawerModal = lazy(() => import( "../Settings/Recruitement/Child/RecruitmentTab/AddRecruitmentDrawerModal"));
 class Settings extends Component {
     render() {

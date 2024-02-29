@@ -1,11 +1,14 @@
-import React from "react";
+import React,{lazy} from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import HiringTab from "./HiringTab";
-import TaskTab from "../Configure/TaskTab";
-import DealsTab from "./Deals/DealsTab";
+
+const OnboardingTab = lazy(() => import("./OnboardingTab/OnboardingTab"));
+const HiringTab = lazy(() => import("./HiringTab"));
+const TaskTab = lazy(() => import("../Configure/TaskTab"));
+const DealsTab = lazy(() => import("./Deals/DealsTab"));
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -32,6 +35,16 @@ function WorkFlow(props) {
           <TabPane tab={`Deals`} key="4">
           <div  class=" mt-[10px]" >
             <DealsTab />
+            </div>
+          </TabPane>
+          <TabPane tab={`User-Onboarding`} key="5">
+          <div  class=" mt-[10px]" >
+            <OnboardingTab />
+            </div>
+          </TabPane>
+          <TabPane tab={`Supplier-Onboarding`} key="6">
+          <div  class=" mt-[10px]" >
+            {/* <OnboardingTab /> */}
             </div>
           </TabPane>
 

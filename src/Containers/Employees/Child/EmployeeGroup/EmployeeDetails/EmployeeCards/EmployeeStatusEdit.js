@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import { Button } from "antd";
 import { updateEmployeeById } from "../../../../EmployeeAction";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { Spacer } from "../../../../../../Components/UI/Elements";
-import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import EditableInput from "../../../../../../Components/Forms/Edit/EditableInput";
 import EditableSearcSelect from "../../../../../../Components/Forms/Edit/EditSearchSelect";
-import EditableDatePicker from "../../../../../../Components/Forms/Edit/EditableDatePicker";
 class EmployeeStatusEdit extends Component {
   constructor(props) {
     super(props);
@@ -56,10 +51,7 @@ class EmployeeStatusEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
-          style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
-        >
+         <div className="flex flex-col p-4">
           {/* <EditableInput
             isRequired
             defaultValue={emailId}
@@ -90,11 +82,9 @@ class EmployeeStatusEdit extends Component {
             {/* <Spacer style={{ margin: "0.125em" }} /> */}
           {/* </FlexContainer> */}
 
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full"
           >
-            <div style={{ width: "37%" }}>
+            <div class=" w-[37%]" >
               <EditableSearcSelect
                 defaultValue={{
                   value: countryDialCode,
@@ -108,7 +98,7 @@ class EmployeeStatusEdit extends Component {
               />
             </div>
 
-            <div style={{ width: "60%" }}>
+            <div class=" w-[60%]" >
               <EditableInput
                 defaultValue={phoneNo}
                 handleChange={this.handleChange}
@@ -118,13 +108,10 @@ class EmployeeStatusEdit extends Component {
                 width="100%"
               />
             </div>
-          </FlexContainer>
-          <Spacer style={{ margin: "0.125em" }} />
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          </div>
+          <div  class=" flex justify-between w-full mt-3 m-[-.125em]"
           >
-            <div style={{ width: "37%" }}>
+            <div class=" w-[37%]" >
               <EditableSearcSelect
                 defaultValue={{
                   value: countryDialCode1,
@@ -139,7 +126,7 @@ class EmployeeStatusEdit extends Component {
               />
             </div>
 
-            <div style={{ width: "60%" }}>
+            <div class=" w-[60%]" >
               <EditableInput
                 defaultValue={mobileNo}
                 handleChange={this.handleChange}
@@ -149,7 +136,7 @@ class EmployeeStatusEdit extends Component {
                 width="100%"
               />
             </div>
-            <div style={{ width: "60%" }}>
+            <div class=" w-[60%]" >
               {/* <EditableSearcSelect
                                 defaultValue={{
                                     value: reportingManager,
@@ -163,8 +150,8 @@ class EmployeeStatusEdit extends Component {
                             // value={this.state.fields.countryDialCode1}
                             /> */}
             </div>
-          </FlexContainer>
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" mt-3 m-[0.125rem]">
           <EditableInput
             // defaultValue={linkedinPublicUrl}
             handleChange={this.handleChange}
@@ -173,7 +160,8 @@ class EmployeeStatusEdit extends Component {
             value={this.state.fields.linkedinPublicUrl}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" mt-3 m-[0.125rem]">
           <EditableInput
             // defaultValue={twitter}
             handleChange={this.handleChange}
@@ -182,6 +170,7 @@ class EmployeeStatusEdit extends Component {
             value={this.state.fields.twitter}
             width="100%"
           />
+            </div>
            {/* <Spacer style={{ margin: "0.125em" }} />
             <EditableInput
             // defaultValue={twitter}
@@ -191,7 +180,7 @@ class EmployeeStatusEdit extends Component {
             value={this.state.fields.designation}
             width="100%"
           /> */}
-           <Spacer style={{ margin: "0.125em" }} />
+      
              {/* <EditableInput
             // defaultValue={twitter}
             handleChange={this.handleChange}
@@ -200,7 +189,7 @@ class EmployeeStatusEdit extends Component {
             value={this.state.fields.department}
             width="100%"
           /> */}
-          <Spacer style={{ margin: "0.125em" }} />
+           <div class=" mt-3 m-[0.125rem]">
            <EditableInput
             defaultValue={level}
             handleChange={this.handleChange}
@@ -209,8 +198,9 @@ class EmployeeStatusEdit extends Component {
             value={this.state.fields.level}
             width="17.625em"
           />
-          <Spacer style={{ margin: "0.125em" }} /> 
-          <div style={{ width: "100%" }}>
+          </div>
+
+          <div class=" w-full mt-3 m-[0.125rem]" >
             <EditableSearcSelect
               defaultValue={{
                 value: timeZone,
@@ -224,9 +214,9 @@ class EmployeeStatusEdit extends Component {
               value={this.state.fields.timeZone}
             />
           </div>
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingEmployeeById}
@@ -238,7 +228,7 @@ class EmployeeStatusEdit extends Component {
             />
             {/* Save */}
           </Button>
-          &nbsp;
+     <div class=" ml-2">
           <Button type="ghost" onClick={() => toggleViewType()}>
             <FormattedMessage
               id="app.cancel"
@@ -246,7 +236,8 @@ class EmployeeStatusEdit extends Component {
             />
             {/* Cancel */}
           </Button>
-        </FlexContainer>
+          </div>
+        </div>
       </>
     );
   }

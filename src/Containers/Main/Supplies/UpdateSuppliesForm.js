@@ -5,9 +5,7 @@ import { Button } from "antd";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { base_url2 } from "../../../Config/Auth";
-import { Spacer } from "../../../Components/UI/Elements";
-import Upload from "../../../Components/Forms/Formik/Upload";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import EditUpload from "../../../Components/Forms/Edit/EditUpload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { updateSupplies } from "./SuppliesAction";
@@ -17,10 +15,16 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 
 const SuppliesSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  // cost: Yup.string().required("Input needed!"),
   hsn: Yup.string().required("Input needed!"),
 });
 class UpdateSuppliesForm extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      newimageId:"",
+    };
+  }
 
   componentDidMount() {
     this.props.getCurrency()
@@ -32,7 +36,11 @@ class UpdateSuppliesForm extends Component {
         value: item.currencyName,
       };
     })
-    console.log(this.props.groupId)
+   
+    const setImage = (imageId) => {
+      this.setState({newimageId:imageId});
+    };
+
     return (
       <>
         <Formik
@@ -42,7 +50,7 @@ class UpdateSuppliesForm extends Component {
             category: "",
             categoryName: this.props.particularDiscountData.categoryName || "",
             description:this.props.particularDiscountData.description || "",
-            imageId: "",
+            imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
             name:this.props.particularDiscountData.name || "",
             hsn:this.props.particularDiscountData.hsn || "",
             subAttribute: "",
@@ -66,7 +74,7 @@ class UpdateSuppliesForm extends Component {
             this.props.updateSupplies(
               {
                 ...values,
-                // baseComponentInd: this.state.baseComponent,
+                imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
               },
               this.props.particularDiscountData.suppliesId
             );
@@ -82,19 +90,21 @@ class UpdateSuppliesForm extends Component {
             ...rest
           }) => (
             <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
-                  <FlexContainer flexWrap="no-wrap">
-                    <div style={{ width: "40%" }}>
-                      <Spacer />
-                      <Field name="imageId" component={Upload} />
+               <div class="flex justify-between">
+                <div class="h-full w-[45%]">
+                  <div class="flex-nowrap">
+                    <div class="w-[40%]">
+                      <div class="mt-3">
+                      <EditUpload
+                    imageId={this.props.particularDiscountData.imageId}
+                    imgWidth={100}
+                    imgHeight={100}
+                    getImage={setImage}
+                  />
+                     
                     </div>
-                  </FlexContainer>
+                    </div>
+                  </div>
                   <Field
                     isRequired
                     defaultValue={{
@@ -127,8 +137,8 @@ class UpdateSuppliesForm extends Component {
                     isColumn
                     inlineLabel
                   />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                   <div class="flex justify-between">
+                    <div class="w-full">
                       <Field
                        defaultValue={{
                         label: this.props.particularDiscountData.attributeName,
@@ -161,16 +171,11 @@ class UpdateSuppliesForm extends Component {
                         style={{ flexBasis: "80%" }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "50%",
-                  }}
-                >
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                <div class="h-full w-[50%]">
+                <div class="flex justify-between">
+                    <div class="w-[47%]">
                       <Field
                         name="name"
                         label="Name"
@@ -180,7 +185,7 @@ class UpdateSuppliesForm extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         name="hsn"
                         label="HSN"
@@ -190,20 +195,10 @@ class UpdateSuppliesForm extends Component {
                         component={InputComponent}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <FlexContainer justifyContent="space-between">
-                    {/* <div style={{ width: "47%" }}>
-                      <Field
-                        name="cost"
-                        label="Cost"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div> */}
-                    <div style={{ width: "47%" }}>
+                  <div class="flex justify-between">
+                    <div class="w-[47%]">
                       <Field
                         name="reorder"
                         label="Re-order"
@@ -213,7 +208,7 @@ class UpdateSuppliesForm extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         name="currencyName"
                         label="Currency"
@@ -226,9 +221,9 @@ class UpdateSuppliesForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="w-[47%]">
                       <Field
                         name="netWeight"
                         label="Net Weight"
@@ -238,7 +233,7 @@ class UpdateSuppliesForm extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         name="netUnit"
                         label="Units"
@@ -251,9 +246,9 @@ class UpdateSuppliesForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="w-[47%]">
                       <Field
                         name="grossWeight"
                         label="Gross Weight"
@@ -263,7 +258,7 @@ class UpdateSuppliesForm extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         name="grossUnit"
                         label="Units"
@@ -276,11 +271,9 @@ class UpdateSuppliesForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-        
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                  </div>
+                  <div class="flex justify-between mt-4">
+                  <div class="w-full">
                       <Field
                         name="description"
                         label="Description"
@@ -290,20 +283,18 @@ class UpdateSuppliesForm extends Component {
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  {/* <StyledLabel>Additional Info</StyledLabel> */}
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end mt-3">
                 <Button
                   type="primary"
                   htmlType="submit"
                   loading={this.props.addingPurchase}
                 >
-                  Create
+                  Update
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

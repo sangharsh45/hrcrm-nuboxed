@@ -67,6 +67,9 @@ const initialState = {
   fetchDealdetailsError:false,
   dealDetailsbyID:{},
 
+  removingDealDocument: false,
+  removingDealDocumentError: false,
+
   fetchingDelasRecords: false,
   fetchingDelasRecordsError: false,
   dealsRecord:{},
@@ -98,6 +101,9 @@ const initialState = {
 
    sendingToWon: false,
 sendingToWonError:false,
+
+deleteDealData: false, deleteDealDataError: false
+
 };
 
 const updateDragdDeal = (item, newProps) => {
@@ -138,7 +144,8 @@ export const dealReducer = (state = initialState, action) => {
             ...state,
             creatingDeal: false,
             opencreateDealModal: false,
-           dealsByuserId :[action.payload,...state.dealsByuserId]
+           dealsByuserId :[action.payload,...state.dealsByuserId],
+           allDealsData :[action.payload,...state.allDealsData]
           };
         case types.CREATE_DEAL_FAILURE:
           return {
@@ -504,6 +511,7 @@ export const dealReducer = (state = initialState, action) => {
           addingDocumentByDealId: false,
           addingDocumentByDealIdError: false,
           documentUploadModal:false,
+          documentsByInnOppId:[action.payload,...state.documentsByInnOppId],
         };
       case types.ADD_DEAL_DOCUMENT_FAILURE:
         return {
@@ -543,6 +551,55 @@ export const dealReducer = (state = initialState, action) => {
               fetchingOpportunityRecord: false,
               fetchingOpportunityRecordError: true,
             };
+
+            case types.DELETE_DEAL_DATA_REQUEST:
+              return { ...state, deleteDealData: true };
+            case types.DELETE_DEAL_DATA_SUCCESS:
+              return {
+                ...state,
+                deleteDealData: false,
+                dealsByuserId: state.dealsByuserId.filter(
+                  (item) => item.invOpportunityId !== action.payload),
+              };
+            case types.DELETE_DEAL_DATA_FAILURE:
+              return { ...state, deleteDealData: false, deleteDealDataError: false };
+
+
+              case types.REMOVE_DEAL_DOCUMENT_REQUEST:
+                return { ...state, removingDealDocument: true };
+              case types.REMOVE_DEAL_DOCUMENT_SUCCESS:
+                return {
+                  ...state,
+                  removingDealDocument: false,
+                  documentsByInnOppId: state.documentsByInnOppId.filter(
+                    (item) => item.documentId !== action.payload
+                ), 
+                };
+              case types.REMOVE_DEAL_DOCUMENT_FAILURE:
+                return {
+                  ...state,
+                  removingDealDocument: false,
+                  removingDealDocumentError: true,
+                };
+
+
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_REQUEST:
+                  return { ...state };
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_SUCCESS:
+                  return {
+                    ...state,
+                    dealContactList: state.dealContactList.map(
+                      (item) =>{
+                      if (item.contactId === action.payload.contactId) {
+                        return action.payload;
+                      } else {
+                        return item;
+                      }
+                    }),
+                  };
+                case types.UPDATE_CONTACT_ROLE_BY_DEAL_ID_FAILURE:
+                  return { ...state };
+
     default:
       return state;
   }

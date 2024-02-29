@@ -1,13 +1,11 @@
 import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Icon, Button, Input,DatePicker } from "antd";
-import { FormattedMessage } from "react-intl";
+import { Tooltip ,Button,DatePicker } from "antd";
 import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEditExpense, handleUpdateExpenseModal, deleteExpenseDrawer, } from "../ExpenseAction";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
-import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout'
 import { base_url } from "../../../Config/Auth";
 import { DeleteOutlined,UploadOutlined } from "@ant-design/icons";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -97,7 +95,7 @@ if(fetchingExpenseByVoucherId) {
   
   return (
     <>
-       <OnlyWrapCard>
+      <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
        {inputValues.map((item,index) => { 
                   return (
                       <div key={index}>
@@ -128,22 +126,22 @@ style={{width:"3rem",height:"3rem"}}
 )}
 </div>   
                               <div className=" flex font-medium flex-col w-[2rem] ">
-                                          <h4 class=" text-sm text-cardBody font-poppins">
+                                          <div class=" text-sm text-cardBody font-poppins">
                                            ID
-                                          </h4>
-                                          <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                          </div>
+                                          <div class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                               
        <Tooltip title={item.expenseId}>
          
          <QuestionMarkIcon style={{fontSize:"1rem"}}/>
-         </Tooltip>                        </h4>
+         </Tooltip>                        </div>
 
                                      
                             
                               </div>
                               <div className=" flex font-medium flex-col  w-20 ">
                          
-                         <h4 class=" text-sm text-cardBody font-poppins"> Type </h4>
+                         <div class=" text-sm text-cardBody font-poppins"> Type </div>
                          {editStates[index] ? (
             <select
   className="input-field"
@@ -157,14 +155,14 @@ style={{width:"3rem",height:"3rem"}}
   ))}
 </select>
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.expenseType}
-                         </h4>
+                         </div>
                            )}
                      </div>
                               <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
                          
-                                  <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
+                                  <div class=" text-sm text-cardBody font-poppins">Date </div>
                                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.expenseDate)} 
@@ -174,16 +172,16 @@ style={{width:"3rem",height:"3rem"}}
     style={{ border: "1px solid grey" }}
   />
 ) : (
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                       
                                   
                                   {dayjs(item.expenseDate).format("MMM Do YY")}
 
-                                  </h4>
+                                  </div>
                                   )}
                               </div>
                               <div className="flex font-medium flex-col w-32">
-                              <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4>
+                              <div class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </div>
                               {editStates[index] ? (
             <input
               type="text"
@@ -192,15 +190,15 @@ style={{width:"3rem",height:"3rem"}}
               style={{ border: "1px solid grey" }}
             />
           ) : (
-                         <h4 class=" text-xs text-cardBody font-poppins">
+                         <div class=" text-xs text-cardBody font-poppins">
                              {item.clientName}
-                         </h4>
+                         </div>
           )}
           </div>
                          <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
 
                                 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4>
+                                  <div class=" text-sm text-cardBody font-poppins">Particulars</div>
                                   {editStates[index] ? (
                                   <input
               type="text"
@@ -210,9 +208,9 @@ style={{width:"3rem",height:"3rem"}}
             />
           ) : (
         
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <div class=" text-xs text-cardBody font-poppins">
                                        {item.particular}
-                                  </h4>
+                                  </div>
           )}
      
                               </div>
@@ -221,7 +219,7 @@ style={{width:"3rem",height:"3rem"}}
                               <div className=" flex font-medium flex-col w-20 ">
 
 
-                                <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                <div class=" text-sm text-cardBody font-poppins">Amount</div>
                                 {editStates[index] ? (
                                   <input
               type="text"
@@ -232,9 +230,9 @@ style={{width:"3rem",height:"3rem"}}
           ) : (
                                                                
           
-                                <h4 class=" text-xs text-cardBody font-poppins">
+                                <div class=" text-xs text-cardBody font-poppins">
                                     {item.amount}
-                                </h4>
+                                </div>
           )}
                             </div> 
 
@@ -242,7 +240,7 @@ style={{width:"3rem",height:"3rem"}}
                      <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
 
 
-<h4 class=" text-sm text-cardBody font-poppins">Curency</h4>
+<div class=" text-sm text-cardBody font-poppins">Curency</div>
 {editStates[index] ? (
   <input
 type="text"
@@ -253,9 +251,9 @@ style={{ border: "1px solid grey" }}
 ) : (
                                
 
-<h4 class=" text-xs text-cardBody font-poppins">
+<div class=" text-xs text-cardBody font-poppins">
    {item.currency}
-</h4>
+</div>
 )}
 </div> 
 
@@ -335,7 +333,7 @@ style={{ border: "1px solid grey" }}
                   )
               })}
 
-    </OnlyWrapCard>
+    </div>
         <UpdateExpenseModal
       // expenseId={currentExpenseId}
       updateExpenseModal={updateExpenseModal}

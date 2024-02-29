@@ -1,19 +1,16 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button, Tooltip,  } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
+import { StyledLabel } from "../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 import { addEducationDetails } from "../../../../ProfileAction";
 import { getEducations } from "../../../../../Settings/Educations/EducationAction";
@@ -77,20 +74,9 @@ class EducationDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  // border: "0.125em solid red",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                    // border: "0.125em solid green"
-                  }}
+                <div class=" w-[45%]"
                 >
                   <FastField
                     name="educationTypeId"
@@ -127,7 +113,7 @@ class EducationDocumentForm extends Component {
                     //   "Mid Level",
                     //   "Junior",
                     // ]}
-                    isColumn
+               
                     // component={SelectComponent}
                     component={SearchSelect}
                     value={values.educationTypeId}
@@ -135,8 +121,8 @@ class EducationDocumentForm extends Component {
                     inlineLabel
                     
                   />
-                  <Spacer />
-                  <div>
+              
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="courseName"
@@ -159,10 +145,9 @@ class EducationDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class=" mt-3">
                     <StyledLabel>Course Type</StyledLabel>
-                    <Spacer />
+                    <div class=" mt-3">
                     <ButtonGroup>
                       <StatusIcon
                         color="blue"
@@ -193,9 +178,10 @@ class EducationDocumentForm extends Component {
                         //  }
                       />
                     </ButtonGroup>
+                    </div>
                   </div>
-                  <Spacer />
-                  <div>
+              
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="specialization"
@@ -218,8 +204,8 @@ class EducationDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  <Spacer />
-                  <div>
+                 
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="university"
@@ -242,10 +228,10 @@ class EducationDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  <Spacer />
+             
 
-                  <div style={{ display: "flex" }}>
-                    <div style={{ width: "50%" }}>
+                  <div class=" flex mt-3">
+                    <div class=" w-[50%]" >
                       <Field
                         name="yearOfPassing"
                         //label="Year of Passing"
@@ -268,8 +254,8 @@ class EducationDocumentForm extends Component {
                         }}
                       />
                     </div>
-                    &nbsp; &nbsp;
-                    <div style={{ width: "49%" }}>
+                   
+                    <div class=" w-[49%] ml-4" >
                       <Field
                         isRequired
                         //label="Marks Secured"
@@ -291,8 +277,8 @@ class EducationDocumentForm extends Component {
                         }}
                       />
                     </div>
-                    &nbsp;&nbsp;
-                    <div style={{ width: "60%" }}>
+                   
+                    <div class=" w-[60%] ml-4" >
                       <Field
                         name="marksType"
                         label={
@@ -305,7 +291,7 @@ class EducationDocumentForm extends Component {
                         component={SelectComponent}
                         options={["%", "Out of 10", "Out of 5"]}
                         isColumn
-                        type="text"
+                
                         width={"100%"}
                         style={{
                           flexBasis: "80%",
@@ -317,14 +303,10 @@ class EducationDocumentForm extends Component {
                     </div>
                   </div>
 
-                  <Spacer />
+             
                 </div>
 
-                <div
-                  style={{
-                    width: "45%",
-                    // border: "0.125em solid green"
-                  }}
+                <div class=" w-[45%]"
                 >
                   <Field
                     name="documentId"
@@ -337,7 +319,7 @@ class EducationDocumentForm extends Component {
                     isRequired
                     component={DragableUpload}
                   />
-                  <Spacer />
+               <div class=" mt-3">
 
                   <Field
                     name="documentTitle"
@@ -353,7 +335,8 @@ class EducationDocumentForm extends Component {
                     component={InputComponent}
                     style={{ height: "2.0625em", marginTop: "0.25em" }}
                   />
-                  <Spacer />
+                  </div>
+                  <div class=" mt-3">
                   <Field
                     name="documentTypeId"
                     selectType="documentTypeName"
@@ -374,7 +357,8 @@ class EducationDocumentForm extends Component {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer />
+                    </div>
+                    <div class=" mt-3">
                   <Field
                     name="documentDescription"
                     //label="Description of document"
@@ -390,11 +374,11 @@ class EducationDocumentForm extends Component {
                     component={TextareaComponent}
                     style={{ height: "5em", marginTop: "0.25em" }}
                   />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                   </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+         
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -402,7 +386,7 @@ class EducationDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

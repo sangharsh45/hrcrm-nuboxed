@@ -8,7 +8,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import PeopleIcon from '@mui/icons-material/People';
-import { Input, Tooltip, } from "antd";
+import { Input, Tooltip,Avatar } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Badge } from "antd";
 import {
@@ -116,13 +116,14 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("table")}
             style={{
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <AccountBalanceIcon />
+           <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+             <AccountBalanceIcon className="text-white" /></Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -140,18 +141,20 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-         <PeopleIcon/>
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+         <PeopleIcon className="text-white"/>
+         </Avatar>
           </span>
         </Badge>
       </Tooltip>
       )}
-      {user.crmInd=== true && user.contactFullListInd===true && ( 
+      {(user.crmInd=== true && user.contactFullListInd===true || user.role === "ADMIN") && ( 
       <Tooltip
         title="All"
       >
@@ -165,13 +168,15 @@ const ContactActionLeft = (props) => {
           overflowCount={5000}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-           ALL
+             <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+          <label className="text-white"> ALL</label>
+           </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -185,7 +190,7 @@ const ContactActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setContactsViewType("dashboard")}
             style={{
               color: props.viewType === "dashboard" && "#1890ff",
@@ -216,7 +221,10 @@ const ContactActionLeft = (props) => {
       </div>
     
 <div class="w-32 md:ml-4 max-sm:hidden">
-      <select value={props.selectedCountry} onChange={props.handleCountryChange} >
+      <select
+         style={{ boxShadow: "0 0.15em 0.3em #aaa"
+        }}
+       value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
         <option value="">All</option>
         {countryNameOption.map((countryOption, index) => (
@@ -227,7 +235,7 @@ const ContactActionLeft = (props) => {
       </select>
       </div>
 
-      <div class="w-[22%] mt-2">
+      <div class="w-[22%] mt-2 ml-2">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

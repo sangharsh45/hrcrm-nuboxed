@@ -1,25 +1,16 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon, Select } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, Switch, Tooltip, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import {getCountries} from "../../../../../../Auth/AuthAction"
-import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 import { addVisaDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
-import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
 function onChange(date) {}
 
 const documentSchema = Yup.object().shape({
@@ -102,18 +93,10 @@ class UserVisaForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                 width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                    }}
+                <div class=" w-[45%]"
+
                 >
                   <div> <FastField
                     name="documentTypeId"
@@ -134,7 +117,7 @@ class UserVisaForm extends Component {
                     isColumn
                      />
                   </div>
-                  <Spacer />
+              <div class=" mt-3">
                 <Field
                         name="country"
                         isColumnWithoutNoCreate
@@ -152,8 +135,9 @@ class UserVisaForm extends Component {
                         component={SelectComponent}
                         inlineLabel
                         />
-                  <Spacer />
-                  <div style={{ width: "40%" }}>
+                        </div>
+                 
+                  <div class=" w-[40%] mt-3" >
                           <FastField
                             name="type"
                             type="text"
@@ -171,9 +155,9 @@ class UserVisaForm extends Component {
                           />
                         </div>
                  
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-[47%]" >
                       <Field
                         name="startDate"
                         //label="Start Date"
@@ -191,7 +175,7 @@ class UserVisaForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         name="endDate"
                         // label="End Date "
@@ -223,14 +207,10 @@ class UserVisaForm extends Component {
                         inlineLabel
                         />
                     </div>
-                  </FlexContainer>
-                  <div
-                      style={{
-                        width: "25%",
-                        fontWeight: "bold",
-                      }}
+                  </div>
+                  <div class=" w-[25%] font-bold"
                     >
-                      <StyledLabel>Multiple Entry</StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Multiple Entry</div>
                       <Switch
                         onChange={this.handleMultipleEntry}
                         checked={this.state.entry}
@@ -241,10 +221,7 @@ class UserVisaForm extends Component {
                
                 </div>
 
-                <div
-                  style={{
-                    width: "45%",
-                    }}
+                <div class=" w-[45%]"
                 >
                   <Field
                     name="documentId"
@@ -258,11 +235,10 @@ class UserVisaForm extends Component {
                     component={DragableUpload}
                   />
                
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -270,7 +246,7 @@ class UserVisaForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

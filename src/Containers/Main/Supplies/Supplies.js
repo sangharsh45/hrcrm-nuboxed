@@ -1,13 +1,13 @@
-import React, { Suspense,useState, useEffect } from "react";
+import React, { Suspense,useState, useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setSuppliesViewType, handleSuppliesModal } from "./SuppliesAction";
 import SuppliesHeader from "./SuppliesHeader";
-import SuppliesTable from "./SuppliesTable";
-import SuppliesDeletedTable from "./SuppliesDeletedTable";
 import { BundleLoader } from "../../../Components/Placeholder";
-import SuppliesCard from "./SuppliesCard";
-import SuppliesDeletedCard from "./SuppliesDeletedCard";
+
+const SuppliesTable =lazy(()=>import("./SuppliesTable"));
+const SuppliesDeletedTable =lazy(()=>import("./SuppliesDeletedTable"));
+
 
 function Supplies(props) {
     const { setSuppliesViewType, viewType, handleSuppliesModal } = props;
@@ -33,13 +33,12 @@ function Supplies(props) {
 
             <Suspense fallback={<BundleLoader />}>
                 {viewType === "all" ? (
-                      <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-                   {isLargeScreen ? <SuppliesTable />:<SuppliesCard />}
-                    </div>
+              
+                   <SuppliesTable />
+                  
                 ) : viewType === "dashboard" ? (
-                    <div className={isLargeScreen ? "hidden sm:block" : "block sm:hidden"}>
-                     {isLargeScreen ? <SuppliesDeletedTable /> :<SuppliesDeletedCard />}
-                    </div>
+                   
+                     <SuppliesDeletedTable /> 
                 ) : null}
             </Suspense>
         </React.Fragment>

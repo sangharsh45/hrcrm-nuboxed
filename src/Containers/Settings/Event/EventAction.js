@@ -52,7 +52,7 @@ export const addEvents = (event, cb) => (dispatch) => {
           message.success(res.data.message):
         message.success("Event has been added successfully!");
         }
-        dispatch(getEvents());
+        // dispatch(getEvents());
         console.log(res);
         dispatch({
           type: types.ADD_EVENTS_SUCCESS,

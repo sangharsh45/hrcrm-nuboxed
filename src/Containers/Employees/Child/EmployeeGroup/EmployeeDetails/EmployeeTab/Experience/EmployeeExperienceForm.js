@@ -1,4 +1,4 @@
-import React, { useEffect,Suspense } from "react";
+import React, { useEffect,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -6,18 +6,15 @@ import { MainWrapper } from "../../../../../../../Components/UI/Elements";
 import { Formik, Form, Field } from "formik";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import dayjs from "dayjs";
-// import ExperienceTable from "./ExperienceTable";
-import {getTopicsByUserId,
-
-} from "../../../../../EmployeeAction"
+import {getTopicsByUserId} from "../../../../../EmployeeAction";
 import * as Yup from "yup";
 import { updateExperienceByEmployeeId} from "../../../../../EmployeeAction"
-import EmployeeExperienceTable from "./EmployeeExperienceTable";
-const expRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const EmployeeExperienceTable=lazy(()=>import("./EmployeeExperienceTable"));
+
 const experienceSchema = Yup.object().shape({
   experience: Yup.string().required("Input needed!"),
 });
+
 function EmployeeExperienceForm(props) {
   useEffect(() => {
     props.getTopicsByUserId(props.singleEmployee.employeeId);
@@ -29,25 +26,19 @@ function EmployeeExperienceForm(props) {
       value: item.keySkillsId,
     };
   });  
- console.log("cak", props.topicsByUserId.length && props.topicsByUserId[0].keySkillsId) 
   return (
     <>
       <Formik
         initialValues={{
           employeeId: props.singleEmployee.employeeId,
           keySkillsId:"",
-          experience: "",
-          // skillSetDetailsId: props.skillSetDetailsId,
-         
+          experience: "",  
         }}
         validationSchema={experienceSchema}
         onSubmit={(values, { resetForm }) => {
           props.updateExperienceByEmployeeId(
             {
               ...values,
-              // skillSetDetailsId: props.skillSetDetailsId,
-      
-              
             },
             values.keySkillsId
             
@@ -63,19 +54,10 @@ function EmployeeExperienceForm(props) {
         }) => (
           <Form className="form-background">
             <MainWrapper>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "center",
-                }}
+            <div class=" flex w-full h-full justify-evenly items-center"
+                          
               >            
-                <div
-                  style={{                  
-                    width: "15%",                   
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="keySkillsId"
@@ -94,10 +76,7 @@ function EmployeeExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{              
-                    width: "15%",                  
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="experience"
@@ -109,10 +88,7 @@ function EmployeeExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{                   
-                    width: "8%",
-                  }}
+                <div class=" w-[8%]"
                 >
                   <Button
                     type="primary"

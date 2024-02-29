@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
@@ -33,11 +33,20 @@ function QCSpareListTable(props) {
         {
             title: "Cost",
             dataIndex: "extraCost",
-
+            render: (text, item) => {
+                return (
+                    <>{item.extraCost} {item.spareCurrency}</>
+                )
+            }
         },
         {
             title: "Total",
             dataIndex: "total",
+            render: (text, item) => {
+                return (
+                    <>{item.total} {item.spareCurrency}</>
+                )
+            }
         },
 
     ];

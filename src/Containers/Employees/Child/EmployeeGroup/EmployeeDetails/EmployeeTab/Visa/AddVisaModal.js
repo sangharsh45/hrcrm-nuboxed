@@ -2,11 +2,7 @@ import React, { lazy, Suspense, Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../../../Components/UI/Antd";
-import UserVisaForm from "./UserVisaForm";
-
-// const EducationDocumentForm = lazy(() =>
-//   import("../Education/EducationDocumentForm")
-// );
+const UserVisaForm =lazy(()=>import("./UserVisaForm"));
 
 class AddVisaModal extends Component {
   render() {
@@ -24,12 +20,7 @@ class AddVisaModal extends Component {
           />}
           width="60%"
           visible={addVisaModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
           onClose={() => handleVisaModal(false)}
-          footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <UserVisaForm />

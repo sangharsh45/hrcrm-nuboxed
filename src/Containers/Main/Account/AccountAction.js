@@ -40,10 +40,11 @@ export const addDistributor = (distributor) => (dispatch) => {
         },
       })
     .then((res) => {
-      console.log(res);
-      // dispatch(getOpportunityRecord(userId));
-      // dispatch(getDistributorsByUserId(userId));
-      // dispatch(getAccountRecords())
+      Swal.fire({
+        icon: 'success',
+        title: 'Customer Created Successfully',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.ADD_DISTRIBUTOR_SUCCESS,
         payload: res.data,
@@ -480,6 +481,20 @@ export const handleOrderDetailsModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleProductOrderDetailsModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCT_ORDER_DETAIL_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleSearchItem = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_SEARCH_ITEMS_MODAL,
+    payload: modalProps,
+  });
+};
+
 /**
  * Link Renewal in distributor
  */
@@ -570,6 +585,12 @@ export const setEditDistributor = (name) => (dispatch) => {
   });
 };
 
+export const setEditOrder = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_ORDER_EDIT,
+    payload: name,
+  });
+};
 /**
  * update distributor modal
  */
@@ -605,9 +626,8 @@ export const updateDistributor = (data, distributorId, userId) => (
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Updated Successfully',
+        showConfirmButton: true,
       })
     })
     .catch((err) => {
@@ -679,6 +699,34 @@ export const emptyDistributor = () => (dispatch) => {
   dispatch({
     type: types.EMPTY_DISTRIBUTOR_LIST,
   });
+};
+// get customer by user
+
+export const getCustomerByUser = (userId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_CUSTOMER_BY_USER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/distributor/${userId}/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CUSTOMER_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CUSTOMER_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
 };
 /**
  * get all the distributor
@@ -1946,10 +1994,13 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      // dispatch(getDistributorOrderByDistributorId(distributorId,0))
+      window.location.reload()
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
       });
+
       message.success("Order has moved to inventory !!")
     })
     .catch((err) => {
@@ -2063,12 +2114,12 @@ export const handlePhoneNotesOrderModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const getPhoneTasklist = (phoneId) => (dispatch) => {
+export const getPhoneTasklist = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_PHONE_TASK_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/phone/phoneTask/${phoneId}`, {
+    .get(`${base_url}/itemTask/all/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2573,6 +2624,11 @@ export const saveUnitForCatalogueItem = (data, id, orderId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Items added successfully',
+        showConfirmButton: true,
+      })
       dispatch(getProductListByDistributor(id, orderId));
       dispatch({
         type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS,
@@ -2598,8 +2654,13 @@ export const addAllProductInOrder = (data, id, orderId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Items added to the order',
+        showConfirmButton: true,
+      })
       dispatch(getProductListByDistributor(id, orderId));
-      dispatch(getDistributorOrderByDistributorId(id, 0))
+      dispatch(getProductionOrder(id, 0))
       dispatch({
         type: types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS,
         payload: res.data,
@@ -2696,6 +2757,224 @@ export const getPaymentMode = (orgId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_PAYMENT_MODE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateOrderStep1 = (data, orderPhoneId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_ORDER_STEP1_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/phoneOrder/orderUpdate/${orderPhoneId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorsByUserId(userId));
+      dispatch({
+        type: types.UPDATE_ORDER_STEP1_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: true,
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ORDER_STEP1_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateOrderPayment = (data, paymentId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_ORDER_PAYMENT_AMOUNT_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/orderPayment/paymentUpdate/${paymentId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorsByUserId(userId));
+      dispatch({
+        type: types.UPDATE_ORDER_PAYMENT_AMOUNT_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: true,
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ORDER_PAYMENT_AMOUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const removeOrderAcc = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.REMOVE_ORDER_ACC_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/order/delete/${orderId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.REMOVE_ORDER_ACC_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.REMOVE_ORDER_ACC_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+
+export const createOrderForProduction = (data) => (dispatch) => {
+  dispatch({
+    type: types.CREATE_ORDER_FOR_PRODUCTION_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/order/catalogOrder`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.CREATE_ORDER_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Created Successfully',
+        showConfirmButton: true,
+      })
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.CREATE_ORDER_FOR_PRODUCTION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getProductionOrder = (distributorId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCTION_ORDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/all-phoneOrders/${distributorId}/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getProductionOrderDetails = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCTION_ORDER_DETAIL_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/product/${orderId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_DETAIL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PRODUCTION_ORDER_DETAIL_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const searchItemInLocation = (data, cb) => (dispatch) => {
+  dispatch({ type: types.SEARCH_ITEM_IN_LOCATION_REQUEST });
+  axios
+    .post(`${base_url2}/order/productionProductData`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.SEARCH_ITEM_IN_LOCATION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.SEARCH_ITEM_IN_LOCATION_FAILURE,
+      });
+    });
+};
+
+export const movetoProductionArchieve = (data, productionProductId) => (
+  dispatch
+) => {
+  dispatch({ type: types.MOVE_TO_PRODUCTION_ARCHIEVE_REQUEST });
+  axios
+    .put(`${base_url2}/production/updateDispatch/${productionProductId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.MOVE_TO_PRODUCTION_ARCHIEVE_FAILURE,
         payload: err,
       });
     });

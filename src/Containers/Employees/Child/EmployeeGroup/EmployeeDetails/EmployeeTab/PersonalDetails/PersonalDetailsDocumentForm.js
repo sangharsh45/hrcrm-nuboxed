@@ -1,20 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, Tooltip } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { FormattedMessage } from "react-intl";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
-import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-
 import { addDocumentDetails,
   getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 
@@ -83,18 +76,10 @@ class PersonalDetailsDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                     }}
+                <div class=" w-[45%]"
+  
                 >
                   <FastField
                     name="documentTypeId"
@@ -114,8 +99,8 @@ class PersonalDetailsDocumentForm extends Component {
                     className="field"
                     isColumn
                      />
-                  <Spacer />
-                  <div>
+               
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="idNo"
@@ -135,18 +120,14 @@ class PersonalDetailsDocumentForm extends Component {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    width: "45%",
-                     }}
+                <div class=" w-[45%]"
                 >
                   <Field
                     name="documentId"
                     isRequired
                     component={DragableUpload}
                   />
-                  <Spacer />
-
+                 <div class=" mt-3">
                   <Field
                     name="documentName"
                     //label="Name of Document"
@@ -160,7 +141,8 @@ class PersonalDetailsDocumentForm extends Component {
                     isColumn
                     component={InputComponent}
                   />
-                  <Spacer />
+                  </div>
+                  <div class=" mt-3">
                   <Field
                     name="description"
                     //label="Description of Document"
@@ -176,11 +158,12 @@ class PersonalDetailsDocumentForm extends Component {
                     component={TextareaComponent}
                     style={{ height: "5em"}}
                   />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                     </div>
+           
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+          
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -188,7 +171,7 @@ class PersonalDetailsDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

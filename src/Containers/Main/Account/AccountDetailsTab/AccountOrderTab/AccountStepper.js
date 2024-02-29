@@ -8,6 +8,8 @@ import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import AddOrderInAccount from "./AddOrderInAccount";
 import AccountOrderSecondStep from "./AccountOrderSecondStep";
 import { FormattedMessage } from 'react-intl';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 
 const Step = StyledSteps.Step;
 
@@ -40,17 +42,17 @@ class AccountStepper extends Component {
         const steps = [
             {
                 title: <FormattedMessage
-                id="app.order"
-                defaultMessage="Order"
-               />,
+                    id="app.order"
+                    defaultMessage="Order"
+                />,
                 icon: <UserOutlined />,
                 content: <AddOrderInAccount distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
             {
                 title: <FormattedMessage
-                id="app.phonedetails"
-                defaultMessage="Phone details"
-               />,
+                    id="app.phonedetails"
+                    defaultMessage="Phone details"
+                />,
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
@@ -64,18 +66,18 @@ class AccountStepper extends Component {
             <>
                 <StyledSteps current={current}>
                     <Step
-                        title={<i class="fas fa-cube" style={{ fontSize: "1.37em" }}></i>}
+                        title={<AddShoppingCartIcon style={{ fontSize: "1rem" }} />}
                         description={<FormattedMessage
-                            id="app.materials"
-                            defaultMessage="Materials"
-                           />}
+                            id="app.oderdetails"
+                            defaultMessage="Order Details"
+                        />}
                     />
                     <Step
-                        title={<UserOutlined style={{ fontSize: "1.37em" }} />}
+                        title={<ControlPointDuplicateIcon style={{ fontSize: "1rem" }} />}
                         description={<FormattedMessage
-                            id="app.orderdetails"
-                            defaultMessage="Order details"
-                           />}
+                            id="app.unitsinfo"
+                            defaultMessage="Units Info"
+                        />}
                     />
 
                 </StyledSteps>
@@ -88,15 +90,17 @@ class AccountStepper extends Component {
                             <>
                                 {current > 1 ? null : (
                                     <>
-                                        <Button className="mt-2"
+                                        <Button
+                                            style={{ marginRight: "3rem", marginTop: "65px" }}
+                                            className=" w-16 absolute top-3/4 right-0"
                                             type="primary"
                                             onClick={() => this.next()}
-                                           
-                                       >
-                                          <FormattedMessage
-                 id="app.proceed"
-                 defaultMessage="Proceed"
-                />
+
+                                        >
+                                            <FormattedMessage
+                                                id="app.proceed"
+                                                defaultMessage="Proceed"
+                                            />
                                         </Button>
                                     </>
                                 )}
@@ -104,11 +108,14 @@ class AccountStepper extends Component {
                         )}
 
                         {current > 0 && (
-                            <Button className="mt-1"onClick={() => this.prev()}>
-                             <FormattedMessage
-                 id="app.previous"
-                 defaultMessage="Previous"
-                />
+                            <Button
+                                className=" w-16 absolute top-3/4 right-0 mt"
+                                style={{ marginRight: "1rem", marginTop: "90px" }} onClick={() => this.prev()}
+                            >
+                                <FormattedMessage
+                                    id="app.previous"
+                                    defaultMessage="Previous"
+                                />
                             </Button>
                         )}
                     </div>

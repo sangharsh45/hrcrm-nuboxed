@@ -1,6 +1,6 @@
 import * as types from "./DashboardActionTypes";
 import dayjs from "dayjs";
-import moment from "moment";
+
 
 const initialState = {
   fetchingSkillsCloud: false,
@@ -186,33 +186,44 @@ const initialState = {
         .toISOString(),
       endDate: dayjs().toISOString(),
     },
+    // {
+    //   id: 2,
+    //   type: "week",
+    //   value: "1W",
+    //   starter: false,
+    //   isSelected: false,
+    //   startDate: dayjs().startOf("week").toISOString(),
+    //   endDate: dayjs().endOf("week").toISOString(),
+    // },
     {
       id: 2,
-      type: "quarter",
-      value: "QTD",
-      starter: false,
-      isSelected: false,
-      startDate: moment().startOf("quarter").toISOString(),
-      endDate: moment().endOf("quarter").toISOString(),
-    },
-    {
-      id: 3,
       type: "month",
       value: "MTD",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("month").toISOString(),
-      endDate: moment().endOf("month").toISOString(),
+      startDate: dayjs().startOf("month").toISOString(),
+      endDate: dayjs().endOf("month").toISOString(),
+    },
+    {
+      id: 3,
+      type: "quarter",
+      value: "QTD",
+      starter: false,
+      isSelected: false,
+      startDate: dayjs().startOf("quarter").toISOString(),
+      endDate: dayjs().endOf("quarter").toISOString(),
     },
     {
       id: 4,
-      type: "week",
-      value: "1W",
+      type: "quarter",
+      value: "YTD",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("week").toISOString(),
-      endDate: moment().endOf("week").toISOString(),
+      startDate: dayjs().startOf("quarter").toISOString(),
+      endDate: dayjs().endOf("quarter").toISOString(),
     },
+
+ 
   ],
   timeRangeType: "today",
   isCustomSelected: false,
@@ -353,6 +364,10 @@ const initialState = {
   fetchingCompletedTaskTypes: false,
   fetchingCompletedTaskTypesError:false,
   completedtypeTasks:[],
+
+  fetchingJumpOrderCount: false,
+  fetchingJumpOrderCountError:false,
+  jumstartOrderCount:{},
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1622,6 +1637,21 @@ export const dashboardReducer = (state = initialState, action) => {
               fetchingCompletedTaskTypes: false,
               fetchingCompletedTaskTypesError: true,
             };  
+
+            case types.GET_JUMPSTART_ORDER_COUNT_REQUEST:
+              return { ...state, fetchingJumpOrderCount: true };
+            case types.GET_JUMPSTART_ORDER_COUNT_SUCCESS:
+              return {
+                ...state,
+                fetchingJumpOrderCount: false,
+                jumstartOrderCount: action.payload,
+              };
+            case types.GET_JUMPSTART_ORDER_COUNT_FAILURE:
+              return {
+                ...state,
+                fetchingJumpOrderCount: false,
+                fetchingJumpOrderCountError: true,
+              };  
 
     default:
       return state;

@@ -1,10 +1,8 @@
-import React, {lazy } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-
 import { Button, Tooltip } from "antd";
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { StyledSelect } from "../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 

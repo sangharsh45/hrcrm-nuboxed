@@ -5,7 +5,7 @@ import { StyledDrawer } from "../../../Components/UI/Antd";
 const OpportunityForm = lazy(() => import("./OpportunityForm"));
 
 const AddOpportunityModal = (props) => {
-  const { ...formProps } = props;
+  const { addOpportunityModal, handleOpportunityModal, ...formProps } = props;
 
   return (
     <>
@@ -15,16 +15,11 @@ const AddOpportunityModal = (props) => {
           defaultMessage="Opportunity"
         />}
         width="60%"
-        style={{marginTop:"3rem"}}
-        visible={props.addOpportunityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => props.handleOpportunityModal(false)}
-        footer={null}
+        visible={addOpportunityModal}
+        onClose={() => handleOpportunityModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>
-          <OpportunityForm {...formProps} />{" "}
+          <OpportunityForm {...formProps}/>
         </Suspense>
       </StyledDrawer>
     </>

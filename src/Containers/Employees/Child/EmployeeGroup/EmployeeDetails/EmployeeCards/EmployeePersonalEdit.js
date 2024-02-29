@@ -4,9 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { updateEmployeeById } from "../../../../EmployeeAction";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { Spacer } from "../../../../../../Components/UI/Elements";
-import EditableInput from "../../../../../../Components/Forms/Edit/EditableInput";
 import EditableDatePicker from "../../../../../../Components/Forms/Edit/EditableDatePicker";
 import EditableSelect from "../../../../../../Components/Forms/Edit/EditableSelect";
 class EmployeePersonalEdit extends Component {
@@ -42,11 +39,8 @@ class EmployeePersonalEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
-          style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
-        >
-          <div style={{ width: "100%" }}>
+              <div className="flex flex-col p-4">
+          <div class=" w-full" >
             <EditableSelect
               isRequired
               defaultValue={bloodGroup}
@@ -64,8 +58,8 @@ class EmployeePersonalEdit extends Component {
               style={{ width: "100%" }}
             />
           </div>
-          <Spacer style={{ margin: "0.125em" }} />
-          <div style={{ width: "100%" }}>
+      
+          <div class=" w-full mt-3 m-[0.125em]" >
             <EditableDatePicker
               defaultValue={dob}
               handleChange={this.handleChange}
@@ -78,9 +72,9 @@ class EmployeePersonalEdit extends Component {
               style={{ width: "100%" }}
             />
           </div>
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingEmployeeById}
@@ -88,11 +82,12 @@ class EmployeePersonalEdit extends Component {
           >
             <FormattedMessage id="app.save" defaultMessage="Save" />,
           </Button>
-          &nbsp;
+      <div class=" ml-2">
           <Button type="ghost" onClick={() => toggleViewType()}>
             <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
           </Button>
-        </FlexContainer>
+          </div>
+        </div>
       </>
     );
   }

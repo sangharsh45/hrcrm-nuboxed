@@ -330,7 +330,7 @@
 //         />
 //         </Form>
   
-//   <h4>Updated on {dayjs(props.communicationAccess.lastUpdatedOn).format("ll")} by {props.communicationAccess.name}</h4>
+//   <div>Updated on {dayjs(props.communicationAccess.lastUpdatedOn).format("ll")} by {props.communicationAccess.name}</div>
 //       {/* <AddCandidateSequenceModal
 //       sequenceDetail={props.sequenceDetail}
 //       item={currentSequenceData}

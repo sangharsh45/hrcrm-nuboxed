@@ -1,199 +1,768 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { useState,useEffect,lazy } from "react";
+import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import { Button, } from "antd";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { bindActionCreators } from "redux";
+import {linkDepartmentDocumentToggle,removeDepartments} from "../Department/DepartmentAction"
+import { Button, Popconfirm, Switch, Tooltip } from "antd";
+import {addingDeptModules} from "../Department/DepartmentAction"
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { DeleteOutlined } from "@ant-design/icons";
 import { TextInput } from "../../../Components/UI/Elements";
+import dayjs from "dayjs";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
-import DepartmentStatusToggle from "./DepartmentStatusToggle";
-import ERPStatusToggle from "./ERPStatusToggle";
-import CRMStatusToggle from "./CRMStatusToggle";
-import IMStatusToggle from "./IMStatusToggle";
-import AccountingStatusToggle from "./AccountingStatusToggle";
-import RecruitProStatusToggle from "./RecruitProStatusToggle";
-import HrStatusToggle from "./HrStatusToggle";
+const DepartmentStatusToggle = lazy(() =>
+  import("./DepartmentStatusToggle")
+);
+
 const { Option } = Select;
 
-class SingleDepartment extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: '',
-      departmentName: "",
-      sectorId:"",
-      sectorName:"",
-      editInd:true,
+const SingleDepartment = (props) => {
+
+  const [viewType, setViewType] = useState("view");
+
+  const toggleViewType = () => {
+    setViewType((prevViewType) => (prevViewType === "view" ? "edit" : "view"));
+  };
+  const {
+    department: { departmentName,creationDate,editInd,moduleMapper,crmInd,financeInd,procurementInd,imInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,elearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
+   handleChange,
+   name,
+   value,
+   linkedDepartments,
+   updatingDepartments,
+   handleUpdateDepartment,
+   handleDeleteDepartment,
+
+ } = props;
+ const currentdate = dayjs().format("DD/MM/YYYY");
+ const date = dayjs(creationDate).format("DD/MM/YYYY");
+  // const { crmInd } = department;
+  console.log("moduleMapper",moduleMapper);
+  // console.log("erpInd", moduleMapper.erpInd);
+  const [crmStatus, setCrmStatus] = useState(crmInd);
+  useEffect(() => {
+    setCrmStatus(crmInd);
+  }, [crmInd]);
+  
+  const handleCrmClick = (checked) => {
+    setCrmStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "crm",
     };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [toggle, setToggle] = React.useState(mandetoryInd);
+  function handleToggleCollection(item) {
+    if (mandetoryInd) {
+      props.linkDepartmentDocumentToggle({
+        departmentName:departmentName,
+        departmentId: departmentId,
+        editInd:false,
+        mandetoryInd: mandetoryInd ? false : true,
+      },
+      departmentId,
+      );
+
+    } else {
+      props.linkDepartmentDocumentToggle({
+        departmentName: departmentName,
+        departmentId: departmentId,
+        editInd:false,
+        mandetoryInd: mandetoryInd ? false : true,
+      },
+      departmentId,
+      );
+    }
   }
 
-  handleSectorId = (value) =>
-    this.setState({ sectorId: value });
-  render() {
-    const {
-       department: { departmentName,recruitOppsInd,hrInd, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
-      handleChange,
-      name,
-      value,
-      linkedDepartments,
-      updatingDepartments,
-      handleUpdateDepartment,
-      handleDeleteDepartment,
+  function handleCancel() {
+    if (mandetoryInd) {
+      setToggle(true);
+    } else {
+      setToggle(false);
+    }
+  }
+  // useEffect(() => {
+  //   setMandatoryStatus(mandetoryInd);
+  // }, [mandetoryInd]);
+  
+  // const handleMandatoryClick = (checked) => {
+  //   setMandatoryStatus(checked);
+  //   let data = {
+  //     value: checked,
+     
+  //     departmentId:departmentId,
+  //     orgId: props.orgId,
+  //     type: "mandatory",
+  //   };
+  //   props.linkDepartmentDocumentToggle(data, departmentId);
+  // };
 
-    } = this.props;
-    console.log(linkedDepartments);
+  const [erpStatus, setErpStatus] = useState(erpInd);
 
-    console.log("35l",this.props)
-    // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
-    return (
-      <DepartmentWrapper>
-        <ViewEditCard>
-          {({ viewType }, toggleViewType) =>
-            viewType === "view" ? (
-              <div class="flex" >
-                <div class="w-full flex-row">
-              <div class=" flex justify-between" >
-                {/* <div class=" flex w-1/2"> */}
-               <div class=" w-[9rem]">
-                <DepartmentName >
-                  {departmentName}
-                </DepartmentName>
-                </div>
-                {/* <div class="w-20">
-                <DepartmentName >
-                  {sectorName}
-                </DepartmentName>
-                </div> */}
-                {/* </div> */}
-                <div >
+  useEffect(() => {
+    setErpStatus(erpInd);
+  }, [erpInd]);
+  
+  const handleErpClick = (checked) => {
+    setErpStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "erp",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [imStatus, setImStatus] = useState(imInd);
+  useEffect(() => {
+    setImStatus(imInd);
+  }, [imInd]);
+  
+  const handleImClick = (checked) => {
+    setImStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "im",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+
+  console.log(accountInd);
+  const [accountStatus, setAccountStatus] = useState(accountInd);
+  useEffect(() => {
+    setAccountStatus(accountInd);
+  }, [accountInd]);
+  
+  const handleAccountClick = (checked) => {
+    setAccountStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "account",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [recruitStatus, setRecruitStatus] = useState(recruitOppsInd);
+
+  useEffect(() => {
+    setRecruitStatus(recruitOppsInd);
+  }, [recruitOppsInd]);
+  
+  const handleRecruitClick = (checked) => {
+    setRecruitStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "recruitopps",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [hrStatus, setHrStatus] = useState(hrInd);
+  useEffect(() => {
+    setHrStatus(hrInd);
+  }, [hrInd]);
+  
+  const handleHrClick = (checked) => {
+    setHrStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "hr",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+  const [productionStatus, setProductionStatus] = useState(productionInd);
+  useEffect(() => {
+    setProductionStatus(productionInd);
+  }, [productionInd]);
+  
+  const handleProductionClick = (checked) => {
+    setProductionStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "production",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+  const [recruitProStatus, setRecruitProStatus] = useState(recruitProInd);
+
+  useEffect(() => {
+    setRecruitProStatus(recruitProInd);
+  }, [recruitProInd]);
+  
+  const handleRecruitProClick = (checked) => {
+    setRecruitProStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "recruitPro",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+  const [repairStatus, setRepairStatus] = useState(repairInd);
+
+  useEffect(() => {
+    setRepairStatus(repairInd);
+  }, [repairInd]);
+  
+  const handleRepairClick = (checked) => {
+    setRepairStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "repair",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [inventoryStatus, setInventoryStatus] = useState(inventoryInd);
+
+  useEffect(() => {
+    setInventoryStatus(inventoryInd);
+  }, [inventoryInd]);
+  
+  const handleInventoryClick = (checked) => {
+    setInventoryStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "inventory",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  
+
+
+  const [accountingStatus, setAccountingStatus] = useState(financeInd);
+
+  useEffect(() => {
+    setAccountingStatus(financeInd);
+  }, [financeInd]);
+  
+  const handleAccountingClick = (checked) => {
+    setAccountingStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "finance",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [orderManagStatus, setOrderManagStatus] = useState(orderManagementInd);
+
+  useEffect(() => {
+    setOrderManagStatus(orderManagementInd);
+  }, [orderManagementInd]);
+  
+  const handleOrderManagementClick = (checked) => {
+    setOrderManagStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "orderManagement",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+  const [logisticsStatus, setLogisticsStatus] = useState(logisticsInd);
+
+  useEffect(() => {
+    setLogisticsStatus(logisticsInd);
+  }, [logisticsInd]);
+  
+  const handleLogisticClick = (checked) => {
+    setLogisticsStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "logistics",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+  const [procurmentStatus, setProcurmentStatus] = useState(procurementInd);
+
+  useEffect(() => {
+    setProcurmentStatus(procurementInd);
+  }, [procurementInd]);
+  
+  const handleProcurmentClick = (checked) => {
+    setProcurmentStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "procurement",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+  const [elearningStatus, setElearningStatus] = useState(elearningInd);
+
+  useEffect(() => {
+    setElearningStatus(elearningInd);
+  }, [elearningInd]);
+  
+  const handleElearningClick = (checked) => {
+    setElearningStatus(checked);
+    let data = {
+      value: checked,
+      departmentId:departmentId,
+      orgId: props.orgId,
+      type: "elearning",
+    };
+    props.addingDeptModules(data, departmentId);
+  };
+
+
+
+  return (
+    <div class=" w-full cursor-pointer">
+      <ViewEditCard>
+        {({ viewType: cardViewType }, toggleCardViewType) =>
+          cardViewType === "view" ? (
+            <div className="flex">
+              <div className="w-full flex-row">
+                <div className="flex justify-between">
+                  <div className="w-[9rem]">
+                  <div class=" font-semibold" >{departmentName}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}</div>
+                  </div>
+                  {/* {mandetoryInd === true && ( */}
+  <>
+                    {/* <div class=" text-sm  ml-2">Mandatory</div> */}
+                    <div   class=" w-[15%] ml-2">
+                    
                     <DepartmentStatusToggle
                       mandetoryInd={mandetoryInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  
                     </div>
-                    <h1 class="ml-4">ERP</h1>
-                    <div class=" w-[7%] ml-2"   >
-                    
-                    <ERPStatusToggle
-                      erpInd={erpInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>CRM</h1>
+                    {/* <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleMandatoryClick}
+                        onCancel={handleMandatoryCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      > */}
+                        {/* <Switch
+                          style={{ width: "4em" }}
+                          onChange={handleMandatoryClick}
+                          checked={mandatoryStatus || mandetoryInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        /> */}
+                      {/* </Popconfirm> */}
+                    {/* </div> */}
+                    </>
+{/* )} */}
+<div class=" flex flex-col w-[80%] ">
+<div class=" flex flex-row ">
+  
+{moduleMapper.erpInd === true && (
+  <>
+    <div class="text-sm w-[2rem] ml-4">ERP</div>
+    <div class="w-[7%] ml-2">
+      <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleErpClick(!erpStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
+        <Switch
+          style={{ width: "4em" }}
+          onChange={() => {}}
+          checked={erpStatus || erpInd}
+          checkedChildren="Yes"
+          unCheckedChildren="No"
+        />
+      </Popconfirm>
+    </div>
+  </>
+)}
+{moduleMapper.financeInd === true && (
+  <>
+                    <div class=" text-sm w-[5rem] ml-4">Accounting</div>
                     <div   class=" w-[7%] ml-2">
-                    <CRMStatusToggle
-                      crmInd={crmInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleAccountingClick(!accountingStatus)}
+                        // onCancel={handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={accountingStatus || financeInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
-                    <h1>IM</h1>
-                    <div class=" w-[7%] ml-2">
-                    <IMStatusToggle
-                      imInd={imInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    </>
+)}
+{moduleMapper.crmInd === true && (
+  <>
+                  <div class=" text-sm w-[2rem] ml-4 ">CRM</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleCrmClick(!crmStatus)}
+                        // onCancel={handleCrmCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          // onChange={handleCrmClick}
+                          checked={crmStatus || crmInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
-                    <h1>HR</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <HrStatusToggle
-                      hrInd={hrInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    </>
+)}
+{moduleMapper.imInd === true && (
+  <>
+                    <div class=" text-sm w-[2rem] ml-4">IM</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleImClick(!imStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={imStatus || imInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                    </Popconfirm>
                     </div>
-                    <h1>Accounting</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <AccountingStatusToggle
-                      accountInd={accountInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    </>
+)}
+{moduleMapper.recruitProInd === true && (
+  <>
+                    <div class=" text-sm w-[5rem] ml-4">Rcruitpro</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleRecruitProClick(!recruitProStatus)}
+                        // onCancel={handleRecruitProCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={recruitProStatus || recruitProInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
+                    </>
+)}
+{moduleMapper.hrInd === true && (
+  <>
 
-                    <h1>RecruitPro</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <RecruitProStatusToggle
-                      recruitOppsInd={recruitOppsInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    <div class=" text-sm w-[2rem] ml-4">HR</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleHrClick(!hrStatus)}
+                        // onCancel={handleHrCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={hrStatus || hrInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
-                   
-                
-              </div>
-              </div>
-              <div>
-                
-                  {this.props.department.mandetoryInd !== true &&(
-                  <BorderColorIcon 
-                    tooltipTitle="Edit"
-                    iconType="edit"
-                    onClick={toggleViewType}
-                   style={{fontSize:"1rem"}}
-                  />
-             
-             
- 
-                  
+                    </>
+)}
+{moduleMapper.elearningInd === true && (
+  <>
+
+                    <div class=" text-sm w-[5rem]  ml-4">Elearning</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleElearningClick(!elearningStatus)}
+                        // onCancel={handleElearningCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={elearningStatus || elearningInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+</div>
+
+<div class=" flex flex-row mt-2 ">
+
+{/* {accountInd === true && (
+  <>
+                    <div class=" text-sm  ml-2">Account</div>
+                    <div   class=" w-[7%] ml-2">
                  
-                  )}
-                   {this.props.department.mandetoryInd !== true &&(
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={handleAccountClick}
+                          checked={accountStatus || accountInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+               
+                    </div>
+                    </>
+)} */}
+{/* {recruitOppsInd === true && (
+  <>
+
+                    <div class=" text-sm  ml-2">RecruitOpps</div>
+                    <div   class=" w-[7%] ml-2">
                   
-  <DeleteIcon
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={handleRecruitClick}
+                          checked={recruitStatus || recruitOppsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
                     
-                    onClick={() => handleDeleteDepartment(departmentId)}
-                   size="14px"
-                   style={{
-                     verticalAlign: "center",
-                     marginLeft: "5px",
-                     color: "red",
-                   }}
-                 />
-                 )}
-                 
-                </div> 
+                    </div>
+                    </>
+)} */}
+
+{moduleMapper.productionInd === true && erpStatus && (
+  <>
+
+                    <div class=" text-sm w-[5rem] ml-4">Production</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleProductionClick(!productionStatus)}
+                        // onCancel={handleProductionCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={productionStatus || productionInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+
+{moduleMapper.repairInd === true && erpStatus && (
+  <>
+                    <div class=" text-sm w-[5rem]  ml-4">Repair</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleRepairClick(!repairStatus)}
+                        // onCancel={handleRepairCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={repairStatus || repairInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+{/* {inventoryInd === true && (
+  <>
+                    <div class=" text-sm  ml-2">Inventory</div>
+                    <div   class=" w-[7%] ml-2">
+                
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={handleInventoryClick}
+                          checked={inventoryStatus || inventoryInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                    
+                    </div>
+                    </>
+)} */}
+{moduleMapper.orderManagementInd === true && erpStatus && (
+  <>
+                    <div class=" text-sm w-[9rem] ml-4">Order Management</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleOrderManagementClick(!orderManagStatus)}
+                        // onCancel={handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={orderManagStatus || orderManagementInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+
+
+{moduleMapper.logisticsInd === true && erpStatus && (
+  <>
+                    <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleLogisticClick(!logisticsStatus)}
+                        // onCancel={handleLogisticCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={logisticsStatus || logisticsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+{moduleMapper.procurementInd === true && erpStatus && (
+  <>
+                    <div class=" text-sm w-[6rem] ml-4">Procurement</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleProcurmentClick(!procurmentStatus)}
+                        // onCancel={handleProcurmentCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "4em" }}
+                          onChange={() => {}}
+                          checked={procurmentStatus || procurementInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </>
+)}
+
+</div>
+</div>
+
+                  <div class="ml-2">
+                    {mandetoryInd !== true && editInd === true && (
+                      <BorderColorIcon
+                        tooltipTitle="Edit"
+                        iconType="edit"
+                        onClick={toggleViewType}
+                        style={{ fontSize: "1rem" }}
+                      />
+                    )}
+  <Tooltip title="Delete">
+                    {mandetoryInd !== true && (
+                          <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => props.removeDepartments(departmentId )}
+                        >
+                      <DeleteOutlined
+                        // onClick={() => handleDeleteDepartment(departmentId)}
+                     
+                        style={{
+                          verticalAlign: "center",
+                          marginLeft: "5px",
+                          fontSize: "1rem",
+                          color: "red",
+                        }}
+                      />
+                       </Popconfirm>
+                    )}
+                    </Tooltip>
+                  </div>
+                </div>
               </div>
-              
-            ) : (
-                <FlexContainer>
-                  <TextInput
-                    name={name}
-                    // value={value || departmentName}
-                    defaultValue={departmentName}
-                    onChange={handleChange}
-                    style={{ width: "60%" }}
-                  />
-                  <Select 
-              defaultValue={sectorName}
-               style={{width:"40%"}}
-               placeholder="Select Sectors"
-               onChange={this.handleSectorId}
-               >
-                            {this.props.sectors.map((item) => {
-                                return <Option value={item.sectorId}>{item.sectorName} </Option>;
-                            })}
-               </Select>
-                  <br />
-                  <br />
-                  <div class=" flex justify-end" >
+            </div>
+          ) : (
+            <div class=" flex">
+              <TextInput
+                name={props.name}
+                defaultValue={departmentName}
+                onChange={props.handleChange}
+                style={{ width: "60%" }}
+              />
+            <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
                     Loading={updatingDepartments}
                     disabled={!value}
-                  onClick={() => handleUpdateDepartment(departmentId,value,sectorId,sectorName,value, toggleViewType())}
+                    onClick={() => {
+                      console.log(value); // Log the 'value' before calling handleUpdateSector
+                      handleUpdateDepartment(departmentId,value,sectorId,sectorName,value, toggleViewType());
+                    }}
+                  // onClick={() => handleUpdateDepartment(departmentId,value,sectorId,sectorName,value, toggleViewType())}
                   >
                     {/* Save */}
                     <FormattedMessage
@@ -201,7 +770,7 @@ class SingleDepartment extends Component {
               defaultMessage="Update"
             />
                 </Button>
-                &nbsp;
+            
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage
@@ -210,26 +779,25 @@ class SingleDepartment extends Component {
             />
                 </Button>
                 </div>
-                </FlexContainer>
-              )
-          }
-        </ViewEditCard>
-      </DepartmentWrapper>
-    );
-  }
-}
+            </div>
+          )
+        }
+      </ViewEditCard>
+    </div>
+  );
+};
 
-export default SingleDepartment;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const DepartmentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DepartmentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      addingDeptModules,
+      linkDepartmentDocumentToggle,
+      removeDepartments,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDepartment);
+

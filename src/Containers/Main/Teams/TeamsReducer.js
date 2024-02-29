@@ -9,6 +9,23 @@ const initialState = {
   fetchingEmployeeListError: false ,
   teamEmployeeList:[],
 
+  fetchingteamsTeam: false,
+  fetchingteamsTeamError: false,
+  teamteamsList:[],
+
+  updatingAssignedValue: false,
+   updatingAssignedValueError: false, 
+
+  fetchingEmployeeKpi: false,
+  fetchingEmployeeKpiError: false,
+  employeeKpiList:[],
+
+  fetchingPerformanceRecords: false,
+  fetchingPerformanceRecordsError: false,
+  performancerecordData:{},
+
+
+  addDrawerPerformanceModal:false,
 
   addTeamMemberModal: false,
 
@@ -32,6 +49,10 @@ const initialState = {
   fetchingTeamError: false,
   teamList: [],
 
+  fetchingRepoting: false, 
+  fetchingRepotingError: false,
+  reportingManger:[],
+
   fetchingTeamByTeamId: false,
   fetchingTeamByTeamIdError: false,
   teamByTeamId: {},
@@ -54,6 +75,10 @@ const initialState = {
   fetchingOrderView: false,
   fetchingOrderViewError: false,
   orderView: [],
+
+  fetchingKpilist: false,
+  fetchingKpilistError: false,
+  kpiList:[],
 
   updatingTeamsById: false,
   updatingTeamsByIdError: false,
@@ -152,6 +177,22 @@ export const teamsReducer = (state = initialState, action) => {
         fetchingTeam: false,
         fetchingTeamError: true,
       };
+
+      case types.GET_TEAMTEAM_REQUEST:
+      return { ...state, fetchingteamsTeam: true };
+    case types.GET_TEAMTEAM_SUCCESS:
+      return {
+        ...state,
+        fetchingteamsTeam: false,
+        teamteamsList: action.payload,
+      };
+    case types.GET_TEAMTEAM_FAILURE:
+      return {
+        ...state,
+        fetchingteamsTeam: false,
+        fetchingteamsTeamError: true,
+      };
+
 
     case types.GET_TEAM_BY_TEAM_ID_REQUEST:
       return { ...state, fetchingTeamByTeamId: true };
@@ -378,6 +419,16 @@ export const teamsReducer = (state = initialState, action) => {
         return { ...state, fetchingEmployeeList: false, teamEmployeeList: action.payload };
       case types.GET_TEAM_MEMBER_LIST_FAILURE:
         return { ...state, fetchingEmployeeList: false, fetchingEmployeeListError: true };
+
+        case types.GET_REPORTING_MANAGER_REQUEST:
+          return { ...state, fetchingRepoting: true };
+        case types.GET_REPORTING_MANAGER_SUCCESS:
+          return { ...state, fetchingRepoting: false, 
+            reportingManger: action.payload };
+        case types.GET_REPORTING_MANAGER_FAILURE:
+          return { ...state, 
+            fetchingRepoting: false, 
+            fetchingRepotingError: true };
   
         case types.ADD_TEAMS_REQUEST:
           return { ...state, addingTeam: true };
@@ -391,6 +442,118 @@ export const teamsReducer = (state = initialState, action) => {
         case types.ADD_TEAMS_FAILURE:
           return { ...state, addingTeam: false, addTeamsModal: false };
     
+          case types.HANDLE_PERFORMANE_DRAWER_MODAL:
+            return { ...state, addDrawerPerformanceModal: action.payload };
+
+            case types.GET_KPILIST_REQUEST:
+              return { ...state, fetchingKpilist: true };
+            case types.GET_KPILIST_SUCCESS:
+              return {
+                ...state,
+                fetchingKpilist: false,
+                kpiList: action.payload,
+              };
+            case types.GET_KPILIST_FAILURE:
+              return {
+                ...state,
+                fetchingKpilist: false,
+                fetchingKpilistError: true,
+              };
+
+              case types.ADD_KPI_REQUEST:
+                return { ...state, addingKpi: true };
+              case types.ADD_KPI_SUCCESS:
+                return { ...state, addingKpi: false,
+                   addingKpi: false,
+                  //  addDrawerPerformanceModal:false,
+                  employeeKpiList: [...state.employeeKpiList, action.payload],
+                  //employees:[action.payload,...state.employees]
+                 };
+              case types.ADD_KPI_FAILURE:
+                return { ...state, addingKpi: false,
+                  addingKpiError: true,
+                  // addDrawerPerformanceModal:false
+                 };  
+                  
+                  
+                  case types.GET_EMPLOYEE_KPI_LIST_REQUEST:
+  return { ...state, fetchingEmployeeKpi: true };
+case types.GET_EMPLOYEE_KPI_LIST_SUCCESS:
+  return {
+    ...state,
+    fetchingEmployeeKpi: false,
+    employeeKpiList: action.payload,
+  };
+case types.GET_EMPLOYEE_KPI_LIST_FAILURE:
+  return {
+    ...state,
+    fetchingEmployeeKpi: false,
+    fetchingEmployeeKpiError: true,
+  };
+
+  case types.GET_PERFORMANCE_RECORDS_REQUEST:
+    return { ...state, fetchingPerformanceRecords: true };
+  case types.GET_PERFORMANCE_RECORDS_SUCCESS:
+    return {
+      ...state,
+      fetchingPerformanceRecords: false,
+      performancerecordData: action.payload,
+    };
+  case types.GET_PERFORMANCE_RECORDS_FAILURE:
+    return {
+      ...state,
+      fetchingPerformanceRecords: false,
+      fetchingPerformanceRecordsError: true,
+    };
+
+
+      
+    case types.DELETE_KPI_DATA_REQUEST:
+      return { ...state, deletingKpiData: true };
+    case types.DELETE_KPI_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingKpiData: false,
+        employeeKpiList: state.employeeKpiList.filter(
+          (item) => item.userKpiLinkId !== action.payload
+        ),
+      };
+    case types.DELETE_KPI_DATA_FAILURE:
+      return { ...state, deletingKpiData: false, deletingKpiDataError: false };
+
+
+      case types.UPDATE_COMPLETED_VALUE_REQUEST:
+        return { ...state, updatingCompletedValue: true };
+      case types.UPDATE_COMPLETED_VALUE_SUCCESS:
+        // return { ...state, updatingDepartments: false, Departments: [...state.Departments, action.payload] };
+        return {
+          ...state,
+          updatingCompletedValue: false,
+          employeeKpiList: state.employeeKpiList.map((equipment) =>
+          equipment.userKpiLinkId === action.payload.userKpiLinkId ? action.payload : equipment
+          ),
+        };
+      case types.UPDATE_COMPLETED_VALUE_FAILURE:
+        return { ...state, updatingCompletedValue: false, updatingCompletedValueError: true };
+
+
+        case types.UPDATE_ASSIGNED_VALUE_REQUEST:
+          return { ...state, updatingAssignedValue: true };
+        case types.UPDATE_ASSIGNED_VALUE_SUCCESS:
+          // return { ...state, updatingDepartments: false, Departments: [...state.Departments, action.payload] };
+          return {
+            ...state,
+            updatingAssignedValue: false,
+            employeeKpiList: state.employeeKpiList.map((equipment) =>
+            equipment.userKpiLinkId === action.payload.userKpiLinkId ? action.payload : equipment
+            ),
+          };
+        case types.UPDATE_ASSIGNED_VALUE_FAILURE:
+          return { ...state, updatingAssignedValue: false, updatingAssignedValueError: true };
+        
+      
+
+
 
     default:
       return state;

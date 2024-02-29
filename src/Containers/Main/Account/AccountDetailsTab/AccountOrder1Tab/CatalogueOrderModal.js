@@ -4,7 +4,7 @@ import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
-import AddOrderForm from "./AddOrderForm";
+import AccountOrder1Stepper from "./AccountOrder1Stepper";
 
 const TabPane = StyledTabs.TabPane;
 class CatalogueOrderModal extends Component {
@@ -19,12 +19,12 @@ class CatalogueOrderModal extends Component {
                     destroyOnClose
                     maskClosable={false}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{ top: 40 }}
+                    style={{ top: 30 }}
                     onClose={() => handleAddOrderModal(false)}
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <AddOrderForm />
+                        <AccountOrder1Stepper distributorId={this.props.distributorId} />
                     </Suspense>
                 </StyledDrawer>
             </div>

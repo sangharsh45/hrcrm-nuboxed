@@ -1,7 +1,7 @@
 import React, { useEffect,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Tooltip, Button } from "antd";
 import {
   getInventoryConsumptionList,
@@ -23,7 +23,7 @@ function InventoryConsumptionTable(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[7%]"><FormattedMessage id="app.suppliesid" defaultMessage="Supplies ID"/></div>
@@ -45,51 +45,51 @@ function InventoryConsumptionTable(props) {
        <div class="flex">
    
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+    <div class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
     {item.suppliesId}
-                            </h4>
+                            </div>
     </div>
  
  
     </div>
     
     <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
+    <div class=" text-xs text-cardBody font-poppins">
                       
                       {item.subCategoryName}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.attributeName || ""} {item.subAttributeName}
-                    </h4>
+                    </div>
     </div>
     
 
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.name}
-             </h4>
+             </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.batchNumber}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.openingInventory}
-                    </h4>
+                    </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
         {item.quantity}
-             </h4>
+             </div>
     </div>
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {moment(item.deliveryDate).format("l")}
-             </h4>
+        <div class=" text-xs text-cardBody font-semibold  font-poppins">
+        {dayjs(item.deliveryDate).format("DD/MM/YYYY")}
+             </div>
     </div>
     <div class="flex md:items-center"> 
 
@@ -97,19 +97,14 @@ function InventoryConsumptionTable(props) {
 <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[6%]">
                    <div>
                    <Tooltip title="Reason">
-          <span
-            style={{
-              cursor: "pointer",
-              fontSize: "12px",
-              color: "green",
-            }}
+          <div class="cursor-pointer text-base text-green"
             onClick={() => {
               props.setEditInventoryConsumption(item);
               props.handleConsumptionReasonModal(true);
             }}
           >
             <i class="fas fa-cart-plus"></i>
-          </span>
+          </div>
         </Tooltip>
                    </div>
                    
@@ -127,7 +122,7 @@ function InventoryConsumptionTable(props) {
           );
         })}
   
-              </OnlyWrapCard>
+              </div>
               </div>
               <Suspense fallback={"Loading..."}>
       <ConsumptionReasonModal
@@ -168,30 +163,7 @@ export default connect(
   mapDispatchToProps
 )(InventoryConsumptionTable);
 
-function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
-  console.log(role);
-  console.log(type);
-  if (role === type) {
-    size = "22px";
-  } else {
-    size = "16px";
-  }
-  return (
-    <Tooltip title={tooltip}>
-      <Button
-        style={{
-          padding: "6px",
-          borderColor: "transparent",
-          color: role === type ? "#1890ff" : "grey",
-        }}
-        ghost={role !== type}
-        onClick={onClick}
-      >
-        <i className={`${iconType}`} style={{ fontSize: "20px" }}></i>
-      </Button>
-    </Tooltip>
-  );
-}
+
 
 
 // import React, { useEffect } from "react";

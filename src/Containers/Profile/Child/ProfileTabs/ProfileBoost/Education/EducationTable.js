@@ -1,32 +1,24 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { getEmailCredentials } from "../../../../../Settings/Email/EmailAction";
 import {
   StyledTable,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import DownloadIcon from '@mui/icons-material/Download';
-import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { Icon } from "antd";
-import { handleEducationModal } from "../../../../ProfileAction";
-import AddEducationModal from "./AddEducationModal";
 import { base_url } from "../../../../../../Config/Auth";
 import {
   getEducationDetails,
   setEditEducation,
 } from "../../../../ProfileAction";
 import { handleUpdateEducationModal } from "../../../../ProfileAction";
-import UpdateEducationModal from "../../ProfileBoost/Education/UpdateEducationModal";
-import { ActionIcon } from "../../../../../../Components/Utils";
-import moment from "moment";
 import {
-  getOpportunityDocument,
   deleteEducationTable,
 } from "../../../../ProfileAction";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
 import { FormattedMessage } from "react-intl";
-import { DeleteOutlined, DownloadOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const UpdateEducationModal = lazy(() => import("../../ProfileBoost/Education/UpdateEducationModal"));
 class EducationTable extends Component {
   componentDidMount() {    
       this.props.getEducationDetails(this.props.employeeId);  

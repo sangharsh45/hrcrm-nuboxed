@@ -4,10 +4,13 @@ import { StyledTabs } from "../../Components/UI/Antd";
 import { PlusOutlined } from "@ant-design/icons";
 import {handleOrganizationDocumentDrawer} from "../Auth/AuthAction"
 import { TabsWrapper } from "../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
 import { connect } from "react-redux";
-import AddOrgDocumentModal from "./AddOrgDocumentModal";
-import OrganizationDocumentList from "./OrganizationDocumentList";
+const AddOrgDocumentModal = lazy(() =>
+  import("./AddOrgDocumentModal")
+);
+const OrganizationDocumentList = lazy(() =>
+  import("./OrganizationDocumentList")
+);
 const TabPane = StyledTabs.TabPane;
 
 class OrganizationDocumentTab extends Component {
@@ -29,8 +32,8 @@ class OrganizationDocumentTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"100%"}}>
+        <div class=" flex flex-no-wrap" >
+        <div class=" w-full" >
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
            
@@ -39,7 +42,7 @@ class OrganizationDocumentTab extends Component {
                   <>
                   
                     <span style={{ marginLeft: "0.25em" }}>Document</span>
-                    {activeKey === "1" && this.props.user.repositoryCreateInd ===true && (
+                    {(activeKey === "1" && this.props.user.repositoryCreateInd === true || this.props.user.role === "ADMIN") && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -75,7 +78,7 @@ class OrganizationDocumentTab extends Component {
   
         </Suspense>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

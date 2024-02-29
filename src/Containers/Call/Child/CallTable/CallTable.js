@@ -1,13 +1,12 @@
 import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import DeleteIcon from "@mui/icons-material/Delete";
+import dayjs from "dayjs";
+import { DeleteOutlined } from "@ant-design/icons";
 import { Tooltip, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
+
 import {
   deleteCall,
   getCallListRangeByUserId,
@@ -25,7 +24,7 @@ function CallTable(props) {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 const [currentNameId, setCurrentNameId] = useState("");
-
+const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   useEffect(() => {
     const {
       getCallListRangeByUserId,
@@ -33,13 +32,20 @@ const [currentNameId, setCurrentNameId] = useState("");
     } = props;
     getCallListRangeByUserId(employeeId, page);
     setPage(page + 1);
-    props.getEmployeelist();
   }, []);
 
   useEffect(() => {
     return () => props.emptyCall();
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleLoadMore = () => {
     const callPageMapd = props.callListRangeByUserId && props.callListRangeByUserId.length &&props.callListRangeByUserId[0].pageCount
@@ -53,7 +59,6 @@ const [currentNameId, setCurrentNameId] = useState("");
         if (page < callPageMapd) {
           setPage(page + 1);
         getCallListRangeByUserId(employeeId, page);
-        props.getEmployeelist();
       }
       if (page === callPageMapd){
         setHasMore(false)
@@ -68,20 +73,184 @@ const [currentNameId, setCurrentNameId] = useState("");
 
   const {
     fetchingCallListRangeByUserId,
-    fetchingCallListRangeByUserIdError,
     callListRangeByUserId,
     deleteCall,
     handleCallNotesDrawerModal,
     userDetails: { employeeId },
-    setEditNote,
   } = props;
 
+  if (isMobile){
+    return (
+      <>
+         <div className=' flex justify-end sticky top-28 z-auto'>
+         <div class="rounded-lg  p-2 w-wk overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
+         
+        <InfiniteScroll
+          dataLength={callListRangeByUserId.length}
+          next={handleLoadMore}
+        hasMore={hasMore}
+          loader={fetchingCallListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
+          height={"75vh"}
+          endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+        >
+        
+            {callListRangeByUserId.map((item) => {
+              const incdata =item.included
+              const findEmp = incdata.map(item => ({
+                empName: item.empName
+                  ? item.empName
+                      .split(' ')
+                      .map(word => (word ? word.charAt(0).toUpperCase() : '')) 
+                      .slice(0,2)
+                  : ''
+              }));
+               return (
+                <div>
+              <div
+                  className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem]  p-3"
+                >
+               <div class="flex items-center  justify-between">
+               
+              <div> {item.callType}</div>
+              
+              
+              <p> {item.callPurpose}</p>
+               
+                </div>
+                <div class="flex items-center  justify-between">
+              
+        
+                <MultiAvatar2
+                      primaryTitle={item.contactName}
+                      // imageId={item.ownerImageId}
+                      imageURL={item.imageURL}
+                      imgWidth={"1.8em"}
+                      imgHeight={"1.8em"}
+                    />
+                
+     
+               
+               
+                <p> {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
+                
+                
+               
+                <div>
+             
+                <Avatar.Group
+                     maxCount={7}
+                    maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+                  >
+                      {item.included &&
+                    item.included.map((candidate, i) => {
+                      
+                      const data1 = candidate.empName ? candidate.empName.slice(0, 2).toUpperCase() : "No data"
+                      return (
+                        <Tooltip title={candidate.empName} key={i}>
+                        <Avatar style={{ backgroundColor: "#f56a00" }}>
+                        {data1}
+                      
+                      </Avatar>
+                      </Tooltip>
+                       
   
+                     
+                      );
+                    })}
+                    
+              </Avatar.Group>
+          
+          
+                </div>
+                
+                </div>
+                
+                <div class="flex items-center  justify-between">
+               
+               <span>
+                {item.assignedTo === null ? (
+                  "Not available"
+                ) : (
+                  <>
+                  {item.assignedTo === item.woner ? (
+                    
+                    null
+                  ) : (
+                  <MultiAvatar2
+                    primaryTitle={item.assignedTo}
+                    imgWidth={"1.8rem"}
+                    imgHeight={"1.8rem"}
+                  />
+                  )}
+                  </>
+                )}
+              </span>
+                {/* <p> {item.assignedTo || "Unassigned"}</p> */}
+                
+                
+               
+               <MultiAvatar2
+                     primaryTitle={item.woner}
+                     //imageId={item.ownerImageId}
+                     imageURL={item.imageURL}
+                     imgWidth={"1.8em"}
+                     imgHeight={"1.8em"}
+                   />
+              
+               
+                
+             
+                <p> {item.completionInd ? "Yes" : "No"}</p>
+               
+              
+                
+               
+                
+                      <div>
+                      <Tooltip title="Notes">
+         <NoteAltIcon
+                  onClick={() => {
+                    handleCallNotesDrawerModal(true);
+                    handleSetCallNameId(item);
+                  }}
+                  className="!text-base cursor-pointer text-[green]"
+                />
+             </Tooltip>
+                      </div>
+                      <div>
+                      <Tooltip title="Delete">
+                      <DeleteOutlined  type="delete" 
+                      className="!text-base cursor-pointer text-[red]"
+                  onClick={() => deleteCall(item.callId, employeeId)}
+                />
+                  </Tooltip>
+                      </div>
+                    
+                </div>
+              </div>
+              </div>
+             )
+            })}
+     
+        </InfiniteScroll>
+        </div>
+        </div>
+        <AddCallNotesDrawerModal
+  handleSetCallNameId={handleSetCallNameId}
+  handleCallNotesDrawerModal={props.handleCallNotesDrawerModal}
+  addDrawerCallNotesModal={props.addDrawerCallNotesModal}
+    currentNameId={currentNameId}
+    // taskName={currentprocessName.taskName} // Pass taskName as a prop
+  
+  />
+      </>
+    );
+  }
 
   return (
     <>
        <div className=' flex justify-end sticky top-28 z-auto'>
-       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+       <div class="rounded-lg m-5 p-2 w-[98%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[7.1rem]"><FormattedMessage
                   id="app.type"
@@ -107,21 +276,22 @@ const [currentNameId, setCurrentNameId] = useState("");
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
+                 <div className="md:w-[6.21rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
         <div className="md:w-[9.2rem]"><FormattedMessage
                   id="app.completed"
                   defaultMessage="completed"
                 /></div>
-        <div className="md:w-[6.21rem]"><FormattedMessage
-                  id="app.owner"
-                  defaultMessage="owner"
-                /></div>
+       
         <div className="w-12"></div>
       </div>
       <InfiniteScroll
         dataLength={callListRangeByUserId.length}
         next={handleLoadMore}
       hasMore={hasMore}
-        loader={fetchingCallListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCallListRangeByUserId?<div class="flex items-center">Loading...</div>:null}
         height={"75vh"}
         endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
       >
@@ -133,7 +303,7 @@ const [currentNameId, setCurrentNameId] = useState("");
                 ? item.empName
                     .split(' ')
                     .map(word => (word ? word.charAt(0).toUpperCase() : '')) 
-                    .slice(0,1)
+                    .slice(0,2)
                 : ''
             }));
              return (
@@ -144,12 +314,12 @@ const [currentNameId, setCurrentNameId] = useState("");
               <div class="flex  flex-col md:w-[8.23rem] max-sm:flex-row max-sm:justify-between w-full">
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col md:w-[6.23rem] max-sm:flex-row max-sm:justify-between w-full">
+            <div class="flex  flex-col md:w-[8.24rem] max-sm:flex-row max-sm:justify-between w-full">
             <p> {item.callPurpose}</p>
               </div>
               </div>
-              <div class="flex md:w-[21rem]">
-              <div class="flex  flex-col md:w-[5.12rem] max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex md:w-[22rem]">
+              <div class="flex  flex-col md:w-[7.12rem] max-sm:flex-row max-sm:justify-between w-full">
       
               <MultiAvatar2
                     primaryTitle={item.contactName}
@@ -161,59 +331,89 @@ const [currentNameId, setCurrentNameId] = useState("");
               
    
               </div>
-              <div class="flex  flex-col md:w-[14.35rem] max-sm:flex-row max-sm:justify-between w-full">
-              <p> {moment(item.startDate).format("llll")}</p>
+              <div class="flex  flex-col justify-center md:w-[11.35rem] max-sm:flex-row max-sm:justify-between w-full">
+              <p> {dayjs(item.startDate).format('YYYY-MM-DD')}</p>
               </div>
               <div class="flex  flex-col md:w-[2.2rem] max-sm:flex-row max-sm:justify-between w-full">
              
               <div>
-                
+           
               <Avatar.Group
                    maxCount={7}
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
                 >
-                   {findEmp.map((item, index) => {
+                    {item.included &&
+                  item.included.map((candidate, i) => {
+                    
+                    const data1 = candidate.empName ? candidate.empName.slice(0, 2).toUpperCase() : "No data"
+                    return (
+                      <Tooltip title={candidate.empName} key={i}>
+                      <Avatar style={{ backgroundColor: "#f56a00" }}>
+                      {data1}
+                    
+                    </Avatar>
+                    </Tooltip>
+                     
+
+                   
+                    );
+                  })}
+                   {/* {findEmp.map((item, index) => {
 return (
+  <Tooltip title={item.empName}>
   <Avatar style={{ backgroundColor: "#f56a00" }}>
               <p key={index}>{item.empName}</p>
               </Avatar>
+              </Tooltip>
                      );
-                   })}
+                   })} */}
             </Avatar.Group>
+        
         
               </div>
               </div>
               </div>
               
-              <div class="flex items-center md:w-[30rem]">
+              <div class="flex items-center md:w-[29rem]">
              <div class="flex  flex-col md:w-[8.35rem] max-sm:flex-row max-sm:justify-between w-full">
-          
-              <MultiAvatar2
-                    primaryTitle={item.assignedTo}
-                   // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
+             <span>
+              {item.assignedTo === null ? (
+                "Not available"
+              ) : (
+                <>
+                {item.assignedTo === item.woner ? (
+                  
+                  null
+                ) : (
+                <MultiAvatar2
+                  primaryTitle={item.assignedTo}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                )}
+                </>
+              )}
+            </span>
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
+              <div class="flex  flex-col md:w-[8.38rem] max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
+             
+             <MultiAvatar2
+                   primaryTitle={item.woner}
+                   //imageId={item.ownerImageId}
+                   imageURL={item.imageURL}
+                   imgWidth={"1.8em"}
+                   imgHeight={"1.8em"}
+                 />
+            
+             </div>
               <div class="flex  flex-col md:w-[10.35rem] max-sm:flex-row max-sm:justify-between w-full">
            
               <p> {item.completionInd ? "Yes" : "No"}</p>
               </div>
             
               
-              <div class="flex  flex-col md:w-[8.38rem] max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
              
-              <MultiAvatar2
-                    primaryTitle={item.woner}
-                    //imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
-             
-              </div>
               <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                     <Tooltip title="Notes">
@@ -222,14 +422,17 @@ return (
                   handleCallNotesDrawerModal(true);
                   handleSetCallNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                className="!text-base cursor-pointer text-[green]"
               />
            </Tooltip>
                     </div>
                     <div>
-                    <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
+                    <Tooltip title="Delete">
+                    <DeleteOutlined  type="delete" 
+                    className="!text-base cursor-pointer text-[red]"
                 onClick={() => deleteCall(item.callId, employeeId)}
               />
+                </Tooltip>
                     </div>
                   </div>
               </div>
@@ -239,7 +442,7 @@ return (
           })}
    
       </InfiniteScroll>
-      </OnlyWrapCard>
+      </div>
       </div>
       <AddCallNotesDrawerModal
 handleSetCallNameId={handleSetCallNameId}
@@ -258,7 +461,6 @@ const mapStateToProps = ({ auth, call, employee }) => ({
   fetchingCallListRangeByUserIdError: call.fetchingCallListRangeByUserIdError,
   callListRangeByUserId: call.callListRangeByUserId,
   addDrawerCallNotesModal:call.addDrawerCallNotesModal,
-  employees: employee.employees,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -269,7 +471,6 @@ const mapDispatchToProps = (dispatch) =>
       handleCallModal,
       setEditNote,
       getNotesListByCallId,
-      getEmployeelist,
       handleCallNotesDrawerModal
     },
     dispatch
@@ -277,16 +478,7 @@ const mapDispatchToProps = (dispatch) =>
 
   export default connect(mapStateToProps, mapDispatchToProps)(CallTable);
 
-function NoDataComponent(props) {
-  const { description, onClick, buttonText } = props;
-  return (
-    <div>
-      <div class=" flex justify-center items-center flex-col">
-        <p>{description || "We couldn't find relevant data"}</p>
-      </div>
-    </div>
-  );
-}
+
 
 
 

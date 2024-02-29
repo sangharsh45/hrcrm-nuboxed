@@ -77,13 +77,16 @@ const initialState = {
   fetchingSupplierListError: false,
   supplierList: [],
 
-
+  pOSupplierDetailsId: "",
 
   addLinkSuppliersOrderConfigureModal: false,
 
   clearbitPurchase: {},
 
   clearbitPurchaseProduct: {},
+  addPoListmModal: false,
+
+  addTermsnCondition: false,
 
   clearbitPurchaseSupplier: {},
 
@@ -94,11 +97,18 @@ const initialState = {
   fetchingGeneratorSupplierListError: false,
   generatorSuppliers: [],
 
+  moveToInventory: false,
+  moveToInventoryError: false,
+
   addSupplierSubscriptionModal: false,
 
   fetchingPurchaseSupplierList: false,
   fetchingPurchaseSupplierListError: false,
   purchaseList: [],
+
+  fetchingTermsnConditionOfPO: false,
+  fetchingTermsnConditionOfPOError: true,
+  termsnconditionofpo: [],
 
   addSupplierCatalogueModal: false,
 
@@ -126,6 +136,8 @@ const initialState = {
   feedbacks: [],
 
   addSuppliersActivityModal: false,
+
+  addlocationInPo: false,
 
   addingSuppliersActivityCall: false,
   addingSuppliersActivityCallError: false,
@@ -155,7 +167,7 @@ const initialState = {
 
   fetchingAllSupplierListById: false,
   fetchingAllSupplierListByIdError: false,
-  AllSupplierList: [],
+  allSupplierList: [],
 
   fetchingInputSupplierData: false,
   fetchingInputSupplierDataError: false,
@@ -226,6 +238,9 @@ const initialState = {
   fetchingSupplierHistoryrror: false,
   supplierHistory: false,
 
+  addingTermsnCondition: false,
+  addingTermsnConditionError: false,
+
   fetchingActivitySupplier: false,
   fetchingActivitySupplierError: false,
   activitySupplier: [],
@@ -243,8 +258,8 @@ const initialState = {
 
   addSupplierPurchaseCatalogueModal: false,
 
-  updateSupplierSuppliesById: false,
-  updateSupplierSuppliesByIdError: false,
+  updatePriceByPoListItem: false,
+  updatePriceByPoListItemError: false,
 
   updatingInStockSupplierSuppliesById: false,
   updatingInStockSupplierSuppliesByIdError: false,
@@ -252,6 +267,9 @@ const initialState = {
   fetchingProductList: false,
   fetchingProductListError: false,
   productList: [],
+
+  addingCurrencyInPo: false,
+  addingCurrencyInPoError: false,
 
   fetchingGeneratorCatalogueSupplierList: false,
   fetchingGeneratorCatalogueSupplierListError: false,
@@ -330,7 +348,10 @@ export const suppliersReducer = (state = initialState, action) => {
     case types.ADD_SUPPLIERS_REQUEST:
       return { ...state, addingSuppliers: true };
     case types.ADD_SUPPLIERS_SUCCESS:
-      return { ...state, addingSuppliers: false, addSuppliersModal: false };
+      return {
+        ...state, addingSuppliers: false, addSuppliersModal: false,
+        supplierList: [action.payload, ...state.supplierList]
+      };
     case types.ADD_SUPPLIERS_FAILURE:
       return {
         ...state,
@@ -345,7 +366,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingSupplierList: false,
-        supplierList: action.payload,
+        supplierList: [...state.supplierList, ...action.payload]
       };
     case types.GET_SUPPLIERS_LIST_FAILURE:
       return {
@@ -376,6 +397,8 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         addLinkSuppliersOrderConfigureModal: action.payload,
+        generatorSuppliers: [],
+        pOSupplierDetailsId: ""
       };
 
     case types.SET_CLEARBIT_PURCHASE_DATA:
@@ -390,8 +413,8 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         addingPurchaseSuppliers: false,
-        addLinkSuppliersOrderConfigureModal: false,
-        addSupplierPurchaseCatalogueModal: false,
+        pOSupplierDetailsId: action.payload,
+
       };
     case types.LINK_PURCHASE_SUPPLIERS_FAILURE:
       return {
@@ -419,6 +442,21 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingGeneratorSupplierListError: true,
       };
 
+    case types.MOVE_TO_INVENTORY_REQUEST:
+      return { ...state, moveToInventory: true };
+    case types.MOVE_TO_INVENTORY_SUCCESS:
+      return {
+        ...state,
+        moveToInventory: false,
+        addlocationInPo: false
+      };
+    case types.MOVE_TO_INVENTORY_FAILURE:
+      return {
+        ...state,
+        moveToInventory: false,
+        moveToInventoryError: true,
+      };
+
     case types.GET_GENERATOR_CATALOGUE_SUPPLIERS_LIST_REQUEST:
       return { ...state, fetchingGeneratorCatalogueSupplierList: true };
     case types.GET_GENERATOR_CATALOGUE_SUPPLIERS_LIST_SUCCESS:
@@ -436,6 +474,15 @@ export const suppliersReducer = (state = initialState, action) => {
 
     case types.HANDLE_SUPPLIERS_SUBSCRIPTION_MODAL:
       return { ...state, addSupplierSubscriptionModal: action.payload };
+
+    case types.HANDLE_PO_LOCATION_MODAL:
+      return { ...state, addlocationInPo: action.payload };
+
+    case types.HANDLE_PO_LIST_MODAL:
+      return { ...state, addPoListmModal: action.payload };
+
+    case types.HANDLE_TERMS_CONDITION_MODAL:
+      return { ...state, addTermsnCondition: action.payload };
 
     case types.GET_PURCHASE_SUPPLIERS_LIST_REQUEST:
       return { ...state, fetchingPurchaseSupplierList: true };
@@ -590,7 +637,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingAllSupplierListById: false,
-        AllSupplierList: action.payload,
+        allSupplierList: action.payload,
       };
     case types.GET_ALL_SUPPLIERS_LIST_FAILURE:
       return {
@@ -606,7 +653,7 @@ export const suppliersReducer = (state = initialState, action) => {
         ...state,
         fetchingInputSupplierData: false,
         supplierList: state.viewType === "dashboard" ? null : action.payload,
-        AllSupplierList: state.viewType === "dashboard" ? action.payload : null,
+        allSupplierList: state.viewType === "dashboard" ? action.payload : null,
       };
     case types.INPUT_SEARCH_DATA_FAILURE:
       return {
@@ -1042,14 +1089,13 @@ export const suppliersReducer = (state = initialState, action) => {
       return { ...state, setEditingSupplierSupplies: action.payload };
 
 
-    case types.UPDATE_SUPPLIER_SUPPLIES_REQUEST:
-      return { ...state, updateSupplierSuppliesById: true };
-    case types.UPDATE_SUPPLIER_SUPPLIES_SUCCESS:
+    case types.UPDATE_PRICE_OF_PO_ITEM_REQUEST:
+      return { ...state, updatePriceByPoListItem: true };
+    case types.UPDATE_PRICE_OF_PO_ITEM_SUCCESS:
       return {
         ...state,
-        updateSupplierSuppliesById: false,
-        updateSupplierSuppliesModal: false,
-        suppliesList: state.suppliesList.map((item) => {
+        updatePriceByPoListItem: false,
+        poDetails: state.poDetails.map((item) => {
           if (item.suppliesId == action.payload.suppliesId) {
             return action.payload;
           } else {
@@ -1057,32 +1103,47 @@ export const suppliersReducer = (state = initialState, action) => {
           }
         }),
       };
-    case types.UPDATE_SUPPLIER_SUPPLIES_FAILURE:
+    case types.UPDATE_PRICE_OF_PO_ITEM_FAILURE:
       return {
         ...state,
-        updateSupplierSuppliesById: false,
-        updateSupplierSuppliesByIdError: true,
+        updatePriceByPoListItem: false,
+        updatePriceByPoListItemError: true,
       };
 
-    case types.UPDATE_INSTOCK_SUPPLIES_REQUEST:
-      return { ...state, updatingInStockSupplierSuppliesById: true };
-    case types.UPDATE_INSTOCK_SUPPLIES_SUCCESS:
+    case types.ADD_TERMS_N_CONDITION_REQUEST:
+      return { ...state, addingTermsnCondition: true };
+    case types.ADD_TERMS_N_CONDITION_SUCCESS:
       return {
         ...state,
-        updatingInStockSupplierSuppliesById: false,
-        suppliesList: state.suppliesList.map((item) => {
-          if (item.suppliesId == action.payload.suppliesId) {
+        addingTermsnCondition: false,
+
+      };
+    case types.ADD_TERMS_N_CONDITION_FAILURE:
+      return {
+        ...state,
+        addingTermsnCondition: false,
+        addingTermsnConditionError: true,
+      };
+
+    case types.ADD_CURRENCY_IN_PO_REQUEST:
+      return { ...state, addingCurrencyInPo: true };
+    case types.ADD_CURRENCY_IN_PO_SUCCESS:
+      return {
+        ...state,
+        addingCurrencyInPo: false,
+        purchaseList: state.purchaseList.map((item) => {
+          if (item.poSupplierDetailsId == action.payload.poSupplierDetailsId) {
             return action.payload;
           } else {
             return item;
           }
         }),
       };
-    case types.UPDATE_INSTOCK_SUPPLIES_FAILURE:
+    case types.ADD_CURRENCY_IN_PO_FAILURE:
       return {
         ...state,
-        updatingInStockSupplierSuppliesById: false,
-        updatingInStockSupplierSuppliesByIdError: true,
+        addingCurrencyInPo: false,
+        addingCurrencyInPoError: true,
       };
 
     case types.GET_PRODUCT_LIST_REQUEST:
@@ -1099,6 +1160,23 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingProductList: false,
         fetchingProductListError: true,
       };
+
+    case types.GET_TERMS_AND_CONDITION_OF_PO_REQUEST:
+      return { ...state, fetchingTermsnConditionOfPO: true };
+    case types.GET_TERMS_AND_CONDITION_OF_PO_SUCCESS:
+      return {
+        ...state,
+        fetchingTermsnConditionOfPO: false,
+        termsnconditionofpo: action.payload,
+      };
+    case types.GET_TERMS_AND_CONDITION_OF_PO_FAILURE:
+      return {
+        ...state,
+        fetchingTermsnConditionOfPO: false,
+        fetchingTermsnConditionOfPOError: true,
+
+      };
+
 
     case types.HANDLE_LINK_SUPPLIER_CATALOGUE_MODAL:
       return { ...state, addSupplierPurchaseCatalogueModal: action.payload };
@@ -1118,9 +1196,10 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingPoDetailsListError: true,
       };
 
+    case types.EMPTY_SUPPLIER_LIST:
+      return { ...state, supplierList: [] };
 
-      
-    
+
 
     default:
       return state;

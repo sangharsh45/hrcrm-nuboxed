@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Tooltip,Button} from "antd";
 import {getTaskNameDetails} from "./DashboardAction";
-import moment from "moment";
+import dayjs from "dayjs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../Components/UI/Layout';
 import {
@@ -32,7 +32,8 @@ function TaskNameDrawerTable (props) {
         <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[5.1rem]">
+          {/* <div class=" w-4"></div> */}
+        <div className=" md:w-[7.1rem]">
         <FormattedMessage
                 id="app.priority"
                 defaultMessage="Priority"
@@ -56,30 +57,31 @@ function TaskNameDrawerTable (props) {
                 defaultMessage="Status"
               />
           </div>
-        <div className="md:w-[5.9rem]">
+        <div className="md:w-[9.9rem]">
         <FormattedMessage
                 id="app.endDate"
                 defaultMessage="End Date"
               />
           </div>
-        <div className="md:w-36">
+        <div className="md:w-[5rem]">
         <FormattedMessage
                 id="app.deviation"
                 defaultMessage="Deviation"
               />
           </div>
+          <div class="w-[1rem]"></div>
       </div>
         <InfiniteScroll
         dataLength={props.taskInameDrwr.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={props.fetchingTaskNamedrwr?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingTaskNamedrwr?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       >
       {props.taskInameDrwr.map((item) => { 
-        const currentDate = moment();
-        const completionDate = moment(item.completionDate);
-        const endDate = moment(item.endDate);
+        const currentDate = dayjs();
+        const completionDate = dayjs(item.completionDate);
+        const endDate = dayjs(item.endDate);
         const difference = currentDate.diff(endDate, 'days');
         const incompleteDeviationDate = endDate.diff(currentDate, 'days');
         const completeDeviation = endDate.diff(completionDate, 'days');
@@ -91,7 +93,7 @@ function TaskNameDrawerTable (props) {
                                 // }}
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row justify-between w-full ">
+                                   <div className=" flex font-medium flex-col md:w-[9rem] max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                   <div class="rounded-full h-11 w-11 bg-red-500">
@@ -122,19 +124,19 @@ function TaskNameDrawerTable (props) {
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-40 max-sm:w-full  ">
+                                <div className=" flex font-medium flex-col md:w-[13rem] max-sm:w-full  ">
 
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4> */}
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            </div> */}
+                                            <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
         {item.taskName}
        
-                                            </h4>
+                                            </div>
                                             </div>
                                         </Tooltip>
                               
@@ -153,7 +155,7 @@ function TaskNameDrawerTable (props) {
             )}
                                   </div>
                               </div>
-                              <div class="flex flex-col w-20">
+                              <div class="flex flex-col w-[7rem]">
                     <div class="">
                    
                     <ButtonGroup >
@@ -188,14 +190,14 @@ function TaskNameDrawerTable (props) {
                         </div>
                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[8rem] max-sm:flex-row w-full max-sm:justify-between ">
                                  
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {`${moment(item.endDate).format("ll")}`}
+                                    {`${dayjs(item.endDate).format("DD/MM/YYYY")}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">

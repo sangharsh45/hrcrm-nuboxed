@@ -48,6 +48,10 @@ const initialState = {
   fetchingAllCustomersDataError: false,
   allCustomerData:[],
 
+  fetchingWeightedValue: false,
+  fetchingWeightedValueError: false,
+  WeightedValue: {},
+
   fetchingAllCustomerByPosition:false,
   fetchingAllCustomerByPosition:false,
 
@@ -177,6 +181,14 @@ const initialState = {
   fetchingCustomerDetailsByIdError: false,
   customer: {},
 
+  fetchingOppValue: false,
+  fetchingOppValueError: false,
+  OppValue: {},
+
+  fetchingPipelineValue: false,
+  fetchingPipelineValueError: false,
+  pipelineValue: {},
+
   addingLocationDetails:false,
 
   documentUploadModal: false,
@@ -191,6 +203,8 @@ const initialState = {
   fetchingCusActivityTimelineStatus: false,
   fetchingCusActivityTimelineStatusError: false,
   customerActivityTimeline:[],
+
+  addDrawerCustomerOpportunityModal:false,
 
   deleteDocument: false,
   deleteDocumentError: false,
@@ -238,6 +252,10 @@ const initialState = {
   fetchingCommercialsByCustomer: false,
   fetchingCommercialsByCustomerError: false,
   commercialsByCustomerId: [],
+
+  fetchingContactValue: false,
+  fetchingContactValueError: false,
+  contactValue: {},
 
   linkedProjectTask:false,
   linkedProjectTaskError:false,
@@ -385,6 +403,8 @@ const initialState = {
   setEditingCustomerContact:{},
   addUpdateCustomerContactModal:false,
 
+  addDrawerCustomerContactModal:false,
+
   puttingCustContcToggle: false,
   puttingCustContcToggleError: false,
 
@@ -428,7 +448,8 @@ export const customerReducer = (state = initialState, action) => {
       return { ...state, 
         addingCustomer: false, 
         addCustomerModal: false ,
-        customerByUserId:[action.payload,...state.customerByUserId]
+        customerByUserId:[action.payload,...state.customerByUserId],
+        allCustomers:[action.payload,...state.allCustomers]
         // customerByUserId: state.customerByUserId.map((item) => {
         //   if (item.customerId === action.payload.customerId) {
         //     return action.payload;
@@ -451,7 +472,7 @@ export const customerReducer = (state = initialState, action) => {
         customerByUserId: [
           ...state.customerByUserId,
           ...action.payload],
-      
+          clearbit:null
       };
     case types.GET_CUSTOMERS_FAILURE:
       return {
@@ -588,6 +609,8 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         addingDocumentByCustomerId: false,
         addingDocumentByCustomerIdError: false,
+        documentsByCustomerId:[action.payload,...state.documentsByCustomerId]
+        
       };
     case types.ADD_CUSTOMER_DOCUMENT_FAILURE:
       return {
@@ -699,6 +722,7 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         addingCustomerOpportunity: false,
         addCustomerOpportunityModal: false,
+        opportunityByCustomerId:[action.payload,...state.opportunityByCustomerId]
         // clearbit: null,
       };
     case types.ADD_CUSTOMER_OPPORTUNITY_FAILURE:
@@ -1505,23 +1529,23 @@ export const customerReducer = (state = initialState, action) => {
                               };
 
 
-                              case types.GET_CUSTOMERS_LIST_REQUEST:
-                                return { ...state, fetchingCustomersList: true };
-                              case types.GET_CUSTOMERS_LIST_SUCCESS:
-                                return {
-                                  ...state,
-                                  fetchingCustomersList: false,
-                                   customerByList: action.payload,
+                              // case types.GET_CUSTOMERS_LIST_REQUEST:
+                              //   return { ...state, fetchingCustomersList: true };
+                              // case types.GET_CUSTOMERS_LIST_SUCCESS:
+                              //   return {
+                              //     ...state,
+                              //     fetchingCustomersList: false,
+                              //      customerByList: action.payload,
                           
                                  
                                 
-                                };
-                              case types.GET_CUSTOMERS_LIST_FAILURE:
-                                return {
-                                  ...state,
-                                  fetchingCustomersList: false,
-                                  fetchingCustomersListError: true,
-                                };
+                              //   };
+                              // case types.GET_CUSTOMERS_LIST_FAILURE:
+                              //   return {
+                              //     ...state,
+                              //     fetchingCustomersList: false,
+                              //     fetchingCustomersListError: true,
+                              //   };
 
 
 
@@ -1608,6 +1632,15 @@ export const customerReducer = (state = initialState, action) => {
                   
                                           case types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL:
                                             return { ...state, addDrawerCustomerPulseModal: action.payload }; 
+
+                                            case types.HANDLE_CUSTOMER_CONTACT_DRAWER_MODAL:
+                                              return { ...state, addDrawerCustomerContactModal: action.payload };
+                                              
+                                              
+                                              case types.HANDLE_CUSTOMER_OPPORTUNITY_DRAWER_MODAL:
+                                                return { ...state, addDrawerCustomerOpportunityModal: action.payload }; 
+                                                
+                                              
                                             
                                             
                                             case types.GET_OPPORTUNITY_RECORD_REQUEST:
@@ -1709,6 +1742,7 @@ export const customerReducer = (state = initialState, action) => {
                                                         case types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS:
                                                           return { ...state, addingCustomerActivityTask: false,
                                                             callActivityModal: false,
+                                                           
                                                             customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
                                                            };
                                                         case types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE:
@@ -1753,6 +1787,62 @@ export const customerReducer = (state = initialState, action) => {
                                                                   customerContractStatus: false,
                                                                   customerContractStatusError: true,
                                                                 };
+
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_REQUEST:
+                                                                  return { ...state, fetchingWeightedValue: true, fetchingWeightedValueError: false };
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_SUCCESS:
+                                                                  return {
+                                                                    ...state,
+                                                                    fetchingWeightedValue: false,
+                                                                    fetchingWeightedValueError: false,
+                                                                    WeightedValue: action.payload,
+                                                                  };
+                                                                case types.GET_PROSPECT_WEIGHTED_VALUE_FAILURE:
+                                                                  return { ...state, fetchingWeightedValue: false, fetchingWeightedValueError: true };
+
+
+                                                                  case types.GET_PROSPECT_OPP_VALUE_REQUEST:
+                                                                    return { ...state, fetchingOppValue: true, fetchingOppValueError: false };
+                                                                  case types.GET_PROSPECT_OPP_VALUE_SUCCESS:
+                                                                    return {
+                                                                      ...state,
+                                                                      fetchingOppValue: false,
+                                                                      fetchingOppValueError: false,
+                                                                      OppValue: action.payload,
+                                                                    };
+                                                                  case types.GET_PROSPECT_OPP_VALUE_FAILURE:
+                                                                    return { ...state, fetchingOppValue: false, fetchingOppValueError: true };
+
+
+
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_REQUEST:
+                                                                      return { ...state, fetchingPipelineValue: true, fetchingPipelineValueError: false };
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_SUCCESS:
+                                                                      return {
+                                                                        ...state,
+                                                                        fetchingPipelineValue: false,
+                                                                        fetchingPipelineValueError: false,
+                                                                        pipelineValue: action.payload,
+                                                                      };
+                                                                    case types.GET_PROSPECT_PIPELINE_VALUE_FAILURE:
+                                                                      return { ...state, fetchingPipelineValue: false, fetchingPipelineValueError: true };
+
+
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_REQUEST:
+                                                                        return { ...state, fetchingContactValue: true, fetchingContactValueError: false };
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_SUCCESS:
+                                                                        return {
+                                                                          ...state,
+                                                                          fetchingContactValue: false,
+                                                                          fetchingContactValueError: false,
+                                                                          contactValue: action.payload,
+                                                                        };
+                                                                      case types.GET_PROSPECT_CONTACT_VALUE_FAILURE:
+                                                                        return { ...state, fetchingContactValue: false, fetchingContactValueError: true };
+                                                                  
+                                                                
+                                                              
+                                                            
        default:
       return state;
   }
@@ -1769,6 +1859,7 @@ const newDateRange = (dateRange, newDate) =>
     }
   });
 
+  
 
 
 

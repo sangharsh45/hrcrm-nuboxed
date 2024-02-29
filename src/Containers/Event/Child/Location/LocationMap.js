@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { Marker, Popup } from "react-leaflet";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import {
   MultiAvatar,
   Title,
@@ -113,8 +111,8 @@ const MyPopupMarker = ({ mark }) => {
   return (
     <Marker position={[mark.lat, mark.lng]} icon={image}>
       <Popup className="popup-wrapper">
-        <FlexContainer justifyContent="center" flexDirection="column">
-          <FlexContainer flexWrap="nowrap" alignItems="center">
+        <div class=" flex flex-col justify-center" >
+          <div class=" flex flex-no-wrap items-center" >
             <MultiAvatar
               primaryTitle={accountName || ""}
               imageId={imageId}
@@ -124,7 +122,7 @@ const MyPopupMarker = ({ mark }) => {
             <Title overflow="hidden" textOverflow="ellipsis">
               {mark.name}
             </Title>
-          </FlexContainer>
+          </div>
           {address &&
             address.map((components, i) => {
               ////debugger;
@@ -139,7 +137,7 @@ const MyPopupMarker = ({ mark }) => {
                 // />;
               }
             })}
-        </FlexContainer>
+        </div>
       </Popup>
     </Marker>
   );

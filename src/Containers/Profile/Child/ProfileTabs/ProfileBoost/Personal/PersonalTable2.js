@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -7,30 +7,25 @@ import {
   StyledModal,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
-import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { Button, Icon } from "antd";
+import { Button, } from "antd";
 import {
   handleUpdatePersonalModal,
   setEditPersonal,
 } from "../../../../ProfileAction";
-import UpdatePersonalModal from "../Personal/UpdatePersonalModal";
-// import { handlePersonalModal } from "../../../../ProfileAction";
-// import AddPersonalModal from "./AddPersonalModal";
 import {
   getPersonalDetails,
   setCurrentPersonal,
 } from "../../../../ProfileAction";
-// import EditEmailForm from "../../../../../Settings/Email/Child/EditEmailForm"
-import { ActionIcon, Leaflet } from "../../../../../../Components/Utils";
+import { Leaflet } from "../../../../../../Components/Utils";
 import { Field, Form, Formik } from "formik";
 import MapPopupMarker from "../../../ProfileCards/MapPopupMarker";
 import { AddressComponent } from "../../../../../../Components/Common";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import FormikPlacesAutoComplete from "../../../../../../Components/Forms/Formik/FormikPlacesAutoComplete";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { deleteEmergencyTable } from "../../../../ProfileAction";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, EditOutlined, EnvironmentOutlined } from "@ant-design/icons";
+const UpdatePersonalModal = lazy(() => import("../Personal/UpdatePersonalModal"));
 class PersonalTable2 extends Component {
   constructor(props) {
     super(props);
@@ -219,7 +214,7 @@ class PersonalTable2 extends Component {
           footer={null}
         >
           <>
-            <FlexContainer>
+            <div class=" flex">
               {!address ? (
                 <>
                   {this.state.addAddressVisible && (
@@ -231,10 +226,8 @@ class PersonalTable2 extends Component {
                   )}
                 </>
               ) : null}
-              <FlexContainer
-                justifyContent="space-between"
-                alignItems="flex-start"
-                flexWrap="nowrap"
+              <div class=" flex justify-between items-start flex-no-wrap"
+        
               >
                 <div>
                   <div className="product3" style={{ width: "180" }}>
@@ -251,7 +244,7 @@ class PersonalTable2 extends Component {
                   </div>
                 </div>
                 <div class="vl"></div>
-                <div style={{ alignSelf: "flex-end" }}>
+                <div class=" flex self-end" >
                   {markers && (
                     <Leaflet
                       height={400}
@@ -271,8 +264,8 @@ class PersonalTable2 extends Component {
                     />
                   )}
                 </div>
-              </FlexContainer>
-            </FlexContainer>
+              </div>
+            </div>
           </>
         </StyledModal>
       </>

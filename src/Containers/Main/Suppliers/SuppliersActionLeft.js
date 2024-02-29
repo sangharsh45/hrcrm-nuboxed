@@ -1,22 +1,14 @@
 import React from "react";
-import GridViewIcon from '@mui/icons-material/GridView';
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
+import TocIcon from '@mui/icons-material/Toc';
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import {
     inputDataSearch, setSuppliersDashboardType, setSelectedTimeInterval,
     setTimeRange
 } from "./SuppliersAction";
 import { connect } from "react-redux";
-import { Button, Input, Tooltip, Badge } from "antd";
-import { AppstoreOutlined, BookOutlined, AreaChartOutlined } from "@ant-design/icons";
-import { TimeInterval } from "../../../Utils";
-import moment from "moment";
+import { Avatar, Input, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-
-const { Search } = Input;
-
-
 
 const Option = StyledSelect.Option;
 
@@ -26,91 +18,52 @@ class SuppliersActionLeft extends React.Component {
             user,
             viewType,
             setSuppliersViewType,
-            setSuppliersDashboardType,
-            dateRangeList, setSelectedTimeInterval,
-            setTimeRange, startDate,
-            endDate,
         } = this.props;
-        const creationDate = user.creationDate;
         return (
-            <FlexContainer alignItems="center">
+            <div class="flex items-center">
                 <Tooltip
-                title={<FormattedMessage id="app.suppliersList" defaultMessage="Suppliers List" />}
-                >
-                    <GridViewIcon
+                    title={<FormattedMessage id="app.cardview" defaultMessage="Card View" />}>
+
+                    <span class=" md:mr-2 text-sm cursor-pointer"
+                        onClick={() => setSuppliersViewType("card")}
                         style={{
-                            marginRight: "0.3rem",
                             color: viewType === "card" && "#1890ff",
                         }}
-                        // iconType="appstore-o"
-                        // tooltipTitle="Suppliers Library"
-                        onClick={() => setSuppliersViewType("card")}
-                    />
+                    >
+                        <Avatar style={{ background: viewType === "card" ? "#f279ab" : "#4bc076" }}>
+                            <TocIcon className="text-white" /></Avatar>
+
+                    </span>
                 </Tooltip>
-                {/* <Tooltip title="ALL Suppliers">
-                <Badge size="small">
-                    <span
+
+                <Tooltip title="ALL Suppliers">
+                    <span class=" md:mr-2 text-sm cursor-pointer"
+                        onClick={() => setSuppliersViewType("all")}
                         style={{
-                            marginRight: "0.5rem",
                             color: viewType === "all" && "#1890ff",
                         }}
-                        onClick={() => setSuppliersViewType("all")}
-                    >All
-                    </span>
-                    </Badge>
-                </Tooltip> */}
-                {/* <Tooltip title="Dashboard View">
-                    <AreaChartOutlined
-                        style={{
-                            marginRight: "0.5rem",
-                            color: viewType === "dashboard" && "#1890ff",
-                        }}
-                        //iconType="area-chart"
+                    >
+                        <Avatar style={{ background: viewType === "all" ? "#f279ab" : "#4bc076" }}>
+                            <div className="text-white">ALL</div></Avatar>
 
-                        onClick={() => setSuppliersViewType("dashboard")}
-                    />
+                    </span>
                 </Tooltip>
-                {viewType === "dashboard" && (
-                    <FlexContainer alignItems="center">
-                        <TimeInterval
-                            times={dateRangeList}
-                            handleClick={setSelectedTimeInterval}
-                        />
-                        <StyledRangePicker
-                            // allowClear={this.handleCancle}
-                            style={{ marginLeft: 8 }}
-                            disabled={1
-                                // organization.subscriptionType === "FREE" ||
-                                // organization.subscriptionType === "STARTER"
-                            }
-                            onChange={(range) => {
-                                setTimeRange(range[0], range[1]);
-                                this.handlerangeClick();
-                            }}
-                            disabledDate={(date) =>
-                                moment(date).isBefore(creationDate) ||
-                                moment(date).isAfter(moment())
-                            }
-                        />
-                    </FlexContainer>
-                )} */}
+
                 &nbsp;&nbsp;
                 <div class=" ml-6 h-6 w-60">
-      <Input
-    //   placeholder={<FormattedMessage id="app.searchByname" defaultMessage="Search By Name" />}
-     placeholder="Search By Name"
-      width={"100%"}
-            // suffix={suffix}
-            // onPressEnter={handleSearch}  
-            // onChange={handleChange}
-            // value={currentData}
-          />
-   
-      </div>
-                &nbsp;
-                &nbsp;
+                    <Input
+                        //   placeholder={<FormattedMessage id="app.searchByname" defaultMessage="Search By Name" />}
+                        placeholder="Search By Name"
+                        width={"100%"}
+                    // suffix={suffix}
+                    // onPressEnter={handleSearch}  
+                    // onChange={handleChange}
+                    // value={currentData}
+                    />
 
-            </FlexContainer>
+                </div>
+
+            </div>
         );
     }
 }

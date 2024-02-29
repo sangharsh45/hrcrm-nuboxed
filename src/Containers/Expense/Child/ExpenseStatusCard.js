@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer } from "../ExpenseAction";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import styled from 'styled-components';
-import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
-import ExpensePendingStatusCard from "./ExpensePendingStatusCard";
-import ExpenseApprovedStatusCard from "./ExpenseApprovedStatusCard";
-import ExpenseRejectedStatusCard from "./ExpenseRejectedStatusCard";
+const ExpensePendingStatusCard =lazy(()=>import("./ExpensePendingStatusCard"));
+const ExpenseApprovedStatusCard =lazy(()=>import("./ExpenseApprovedStatusCard"));
+const ExpenseRejectedStatusCard =lazy(()=>import("./ExpenseRejectedStatusCard"));
+
 
 function ExpenseStatusCard(props) {
  

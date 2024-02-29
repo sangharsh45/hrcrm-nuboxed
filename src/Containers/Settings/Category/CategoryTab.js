@@ -1,16 +1,38 @@
-import React, { Suspense, useState} from "react";
+import React, { useState,lazy} from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import {  FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-import CategoryActivity from "./CategoryActivity";
-import Category from "./Category";
-import CategoryActionLeft from "./CategoryActionLeft";
-import CategoryActionRight from "./CategoryActionRight";
-import OthersTab from "./OthersTab";
-import CustomerSectorTab from "./CustomerSectorTab";
-import InvestorTab from "./InvestorTab/InvestorTab";
-import ModuleTab from "./Module/ModuleTab";
+const PerformanceManagementTab = lazy(() =>
+  import("./PerformanceManagementTab/PerformanceManagementTab")
+);
+const OrderTab = lazy(() =>
+  import("./OrderTab/OrderTab")
+);
+const CategoryActivity = lazy(() =>
+  import("./CategoryActivity")
+);
+const Category = lazy(() =>
+  import("./Category")
+);
+const CategoryActionLeft = lazy(() =>
+  import("./CategoryActionLeft")
+);
+const CategoryActionRight = lazy(() =>
+  import("./CategoryActionRight")
+);
+const OthersTab = lazy(() =>
+  import("./OthersTab")
+);
+const CustomerSectorTab = lazy(() =>
+  import("./CustomerSectorTab")
+);
+const InvestorTab = lazy(() =>
+  import("./InvestorTab/InvestorTab")
+);
+const ModuleTab = lazy(() =>
+  import("./Module/ModuleTab")
+);
+
 const TabPane = StyledTabs.TabPane;
 
 function CategoryTab (props) {
@@ -47,6 +69,16 @@ function CategoryTab (props) {
               ruleId: "6",
               component:<InvestorTab />,
             },
+            {
+              rulesName: "Order",
+              ruleId: "7",
+              component:<OrderTab />,
+            },
+            {
+              rulesName: "Performance Management",
+              ruleId: "8",
+              component:<PerformanceManagementTab />,
+            },
             // {
             //   rulesName: "Assessment",
             //   ruleId: "4",
@@ -62,8 +94,8 @@ function CategoryTab (props) {
         return (
           <div>
           <div>
-            <Suspense fallback={"Loading..."}>
-              <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
+            {/* <Suspense fallback={"Loading..."}> */}
+              <div class=" flex flex-no-wrap w-full" >
                 <div class=" w-[20%]" >
                   <CategoryActionLeft
                     handleRuleClick={handleRuleClick}
@@ -74,8 +106,8 @@ function CategoryTab (props) {
                 <div class=" w-[80%]" >
                   <CategoryActionRight current={currentRulesOpen} />
                 </div>
-              </FlexContainer>
-            </Suspense>
+              </div>
+            {/* </Suspense> */}
           </div>
         </div>
       );

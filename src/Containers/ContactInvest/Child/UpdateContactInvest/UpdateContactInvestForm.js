@@ -5,18 +5,17 @@ import { Button } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../../Components/UI/Elements";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { updateContactInvest } from "../../ContactInvestAction";
-import Upload from "../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
-import {getInvestorData} from "../../../Investor/InvestorAction";
+import {getInvestorData,getDialCode} from "../../../Investor/InvestorAction";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateContactSchema = Yup.object().shape({
@@ -31,6 +30,7 @@ class UpdateContactInvestForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
     this.props.getInvestorData(this.props.userId);
+    this.props.getDialCode();
   }
   constructor(props) {
     super(props);
@@ -97,6 +97,25 @@ class UpdateContactInvestForm extends Component {
       contactiData
     } = this.props;
     console.log(linkContact);
+
+    const sortedCountry =this.props.dialCodeList.sort((a, b) => {
+      const nameA = a.country_dial_code.toLowerCase();
+      const nameB = b.country_dial_code.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const countryNameOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code}`,
+        value: item.country_dial_code,
+      };
+    });
     const customerNameOption = this.props.investorData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -126,6 +145,7 @@ class UpdateContactInvestForm extends Component {
             designationTypeId:contactiData.designationTypeId || "",
             description:contactiData.description || "",
             departmentId:contactiData.departmentId || "",
+            sourceId:contactiData.source || "",
             departmentDetails:
              contactiData.departmentDetails || "",
             userId: this.props.userId,
@@ -137,7 +157,7 @@ class UpdateContactInvestForm extends Component {
               this.props.user.countryDialCode,
             countryDialCode1:
               contactiData.countryDialCode1 ||
-              this.props.user.countryDialCode,
+              this.props.user.countryDialCode1,
             phoneNumber: contactiData.phoneNumber || "",
             mobileNumber: contactiData.mobileNumber || "",
             emailId: contactiData.emailId || "",
@@ -182,10 +202,10 @@ class UpdateContactInvestForm extends Component {
               <div class=" flex justify-around max-sm:flex-col  ">
                 <div class=" h-full w-w47.5 max-sm:w-wk" >
                  <div class=" flex justify-between  flex-nowrap">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-wk">
+                        {/* <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="salutation"
                             type="text"
@@ -202,8 +222,8 @@ class UpdateContactInvestForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-wk">
+                        </div> */}
+                        <div class=" w-full max-sm:w-wk">
                           <FastField
                             isRequired
                             name="firstName"
@@ -283,23 +303,22 @@ class UpdateContactInvestForm extends Component {
                   </div>
                   <div class=" flex justify-between">
                     <div class=" w-2/6 max-sm:w-2/5">
-                      <FastField
+                    <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
                         label={
                           <FormattedMessage
                             id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${contactiData.countryDialCode}`,
+                        }}
                         isColumn
+                        // width={"100%"}
                         selectType="dialCode"
                         component={SearchSelect}
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
                         inlineLabel
                       />
                     </div>
@@ -363,8 +382,8 @@ class UpdateContactInvestForm extends Component {
                   </div> */}
 
                  
-                  <Spacer />
-                  < div class=" flex justify-between">
+                 
+                  < div class=" flex justify-between mt-3">
                     <div class=" w-full">
                       <FastField
                         type="text"
@@ -383,7 +402,8 @@ class UpdateContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer style={{ marginTop: "1.25em" }} />
+                 
+                  <div class="mt-6">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -394,7 +414,7 @@ class UpdateContactInvestForm extends Component {
                     isColumn
                     component={TextareaComponent}
                   />                 
-                  
+                  </div>
                 </div>
                 
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "> 
@@ -419,8 +439,8 @@ class UpdateContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                <Spacer />
-                <div class="  w-w47.5">
+            
+                <div class="  w-w47.5 ">
                   <FastField
                     name="designationTypeId"
                     //label="Designation"
@@ -448,8 +468,8 @@ class UpdateContactInvestForm extends Component {
                   />
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-between">   
+              
+              <div class=" flex justify-between mt-3">   
               <div class=" w-w47.5">
                     <FastField
                       name="departmentId"
@@ -487,13 +507,13 @@ class UpdateContactInvestForm extends Component {
 
                   </div>
                  
-                  <Spacer style={{ marginTop: "1.25em" }} />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-6 w-full" style={{backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} ><FormattedMessage
+                      <div class="text-white font-medium m-[0.2rem_0_0.4rem_0.2rem] text-xs flex" ><FormattedMessage
                 id="app.address"
                 defaultMessage="Address"
-              /> </HeaderLabel>
+              /> </div>
                   </div>
                     </div>
                   <FieldArray
@@ -507,10 +527,9 @@ class UpdateContactInvestForm extends Component {
                     )}
                   />
 
-                <Spacer style={{ marginTop: "1.25em" }} />
-                  <Spacer />
+               
                  
-                  <div class=" flex  justify-between">
+                  <div class=" flex  justify-between mt-6">
                     {/* <div style={{ width: "47%" }}>
                       <Field
                         name="address[0].city"
@@ -527,7 +546,7 @@ class UpdateContactInvestForm extends Component {
                       />
                       </div> */}
                   </div>
-                  <Spacer />
+                 
                   {/* <FlexContainer justifyContent="space-between">
                     <div style={{ width: "47%" }}>
                       <Field
@@ -564,8 +583,8 @@ class UpdateContactInvestForm extends Component {
                   </FlexContainer> */}
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+             
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute mt-6 ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -595,6 +614,7 @@ const mapStateToProps = ({ auth,investor, contact, contactinvest,customer, depar
   userId: auth.userDetails.userId,
   customerId: customer.customer.customerId,
   departmentId: departments.departmentId,
+  dialCodeList:investor.dialCodeList,
   designationTypeId: designations.designationTypeId,
 });
 
@@ -606,6 +626,7 @@ const mapDispatchToProps = (dispatch) =>
       getDesignations,
       getDepartments,
       getInvestorData,
+      getDialCode,
     },
     dispatch
   );

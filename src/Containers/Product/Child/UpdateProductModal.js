@@ -1,11 +1,10 @@
 import React, { lazy, Suspense } from "react";
-
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import UpdateProductForm from "./UpdateProductForm";
+const UpdateProductForm =lazy(()=>import("./UpdateProductForm"));
 
 const UpdateProductModal = (props) => {
-  console.log(props.productId);
+
   const { ...formProps } = props;
   return (
     <>
@@ -15,8 +14,6 @@ const UpdateProductModal = (props) => {
         visible={props.updateProductModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"3rem" }}
         onClose={() => props.handleUpdateProductModal(false)}
         footer={null}
       >

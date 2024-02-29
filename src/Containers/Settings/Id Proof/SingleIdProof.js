@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeIdProof} from "../Id Proof/IdProofAction"
 import { TextInput } from "../../../Components/UI/Elements";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
@@ -18,7 +21,7 @@ class SingleIdProof extends Component {
   }
   render() {
     const {
-      idProof: { IdProofType, IdProofTypeId },
+      idProof: { IdProofType,creationDate, IdProofTypeId },
       handleChange,
       name,
       value,
@@ -28,16 +31,22 @@ class SingleIdProof extends Component {
       handleDeleteIdProof,
     } = this.props;
     console.log(linkedIdProofs);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <IdProofWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <IdProofName style={{ flexBasis: "85%" }}>
-                  {IdProofType}
-                </IdProofName>
+               <div class=" font-semibold" >
+                  {IdProofType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
                   {this.props.idProof.editInd ? (
                     <BorderColorIcon
@@ -48,27 +57,28 @@ class SingleIdProof extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeIdProof(IdProofTypeId )}
+                        >
+                    <DeleteOutlined
                     
-                      onClick={() => handleDeleteIdProof(IdProofTypeId)}
-                      size="14px"
+                      // onClick={() => handleDeleteIdProof(IdProofTypeId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+               
                 </div>
               </div>
             ) : (
@@ -80,8 +90,7 @@ class SingleIdProof extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -99,7 +108,7 @@ class SingleIdProof extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -109,22 +118,22 @@ class SingleIdProof extends Component {
             )
           }
         </ViewEditCard>
-      </IdProofWrapper>
+      </div>
     );
   }
 }
 
-export default SingleIdProof;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const IdProofWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const IdProofName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const IdProofValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeIdProof,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleIdProof);
+
+
+

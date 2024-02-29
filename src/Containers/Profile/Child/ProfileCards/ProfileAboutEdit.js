@@ -4,10 +4,6 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { updateUserById } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
-import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
-import EditSearchSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
 import EditableSelect from "../../../../Components/Forms/Edit/EditableSelect";
 class ProfileAboutEdit extends Component {
   constructor(props) {
@@ -51,13 +47,11 @@ class ProfileAboutEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
-          <div style={{ width: "100%" }}></div>
-          <Spacer style={{ margin: "0.1875em" }} />
-          <div style={{ width: "100%" }}>
+          <div class=" w-full" ></div>
+          <div class=" w-full m-[0.1875rem]" >
             <EditableSelect
               defaultValue={designation}
               handleChange={this.handleChange}
@@ -75,13 +69,12 @@ class ProfileAboutEdit extends Component {
               style={{ width: "100%" }}
             />
           </div>
-          <Spacer style={{ margin: "0.125em" }} />
-          <FlexContainer
+          <div class=" flex justify-between w-full m-[0.125rem]"
             justifyContent="space-between"
             style={{ width: "100%" }}
           >
             {/* {userType === "ADMIN" && ( */}
-            <div style={{ width: "100%" }}>
+            <div class=" w-full" >
               <EditableSelect
                 defaultValue={department}
                 handleChange={this.handleChange}
@@ -116,7 +109,7 @@ class ProfileAboutEdit extends Component {
                 width="100%"
               />
             </div> */}
-          </FlexContainer>
+          </div>
           {/* <Spacer style={{ margin: "0.125em" }} /> */}
           {/* <EditableInput
             defaultValue={userType}
@@ -126,8 +119,8 @@ class ProfileAboutEdit extends Component {
             value={this.state.fields.userType}
             width="17.625em"
           /> */}
-          <Spacer style={{ margin: "0.125em" }} />
-          <div style={{ width: "100%" }}>
+
+          <div class=" w-full m-[0.125rem] ">
             <EditableSelect
               defaultValue={label}
               handleChange={this.handleChange}
@@ -154,8 +147,8 @@ class ProfileAboutEdit extends Component {
               style={{ width: "100%" }}
             />
           </div>
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25rem]" >
           <Button
             type="primary"
             Loading={updatingUserById}
@@ -175,7 +168,7 @@ class ProfileAboutEdit extends Component {
               defaultMessage="Cancel"
             />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

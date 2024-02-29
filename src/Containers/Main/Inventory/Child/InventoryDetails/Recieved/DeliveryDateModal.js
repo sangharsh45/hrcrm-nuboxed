@@ -14,13 +14,10 @@ class DeliveryDateModal extends Component {
       <>
         <StyledDrawer
           title={`Order No - ${this.props.rowData.newOrderNo} `}
-          width="45%"
-          height="45%"
+          width="60%"
           visible={addDeliverDate}
           destroyOnClose
           maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop: "5rem" }}
           onClose={() => handleDeliveryDateModal(false)}
           footer={null}
         >

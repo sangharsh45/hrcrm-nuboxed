@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
-import { Button,Tooltip } from "antd";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Button,Popconfirm,Tooltip } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import {removeDesignations} from "../DesignationAction"
+import { bindActionCreators } from "redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
@@ -18,7 +21,7 @@ class SingleDesignation extends Component {
   }
   render() {
     const {
-      designation: { designationType, designationTypeId },
+      designation: { designationType, creationDate,designationTypeId },
       handleChange,
       name,
       value,
@@ -28,16 +31,22 @@ class SingleDesignation extends Component {
       handleDeleteDesignation,
     } = this.props;
     console.log(linkedDesignations);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedSources && linkedSources.includes(documentTypeId)
     return (
-      <DesignationWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <DesignationName style={{ flexBasis: "85%" }}>
-                  {designationType}
-                </DesignationName>
+                <div class=" font-semibold" >
+                  {designationType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
                   {this.props.designation.editInd ? (
                     <BorderColorIcon
@@ -48,18 +57,26 @@ class SingleDesignation extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+               
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeDesignations(designationTypeId )}
+                        >
+                    <DeleteOutlined
     
-                      onClick={() => handleDeleteDesignation(designationTypeId)}
-                      size="14px"
+                      // onClick={() => handleDeleteDesignation(designationTypeId)}
+                  
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                      </Popconfirm>
                   </Tooltip>
                   {/* {disableDelete && <ActionIcon
                                         tooltipTitle='Delete'
@@ -88,8 +105,7 @@ class SingleDesignation extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
@@ -107,7 +123,7 @@ class SingleDesignation extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -117,22 +133,21 @@ class SingleDesignation extends Component {
             )
           }
         </ViewEditCard>
-      </DesignationWrapper>
+      </div>
     );
   }
 }
 
-export default SingleDesignation;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const DesignationWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DesignationName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DesignationValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeDesignations,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDesignation);
+
+

@@ -10,9 +10,9 @@ import {
 import UpdateAccountContactModal from "./UpdateAccountContactModal";
 import { Button, Tooltip } from "antd";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import moment from "moment";
-import { OnlyWrapCard } from "../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
+
 class AccountContactTable extends Component {
 
     componentDidMount() {
@@ -27,18 +27,17 @@ class AccountContactTable extends Component {
         if (fetchingContactDistributorsById) {
             return <BundleLoader />;
         }
-        const tab = document.querySelector(".ant-layout-sider-children");
-        const tableHeight = tab && tab.offsetHeight * 1.2;
+
         return (
             <>
                 <div className=' flex justify-end sticky top-28 z-auto'>
-                    <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                <div class="rounded-lg m-5 p-2 w-[96%] overflow-auto shadow-[4px_0px_9px_3px_] shadow-[#a3abb980] bg-[#E3E8EE]">
                         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-                            <div className=" md:w-[3.1rem]">Name</div>
-                            <div className=" md:w-[3.1rem]">Email</div>
-                            <div className=" md:w-[4.8rem] ">Mobile No</div>
-                            <div className="md:w-[2.9rem]">Designation</div>
-                            <div className="md:w-[27.8rem]">Department</div>
+                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.name" defaultMessage="Name"/></div>
+                            <div className=" md:w-[3.1rem]"><FormattedMessage id="app.email" defaultMessage="Email"/></div>
+                            <div className=" md:w-[4.8rem] "><FormattedMessage id="app.Mobile No" defaultMessage="Mobile No"/></div>
+                            <div className="md:w-[2.9rem]"><FormattedMessage id="app.Designation" defaultMessage="Designation"/></div>
+                            <div className="md:w-[27.8rem]"><FormattedMessage id="app.Department" defaultMessage="Department"/></div>
 
 
                         </div>
@@ -46,26 +45,12 @@ class AccountContactTable extends Component {
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingCustomers?<div style={{ textAlign: 'center' }}>Loading...</div>:null}
         height={"75vh"}
       > */}
 
-                        {this.props.contactDistributor.map((item) => {
-                            const currentdate = moment().format("DD/MM/YYYY");
+                        {this.props.contactDistributor.map((item) => { 
                             const data = {}
-                            const date = moment(item.creationDate).format("DD/MM/YYYY");
-                            const diff = Math.abs(
-                                moment().diff(moment(item.lastRequirementOn), "days")
-                            );
-                            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
-                                } 
-           Street : ${item.address && item.address.length && item.address[0].street
-                                }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${(item.address && item.address.length && item.address[0].country) || ""
-                                } 
-           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
-                                } `;
                             return (
                                 <div>
                                     <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
@@ -74,10 +59,10 @@ class AccountContactTable extends Component {
 
                                             <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                <div class=" text-xs text-cardBody font-poppins">
                                                     {`${item.salutation || ""} ${item.firstName || ""} ${item.middleName || ""
                                                         } ${item.lastName || ""}`}
-                                                </h4>
+                                                </div>
 
                                             </div>
 
@@ -85,9 +70,9 @@ class AccountContactTable extends Component {
                                             <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
 
-                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                <div class=" text-xs text-cardBody font-poppins">
                                                     {item.emailId}
-                                                </h4>
+                                                </div>
 
                                             </div>
 
@@ -123,8 +108,9 @@ class AccountContactTable extends Component {
                                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
 
-                                                    {!item.accessInd && <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {!item.accessInd && <div class=" text-xs text-cardBody font-poppins">
                                                         <Button
+                                                        type="primary"
                                                             onClick={() =>
                                                                 this.props.applyForLoginInContact(
                                                                     data,
@@ -132,25 +118,24 @@ class AccountContactTable extends Component {
                                                                     this.props.distributorId,
                                                                     this.props.userId
                                                                 )}
-                                                            style={{ backgroundColor: "blue", color: "white" }}
-                                                        >Apply For Login</Button>
-                                                    </h4>}
+                                                        ><FormattedMessage id="app.applyforlogin" defaultMessage="Apply For Login"/></Button>
+                                                    </div>}
 
                                                 </div>
                                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
 
-                                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                                    <div class=" text-xs text-cardBody font-poppins">
                                                         <Tooltip title="Edit">
                                                             <BorderColorIcon
-                                                                style={{ cursor: "pointer", fontSize: "1rem", color: "grey", }}
+                                                             className="!text-base cursor-pointer text-[grey]"
                                                                 onClick={() => {
                                                                     this.props.setEditDistributorContact(item);
                                                                     this.props.handleUpdateDistributorContactModal(true);
                                                                 }}
                                                             />
                                                         </Tooltip>
-                                                    </h4>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -163,7 +148,7 @@ class AccountContactTable extends Component {
                             )
                         })}
 
-                    </OnlyWrapCard>
+                    </div>
                 </div>
 
                 <UpdateAccountContactModal

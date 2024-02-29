@@ -1,21 +1,25 @@
-import React from 'react'
-import AddMultipleQCSpare from "./AddMultipleQCSpare";
-import QCSpareListTable from './QCSpareListTable';
+import { Suspense,lazy } from 'react';
+import { BundleLoader } from '../../../Components/Placeholder';
+
+const AddMultipleQCSpare =lazy(()=>import("./AddMultipleQCSpare"));
+const QCSpareListTable =lazy(()=>import("./QCSpareListTable"));
 
 const AddingQCSpareList = (props) => {
     return (
         <>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div style={{ width: "50%" }}>
+        <Suspense fallback={<BundleLoader/>}>
+            <div class="flex justify-between">
+                <div class="w-[47%]">
                     <AddMultipleQCSpare RowData={props.RowData} />
                 </div>
-                <div style={{ width: "49%" }}>
+                <div class="w-[50%]">
                     <QCSpareListTable
                         phoneId={props.phoneId}
                         RowData={props.RowData}
                     />
                 </div>
             </div>
+            </Suspense>
         </>
     )
 }

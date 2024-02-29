@@ -5,13 +5,13 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { getAssignedToList } from "../../../Employees/EmployeeAction";
 import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import {
     getContactListByCustomerId,
     getOpportunityListByCustomerId,
   } from "../../CustomerAction";
 import dayjs from "dayjs";
-import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -27,8 +27,6 @@ import {addCustomerActivityEvent} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
-import { getEvents } from "../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import { Listbox } from '@headlessui/react'
 
@@ -61,14 +59,13 @@ function CustomerEventActivityForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
-   props.getEvents();
+    props.getAssignedToList(props.orgId);
    props.getAllCustomerData(userId)
    props.getOpportunityListByCustomerId(props.customer.customerId);
    props.getContactListByCustomerId(props.customer.customerId);
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
@@ -108,10 +105,10 @@ function CustomerEventActivityForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName,empName, fullName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
       addingEvent,
@@ -293,11 +290,11 @@ const {
             values,
             ...rest
           }) => (
-            <div class="overflow-y-auto h-[36rem] overflow-x-hidden max-sm:h-[30rem]">
+            <div class="overflow-y-auto h-[44rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
-                <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+                <div class=" h-full w-w47.5 mt-3 max-sm:w-wk">
+                  
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -327,8 +324,8 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div>
+                
+                  <div class=" mt-3">
                     <div class=" flex justify-between">
                       <div class=" w-1/2">
                         <Field
@@ -448,8 +445,7 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
+                 
                   
                     {/* <Field
                       name="employeesId"
@@ -476,11 +472,11 @@ const {
                  <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+            <Listbox.Label className="block text-sm font-semibold text-gray-700 mt-3">
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
-            <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
+            <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" >
                 {selected}
               </Listbox.Button>
               {open && (
@@ -488,7 +484,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -496,7 +492,7 @@ const {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -506,7 +502,7 @@ const {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -541,7 +537,7 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+      <div class=" mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -561,9 +557,8 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
-                  <Spacer />
-                  <div>
+                  </div>
+                  <div class=" mt-3">
                   {props.user.crmInd === true &&(
                 <Field
                 name="customerId"
@@ -589,8 +584,7 @@ const {
               />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class=" mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contact"
@@ -616,8 +610,7 @@ const {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+                  <div class=" mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunity"
@@ -643,7 +636,7 @@ const {
                />
                   )} 
                   </div>
-                  <Spacer />
+              
                   {/* <Field
                     disabled="true"
                     isRequired
@@ -676,8 +669,8 @@ const {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+                <div class=" h-full w-w47.5 mt-3 max-sm:w-wk ">
+                
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -688,7 +681,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+              <div class=" mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -700,7 +693,8 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+                
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
@@ -743,8 +737,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+            
+              <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -787,14 +781,15 @@ const {
 }
 const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, candidate }) => ({
   addingEvent: event.addingEvent,
+  assignedToList:employee.assignedToList,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  orgId: auth.userDetails.organizationId,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
-  events: events.events,
+  sales: opportunity.sales,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
 });
@@ -805,14 +800,12 @@ const mapDispatchToProps = (dispatch) =>
       addCustomerActivityEvent,
       deleteEvent,
       updateEvent,
+      getAssignedToList,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
-      getEvents,
       getOpportunityListByCustomerId,
       getContactListByCustomerId,
       getAllCustomerData,
-  
       setClearbitCandidateData,
     },
     dispatch

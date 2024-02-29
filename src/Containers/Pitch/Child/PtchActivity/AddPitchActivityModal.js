@@ -28,12 +28,8 @@ const AddPitchActivityModal = (props) => {
         />}
         width={drawerWidth}
         visible={addPitchactivityModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handlePitchActivityModal(false)}
-        style={{marginTop:"3rem"}}
-        footer={null}
+
       >
         <Suspense fallback={<BundleLoader />}>
           {/* <CallTaskForm
@@ -89,7 +85,9 @@ const AddPitchActivityModal = (props) => {
                 key="2"
               >
                 <Suspense fallback={"loading ..."}>
-                  <PitchEventForm rowdata={props.rowdata} {...formProps}/>
+                  <PitchEventForm rowdata={props.rowdata}
+                  //  {...formProps}
+                   />
                 </Suspense>
               </TabPane>
               <TabPane

@@ -559,9 +559,8 @@ export const setEditOpportunity = (name) => (dispatch) => {
 
  export const updateOpportunity = (data, opportunityId) => (
   dispatch,
-  getState
 ) => {
-   const userId = getState().auth.userDetails.userId;
+  
   dispatch({ type: types.UPDATE_OPPORTUNITY_BY_ID_REQUEST });
   axios
     .put(`${base_url}/opportunity/${opportunityId}`, data, {
@@ -771,9 +770,7 @@ export const getRecruitByOpportunityId = (opportunityId) => (dispatch) => {
     });
 };
 
-export const deleteOpportunityData = (id) => (dispatch, getState) => {
-  const { userId } = getState("auth").auth.userDetails;
-  // console.log("inside deleteCall", callId);
+export const deleteOpportunityData = (id) => (dispatch) => {
   dispatch({
     type: types.DELETE_OPPORTUNITY_DATA_REQUEST,
   });
@@ -785,7 +782,6 @@ export const deleteOpportunityData = (id) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(getOpportunityListByUserId(userId,0));
       dispatch({
         type: types.DELETE_OPPORTUNITY_DATA_SUCCESS,
         payload: id,

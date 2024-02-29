@@ -24,12 +24,7 @@ class AddContractModal extends Component {
           />}
           width="25%"
           visible={addContractModal}
-          destroyOnClose
-          maskClosable={false}
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
           onClose={() => handleContractModal(false)}
-          footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <ContractDocumentForm />

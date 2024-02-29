@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
@@ -15,7 +15,10 @@ import {
   removeCustomer,
   updateCustomer
 } from "./CustomerAction";
-import SingleCustomer from "./SingleCustomer";
+const SingleCustomer = lazy(() =>
+  import("./SingleCustomer")
+);
+
 
 class Customer extends Component {
   constructor(props) {
@@ -136,6 +139,7 @@ class Customer extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
             <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -146,39 +150,11 @@ class Customer extends Component {
             // value={currentData}
           />
             </div>
-
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {customerListData.length ? (
-                  customerListData.map((customer, i) => (
-                    <SingleCustomer
-                      key={i}
-                      value={singleCustomer}
-                      name1="singleCustomer"
-                      customer={customer}
-                      linkedSectors={linkedSectors}
-                      updatingCustomer={updatingCustomer}
-                      handleChange={this.handleChange}
-                      handleupdateCustomer={this.handleupdateCustomer}
-                      handleDeleteCustomer={this.handleDeleteCustomer}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-              </MainWrapper>
-            </div>
             {isTextInputOpen ? (
               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
               >
-                <br />
-                <br />
+              
                 <TextInput
                   placeholder="Add Customer"
                   name="name"
@@ -200,18 +176,17 @@ class Customer extends Component {
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
                 &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
+                <Button type="cancel"  onClick={this.toggleInput}>
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
               </div>
             ) : (
               <>
-                <br />
+             
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     loading={addingCustomer}
                     onClick={this.toggleInput}
@@ -223,14 +198,45 @@ class Customer extends Component {
                     />
                   </Button>
                 </div>
-                {/* <h4>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</h4> */}
+                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
               </>
             )}
+              </div>
+            <div class=" flex flex-col" >
+              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
+              <MainWrapper className="!h-[69vh] !mt-2" >
+             {customerListData.length ? (
+  customerListData
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((customer, i) => (
+                    <SingleCustomer
+                      key={i}
+                      value={singleCustomer}
+                      name1="singleCustomer"
+                      customer={customer}
+                      linkedSectors={linkedSectors}
+                      updatingCustomer={updatingCustomer}
+                      handleChange={this.handleChange}
+                      handleupdateCustomer={this.handleupdateCustomer}
+                      handleDeleteCustomer={this.handleDeleteCustomer}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+              </MainWrapper>
+            </div>
+         
           </MainWrapper>
       
        
         </div>
-        <h4>Updated on {moment(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format("ll")} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format('YYYY-MM-DD')} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</div>
       </>
     );
   }

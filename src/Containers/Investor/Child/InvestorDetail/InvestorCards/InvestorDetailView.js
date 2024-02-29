@@ -1,6 +1,5 @@
 import React, {  } from "react";
 import { FormattedMessage } from "react-intl";
-import { SubTitle } from "../../../../../Components/UI/Elements";
 
 function InvestorDetailView (props) {   
     const {
@@ -43,11 +42,9 @@ export default InvestorDetailView;
 
 const InvestorItemRow = ({ label, value }) => {
   return (
-    <div class=" flex items-center flex-nowrap m-1"
-    >
-      <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
-      <SubTitle style={{
-         }}>{value}</SubTitle>
+    <div class=" flex items-center w-[95%] justify-between flex-no-wrap m-2">
+      <div class=" text-[#444] font-semibold" >{label}</div>
+      <div className="overflow-hidden truncate ml-8">{value}</div>
     </div>
   );
 };

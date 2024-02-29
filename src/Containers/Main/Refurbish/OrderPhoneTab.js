@@ -1,11 +1,10 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { StyledTabs } from '../../../Components/UI/Antd';
 import TabPane from 'antd/lib/tabs/TabPane';
-import { FolderOpenTwoTone } from '@ant-design/icons';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { BundleLoader } from '../../../Components/Placeholder'
+import { BundleLoader } from '../../../Components/Placeholder';
+import HandymanIcon from '@mui/icons-material/Handyman';
 
 const AddCatalogueInProduction = lazy(() => import('./ProductionTab/AddCatalogueInProduction'));
 const OpenRepairTable = lazy(() => import('./OpenRepairTable'));
@@ -50,7 +49,7 @@ const OrderPhoneTab = (props) => {
                                 </span>
                                 &nbsp;&nbsp;
                                 <span onClick={handleOpenQc}>
-                                    <FolderOpenTwoTone />
+                                    <HandymanIcon className="text-base"/>
                                 </span>
 
                             </>
@@ -64,12 +63,12 @@ const OrderPhoneTab = (props) => {
                     tab={
                         <>
                             <span onClick={handleMainRepair}>
-                                {/* <BorderColorIcon />&nbsp; */}
+                   
                                 Process
                             </span>
                             &nbsp;&nbsp;
                             <span onClick={handleOpenRepair}>
-                                <FolderOpenTwoTone />
+                                <HandymanIcon className="text-base"/>
                             </span>
 
                         </>
@@ -85,7 +84,7 @@ const OrderPhoneTab = (props) => {
                         tab={
                             <>
                                 <span>
-                                    {/* <BorderColorIcon />&nbsp; */}
+                       
                                     Production
                                 </span>
                             </>

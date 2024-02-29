@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import { Divider, Tooltip } from "antd";
-import { elipsize } from "../../../../Helpers/Function/Functions";
+import { Tooltip } from "antd";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
-  StyledLabel,
 } from "../../../../Components/UI/Elements";
 import dayjs from "dayjs";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { ActionIcon } from "../../../../Components/Utils";
 class ProfileStatsView extends Component {
   render() {
@@ -31,14 +26,14 @@ class ProfileStatsView extends Component {
     const phon = `${countryDialCode || ""} ${phoneNo || ""}`;
     return (
       <>
-        <FlexContainer justifyContent="flex-end">
+        <div class=" flex justify-end" >
           <ActionIcon
             tooltipTitle="Edit"
             iconType="edit"
             handleIconClick={toggleViewType}
             size="1em"
           />
-        </FlexContainer>
+        </div>
         <ProfileItemRow label="Email" value={emailId} />
         <ProfileItemRow label="Emp Id" value={employeeId} />
         <ProfileItemRow
@@ -64,11 +59,7 @@ export default ProfileStatsView;
 
 const ProfileItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
-      style={{ margin: "0.4rem" }}
-      width="2.5em"
+    <div  class=" flex items-center flex-no-wrap m-2"
     >
       <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle
@@ -81,6 +72,6 @@ const ProfileItemRow = ({ label, value }) => {
           {value}
         </Tooltip>
       </SubTitle>
-    </FlexContainer>
+    </div>
   );
 };

@@ -2,7 +2,7 @@ import React, {useEffect,lazy} from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox } from "../../../../Components/UI/Elements";
+import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 import {
   getJumpInvestorlist,
   getJumpInvestor2list,
@@ -43,7 +43,8 @@ function DashboardInvestorsOrgJumpstart (props) {
     return (
       <>
        <div class=" flex flex-row w-full" >
-        <div class=" flex w-full" >
+        <div class=" flex w-full max-sm:flex-col" >
+        <div class="flex w-wk">
           <JumpStartBox
             noProgress
             title={<FormattedMessage
@@ -56,7 +57,7 @@ function DashboardInvestorsOrgJumpstart (props) {
             isLoading={props.user.fetchingJumpstartInvestor}
           />
 
-          <JumpStartBox
+          <JumpStartBox1
             noProgress
             title={<FormattedMessage
               id="app.pitchAdded"
@@ -67,8 +68,9 @@ function DashboardInvestorsOrgJumpstart (props) {
             value={props.jumpstartInvestor2Count.createdinvestorLeadsList}
             isLoading={props.fetchingJumpstartInvestor2}
           />
-
-          <JumpStartBox
+</div>
+<div class="flex w-wk">
+          <JumpStartBox2
             noProgress
             title={<FormattedMessage
               id="app.dealsAdded"
@@ -79,7 +81,7 @@ function DashboardInvestorsOrgJumpstart (props) {
             value={props.jumpstartInvestor3Count.opportunityAdded}
             isLoading={props.fetchingJumpstartInvestor3}
           />
-          <JumpStartBox
+          <JumpStartBox3
             noProgress
             title={<FormattedMessage
               id="app.dealsClosed"
@@ -90,6 +92,7 @@ function DashboardInvestorsOrgJumpstart (props) {
             value={ props.jumpstartInvestor4Count.closedOpportunity}
             isLoading={props.fetchingJumpstartInvestor4}
           />
+          </div>
         </div>
       </div>
 

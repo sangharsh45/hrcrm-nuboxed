@@ -18,23 +18,20 @@ import {
   addTask,
   updateTask,
   handleTaskModal,
-  getCustomerTask,
   getProjectTaskList,
-
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
 } from "../TaskAction";
-import { getTaskForRecruit,
+import {
   getTaskForStages,
   getTaskForWorkflow,
  } from "../../Settings/SettingsAction";
 import { handleChooserModal } from "../../Planner/PlannerAction";
-import { StyledLabel } from "../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
-import { getEmployeelist } from "../../Employees/EmployeeAction";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
@@ -230,13 +227,11 @@ const [priority,setpriority]=useState(props.selectedTask
   
 
   useEffect(()=> {
-    props.getEmployeelist();
+    props.getAssignedToList(props.orgId);
       props.getTaskForStages();
       props.getAllCustomerData(userId)
       props.getAllOpportunityData(userId)
       props.getFilteredEmailContact(userId);
-    props.getTaskForRecruit(props.orgId);
-    props.getCustomerTask(props.orgId);
     props.getProjectTaskList(props.orgId);
     props.getTasks();
     props.getUnits(props.orgId);
@@ -361,7 +356,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.employees.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    console.log("workflow",selectedWorkflow);
    console.log("recruitWorkflowTask",props.recruitWorkflowTask);
     return (
@@ -562,14 +557,14 @@ const [priority,setpriority]=useState(props.selectedTask
                
                       <div class=" flex justify-between flex-col w-full">
                         
-                          <StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                             {/* Priority */}
                             <FormattedMessage
                               id="app.priority"
                               defaultMessage="priority"
                             />
                             
-                          </StyledLabel>
+                          </div>
                         
                           <div class="flex">
                             <Tooltip title="High">
@@ -630,10 +625,10 @@ const [priority,setpriority]=useState(props.selectedTask
                  
                     <div class=" w-1/2  max-sm:w-wk ">
                       
-                      <StyledLabel><FormattedMessage
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                               id="app.type"
                               defaultMessage="type"
-                            /></StyledLabel>
+                            /></div>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                        onChange={handleTaskTypeChange}
@@ -675,10 +670,10 @@ const [priority,setpriority]=useState(props.selectedTask
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2 ml-2 max-sm:w-wk">
                           
-                          <StyledLabel><FormattedMessage
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                               id="app.workflow"
                               defaultMessage="workflow"
-                            /></StyledLabel>
+                            /></div>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
                        onChange={handleWorkflowChange}
@@ -775,13 +770,13 @@ const [priority,setpriority]=useState(props.selectedTask
                  
                     <div class="w-[24%]">
                      
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.status"
                           defaultMessage="status"
                         />
                       
-                      </StyledLabel>
+                      </div>
 
                       <div class="w-[100%]">
                         <ButtonGroup>
@@ -991,7 +986,19 @@ const [priority,setpriority]=useState(props.selectedTask
                           component={DragableUpload}
                         />
                       </div>
-
+                      <div class=" mt-2">
+                      <Field
+                    name="taskDescription"
+                    //label="Notes"
+                    label={
+                      <FormattedMessage id="app.description" defaultMessage="description" />
+                    }
+                    width={"21.875em"}
+                    isColumn
+                    component={TextareaComponent}
+                    inlineLabel
+                  />
+                  </div>
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2">
@@ -1107,10 +1114,10 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" flex justify-between w-full">
                         {values.taskTypeId === "TSK52434477391272022" && (
                           <div class=" w-full">
-                            <StyledLabel><FormattedMessage
+                            <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                               id="app.complexity"
                               defaultMessage="complexity"
-                            /></StyledLabel>
+                            /></div>
                             <div>
                               <Tooltip title="Easy">
                                 <Button
@@ -1252,7 +1259,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1260,7 +1267,7 @@ const [priority,setpriority]=useState(props.selectedTask
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -1270,7 +1277,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -1435,17 +1442,7 @@ const [priority,setpriority]=useState(props.selectedTask
                />
                   )} 
                   </div>
-                  <Field
-                    name="taskDescription"
-                    //label="Notes"
-                    label={
-                      <FormattedMessage id="app.description" defaultMessage="description" />
-                    }
-                    width={"21.875em"}
-                    isColumn
-                    component={TextareaComponent}
-                    inlineLabel
-                  />
+                
                      <div class=" mt-4">
                       <Field
                             type="text"
@@ -1473,10 +1470,10 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
                           <div>
-                            <StyledLabel><FormattedMessage
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"><FormattedMessage
                                 id="app.setReminder"
                                 defaultMessage="setReminder"
-                              /></StyledLabel>
+                              /></div>
                           </div>
                           <div>
                             {/* <FlexContainer justifyContent="space-between"> */}
@@ -1579,6 +1576,7 @@ const mapStateToProps = ({
   candidate,
 }) => ({
   addingTask: task.addingTask,
+  assignedToList:employee.assignedToList,
   allOpportunityData:opportunity.allOpportunityData,
   filteredContact: candidate.filteredContact,
   allCustomerData:customer.allCustomerData,
@@ -1613,10 +1611,8 @@ const mapDispatchToProps = (dispatch) =>
       getCandidateTaskList,
       updateTask,
       handleTaskModal,
-      getCustomerTask,
-      getTaskForRecruit,
       deleteTask,
-      getEmployeelist,
+      getAssignedToList,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,

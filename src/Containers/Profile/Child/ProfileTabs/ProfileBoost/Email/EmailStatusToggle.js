@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { Switch, Popconfirm, message, Select } from "antd";
+import React, {  } from "react";
+import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { linkEmailStatus } from "../../../../ProfileAction";
-//import { putCustomerContactToggle } from "../../../../CustomerAction";
+import { linkEmailStatus } from "../../../../ProfileAction"
 
 function EmailStatusToggle(props) {
 

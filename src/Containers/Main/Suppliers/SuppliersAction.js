@@ -2,6 +2,8 @@ import * as types from "./SuppliersActionType";
 import { base_url, base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
+import { message } from "antd";
+import Swal from "sweetalert2";
 
 export const setSuppliersViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_SUPPLIERS_VIEW_TYPE, payload: viewType });
@@ -16,13 +18,14 @@ export const handleSuppliersModal = (modalProps) => (dispatch) => {
 // add supplier
 
 export const addSuppliers = (data, userId) => (dispatch) => {
-  console.log("inside add purchase");
   dispatch({ type: types.ADD_SUPPLIERS_REQUEST });
   axios
-    .post(`${base_url2}/supplier `, data, {})
+    .post(`${base_url2}/supplier `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliersList(userId));
       dispatch({
         type: types.ADD_SUPPLIERS_SUCCESS,
         payload: res.data,
@@ -75,7 +78,11 @@ export const getSupplierBySupplierId = (supplierId) => (dispatch) => {
     type: types.GET_SUPPLIER_BY_SUPPLIER_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplier/${supplierId}`)
+    .get(`${base_url2}/supplier/${supplierId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -103,6 +110,14 @@ export const handleLinkSuppliersOrderConfigureModal = (modalProps) => (
   });
 };
 
+export const handlePoLocationModal = (modalProps) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.HANDLE_PO_LOCATION_MODAL,
+    payload: modalProps,
+  });
+};
 export const handleLinkSuppleirCatalogueModal = (modalProps) => (
   dispatch
 ) => {
@@ -139,11 +154,20 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.LINK_PURCHASE_SUPPLIERS_REQUEST });
   axios
-    .post(`${base_url}/purchase/supplier/supplies`, data, {})
+    .post(`${base_url2}/po/createPo`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch(getGeneratorSuppliersList(supplierId, "material"));
-      dispatch(getGeneratorCatalogueSuppliersList(supplierId, "catalogue"))
+      Swal.fire({
+        icon: 'success',
+        title: 'Item added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch(getGeneratorSuppliersList(res.data));
+      dispatch(getPurchaseSuppliersList(supplierId))
       dispatch({
         type: types.LINK_PURCHASE_SUPPLIERS_SUCCESS,
         payload: res.data,
@@ -162,12 +186,17 @@ export const linkPurchaseToSuppliers = (data, supplierId) => (dispatch) => {
 
 //get purchase to cart table
 
-export const getGeneratorSuppliersList = (supplierId) => (dispatch) => {
+export const getGeneratorSuppliersList = (poSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_GENERATOR_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/product/supplier/${supplierId}/material`, {})
+    .get(`${base_url2}/po/poSupplierDetails/${poSupplierDetailsId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -179,6 +208,38 @@ export const getGeneratorSuppliersList = (supplierId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_GENERATOR_SUPPLIERS_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const movePoToInventory = (data, supplierId) => (dispatch) => {
+  dispatch({
+    type: types.MOVE_TO_INVENTORY_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/poInventoryLocationLink/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'PO released ',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch(getPurchaseSuppliersList(supplierId))
+      dispatch({
+        type: types.MOVE_TO_INVENTORY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.MOVE_TO_INVENTORY_FAILURE,
         payload: err,
       });
     });
@@ -246,7 +307,12 @@ export const getPurchaseSuppliersList = (supplierId) => (dispatch) => {
     type: types.GET_PURCHASE_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/supplier/${supplierId}`, {})
+    .get(`${base_url2}/po/poSupplierList/${supplierId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -495,16 +561,18 @@ export const getAllSuppliersList = () => (dispatch) => {
     type: types.GET_ALL_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/supplier/all-suppliers`, {})
+    .get(`${base_url2}/supplier/all-suppliers`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: types.GET_ALL_SUPPLIERS_LIST_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: types.GET_ALL_SUPPLIERS_LIST_FAILURE,
         payload: err,
@@ -1025,7 +1093,12 @@ export const updateSupplierContact = (data, contactPersonId) => (dispatch) => {
     .put(`${base_url}/contactPerson/${contactPersonId}`, data)
     .then((res) => {
       console.log(res);
-      // dispatch(getDistributorsByUserId(userId));
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.UPDATE_SUPPLIER_CONTACT_SUCCESS,
         payload: res.data,
@@ -1054,59 +1127,106 @@ export const setEditSupplierSupplies = (name) => (dispatch) => {
   });
 };
 
-export const updateSupplierSupplies = (data, supplierId) => (dispatch) => {
+export const updatePriceOfPoItem = (data) => (dispatch) => {
   dispatch({
-    type: types.UPDATE_SUPPLIER_SUPPLIES_REQUEST,
+    type: types.UPDATE_PRICE_OF_PO_ITEM_REQUEST,
   });
   axios
-    .post(`${base_url}/supplier/supplies/price`, data)
+    .put(`${base_url2}/po/updatePrice`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliesList(supplierId))
-      dispatch(getProductList(supplierId))
+      Swal.fire({
+        icon: 'success',
+        title: 'Price updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
-        type: types.UPDATE_SUPPLIER_SUPPLIES_SUCCESS,
+        type: types.UPDATE_PRICE_OF_PO_ITEM_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.UPDATE_SUPPLIER_SUPPLIES_FAILURE,
+        type: types.UPDATE_PRICE_OF_PO_ITEM_FAILURE,
         payload: err,
       });
     });
 };
 
-export const updateInStockSupplies = (data, suppliesId, supplierId) => (dispatch) => {
+export const addTermsnCondition = (data, poSupplierDetailsId) => (dispatch) => {
   dispatch({
-    type: types.UPDATE_INSTOCK_SUPPLIES_REQUEST,
+    type: types.ADD_TERMS_N_CONDITION_REQUEST,
   });
   axios
-    .put(`${base_url}/supplier/supplierSuppliesInd/${suppliesId}/${supplierId}`, data)
+    .post(`${base_url2}/po/termAndCondition`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliesList(supplierId))
+      Swal.fire({
+        icon: 'success',
+        title: 'Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch(getTermsnConditionOfPo(poSupplierDetailsId))
       dispatch({
-        type: types.UPDATE_INSTOCK_SUPPLIES_SUCCESS,
+        type: types.ADD_TERMS_N_CONDITION_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.UPDATE_INSTOCK_SUPPLIES_FAILURE,
+        type: types.ADD_TERMS_N_CONDITION_FAILURE,
         payload: err,
       });
     });
 };
 
-export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
+export const getTermsnConditionOfPo = (poSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TERMS_AND_CONDITION_OF_PO_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/po/termAndCondition/${poSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TERMS_AND_CONDITION_OF_PO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TERMS_AND_CONDITION_OF_PO_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getPurchaseOrderDetailsList = (pOSupplierDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_PURCHASE_ORDER_DETAILS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/purchase/supplies/${purchaseId}`, {})
+    .get(`${base_url2}/po/poSupplierDetails/${pOSupplierDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1118,6 +1238,58 @@ export const getPurchaseOrderDetailsList = (purchaseId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_PURCHASE_ORDER_DETAILS_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const emptysUPPLIERS = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_SUPPLIER_LIST,
+  });
+};
+
+export const handlePoListModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PO_LIST_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleTermsnConditionModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TERMS_CONDITION_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const addCurrencyInPo = (data, poSupplierDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CURRENCY_IN_PO_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/po/updateCurrency/${poSupplierDetailsId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Currency updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })// dispatch(getTermsnConditionOfPo(poSupplierDetailsId))
+      dispatch({
+        type: types.ADD_CURRENCY_IN_PO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CURRENCY_IN_PO_FAILURE,
         payload: err,
       });
     });

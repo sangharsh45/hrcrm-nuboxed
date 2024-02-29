@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { StyledTable } from '../../../../Components/UI/Antd'
 import { getCatalogueByTechnician } from "../RefurbishAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -177,9 +176,8 @@ const ProductionTable = (props) => {
 {item.repurbishStartDate===null ?null:
                         <Tooltip title="">
                             <Button
-                                style={{ backgroundColor: "orange", color: "white" }}
+                            className="bg-[orange] text-[white]"
                                 onClick={() => {
-                                    // handleShowBuilder()
                                     props.handleInTagDrawer(true)
                                     handleSetRowData(item)
                                 }}

@@ -10,19 +10,16 @@ import { FormattedMessage } from "react-intl";
 class SupplierDetailsHeaderLeft extends React.Component {
   render() {
     return (
-      <FlexContainer alignItems="center">
+      <div class="items-center">
         <Tooltip 
         title={<FormattedMessage id="app.back" defaultMessage="Back" />}
       >
           <RollbackOutlined
             style={{ marginRight: "0.3rem",color: "#1890ff" }}
-            // iconType="rollback"
-            // tooltipTitle="Back"
-            
             onClick={() => this.props.history.goBack()}
           />
         </Tooltip>
-      </FlexContainer>
+      </div>
     );
   }
 }

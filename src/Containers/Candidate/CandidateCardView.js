@@ -1,11 +1,6 @@
 import React, { useEffect, useState,  lazy } from "react";
 import { MultiAvatar, MultiAvatar2,  StyledLabel } from '../../Components/UI/Elements'
 import FactCheckIcon from '@mui/icons-material/FactCheck';
-import SkillsLoadMore from "../../Containers/Candidate/Child/CandidateTable/SkillsLoadMore";
-import UpdateCandidateResumeModal from "./Child/CandidateTable/UpdateCandidateResumeModal";
-import { FlexContainer } from '../../Components/UI/Layout'
-import AddCandidatesTasksDrawerModal from "./AddCandidatesTasksDrawerModal"
-import AddPlayerModal from "./Child/CandidateTable/AddPlayerModal";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -33,6 +28,7 @@ import {
     emptyCandidate
     
   } from "../Candidate/CandidateAction";
+  import { Link } from 'react-router-dom';
  import{getCountries} from "./../Auth/AuthAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -41,8 +37,21 @@ import styled from 'styled-components'
 import { StyledPopconfirm  } from '../../Components/UI/Antd';
 import { UpCircleOutlined } from '@ant-design/icons';
 import { BundleLoader } from "../../Components/Placeholder";
+import { FlexContainer } from '../../Components/UI/Layout'
+const AddCandidatesTasksDrawerModal = lazy(() =>
+  import("./AddCandidatesTasksDrawerModal")
+);
+const AddPlayerModal = lazy(() =>
+  import("./Child/CandidateTable/AddPlayerModal")
+);
+const SkillsLoadMore = lazy(() =>
+  import("../../Containers/Candidate/Child/CandidateTable/SkillsLoadMore")
+);
+const UpdateCandidateResumeModal = lazy(() =>
+  import("./Child/CandidateTable/UpdateCandidateResumeModal")
+);
 
-const CandidateDetailsView =lazy(()=>import("../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
+
 const UpdateCandidateModal = lazy(() =>
   import("./Child/UpdateCandidate/UpdateCandidateModal")
 );
@@ -177,10 +186,15 @@ function handleSetCurrentCandidateId(candidateId) {
                       {/* <CardDescription> */}
                       <div>
                         <Header>
-                        <CandidateDetailsView
+                        <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"  to={`candidate/${item.candidateId}`} title={item.fullName}>
+      {item.fullName}
+    </Link>
+                        {/* <a class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[blue] cursor-pointer" 
+                            href={`candidate/${item.candidateId}`}>{item.fullName}</a> */}
+                        {/* <CandidateDetailsView
             candidateId={item.candidateId}
             candidateName={item.fullName}
-          />       
+          />        */}
                         </Header> 
                         </div>
                         {/* {item.Video !== null?( */}
@@ -473,7 +487,7 @@ border-radius: 0.75rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 8rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;

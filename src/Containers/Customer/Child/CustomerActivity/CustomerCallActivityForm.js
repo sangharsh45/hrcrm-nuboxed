@@ -12,7 +12,6 @@ import {
     getOpportunityListByCustomerId,
   } from "../../CustomerAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
@@ -28,11 +27,9 @@ import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Fragment } from 'react'
 import { Listbox } from '@headlessui/react'
 const ButtonGroup = Button.Group;
 const suffix = (
@@ -99,7 +96,6 @@ function CustomerCallActivityForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
     props.getOpportunityListByCustomerId(props.customer.customerId);
@@ -140,7 +136,7 @@ function CustomerCallActivityForm(props) {
         value: item.customerId,
       };
     });
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -193,8 +189,7 @@ function CustomerCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("bn",selectedOption,selected)
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
    return (
       <>
         <Formik
@@ -349,11 +344,11 @@ function CustomerCallActivityForm(props) {
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
-                      <StyledLabel>
+                  
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                         {/* Type */}
                         <FormattedMessage id="app.type" defaultMessage="Type" />
-                      </StyledLabel>
+                      </div>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
                         <Tooltip
@@ -427,13 +422,13 @@ function CustomerCallActivityForm(props) {
                       </div>
                     </div>
                     <div class=" w-1/2">
-                      <Spacer />
-                      <StyledLabel>
+                     
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col mt-3">
                         <FormattedMessage
                           id="app.category"
                           defaultMessage="Category"
                         />
-                      </StyledLabel>
+                      </div>
                       
                       <ButtonGroup>
                         <Button
@@ -472,12 +467,12 @@ function CustomerCallActivityForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
+               
+                  <div class=" flex justify-between mt-3 items-end max-sm:flex-col " >
                     <div class=" self-start">
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                       Mode
-                      </StyledLabel>
+                      </div>
                       <Switch
                         // style={{
                         //   marginLeft: "0.3125em"
@@ -531,7 +526,7 @@ function CustomerCallActivityForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+            <div class=" mt-3">
                   <Field
                     name="startDate"
                     // label="Date"
@@ -544,8 +539,9 @@ function CustomerCallActivityForm(props) {
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+                  </div>
+                
+                  <div class=" flex justify-between mt-3 max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -589,7 +585,7 @@ function CustomerCallActivityForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                 <div class=" mt-3">
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -608,7 +604,8 @@ function CustomerCallActivityForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+                
                   {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -653,7 +650,7 @@ function CustomerCallActivityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -706,7 +703,7 @@ function CustomerCallActivityForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+    <div class=" mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -726,9 +723,8 @@ function CustomerCallActivityForm(props) {
                       value: employeeId,
                     }}
                   />
-                 
-                  <Spacer />
-                  <div>
+                 </div>
+                 <div class=" mt-3">
                   {props.user.crmInd === true &&(
                <Field
                name="customerId"
@@ -754,8 +750,8 @@ function CustomerCallActivityForm(props) {
              />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+          
+                  <div class=" mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -781,8 +777,7 @@ function CustomerCallActivityForm(props) {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+                  <div class=" mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunity"
@@ -808,7 +803,7 @@ function CustomerCallActivityForm(props) {
                />
                   )} 
                   </div>
-                  <Spacer/>
+               
                   {/* <div >
                   <Field
                     disabled="true"
@@ -829,8 +824,8 @@ function CustomerCallActivityForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer /> */}
-                  <div>
+                 
+                    <div class=" mt-3">
                     <div class=" w-full"><Field
                       name="callDescription"
                       // label="Notes"
@@ -844,13 +839,13 @@ function CustomerCallActivityForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+                
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
                     <div class=" flex justify-between" >
                         <div>
-                          <StyledLabel>Set Reminder</StyledLabel>
+                         <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder</div>
                         </div>
                         <div>
                           <Switch
@@ -888,8 +883,8 @@ function CustomerCallActivityForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+              
+              <div class=" flex justify-end mt-3">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -941,20 +936,17 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   addingCall: call.addingCall,
   allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
-
   orgId: auth.userDetails.organizationId,
   user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
-  // candidateByuserId:candidate.candidateByuserId
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -967,7 +959,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
       getOpportunityListByCustomerId,
       getContactListByCustomerId,
       setClearbitCandidateData, 

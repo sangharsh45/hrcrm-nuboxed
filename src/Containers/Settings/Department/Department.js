@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput,  } from "../../../Components/UI/Elements";
-import SingleDepartment from "./SingleDepartment";
 import {
   getDepartments,
   addDepartments,
@@ -15,11 +14,11 @@ import {
   updateDepartments,
   ClearReducerDataOfDepartment
 } from "./DepartmentAction";
-import {
-  getSectors,
-} from "../Sectors/SectorsAction";
 import { Select } from "../../../Components/UI/Elements";
-import moment from "moment";
+import dayjs from "dayjs";
+const SingleDepartment = lazy(() =>
+  import("./SingleDepartment")
+);
 
 const { Option } = Select;
 
@@ -135,7 +134,7 @@ class Department extends Component {
     const { getDepartments, getSectors } = this.props;
     console.log();
     getDepartments(getDepartments);
-    getSectors();
+    // getSectors();
   }
   render() {
     const {
@@ -168,6 +167,7 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
+              <div class=" flex flex-row justify-between">
                        <div class=" flex w-[18vw]" >
                        <Input
          placeholder="Search by Name"
@@ -178,41 +178,11 @@ class Department extends Component {
             // value={currentData}
           />
         </div>
-            <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {departments.length ? (
-                  departments.map((department, i) => (
-                    <SingleDepartment
-                      key={i}
-                      value={singleDepartment}
-                      name="singleDepartment"
-                      department={department}
-                      linkedDepartments={linkedDepartments}
-                      updatinDepartments={updatingDepartments}
-                      handleChange={this.handleChange}
-                      handleSectorId={this.handleSectorId}
-                      handleUpdateDepartment={this.handleUpdateDepartment}
-                      sectors={this.props.sectors}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteDepartment={this.handleDeleteDepartment}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
-
-              </MainWrapper>
-            </div>
-            {isTextInputOpen ? (
+        {isTextInputOpen ? (
             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
             >
-                <br />
-                <br />
+              
                   <TextInput
                     placeholder="Add Department"
                     name="departmentName"
@@ -240,58 +210,67 @@ class Department extends Component {
                     onClick={this.handleAddDepartment}
                   // style={{ marginRight: "0.125em" }}
                   >
-                    Save
+                    <label class="text-white"> Save</label>
                   </Button>
                   &nbsp;
-                  <Button type="primary" ghost onClick={this.toggleInput}>
-                    Cancel
+                  <Button type="cancel"  onClick={this.toggleInput}>
+                  <label class="text-white"> Cancel</label>
                   </Button>
               </div>
             ) : (
               <>
-               <br />
+              
                <div class=" flex justify-end" >
                   <Button
                     type="primary"
-                    ghost
                     htmlType="button"
                     Loading={addingDepartments}
-                    onClick={this.toggleInput}
+                    onClick={this.toggleInput}                
                   >
-                    Add More
+                   <label class="text-white"> Add More</label>
                   </Button>
                 </div>
                
               </>
             )}
+             </div>
+            <div class=" flex flex-col" >
+            <MainWrapper className="!h-[69vh] !mt-2" >
+              {departments.length ? (
+  departments
+    .slice() 
+    .sort((a, b) => a.departmentName.localeCompare(b.departmentName)) 
+    .map((department, i) => (
+                    <SingleDepartment
+                      key={i}
+                      value={singleDepartment}
+                      name="singleDepartment"
+                      department={department}
+                      linkedDepartments={linkedDepartments}
+                      updatinDepartments={updatingDepartments}
+                      handleChange={this.handleChange}
+                      handleSectorId={this.handleSectorId}
+                      handleUpdateDepartment={this.handleUpdateDepartment}
+                      sectors={this.props.sectors}
+                      handleClear={this.handleClear}
+                      handleSearchChange={this.handleSearchChange}
+                      currentData={this.state.currentData}
+                      setCurrentData={this.setCurrentData}
+                     handleDeleteDepartment={this.handleDeleteDepartment}
+                    />
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+
+              </MainWrapper>
+            </div>
+           
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+      
+  
         </div>
-        <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format('YYYY-MM-DD')} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</div>
       </>
     );
   }
@@ -308,7 +287,7 @@ const mapStateToProps = ({ departments, sector }) => ({
   updatingDepartmentsError: departments.updatingDepartmentsError,
   fetchingDepartments: departments.fetchingDepartments,
   fetchingDepartmentsError: departments.fetchingDepartmentsError,
-  sectors: sector.sectors,
+  // sectors: sector.sectors,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -317,7 +296,7 @@ const mapDispatchToProps = (dispatch) =>
       addDepartments,
        removeDepartments,
       updateDepartments,
-      getSectors,
+      // getSectors,
       ClearReducerDataOfDepartment,
       searchDepartmentName
     },

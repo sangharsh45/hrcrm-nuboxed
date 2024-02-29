@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import {  Button, Popconfirm,Tooltip } from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import React from "react";
+import {  Popconfirm,Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-import { elipsize } from "../../../Helpers/Function/Functions";
-import { StopTwoTone, TableOutlined } from "@ant-design/icons";
+import { StopTwoTone, DeleteOutlined } from "@ant-design/icons";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
 import {
@@ -11,31 +9,8 @@ import {
   Title,
   SubTitle,
 } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { CurrencySymbol } from "../../../Components/Common";
-
-// const menu = (
-//   <Menu>
-//     <Menu.Item>
-//       <a target="_blank" rel="noopener noreferrer" href="#">
-//         {/* Call */}
-//         <FormattedMessage
-//           id="app.calls"
-//           defaultMessage="Call"
-//         />,
-//       </a>
-//     </Menu.Item>
-//     <Menu.Item>
-//       <a target="_blank" rel="noopener noreferrer" href="#">
-//         {/* Email */}
-//         <FormattedMessage
-//           id="app.email"
-//           defaultMessage="Email"
-//         />,
-//       </a>
-//     </Menu.Item>
-//   </Menu>
-// );
 
 const BussinessCard = (props) => {
   const {
@@ -46,12 +21,17 @@ const BussinessCard = (props) => {
     currencyType,
     opportunityId,
     handleWon,
-    handleConfirm
+    handleConfirm,
+    handleDelete,
+    user,
+    customerName,
+    contactName
   } = props;
-  console.log("...>>>>>>>>>>>.......<<<<<<<<<<<<<<", imageURL);
+  
   return (
-    <FlexContainer flexDirection="column" style={{ borderRadius: 3 }}>
-      <MainWrapper>
+    <div class="flex-col rounded-[3px]">
+      <MainWrapper style={{height:"6rem"}}>
+      {/* <div class="rounded bg-white m-1 p-1 overflow-auto h-24 border-[0.0625rem] border-[#eee]-600 w-full"> */}
         <FlexContainer
           alignItems="center"
           flexWrap="no-wrap"
@@ -60,8 +40,6 @@ const BussinessCard = (props) => {
           <FlexContainer style={{ flexBasis: "20%", margin: "0.3rem" }}>
             <MultiAvatar
               primaryTitle={primaryTitle}
-            //   imageId={imageId}
-            //   imageURL={imageURL}
               imgHeight={"1.56em"}
               imgWidth={"1.56em"}
             />
@@ -79,12 +57,19 @@ const BussinessCard = (props) => {
             >
               {primaryTitle || ""}
             </Title>
+            <div class="text-xs">
+              {customerName || ""} 
+              </div>
+              <div class="text-xs">          
+              {contactName || ""} 
+              </div>
             <SubTitle>
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
              
               &nbsp;             
               {secondaryTitle || ""} 
+             
               <Popconfirm
   title="Change status to Won?"
   onConfirm={() => handleWon(opportunityId)}
@@ -135,7 +120,16 @@ const BussinessCard = (props) => {
         />
         </Tooltip>
     </Popconfirm>
-              <Button style={{marginLeft:"0.25rem"}}>Drop</Button>
+    <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => handleDelete(opportunityId)}
+          >
+           
+             {user.opportunityDeleteInd ===true && user.crmInd === true && (
+            <DeleteOutlined
+            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"1rem"  }} />
+             )}
+          </StyledPopconfirm>
             </SubTitle>      
           </FlexContainer>
           <FlexContainer
@@ -145,8 +139,9 @@ const BussinessCard = (props) => {
 
         <SubTitle style={{ color: "#337df4", fontSize: "0.75em" }}>
         </SubTitle>
+      {/* </div> */}
       </MainWrapper>
-    </FlexContainer>
+    </div>
   );
 };
 export default BussinessCard;

@@ -1,23 +1,20 @@
 
-import React from "react";
+import React ,{lazy}from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
+import { Tag, Input, Tooltip, } from "antd";
 import {
   getLibrarys,
 } from "../../../../../Settings/Library/LibraryAction";
-import { ViewEditCard, Title } from "../../../../../../Components/UI/Elements";
+import { ViewEditCard, } from "../../../../../../Components/UI/Elements";
 import {
   addTopicByUserId,
   getTopicsByUserId,
   deleteTopicByUserId,
 } from "../../../../../Employees/EmployeeAction";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
-  
-  
+import { PlusOutlined,
 } from '@ant-design/icons';
-import EmployeeSelect from "./EmployeeSelect";
+const EmployeeSelect = lazy(() => import("./EmployeeSelect"));
 class EmployeeTopicOfInterest extends React.Component {
   constructor(props) {
     super(props);
@@ -100,14 +97,13 @@ class EmployeeTopicOfInterest extends React.Component {
       <ViewEditCard>
         {({ viewType }, toggleViewType) =>
           viewType === "view" ? (
-            <div style={{ height: "11em"}}>
-              <div style={{display:"flex"}}>
-              <Title
-                fontSize="0.875em"
-                style={{ fontWeight: 600, marginBottom: "0.2rem" }}
+            <div class=" h-[11rem]" >
+              <div class=" flex justify-between" >
+              <div class=" font-semibold mb-[0.2rem] text-[0.875em]"
+              
               >
                 Skills{" "}
-              </Title>
+              </div>
               <div>
                       <EmployeeSelect
                       employeeId={this.props.singleEmployee.employeeId}

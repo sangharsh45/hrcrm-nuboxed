@@ -23,7 +23,7 @@ import {
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
+import { getAssignedToList } from "../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
@@ -95,7 +95,7 @@ function CallForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
+    props.getAssignedToList(props.orgId);
     props.getAllSalesList();
     props.getFilteredEmailContact(userId);
   }, []);
@@ -112,9 +112,9 @@ function CallForm(props) {
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -133,7 +133,7 @@ function CallForm(props) {
     });
     // console.log(this.state.category);
     const {
-      user: { userId, firstName, middleName, fullName, lastName, timeZone },
+      user: { userId, firstName,empName, middleName, fullName, lastName, timeZone },
       isEditing,
       prefillCall,
       addingCall,
@@ -158,7 +158,7 @@ function CallForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
+   const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    console.log("bn",selectedOption,selected)
    console.log(props.rowdata)
    return (
@@ -619,7 +619,7 @@ function CallForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -627,7 +627,7 @@ function CallForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -637,7 +637,7 @@ function CallForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -688,7 +688,7 @@ function CallForm(props) {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -849,11 +849,12 @@ function CallForm(props) {
 const mapStateToProps = ({ auth, call, employee, opportunity, candidate }) => ({
   addingCall: call.addingCall,
   userId: auth.userDetails.userId,
+  orgId: auth.userDetails.organizationId,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
+  assignedToList:employee.assignedToList,
   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
@@ -869,7 +870,7 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
+      getAssignedToList,
       getFilteredEmailContact,
       setClearbitCandidateData, 
       handleCallNotesModal,

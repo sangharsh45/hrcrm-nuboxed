@@ -24,11 +24,9 @@ import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
-import { getEmployeelist } from "../../Employees/EmployeeAction";
-import { getEvents } from "../../Settings/Event/EventAction";
-import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 
 
 // yup validation scheme for creating a opportunity
@@ -60,15 +58,14 @@ function EventForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
-   props.getEvents();
+    props.getAssignedToList(props.orgId);
    props.getAllCustomerData(userId)
    props.getAllOpportunityData(userId)
    props.getFilteredEmailContact(userId);
   },[])
-  const sortedEmployee =props.employees.sort((a, b) => {
-    const nameA = a.fullName.toLowerCase();
-    const nameB = b.fullName.toLowerCase();
+  const sortedEmployee =props.assignedToList.sort((a, b) => {
+    const nameA = a.empName.toLowerCase();
+    const nameB = b.empName.toLowerCase();
     // Compare department names
     if (nameA < nameB) {
       return -1;
@@ -81,7 +78,7 @@ function EventForm (props) {
   
     const employeesData =sortedEmployee.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
         //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
@@ -144,10 +141,10 @@ function EventForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName,empName, fullName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
       addingEvent,
@@ -320,7 +317,7 @@ const {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-around max-sm:flex-col">
+              <div class=" flex justify-between max-sm:flex-col">
                 <div class=" h-full w-w47.5  mt-3 max-sm:w-wk">
                  
                   <Field
@@ -631,7 +628,7 @@ const {
                   static
                   className="absolute z-10 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -639,7 +636,7 @@ const {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -649,7 +646,7 @@ const {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -701,7 +698,7 @@ const {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -817,14 +814,15 @@ const {
 }
 const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, candidate }) => ({
   addingEvent: event.addingEvent,
+  orgId: auth.userDetails.organizationId,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  assignedToList:employee.assignedToList,
   allOpportunityData:opportunity.allOpportunityData,
   filteredContact: candidate.filteredContact,
   deletingEvent: event.deleteEvent,
   employees: employee.employees,
-  events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
 });
@@ -837,8 +835,7 @@ const mapDispatchToProps = (dispatch) =>
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
-      getEvents,
+      getAssignedToList,
       getAllOpportunityData,
       getAllCustomerData,
       getFilteredEmailContact,

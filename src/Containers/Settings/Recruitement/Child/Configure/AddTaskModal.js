@@ -1,11 +1,11 @@
-import React, {  Suspense } from "react";
+import React, {  Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { handleTaskDrawer } from "../../../SettingsAction";
-import RecruitTaskForm from "./RecruitTaskForm";
+const RecruitTaskForm = lazy(() => import("./RecruitTaskForm"));
 
 
 const AddTaskModal = (props) => {
@@ -23,7 +23,7 @@ const AddTaskModal = (props) => {
         visible={props.addTaskDrawer}
         maskClosable={false}
         destroyOnClose
-        style={{ top: 40 }}
+        style={{ marginTop: "3rem" }}
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => props.handleTaskDrawer(false)}
         footer={null}

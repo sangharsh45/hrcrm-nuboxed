@@ -83,6 +83,13 @@ import { collectionReducer } from "../Containers/Collection/CollectionReducer";
 import { productReducer } from "../Containers/Product/ProductReducer";
 import { investorListReducer } from "../Containers/Settings/Category/InvestorTab/InvestorListReducer";
 import { procurementReducer } from "../Containers/Procurement/ProcurementReducer";
+import { catgPaymentReducer } from "../Containers/Settings/Category/Payment/PaymentReducer";
+import { itemTaskReducer } from "../Containers/Settings/Category/ItemTask/ItemTaskReducer";
+import { moduleReducer } from "../Containers/Settings/Category/Module/ModuleReducer";
+import { kpiReducer } from "../Containers/Settings/Category/KPI/KPIReducer";
+import { currencyReducer } from "../Containers/Settings/Category/Currency/CurrencyReducer";
+import { subscriptionReducer } from "../Containers/Subscription/SubscriptionReducer";
+import { productionReducer } from "../Containers/Production/ProductionReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -161,7 +168,14 @@ const appReducer = combineReducers({
   product: productReducer,
   refurbish: refurbishReducer,
   investorList:investorListReducer,
-  procurement:procurementReducer
+  procurement:procurementReducer,
+  payments:catgPaymentReducer,
+  itemTask:itemTaskReducer,
+  module:moduleReducer,
+  kpi:kpiReducer,
+  currency:currencyReducer,
+  subscription:subscriptionReducer,
+  production:productionReducer
 });
 
 const rootReducer = (state, action) => {

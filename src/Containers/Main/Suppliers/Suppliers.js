@@ -5,9 +5,9 @@ import { setSuppliersViewType } from "./SuppliersAction";
 import SuppliersHeader from "../../Main/Suppliers/SuppliersHeader";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { getSuppliersList, getAllSuppliersList } from "./SuppliersAction";
-import SuppliersCardList from "./Child/SuppliersCardList";
 
-
+const SuppliersCardList =lazy(()=>import("./Child/SuppliersCardList"));
+const AllSuppliersCardList=lazy(()=>import("./Child/AllSuppliersCardList"));
 class Suppliers extends Component {
   state = { currentData: "" };
 
@@ -15,7 +15,7 @@ class Suppliers extends Component {
     this.setState({ currentData: value });
   };
   render() {
-    const { setSuppliersViewType, viewType, handleSuppliesModal } = this.props;
+    const { setSuppliersViewType, viewType } = this.props;
     return (
       <React.Fragment>
         <SuppliersHeader
@@ -24,19 +24,16 @@ class Suppliers extends Component {
           handleClear={this.handleClear}
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
-          // handleSuppliesModal={handleSuppliesModal}
         />
 
         <Suspense fallback={<BundleLoader />}>
           {this.props.viewType === "card" ? (
             <SuppliersCardList />
           ) 
-          //  this.props.viewType === "all" ? (
-          //   <AllSupplierTable />
-          // ) : this.props.viewType === "dashboard" ? (
-          //   <SuppliersDashboard />
-          // ) 
-          : null}
+          : this.props.viewType==="all" ? (
+            <AllSuppliersCardList/>
+          )
+          :null}
         </Suspense>
       </React.Fragment>
     );

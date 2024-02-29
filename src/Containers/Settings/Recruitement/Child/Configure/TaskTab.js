@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { bindActionCreators } from "redux";
@@ -13,7 +13,7 @@ import {
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
-import TaskWorkFlowTab from "./TaskWorkFlowTab";
+const TaskWorkFlowTab = lazy(() => import("./TaskWorkFlowTab"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;

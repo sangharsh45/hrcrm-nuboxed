@@ -450,12 +450,12 @@ export const setFiscalTimeIntervalReport = (data) => (dispatch) => {
 /**
  * get user details after login
  */
-export const getOrganizationDetails = (token) => (dispatch) => {
+export const getOrganizationDetails = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_ORGANIZATION_DETAILS_REQUEST,
   });
   axios
-    .get(`${base_url}/organization`, {
+    .get(`${base_url}/organization/get/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -489,7 +489,7 @@ export const handleUpdateOrganizationModal = (modalProps) => (dispatch) => {
 /**
  * update user details after login
  */
- export const updateOrganizationDetails = (orgId, data, cb) => (
+export const updateOrganizationDetails = (orgId, data, cb) => (
   dispatch
 ) => {
   console.log(data);
@@ -509,7 +509,7 @@ export const handleUpdateOrganizationModal = (modalProps) => (dispatch) => {
     )
     .then((res) => {
       console.log(res);
-       dispatch(getOrganizationDetails());
+      dispatch(getOrganizationDetails());
       dispatch({
         type: types.UPDATE_ORGANIZATION_DETAILS_SUCCESS,
         payload: res.data,
@@ -731,7 +731,7 @@ export const getCallsListByUserId = (userId) => (dispatch) => {
 /**
  * get task list by userId
  */
-export const getTasksListByUserId = (employeeId,pageNo) => (dispatch) => {
+export const getTasksListByUserId = (employeeId, pageNo) => (dispatch) => {
   console.log(employeeId);
   dispatch({
     type: types.GET_TASKS_LIST_BY_USER_ID_REQUEST,
@@ -1000,7 +1000,7 @@ export const editOrganizationDetails = (orgId, data, cb) => (
 
 
 
-export const addOrganizationDocument = (customer,orgId) => (dispatch, getState) => {
+export const addOrganizationDocument = (customer, orgId) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
 
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -1049,12 +1049,12 @@ export const getRepositoryDocuments = (orgId) => (dispatch) => {
     type: types.GET_REPOSITORY_DOCUMENTS_REQUEST,
   });
   axios
-  .get(`${base_url}/organization/document/organization/${orgId}`, {
-    headers: {
-      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-    },
-  })
-    
+    .get(`${base_url}/organization/document/organization/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1085,7 +1085,7 @@ export const handleOrganizationDocumentDrawer = (modalProps) => (dispatch) => {
   });
 };
 
-export const deleteOrgDocata = (documentId,orgId) => (dispatch, getState) => {
+export const deleteOrgDocata = (documentId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -1168,14 +1168,14 @@ export const LinkOrgDocPrivate = (data, cb,) => (dispatch) => {
     });
 };
 
-export const addOnboard = (data,cb ) => (dispatch, getState) => {
+export const addOnboard = (data, cb) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
   dispatch({
     type: types.ADD_ONBOARD_REQUEST,
   });
 
   axios
-    .post(`${base_url}/registration`,data, 
+    .post(`${base_url}/registration`, data,
     )
     .then((res) => {
       console.log(res);
@@ -1194,7 +1194,7 @@ export const addOnboard = (data,cb ) => (dispatch, getState) => {
         type: types.ADD_ONBOARD_FAILURE,
         payload: err,
       });
-  
+
     });
 };
 
@@ -1248,7 +1248,7 @@ export const addOrganization = (org) => (dispatch, getState) => {
     });
 };
 
-export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
+export const getOrganizationList = (userId, pageNo, filter) => (dispatch) => {
   dispatch({
     type: types.GET_ORGANIZATION_REQUEST,
   });
@@ -1269,6 +1269,271 @@ export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_ORGANIZATION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const updatePreferLang = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_PREFERED_LANG_REQUEST });
+  axios
+    .put(
+      `${base_url}/employee/update/preferedLanguage`, { ...data },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      // dispatch(getUserDetails());
+      dispatch({
+        type: types.UPDATE_PREFERED_LANG_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.UPDATE_PREFERED_LANG_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleActionDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACTION_DRAWER_MODAL,
+    payload: modalProps,
+  });
+
+};
+
+export const getActionRequiredCount = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ACTION_REQUIRED_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/action-required/record/today/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ACTION_REQUIRED_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ACTION_REQUIRED_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityIncludedCount = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_INCLUDED_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/included/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_INCLUDED_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_INCLUDED_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getIncludedOpportunityList = (userId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_INCLUDED_OPPORTUNITY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/included/user/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INCLUDED_OPPORTUNITY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INCLUDED_OPPORTUNITY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const emptyIncludedOpportunity = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_INCLUDED_OPPORTUNITY_LIST,
+  });
+};
+
+export const emptyIncludedDeals = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_INCLUDED_DEALS_LIST,
+  });
+};
+
+export const emptyIncludedTask = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_INCLUDED_TASK_LIST,
+  });
+};
+
+export const getDealsIncludedCount = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEALS_INCLUDED_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/included/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_INCLUDED_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEALS_INCLUDED_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getTaskIncludedCount = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_INCLUDED_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/included/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_INCLUDED_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_INCLUDED_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getIncludedDealsList = (userId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_INCLUDED_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/included/user/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INCLUDED_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INCLUDED_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getIncludedTaskList = (userId, pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_INCLUDED_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/included/user/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INCLUDED_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INCLUDED_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAllDialCodeList = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_DIAL_CODE_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/countries/all/dail-code/list`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_DIAL_CODE_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_DIAL_CODE_LIST_FAILURE,
         payload: err,
       });
     });

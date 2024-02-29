@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
+import { Select } from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
@@ -15,13 +16,16 @@ import {
   removeSource,
   updateSource
 } from "./SourceAction";
-import SingleSource from "./SingleSource";
+const SingleSource = lazy(() =>
+  import("./SingleSource")
+);
 
 class Source extends Component {
   constructor(props) {
     super(props);
     this.state = {
       linkedSectors: [],
+      listType:null,
       isTextInputOpen: false,
       addingSources: false,
       name: "",
@@ -31,6 +35,9 @@ class Source extends Component {
       currentData: "",
     };
   }
+  handleType=(value)=>
+  this.setState({listType:value});
+
   handleChangeDes = (e) => {
     this.setState({ currentData: e.target.value });
   
@@ -69,8 +76,9 @@ class Source extends Component {
     this.setState({ [name]: value });
     handleAddSource = () => {
       const { addSources, sources } = this.props;
-      const { name, editInd, addingSources, isTextInputOpen } = this.state;
+      const { name, editInd,listType, addingSources, isTextInputOpen } = this.state;
       let source = { name,
+        listType,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
@@ -87,6 +95,7 @@ class Source extends Component {
         this.setState({
           name: "",
           singleSource: "",
+          listType:"",
           isTextInputOpen: false,
           editInd: true,
         });
@@ -97,8 +106,8 @@ class Source extends Component {
     this.props.removeSource(sourceId);
     this.setState({ name: "", singleSource: "" });
   };
-  handleUpdateSource = (name, sourceId, editInd, cb) => {
-    this.props.updateSource(name, sourceId, editInd, cb);
+  handleUpdateSource = (name, sourceId,listType, editInd, cb) => {
+    this.props.updateSource(name, sourceId,listType, editInd, cb);
     this.setState({ name: "", singleSource: "",sourceId:"", editInd: true });
   };
   // getLinkedDocuments = () => {
@@ -149,6 +158,7 @@ class Source extends Component {
               color: "#FFFAFA",
             }}
           >
+             <div class=" flex flex-row justify-between">
           <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
@@ -159,12 +169,78 @@ class Source extends Component {
             // value={currentData}
           />
             </div>
-
+            {isTextInputOpen ? (
+             <div class=" flex items-center ml-[0.3125em] "
+            
+             >
+              
+                <TextInput
+                  placeholder="Add Source"
+                  name="name"
+                  value={name}
+                  onChange={this.handleChange}
+                  width="35%"
+                  style={{ marginRight: "0.125em" }}
+                />
+               
+                <Select style={{ width: "32%",marginLeft:"0.5rem"}}
+                onChange={this.handleType}
+                placeholder="Select Type"
+                >
+                      <option value="Event">Event</option>
+                      <option value="Employee">Employee</option>
+                      <option value="Customer">Customer</option>
+                  <option value="Investor">Investor</option>
+    
+      
+      
+                </Select>
+             
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!name}
+                  Loading={addingSources}
+                  onClick={this.handleAddSource}
+                  style={{ marginRight: "0.125em",marginLeft:"0.5rem" }}
+                >
+                  {/* Save */}
+                  <FormattedMessage id="app.save" defaultMessage="Save" />
+                </Button>
+                &nbsp;
+                <Button type="cancel"  onClick={this.toggleInput}>
+                  {/* Cancel */}
+                  <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
+                </Button>
+              </div>
+            ) : (
+              <>
+  
+                <div class=" flex justify-end" >
+                  <Button
+                    type="primary"
+                    htmlType="button"
+                    loading={addingSources}
+                    onClick={this.toggleInput}
+                  >
+                    {/* Add More */}
+                    <FormattedMessage
+                      id="app.addmore"
+                      defaultMessage="Add More"
+                    />
+                  </Button>
+                </div>
+                {/* <div>Updated on {dayjs(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</div> */}
+              </>
+            )}
+             </div>
             <div class=" flex flex-col" >
-              {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sources.length ? (
-                  sources.map((source, i) => (
+            <MainWrapper className="!h-[69vh] !mt-2" >
+             {sources.length ? (
+  sources
+    .slice() 
+    .sort((a, b) => a.name.localeCompare(b.name)) 
+    .map((source, i) => (
                     <SingleSource
                       key={i}
                       value={singleSource}
@@ -186,64 +262,12 @@ class Source extends Component {
                   )}
               </MainWrapper>
             </div>
-            {isTextInputOpen ? (
-             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
-            
-             >
-                <br />
-                <br />
-                <TextInput
-                  placeholder="Add Source"
-                  name="name"
-                  value={name}
-                  onChange={this.handleChange}
-                  width="55%"
-                  style={{ marginRight: "0.125em" }}
-                />
-                &nbsp;
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={!name}
-                  Loading={addingSources}
-                  onClick={this.handleAddSource}
-                  style={{ marginRight: "0.125em" }}
-                >
-                  {/* Save */}
-                  <FormattedMessage id="app.save" defaultMessage="Save" />
-                </Button>
-                &nbsp;
-                <Button type="primary" ghost onClick={this.toggleInput}>
-                  {/* Cancel */}
-                  <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
-                </Button>
-              </div>
-            ) : (
-              <>
-                <br />
-                <div class=" flex justify-end" >
-                  <Button
-                    type="primary"
-                    ghost
-                    htmlType="button"
-                    loading={addingSources}
-                    onClick={this.toggleInput}
-                  >
-                    {/* Add More */}
-                    <FormattedMessage
-                      id="app.addmore"
-                      defaultMessage="Add More"
-                    />
-                  </Button>
-                </div>
-                {/* <h4>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</h4> */}
-              </>
-            )}
+          
           </MainWrapper>
       
        
         </div>
-        <h4>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</h4>
+        <div class=" font-bold">Updated on {dayjs(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format('YYYY-MM-DD')} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</div>
       </>
     );
   }

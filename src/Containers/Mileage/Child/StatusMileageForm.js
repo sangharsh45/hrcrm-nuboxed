@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { ClockCircleOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { getMileageStatusByMileageId } from '../MileageAction';
 
 const StatusMileageForm = (props) => {
@@ -19,12 +18,30 @@ const StatusMileageForm = (props) => {
           {mileageStatus &&
             mileageStatus.map((status, i) => (
               <Timeline.Item key={i}>
-                {status.approvedStatus === 'Approved' ? (
-                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
-                ) : status.approvedStatus === 'Pending' ? (
-                  `Pending With ${status.employeeName}.`
-                ) : null}
-              </Timeline.Item>
+              {`${status.approvedStatus} by ${status.employeeName}`}
+              <br />
+              {status.createdOn ? (
+                `Sent on ${dayjs(status.createdOn).format("DD-MM-YYYY")}`
+              ) : (
+                "Yet to be approved"
+              )}
+               ||
+              &nbsp;&nbsp;
+              {status.approvedDate ? (
+                `Approved on ${dayjs(status.approvedDate).format("DD-MM-YYYY")}`
+              ) : (
+                "Yet to be approved"
+              )}
+              
+                          
+                          </Timeline.Item>         
+              // <Timeline.Item key={i}>
+              //   {status.approvedStatus === 'Approved' ? (
+              //     ` ${dayjs(status.createdOn).format("DD/MM/YYYY")} Approved By ${status.employeeName} on ${dayjs(status.approvedDate).format("DD/MM/YYYY")}`
+              //   ) : status.approvedStatus === 'Pending' ? (
+              //     `Pending With ${status.employeeName}.`
+              //   ) : null}
+              // </Timeline.Item>
             ))}
           {/* <Timeline.Item
             dot={<ClockCircleOutlined className="timeline-clock-icon" style={{ color: 'red' }} />}

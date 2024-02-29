@@ -1,24 +1,16 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
-import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
-// import Upload from "../../../../../../Components/Forms/Formik/Upload";
  import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-// import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import { addTrainingDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
-import moment from "moment";
+import dayjs from "dayjs";
 
 // const documentSchema = Yup.object().shape({
 //   documentId: Yup.string().required("Input needed !"),
@@ -58,8 +50,8 @@ class TrainingDocumentForm extends Component {
             this.props.addTrainingDetails(
               {
                 ...values,
-                startDate: moment(values.startDate).toISOString(),
-                endDate: moment(values.endDate).toISOString(),
+                startDate: dayjs(values.startDate).toISOString(),
+                endDate: dayjs(values.endDate).toISOString(),
               },
               this.props.employeeId,
               values.documentId,
@@ -77,21 +69,13 @@ class TrainingDocumentForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "space-between",
-                  }}
+                <div class=" flex w-full h-full justify-between"
+
                 >
-                  <div
-                    style={{
-                      width: "45%",
-                         }}
+                  <div class=" w-[45%]"
                   >
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "100%" }}>
+                    <div class=" flex justify-between" >
+                      <div class=" w-full" >
                       <FastField
                     name="documentTypeId"
                     type="text"
@@ -116,7 +100,7 @@ class TrainingDocumentForm extends Component {
                     className="field"
                     isColumn
                      />
-                  <Spacer />
+               <div class=" mt-3">
                         <FastField
                           isRequired
                           name="courseName"
@@ -131,13 +115,14 @@ class TrainingDocumentForm extends Component {
                           component={InputComponent}
                           inlineLabel
                            />
+                           </div>
                       </div>
-                    </FlexContainer>
+                    </div>
 
-                    <Spacer />
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "60%" }}>
-                        {/* <StyledLabel>Organization/Institution</StyledLabel> */}
+                   
+                    <div class=" flex justify-between mt-3" >
+                      <div class=" w-[60%]" >
+                        {/* <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Organization/Institution</div> */}
                         <FastField
                           type="Organization"
                           name="organization"
@@ -152,7 +137,7 @@ class TrainingDocumentForm extends Component {
                           inlineLabel
                           />
                       </div>
-                      <div style={{ width: "30%" }}>
+                      <div class=" w-[30%]" >
                       
                         <FastField
                           name="grade"
@@ -170,10 +155,10 @@ class TrainingDocumentForm extends Component {
                            }}
                         />
                       </div>
-                    </FlexContainer>
-                    <Spacer />
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "47%" }}>
+                    </div>
+                 
+                    <div class=" flex justify-between mt-3" >
+                      <div class=" w-[47%]" >
                         <Field
                           name="startDate"
                           //label="Start Date"
@@ -219,28 +204,22 @@ class TrainingDocumentForm extends Component {
                           inlineLabel
                           />
                       </div> */}
-                    </FlexContainer>
-                    <Spacer />
+                    </div>
+                
                   </div>
 
-                  <div
-                    style={{
-                      width: "50%",
-                        }}
+                  <div class=" w-[50%]"
                   >
-                   <FlexContainer justifyContent="space-between"></FlexContainer>
+                   <div class=" flex justify-between " ></div>
 
-                    <div
-                      style={{
-                        width: "100%",
-                           }}
+                    <div class=" w-full"
                     >
                       <Field
                         name="documentId"
                         isRequired
                         component={DragableUpload}
                       />
-                      <Spacer />
+                    <div class=" mt-3">
 
                       <Field
                         name="documentTitle"
@@ -253,7 +232,8 @@ class TrainingDocumentForm extends Component {
                         isColumn
                         component={InputComponent}
                         />
-                      <Spacer />
+                        </div>
+                        <div class=" mt-3">
                       <Field
                         name="documentDescription"
                         //label="Description of Document"
@@ -266,10 +246,11 @@ class TrainingDocumentForm extends Component {
                         width={"100%"}
                         component={TextareaComponent}
                           />
-                      <Spacer style={{ marginBottom: "0.9375em" }} />
+                            </div>
+                  
                     </div>
 
-                    <Spacer />
+                   
 
                     {/* <FieldArray
                                     name="address"
@@ -282,11 +263,11 @@ class TrainingDocumentForm extends Component {
                                     )}
                                 /> */}
 
-                    <Spacer style={{ marginBottom: "0.9375em" }} />
+                  
                   </div>
                 </div>
-                <Spacer />
-                <FlexContainer justifyContent="flex-end">
+              
+                <div class=" flex justify-end mt-3" >
                   <Button
                     htmlType="submit"
                     type="primary"
@@ -297,7 +278,7 @@ class TrainingDocumentForm extends Component {
                       defaultMessage="Submit"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

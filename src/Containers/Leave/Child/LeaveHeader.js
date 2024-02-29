@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-// import EmployeesActionLeft from "./EmployeesActionLeft";
-import LeaveActionRight from "./LeaveActionRight";
-import LeavesActionLeft from "./LeavesActionLeft";
+const LeaveActionRight = lazy(() => import("./LeaveActionRight"));
+const LeavesActionLeft = lazy(() => import("./LeavesActionLeft"));
+
 class LeaveHeader extends Component {
     render() {
         const {

@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 const RoomAndRackForm = lazy(() => import("./RoomAndRackForm"))
@@ -7,13 +8,17 @@ function InventoryRoomRackModal(props) {
     return (
         <>
             <StyledDrawer
-                title="Room And Rack"
-                width="50%"
+               title={<FormattedMessage
+                id="app.roomAndRack"
+                defaultMessage="Room And Rack"
+              />}
+                // title="Room And Rack"
+                width="60%"
                 visible={props.addroomrackininventory}
                 destroyOnClose
                 maskClosable={false}
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{ marginTop: "3rem" }}
                 onClose={() => props.handleInventoryRoomRackModal(false)}
                 footer={null}
             >

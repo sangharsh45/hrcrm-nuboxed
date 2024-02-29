@@ -12,14 +12,9 @@ class AddTaskNotesDrawerModal extends Component {
       <div>
         <StyledDrawer
         // title="Notes"
-          title={this.props.currentNameId.taskName}
+          title={`${this.props.currentNameId.taskName} by ${this.props.currentNameId.ownerName}`}
           width="64%"
-          style={{ marginTop: "5rem" }}
           visible={this.props.addDrawerTaskNotesModal}
-          closable
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleTaskNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>

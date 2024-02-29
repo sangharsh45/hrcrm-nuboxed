@@ -1,66 +1,61 @@
 import React, { useEffect } from "react";
-import { ActionIcon } from "../../../Components/Utils";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
-import { TimeInterval } from "../../../Utils";
-import moment from "moment";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AppstoreOutlined, DeleteOutlined, BookOutlined, AlipayOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
-import { GlobalOutlined, TableOutlined } from "@ant-design/icons";
-
-const Option = StyledSelect.Option;
+import { DeleteOutlined, AlipayOutlined } from "@ant-design/icons";
+import { Tooltip,Avatar } from "antd";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const ProductActionLeft = (props) => {
-
   useEffect(() => {
-    // props.getRecords(props.userId);
   }, [props.userId]);
   const {
     viewType,
     setProductViewType,
-    dateRangeList,
-    setSelectedTimeIntervalCatalogue,
     user,
-    userId,
-    product,
   } = props;
-  const creationDate = user.creationDate;
   return (
     <FlexContainer alignItems="center">
       <Tooltip title="Product List">
 
-        <span
+        <div
           style={{
-            marginRight: "0.5rem",
             color: props.viewType === "table" && "red",
           }}
           onClick={() => props.setProductViewType("table")}
         >
-          <i class="fas fa-qrcode"></i>
-        </span>
+           <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+           <MenuIcon className="text-white !text-2xl"  /> 
+           </Avatar>
+
+        </div>
       </Tooltip>
 
       <Tooltip
         title="Category"
       >
+        <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
         <AlipayOutlined
+        className="!text-2xl cursor-pointer"
           onClick={() => setProductViewType("all")}
           style={{
-            marginRight: "0.5rem",
             color: viewType === "all" && "#1890ff",
           }} />
+        </Avatar>
+
       </Tooltip>
 
       <Tooltip title="Suspended Product">
+      <Avatar style={{ background: props.viewType === "dashboard" ? "#f279ab" : "#4bc076" }}>
         <DeleteOutlined
+        className="!text-2xl cursor-pointer"
           style={{
-            marginRight: "0.5rem",
+
             color: props.viewType === "dashboard" && "red",
           }}
           onClick={() => props.setProductViewType("dashboard")}
         />
+        </Avatar>
       </Tooltip>
     </FlexContainer>
   );

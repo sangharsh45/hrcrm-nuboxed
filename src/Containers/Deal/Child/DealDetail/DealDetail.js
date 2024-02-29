@@ -5,7 +5,7 @@ import { MainWrapper } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getDealDetailById } from "../../DealAction";
 const DealDetailHeader = lazy(() => import("./DealDetailHeader"));
-const DealDetailLeft = lazy(() => import("./DealDetailLeft.js"));
+const DealDetailLeft = lazy(() => import("./DealDetailLeft"));
 const DealDetailRight = lazy(() => import("./DealDetailRight"));
 
 class DealDetail extends Component {

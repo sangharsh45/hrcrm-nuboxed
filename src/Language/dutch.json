@@ -670,6 +670,19 @@
   "app.course":"Cursus",
   "app.program":"Programma",
   "app.readless":"Lees minder",
-  "app.readmore":"Lees verder"
+  "app.readmore":"Lees verder",
+  "app.orderid":"Order ID",
+  "app.balance":"Evenwicht",
+  "app.expectedprice":"Verwachte prijs",
+  "app.deliverydate":"Bezorgdatum",
+  "app.receivable":"Te ontvangen",
+  "app.archive":"Archief",
+  "app.paymentdate":"Betaaldatum",
+  "app.payment":"Betaling",
+  "app.mode":"Modus",
+  "app.received":"Ontvangen",
+  "app.distributor":"Distributeur",
+  "app.balanceasof":"Saldo vanaf",
+  "app.transaction":"Transactie"
 
 }

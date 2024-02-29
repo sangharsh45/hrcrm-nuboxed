@@ -8,7 +8,6 @@ import { Formik, Form, Field, FastField } from "formik";
 import dayjs from "dayjs";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { getUnits } from "../../../../../Containers/Settings/Unit/UnitAction";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
@@ -23,29 +22,25 @@ import {
   deleteTask,
 } from "../../../../Task/TaskAction";
 import {addContactinvestActivityTask} from "../../../ContactInvestAction"
-import { getTaskForRecruit,
+import { 
   getTaskForStages,
   getTaskForWorkflow,
  } from "../../../../Settings/SettingsAction";
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
-import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import Upload from "../../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
-import { Listbox, } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
 
 const { Option } = Select;
 
 function ContactInvestorTaskActivityForm (props) {
   const [selectedTaskType, setSelectedTaskType] = useState('');
   const [selectedWorkflow, setSelectedWorkflow] = useState("");
-//   const[selectedTaskType,setselectedTaskType]=useState("")
-// const[selectedWorkflow,setselectedWorkflow]=useState("");
 const[workflow,setworkflow]=useState([]);
 const[active,setactive]=useState(props.selectedTask ? props.selectedTask.taskStatus
   : "To Start");
@@ -63,10 +58,6 @@ const [priority,setpriority]=useState(props.selectedTask
     : "Email");
   const[reminder,setreminder]=useState(true);
     
- function handleTypeChange(data){
-  setType(data);
-  setselectedType(data);
-  };
  const glassButtoClick = (type) => {
     setactive(type);
   };
@@ -78,20 +69,10 @@ const [priority,setpriority]=useState(props.selectedTask
   
   const handleTaskTypeChange = (event) => {
     const selectedTaskType = event.target.value;
-    // const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
     setSelectedTaskType(selectedTaskType);
      setSelectedWorkflow("");
     props.getTaskForWorkflow(selectedTaskType);
   };
-
-//  const handleTaskTypeChange = (event) => {
-//     const selectedTaskType = event.target.value;
-//      const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
-//      const workflow=filteredWorkflow
-//      setselectedTaskType(selectedTaskType,workflow);
-//     console.log(selectedTaskType)
-//     props.getTaskForWorkflow(selectedTaskType);
-//   };
 
   const handleWorkflowChange = (event) => {
     const selectedWorkflow = event.target.value;
@@ -137,86 +118,10 @@ const [priority,setpriority]=useState(props.selectedTask
     return newData;
   };
 
-  // handleCheckListOptions = (filterOptionKey, filterOptionValue) => {
-  //   const listOptions =
-  //     this.props.recruitWorkflowTask.length &&
-  //     this.props.recruitWorkflowTask
-  //       .filter((option) => {
-  //         if (
-  //           option.taskTypeId === filterOptionValue &&
-  //           option.probability !== 0
-  //         ) {
-  //           return option;
-  //         }
-  //       })
-  //       .map((option) => ({
-  //         label: option.taskChecklistName || "",
-  //         value: option.taskType,
-  //       }));
-  //   console.log(listOptions);
-
-  //   return listOptions;
-  // };
-
-  function taskStageOptions(filterOptionKey, filterOptionValue) {
-    const listOptions =
-      props.recruitTaskStages.length &&
-      props.recruitTaskStages
-        .filter((option) => {
-          if (
-            option.taskTypeId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.taskChecklistStageName || "",
-          value: option.taskChecklistId,
-        }));
-    console.log(listOptions);
-
-    return listOptions;
-  };
-  
-
-
-  const handlecandidateOptions = (filterOptionKey, filterOptionValue) => {
-    const candidateOptions =
-      props.candidateFilterTaskList.length &&
-      props.candidateFilterTaskList
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.candidateName || "",
-          value: option.included,
-        }));
-    console.log(candidateOptions);
-
-    return candidateOptions;
-  };
-  const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-    return {
-      label: `${item.opportunityName}`,
-      value: item.opportunityId,
-    };
-  });
-
-  
-
+ 
   useEffect(()=> {
-    props.getEmployeelist();
-      props.getTaskForStages();
-      props.getAllCustomerData(userId)
-    //   props.getOpportunityListByCustomerId(props.customer.customerId);
-    //   props.getContactListByCustomerId(props.customer.customerId);
-    props.getTaskForRecruit(props.orgId);
+    props.getTaskForStages();
+    props.getAllCustomerData(userId)
     props.getCustomerTask(props.orgId);
     props.getProjectTaskList(props.orgId);
     props.getTasks();
@@ -225,8 +130,6 @@ const [priority,setpriority]=useState(props.selectedTask
     props.getCandidateTaskFilterList(props.orgId);
   },[]);
 
-    console.log(selectedWorkflow)
-    console.log(selectedTaskType)
     const customerData = props.customerTaskList
       .sort((a, b) => {
         const customerNameA = a.name && a.name.toLowerCase();
@@ -237,45 +140,16 @@ const [priority,setpriority]=useState(props.selectedTask
         if (customerNameA > customerNameB) {
           return 1;
         }
-
-        // names must be equal
         return 0;
       })
       .map((item) => {
         return {
           label: `${item.name}`,
-          // label: `${item.salutation || ""} ${item.firstName ||
-          //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
           value: item.customerId,
         };
       });
       
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
+    
     const today = dayjs();
     var todayDate = new Date();
     console.log(today);
@@ -303,7 +177,7 @@ const [priority,setpriority]=useState(props.selectedTask
       employeeId,
       taskTypeId,
     } = props;
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -327,9 +201,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("workflow",selectedWorkflow);
-   console.log("recruitWorkflowTask",props.recruitWorkflowTask);
+    const selectedOption = props.sales.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
@@ -534,14 +406,14 @@ const [priority,setpriority]=useState(props.selectedTask
                
                       <div class=" flex justify-between flex-col w-full">
                         
-                          <StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                             {/* Priority */}
                             <FormattedMessage
                               id="app.priority"
                               defaultMessage="Priority"
                             />
                             
-                          </StyledLabel>
+                          </div>
                         
                           <div class="flex">
                             <Tooltip title="High">
@@ -603,7 +475,7 @@ const [priority,setpriority]=useState(props.selectedTask
                  
                     <div class=" w-1/2  max-sm:w-wk ">
                       
-                      <StyledLabel>Type</StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Type</div>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                        onChange={handleTaskTypeChange}
@@ -645,7 +517,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2 ml-2 max-sm:w-wk">
                           
-                          <StyledLabel>Workflow</StyledLabel>
+                      <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Workflow</div>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
                        onChange={handleWorkflowChange}
@@ -710,7 +582,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     {/* )} */}
                       {/* <div class=" w-1/2">
-                          <Spacer />
+                         
                       <StyledLabel>Task Stages</StyledLabel>
                       <Field
                     name="taskChecklistId"
@@ -740,17 +612,17 @@ const [priority,setpriority]=useState(props.selectedTask
 
 
                  
-                    <div style={{ width: "24%" }}>
+                    <div class="w-[24]">
                      
-                      <StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">
                         <FormattedMessage
                           id="app.status"
                           defaultMessage="Status"
                         />
                         {/* Status */}
-                      </StyledLabel>
+                      </div>
 
-                      <div style={{ width: "100%" }}>
+                      <div class="w-full">
                         <ButtonGroup>
                           <StatusIcon
                             color="blue"
@@ -802,8 +674,8 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between w-full max-sm:flex-col">
+
+                  <div class="mt-3 flex justify-between w-full max-sm:flex-col">
                    
                     {/* <div class=" w-5/12 max-sm:w-wk">
                       <div class=" flex justify-between w-full">
@@ -828,7 +700,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div> */}
                   </div>
-                  <Spacer />
+                
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Field
@@ -850,7 +722,7 @@ const [priority,setpriority]=useState(props.selectedTask
                         }}
                       />
                     </div>
-                    <Spacer />
+            
                     <div class=" w-5/12">
                       <Field
                         // isRequired
@@ -873,7 +745,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       />
                     </div>
                   </div>
-                  <Spacer /> */}
+               */}
 
                
                   <div class=" flex justify-between">
@@ -1054,7 +926,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" flex justify-between w-full">
                         {values.taskTypeId === "TSK52434477391272022" && (
                           <div class=" w-full">
-                            <StyledLabel>Complexity</StyledLabel>
+                           <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Complexity</div>
                             <div>
                               <Tooltip title="Easy">
                                 <Button
@@ -1134,7 +1006,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   </div>
                   <div>
-                    <Spacer />
+      
                     {/* {values.startDate && (
                       <>
                         {dayjs(todayDate).isSameOrBefore(
@@ -1144,17 +1016,17 @@ const [priority,setpriority]=useState(props.selectedTask
                         ) : (
                           <>
                             {" "}
-                            <span
+                            <div
                             >
                               <b>This Task occurs in the past !</b>
-                            </span>
+                            </div>
                           </>
                         )}
                       </>
                     )} */}
                   </div>
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk">
+                <div class="h-full w-w47.5 max-sm:w-wk">
                  
                   {/* <Field
                     name="assignedTo"
@@ -1192,7 +1064,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1205,16 +1077,16 @@ const [priority,setpriority]=useState(props.selectedTask
                       {({ selected, active }) => (
                         <>
                           <div className="flex items-center">
-                            <span
+                            <div
                               className={`ml-3 block truncate ${
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
                               {item.fullName}
-                            </span>
+                            </div>
                           </div>
                           {selected && (
-                            <span
+                            <div
                               className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
                                 active ? "text-white" : "text-indigo-600"
                               }`}
@@ -1233,7 +1105,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                   clipRule="evenodd"
                                 />
                               </svg>
-                            </span>
+                            </div>
                           )}
                         </>
                       )}
@@ -1245,7 +1117,7 @@ const [priority,setpriority]=useState(props.selectedTask
           </>
         )}
       </Listbox>
-                  <Spacer />
+            
                   {/* {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
                       name="included"
@@ -1296,8 +1168,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   /> */}
               
                  
-                  <Spacer />
-               
+         
+               <div class="mt-3">
                   <Field
                     name="taskDescription"
                     //label="Notes"
@@ -1309,7 +1181,8 @@ const [priority,setpriority]=useState(props.selectedTask
                     component={TextareaComponent}
                     inlineLabel
                   />
-                     <div class=" mt-4">
+                  </div>
+                     <div class=" mt-3">
                       <Field
                             type="text"
                             name="link"
@@ -1330,13 +1203,13 @@ const [priority,setpriority]=useState(props.selectedTask
                 
                  
                   
-                  <Spacer />
-                  <div class=" flex justify-between">
+          
+                  <div class="mt-3 flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
                           <div>
-                            <StyledLabel>Set Reminder </StyledLabel>
+                          <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Set Reminder </div>
                           </div>
                           <div>
                             {/* <FlexContainer justifyContent="space-between"> */}
@@ -1378,8 +1251,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+        
+              <div class="mt-3 flex justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -1452,14 +1325,13 @@ const mapStateToProps = ({
   stagesTask:settings.stagesTask,
   updatingTask: task.updatingTask,
   units: unit.units,
-  recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
   recruitTaskStages:settings.recruitTaskStages,
-  employees: employee.employees,
   tasks: tasks.tasks,
   customerTaskList: task.customerTaskList,
   candidateFilterTaskList: task.candidateFilterTaskList,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  sales: opportunity.sales,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1476,9 +1348,7 @@ const mapDispatchToProps = (dispatch) =>
       updateTask,
       handleTaskModal,
       getCustomerTask,
-      getTaskForRecruit,
       deleteTask,
-      getEmployeelist,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,

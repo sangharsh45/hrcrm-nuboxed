@@ -11,10 +11,6 @@ const AddCandidateFilterModal = props => {
         title="Filter Talent"
         width="60%"
         visible={addCandidateFilterModal}
-        closable
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop: "3rem" }}
         onClose={() => handleCandidateFilterModal(false)}
         footer={null}
       >

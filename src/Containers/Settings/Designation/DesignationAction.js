@@ -52,7 +52,7 @@ export const addDesignations = (designation, cb) => (dispatch) => {
           message.success(res.data.message):
          message.success("Designation has been added successfully!");
         }
-        dispatch(getDesignations());
+        // dispatch(getDesignations());
         console.log(res);
         dispatch({
           type: types.ADD_DESIGNATIONS_SUCCESS,

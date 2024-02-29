@@ -1,11 +1,13 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState,lazy } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import CountryList from "./CountryList";
  import {getCountries} from "../../../../Auth/AuthAction"
-import WeekendCountryList from "./WeekendCountryList";
+import LeadsTab from "../../../../Rules/Child/RulesTab/LeadsTab";
+ const WeekendCountryList = lazy(() => import("./WeekendCountryList"));
+ const CountryList = lazy(() => import("./CountryList"));
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -63,6 +65,25 @@ function SettingsHolidayTab(props) {
                          
                                         <Suspense fallback={"Loading..."}>
                                             <WeekendCountryList 
+                                    //   country_id={this.departmentData.country_id} 
+                                                />
+                                            
+                                        </Suspense>
+                                 
+                     
+                    </TabPane>
+                    <TabPane 
+                       tab={
+                        <span >
+                   Leaves
+                        </span>
+                    }
+                   
+                   key="3"
+                    >
+                         
+                                        <Suspense fallback={"Loading..."}>
+                                            <LeadsTab 
                                     //   country_id={this.departmentData.country_id} 
                                                 />
                                             

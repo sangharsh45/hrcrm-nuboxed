@@ -52,7 +52,7 @@ export const addDocuments = (documents, cb) => (dispatch) => {
           message.success(res.data.message):
         message.success("Document has been added successfully!");
         }
-        dispatch(getDocuments());
+        // dispatch(getDocuments());
         console.log(res);
         dispatch({
           type: types.ADD_DOCUMENTS_SUCCESS,

@@ -1,5 +1,5 @@
 import * as types from "./CollectionActionTypes";
-import { base_url,base_url2 } from "../../Config/Auth";
+import { base_url, base_url2 } from "../../Config/Auth";
 import { message } from "antd";
 import axios from "axios";
 import moment from "moment";
@@ -68,7 +68,7 @@ export const getTodayDistributor = () => (dispatch) => {
     type: types.GET_TODAY_DISTRIBUTOR_REQUEST,
   });
   axios
-    .get(`${base_url2}/orderPayment/payment/distributor`,{
+    .get(`${base_url2}/orderPayment/payment/distributor`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -235,6 +235,7 @@ export const linkDistributorPaymentByFinance = (
   data,
   paymentId,
   userId,
+  type,
 
 ) => (dispatch) => {
   // debugger;
@@ -242,7 +243,7 @@ export const linkDistributorPaymentByFinance = (
     type: types.LINK_DISTRIBUTOR_PAYMENT_BY_FINANCE_REQUEST,
   });
   axios
-    .put(`${base_url2}/orderPayment/payment/${paymentId}/${userId}`, data,{
+    .put(`${base_url2}/orderPayment/payment/${paymentId}/${userId}/${type}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -382,7 +383,7 @@ export const DistributorCollectionArchiveToday = (payment) => (dispatch) => {
     type: types.DISTRIBUTOR_COLLECTION_ARCHIVE_REQUEST,
   });
   axios
-    .post(`${base_url2}/orderPayment/today-orderPaymentList`, payment,{
+    .post(`${base_url2}/orderPayment/today-orderPaymentList`, payment, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -406,17 +407,17 @@ export const DistributorCollectionArchiveToday = (payment) => (dispatch) => {
 /**
  * get all the distributor
  */
-export const getAllDistributorsList = (userId) => (dispatch) => {
+export const getAllDistributorsList = (pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/all-distributors`,
-    {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      },
-    })
+    .get(`${base_url2}/distributor/all-distributors/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({

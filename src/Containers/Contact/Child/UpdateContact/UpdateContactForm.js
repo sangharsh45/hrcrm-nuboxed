@@ -11,11 +11,13 @@ import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { updateContact } from "../../ContactAction";
-import Upload from "../../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
+import {getDialCode} from "../../../Investor/InvestorAction";
+
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
@@ -32,7 +34,7 @@ const UpdateContactSchema = Yup.object().shape({
 class UpdateContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
-
+    this.props.getDialCode();
   }
   constructor(props) {
     super(props);
@@ -131,6 +133,12 @@ class UpdateContactForm extends Component {
         value: item.customerId,
       };
     });
+    const dialCodeOption = this.props.dialCodeList.map((item) => {
+      return {
+        label: `+${item.country_dial_code || ""}`,
+        value: item.country_dial_code
+      };  });
+
     return (
       <>
         <Formik
@@ -199,7 +207,7 @@ class UpdateContactForm extends Component {
                 <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
                  <div class=" flex  flex-nowrap justify-between">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
                         {/* <div class=" w-w47.5 max-sm:w-full">
@@ -303,7 +311,6 @@ class UpdateContactForm extends Component {
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        //label="Mobile #"
                         label={
                           <FormattedMessage
                             id="app.countryDialCode"
@@ -311,12 +318,10 @@ class UpdateContactForm extends Component {
                           />
                         }
                         isColumn
-                        selectType="dialCode"
-                        component={SearchSelect}
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(dialCodeOption) ? dialCodeOption : []
+                        }
                         inlineLabel
                       />
                     </div>
@@ -592,7 +597,7 @@ class UpdateContactForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, team,customer, departments, designations, opportunity }) => ({
+const mapStateToProps = ({ auth, contact, investor,customer, departments, designations, opportunity }) => ({
   setEditingContact: contact.setEditingContact,
   updateContactById: contact.updateContactById,
   updateContactByIdError: contact.updateContactByIdError,
@@ -602,11 +607,13 @@ const mapStateToProps = ({ auth, contact, team,customer, departments, designatio
   customerId: customer.customer.customerId,
   departmentId: departments.departmentId,
   designationTypeId: designations.designationTypeId,
+  dialCodeList:investor.dialCodeList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      getDialCode,
       updateContact,
       getCustomerData,
       getDesignations,

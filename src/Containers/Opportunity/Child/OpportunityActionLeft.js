@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { Tooltip, Badge } from "antd";
+import { Tooltip, Badge ,Avatar } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
@@ -59,7 +59,34 @@ const OpportunityActionLeft = (props) => {
   return (
     <div class=" flex items-center">
   
-<Tooltip
+      <Badge
+        size="small"
+        count={(viewType === "table" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
+        <Tooltip
+          title={
+            <FormattedMessage
+              id="app.listOpportunity"
+              defaultMessage="Opportunity List"
+            />
+          }
+        >
+          <span
+            class=" mr-1 text-sm "
+            onClick={() => props.setOpportunityViewType("table")}
+            style={{
+              color: props.viewType === "table" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+            <Avatar style={{ background: props.viewType === "table" ? "#f279ab" : "#4bc076" }}>
+            <LightbulbIcon />
+            </Avatar>
+          </span>
+        </Tooltip>
+      </Badge>
+      <Tooltip
           title={
             <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
           }
@@ -81,36 +108,12 @@ const OpportunityActionLeft = (props) => {
             // tooltipTitle="Stage View"
             onClick={() => props.setOpportunityViewType("stage")}
           >
+             <Avatar style={{ background: props.viewType === "stage" ? "#f279ab" : "#4bc076" }}>
            <TableOutlined/>
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
-      
-      <Badge
-        size="small"
-        count={(viewType === "table" && recordData.opportunityDetails) || 0}
-        overflowCount={999}
-      >
-        <Tooltip
-          title={
-            <FormattedMessage
-              id="app.listOpportunity"
-              defaultMessage="Opportunity List"
-            />
-          }
-        >
-          <span
-            class=" mr-2 text-sm "
-            onClick={() => props.setOpportunityViewType("table")}
-            style={{
-              color: props.viewType === "table" && "#1890ff",cursor:"pointer"
-            }}
-          >
-            {" "}
-            <LightbulbIcon style={{ color: "rgb(14, 149, 144)"}}/>
-          </span>
-        </Tooltip>
-      </Badge>
       <Tooltip title={"Won"}>
       <Badge
           size="small"
@@ -122,7 +125,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("won")}
             style={{
               cursor:"pointer",
@@ -130,7 +133,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "won" ? "#f279ab" : "#4bc076" }}>
             <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+            </Avatar>
           </span>
           </Badge>
       </Tooltip>
@@ -146,7 +151,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("close")}
             style={{
               cursor:"pointer",
@@ -154,7 +159,9 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "close" ? "#f279ab" : "#4bc076" }}>
             <LockOpenIcon />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -169,7 +176,7 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("lost")}
             style={{
               cursor:"pointer",
@@ -177,12 +184,14 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "lost" ? "#f279ab" : "#4bc076" }}>
             <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
     
-  <div class="ml-2">
+  {/* <div class="ml-2"> */}
   <Tooltip
           title="Teams"
         >
@@ -192,19 +201,21 @@ const OpportunityActionLeft = (props) => {
         overflowCount={999}
       >
           <span
-            class=" mr-2 text-sm "
+            class=" mr-1 text-sm "
             onClick={() => props.setOpportunityViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",cursor:"pointer"
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
             <PeopleIcon/>
+            </Avatar>
           </span>
           </Badge>
         </Tooltip>
-  </div>
-  <div class="ml-2">
+  {/* </div> */}
+  {/* <div class="ml-2"> */}
     {user.crmInd=== true && user.opportunityFullListInd===true && ( 
   <Tooltip
           title="All list"
@@ -215,19 +226,21 @@ const OpportunityActionLeft = (props) => {
         overflowCount={999}
       >
           <span
-            class=" mr-2 text-sm "
+            class=" mr-1 text-sm "
             onClick={() => props.setOpportunityViewType("all")}
             style={{
               color: props.viewType === "all" && "#1890ff",cursor:"pointer"
             }}
           >
             {" "}
+            <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
            ALL
+           </Avatar>
           </span>
           </Badge>
         </Tooltip>
     )}
-  </div>
+  {/* </div> */}
      
 
       <Tooltip
@@ -249,14 +262,16 @@ const OpportunityActionLeft = (props) => {
           overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-1 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
               cursor:"pointer",
               color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
-            <DeleteIcon />
+             <Avatar style={{ background: props.viewType === "dashboard" ? "#f279ab" : "#4bc076" }}>
+            <DeleteOutlined />
+            </Avatar>
           </span>
         </Badge>
       </Tooltip>
@@ -271,7 +286,7 @@ const OpportunityActionLeft = (props) => {
         }
       >
         <span
-          class=" mr-2 text-sm cursor-pointer"
+          class=" mr-1 text-sm cursor-pointer"
           onClick={() => props.setOpportunityViewType("Map")}
           style={{
             color: props.viewType === "Map" && "#1890ff",

@@ -1,23 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, Field, } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
-import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-import ButtonGroup from "antd/lib/button/button-group";
-// import dayjs from "dayjs";
-
 import { addContractDetails } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
 
@@ -73,23 +63,12 @@ class ContractDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  // border: "0.125em solid red",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "100%",
-                    // border: "0.125em solid green"
-                  }}
+                <div class=" w-full"
                 >
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  <div class=" flex justify-between" >
+                    <div class=" w-[47%]">
                       <Field
                         name="previous_start_date"
                         //label="Start Date"
@@ -113,7 +92,7 @@ class ContractDocumentForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                       <Field
                         name="previous_end_date"
                         // label="End Date "
@@ -150,11 +129,10 @@ class ContractDocumentForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                  </div>
+              
+                  <div class=" flex justify-between mt-3" >
+                    <div class=" w-full" >
                     <Field
                       isRequired
                       name="contract_Type"
@@ -178,8 +156,9 @@ class ContractDocumentForm extends Component {
                     />
                     </div>
                    
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+           
+                  <div class=" mt-3">
                   <Field
                     name="notes"
                     // label="Notes"
@@ -196,10 +175,11 @@ class ContractDocumentForm extends Component {
                     
                     }}
                   />
+                  </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -207,7 +187,7 @@ class ContractDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

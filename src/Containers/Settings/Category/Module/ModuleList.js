@@ -1,78 +1,306 @@
-import React, { Component } from "react";
+import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
-import CRMStatusToggle from "../../Department/CRMStatusToggle";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
-import styled from "styled-components";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import IMStatusToggle from "../../Department/IMStatusToggle";
-import AccountingStatusToggle from "../../Department/AccountingStatusToggle";
-import RecruitProStatusToggle from "../../Department/RecruitProStatusToggle";
-import HrStatusToggle from "../../Department/HrStatusToggle";
+import {addingModules,getModules} from "../Module/ModuleAction"
 import { bindActionCreators } from "redux";
-import { Button,Input } from "antd";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper } from "../../../../Components/UI/Layout";
-import { TextInput,  } from "../../../../Components/UI/Elements";
 import { Select } from "../../../../Components/UI/Elements";
+import {  Popconfirm, Switch } from "antd";
 import moment from "moment";
-import SingleModuleList from "./SingleModuleList";
+import FWLogo from "../../../../Assets/Images/crm.jpg";
+import FWLogo1 from "../../../../Assets/Images/Im.jpg";
+import FWLogo2 from "../../../../Assets/Images/Hr.jpg";
+import FWLogo3 from "../../../../Assets/Images/Recruitpro.jpg";
+import FWLogo4 from "../../../../Assets/Images/elearning.jpg";
+import FWLogo5 from "../../../../Assets/Images/payment.jpg";
+const SingleModuleList = lazy(() =>
+  import("./SingleModuleList")
+);
+
 
 const { Option } = Select;
 
-class ModuleList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      linkedDepartments: [],
-      isTextInputOpen: false,
-      addingDepartment: false,
-      departmentName: "",
-      singleDepartment: "",
-      sectorId: "",
-      editInd: true,
-      currentData: "",
+const ModuleList = (props) => {
 
+  const [rowdata, setrowData] = useState({});
+
+  const handleRowData = (data) => {
+    setrowData(data);
+  };
+  useEffect(() => {
+    props.getModules(props.orgId);
+    // props.getRequirementsDuration(props.orgId);
+  }, []);
+
+  const { crmInd } = props.moduleList;
+console.log(crmInd);
+const [crmStatus, setCrmStatus] = useState(crmInd);
+
+useEffect(() => {
+  setCrmStatus(crmInd);
+}, [crmInd]);
+
+const handleCrmClick = (checked) => {
+  setCrmStatus(checked);
+  let data = {
+    value: checked,
+    orgId: props.orgId,
+    type: "crm",
+  };
+  props.addingModules(data, props.orgId);
+};
+
+const { financeInd } = props.moduleList;
+console.log(financeInd);
+const [financeStatus, setFinanceStatus] = useState(financeInd);
+
+useEffect(() => {
+  setFinanceStatus(financeInd);
+}, [financeInd]);
+
+const handleFinanceClick = (checked) => {
+  setFinanceStatus(checked);
+  let data = {
+    value: checked,
+    orgId: props.orgId,
+    type: "finance",
+  };
+  props.addingModules(data, props.orgId);
+};
+
+  // const { mandetoryInd } = props.moduleList;
+  // console.log(mandetoryInd);
+  // const [mandatoryStatus, setMandatoryStatus] = useState(mandetoryInd);
+  // function handleMandatoryClick(checked) {
+  //   console.log(mandetoryInd);
+  //   if (mandetoryInd) {
+  //     //disable url
+  //     props.addingModules({
+  //       ...props.moduleList,
+  //       orgId: props.orgId,
+  //       type:"mandatory",
+  //       mandetoryInd: mandetoryInd ? false : true,
+  //     });
+  //     setMandatoryStatus(mandetoryInd ? false : true);
+  //   } else {
+  //     props.addingModules(
+  //       {
+  //         ...props.moduleList,
+  //         orgId: props.orgId,
+  //         type:"mandatory",
+  //         mandetoryInd: mandetoryInd ? false : true,
+  //       },
+  //       props.orgId
+  //     );
+  //     setMandatoryStatus(mandetoryInd ? false : true);
+  //   }
+  // }
+  // function handleMandatoryCancel() {
+  //   if (mandetoryInd) {
+  //     setMandatoryStatus(true);
+  //   } else {
+  //     setMandatoryStatus(false);
+  //   }
+  // }
+
+
+  const { erpInd } = props.moduleList;
+  console.log(erpInd);
+  const [erpStatus, setErpStatus] = useState(erpInd);
+  useEffect(() => {
+    setErpStatus(erpInd);
+  }, [erpInd]);
+  
+  const handleErpClick = (checked) => {
+    setErpStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "erp",
     };
-  }
+    props.addingModules(data, props.orgId);
+  };
 
-  handleChangeDes = (e) => {
-    this.setState({ currentData: e.target.value });
+  const { imInd } = props.moduleList;
+  console.log(imInd);
+  const [imStatus, setImStatus] = useState(imInd);
   
-    if (e.target.value.trim() === "") {
-      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
-    //   this.props.getDepartments();
-      this.props.ClearReducerDataOfDepartment();
-    }
-  };
-  handleSearch = () => {
-    if (this.state.currentData.trim() !== "") {
-      // Perform the search
-      this.props.searchDepartmentName(this.state.currentData);
-    } else {
-      console.error("Input is empty. Please provide a value.");
-    }
-  };
-
-  setCurrentData = (value) => {
-    this.setState({ currentData: value });
-  };
-
-  render() {
-    const {
-      fetchingDepartments,
-      fetchingDepartmentsError,
-      updatingDepartments,
-      values,
-
-    } = this.props;
-    const {
-      isTextInputOpen,
-      departmentName,
-      singleDepartment,
-      linkedDepartments,
-      sectorId
-    } = this.state;
+  useEffect(() => {
+    setImStatus(imInd);
+  }, [imInd]);
   
+  const handleImClick = (checked) => {
+    setImStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "im",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { hrInd } = props.moduleList;
+  console.log(hrInd);
+  const [hrStatus, setHrStatus] = useState(hrInd);
+  
+  useEffect(() => {
+    setHrStatus(hrInd);
+  }, [hrInd]);
+  
+  const handleHrClick = (checked) => {
+    setHrStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "hr",
+    };
+    props.addingModules(data, props.orgId);
+  };
+ 
+
+
+
+
+  
+
+  const { productionInd } = props.moduleList;
+  console.log(productionInd);
+  const [productionStatus, setProductionStatus] = useState(productionInd);
+  useEffect(() => {
+    setProductionStatus(productionInd);
+  }, [productionInd]);
+  
+  const handleProductionClick = (checked) => {
+    setProductionStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "production",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { recruitProInd } = props.moduleList;
+  console.log(recruitProInd);
+  const [recruitProStatus, setRecruitProStatus] = useState(recruitProInd);
+
+  useEffect(() => {
+    setRecruitProStatus(recruitProInd);
+  }, [recruitProInd]);
+  
+  const handleRecruitProClick = (checked) => {
+    setRecruitProStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "recruitPro",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { repairInd } = props.moduleList;
+  console.log(repairInd);
+  const [repairStatus, setRepairStatus] = useState(repairInd);
+  useEffect(() => {
+    setRepairStatus(repairInd);
+  }, [repairInd]);
+  
+  const handleRepairClick = (checked) => {
+    setRepairStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "repair",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { inventoryInd } = props.moduleList;
+  console.log(inventoryInd);
+  const [inventoryStatus, setInventoryStatus] = useState(inventoryInd);
+  useEffect(() => {
+    setInventoryStatus(inventoryInd);
+  }, [inventoryInd]);
+  
+  const handleInventoryClick = (checked) => {
+    setInventoryStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "inventory",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { orderManagementInd } = props.moduleList;
+  console.log(orderManagementInd);
+  const [orderManagStatus, setOrderManagStatus] = useState(orderManagementInd);
+  useEffect(() => {
+    setOrderManagStatus(orderManagementInd);
+  }, [orderManagementInd]);
+  
+  const handleOrderManagementClick = (checked) => {
+    setOrderManagStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "orderManagement",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { logisticsInd } = props.moduleList;
+  console.log(logisticsInd);
+  const [logisticsStatus, setLogisticsStatus] = useState(logisticsInd);
+
+  useEffect(() => {
+    setLogisticsStatus(logisticsInd);
+  }, [logisticsInd]);
+  
+  const handleLogisticClick = (checked) => {
+    setLogisticsStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "logistics",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+
+  const { procurementInd } = props.moduleList;
+  console.log(procurementInd);
+  const [procurmentStatus, setProcurmentStatus] = useState(procurementInd);
+  useEffect(() => {
+    setProcurmentStatus(procurementInd);
+  }, [procurementInd]);
+  
+  const handleProcurmentClick = (checked) => {
+    setProcurmentStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "procurement",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
+  const { elearningInd } = props.moduleList;
+  console.log(elearningInd);
+  const [elearningStatus, setElearningStatus] = useState(elearningInd);
+  useEffect(() => {
+    setElearningStatus(elearningInd);
+  }, [elearningInd]);
+  
+  const handleElearningClick = (checked) => {
+    setElearningStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "elearning",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
     return (
       <>
@@ -84,74 +312,235 @@ class ModuleList extends Component {
               color: "#FFFAFA",
             }}
           >
-                       <div class=" flex w-[18vw]" >
-                       <Input
-         placeholder="Search by Name"
-        style={{width:"100%",marginLeft:"0.5rem"}}
-            // suffix={suffix}
-            onPressEnter={this.handleSearch}  
-            onChange={this.handleChangeDes}
-            // value={currentData}
-          />
-        </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
-              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-              <DepartmentWrapper>
+              <MainWrapper style={{ height: "29rem", marginTop: "0.625em" }}>
+              <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class="flex" >
                 <div class="w-full flex-row">
-              <div class=" flex justify-between" >
-             
-                    <h1>CRM</h1>
+              <div class=" flex " >
+             <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm font-semibold">CRM</div>
+                    <div   class=" ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleCrmClick(!crmStatus)}
+                        // onCancel={handleCrmCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          onChange={() => {}}
+                          // onChange={handleCrmClick}
+                          checked={crmStatus || crmInd}
+                          // checked={crmStatus || crmInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo5}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+              <div class=" text-sm font-semibold ">Accounting</div>
+                    <div   class="  ml-2">
+                    <Popconfirm
+        title="Do you wish to change Status?"
+        onConfirm={() => handleFinanceClick(!financeStatus)}
+        okText="Yes"
+        cancelText="No"
+      >
+                        <Switch
+                              onChange={() => {}}
+                        //  onChange={this.props.handleErpClick}
+                          style={{ width: "4em" }}
+                          checked={financeStatus || props.moduleList.financeInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+                    <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+             <div class="flex justify-center mt-1">
+                    <div class=" text-sm font-semibold  ml-2">IM</div>
+                    <div   class="  ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleImClick(!imStatus)}
+                        // onCancel={handleImCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          // onChange={handleImClick}
+                          onChange={() => {}}
+                          checked={imStatus || imInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </div>
+                    </div>
+                    {/* <div>Account</div>
                     <div   class=" w-[7%] ml-2">
-                    <CRMStatusToggle
-                    //   crmInd={crmInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleAccountClick}
+                        onCancel={handleAccountCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={accountStatus || accountInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div> */}
+                    {/* <div>RecruitOpps</div>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleRecruitClick}
+                        onCancel={handleRecruitCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={recruitStatus || recruitOppsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
-                    <h1>IM</h1>
-                    <div class=" w-[7%] ml-2">
-                    <IMStatusToggle
-                    //   imInd={imInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
+*/}
+ <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo2}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                      <div class=" text-sm  ml-2 font-semibold">HR</div>
+                    <div   class="  ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleHrClick(!hrStatus)}
+                        // onCancel={handleHrCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                   
+                        <Switch
+                         style={{ width: "5em" }}
+                         onChange={() => {}}
+                        
+                         checked={hrStatus || hrInd}
+                         checkedChildren="Yes"
+                         unCheckedChildren="No"
+                         
+                        />
+                              </Popconfirm>
+                    
+                    </div> 
                     </div>
-                    <h1>HR</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <HrStatusToggle
-                    //   hrInd={hrInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>Accounting</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <AccountingStatusToggle
-                    //   accountInd={accountInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
                     </div>
 
-                    <h1>RecruitPro</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <RecruitProStatusToggle
-                    //   recruitOppsInd={recruitOppsInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
+                   
+
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo3}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+           
+                    <div class=" text-sm  ml-2 font-semibold">Rcruitpro</div>
+                    <div   class=" ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleRecruitProClick(!recruitProStatus)}
+                        // onCancel={handleRecruitProCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          onChange={() => {}}
+                          // onChange={handleRecruitProClick}
+                          checked={recruitProStatus || recruitProInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
+                    </div>
+                    </div>
+                    <div class="w-[13rem] h-[12rem] bg-white shadow-2xl border-2 flex flex-col rounded-lg scale-95 hover:scale-100">
+             <img
+              className="big-logo"
+              src={FWLogo4}
+              style={{ height:"7rem" }}
+              alt="Tekorero logo"
+            />
+            <div class="flex justify-center mt-1">
+                    <div class=" text-sm  ml-2 font-semibold">Elearning</div>
+                    <div   class="  ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={() => handleElearningClick(!elearningStatus)}
+                        // onCancel={handleElearningCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          onChange={() => {}}
+                          // onChange={handleElearningClick}
+                          checked={elearningStatus || elearningInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    </div> 
+                    </div>
+                   
+
+                   
                    
                 
               </div>
@@ -164,7 +553,7 @@ class ModuleList extends Component {
               </div>
               
             ) : (
-                <FlexContainer>
+              <div class=" flex">
                   {/* <TextInput
                     name={name}
                     // value={value || departmentName}
@@ -182,32 +571,46 @@ class ModuleList extends Component {
                                 return <Option value={item.sectorId}>{item.sectorName} </Option>;
                             })}
                </Select> */}
-                  <br />
-                  <br />
+           
               
-                </FlexContainer>
+                </div>
               )
           }
         </ViewEditCard>
-      </DepartmentWrapper>
+      </div>
                 {/* {departments.length ? (
                   departments.map((department, i) => ( */}
                     <SingleModuleList
-                    //   key={i}
-                      value={singleDepartment}
-                      name="singleDepartment"
-                    //   department={department}
-                      linkedDepartments={linkedDepartments}
-                      updatinDepartments={updatingDepartments}
-                      handleChange={this.handleChange}
-                      handleSectorId={this.handleSectorId}
-                      handleUpdateDepartment={this.handleUpdateDepartment}
-                      sectors={this.props.sectors}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteDepartment={this.handleDeleteDepartment}
+                    handleProcurmentClick={handleProcurmentClick}
+                    // handleProcurmentCancel={handleProcurmentCancel}
+                    procurmentStatus={procurmentStatus}
+
+handleLogisticClick={handleLogisticClick}
+// handleLogisticCancel={handleLogisticCancel}
+logisticsStatus={logisticsStatus}
+                      handleOrderManagementClick={handleOrderManagementClick}
+                      // handleOrderManagementCancel={handleOrderManagementCancel}
+                      orderManagStatus={orderManagStatus}
+                   handleInventoryClick={handleInventoryClick}
+                  //  handleInventoryCancel={handleInventoryCancel}
+                   inventoryStatus={inventoryStatus}
+                   moduleList={props.moduleList}
+                      handleErpClick={handleErpClick}
+                      // handleErpCancel={handleErpCancel}
+                      erpStatus={erpStatus}
+                      handleRepairClick={handleRepairClick}
+                      // handleRepairCancel={handleRepairCancel}
+                      repairStatus={repairStatus}
+                      handleRowData={handleRowData}
+                      rowdata={rowdata}
+                      // handleSectorId={this.handleSectorId}
+                      handleProductionClick={handleProductionClick}
+                      productionStatus={productionStatus}
+                      //  handleProductionCancel={handleProductionCancel}
+                    //   handleSearchChange={this.handleSearchChange}
+                    //   currentData={this.state.currentData}
+                    //   setCurrentData={this.setCurrentData}
+                    //  handleDeleteDepartment={this.handleDeleteDepartment}
                     />
                   {/* )) */}
                   {/* ) : (
@@ -218,34 +621,28 @@ class ModuleList extends Component {
             </div>
            
           </MainWrapper>
-         
+          <div>Updated on {moment(props.moduleList.updationDate).format("ll")} by {props.moduleList.updatedBy}</div>
         </div>
-        <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
+     
       </>
     );
   }
-}
 
-const mapStateToProps = ({ departments, sector }) => ({
+
+const mapStateToProps = ({ module, auth }) => ({
+  userId: auth.userDetails.userId,
+  orgId: auth.userDetails.organizationId,
+  moduleList: module.moduleList,
+  fetchingModules: module.fetchingModules,
+  fetchingModulesError: module.fetchingModulesError,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
+      getModules,
+      addingModules
     },
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(ModuleList);
-const DepartmentWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const DepartmentName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const DepartmentValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;

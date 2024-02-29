@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Popconfirm, Select, Typography, message } from 'antd'
+import { Button, DatePicker, Select,  } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getProductionUsersById, getRepairPhoneById, UpdateTechnicianForRepairPhone } from "./RefurbishAction"
 import QRCodeModal from '../../../Components/UI/Elements/QRCodeModal'
-import { SubTitle } from '../../../Components/UI/Elements'
+import { SubTitle } from '../../../Components/UI/Elements';
+
 const { Option } = Select;
 const AssignRepairForm = (props) => {
     const [user, setUser] = useState("")
@@ -55,41 +56,41 @@ const AssignRepairForm = (props) => {
             width: "1%",
         },
         {
-            title: "Company",
+            title: "OEM",
             dataIndex: "company",
-            width: "10%",
+            width: "15%",
 
         },
         {
             title: "Model",
             dataIndex: "model",
-            width: "9%",
+            width: "10%",
         },
         {
             title: "IMEI",
             dataIndex: "imei",
-            width: "8%",
+            width: "12%",
         },
         {
             title: "OS",
             dataIndex: "os",
-            width: "8%",
+            width: "12%",
 
         },
         {
             title: "GB",
             dataIndex: "gb",
-            width: "8%",
+            width: "12%",
         },
         {
             title: "Color",
             dataIndex: "color",
-            width: "10%",
+            width: "12%",
         },
         {
             title: "Condition",
             dataIndex: "conditions",
-            width: "10%",
+            width: "12%",
         },
         {
             title: "QR",
@@ -105,19 +106,13 @@ const AssignRepairForm = (props) => {
                                 imgRadius={20}
                             />
                         ) : (
-                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                            <span color="text-[0.6em] font-bold">
                                 No QR
                             </span>
                         )}
                     </SubTitle>
                 );
             },
-        },
-
-        {
-            title: "Received by",
-            width: "9%",
-            dataIndex: "receivePhoneUserName"
         },
 
 
@@ -127,13 +122,9 @@ const AssignRepairForm = (props) => {
     return (
         <div>
 
-            <div style={{ margin: "10px 0", display: "flex", justifyContent: "space-between" }}>
+            <div class="mt-[10px] flex justify-between">
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Department</label>
+                    <label class="text-[15px] font-semibold m-[10px]">Department</label>
                     <Select
                         style={{
                             width: 250,
@@ -147,11 +138,7 @@ const AssignRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Technician</label>
+                <label class="text-[15px] font-semibold m-[10px]">Technician</label>
                     <Select
                         style={{
                             width: 250,
@@ -165,11 +152,7 @@ const AssignRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Due Date</label>
+                <label class="text-[15px] font-semibold m-[10px]">Due Date</label>
                     <DatePicker
                         style={{
                             width: 250,
@@ -187,7 +170,7 @@ const AssignRepairForm = (props) => {
                 rowSelection={rowSelection}
                 loading={props.fetchingNoOfPhonesById}
             />
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "5px" }}>
+            <div class="flex justify-end mt-1">
                 <Button
                     type='primary'
                     onClick={() => props.UpdateTechnicianForRepairPhone({

@@ -9,7 +9,6 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw, } from "draft-js";
-import { StyledLabel } from "../../../../Components/UI/Elements";
 
 class AddCustomerEmailDrawerModal extends Component {
 
@@ -71,11 +70,6 @@ class AddCustomerEmailDrawerModal extends Component {
           title={name}
           width={"40%"}
           visible={this.props.addDrawerCustomerEmailModal}
-          closable
-          style={{marginTop:"5rem"}}
-          placement="right"
-          destroyOnClose
-          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleCustomerEmailDrawerModal(false)}
         >
             <Formik
@@ -120,7 +114,7 @@ class AddCustomerEmailDrawerModal extends Component {
                    <div class=" w-full">
                   <div class=" flex items-center">
                     <div class=" w-1/12">
-               <StyledLabel>To</StyledLabel>
+                    <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">To</div>
                     </div>
                     <div class=" w-11/12">
                       
@@ -133,7 +127,7 @@ class AddCustomerEmailDrawerModal extends Component {
                   </div>
                   <div class=" flex items-center">
                   <div class=" w-1/12">
-               <StyledLabel>CC</StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">CC</div>
                     </div>
                     <div class=" w-11/12">
                       
@@ -147,7 +141,7 @@ class AddCustomerEmailDrawerModal extends Component {
                  
                   <div class=" flex items-center">
                   <div class=" w-1/12">
-               <StyledLabel>BCC</StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">BCC</div>
                     </div>
                     <div class=" w-11/12">
                       
@@ -160,7 +154,7 @@ class AddCustomerEmailDrawerModal extends Component {
                   </div>
                   <div class=" flex items-center">
                   <div class=" w-1/12">
-               <StyledLabel>Subject</StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col">Subject</div>
                     </div>
                     <div class=" w-11/12">
                       

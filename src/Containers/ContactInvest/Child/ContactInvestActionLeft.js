@@ -10,7 +10,7 @@ import SpeechRecognition, {
 import PeopleIcon from '@mui/icons-material/People';
 import { Input,Tooltip, } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Badge } from "antd";
+import { Badge,Avatar } from "antd";
 import {
   getContactInvest,
   getTeamContactInvest,
@@ -99,38 +99,17 @@ const ContactInvestActionLeft = (props) => {
           }
           overflowCount={5000}
         >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
+          <div
+            class=" mr-1"
             onClick={() => props.setContactInvetViewType("card")}
             style={{
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <AccountBalanceIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-      <Tooltip
-       title={<FormattedMessage id="app.all" defaultMessage="All" />}
-      >
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "all" &&
-              props.contactInvest.contactDetails) ||
-            0
-          }
-          overflowCount={5000}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setContactInvetViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",
-            }}
-          >
-   <FormattedMessage id="app.all" defaultMessage="All" />
-          </span>
+            <Avatar style={{ background: props.viewType === "card" ? "#f279ab" : "#4bc076" }}>
+            <AccountBalanceIcon className=" text-base cursor-pointer" />
+            </Avatar>
+          </div>
         </Badge>
       </Tooltip>
       <Tooltip
@@ -146,19 +125,47 @@ const ContactInvestActionLeft = (props) => {
           }
           overflowCount={5000}
         >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
+          <div
+            class=" mr-1 "
             onClick={() => props.setContactInvetViewType("teams")}
             style={{
               color: props.viewType === "teams" && "#1890ff",
             }}
           >
-           <PeopleIcon/>
-          </span>
+             <Avatar style={{ background: props.viewType === "teams" ? "#f279ab" : "#4bc076" }}>
+           <PeopleIcon className=" text-base cursor-pointer"/>
+           </Avatar>
+          </div>
         </Badge>
       </Tooltip>
+      <Tooltip
+       title={<FormattedMessage id="app.all" defaultMessage="All" />}
+      >
+        <Badge
+          size="small"
+          count={
+            (props.viewType === "all" &&
+              props.contactInvest.contactDetails) ||
+            0
+          }
+          overflowCount={5000}
+        >
+          <div
+            class=" mr-1 text-base cursor-pointer"
+            onClick={() => props.setContactInvetViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+            <Avatar style={{ background: props.viewType === "all" ? "#f279ab" : "#4bc076" }}>
+   <FormattedMessage id="app.all" defaultMessage="All" />
+   </Avatar>
+          </div>
+        </Badge>
+      </Tooltip>
+    
    
-      <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
+      <div class=" w-72 md:ml-4 max-sm:w-16 ml-3">
    
           <Input
        placeholder="Search by Name or Company"
@@ -186,9 +193,9 @@ const ContactInvestActionLeft = (props) => {
       >
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
       </Button> */}
-      <div style={{ width: "15%" }}>
+      <div class="w-[35%] mt-[0.5rem]">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
-          <Option value="CreationDate">CreationDate</Option>
+          <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>
             <Option value="descending">Z To A</Option>
           </StyledSelect>

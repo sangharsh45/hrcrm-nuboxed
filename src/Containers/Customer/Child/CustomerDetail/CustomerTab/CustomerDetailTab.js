@@ -24,10 +24,10 @@ import {
   handleCallActivityModal,
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
-import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
-import AddProjectDrawer from "./ProjectTab/AddProjectDrawer";
-import AddCustomerActivityModal from "../AddCustomerActivityModal";
-import CustomerActivityTable from "../CustomerActivityTable";
+const ReactCustomerSpeechModal = lazy(() => import("../ReactCustomerSpeechModal"));
+const AddProjectDrawer = lazy(() => import("./ProjectTab/AddProjectDrawer"));
+const AddCustomerActivityModal = lazy(() => import("../AddCustomerActivityModal"));
+const CustomerActivityTable = lazy(() => import("../CustomerActivityTable"));
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const AddCustomerContactModal = lazy(() =>
@@ -313,48 +313,7 @@ class ContactDetailTab extends Component {
                 <LinkedNotes />
               </Suspense>
             </TabPane> */}
-            <TabPane
-              tab={
-                <>
-                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">
-                    {
-                      <FormattedMessage
-                        id="app.invoice"
-                        defaultMessage="Invoice"
-                      />
-                    }
-                    {/* Documents */}
-                  </span>
-                  {activeKey === "7" && (
-                    <>
-                      {/* <PlusOutlined
-                        type="plus"
-                        title={
-                          <FormattedMessage
-                            id="app.create"
-                            defaultMessage="Create"
-                          />
-                        }
-                        onClick={() => handleInvoiceModal(true)}
-                        size="0.875em"
-                        style={{
-                          marginLeft: "0.3125em",
-                          verticalAlign: "center",
-                        }}
-                      /> */}
-                    </>
-                  )}
-                </>
-              }
-              key="7"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <LinkedInvoice />
-              </Suspense>
-            </TabPane>
-            <TabPane
+                  <TabPane
               tab={
                 <>
                   <ReceiptIcon style={{fontSize:"1.1rem"}}/>
@@ -367,7 +326,7 @@ class ContactDetailTab extends Component {
                     }
                     {/* Documents */}
                   </span>
-                  {activeKey === "8" && (
+                  {activeKey === "7" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -389,7 +348,7 @@ class ContactDetailTab extends Component {
                 
                 </>
               }
-              key="8"
+              key="7"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -399,6 +358,48 @@ class ContactDetailTab extends Component {
                 />
               </Suspense>
             </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.invoice"
+                        defaultMessage="Invoice"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                  {activeKey === "8" && (
+                    <>
+                      {/* <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                        onClick={() => handleInvoiceModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      /> */}
+                    </>
+                  )}
+                </>
+              }
+              key="8"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <LinkedInvoice />
+              </Suspense>
+            </TabPane>
+      
            
           </StyledTabs>
         </TabsWrapper>
@@ -420,10 +421,11 @@ class ContactDetailTab extends Component {
           />
 
           <AddCustomerContactModal
+          handleCustomerContactModal={handleCustomerContactModal}
             addCustomerContactModal={addCustomerContactModal}
             defaultCustomers={[{ label: name, value: customerId }]}
             customerId={{ value: customerId }}
-            callback={() => getContactListByCustomerId(customerId)}
+            // callback={() => getContactListByCustomerId(customerId)}
           />
 
        
@@ -441,7 +443,7 @@ class ContactDetailTab extends Component {
             handleCustomerOpportunityModal={handleCustomerOpportunityModal}
             defaultCustomers={[{ label: name, value: customerId }]}
             customerId={{ value: customerId }}
-            callback={() => getOpportunityListByCustomerId(customerId)}
+            // callback={() => getOpportunityListByCustomerId(customerId)}
           />
                  <AddProjectDrawer
             addCustomerProjectDrawer={addCustomerProjectDrawer}
@@ -452,7 +454,7 @@ class ContactDetailTab extends Component {
            defaultCustomers={[{ label: name, value: customerId }]}
             customerId={{ value: customerId }}
           customer={this.props.customer}
-          callback={() => getContactListByCustomerId(customerId)}
+          // callback={() => getContactListByCustomerId(customerId)}
             callActivityModal={callActivityModal}
             handleCallActivityModal={handleCallActivityModal}
           /> 

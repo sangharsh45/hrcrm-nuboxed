@@ -5,11 +5,10 @@ import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import {getCurrencyList} from "../../../../../Settings/Category/Currency/CurrencyAction"
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { addCustomerOpportunity,getContactListByCustomerId } from "../../../../CustomerAction";
-import {
-  getAllSalesList, getWorkflow, getStages,
+import { addCustomerOpportunity } from "../../../../CustomerAction";
+import { getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -26,6 +25,7 @@ const OpportunitySchema = Yup.object().shape({
   opportunityName: Yup.string().required("Please provide Opportunity name"),
   currency: Yup.string().required("Currency needed!"),
   oppWorkflow: Yup.string().required("Input needed!"),
+  oppStage: Yup.string().required("Input needed!"),
 });
 function CustomerOpportunityForm(props) {
   const handleReset = (resetForm) => {
@@ -33,9 +33,8 @@ function CustomerOpportunityForm(props) {
   };
 
   useEffect(() => {
-    props.getAllSalesList();
+    props.getCurrencyList();
     props.getWorkflow(props.orgId);
-    props.getContactListByCustomerId(props.customerId);
     props.getStages(props.orgId);
     props. getCrm();
   }, []);
@@ -64,34 +63,9 @@ function CustomerOpportunityForm(props) {
 
     return contactOptions;
   }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+ 
 
-  // const ContactOptions = props.contactByCustomerId.map((item) => {
-  //   return {
-  //     label: `${item.contactName || ""}`,
-  //     value: item.contactId,
-  //   };
-  // });
 
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (option.customerId === filterOptionValue && option.probability !== 0) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.stages.length &&
@@ -125,47 +99,27 @@ function CustomerOpportunityForm(props) {
     };
   });
 
-
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length && props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
-        // .map((option) => {
-        //   const data=option.initiativeSkillMapper
-        //   console.log(data)
-        //   return data .map((item)=>{
-        //     console.log(item.skilId)
-        //     return {      
-        //       label: item.skillName,
-        //       value: item.skilId,
-        //     }        
-        // })      
-
-        // })
-        .map((option) => {
-          console.log("option1", option)
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-
-
-        });
-
-    return skillOptions;
-  }
-
-  const salesNameOption = props.sales.map((item) => {
+  const sortedCurrency =props.currencyList.sort((a, b) => {
+    const nameA = a.currency_name.toLowerCase();
+    const nameB = b.currency_name.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const currencyNameOption = sortedCurrency.map((item) => {
     return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
+      label: `${item.currency_name}`,
+      value: item.currency_id,
     };
   });
+  
+
+
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
   const selectedOption = props.sales.find((item) => item.fullName === selected);
@@ -301,8 +255,8 @@ function CustomerOpportunityForm(props) {
           <Form className="form-background">
             <div  class=" flex justify-between">
           
-              <div class=" h-full w-2/4"
-              >
+            <div class=" h-full w-[47.5%] mt-3"
+                >
                 <Field
                   isRequired
                   name="opportunityName"
@@ -323,8 +277,8 @@ function CustomerOpportunityForm(props) {
                   // accounts={accounts}
                   inlineLabel
                 />
-                <Spacer />
-                <div class=" flex justify-between">
+           
+                <div class=" flex justify-between mt-3">
                   <div class=" w-2/4">
                     <Field
                       isRequired
@@ -374,8 +328,8 @@ function CustomerOpportunityForm(props) {
                     />
                   </div>
                 </div>
-                <Spacer />
-                <div class=" flex justify-between">
+          
+                <div class=" flex justify-between mt-3">
                   <div class=" w-2/4">
                     <Field
                       name="proposalAmount"
@@ -383,8 +337,8 @@ function CustomerOpportunityForm(props) {
 
                       label={
                         <FormattedMessage
-                          id="app.proposalAmount"
-                          defaultMessage="Proposal Amount"
+                          id="app.Value"
+                          defaultMessage="Value"
                         />
                       }
                       isColumn
@@ -393,31 +347,33 @@ function CustomerOpportunityForm(props) {
                     />
                   </div>
                   <div class=" w-2/5">
-                    <Field
-                      name="currency"
-                      isColumnWithoutNoCreate
-                      defaultValue={{
-                        value: props.user.currency,
-                      }}
-                      label={
-                        <FormattedMessage
+                  <Field
+                        name="currency"
+                        defaultValue={{
+                          value: props.user.currency,
+                        }}
+                        isColumnWithoutNoCreate
+                        placeholder="Currency"
+                        label={<FormattedMessage
                           id="app.currency"
                           defaultMessage="Currency"
-                        />
-                      }
-                      width="100%"
-                      isColumn
-                      selectType="currencyName"
-                      value={values.currencyName}
-                      isRequired
-                      component={SearchSelect}
-                    // flag={values.currency}
-                    // options={Array.isArray(currency) ? currency : []}
-                    />
+                        />}
+                        isColumn
+                        // selectType="currencyName"
+                        isRequired
+                        component={SelectComponent}
+                        options={
+                          Array.isArray(currencyNameOption)
+                            ? currencyNameOption
+                            : []
+                        }
+                      
+                      />
+                  
                   </div>
                 </div>
-                <Spacer />
-
+               
+<div class=" mt-3">
                 <Field
                   name="description"
                   // label="Notes"
@@ -428,9 +384,11 @@ function CustomerOpportunityForm(props) {
                   isColumn
                   component={TextareaComponent}
                 />
+                </div>
               </div>
           
-              <div class=" h-full w-2/5">
+              <div class=" h-full w-[47.5%]"
+                >
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -440,7 +398,7 @@ function CustomerOpportunityForm(props) {
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
@@ -524,10 +482,11 @@ function CustomerOpportunityForm(props) {
                   inlineLabel
                   style={{ flexBasis: "80%" }}
                 /> */}
+                 <div class="mt-3">
                 <Field
                   name="customerId"
                   isColumnWithoutNoCreate
-                  selectType="customerList"
+                  // selectType="customerList"
                   // label="Customer"
 
                   label={
@@ -537,15 +496,17 @@ function CustomerOpportunityForm(props) {
                     />
                   }
                   // isRequired
-                  component={SearchSelect}
+                  component={SelectComponent}
                   isColumn
-                  value={values.customerId}
+                  options={[]}
+                  // value={values.customerId}
                   isDisabled={defaultCustomers}
                   defaultValue={defaultCustomers ? defaultCustomers : null}
                   inlineLabel
 
                 />
-                <Spacer />
+                </div>
+         <div class=" mt-3">
                 <Field
                   name="contactId"
                   isColumnWithoutNoCreate
@@ -562,10 +523,10 @@ function CustomerOpportunityForm(props) {
                   value={values.contactId}
                   inlineLabel
                 />
-
-                <div class=" flex justify-between">
+</div>
+                <div class=" flex justify-between mt-3">
                   <div class=" w-2/4">
-                    <StyledLabel>
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> 
                       <Field
                         name="oppWorkflow"
                         // selectType="contactListFilter"
@@ -583,11 +544,11 @@ function CustomerOpportunityForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
-                  <Spacer />
-                  <div class=" w-2/5">
-                    <StyledLabel>
+                
+                  <div class=" w-2/5 ">
+                  <div class="font-bold m-[0.1rem-0-0.02rem-0.2rem] text-xs flex flex-col"> 
                       <Field
                         name="oppStage"
                         //selectType="initiativeName"
@@ -613,13 +574,13 @@ function CustomerOpportunityForm(props) {
                         isColumn
                         inlineLabel
                       />
-                    </StyledLabel>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <Spacer />
-            <div class=" flex justify-end">
+          
+            <div class=" flex justify-end mt-3">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -637,7 +598,7 @@ function CustomerOpportunityForm(props) {
 
 }
 
-const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
+const mapStateToProps = ({ auth, opportunity, currency, customer,leads }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -645,11 +606,10 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   customerId: customer.customer.customerId,
   addingCustomerOpportunity: customer.addingCustomerOpportunity,
   addingCustomerOpportunityError: customer.addingCustomerOpportunity,
-  currencies: auth.currencies,
+  currencyList: currency.currencyList,
   sales: opportunity.sales,
   workflow: opportunity.workflow,
   stages: opportunity.stages,
-  contactByCustomerId:customer.contactByCustomerId,
   orgId: auth.userDetails.organizationId,
   fullName: auth.userDetails.fullName,
   crmAllData:leads.crmAllData,
@@ -659,10 +619,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addCustomerOpportunity,
-      getAllSalesList,
+      getCurrencyList,
       getWorkflow,
-      getStages,
-      getContactListByCustomerId,
+      getStages, 
       getCrm,
     },
     dispatch

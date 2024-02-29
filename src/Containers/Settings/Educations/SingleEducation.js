@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
-import DeleteIcon from '@mui/icons-material/Delete';
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import {removeEducation} from "../Educations/EducationAction"
+import { bindActionCreators } from "redux";
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
@@ -17,7 +20,7 @@ class SingleEducations extends Component {
   }
   render() {
     const {
-      education: { educationType, educationTypeId },
+      education: { educationType,creationDate, educationTypeId },
       handleChange,
       name,
       value,
@@ -27,16 +30,22 @@ class SingleEducations extends Component {
       handleDeleteEducation,
     } = this.props;
     console.log(linkedEducations);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <EducationWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <EducationName style={{ flexBasis: "85%" }}>
-                  {educationType}
-                </EducationName>
+                <div class=" font-semibold" >
+                  {educationType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}
+                </div>
                 <div>
                   {this.props.education.editInd ? (
                     <BorderColorIcon
@@ -47,27 +56,28 @@ class SingleEducations extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+                
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeEducation(educationTypeId )}
+                        >
+                    <DeleteOutlined
                      
-                      onClick={() => handleDeleteEducation(educationTypeId)}
-                      size="14px"
+                      // onClick={() => handleDeleteEducation(educationTypeId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                        </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+   
                 </div>
               </div>
             ) : (
@@ -79,8 +89,7 @@ class SingleEducations extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -98,7 +107,7 @@ class SingleEducations extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+                
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -108,22 +117,22 @@ class SingleEducations extends Component {
             )
           }
         </ViewEditCard>
-      </EducationWrapper>
+      </div>
     );
   }
 }
 
-export default SingleEducations;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const EducationWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const EducationName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const EducationValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeEducation,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEducations);
+
+
+

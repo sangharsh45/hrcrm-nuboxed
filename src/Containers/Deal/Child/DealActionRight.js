@@ -18,6 +18,7 @@ class DealActionRight extends React.Component {
          {/* {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.opportunityFullListInd===true &&( */}
   {/* <OpportunityShareForm/> */}
          {/* )} */}
+         <div class="max-sm:hidden">
         <Button
         style={{lineHeight:"inherit"}}
            type="primary"
@@ -30,6 +31,7 @@ class DealActionRight extends React.Component {
                 defaultMessage="Export"
               />
         </Button>
+        </div>
         <Tooltip placement={"left"} title={<FormattedMessage
                 id="app.create"
                 defaultMessage="Create"

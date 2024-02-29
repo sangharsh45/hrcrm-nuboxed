@@ -1,12 +1,17 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Button, Tooltip } from "antd";
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { Component ,lazy} from "react";
+import { Button, Tooltip,Popconfirm } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {removeTask} from "../Task/TaskAction"
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
-import TaskConnetToggle from "./TaskConnetToggle";
+const TaskConnetToggle = lazy(() =>
+  import("./TaskConnetToggle")
+);
 
 class SingleTasks extends Component {
   constructor(props) {
@@ -19,7 +24,7 @@ class SingleTasks extends Component {
   }
   render() {
     const {
-      task: { taskType, taskTypeId,taskCheckListInd },
+      task: { taskType,creationDate, taskTypeId,taskCheckListInd },
       handleChange,
       name,
       value,
@@ -29,15 +34,21 @@ class SingleTasks extends Component {
       handleDeleteTask,
     } = this.props;
     console.log(linkedTasks);
+    const currentdate = dayjs().format("DD/MM/YYYY");
+    const date = dayjs(creationDate).format("DD/MM/YYYY");
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
     return (
-      <TaskWrapper>
+      <div class=" w-full cursor-pointer">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
                    <div class=" flex w-2/5">
-                <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
+                   <div class=" font-semibold" >{taskType}&nbsp;&nbsp;&nbsp;
+            {date === currentdate ?<span class="text-xs text-[tomato] font-bold"
+                                  >
+                                    New
+                                  </span> : null}</div>
                 <div>
                   </div>
                 </div>
@@ -62,27 +73,28 @@ class SingleTasks extends Component {
                       style={{fontSize:"1rem"}}
                     />
                   ) : null}
-                  &nbsp;
+               
                   <Tooltip title="Delete">
-                    <DeleteIcon
+                  <Popconfirm
+                          title="Do you want to delete?"
+                          okText="Yes"
+                          cancelText="No"
+                          onConfirm={() => this.props.removeTask(taskTypeId )}
+                        >
+                    <DeleteOutlined
                     
-                      onClick={() => handleDeleteTask(taskTypeId)}
-                      size="14px"
+                      // onClick={() => handleDeleteTask(taskTypeId)}
+                    
                       style={{
                         verticalAlign: "center",
-                        marginLeft: "5px",
+                        marginLeft: "1rem",
+                        fontSize:"1rem",
                         color: "red",
                       }}
                     />
+                       </Popconfirm>
                   </Tooltip>
-                  {/* <ActionIcon
-                                  tooltipTitle="Delete"
-                                 iconType="delete"
-                                  handleIconClick={() => handleDeleteSector(typeId)}
-                                  size="0.75em"
-                                theme="filled"
-                               style={{ color: "#666" }}
-                                 /> */}
+ 
                 </div>
               </div>
             ) : (
@@ -94,8 +106,7 @@ class SingleTasks extends Component {
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
-                <br />
-                <br />
+               
                 <div class=" ml-auto" >
                   <Button
                     type="primary"
@@ -109,7 +120,7 @@ class SingleTasks extends Component {
                     {/* Save */}
                     <FormattedMessage id="app.update" defaultMessage="Update" />
                   </Button>
-                  &nbsp;
+               
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
@@ -119,22 +130,22 @@ class SingleTasks extends Component {
             )
           }
         </ViewEditCard>
-      </TaskWrapper>
+      </div>
     );
   }
 }
 
-export default SingleTasks;
+const mapStateToProps = ({ departments, sector }) => ({
 
-const TaskWrapper = styled.div`
-  width: 100%;
-  cursor: pointer;
-`;
-const TaskName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 600;
-`;
-const TaskValue = styled.h3`
-  color: #999;
-  font-size: 1.3rem;
-`;
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeTask,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTasks);
+
+
+
