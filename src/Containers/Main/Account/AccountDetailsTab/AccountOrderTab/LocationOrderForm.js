@@ -90,6 +90,7 @@ function LocationOrderForm(props) {
 const mapStateToProps = ({ distributor, plant, auth }) => ({
     orgId: auth.userDetails.organizationId,
     locationlist: distributor.locationlist,
+    userId: auth.userDetails.userId
 });
 
 const mapDispatchToProps = (dispatch) =>
