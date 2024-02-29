@@ -46,7 +46,8 @@ const AccountOrderTable = (props) => {
     useEffect(() => {
         setPage(page + 1);
         props.getDistributorOrderByDistributorId(props.distributorId, page)
-    }, [props.distributorId, page])
+    }, [])
+
     const [particularRowData, setParticularRowData] = useState({});
 
     function handleSetParticularOrderData(item) {
@@ -213,9 +214,8 @@ const AccountOrderTable = (props) => {
 
 
                                                             <div class=" text-xs text-cardBody font-poppins text-center">
-                                                                {item.type === "Catalogue" ?
-                                                                    item.productionLocationDetailsViewDTO && item.productionLocationDetailsViewDTO.name || "" :
-                                                                    item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
+
+                                                                {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
                                                             </div>
                                                         </div>
 
@@ -311,56 +311,25 @@ const AccountOrderTable = (props) => {
 
                                                     </div>
                                                     <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                                        {props.inspectionRequiredInd ?
-                                                            <div class=" text-xs text-cardBody font-poppins">
-                                                                {item.transferInd === 0 ? (
-                                                                    <Tooltip title="Send To Refurbish">
-                                                                        <Button
-                                                                            class="cursor-pointer bg-[#3096e9] text-white text-base"
-                                                                            onClick={() => {
-                                                                                handleSetParticularOrderData(item);
-                                                                                props.handleAccountProduction(true);
-                                                                            }}
-                                                                        >
-                                                                            <FormattedMessage
-                                                                                id="app.sendtostore"
-                                                                                defaultMessage="Send To Store"
-                                                                            />
+                                                        {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name ? null : <Tooltip title={<FormattedMessage
+                                                            id="app.selectinventorylocation"
+                                                            defaultMessage="Select Inventory Location"
+                                                        />}>
+                                                            <Button
+                                                                type='primary'
+                                                                className="cursor-pointer text-sm bg-[#3096e9] text-white"
+                                                                onClick={() => {
+                                                                    handleSetParticularOrderData(item);
+                                                                    props.handleInventoryLocationInOrder(true);
+                                                                }}
+                                                            >
+                                                                <FormattedMessage
+                                                                    id="app.orderpickup"
+                                                                    defaultMessage="Pickup"
+                                                                />
 
-                                                                        </Button>
-                                                                    </Tooltip>
-
-                                                                ) : null
-                                                                }
-                                                            </div>
-                                                            :
-                                                            <div class=" text-xs text-cardBody font-poppins">
-                                                                {item.transferInd === 0 ? (
-                                                                    <Tooltip title={<FormattedMessage
-                                                                        id="app.selectinventorylocation"
-                                                                        defaultMessage="Select Inventory Location"
-                                                                    />}>
-                                                                        <Button
-                                                                            type='primary'
-                                                                            className="cursor-pointer text-sm bg-[#3096e9] text-white"
-                                                                            onClick={() => {
-                                                                                handleSetParticularOrderData(item);
-                                                                                props.handleInventoryLocationInOrder(true);
-                                                                            }}
-                                                                        >
-                                                                            <FormattedMessage
-                                                                                id="app.orderpickup"
-                                                                                defaultMessage="Pickup"
-                                                                            />
-
-                                                                        </Button>
-                                                                    </Tooltip>
-
-                                                                ) : null
-                                                                }
-                                                            </div>}
-
-
+                                                            </Button>
+                                                        </Tooltip>}
                                                     </div>
                                                     <div class="flex justify-end">
                                                         <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
