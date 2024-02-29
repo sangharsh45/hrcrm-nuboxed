@@ -55,6 +55,10 @@ function PitchEventForm (props) {
     handleEventModal(false);
     callback && callback();
   };
+
+  function handleReset(resetForm) {
+    resetForm();
+  };
  const handleReminderChange = (checked) => {
   setRemider(checked);
   };
@@ -134,11 +138,9 @@ const {
     return (
       <>
         <Formik
-          enableReinitialize
+          // enableReinitialize
           initialValues={
-            isEditing
-              ? prefillEvent
-              : {
+            {
                   eventType: "",
                   eventTypeId: "",
                   eventSubject: "",
@@ -151,7 +153,7 @@ const {
                   startTime: startDate || null,
                   endDate: endDate || null,
                   endTime: endDate || null,
-                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
+                  // assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   note: "",
                   eventStatus: "",
                   allDayInd: true,
@@ -242,34 +244,35 @@ const {
 
             let newEndTime = `${finalEndTime}${timeEndPart}`;
 
-            isEditing
-              ? updateEvent(
-                  prefillEvent.eventId,
-                  {
-                    ...values,
-                    startDate: `${newStartDate}T${newStartTime}`,
-                    endDate: `${newEndDate}T${newEndTime}`,
-                    startTime: 0,
-                    endTime: 0,
-                    assignedTo: selectedOption ? selectedOption.employeeId:userId,
-                  },
-                  handleCallback
-                )
-              : addPitchActivityEvent(
+            // isEditing
+            //   ? updateEvent(
+            //       prefillEvent.eventId,
+            //       {
+            //         ...values,
+            //         startDate: `${newStartDate}T${newStartTime}`,
+            //         endDate: `${newEndDate}T${newEndTime}`,
+            //         startTime: 0,
+            //         endTime: 0,
+            //         assignedTo: selectedOption ? selectedOption.employeeId:userId,
+            //       },
+            //       handleCallback
+            //     )
+               addPitchActivityEvent(
                   {
                     ...values,
                     investorLeadsId:props.rowdata.investorLeadsId,
                     ownerIds: userId === userId ? [userId] : [],
-                    startDate: `${newStartDate}T20:00:00Z`,
-                    endDate: `${newEndDate}T20:00:00Z`,
+                    // startDate: `${newStartDate}T20:00:00Z`,
+                    // endDate: `${newEndDate}T20:00:00Z`,
+                    startDate: `${newStartDate}T${newStartTime}`,
+                    endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
                     endTime: 0,
                     remindInd: reminder ? true : false,
                     assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  handleCallback
-                );
-            !isEditing && resetForm();
+                  () => handleReset(resetForm)
+                  );
           }}
         >
           {({

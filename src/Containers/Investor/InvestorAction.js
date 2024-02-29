@@ -829,3 +829,10 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const handleInvestorPulseDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_PULSE_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
