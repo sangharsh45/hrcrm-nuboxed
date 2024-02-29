@@ -473,7 +473,7 @@ const AccountOrderTable = (props) => {
 
                                         )
                                     })}
-                                </> : !props.fetchingDistributorByDistributorId && !props.distributorOrder.length ? <NodataFoundPage /> : null}
+                                </> : <NodataFoundPage />}
                         </InfiniteScroll>
                     </div>
                 </div>
