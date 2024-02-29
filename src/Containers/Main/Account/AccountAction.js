@@ -709,7 +709,7 @@ export const getCustomerByUser = (userId, pageNo) => (dispatch) => {
     type: types.GET_CUSTOMER_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/${userId}/${pageNo}`,
+    .get(`${base_url2}/distributor/user/${userId}/${pageNo}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

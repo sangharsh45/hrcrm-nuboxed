@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import { Link } from "../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  getAllDistributorsList,
+  getCustomerByUser,
   setEditDistributor,
   handleUpdateDistributorModal,
   handleDistributorOrderModal,
@@ -26,7 +26,7 @@ function AccountTable(props) {
   const [RowData, setRowData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getAllDistributorsList(page);
+    props.getCustomerByUser(props.userId, page);
     setPage(page + 1);
   }, []);
   function handleCurrentRowData(datas) {
@@ -35,10 +35,7 @@ function AccountTable(props) {
 
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getAllDistributorsList(props.currentUser ? props.currentUser : page,
-
-
-    );
+    props.getCustomerByUser(props.userId, props.currentUser ? props.currentUser : page);
   }
 
   const {
@@ -90,14 +87,14 @@ function AccountTable(props) {
 
           </div>
           <InfiniteScroll
-            dataLength={props.allDistributors.length}
+            dataLength={props.customerListByUser.length}
             next={handleLoadMore}
             hasMore={hasMore}
-            loader={props.fetchingAllDistributors ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
+            loader={props.fetchingCustomerByUser ? <div style={{ textAlign: 'center' }}>Loading...</div> : null}
             height={"75vh"}
           >
 
-            {props.allDistributors.map((item) => {
+            {props.customerListByUser.map((item) => {
               const currentdate = dayjs().format("DD/MM/YYYY");
               const date = dayjs(item.creationDate).format("DD/MM/YYYY");
               const diff = Math.abs(
@@ -258,8 +255,8 @@ function AccountTable(props) {
   );
 }
 const mapStateToProps = ({ distributor, auth }) => ({
-  allDistributors: distributor.allDistributors,
-  fetchingAllDistributors: distributor.fetchingAllDistributors,
+  customerListByUser: distributor.customerListByUser,
+  fetchingCustomerByUser: distributor.fetchingCustomerByUser,
   fetchingDistributorsByUserIdError:
     distributor.fetchingDistributorsByUserIdError,
   userId: auth.userDetails.userId,
@@ -274,7 +271,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleUpdateDistributorModal,
-      getAllDistributorsList,
+      getCustomerByUser,
       setEditDistributor,
       handleDistributorOrderModal,
       handleDistributorActivityTableModal,
