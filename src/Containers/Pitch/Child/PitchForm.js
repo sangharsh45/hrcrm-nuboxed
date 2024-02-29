@@ -269,6 +269,9 @@ props.getSectors();
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${user.countryDialCode}`,
+                        }}
                         isColumn
                         // width={"100%"}
                         selectType="dialCode"
@@ -534,6 +537,7 @@ orgId:auth.userDetails.organizationId,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   fullName: auth.userDetails.fullName,
+  // countryDialCode:auth.userDetails.countryDialCode,
   sectors: sector.sectors,
 });
 

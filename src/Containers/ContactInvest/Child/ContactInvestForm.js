@@ -343,6 +343,9 @@ class ContactInvestForm extends Component {
                             defaultMessage="Dial Code"
                           />
                         }
+                        defaultValue={{
+                          label:`+${user.countryDialCode}`,
+                        }}
                         isColumn
                         // width={"100%"}
                         selectType="dialCode"
@@ -393,6 +396,9 @@ class ContactInvestForm extends Component {
                              defaultMessage="Dial Code"
                            />
                          }
+                         defaultValue={{
+                          label:`+${user.countryDialCode1}`,
+                        }}
                          isColumn
                          component={SelectComponent}
                          options={

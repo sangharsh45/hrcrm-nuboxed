@@ -230,11 +230,14 @@ function UpdateInvestorForm (props) {
                                 defaultMessage="Source"
                               />
                             }
+                            defaultValue={{
+                              label:RowData.source,
+                            }}
                           
                             selectType="sourceName"
                             component={SearchSelect}
                             // value={values.source}
-                            defaultValue={RowData.source}
+                            // defaultValue={RowData.source}
                             isColumn
                           />
 

@@ -13,7 +13,7 @@ import { MultiAvatar, } from "../../../../../../Components/UI/Elements";
 import { ActionIcon } from "../../../../../../Components/Utils";
 import Highlighter from "react-highlight-words";
 import {SearchOutlined}  from '@ant-design/icons';
-import {getDealContactList} from "../../../../DealAction";
+import {getDealContactList,setContactRoleForDeals} from "../../../../DealAction";
 
 const ButtonGroup = Button.Group;
 class LinkedDealContact extends Component {
@@ -37,7 +37,7 @@ class LinkedDealContact extends Component {
      
     };
 
-    this.props.setContactRoleForOpportunity(data,contactId);
+    this.props.setContactRoleForDeals(data,contactId);
   };
   handleAddPlusClick1 = (contactId) => {
    
@@ -47,7 +47,7 @@ class LinkedDealContact extends Component {
      
     };
 
-    this.props.setContactRoleForOpportunity(data,contactId);
+    this.props.setContactRoleForDeals(data,contactId);
   };
   handleAddPlusClick2 = (contactId) => {
    
@@ -57,7 +57,7 @@ class LinkedDealContact extends Component {
      
     };
 
-    this.props.setContactRoleForOpportunity(data,contactId);
+    this.props.setContactRoleForDeals(data,contactId);
   };
   handleAddPlusClick3 = (contactId) => {
    
@@ -67,7 +67,7 @@ class LinkedDealContact extends Component {
      
     };
 
-    this.props.setContactRoleForOpportunity(data,contactId);
+    this.props.setContactRoleForDeals(data,contactId);
   };
 
   getColumnSearchProps = (dataIndex) => ({
@@ -349,7 +349,8 @@ const mapStateToProps = ({ deal }) => ({
 const mapDidivtchToProps = (didivtch) =>
   bindActionCreators(
     {
-        getDealContactList
+        getDealContactList,
+        setContactRoleForDeals
     },
     didivtch
   );
