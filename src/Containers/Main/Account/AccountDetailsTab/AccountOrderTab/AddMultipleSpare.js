@@ -183,7 +183,7 @@ const AddMultipleSpare = (props) => {
                                 // placeholder={`select`}
                                 >
                                     {props.currencies.map((a) => {
-                                        return <Option value={a.currencyName}>{a.currencyName}</Option>;
+                                        return <Option value={a.currency_name}>{a.currency_name}</Option>;
                                     })}
                                 </Select>
 

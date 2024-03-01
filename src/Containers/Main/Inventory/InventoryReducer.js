@@ -222,6 +222,9 @@ const initialState = {
   fetchingRefurbishProductError: false,
   refurbishProduct: [],
 
+  updatingOrderReceive: false,
+  updatingOrderReceiveError: false,
+
   fetchingMaterialReceiveData: false,
   fetchingMaterialReceiveDataError: false,
   materialReceiveData: [],
@@ -997,7 +1000,11 @@ export const inventoryReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingInspection: false,
-        receivedOrdeIdModal: false
+        receivedOrdeIdModal: false,
+        // allReceivedUser: state.allReceivedUser.map((item) =>
+        //   item.orderId === action.payload.orderId
+        //     ? action.payload : item
+        // ),
       };
     case types.UPDATE_INSPECTION_FAILURE:
       return {
@@ -1257,7 +1264,25 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         fetchingGrnNoByPoId: false,
         fetchingGrnNoByPoIdError: true,
+      };
 
+
+    case types.UPDATE_ORDER_RECEIVE_REQUEST:
+      return { ...state, updatingOrderReceive: true };
+    case types.UPDATE_ORDER_RECEIVE_SUCCESS:
+      return {
+        ...state,
+        updatingOrderReceive: false,
+        allReceivedUser: state.allReceivedUser.map((item) =>
+          item.orderId === action.payload.orderId
+            ? action.payload : item
+        ),
+      };
+    case types.UPDATE_ORDER_RECEIVE_FAILURE:
+      return {
+        ...state,
+        updatingOrderReceive: false,
+        updatingOrderReceiveError: true,
       };
     default:
       return state;

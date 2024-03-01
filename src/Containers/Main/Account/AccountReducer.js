@@ -1234,6 +1234,13 @@ export const distributorReducer = (state = initialState, action) => {
         addingCar: false,
         updateOrderModal: false,
         addLinkDistributorOrderConfigureModal: false,
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.ADD_CAR_FAILURE:
       return {

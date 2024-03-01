@@ -50,7 +50,7 @@ function AddOrderInAccount(props) {
                 deliveryDate: "",
                 contactPersonId: "",
                 paymentInTerms: "",
-                // customPayment: "",
+                customPayment: "",
                 comments: "",
                 awbNo: "",
                 orderCurrencyId: "",
@@ -62,7 +62,6 @@ function AddOrderInAccount(props) {
                 userId: props.userId,
                 orderId: "",
                 priority: priority || "",
-                xlUpdateInd: false,
                 loadingAddress: [
                     {
                         address1: "",
@@ -101,7 +100,7 @@ function AddOrderInAccount(props) {
                     props.addOrderForm({
                         ...values,
                         priority: priority || "",
-                        // paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
+                        paymentInTerms: values.paymentInTerms === "Custom" ? values.customPayment : values.paymentInTerms,
 
                     }, props.distributorId);
                 } else {
@@ -189,7 +188,7 @@ function AddOrderInAccount(props) {
                                         options={["7", "15", "21", "30", "45", "60", "75", "90", "Custom"]}
                                     />
                                 </div>
-                                {/* {values.paymentInTerms === "Custom" && <div class="w-[22%]">
+                                {values.paymentInTerms === "Custom" && <div class="w-[22%]">
                                     <Field
                                         label={
                                             <FormattedMessage
@@ -203,7 +202,7 @@ function AddOrderInAccount(props) {
                                         width={"100%"}
                                         isColumn
                                     />
-                                </div>} */}
+                                </div>}
                                 <div class="w-[22%]">
                                     <Field
                                         label="Air Way Bill"
@@ -363,7 +362,7 @@ function AddOrderInAccount(props) {
                                     <Button
                                         className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
                                         htmlType="Submit"
-                                        loading={props.addingOrders}
+                                        loading={props.addingOrder}
                                     >
                                         <FormattedMessage
                                             id="app.save"
@@ -387,7 +386,7 @@ const mapStateToProps = ({ homeStepper, auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
-    addingOrders: distributor.addingOrders
+    addingOrder: distributor.addingOrder
 });
 
 const mapDispatchToProps = (dispatch) =>

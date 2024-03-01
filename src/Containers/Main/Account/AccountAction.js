@@ -1971,13 +1971,16 @@ export const applyForLoginInContact = (data, contactPersonId, id, userId) => (di
         },
       })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Applied for login',
+        showConfirmButton: true,
+      })
       dispatch(getContactDistributorList(id))
       dispatch({
         type: types.APPLY_FOR_LOGIN_IN_CONTACT_SUCCESS,
         payload: res.data,
       });
-      message.success("Apply for login is updated successfully !!")
     })
     .catch((err) => {
       console.log(err);
@@ -2004,7 +2007,7 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
         title: 'Repair facility has been choosen',
         showConfirmButton: true,
       })
-      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
+      // dispatch(getDistributorOrderByDistributorId(distributorId, 0))
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
