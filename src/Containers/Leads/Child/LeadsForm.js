@@ -18,8 +18,6 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import { Listbox, } from '@headlessui/react';
-// import {getDialCode} from "../../Investor/InvestorAction";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -37,7 +35,6 @@ function LeadsForm (props) {
  
   useEffect(()=> {
 props. getCrm();
-// props.getDialCode();
   },[]);
 
     const {
@@ -57,13 +54,6 @@ props. getCrm();
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.crmAllData.find((item) => item.empName === selected);
 
-    // const dialCodeOption = props.dialCodeList.map((item) => {
-    //   return {
-    //     label: `+${item.country_dial_code || ""}`,
-    //     value: item.country_dial_code
-    //     ,
-    //   };
-    // });
     
     return (
       <>
@@ -263,8 +253,9 @@ props. getCrm();
                         name="countryDialCode"
                         selectType="dialCode"
                         component={SearchSelect}
-                        value={values.countryDialCode1}
-                        
+                        defaultValue={{
+                          label:`${props.user.countryDialCode}`,
+                        }}
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
@@ -273,10 +264,6 @@ props. getCrm();
                           />
                         }
                         isColumn
-                        // component={SelectComponent}
-                        // options={
-                        //   Array.isArray(dialCodeOption) ? dialCodeOption : []
-                        // }
                         inlineLabel
                       />
                   
@@ -560,7 +547,7 @@ props. getCrm();
     );
 }
 
-const mapStateToProps = ({ auth, leads,investor }) => ({
+const mapStateToProps = ({ auth, leads }) => ({
   addingLeads: leads.addingLeads,
   crmAllData:leads.crmAllData,
   addingLeadsError: leads.addingLeadsError,
@@ -568,7 +555,7 @@ const mapStateToProps = ({ auth, leads,investor }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   fullName: auth.userDetails.fullName,
-  // dialCodeList:investor.dialCodeList,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -577,7 +564,7 @@ const mapDispatchToProps = (dispatch) =>
        addLeads,
        getCrm,
       setClearbitData,
-      // getDialCode,
+
     },
     dispatch
   );

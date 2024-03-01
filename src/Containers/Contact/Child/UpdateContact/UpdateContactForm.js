@@ -16,7 +16,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
-import {getDialCode} from "../../../Investor/InvestorAction";
+
 
 const { Option } = Select;
 /**
@@ -34,7 +34,6 @@ const UpdateContactSchema = Yup.object().shape({
 class UpdateContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
-    this.props.getDialCode();
   }
   constructor(props) {
     super(props);
@@ -133,12 +132,7 @@ class UpdateContactForm extends Component {
         value: item.customerId,
       };
     });
-    const dialCodeOption = this.props.dialCodeList.map((item) => {
-      return {
-        label: `+${item.country_dial_code || ""}`,
-        value: item.country_dial_code
-      };  });
-
+   
     return (
       <>
         <Formik
@@ -318,10 +312,11 @@ class UpdateContactForm extends Component {
                           />
                         }
                         isColumn
-                        component={SelectComponent}
-                        options={
-                          Array.isArray(dialCodeOption) ? dialCodeOption : []
-                        }
+                        selectType="dialCode"
+                        component={SearchSelect}
+                        defaultValue={{
+                          label:`+${this.props.user.countryDialCode }`,
+                        }}
                         inlineLabel
                       />
                     </div>
@@ -597,7 +592,7 @@ class UpdateContactForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, investor,customer, departments, designations, opportunity }) => ({
+const mapStateToProps = ({ auth, contact,customer, departments, designations, opportunity }) => ({
   setEditingContact: contact.setEditingContact,
   updateContactById: contact.updateContactById,
   updateContactByIdError: contact.updateContactByIdError,
@@ -607,13 +602,13 @@ const mapStateToProps = ({ auth, contact, investor,customer, departments, design
   customerId: customer.customer.customerId,
   departmentId: departments.departmentId,
   designationTypeId: designations.designationTypeId,
-  dialCodeList:investor.dialCodeList,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDialCode,
+
       updateContact,
       getCustomerData,
       getDesignations,

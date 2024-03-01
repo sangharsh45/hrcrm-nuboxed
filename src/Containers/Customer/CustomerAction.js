@@ -665,9 +665,7 @@ export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
       // cb && cb();
       Swal.fire({
         icon: 'error',
-        title: res.data.message,
-        // showConfirmButton: false,
-        // timer: 1500
+        title: 'Contact is exist with same emailId !',
       })
     })
     .catch((err) => {
