@@ -517,7 +517,8 @@ const PitchCardList = (props) => {
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
-        <div className="md:w-[10.3rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
+                <div class=" w-4"></div>
+        <div className="md:w-[8.3rem] max-xl:text-[0.65rem] max-lg:text-[0.45rem]"><FormattedMessage
                   id="app.qualify"
                   defaultMessage="qualify"
                 /></div>
@@ -751,7 +752,7 @@ const PitchCardList = (props) => {
              
                                     </div>
                                 </div>
-     <div className=" flex font-medium flex-col md:w-[5.5rem]  max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
+     <div className=" flex font-medium flex-col md:w-[4.5rem]  max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem]">
                        
                        {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
@@ -767,11 +768,7 @@ const PitchCardList = (props) => {
             </span>
                    </div>
                                
-                         
-                   <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem] ">
-                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
-         
-                                    <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                   <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
                 <span className=" cursor-pointer"
@@ -788,7 +785,11 @@ const PitchCardList = (props) => {
                 </span>
               </Tooltip>
             ) : null}
-                        </div>
+                        </div>  
+                   <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row w-full max-sm:justify-between max-xl:text-[0.65rem] max-lg:text-[0.45rem] ">
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</div> */}
+         
+                        
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>

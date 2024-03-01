@@ -19,6 +19,8 @@ const initialState = {
       fetchingAllPitchError: false,
       allPitchData:[],
 
+      clearbit: {},
+
       addingPitchActivityEvent: false,
       addingPitchActivityEventError: false,
 
@@ -69,6 +71,10 @@ const initialState = {
     fetchingDocumentsByPitchId:false,
     fetchingDocumentsByPitchIdError:false,
     documentsByPitchId:[],
+
+    fetchingPitchActivityCount: false,
+    fetchingPitchActivityCountError: false,
+    pitchActivityCount:{},
 
 
     updatePitchById:false,
@@ -133,6 +139,7 @@ case types.GET_PITCH_REQUEST:
       ...state,
       fetchingPitch: false,
       pitchData: [...state.pitchData, ...action.payload],
+      clearbit:null
     };
   case types.GET_PITCH_FAILURE:
     return {
@@ -476,6 +483,7 @@ case types.GET_PITCH_REQUEST:
       ...state,
       fetchingAllPitch: false,
       allPitchData: action.payload,
+      clearbit:null
     };
   case types.GET_ALL_PITCH_FAILURE:
     return {
@@ -562,6 +570,25 @@ case types.GET_PITCH_REQUEST:
                     pitchData: [], 
                     // deletedTruck: [] 
                   };
+
+                  case types.SET_CLEARBIT_DATA:
+                    return { ...state, clearbit: action.payload };
+
+
+                    case types.GET_PITCH_ACTIVITY_RECORDS_REQUEST:
+                      return { ...state, fetchingPitchActivityCount: true };
+                    case types.GET_PITCH_ACTIVITY_RECORDS_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingPitchActivityCount: false,
+                        pitchActivityCount: action.payload,
+                      };
+                    case types.GET_PITCH_ACTIVITY_RECORDS_FAILURE:
+                      return {
+                        ...state,
+                        fetchingPitchActivityCount: false,
+                        fetchingPitchActivityCountError: true,
+                      };
 
     default:
 return state;

@@ -139,6 +139,7 @@ const [rowdata, setrowdata] = useState("");
   const {
     fetchingCustomers,
     customerByUserId,
+    fetchingCustomerPagination,
     handleUpdateCustomerModal,
     addDrawerCustomerPulseModal,
     addDrawerCustomerContactModal,
@@ -574,7 +575,7 @@ const [rowdata, setrowdata] = useState("");
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<div class="flex justify-center">Loading...</div>:null}
+        loader={fetchingCustomers || fetchingCustomerPagination?<div class="flex justify-center">Loading...</div>:null}
         height={"75vh"}
       >
       
@@ -749,14 +750,14 @@ const [rowdata, setrowdata] = useState("");
                        
                        {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
-                       <Tooltip title={item.ownerName}>
+                       {/* <Tooltip title={item.ownerName}> */}
                 <MultiAvatar
                   primaryTitle={item.ownerName}
                   imageId={item.ownerImageId}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
-              </Tooltip>
+              {/* </Tooltip> */}
                    </div>
                    <div className=" flex font-medium justify-center flex-col w-[9.1rem] max-sm:flex-row  ">
                        
@@ -998,6 +999,7 @@ const mapStateToProps = ({
   addDrawerCustomerOpportunityModal:customer.addDrawerCustomerOpportunityModal,
   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
+  fetchingCustomerPagination:customer.fetchingCustomerPagination,
   sales: opportunity.sales,
   addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
   recruiterName: opportunity.recruiterName,

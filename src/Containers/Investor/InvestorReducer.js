@@ -8,6 +8,10 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+  fetchingInvestorActivityCount: false,
+  fetchingInvestorActivityCountError: false,
+  investorActivityCount:{},
+
   fetchingDialCode: false,
   fetchingDialCodeError: false,
   dialCodeList:[],
@@ -719,6 +723,22 @@ export const investorReducer = (state = initialState, action) => {
                                     };
                                   case types.GET_INVESTOR_CONTACT_VALUE_FAILURE:
                                     return { ...state, fetchingInvContactValue: false, fetchingInvContactValueError: true };
+
+
+                                    case types.GET_INVESTOR_ACTIVITY_RECORDS_REQUEST:
+                                      return { ...state, fetchingInvestorActivityCount: true };
+                                    case types.GET_INVESTOR_ACTIVITY_RECORDS_SUCCESS:
+                                      return {
+                                        ...state,
+                                        fetchingInvestorActivityCount: false,
+                                        investorActivityCount: action.payload,
+                                      };
+                                    case types.GET_INVESTOR_ACTIVITY_RECORDS_FAILURE:
+                                      return {
+                                        ...state,
+                                        fetchingInvestorActivityCount: false,
+                                        fetchingInvestorActivityCountError: true,
+                                      };
 
 
 default:

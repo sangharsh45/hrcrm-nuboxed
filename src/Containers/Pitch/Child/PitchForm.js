@@ -9,8 +9,7 @@ import {getSectors} from "../../Settings/Sectors/SectorsAction"
 import {getSources} from "../../Settings/Category/Source/SourceAction"
 import {getAllEmployeelist,getDialCode} from "../../Investor/InvestorAction"
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { setClearbitData} from "../../Leads/LeadsAction";
-import {addPitch} from "../PitchAction"
+import {addPitch,setClearbitData} from "../PitchAction"
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -528,7 +527,7 @@ props.getSectors();
 const mapStateToProps = ({ auth,investor,source,countrys,sector, leads,employee,pitch }) => ({
     addingPitch: pitch.addingPitch,
   addingLeadsError: leads.addingLeadsError,
-   clearbit: leads.clearbit,
+   clearbit: pitch.clearbit,
   user: auth.userDetails,
   sources: source.sources,
   country: countrys.country,
@@ -549,7 +548,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllEmployeelist,
       getSources,
       getDialCode,
-      getSectors
+      getSectors,
    
     },
     dispatch

@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip } from "antd";
+import { Badge, Tooltip } from "antd";
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { FormattedMessage } from "react-intl";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -316,7 +316,12 @@ class ContactDetailTab extends Component {
                   <TabPane
               tab={
                 <>
+
                   <ReceiptIcon style={{fontSize:"1.1rem"}}/>
+                  <Badge
+                count={this.props.customerActivityCount.count}
+                overflowCount={999}
+              > 
                   <span class=" ml-1">
                     {
                       <FormattedMessage
@@ -325,7 +330,9 @@ class ContactDetailTab extends Component {
                       />
                     }
                     {/* Documents */}
+                 
                   </span>
+                  </Badge>
                   {activeKey === "7" && (
                     <>
                       <PlusOutlined
@@ -465,6 +472,7 @@ class ContactDetailTab extends Component {
 }
 const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   documentUploadModal: customer.documentUploadModal,
+  customerActivityCount:customer.customerActivityCount,
   addCustomerContactModal: customer.addCustomerContactModal,
   addCustomerOpportunityModal: customer.addCustomerOpportunityModal,
   customerId: customer.customer.customerId,
