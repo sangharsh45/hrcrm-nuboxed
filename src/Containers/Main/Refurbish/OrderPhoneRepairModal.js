@@ -10,7 +10,7 @@ const OrderPhoneRepairModal = (props) => {
         <>
             <StyledDrawer
                 title={(`Order # - ${rowData.newOrderNo}`)}
-                width="85%"
+                width="90%"
                 visible={showRepairPhoneList}
                 closable
                 destroyOnClose

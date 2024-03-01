@@ -225,7 +225,7 @@ const initialState = {
 
   fetchingItemTaskCount: false,
   fetchingItemTaskCountError: false,
-  itemTaskcount:{}
+  itemTaskcount: {}
 
 };
 
@@ -627,7 +627,7 @@ export const refurbishReducer = (state = initialState, action) => {
       };
 
     case types.HANDLE_ORDER_PHONE_MODAL:
-      return { ...state, showPhoneList: action.payload };
+      return { ...state, showPhoneList: action.payload, orderPhoneList: [] };
 
     case types.GET_ORDERID_BY_USER_REQUEST:
       return { ...state, fetchingOrderIdByUserId: true };
@@ -702,7 +702,7 @@ export const refurbishReducer = (state = initialState, action) => {
       };
 
     case types.HANDLE_REPAIR_PHONE_MODAL:
-      return { ...state, showRepairPhoneList: action.payload };
+      return { ...state, showRepairPhoneList: action.payload, repairPhone: [] };
 
     case types.GET_REPAIR_ORDER_BY_USER_REQUEST:
       return { ...state, fetchingRepairorderById: true };
@@ -1030,54 +1030,54 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingTaskByPhoneIdError: true,
       };
 
-      case types.APPROVE_SPARE_REQUEST:
-        return { ...state, approvingSpare: true };
-      case types.APPROVE_SPARE_SUCCESS:
-        return {
-          ...state,
-          approvingSpare: false,
-          allSpareById: state.allSpareById.filter(
-            (item) => item.phoneSpareId !== action.payload.phoneSpareId
-          ),
-        };
-      case types.APPROVE_SPARE_FAILURE:
-        return {
-          ...state,
-          approvingSpare: false,
-          approvingSpareError: true,
-        };  
-        
-        case types.UPDATE_PROCESS_TASK_REQUEST:
-          return { ...state, updatingProcessTask: true };
-        case types.UPDATE_PROCESS_TASK_SUCCESS:
-          return {
-            ...state,
-            updatingProcessTask: false,
-            taskByPhone: state.taskByPhone.filter(
-              (item) => item.phoneTaskId !== action.payload.phoneTaskId
-            ),
-          };
-        case types.UPDATE_PROCESS_TASK_FAILURE:
-          return {
-            ...state,
-            updatingProcessTask: false,
-            updatingProcessTaskError: true,
-          };  
+    case types.APPROVE_SPARE_REQUEST:
+      return { ...state, approvingSpare: true };
+    case types.APPROVE_SPARE_SUCCESS:
+      return {
+        ...state,
+        approvingSpare: false,
+        allSpareById: state.allSpareById.filter(
+          (item) => item.phoneSpareId !== action.payload.phoneSpareId
+        ),
+      };
+    case types.APPROVE_SPARE_FAILURE:
+      return {
+        ...state,
+        approvingSpare: false,
+        approvingSpareError: true,
+      };
 
-          case types.GET_TASK_ITEM_COUNT_REQUEST:
-            return { ...state, fetchingItemTaskCount: true };
-          case types.GET_TASK_ITEM_COUNT_SUCCESS:
-            return {
-              ...state,
-              fetchingItemTaskCount: false,
-              itemTaskcount: action.payload,
-            };
-          case types.GET_TASK_ITEM_COUNT_FAILURE:
-            return {
-              ...state,
-              fetchingItemTaskCount: false,
-              fetchingItemTaskCountError: true,
-            };
+    case types.UPDATE_PROCESS_TASK_REQUEST:
+      return { ...state, updatingProcessTask: true };
+    case types.UPDATE_PROCESS_TASK_SUCCESS:
+      return {
+        ...state,
+        updatingProcessTask: false,
+        taskByPhone: state.taskByPhone.filter(
+          (item) => item.phoneTaskId !== action.payload.phoneTaskId
+        ),
+      };
+    case types.UPDATE_PROCESS_TASK_FAILURE:
+      return {
+        ...state,
+        updatingProcessTask: false,
+        updatingProcessTaskError: true,
+      };
+
+    case types.GET_TASK_ITEM_COUNT_REQUEST:
+      return { ...state, fetchingItemTaskCount: true };
+    case types.GET_TASK_ITEM_COUNT_SUCCESS:
+      return {
+        ...state,
+        fetchingItemTaskCount: false,
+        itemTaskcount: action.payload,
+      };
+    case types.GET_TASK_ITEM_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingItemTaskCount: false,
+        fetchingItemTaskCountError: true,
+      };
 
     default:
       return state;
