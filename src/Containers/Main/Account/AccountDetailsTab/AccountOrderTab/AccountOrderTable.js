@@ -311,7 +311,7 @@ const AccountOrderTable = (props) => {
 
                                                     </div>
                                                     <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                                        {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name ? null : <Tooltip title={<FormattedMessage
+                                                        {item.inventoryReceiveInd ? null : <Tooltip title={<FormattedMessage
                                                             id="app.selectinventorylocation"
                                                             defaultMessage="Select Inventory Location"
                                                         />}>
@@ -442,7 +442,7 @@ const AccountOrderTable = (props) => {
 
                                         )
                                     })}
-                                </> : <NodataFoundPage />}
+                                </> : !props.distributorOrder.length && !props.fetchingDistributorByDistributorId ? <NodataFoundPage /> : null}
                         </InfiniteScroll>
                     </div>
                 </div>

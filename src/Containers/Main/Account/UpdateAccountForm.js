@@ -93,23 +93,9 @@ const UpdateAccountForm = ({
           description: setEditingDistributor.description || "",
           imageId: setEditingDistributor.imageId || "",
           notes: setEditingDistributor.notes || "",
+          customPayment: "",
           dialCode: setEditingDistributor.dialCode || "",
           clientId: setEditingDistributor.clientId || "",
-
-          // address: [
-          // {
-          // country:setEditingCustomer.country || "",
-          //   addressId: setEditingDistributor.address.address[0].addressId || "",
-          //   address1: setEditingDistributor.address.length ? setEditingDistributor.address[0].address1 : "",
-          //   address2:  setEditingDistributor.address.length ? setEditingDistributor.address[0].address2 : "",
-          //   street:  setEditingDistributor.address.length ? setEditingDistributor.address[0].street : "",
-          //   city:  setEditingDistributor.address.length ? setEditingDistributor.address[0].city : "",
-          //   state:  setEditingDistributor.address.address[0].state || "",
-          //   country: setEditingDistributor.address.length ? setEditingDistributor.address[0].country : "",
-          //   postalCode:  setEditingDistributor.address.length ? setEditingDistributor.address[0].postalCode : "",             
-          // },
-          //   ],
-
           address: [
             {
               addressId: setEditingDistributor.address.length ? setEditingDistributor.address[0].addressId : "",
@@ -135,6 +121,7 @@ const UpdateAccountForm = ({
             {
               ...values,
               vatInd: vatInd,
+              payment: values.payment === "Custom" ? values.customPayment : values.payment,
               assignedTo: selectedOption ? selectedOption.employeeId : userId,
             },
             setEditingDistributor.distributorId,
@@ -152,7 +139,6 @@ const UpdateAccountForm = ({
           values,
           ...rest
         }) => (
-
           <Form class="form-background">
             <div class="flex justify-between" >
               <div class=" h-full w-w47.5 max-sm:w-wk">
@@ -270,21 +256,45 @@ const UpdateAccountForm = ({
                     />
                   </div>
                 </div>
-                <Field
-                  name="insuranceGrade"
-                  type="text"
-                  label={
-                    <FormattedMessage
-                      id="app.insurancegrade"
-                      defaultMessage="insurancegrade"
+                <div class="flex justify-between mt-4" >
+                  <div class="w-w47.5">
+                    <Field
+                      name="insuranceGrade"
+                      type="text"
+                      label={
+                        <FormattedMessage
+                          id="app.insurancegrade"
+                          defaultMessage="insurancegrade"
+                        />
+                      }
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
                     />
-                  }
-                  width={"100%"}
-                  component={InputComponent}
-                  isColumn
-                  inlineLabel
-                />
-                <div class=" flex justify-between mt-4">
+                  </div>
+                  <div class="w-w47.5">
+                    <Field
+                      name="clientId"
+                      label={
+                        <FormattedMessage
+                          id="app.type"
+                          defaultMessage="Type"
+                        />
+                      }
+                      isColumn
+                      placeholder="Type"
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(customerTypeOptions)
+                          ? customerTypeOptions
+                          : []
+                      }
+
+                    />
+                  </div>
+                </div>
+                <div class="flex justify-between mt-4" >
                   <div class="w-w47.5">
                     <FastField
                       label={
@@ -322,7 +332,7 @@ const UpdateAccountForm = ({
                     />
                   </div>
                 </div>
-                <div class=" flex justify-between mt-4">
+                <div class="flex justify-between mt-4" >
                   <div class="w-w47.5">
                     <FastField
                       label={
@@ -340,44 +350,26 @@ const UpdateAccountForm = ({
                       isColumn
                     />
                   </div>
-                  <div class="w-w47.5">
-                    <Field
-                      name="clientId"
+                  {values.payment === "Custom" && <div class="w-w47.5">
+                    <FastField
                       label={
                         <FormattedMessage
-                          id="app.type"
-                          defaultMessage="Type"
+                          id="app.Custom Payment"
+                          defaultMessage="Custom Payment"
                         />
                       }
+                      name="customPayment"
+                      component={InputComponent}
+                      inlineLabel
+                      width={"100%"}
                       isColumn
-                      placeholder="Type"
-                      component={SelectComponent}
-                      options={
-                        Array.isArray(customerTypeOptions)
-                          ? customerTypeOptions
-                          : []
-                      }
-
                     />
-                  </div>
+                  </div>}
                 </div>
-                <div class="mt-4">
-                  <Field
-                    name="description"
-                    label={
-                      <FormattedMessage
-                        id="app.description"
-                        defaultMessage="description"
-                      />
-                    }
-                    width={"100%"}
-                    isColumn
-                    component={TextareaComponent}
-                  />
-                </div>
+
               </div>
-              <div class="w-w47.5">
-                <div class="  w-full mt-2">
+              <div class=" h-full w-w47.5 max-sm:w-wk">
+                <div class=" h-full w-full mt-3">
                   <Listbox value={selected} onChange={setSelected}>
                     {({ open }) => (
                       <>
@@ -448,7 +440,7 @@ const UpdateAccountForm = ({
                   </Listbox>
                 </div>
                 <div class="mt-4">
-                  <StyledLabel ><FormattedMessage
+                  <StyledLabel > <FormattedMessage
                     id="app.billingaddress"
                     defaultMessage="billingaddress"
                   /></StyledLabel>
@@ -463,6 +455,20 @@ const UpdateAccountForm = ({
                         values={values}
                       />
                     )}
+                  />
+                </div>
+                <div class="mt-4">
+                  <Field
+                    name="description"
+                    label={
+                      <FormattedMessage
+                        id="app.description"
+                        defaultMessage="description"
+                      />
+                    }
+                    width={"100%"}
+                    isColumn
+                    component={TextareaComponent}
                   />
                 </div>
               </div>

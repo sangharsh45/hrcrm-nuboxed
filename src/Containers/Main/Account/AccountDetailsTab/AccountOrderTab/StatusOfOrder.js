@@ -4,7 +4,8 @@ import {
     startQCStatus,
     startRepairInStatus,
     handlePaymentHistory,
-    handleRepairReason
+    handleRepairReason,
+    handlePaidModal
 } from "../../AccountAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,6 +13,7 @@ import moment from 'moment';
 import StartRepairReasonModal from './StartRepairReasonModal';
 import ShowPaymentHistoryModal from './ShowPaymentHistoryModal';
 import { FormattedMessage } from 'react-intl';
+import PaidButtonModal from './PaidButtonModal';
 
 const StatusOfOrder = (props) => (
     <div class="bg-white">
@@ -46,6 +48,9 @@ const StatusOfOrder = (props) => (
                                     <div className=' flex justify-around w-[38rem]'>
                                         <Button
                                             type='primary'
+                                            onClick={() => {
+                                                props.handlePaidModal(true);
+                                            }}
                                         >
                                             Receive Payment
                                         </Button>
@@ -249,11 +254,16 @@ const StatusOfOrder = (props) => (
             handlePaymentHistory={props.handlePaymentHistory}
             showPaymentHistoryModal={props.showPaymentHistoryModal}
         />
-
+        <PaidButtonModal
+            addPaidButtonModal={props.addPaidButtonModal}
+            handlePaidModal={props.handlePaidModal}
+            particularRowData={props.particularRowData}
+        />
     </div>
 );
 const mapStateToProps = ({ distributor, auth }) => ({
     userId: auth.userDetails.userId,
+    addPaidButtonModal: distributor.addPaidButtonModal,
     showRepairReasonModal: distributor.showRepairReasonModal,
     showPaymentHistoryModal: distributor.showPaymentHistoryModal,
     startingQcInStatus: distributor.startingQcInStatus,
@@ -267,7 +277,8 @@ const mapDispatchToProps = (dispatch) =>
             startQCStatus,
             startRepairInStatus,
             handlePaymentHistory,
-            handleRepairReason
+            handleRepairReason,
+            handlePaidModal
         },
         dispatch
     );

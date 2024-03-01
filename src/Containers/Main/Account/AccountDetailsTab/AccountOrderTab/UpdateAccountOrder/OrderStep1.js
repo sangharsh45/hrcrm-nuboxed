@@ -279,7 +279,7 @@ function OrderStep1(props) {
                                         inlineLabel
                                         width={"100%"}
                                         component={DatePicker}
-                                    // value={values.availabilityDate}
+                                        value={values.availabilityDate}
 
                                     />
                                 </div>

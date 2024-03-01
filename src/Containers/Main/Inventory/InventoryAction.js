@@ -1083,6 +1083,11 @@ export const updateValidationInReceive = (data, phoneId, id) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getPhonelistByOrderId(id))
+      Swal.fire({
+        icon: 'success',
+        title: 'Phone Received',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.UPDATE_VALIDATION_IN_RECEIVE_SUCCESS,
         payload: res.data,
@@ -1120,7 +1125,11 @@ export const updateInspection = (data, orderPhoneId, locationId) => (dispatch) =
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Inspection Status Updated',
+        showConfirmButton: true,
+      })
       dispatch(getReceivedUserList(locationId))
       dispatch({
         type: types.UPDATE_INSPECTION_SUCCESS,
@@ -1329,8 +1338,7 @@ export const updateReceivedDamagedUnit = (data, poSupplierDetailsId, suppliesId)
       Swal.fire({
         icon: 'success',
         title: 'Updated Successfully',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       console.log(res);
       dispatch({
@@ -1389,8 +1397,7 @@ export const generateGrnForPo = (data) => (dispatch) => {
       Swal.fire({
         icon: 'success',
         title: 'Grn Created Successfully',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       dispatch({
         type: types.GENERATE_GRN_FOR_PO_SUCCESS,
@@ -1452,8 +1459,7 @@ export const trnasferGrnItemToStock = (data, poSupplierSuppliesId) => (dispatch)
       Swal.fire({
         icon: 'success',
         title: 'Updated Successfully',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       dispatch({
         type: types.TRANSFER_PO_GRN_TO_STOCK_SUCCESS,
@@ -1522,8 +1528,7 @@ export const updatePartIdOfAnItem = (data, supplierSuppliesUniqueNumberId) => (d
       Swal.fire({
         icon: 'success',
         title: 'Part no updated successfully',
-        showConfirmButton: false,
-        timer: 1500
+        showConfirmButton: true,
       })
       dispatch({
         type: types.UPDATE_PART_ID_OF_AN_ITEM_SUCCESS,
@@ -1584,6 +1589,31 @@ export const getPartNoByItem = (poSupplierSuppliesId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_PART_NO_BY_ITEM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateOrderReceiveToggle = (data, orderId, locationId) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_ORDER_RECEIVE_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/inventoryReceived/${orderId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getReceivedUserList(locationId))
+      dispatch({
+        type: types.UPDATE_ORDER_RECEIVE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.UPDATE_ORDER_RECEIVE_FAILURE,
         payload: err,
       });
     });

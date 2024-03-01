@@ -76,7 +76,10 @@ function LocationOrderForm(props) {
                                 />
                             </div>
                             <div class="flex justify-end mt-5">
-                                <Button type="primary" htmlType="submit">
+                                <Button
+                                    loading={props.addingLocationInOrder}
+                                    type="primary"
+                                    htmlType="submit">
                                     Submit
                                 </Button>
                             </div>
@@ -90,7 +93,8 @@ function LocationOrderForm(props) {
 const mapStateToProps = ({ distributor, plant, auth }) => ({
     orgId: auth.userDetails.organizationId,
     locationlist: distributor.locationlist,
-    userId: auth.userDetails.userId
+    userId: auth.userDetails.userId,
+    addingLocationInOrder: distributor.addingLocationInOrder
 });
 
 const mapDispatchToProps = (dispatch) =>
