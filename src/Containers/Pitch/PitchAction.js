@@ -811,3 +811,36 @@ export const ClearReducerDataOfPitch = () => (dispatch) => {
     type: types.HANDLE_CLAER_REDUCER_DATA_PITCH,
   });
 };
+
+export const setClearbitData = (data) => (dispatch) => {
+  dispatch({
+    type: types.SET_CLEARBIT_DATA,
+    payload: data,
+  });
+};
+
+export const getPitchActivityRecords = (investorLeadsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PITCH_ACTIVITY_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorLeads/activity/record/${investorLeadsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PITCH_ACTIVITY_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PITCH_ACTIVITY_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

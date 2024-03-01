@@ -6,11 +6,12 @@ import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dayjs from 'dayjs';
- import { getCustomerActivityTimeline } from '../../CustomerAction';
+ import { getCustomerActivityTimeline,getCustomerActivityRecords } from '../../CustomerAction';
 
 const CustomerActivityTable = (props) => {
   useEffect(() => {
       props.getCustomerActivityTimeline(props.customer.customerId);
+      props.getCustomerActivityRecords(props.customer.customerId);
   }, []);
 
   const { customerActivityTimeline, ratingValue } = props;
@@ -51,12 +52,14 @@ const CustomerActivityTable = (props) => {
 const mapStateToProps = ({ customer, auth }) => ({
   userId: auth.userDetails.userId,
   customerActivityTimeline: customer.customerActivityTimeline,
+  customerActivityCount:customer.customerActivityCount,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getCustomerActivityTimeline,
+        getCustomerActivityRecords
     },
     dispatch
   );

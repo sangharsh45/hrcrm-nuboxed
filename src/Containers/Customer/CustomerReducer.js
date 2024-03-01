@@ -279,6 +279,10 @@ const initialState = {
   fetchingInvoiceByCustomerError: false,
   invoiceByCustomerId: [],
 
+  fetchingCustomerActivityCount: false,
+  fetchingCustomerActivityCountError: false,
+  customerActivityCount:{},
+
   fetchingCustomerCloser:false,
   fetchingCustomerCloserError:false,
   customerCloser:[],
@@ -1839,6 +1843,22 @@ export const customerReducer = (state = initialState, action) => {
                                                                         };
                                                                       case types.GET_PROSPECT_CONTACT_VALUE_FAILURE:
                                                                         return { ...state, fetchingContactValue: false, fetchingContactValueError: true };
+
+
+                                                                        case types.GET_CUSTOMER_ACTIVITY_RECORDS_REQUEST:
+                                                                          return { ...state, fetchingCustomerActivityCount: true };
+                                                                        case types.GET_CUSTOMER_ACTIVITY_RECORDS_SUCCESS:
+                                                                          return {
+                                                                            ...state,
+                                                                            fetchingCustomerActivityCount: false,
+                                                                            customerActivityCount: action.payload,
+                                                                          };
+                                                                        case types.GET_CUSTOMER_ACTIVITY_RECORDS_FAILURE:
+                                                                          return {
+                                                                            ...state,
+                                                                            fetchingCustomerActivityCount: false,
+                                                                            fetchingCustomerActivityCountError: true,
+                                                                          };
                                                                   
                                                                 
                                                               

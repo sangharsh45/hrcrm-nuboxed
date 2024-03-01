@@ -182,7 +182,7 @@ render() {
                 }
               
                 value={
-                  this.props.WonInvestorPipeline.wonPipeLineValue
+                  this.props.WonInvestorPipeline.pipeLineWonValue
     
                 }
                  isLoading={this.props.fetchingWonInvPipelineValue} 

@@ -83,6 +83,11 @@ const initialState = {
   fetchingContactOpportunityError: false,
   opportunityByContactId: [],
 
+
+  fetchingContactActivityCount: false,
+  fetchingContactActivityCountError: false,
+  contactActivityCount:{},
+
   updateContactModal: false,
 
   linkingOpportunityContact:false,
@@ -984,6 +989,23 @@ export const contactReducer = (state = initialState, action) => {
                                 fetchingContactsCETRecord: false,
                                 fetchingContactsCETRecordError: true,
                             };
+
+
+                               
+    case types.GET_CONTACT_ACTIVITY_RECORDS_REQUEST:
+      return { ...state, fetchingContactActivityCount: true };
+    case types.GET_CONTACT_ACTIVITY_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingContactActivityCount: false,
+        contactActivityCount: action.payload,
+      };
+    case types.GET_CONTACT_ACTIVITY_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingContactActivityCount: false,
+        fetchingContactActivityCountError: true,
+      };
 
                   default:
       return state;

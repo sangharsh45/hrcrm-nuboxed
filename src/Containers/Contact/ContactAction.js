@@ -1427,3 +1427,29 @@ export const getContactCETrecord = (contactId) => (dispatch) => {
           });
       });
 };
+
+export const getContactActivityRecords = (contactId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CONTACT_ACTIVITY_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/activity/record/${contactId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CONTACT_ACTIVITY_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CONTACT_ACTIVITY_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

@@ -56,6 +56,10 @@ const initialState = {
   fetchingCrmError: false,
   crmAllData:[],
 
+  fetchingLeadsActivityCount: false,
+  fetchingLeadsActivityCountError: false,
+  leadsActivityCount:{},
+
 
   addLeadsOpportunityModal:false,
 
@@ -953,6 +957,21 @@ case types.HANDLE_LEADS_MODAL:
 
                     case types.EMPTY_LEADS_LIST:
                       return { ...state, leadsAllData: [] }; 
+
+                      case types.GET_LEADS_ACTIVITY_RECORDS_REQUEST:
+                        return { ...state, fetchingLeadsActivityCount: true };
+                      case types.GET_LEADS_ACTIVITY_RECORDS_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingLeadsActivityCount: false,
+                          leadsActivityCount: action.payload,
+                        };
+                      case types.GET_LEADS_ACTIVITY_RECORDS_FAILURE:
+                        return {
+                          ...state,
+                          fetchingLeadsActivityCount: false,
+                          fetchingLeadsActivityCountError: true,
+                        };
 
 default:
 return state;

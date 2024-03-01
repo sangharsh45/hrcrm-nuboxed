@@ -1032,3 +1032,29 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const getInvestorActivityRecords = (investorId) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTOR_ACTIVITY_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/activity/record/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_ACTIVITY_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTOR_ACTIVITY_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };

@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip } from "antd";
+import { Badge, Tooltip } from "antd";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import AddchartIcon from '@mui/icons-material/Addchart'; 
 import { FormattedMessage } from "react-intl";
@@ -266,6 +266,10 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
               tab={
                 <>
                   <AddchartIcon style={{fontSize:"1.1rem"}}/>
+                  <Badge
+                count={this.props.investorActivityCount.count}
+                overflowCount={999}
+              > 
                   <span class=" ml-1">
                     {
                       <FormattedMessage
@@ -275,6 +279,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                     }
                     {/* Documents */}
                   </span>
+                  </Badge>
                   {activeKey === "3" && (
                     <>
                       <PlusOutlined
@@ -498,6 +503,7 @@ const mapStateToProps = ({ auth, investor, contact, opportunity,deal }) => ({
   opendocumentUploadModal: investor.opendocumentUploadModal,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
+  investorActivityCount:investor.investorActivityCount,
   investorActivityModal:investor.investorActivityModal,
 contactsbyInvestorId:investor.contactsbyInvestorId,
 opencreateDealModal:deal.opencreateDealModal
