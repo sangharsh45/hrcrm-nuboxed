@@ -1,7 +1,10 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { PieChart_ } from "../../Components/Charts";
+import Piechart1 from "../../Components/Charts/PieChart1";
 import { BundleLoader } from "../../Components/Placeholder";
+import CustomerGoogleMap from "./Child/Chart/CustomerGoogleMap";
 import {setDashboardViewType} from "./DashboardAction";
 const DashboardCustomerTab= lazy(()=>import("./DashboardCustomerTab"));
 const FunnelChartAll= lazy(()=>import("./FunnelChartAll"));
@@ -123,10 +126,22 @@ class Dashboard extends Component {
           <OrdersDashTab/>)
           :this.state.activeButton==="Finance" ?(
             <FinanceDashTab/>)
-       : viewType==="ALL" || this.state.activeButton==="Customer" ?(
+       :  this.state.activeButton==="Customer" ?(
         <CustomerLeadsTab/>)
-        :
-       <TaskDashboardTab
+        :  viewType==="ALL" ?(
+          <Piechart1
+          // width={450}
+          // height={390}
+          // // data={opportunityAmountBySource}
+          // innerRadius={40}
+          // outerRadius={80}
+          // textData
+          // curr
+
+      />
+          // <CustomerLeadsTab/>
+          )
+       :<TaskDashboardTab
       viewType={viewType}
       />
        }
@@ -144,7 +159,16 @@ class Dashboard extends Component {
                    (<DashboardDetailsTab viewType={viewType}/>)
                    :this.state.activeButton==="Finance" ?(
                     null)
-                   : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
+                    : viewType==="ALL" || this.state.activeButton==="Customer" ? ( <CustomerGoogleMap
+                    //   emptyTruckLoad={props.emptyTruckLoad}
+                    //   latLngArray={latLngArray}
+                    //   origin={origin}
+                    //  //  truckIcon={truckIcon}
+                    //   selectedMarker={selectedMarker}
+                    //   handleMarkerClick={handleMarkerClick}
+                      />)
+                  
+                  //  : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
             
            
             :(
@@ -159,10 +183,12 @@ class Dashboard extends Component {
      <div class="w-[47%] max-sm:w-wk">
      <div class=" flex flex-col display-block" >
        <div class=" flex justify-between" >
-       {this.state.activeButton ==="test" && (
+       {this.state.activeButton ==="test" && viewType !=="ALL" && (
             <TodoDashboardTab
             viewType={viewType}
             />)}
+
+            
              {viewType==="bulb" ? (<SourceChart/>)
             
              :null

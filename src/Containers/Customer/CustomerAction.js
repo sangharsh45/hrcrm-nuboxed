@@ -2409,6 +2409,33 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
   };
 
 
+  export const getCustomerActivityRecords = (customerId) => (dispatch) => {
+    dispatch({
+      type: types.GET_CUSTOMER_ACTIVITY_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/activity/record/${customerId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CUSTOMER_ACTIVITY_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CUSTOMER_ACTIVITY_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
 
   
  

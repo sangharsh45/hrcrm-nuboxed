@@ -1,5 +1,5 @@
 import { Badge, Tag,Tooltip,Avatar } from "antd";
-import React, {  } from "react";
+import React, { useState } from "react";
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
@@ -20,6 +20,7 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import DashboardShareForm from "./DashboardShareForm";
 
 const DashboardActionLeft = (props) => {
+  const [showShareForm, setShowShareForm] = useState(false);
   const {
     setSelectedTimeIntervalReport,
     dateRangeList,
@@ -29,7 +30,9 @@ const DashboardActionLeft = (props) => {
     activeButton,
     user,
   } = props;
-
+  const toggleShareForm = () => {
+    setShowShareForm(!showShareForm);
+  };
   return (
     <>
       <div class=" flex items-center "  >
@@ -51,206 +54,390 @@ const DashboardActionLeft = (props) => {
                   fontFamily:"poppins",
                   borderColor: "tomato",
                 }}
-               onClick={() => setDashboardViewType("ALL")}
+                onClick={() => {
+                  setDashboardViewType("ALL");
+                  toggleShareForm(); // Toggle the state when switching to "ALL"
+                }}
               >
-                <FormattedMessage
+                 {showShareForm ?"Enterprise": "My view"  }
+                {/* <FormattedMessage
                   id="app.enterprise"
                   defaultMessage="Enterprise"
-                />
+                /> */}
               </Tag>
             )}
-             {viewType==="ALL" && (
-        <DashboardShareForm/>
-        )}
+         {viewType === "ALL" && showShareForm && <DashboardShareForm />}
            
     
-        <div class="flex w-[10rem] ml-2 ">
-        {viewType==="ALL" ?null: (
-        <Badge
-        size="small"
-        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
-      >
-        <span class=" cursor-pointer mr-1 "
-                onClick={() => handleButtonClick("test")} 
-          // onClick={() => props.setDashboardViewType("test")}
-          style={{
-            color: activeButton === "test" && "tomato",
-  
-          }}> 
-              <Tooltip title="My Details">
-              <Avatar style={{ background: activeButton === "test" ? "#f279ab" : "#4bc076" }}>
-          <PersonIcon className="text-white"   />
-          </Avatar>
-          </Tooltip>
-        
-        </span>
-        </Badge>
-        )}
-        <Badge
-        size="small"
-        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
-      >
-        <span class="cursor-pointer mr-1" 
-        onClick={() => handleButtonClick("Tasks")} 
-        style={{
-          color:activeButton === "Tasks" && "tomato",
-          
-        }}
-        >
-         <Tooltip title="Tasks">
-         <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>     
-     <FactCheckIcon className="text-white"
-               
-              />
-                  </Avatar>
-              </Tooltip>
-        </span>
-  </Badge>
+         <div className="flex w-[10rem] ml-2">
+          {viewType === "ALL" && showShareForm  ? (
+            // Render all icons except "My Details"
+            <>
+              {/* Your Badge components here */}
+              {/* Example: */}
        
-    {user.crmInd === true && (
-        <Badge
-        size="small"
-        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-        // overflowCount={999}
-      >
-        <span class="cursor-pointer mr-1"
-        onClick={() =>  handleButtonClick("Customer")} 
-        style={{
-          color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && viewType === "ALL" && "#444" : viewType === "ALL" && "tomato" ,
-       
-        }}
-        >
-          <Tooltip title="Prospect">
-          <Avatar style={{ background: activeButton === "Customer" ? "#f279ab" : "#4bc076" }}>     
-          <ApartmentIcon  className="text-white"
+   
+   
+{user.crmInd === true && (
+    <Badge
+    size="small"
+    // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+    // overflowCount={999}
+  >
+    <span class="cursor-pointer mr-1"
+    onClick={() =>  handleButtonClick("Customer")} 
+    style={{
+      color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && viewType === "ALL" && "#444" : viewType === "ALL" && "tomato" ,
+    }}
+    >
+      <Tooltip title="Prospect">
+      <Avatar style={{ background: activeButton === "Customer" ? "#f279ab" : "#4bc076" }}>     
+      <ApartmentIcon  className="text-white"
 
 
 />
 </Avatar>
 </Tooltip>        
-        </span>
-        </Badge>
+    </span>
+    </Badge>
 )}
-       
+   
 
-   
-    {user.orderManagementInd === true && (
-         <Badge
-         size="small"
-         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-         // overflowCount={999}
-       >
-        <span class="cursor-pointer mr-1"
-        onClick={() => handleButtonClick("Accounts")} 
-        style={{
-          color:activeButton === "Accounts" && "tomato",
-          
-        }}
-        >
-          <Tooltip title="Customer">
-          <Avatar style={{ background: activeButton === "Accounts" ? "#f279ab" : "#4bc076" }}>     
-          <AcUnitIcon className="text-white"
-                
-              />
-                </Avatar>
-          </Tooltip>
-        </span>
-        </Badge>
-    )}
-{user.orderManagementInd === true  && (
-      <Badge
-      size="small"
-      // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-      // overflowCount={999}
+
+{user.orderManagementInd === true && (
+     <Badge
+     size="small"
+     // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+     // overflowCount={999}
+   >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Accounts")} 
+    style={{
+      color:activeButton === "Accounts" && "tomato",
+      
+    }}
     >
-        <span class="cursor-pointer mr-1"
-        onClick={() => handleButtonClick("Order")} 
-        style={{
-          color:activeButton === "Order" && "tomato",
-    
-        }}
-        >  <Tooltip title="Orders">
-            <Avatar style={{ background: activeButton === "Order" ? "#f279ab" : "#4bc076" }}>     
-          <DynamicFeedIcon className="text-white"
-               
-              />
-               </Avatar>
-           </Tooltip>
-        </span>
-        </Badge>
+      <Tooltip title="Customer">
+      <Avatar style={{ background: activeButton === "Accounts" ? "#f279ab" : "#4bc076" }}>     
+      <AcUnitIcon className="text-white"
+            
+          />
+            </Avatar>
+      </Tooltip>
+    </span>
+    </Badge>
 )}
-   
-    {user.financeInd === true && (
+
+ 
+{user.orderManagementInd === true  && (
+  <Badge
+  size="small"
+  // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+  // overflowCount={999}
+>
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Order")} 
+    style={{
+      color:activeButton === "Order" && "tomato",
+
+    }}
+    >  <Tooltip title="Orders">
+        <Avatar style={{ background: activeButton === "Order" ? "#f279ab" : "#4bc076" }}>     
+      <DynamicFeedIcon className="text-white"
+           
+          />
+           </Avatar>
+       </Tooltip>
+    </span>
+    </Badge>
+)}
+
+{user.financeInd === true && (
+    <Badge
+    size="small"
+    // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+    // overflowCount={999}
+  >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Finance")} 
+    style={{
+      color:activeButton === "Finance" && "tomato",
+      
+    }}
+    >
+       <Tooltip title="Finance">
+       <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
+      <ReceiptIcon  className="text-white"/>
+      </Avatar>
+      </Tooltip>
+      
+    </span>
+    </Badge>
+)}
+    {user.imInd === true  && (
         <Badge
         size="small"
         // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         // overflowCount={999}
       >
-        <span class="cursor-pointer mr-1"
-        onClick={() => handleButtonClick("Finance")} 
-        style={{
-          color:activeButton === "Finance" && "tomato",
-          
-        }}
-        >
-           <Tooltip title="Finance">
-           <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
-          <ReceiptIcon  className="text-white"/>
-          </Avatar>
-          </Tooltip>
-          
-        </span>
-        </Badge>
-    )}
-        {user.imInd === true  && (
-            <Badge
-            size="small"
-            // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-            // overflowCount={999}
-          >
-        <span class="cursor-pointer mr-1"
-        onClick={() => handleButtonClick("Investors")} 
-        style={{
-          color:activeButton === "Investors" && "tomato",
-    
-        }}
-        >  
-        <Tooltip title="Investors">
-        <Avatar style={{ background: activeButton === "Investors" ? "#f279ab" : "#4bc076" }}>     
-          <LocationCityIcon className="text-white"
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Investors")} 
+    style={{
+      color:activeButton === "Investors" && "tomato",
+
+    }}
+    >  
+    <Tooltip title="Investors">
+    <Avatar style={{ background: activeButton === "Investors" ? "#f279ab" : "#4bc076" }}>     
+      <LocationCityIcon className="text-white"
 />
 </Avatar>
 </Tooltip>       
-        </span>
-        </Badge>
+    </span>
+    </Badge>
 )}
 
 {user.recruitProInd === true  && (
-            <Badge
-            size="small"
-            // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
-            // overflowCount={999}
-          >
-        <span class="cursor-pointer mr-1"
-        onClick={() => handleButtonClick("RecruitPro")} 
-        style={{
-          color:activeButton === "RecruitPro" && "tomato",
-    
-        }}
-        >  
-        <Tooltip title="RecruitPro">
-        <Avatar style={{ background: activeButton === "RecruitPro" ? "#f279ab" : "#4bc076" }}>     
-          <RecentActorsIcon className="text-white"
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("RecruitPro")} 
+    style={{
+      color:activeButton === "RecruitPro" && "tomato",
+
+    }}
+    >  
+    <Tooltip title="RecruitPro">
+    <Avatar style={{ background: activeButton === "RecruitPro" ? "#f279ab" : "#4bc076" }}>     
+      <RecentActorsIcon className="text-white"
 />
 </Avatar>
 </Tooltip>       
-        </span>
-        </Badge>
+    </span>
+    </Badge>
 )}
-    
-   </div>
+
+<Badge size="small">
+                <span
+                  className="cursor-pointer mr-1"
+                  onClick={() => handleButtonClick("Tasks")}
+                  style={{
+                    color: activeButton === "Tasks" && "tomato",
+                  }}
+                >
+                  <Tooltip title="Tasks">
+                    <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>
+                      <FactCheckIcon className="text-white" />
+                    </Avatar>
+                  </Tooltip>
+                </span>
+              </Badge>
+            </>
+          ) : (
+            <>
+            <Badge size="small">
+              <span
+                className="cursor-pointer mr-1"
+                onClick={() => handleButtonClick("test")}
+                style={{
+                  color: activeButton === "test" && "tomato",
+                }}
+              >
+                <Tooltip title="My Details">
+                  <Avatar style={{ background: activeButton === "test" ? "#f279ab" : "#4bc076" }}>
+                    <PersonIcon className="text-white" />
+                  </Avatar>
+                </Tooltip>
+              </span>
+            </Badge>
+
+            {/* <Badge size="small">
+                <span
+                  className="cursor-pointer mr-1"
+                  onClick={() => handleButtonClick("Tasks")}
+                  style={{
+                    color: activeButton === "Tasks" && "tomato",
+                  }}
+                >
+                  <Tooltip title="Tasks">
+                    <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>
+                      <FactCheckIcon className="text-white" />
+                    </Avatar>
+                  </Tooltip>
+                </span>
+              </Badge> */}
+              <Badge
+    size="small"
+    // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+    // overflowCount={999}
+  >
+    <span class="cursor-pointer mr-1" 
+    onClick={() => handleButtonClick("Tasks")} 
+    style={{
+      color:activeButton === "Tasks" && "tomato",
+      
+    }}
+    >
+     <Tooltip title="Tasks">
+     <Avatar style={{ background: activeButton === "Tasks" ? "#f279ab" : "#4bc076" }}>     
+ <FactCheckIcon className="text-white"
+           
+          />
+              </Avatar>
+          </Tooltip>
+    </span>
+</Badge>
+   
+{user.crmInd === true && (
+    <Badge
+    size="small"
+    // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+    // overflowCount={999}
+  >
+    <span class="cursor-pointer mr-1"
+    onClick={() =>  handleButtonClick("Customer")} 
+    style={{
+      color:activeButton ==="Customer" ? activeButton === "Customer" && "tomato" && viewType === "ALL" && "#444" : viewType === "ALL" && "tomato" ,
+   
+    }}
+    >
+      <Tooltip title="Prospect">
+      <Avatar style={{ background: activeButton === "Customer" ? "#f279ab" : "#4bc076" }}>     
+      <ApartmentIcon  className="text-white"
+
+
+/>
+</Avatar>
+</Tooltip>        
+    </span>
+    </Badge>
+)}
+   
+
+
+{user.orderManagementInd === true && (
+     <Badge
+     size="small"
+     // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+     // overflowCount={999}
+   >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Accounts")} 
+    style={{
+      color:activeButton === "Accounts" && "tomato",
+      
+    }}
+    >
+      <Tooltip title="Customer">
+      <Avatar style={{ background: activeButton === "Accounts" ? "#f279ab" : "#4bc076" }}>     
+      <AcUnitIcon className="text-white"
+            
+          />
+            </Avatar>
+      </Tooltip>
+    </span>
+    </Badge>
+)}
+
+ 
+{user.orderManagementInd === true  && (
+  <Badge
+  size="small"
+  // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+  // overflowCount={999}
+>
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Order")} 
+    style={{
+      color:activeButton === "Order" && "tomato",
+
+    }}
+    >  <Tooltip title="Orders">
+        <Avatar style={{ background: activeButton === "Order" ? "#f279ab" : "#4bc076" }}>     
+      <DynamicFeedIcon className="text-white"
+           
+          />
+           </Avatar>
+       </Tooltip>
+    </span>
+    </Badge>
+)}
+
+{user.financeInd === true && (
+    <Badge
+    size="small"
+    // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+    // overflowCount={999}
+  >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Finance")} 
+    style={{
+      color:activeButton === "Finance" && "tomato",
+      
+    }}
+    >
+       <Tooltip title="Finance">
+       <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
+      <ReceiptIcon  className="text-white"/>
+      </Avatar>
+      </Tooltip>
+      
+    </span>
+    </Badge>
+)}
+    {user.imInd === true  && (
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("Investors")} 
+    style={{
+      color:activeButton === "Investors" && "tomato",
+
+    }}
+    >  
+    <Tooltip title="Investors">
+    <Avatar style={{ background: activeButton === "Investors" ? "#f279ab" : "#4bc076" }}>     
+      <LocationCityIcon className="text-white"
+/>
+</Avatar>
+</Tooltip>       
+    </span>
+    </Badge>
+)}
+
+{user.recruitProInd === true  && (
+        <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        // overflowCount={999}
+      >
+    <span class="cursor-pointer mr-1"
+    onClick={() => handleButtonClick("RecruitPro")} 
+    style={{
+      color:activeButton === "RecruitPro" && "tomato",
+
+    }}
+    >  
+    <Tooltip title="RecruitPro">
+    <Avatar style={{ background: activeButton === "RecruitPro" ? "#f279ab" : "#4bc076" }}>     
+      <RecentActorsIcon className="text-white"
+/>
+</Avatar>
+</Tooltip>       
+    </span>
+    </Badge>
+)}
+
+            </>
+            
+          )}
+        </div>
    
       <>
       <div class="ml-[9rem] max-sm:hidden" >
