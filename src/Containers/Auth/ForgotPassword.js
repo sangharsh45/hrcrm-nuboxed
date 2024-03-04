@@ -96,7 +96,6 @@
 //         )
 //    }
 //}
-
 // 
 
 
@@ -117,7 +116,7 @@ import styled from "styled-components";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import FWLogo from "../../Assets/Images/name.jpg";  // for CT
 import FWLogo2 from "../../Assets/Images/nuboxnew.jpg";  // for NB
-
+import {forgotUserPassword,validateOtpurL,verifyEmailurL} from "./AuthAction";
 /**
  * yup validation scheme for set Password
  */
@@ -195,7 +194,7 @@ class ForgotPassword extends Component {
                   <Spacer />
                   <Formik
                     initialValues={{
-                      email: "",
+                      emailId: "",
                       otp: "",
                       password: "",
                       confirmPassword: "",
@@ -205,7 +204,7 @@ class ForgotPassword extends Component {
                       console.log(values);
                       this.props.forgetPassword(
                         {
-                          email: this.props.email,
+                          emailId: this.props.email,
                         },
                         this.callback
                       );
@@ -219,7 +218,7 @@ class ForgotPassword extends Component {
                               <Field
                                 // type="defaultUser.email"
                                 placeholder="Enter your email"
-                                name="defaultUser.email"
+                                name="emailId"
                                 // label="Verify Email"
                                 // className="field"
                                 isColumn
@@ -231,22 +230,19 @@ class ForgotPassword extends Component {
                             <div className="w-[25%]" >
                               <Button
                                 type="primary"
-                                // htmlType="submit"
-                                //disabled={!values.defaultUser.email.length}
-                                // loading={isSubmitting}
+                                disabled={!values.emailId.length}
                                 onClick={() => {
-                                  this.setState({ sendOtpClicked: true });
+                                  // this.setState({ sendOtpClicked: true });
                                   this.props.verifyEmailurL({
-                                    emailId: values.defaultUser.email,
+                                    emailId: values.emailId,
                                     otp: 0,
                                   });
-                                  // this.handleOtpField()
                                 }}
-                                style={{
+                                class={{
                                   width: "100%",
                                   margin: "7%",
                                 }}
-                              // disabled={!this.state.checked}
+             
                               >
                                 Send OTP
                               </Button>
@@ -257,7 +253,7 @@ class ForgotPassword extends Component {
                             <div className="w-[75%]" >
                               <Field
                                 // disabled={!this.state.otp}
-                                name="defaultUser.validateotp"
+                                name="otp"
                                 // label="Validate OTP*"
                                 placeholder="Validate OTP"
                                 isColumn
@@ -267,21 +263,19 @@ class ForgotPassword extends Component {
                             <div className="w-[25%]">
                               <Button
                                 type="primary"
-                                // htmlType="submit"
-                                //disabled={!values.defaultUser.validateotp.length}
+                                disabled={!values.otp.length}
                                 onClick={() => {
-                                  //   this.props.validateOtpurL({
-                                  //     emailId: values.defaultUser.email,
-                                  //     otp: values.defaultUser.validateotp,
-                                  //   });
+                                    this.props.validateOtpurL({
+                                      emailId: values.emailId,
+                                      otp: values.otp,
+                                    });
 
                                 }}
                                 style={{
                                   width: "100%",
                                   margin: "7%",
                                 }}
-                                disabled={!this.state.sendOtpClicked}
-                              // disabled={!this.state.checked}
+                                // disabled={!this.state.sendOtpClicked}
                               >
                                 Validate
                               </Button>
@@ -293,7 +287,7 @@ class ForgotPassword extends Component {
                             <div className="w-full" >
                               <Field
                                 name="password"
-                                //type={this.state.type}
+                                type={this.state.type}
                                 placeholder=" New password"
                                 component={this.InputComponent}
                               />
@@ -384,7 +378,7 @@ class ForgotPassword extends Component {
                             <Button
                               type="primary"
                               htmlType="submit"
-                              Loading={this.props.changingPassword}
+                              loading={this.props.doResetpassword}
                               style={{ width: "15.875em", height: "2.5em" }}
                             // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
                             >
@@ -423,17 +417,17 @@ class ForgotPassword extends Component {
   }
 }
 const mapStateToProps = ({ auth }) => ({
-  changingPassword: auth.changingPassword,
-  changingPasswordError: auth.changingPasswordError,
+  doResetpassword: auth.doResetpassword,
+  doResetpasswordError: auth.doResetpasswordError,
   email: auth.userDetails.email,
   user: auth.userDetails,
   userType: auth.userDetails.userType,
+  validOtp: auth.validOtp,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // changePassword,
-      // validateOtpurL,
+      forgotUserPassword,validateOtpurL,verifyEmailurL
     },
     dispatch
   );
