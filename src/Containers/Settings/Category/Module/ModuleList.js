@@ -1,5 +1,6 @@
 import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
+import { Spin } from "antd";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import {addingModules,getModules} from "../Module/ModuleAction"
 import { bindActionCreators } from "redux";
@@ -13,6 +14,7 @@ import FWLogo2 from "../../../../Assets/Images/Hr.jpg";
 import FWLogo3 from "../../../../Assets/Images/Recruitpro.jpg";
 import FWLogo4 from "../../../../Assets/Images/elearning.jpg";
 import FWLogo5 from "../../../../Assets/Images/payment.jpg";
+import { BundleLoader } from "../../../../Components/Placeholder";
 const SingleModuleList = lazy(() =>
   import("./SingleModuleList")
 );
@@ -301,7 +303,8 @@ const handleFinanceClick = (checked) => {
     };
     props.addingModules(data, props.orgId);
   };
-
+  
+  if (props.fetchingModules) return <BundleLoader/>;
     return (
       <>
         <div flexWrap="nowrap">
@@ -339,8 +342,7 @@ const handleFinanceClick = (checked) => {
                         okText="Yes"
                         cancelText="No"
                       >
-                        <Switch
-                          style={{ width: "5em" }}
+                        <Switch className="w-[5rem]"
                           onChange={() => {}}
                           // onChange={handleCrmClick}
                           checked={crmStatus || crmInd}
@@ -398,7 +400,7 @@ const handleFinanceClick = (checked) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "5em" }}
+                          className="w-[5rem]"
                           // onChange={handleImClick}
                           onChange={() => {}}
                           checked={imStatus || imInd}
@@ -419,7 +421,7 @@ const handleFinanceClick = (checked) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "5em" }}
+                          className="w-[5rem]"
                           checked={accountStatus || accountInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
@@ -436,7 +438,7 @@ const handleFinanceClick = (checked) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "5em" }}
+                          className="w-[5rem]"
                           checked={recruitStatus || recruitOppsInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
@@ -463,7 +465,7 @@ const handleFinanceClick = (checked) => {
                       >
                    
                         <Switch
-                         style={{ width: "5em" }}
+                         className="w-[5rem]"
                          onChange={() => {}}
                         
                          checked={hrStatus || hrInd}
@@ -498,7 +500,7 @@ const handleFinanceClick = (checked) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "5em" }}
+                          className="w-[5rem]"
                           onChange={() => {}}
                           // onChange={handleRecruitProClick}
                           checked={recruitProStatus || recruitProInd}
@@ -527,7 +529,7 @@ const handleFinanceClick = (checked) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "5em" }}
+                          className="w-[5rem]"
                           onChange={() => {}}
                           // onChange={handleElearningClick}
                           checked={elearningStatus || elearningInd}

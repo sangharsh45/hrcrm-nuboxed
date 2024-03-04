@@ -64,7 +64,7 @@ class ReportActionLeft extends React.Component {
     return (
       <div class=" flex items-center" >
 
-<div class="flex w-[12rem] ">
+{/* <div class="flex w-[12rem] ">
         <Badge
         size="small"
       >
@@ -186,7 +186,7 @@ style={{ fontSize: "1rem" ,}}
         </Badge>
  )} 
     
-   </div>
+   </div> */}
           {user.department === "Management" && (
               <>
               <div class=" flex ">

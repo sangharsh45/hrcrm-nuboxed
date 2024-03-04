@@ -8,9 +8,7 @@ import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 import IncludedDealCardList from "./ActionRequired/IncludedDealCardList";
 import IncludedTaskCardList from "./ActionRequired/IncludedTaskCardList";
 import OppIncludedCardList from "./ActionRequired/OppIncludedCardList";
-// const LeadHotTable=lazy(()=>import("./LeadHotTable"));
-// const LeadColdTable=lazy(()=>import("./LeadColdTable"));
-// const LeadWarmTable=lazy(()=>import("./LeadWarmTable"));
+
 
 const TabPane = StyledTabs.TabPane;
 
