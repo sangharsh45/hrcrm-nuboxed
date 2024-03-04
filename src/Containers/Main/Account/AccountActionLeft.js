@@ -21,35 +21,35 @@ const AccountActionLeft = (props) => {
     }, [props.viewType, props.userId]);
 
 
-    const { distributorsByUserId } = props;
-    var total =
-        distributorsByUserId &&
-        distributorsByUserId.reduce((a, item) => {
-            return (a += item.totalPayableAmount) || 0;
-        }, 0);
-    var cost = `${Number(total).toFixed(2)}`;
+    // const { distributorsByUserId } = props;
+    // var total =
+    //     distributorsByUserId &&
+    //     distributorsByUserId.reduce((a, item) => {
+    //         return (a += item.totalPayableAmount) || 0;
+    //     }, 0);
+    // var cost = `${Number(total).toFixed(2)}`;
 
-    const { allDistributors } = props;
-    var total1 =
-        allDistributors &&
-        allDistributors.reduce((a, item) => {
-            return (a += item.totalPayableAmount) || 0;
-        }, 0);
-    var cost1 = `${Number(total1).toFixed(2)}`;
+    // const { allDistributors } = props;
+    // var total1 =
+    //     allDistributors &&
+    //     allDistributors.reduce((a, item) => {
+    //         return (a += item.totalPayableAmount) || 0;
+    //     }, 0);
+    // var cost1 = `${Number(total1).toFixed(2)}`;
 
-    var totalA =
-        distributorsByUserId &&
-        distributorsByUserId.reduce((a, item) => {
-            return (a += item.outstanding) || 0;
-        }, 0);
-    var costA = `${Number(totalA).toFixed(2)}`;
+    // var totalA =
+    //     distributorsByUserId &&
+    //     distributorsByUserId.reduce((a, item) => {
+    //         return (a += item.outstanding) || 0;
+    //     }, 0);
+    // var costA = `${Number(totalA).toFixed(2)}`;
 
-    var totalB =
-        allDistributors &&
-        allDistributors.reduce((a, item) => {
-            return (a += item.outstanding) || 0;
-        }, 0);
-    var costB = `${Number(totalB).toFixed(2)}`;
+    // var totalB =
+    //     allDistributors &&
+    //     allDistributors.reduce((a, item) => {
+    //         return (a += item.outstanding) || 0;
+    //     }, 0);
+    // var costB = `${Number(totalB).toFixed(2)}`;
 
     return (
         <div class="flex items-center" >
@@ -155,7 +155,7 @@ const AccountActionLeft = (props) => {
                         </div>
                     ) : null} */}
 
-            &nbsp;&nbsp;
+            {/* &nbsp;&nbsp;
             {props.viewType === "table" ?
                 (
                     <div>
@@ -182,7 +182,7 @@ const AccountActionLeft = (props) => {
                                 &nbsp;&nbsp;
                             </>
                         </div>
-                    ) : null}
+                    ) : null} */}
         </div>
     );
 };

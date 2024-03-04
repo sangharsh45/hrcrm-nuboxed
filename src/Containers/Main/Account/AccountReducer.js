@@ -269,6 +269,10 @@ const initialState = {
   fetchingRenewOrderByOrderIdError: false,
   RenewOrder: [],
 
+  showPulseModal: false,
+
+  showPaymentListModal: false,
+
   showRepairReasonModal: false,
 
   showPaymentHistoryModal: false,
@@ -2225,7 +2229,9 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingCustomerByUser: false,
-        customerListByUser: action.payload
+        customerListByUser: [
+          ...state.customerListByUser,
+          ...action.payload]
       };
     case types.GET_CUSTOMER_BY_USER_FAILURE:
       return {
@@ -2263,6 +2269,12 @@ export const distributorReducer = (state = initialState, action) => {
         movingToProductionArchieve: false,
         movingToProductionArchieveError: true,
       };
+
+    case types.HANDLE_ACCOUNT_PULSE:
+      return { ...state, showPulseModal: action.payload };
+
+    case types.HANDLE_PRODUCTION_PAYMENT_MODAL:
+      return { ...state, showPaymentListModal: action.payload };
     default:
       return state;
   }

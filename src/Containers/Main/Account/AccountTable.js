@@ -5,6 +5,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip } from "antd";
 import { Link } from "../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   getCustomerByUser,
   setEditDistributor,
@@ -14,10 +15,12 @@ import {
   deleteDistributorData,
   handleBillingAddressModal,
   handleUpdateAccountModal,
-  emptyDistributor
+  emptyDistributor,
+  handleAccountPulse
 } from "./AccountAction";
 import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
+import AccountPulseModal from "./AccountPulseModal";
 const UpdateAccountModal = lazy(() => import("./UpdateAccountModal"));
 
 
@@ -35,8 +38,8 @@ function AccountTable(props) {
 
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getCustomerByUser(props.userId, props.currentUser ? props.currentUser : page);
-  }
+    props.getCustomerByUser(props.userId, page);
+  };
 
   const {
     handleUpdateAccountModal,
@@ -111,20 +114,13 @@ function AccountTable(props) {
             `;
               return (
                 <div>
-                  <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 "
-                  // style={{
-                  //     borderBottom: "3px dotted #515050"
-                  // }}
-                  >
+                  <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
                     <div class="flex">
                       <div className=" flex font-medium flex-col md:w-[13.6rem] max-sm:w-full  ">
 
 
                         <Tooltip>
                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                            {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">
-                                            Name
-                                            </div> */}
                             <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
                               <Link
@@ -213,11 +209,22 @@ function AccountTable(props) {
 
                       </div>
                     </div>
+                    <div className=" flex font-medium flex-col  md:w-[6.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
+                      {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
+                      <div class=" text-xs text-cardBody font-poppins">
+                        <Tooltip title="Pulse">
+                          <MonitorHeartIcon
+                            onClick={() => {
+                              props.handleAccountPulse(true);
+                              handleCurrentRowData(item);
+                            }}
+                            className=" !text-base cursor-pointer text-[#df9697]"
+                          />
+                        </Tooltip>
+                      </div>
+                    </div>
                     <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-
-
                       {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </div> */}
                       <div class=" text-xs text-cardBody font-poppins">
                         <Tooltip title="Edit">
@@ -249,13 +256,18 @@ function AccountTable(props) {
         updateAccountModal={props.updateAccountModal}
         handleUpdateAccountModal={handleUpdateAccountModal}
       />
-
+      <AccountPulseModal
+        RowData={RowData}
+        handleAccountPulse={props.handleAccountPulse}
+        showPulseModal={props.showPulseModal}
+      />
 
     </>
   );
 }
 const mapStateToProps = ({ distributor, auth }) => ({
   customerListByUser: distributor.customerListByUser,
+  showPulseModal: distributor.showPulseModal,
   fetchingCustomerByUser: distributor.fetchingCustomerByUser,
   fetchingDistributorsByUserIdError:
     distributor.fetchingDistributorsByUserIdError,
@@ -278,7 +290,8 @@ const mapDispatchToProps = (dispatch) =>
       deleteDistributorData,
       handleBillingAddressModal,
       handleUpdateAccountModal,
-      emptyDistributor
+      emptyDistributor,
+      handleAccountPulse
     },
     dispatch
   );
