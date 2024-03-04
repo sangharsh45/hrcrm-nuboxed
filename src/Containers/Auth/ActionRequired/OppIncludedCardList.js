@@ -16,6 +16,7 @@ import {
     emptyIncludedOpportunity,
     getOpportunityIncludedCount
 } from "../AuthAction";
+import { BundleLoader } from "../../../Components/Placeholder";
 const Option =Select;
 
 function OppIncludedCardList(props) {
@@ -88,36 +89,34 @@ function OppIncludedCardList(props) {
     updateOpportunityModal,
     deleteOpportunityData,
     history,
-    fetchingOpportunity
+    fetchingIncludedOpportunity
   } = props;
   
-  // if (fetchingOpportunity) {
-  //   return <BundleLoader />;
-  // }
+  if (fetchingIncludedOpportunity) {
+    return <BundleLoader />;
+  }
 
   return (
     <>
     
-
+    <div className="page-container">
 <InfiniteScroll
                 dataLength={opportunityIncluded.length}
                 next={handleLoadMore}
                 hasMore={hasMore}
-                loader={fetchingOpportunity?<div style={{ textAlign: 'center' }}>Loading...</div> :null}
-                height={"87vh"}
+                loader={fetchingIncludedOpportunity?<div style={{ textAlign: 'center' }}>Loading...</div> :null}
+                height={"75vh"}
             >
 
-<div class=" h-h86 overflow-auto overflow-x-auto">
-             
-             <div class="flex flex-wrap w-full justify-center max-sm:justify-between max-sm:flex-col max-sm:items-center"> 
-                   
+<div class="flex flex-wrap w-full max-sm:justify-between max-sm:flex-col max-sm:items-center"> 
                {opportunityIncluded.map((item) => {
                  console.log("noOfDocPending",item.noOfDocPending)
        
                   return (
-                   <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[10rem] 
-                   text-[#444444] m-3 p-1 w-[20vw] flex flex-col  ">
-                       <div class="w-[200] flex h-[200]">
+                    <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[9rem] 
+                    text-[#444444] m-3 p-1 w-[19vw] flex flex-col  ">
+                     <div class=" flex flex-no-wrap items-center h-[2.81em]"
+                >
                     <Tooltip 
                     title={item.country}
                     >
@@ -265,10 +264,10 @@ function OppIncludedCardList(props) {
                   )  
              })}
                </div>
-               </div>
+
 
       </InfiniteScroll>
-      
+      </div>
   
 
     </>
@@ -279,6 +278,7 @@ function OppIncludedCardList(props) {
 const mapStateToProps = ({ auth, account, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
+  fetchingIncludedOpportunity:auth.fetchingIncludedOpportunity,
   opportunityIncluded: auth.opportunityIncluded,
   oppIncludedCount:auth.oppIncludedCount,
   

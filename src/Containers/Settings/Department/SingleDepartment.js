@@ -370,7 +370,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       > */}
                         {/* <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={handleMandatoryClick}
                           checked={mandatoryStatus || mandetoryInd}
                           checkedChildren="Yes"
@@ -394,7 +394,7 @@ const SingleDepartment = (props) => {
         cancelText="No"
       >
         <Switch
-          style={{ width: "4em" }}
+         className="w-[4rem]"
           onChange={() => {}}
           checked={erpStatus || erpInd}
           checkedChildren="Yes"
@@ -416,7 +416,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={accountingStatus || financeInd}
                           checkedChildren="Yes"
@@ -438,7 +438,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           // onChange={handleCrmClick}
                           checked={crmStatus || crmInd}
@@ -460,7 +460,7 @@ const SingleDepartment = (props) => {
         cancelText="No"
       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={imStatus || imInd}
                           checkedChildren="Yes"
@@ -482,7 +482,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={recruitProStatus || recruitProInd}
                           checkedChildren="Yes"
@@ -505,7 +505,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={hrStatus || hrInd}
                           checkedChildren="Yes"
@@ -528,7 +528,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={elearningStatus || elearningInd}
                           checkedChildren="Yes"
@@ -548,7 +548,7 @@ const SingleDepartment = (props) => {
                     <div   class=" w-[7%] ml-2">
                  
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={handleAccountClick}
                           checked={accountStatus || accountInd}
                           checkedChildren="Yes"
@@ -565,7 +565,7 @@ const SingleDepartment = (props) => {
                     <div   class=" w-[7%] ml-2">
                   
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={handleRecruitClick}
                           checked={recruitStatus || recruitOppsInd}
                           checkedChildren="Yes"
@@ -589,7 +589,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={productionStatus || productionInd}
                           checkedChildren="Yes"
@@ -612,7 +612,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={repairStatus || repairInd}
                           checkedChildren="Yes"
@@ -628,7 +628,7 @@ const SingleDepartment = (props) => {
                     <div   class=" w-[7%] ml-2">
                 
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={handleInventoryClick}
                           checked={inventoryStatus || inventoryInd}
                           checkedChildren="Yes"
@@ -650,7 +650,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={orderManagStatus || orderManagementInd}
                           checkedChildren="Yes"
@@ -674,7 +674,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={logisticsStatus || logisticsInd}
                           checkedChildren="Yes"
@@ -696,7 +696,7 @@ const SingleDepartment = (props) => {
                         cancelText="No"
                       >
                         <Switch
-                          style={{ width: "4em" }}
+                         className="w-[4rem]"
                           onChange={() => {}}
                           checked={procurmentStatus || procurementInd}
                           checkedChildren="Yes"

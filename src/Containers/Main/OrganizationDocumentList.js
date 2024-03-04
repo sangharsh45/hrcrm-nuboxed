@@ -7,6 +7,7 @@ import { base_url } from "../../Config/Auth";
 import {  Button} from "antd";
 import DownloadIcon from "@mui/icons-material/Download";
 import { DeleteOutlined } from "@ant-design/icons";
+import { BundleLoader } from '../../Components/Placeholder';
 
 class OrganizationDocumentList extends Component {
     constructor(props) {
@@ -84,10 +85,11 @@ this.setState({
 
   render() {
      console.log("karisma",this.state.currentProcessItem1)
-    const{user}=this.props;
+    const{user,fetchingRepositoryDocuments}=this.props;
+    if (fetchingRepositoryDocuments) return <BundleLoader/>;
     return (
-      <div className="overflow-y-auto max-h-[39rem]">
-     <div class="flex flex-col  justify-center flex-wrap w-full max-sm:justify-between  max-sm:items-center">    
+      <div className="overflow-y-auto h-[60vh] overflow-x-hidden">
+     <div className="flex flex-col justify-center flex-wrap w-full max-sm:justify-between max-sm:items-center">
           {this.props.repositoryData.map((item) => (
             <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[3rem] 
             text-[#444444] m-3 p-1 w-wk flex flex-col  "
@@ -202,6 +204,7 @@ this.setState({
 
 const mapStateToProps = ({ location, auth }) => ({
   repositoryData: auth.repositoryData,
+  fetchingRepositoryDocuments:auth.fetchingRepositoryDocuments,
   orgId: auth.userDetails.organizationId,
   user: auth.userDetails,
 });

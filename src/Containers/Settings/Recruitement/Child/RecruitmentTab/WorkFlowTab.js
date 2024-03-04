@@ -3,6 +3,7 @@ import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import SupplierOnboardingTab from "./SupplierOnboarding/SupplierOnboardingTab";
 
 const OnboardingTab = lazy(() => import("./OnboardingTab/OnboardingTab"));
 const HiringTab = lazy(() => import("./HiringTab"));
@@ -44,7 +45,7 @@ function WorkFlow(props) {
           </TabPane>
           <TabPane tab={`Supplier-Onboarding`} key="6">
           <div  class=" mt-[10px]" >
-            {/* <OnboardingTab /> */}
+            <SupplierOnboardingTab />
             </div>
           </TabPane>
 

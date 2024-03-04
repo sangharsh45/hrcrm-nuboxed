@@ -48,7 +48,7 @@ componentDidMount() {
 
 render() {
    const weightedValue = `${this.props.InvWeightedValue.weightedValue}`;
-   const pipeLineValue = `${this.props.InvestorPipelineValue.pipeLineValue} ${this.props.InvestorPipelineValue.tradeCurrency}`;
+   const pipeLineValue = `${this.props.InvestorPipelineValue.pipeLineValue}`;
  
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
@@ -90,7 +90,7 @@ render() {
             }
           
             value={
-              pipeLineValue
+              this.props.InvestorPipelineValue.pipeLineValue
 
             }
              isLoading={this.props.fetchingInvPipelineValue} 
@@ -108,7 +108,7 @@ render() {
               />
             }
             value={
-              weightedValue
+              this.props.InvWeightedValue.weightedValue
 
             }
             isLoading={this.props.fetchingINVWeightedValue} 
@@ -163,7 +163,7 @@ render() {
                   />
                 }
                 value={
-                  this.props.WonInvestOpp.InvestorOppertunityDetails
+                  this.props.WonInvestOpp.opportunityWon
     
                 }
                 isLoading={this.props.fetchingWonInvestorOppValue} 
@@ -199,10 +199,10 @@ render() {
                     defaultMessage="Won Weighted Value"
                   />
                 }
-                // value={
-                //   this.props.WonInvWeighted.
+                value={
+                  this.props.WonInvWeighted.weightedWonValue
     
-                // }
+                }
                 isLoading={this.props.fetchingWonINVWeightedValue} 
                 //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
               

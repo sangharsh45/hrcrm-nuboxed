@@ -547,7 +547,7 @@ function MainApp(props) {
                         props.handleActionDrawerModal(true);
                      
                       }}
-            >Action Required {props.actionCount.ActionRecordCount}</div>
+            >Action Required <span class=" text-[tomato]">{props.actionCount.ActionRecordCount}</span></div>
                   <div class=" text-white bg-mainclr h-[1.75rem] ml-8 mr-3 max-sm:hidden"
                     style={{
                       border: "1px solid tomato",
