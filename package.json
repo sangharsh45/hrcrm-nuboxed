@@ -36,6 +36,7 @@
     "chart.js": "^4.2.1",
     "chartjs-plugin-trendline": "^2.1.0",
     "cheerio": "^1.0.0-rc.10",
+    "circle-chart": "^1.0.0",
     "cross-env": "^7.0.3",
     "d3-funnel": "^2.1.1",
     "draft-js": "^0.11.7",

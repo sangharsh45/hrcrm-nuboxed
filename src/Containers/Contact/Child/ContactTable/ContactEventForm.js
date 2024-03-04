@@ -221,7 +221,7 @@ const {
               : addContactActivityEvent(
                   {
                     ...values,
-                    contactId:props.currentContact.contactId,
+                    contact:props.currentContact.contactId,
                     ownerIds: userId === userId ? [userId] : [],
                     startDate: `${newStartDate}T${newStartTime}`,
                     endDate: `${newEndDate}T${newEndTime}`,
