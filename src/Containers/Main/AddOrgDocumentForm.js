@@ -184,7 +184,7 @@ class AddOrgDocumentForm extends Component {
                         </p>
                       )}
                       <Spacer />
-                      <FastField
+                      <Field
                     name="documentTypeId"
                     type="text"
                     //label="Type"

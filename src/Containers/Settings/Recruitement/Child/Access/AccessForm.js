@@ -80,6 +80,7 @@ const AccessForm = (props) => {
     setCheckedHolidayList(props.departmentAcces.holiday)
     setCheckedAccessmentList(props.departmentAcces.assessment)
     setCheckedTopicList(props.departmentAcces.topic)
+    setCheckedReportList(props.departmentAcces.report)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -129,6 +130,7 @@ const AccessForm = (props) => {
   props.departmentAcces.holiday,
   props.departmentAcces.topic,
   props.departmentAcces.production,
+  props.departmentAcces.report,
  
   
   
@@ -616,6 +618,24 @@ const AccessForm = (props) => {
                     setCheckAllDashboard(e.target.checked);
                   };
 
+
+                    // Reports
+
+                    const [checkedReportList, setCheckedReportList] = useState(props.departmentAcces.report              );
+                    const [indeterminateReport, setIndeterminateReport] = useState(true);
+                    const [checkAllReport, setCheckAllReport] = useState(false);
+                  
+                    const onReportChange = (list) => {
+                      setCheckedReportList(list);
+                      setIndeterminateReport(!!list.length && list.length < defaultCheckedList.length);
+                      setCheckAllReport(list.length === defaultCheckedList.length);
+                    };
+                  
+                    const onCheckAllReportChange = (e) => {
+                      setCheckedReportList(e.target.checked ? defaultCheckedList : []);
+                      setIndeterminateReport(false);
+                      setCheckAllReport(e.target.checked);
+                    };
                          // Settings
 
                          const [checkedSettingsList, setCheckedSettingsList] = useState(props.departmentAcces.settings              );
@@ -1051,6 +1071,7 @@ const onCheckAllTeamsChange = (e) => {
       catalog:checkedCatalogList || [],
       holiday:checkedHolidayList || [],
       topic:checkedTopicList || [],
+      report:checkedReportList || [],
       
       
       departmentId: props.departmentId,
@@ -1199,6 +1220,15 @@ const onCheckAllTeamsChange = (e) => {
               </Checkbox>
               <Divider />
               <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
+
+            </div>
+            <div >
+              <div class="text-sm font-semibold">Reports</div>
+              <Checkbox indeterminate={indeterminateReport} onChange={onCheckAllReportChange} checked={checkAllReport}>
+              <div class="text-xs"> Check all</div>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={defaultCheckedList} value={checkedReportList} onChange={onReportChange} />
 
             </div>
             <div >

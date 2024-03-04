@@ -523,7 +523,7 @@ function NavMenu(props) {
         {/*Publish*/}
         {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
-        {(user.publishAccessInd === true || user.role === "ADMIN") && (
+        {(user.publishAccessInd === true  && user.recruitProInd === true) || (user.role === "ADMIN"  && user.recruitProInd === true) && (
           <Menu.Item key="/publish" style={{ height: "1.7rem", 
           paddingLeft: "1rem",color: selectedMenuItem === '/publish' ? 'tomato' : '#4bc076' }}>
             <Link to="/publish" onClick={() => handleSelect('/publish')}>
