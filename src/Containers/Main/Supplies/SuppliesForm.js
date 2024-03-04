@@ -15,7 +15,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 
 const SuppliesSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  hsn: Yup.string().required("Input needed!"),
+  // hsn: Yup.string().required("Input needed!"),
 });
 class Suppliesform extends Component {
 
@@ -29,7 +29,7 @@ class Suppliesform extends Component {
         value: item.currency_name,
       };
     })
-  
+
     return (
       <>
         <Formik
@@ -57,7 +57,7 @@ class Suppliesform extends Component {
             this.props.addSupplies(
               {
                 ...values,
-              },  
+              },
             );
           }}
         >
@@ -76,7 +76,7 @@ class Suppliesform extends Component {
                   <div class="flex-nowrap">
                     <div class="w-[40%]">
                       <div class="mt-3">
-                      <Field name="imageId" component={PostImageUpld} />
+                        <Field name="imageId" component={PostImageUpld} />
                       </div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@ class Suppliesform extends Component {
                     isColumn
                     inlineLabel
                   />
-                   <div class="flex justify-between">
+                  <div class="flex justify-between">
                     <div class="w-full">
                       <Field
                         name="attributeName"
@@ -133,7 +133,7 @@ class Suppliesform extends Component {
                   </div>
                 </div>
                 <div class="h-full w-[50%]">
-                <div class="flex justify-between">
+                  <div class="flex justify-between">
                     <div class="w-[47%]">
                       <Field
                         name="name"
@@ -157,7 +157,7 @@ class Suppliesform extends Component {
                   </div>
 
                   <div class="flex justify-between">
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="reorder"
                         label="Re-order"
@@ -167,7 +167,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="currencyName"
                         label="Currency"
@@ -182,7 +182,7 @@ class Suppliesform extends Component {
                     </div>
                   </div>
                   <div class="flex justify-between">
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="netWeight"
                         label="Net Weight"
@@ -192,7 +192,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="netUnit"
                         label="Units"
@@ -207,7 +207,7 @@ class Suppliesform extends Component {
                     </div>
                   </div>
                   <div class="flex justify-between">
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="grossWeight"
                         label="Gross Weight"
@@ -217,7 +217,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                   <div class="w-[47%]">
+                    <div class="w-[47%]">
                       <Field
                         name="grossUnit"
                         label="Units"

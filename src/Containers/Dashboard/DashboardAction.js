@@ -2155,28 +2155,80 @@ export const getCompletedTaskTypeDetails = (userId, name) => (dispatch) => {
     });
 };
 
-export const getJumpOrderCount =(type) => (dispatch) => {
-    dispatch({ type: types.GET_JUMPSTART_ORDER_COUNT_REQUEST });
-    axios
-      .get(
-        `${base_url2}/order/orderCount/${type}`,
-        {
-          headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-          },
-        }
-      )
-      .then((res) => {
-        dispatch({
-          type: types.GET_JUMPSTART_ORDER_COUNT_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({
-          type: types.GET_JUMPSTART_ORDER_COUNT_FAILURE,
-          payload: err,
-        });
+export const getJumpOrderCount = (type) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_ORDER_COUNT_REQUEST });
+  axios
+    .get(
+      `${base_url2}/order/orderCount/${type}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: types.GET_JUMPSTART_ORDER_COUNT_SUCCESS,
+        payload: res.data,
       });
-  };
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_ORDER_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getJumpOrderDetail = (type, orderType) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_ORDER_DETAIL_REQUEST });
+  axios
+    .get(
+      `${base_url2}/order/orderCount/${type}/${orderType}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: types.GET_JUMPSTART_ORDER_DETAIL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_ORDER_DETAIL_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getJumpFinanceDetail = (orgId, type) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_FINANCE_DETAIL_REQUEST });
+  axios
+    .get(
+      `${base_url2}/order/finance/${orgId}/${type}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: types.GET_JUMPSTART_FINANCE_DETAIL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_FINANCE_DETAIL_FAILURE,
+        payload: err,
+      });
+    });
+};

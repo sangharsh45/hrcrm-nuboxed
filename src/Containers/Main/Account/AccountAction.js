@@ -993,6 +993,13 @@ export const handlePaidModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const handleOrderPaymentModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCTION_PAYMENT_MODAL,
+    payload: modalProps,
+  });
+};
 /**
  * Link paid in distributor
  */
@@ -2058,6 +2065,13 @@ export const handleInventoryLocationInOrder = (modalProps) => (dispatch) => {
 export const handleNotesModalInOrder = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_NOTES_MODAL_IN_ORDER,
+    payload: modalProps,
+  });
+};
+
+export const handleAccountPulse = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACCOUNT_PULSE,
     payload: modalProps,
   });
 };

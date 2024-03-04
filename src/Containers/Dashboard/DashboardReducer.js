@@ -215,15 +215,15 @@ const initialState = {
     },
     {
       id: 4,
-      type: "quarter",
+      type: "year",
       value: "YTD",
       starter: false,
       isSelected: false,
-      startDate: dayjs().startOf("quarter").toISOString(),
-      endDate: dayjs().endOf("quarter").toISOString(),
+      startDate: dayjs().startOf("year").toISOString(),
+      endDate: dayjs().endOf("year").toISOString(),
     },
 
- 
+
   ],
   timeRangeType: "today",
   isCustomSelected: false,
@@ -353,21 +353,29 @@ const initialState = {
 
   taskNameDrwr: false,
   fetchingTaskNamedrwr: false,
-  fetchingTaskNamedrwrError:false,
-  taskInameDrwr:[],
+  fetchingTaskNamedrwrError: false,
+  taskInameDrwr: [],
 
   fetchingDashboardCompletedTasks: false,
-  fetchingDashboardCompletedTasksError:false,
-  dashbCompletedTasks:[],
-  completedtaskDrwr:false,
+  fetchingDashboardCompletedTasksError: false,
+  dashbCompletedTasks: [],
+  completedtaskDrwr: false,
 
   fetchingCompletedTaskTypes: false,
-  fetchingCompletedTaskTypesError:false,
-  completedtypeTasks:[],
+  fetchingCompletedTaskTypesError: false,
+  completedtypeTasks: [],
 
   fetchingJumpOrderCount: false,
-  fetchingJumpOrderCountError:false,
-  jumstartOrderCount:{},
+  fetchingJumpOrderCountError: false,
+  jumstartOrderCount: {},
+
+  fetchingorderDetails: false,
+  fetchingorderDetailsError: false,
+  orderinDashboard: [],
+
+  fetchingJumpstartFinanceDetail: false,
+  fetchingJumpstartFinanceDetailError: false,
+  financeDetail: []
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -680,6 +688,21 @@ export const dashboardReducer = (state = initialState, action) => {
         ...state,
         fetchingLeavesGantt: false,
         fetchingLeavesGanttError: true,
+      };
+
+    case types.GET_JUMPSTART_FINANCE_DETAIL_REQUEST:
+      return { ...state, fetchingJumpstartFinanceDetail: true };
+    case types.GET_JUMPSTART_FINANCE_DETAIL_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartFinanceDetail: false,
+        financeDetail: action.payload,
+      };
+    case types.GET_JUMPSTART_FINANCE_DETAIL_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartFinanceDetail: false,
+        fetchingJumpstartFinanceDetailError: true,
       };
 
     case types.GET_TASKS_DASHBOARD_GANTT_REQUEST:
@@ -1605,53 +1628,69 @@ export const dashboardReducer = (state = initialState, action) => {
         fetchingTaskNamedrwrError: true,
       };
 
-      case types.GET_DASHBOARD_COMPLETED_TASK_REQUEST:
-        return { ...state, fetchingDashboardCompletedTasks: true };
-      case types.GET_DASHBOARD_COMPLETED_TASK_SUCCESS:
-        return {
-          ...state,
-          fetchingDashboardCompletedTasks: false,
-          dashbCompletedTasks: action.payload,
-        };
-      case types.GET_DASHBOARD_COMPLETED_TASK_FAILURE:
-        return {
-          ...state,
-          fetchingDashboardCompletedTasks: false,
-          fetchingDashboardCompletedTasksError: true,
-        };
+    case types.GET_DASHBOARD_COMPLETED_TASK_REQUEST:
+      return { ...state, fetchingDashboardCompletedTasks: true };
+    case types.GET_DASHBOARD_COMPLETED_TASK_SUCCESS:
+      return {
+        ...state,
+        fetchingDashboardCompletedTasks: false,
+        dashbCompletedTasks: action.payload,
+      };
+    case types.GET_DASHBOARD_COMPLETED_TASK_FAILURE:
+      return {
+        ...state,
+        fetchingDashboardCompletedTasks: false,
+        fetchingDashboardCompletedTasksError: true,
+      };
 
-        case types.HANDLE_COMPLETED_TASK_TYPE_DRAWER:
-          return { ...state, completedtaskDrwr: action.payload };
+    case types.HANDLE_COMPLETED_TASK_TYPE_DRAWER:
+      return { ...state, completedtaskDrwr: action.payload };
 
-          case types.GET_COMPLETED_TASK_TYPE_REQUEST:
-            return { ...state, fetchingCompletedTaskTypes: true };
-          case types.GET_COMPLETED_TASK_TYPE_SUCCESS:
-            return {
-              ...state,
-              fetchingCompletedTaskTypes: false,
-              completedtypeTasks: action.payload,
-            };
-          case types.GET_COMPLETED_TASK_TYPE_FAILURE:
-            return {
-              ...state,
-              fetchingCompletedTaskTypes: false,
-              fetchingCompletedTaskTypesError: true,
-            };  
+    case types.GET_COMPLETED_TASK_TYPE_REQUEST:
+      return { ...state, fetchingCompletedTaskTypes: true };
+    case types.GET_COMPLETED_TASK_TYPE_SUCCESS:
+      return {
+        ...state,
+        fetchingCompletedTaskTypes: false,
+        completedtypeTasks: action.payload,
+      };
+    case types.GET_COMPLETED_TASK_TYPE_FAILURE:
+      return {
+        ...state,
+        fetchingCompletedTaskTypes: false,
+        fetchingCompletedTaskTypesError: true,
+      };
 
-            case types.GET_JUMPSTART_ORDER_COUNT_REQUEST:
-              return { ...state, fetchingJumpOrderCount: true };
-            case types.GET_JUMPSTART_ORDER_COUNT_SUCCESS:
-              return {
-                ...state,
-                fetchingJumpOrderCount: false,
-                jumstartOrderCount: action.payload,
-              };
-            case types.GET_JUMPSTART_ORDER_COUNT_FAILURE:
-              return {
-                ...state,
-                fetchingJumpOrderCount: false,
-                fetchingJumpOrderCountError: true,
-              };  
+    case types.GET_JUMPSTART_ORDER_COUNT_REQUEST:
+      return { ...state, fetchingJumpOrderCount: true };
+    case types.GET_JUMPSTART_ORDER_COUNT_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpOrderCount: false,
+        jumstartOrderCount: action.payload,
+      };
+    case types.GET_JUMPSTART_ORDER_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingJumpOrderCount: false,
+        fetchingJumpOrderCountError: true,
+      };
+
+    case types.GET_JUMPSTART_ORDER_DETAIL_REQUEST:
+      return { ...state, fetchingorderDetails: true };
+    case types.GET_JUMPSTART_ORDER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        fetchingorderDetails: false,
+        orderinDashboard: action.payload,
+      };
+    case types.GET_JUMPSTART_ORDER_DETAIL_FAILURE:
+      return {
+        ...state,
+        fetchingorderDetails: false,
+        fetchingorderDetailsError: true,
+
+      };
 
     default:
       return state;
