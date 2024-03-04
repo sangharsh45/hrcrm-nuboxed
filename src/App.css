@@ -1008,12 +1008,12 @@ h1{
   pointer-events: auto;
 }
 
-.ant-avatar .ant-avatar-string {
+/* .ant-avatar .ant-avatar-string {
   position: absolute;
   left: 50%;
   transform-origin: 0 center;
   top: -7%;
-}
+} */
 
 .ant-menu .ant-menu-item-selected {
   background-color: #709ab3;

@@ -101,6 +101,7 @@ import { connect } from "react-redux";
 import { setTimeRangeReport,getAllReportInvestors } from "./ReportAction";
 import { bindActionCreators } from "redux";
 import ReportsCardList from "./Child/ReportsCardList";
+import ReportDetails from "./Child/ReportDetails/ReportDetails";
 const ReportHeader =lazy(()=> import("./Child/ReportHeader"));
 const Requirement =lazy(()=> import("./Child/MyViewReports/Requirement"));
 const OrgSelected =lazy(()=> import("./Child/OrganizationView/Selected"));
@@ -142,10 +143,16 @@ class Reports extends React.Component {
         dropdownData={this.state.dropdownData}
         />
         <Suspense fallback={<BundleLoader />}>
+          <ReportDetails
+             handleDropChange={this.handleDropChange}
+             handleIconClick={this.handleIconClick}
+             activeIcon={this.state.activeIcon}
+             dropdownData={this.state.dropdownData}
+          />
         {this.state.currentUser === "Investor List" && (
     <ReportsCardList allReportInvestors={this.props.allReportInvestors} />
   )}
-          {reportViewType === "ME" && (
+          {/* {reportViewType === "ME" && (
             <>
 
               {selectedReportType === "Requirement" && <Requirement />}
@@ -159,7 +166,7 @@ class Reports extends React.Component {
                 <OrgRequirement />}
               {selectedReportType === "Selected" && <OrgSelected />}
             </>
-          )}
+          )} */}
         </Suspense>
       </React.Fragment>
     );
