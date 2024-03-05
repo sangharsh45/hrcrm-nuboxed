@@ -48,6 +48,7 @@ class Suppliesform extends Component {
             subCategoryName: "",
             price: 0,
             tax: 0,
+            orgId: this.props.orgId,
             userId: this.props.userId,
             currencyName: ""
           }}
@@ -267,6 +268,7 @@ const mapStateToProps = ({ auth, supplies }) => ({
   groupId: auth.userDetails.groupId,
   userId: auth.userDetails.userId,
   currencies: auth.currencies,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>

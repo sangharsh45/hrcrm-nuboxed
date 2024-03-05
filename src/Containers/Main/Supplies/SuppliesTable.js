@@ -94,7 +94,7 @@ function SuppliesTable(props) {
 
 
                         <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                          {item.name}
+                          {item.suppliesName}
                         </div>
 
                       </div>
@@ -259,7 +259,9 @@ function SuppliesTable(props) {
                           />
 
                         </div>
-                        <div class="w-[4%]"></div>
+                        <div class="w-[4%]">
+
+                        </div>
 
                         <div class="max-sm:w-full md:flex items-center">
 
@@ -273,7 +275,7 @@ function SuppliesTable(props) {
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        {item.name}
+                        {item.suppliesName}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">

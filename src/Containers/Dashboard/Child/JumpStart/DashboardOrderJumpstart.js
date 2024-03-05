@@ -11,13 +11,7 @@ import {
 function DashboardOrderJumpstart(props) {
 
   useEffect(() => {
-    // if (props.timeRangeType === "today") {
-    // props.getJumpOrderCount(props.timeRangeType);
     props.getJumpOrderDetail(props.timeRangeType, "Catalog")
-    // }
-    // else {
-    //   // props.getJumpOrderCount(props.timeRangeType);
-    // }
   }, [props.timeRangeType]);
   console.log(props.timeRangeType)
   return (
