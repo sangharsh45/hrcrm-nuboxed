@@ -541,13 +541,13 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div  class=" text-base cursor-pointer font-semibold text-[blue] max-sm:hidden"
+                  <div  class=" text-base cursor-pointer font-normal text-[blue] max-sm:hidden"
                       onClick={() => {
                         // handleRowData(item);
                         props.handleActionDrawerModal(true);
                      
                       }}
-            >Action Required <span class=" text-[tomato]">{props.actionCount.ActionRecordCount}</span></div>
+            >Action Required <span class=" text-[tomato] font-semibold">{props.actionCount.ActionRecordCount}</span></div>
                   <div class=" text-white bg-mainclr h-[1.75rem] ml-8 mr-3 max-sm:hidden"
                     style={{
                       border: "1px solid tomato",

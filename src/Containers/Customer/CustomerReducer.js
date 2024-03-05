@@ -4,6 +4,10 @@ const initialState = {
   viewType: "table",
   addCustomerModal: false,
 
+  fetchingWonCusmWeightedValue: false,
+  fetchingWonCusmWeightedValueError: false,
+  WonCustomerWeighted: {},
+
   addingCustomerActivityEvent:false,
   addingCustomerActivityEventError:false,
 
@@ -173,6 +177,10 @@ const initialState = {
   fetchingAllCustomersError: false,
   allcustomersByUserId: [],
 
+  fetchingWonCustomerOppValue: false,
+  fetchingWonCustomerOppValueError: false,
+  WonCustomerOpp: {},
+
   fetchingCustomerById: false,
   fetchingCustomerByIdError: false,
   customerById: [],
@@ -188,6 +196,10 @@ const initialState = {
   fetchingPipelineValue: false,
   fetchingPipelineValueError: false,
   pipelineValue: {},
+
+  fetchingWonCusPipelineValue: false,
+  fetchingWonCusPipelineValueError: false,
+  WonCustomerPipeline: {},
 
   addingLocationDetails:false,
 
@@ -1859,6 +1871,48 @@ export const customerReducer = (state = initialState, action) => {
                                                                             fetchingCustomerActivityCount: false,
                                                                             fetchingCustomerActivityCountError: true,
                                                                           };
+
+                                                                          case types.GET_WON_CUSTOMER_OPP_VALUE_REQUEST:
+                                                                            return { ...state, fetchingWonCustomerOppValue: true, fetchingWonInvestorOppValueError: false };
+                                                                          case types.GET_WON_CUSTOMER_OPP_VALUE_SUCCESS:
+                                                                            return {
+                                                                              ...state,
+                                                                              fetchingWonCustomerOppValue: false,
+                                                                              fetchingWonCustomerOppValueError: false,
+                                                                              WonCustomerOpp: action.payload,
+                                                                            };
+                                                                          case types.GET_WON_CUSTOMER_OPP_VALUE_FAILURE:
+                                                                            return { ...state, fetchingWonCustomerOppValue: false, fetchingWonCustomerOppValueError: true };
+
+
+
+                                                                            case types.GET_WON_CUSTOMER_PIPELINE_VALUE_REQUEST:
+                                                                              return { ...state, fetchingWonCusPipelineValue: true, fetchingWonInvPipelineValueError: false };
+                                                                            case types.GET_WON_CUSTOMER_PIPELINE_VALUE_SUCCESS:
+                                                                              return {
+                                                                                ...state,
+                                                                                fetchingWonCusPipelineValue: false,
+                                                                                fetchingWonCusPipelineValueError: false,
+                                                                                WonCustomerPipeline: action.payload,
+                                                                              };
+                                                                            case types.GET_WON_CUSTOMER_PIPELINE_VALUE_FAILURE:
+                                                                              return { ...state, fetchingWonCusPipelineValue: false, fetchingWonCusPipelineValueError: true };
+
+
+
+                                                                              case types.GET_WON_CUSTOMER_WEIGHTED_VALUE_REQUEST:
+                                                                                return { ...state, fetchingWonCusmWeightedValue: true, fetchingWonINVWeightedValueError: false };
+                                                                              case types.GET_WON_CUSTOMER_WEIGHTED_VALUE_SUCCESS:
+                                                                                return {
+                                                                                  ...state,
+                                                                                  fetchingWonCusmWeightedValue: false,
+                                                                                  fetchingWonCusmWeightedValueError: false,
+                                                                                  WonCustomerWeighted: action.payload,
+                                                                                };
+                                                                              case types.GET_WON_CUSTOMER_WEIGHTED_VALUE_FAILURE:
+                                                                                return { ...state, fetchingWonCusmWeightedValue: false, fetchingWonCusmWeightedValueError: true };
+                                              
+                                              
                                                                   
                                                                 
                                                               

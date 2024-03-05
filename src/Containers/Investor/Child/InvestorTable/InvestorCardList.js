@@ -637,14 +637,28 @@ function InvestorCardList(props) {
                    </div>
                    </div>
                    <div class="flex max-sm:justify-between">
-                   <div className=" flex font-medium flex-col md:w-[9.21rem] max-sm:flex-row w-full max-sm:justify-between ">
+                   <div className=" flex font-medium flex-col md:w-[7.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Source</div> */}
 
                                     <div class=" text-sm text-cardBody font-poppins">
                                     {item.source}
                                     </div>
                                 </div>
-                              
+                                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
+                      <div>
+                          <Tooltip title="Pulse">
+         <MonitorHeartIcon
+                  onClick={() => {
+                    handleInvestorPulseDrawerModal(true);
+                    handleCurrentRowData(item);
+                  }}
+                  className=" !text-base cursor-pointer text-[#df9697]"
+                />
+             </Tooltip>
+                          </div>
+
+          
+                      </div> 
                                 <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                    <div>
                    <Tooltip title="Notes">
@@ -750,21 +764,7 @@ function InvestorCardList(props) {
            )} 
             </div>
                       </div> 
-                      <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
-                      <div>
-                          <Tooltip title="Pulse">
-         <MonitorHeartIcon
-                  onClick={() => {
-                    handleInvestorPulseDrawerModal(true);
-                    handleCurrentRowData(item);
-                  }}
-                  className=" !text-base cursor-pointer text-[#df9697]"
-                />
-             </Tooltip>
-                          </div>
-
-          
-                      </div> 
+                  
           
                       </div>   
                             </div>

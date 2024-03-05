@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../../../Config/Auth";
 import { message } from "antd"
+import Swal from 'sweetalert2'
 
 /**
  * get all the Sector
@@ -52,7 +53,13 @@ export const addInvestorData = (sectors,orgId, cb) => (dispatch) => {
         // dispatch(getInvestorList(orgId));
         {res.data.message?  
           message.success(res.data.message):
-        message.success("INVESTOR_ has been added successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Investor Type has been added successfully!',
+            showConfirmButton: false,
+            // timer: 1500
+          })
+        // message.success("INVESTOR_ has been added successfully!");
         }
         console.log(res);
         dispatch({
@@ -87,7 +94,7 @@ export const removeInvestor = ( investorCategoryId) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("INVESTOR has been deleted successfully!");
+        message.success("Investor has been deleted successfully!");
         console.log(res);
         dispatch({
           type: types.REMOVE_INVESTOR_SUCCESS,
@@ -113,7 +120,7 @@ export const updateInvestor = ( investorCategoryId,name,cb) => (dispatch) => {
     axios
       .put(
         `${base_url}/investorCategory/${investorCategoryId}`,
-        { name,investorCategoryId,editInd:true },
+        {investorCategoryId, name,editInd:true },
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -122,12 +129,18 @@ export const updateInvestor = ( investorCategoryId,name,cb) => (dispatch) => {
       )
       .then((res) => {
         
-        message.success("INVESTOR has been updated successfully!");
+        // message.success("INVESTOR has been updated successfully!");
         console.log(res);
         dispatch({
           type: types.UPDATE_INVESTOR_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Investor Type has been updated successfully!',
+          showConfirmButton: false,
+          // timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);

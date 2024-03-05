@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { getCurrencyList ,
-  allCurrencyMandatory
+  allCurrencyMandatory,
+  searchCurrencyName,
+  ClearReducerDataOfCurrency
 } from "../Currency/CurrencyAction";
-import { Button, } from "antd";
+import { Button,Input } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const SingleCurrency = lazy(() =>
   import("./SingleCurrency")
@@ -29,6 +31,24 @@ class Currency extends Component {
     };
   
   }
+
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchCurrencyName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getCurrencyList();
+      this.props.ClearReducerDataOfCurrency();
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getCurrencyList();
@@ -81,40 +101,25 @@ class Currency extends Component {
        
           <div class="basis-full overflow-auto text-white"
           >
-             {/* <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder={translatedMenuItems[12]}
-          
-       style={{width:"100%",marginLeft:"0.5rem"}}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
-          />
-           
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchCountryName(this.state.currentData);
-
-          }}
-        >
-            {translatedMenuItems[13]}
        
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-            {translatedMenuItems[14]}
-      
-      
-        </Button>
-        </div> */}
+           
+        
+         
  
             <div class="flex flex-col">
               <MainWrapper style={{ height: "38em", marginTop: "0.625em" }}>
+              <div class=" flex flex-row">
+              <div class=" flex w-[18vw] " >
+            <Input
+         placeholder="Search by Currency"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
+            </div>
+            <div class=" flex">
               <Button 
   type="primary"
   // style={{backgroundColor:this.state.selected ?"red" :"green"}}
@@ -122,6 +127,8 @@ class Currency extends Component {
   >
           {this.state.selected ? "Clear All" : "Select All"}
         </Button>
+        </div>
+        </div>
         &nbsp;
                  {/* {country.length &&
                   country.map((country, i) => (
@@ -177,7 +184,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getCurrencyList,
-  
+        searchCurrencyName,
+        ClearReducerDataOfCurrency,
         allCurrencyMandatory,
      
     },

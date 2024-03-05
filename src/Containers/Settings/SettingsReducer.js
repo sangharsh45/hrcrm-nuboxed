@@ -319,6 +319,9 @@ const initialState = {
   fetchingTaskStagesForRecruitError: false,
   recruitTaskStages: [],
 
+  addingProcessForProduction: false,
+  addingProcessForProductionError: false,
+
   fetchingTaskTeamList: false,
   fetchingTaskTeamListError: false,
   taskTeamList: [],
@@ -329,6 +332,10 @@ const initialState = {
   fetchingMileageDetails: false,
   // fetchingOrganizationLeadsError: false,
   mileageData: [],
+
+  fetchingProcessForProduction: false,
+  fetchingProcessForProductionError: false,
+  productionProcess: [],
 
   updatingMileage: false,
   updatingMileageError: false,
@@ -3457,6 +3464,48 @@ export const settingsReducer = (state = initialState, action) => {
           linkingSupplierStagesPublish: false,
           linkingSupplierStagesPublishError: true,
         };
+
+
+        case types.ADD_PROCESS_FOR_PRODUCTION_REQUEST:
+          return {
+            ...state,
+            addingProcessForProduction: true,
+            addingProcessForProductionError: false,
+          };
+        case types.ADD_PROCESS_FOR_PRODUCTION_SUCCESS:
+          return {
+            ...state,
+            addingProcessForProduction: false,
+            addingProcessForProductionError: false,
+            // addProcessHiringModal: false,
+          };
+        case types.ADD_PROCESS_FOR_PRODUCTION_FAILURE:
+          return {
+            ...state,
+            addingProcessForProduction: false,
+            addingProcessForProductionError: true,
+            // addProcessHiringModal: false,
+          };
+
+          case types.GET_PROCESS_FOR_PRODUCTION_REQUEST:
+            return {
+              ...state,
+              fetchingProcessForProduction: true,
+              fetchingProcessForProductionError: false,
+            };
+          case types.GET_PROCESS_FOR_PRODUCTION_SUCCESS:
+            return {
+              ...state,
+              fetchingProcessForProduction: false,
+              fetchingProcessForProductionError: false,
+              productionProcess: action.payload,
+            };
+          case types.GET_PROCESS_FOR_PRODUCTION_FAILURE:
+            return {
+              ...state,
+              fetchingProcessForProduction: false,
+              fetchingProcessForProductionError: true,
+            };
           
 
     default:

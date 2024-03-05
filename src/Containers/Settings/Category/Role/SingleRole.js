@@ -135,7 +135,7 @@ class SingleRole extends Component {
                     Update
                   </Button>
                
-                  <Button type="primary" ghost onClick={() => toggleViewType()}>
+                  <Button type="cancel"  onClick={() => toggleViewType()}>
                     Cancel
                   </Button>
                 </div>

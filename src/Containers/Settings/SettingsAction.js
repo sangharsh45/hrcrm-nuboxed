@@ -4699,3 +4699,62 @@ export const LinkSupplierStagePublish = (data, cb) => (dispatch) => {
       cb && cb("Failure");
     });
 };
+
+
+export const addProcessForProductionOnboarding = (data, orgId, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.ADD_PROCESS_FOR_PRODUCTION_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/productionWorkflow`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch(getProcessForProduction(orgId));
+      dispatch({
+        type: types.ADD_PROCESS_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PROCESS_FOR_PRODUCTION_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const getProcessForProduction = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_FOR_PRODUCTION_REQUEST,
+  });
+  axios
+    .get(`${base_url}/productionWorkflow/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_FOR_PRODUCTION_FAILURE,
+        payload: err,
+      });
+    });
+};

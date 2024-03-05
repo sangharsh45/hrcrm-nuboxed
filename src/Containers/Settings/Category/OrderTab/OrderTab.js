@@ -3,10 +3,18 @@ import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { connect } from "react-redux";
+import SourceIcon from '@mui/icons-material/Source';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 const ItemTask = lazy(() =>
   import("../ItemTask/ItemTask")
 );
+const BrandModel = lazy(() =>
+  import("../Brand&Model/BrandModel")
+);
+const ShipBy = lazy(() =>
+  import("../ShipBy/ShipBy")
+);
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -27,6 +35,10 @@ class OrderTab extends Component {
     switch (key) {
       case "0":
         return       <ItemTask />;
+        case "1":
+          return     <ShipBy/>;
+          case "2":
+            return     <BrandModel/>;
 
       default:
         return null;
@@ -43,12 +55,13 @@ class OrderTab extends Component {
                 defaultActiveKey={activeKey}
                 onChange={this.handleTabChange}
               >
+                {this.props.user.repairInd === true && (
                 <TabPane
                   tab={
                     <>
                       <MonetizationOnIcon />
                       <span class=" ml-1" >
-                      Item task
+                      Repair Task
                       </span>
                     </>
                   }
@@ -56,8 +69,37 @@ class OrderTab extends Component {
                 >
              
                 </TabPane>
-               
-             
+               )}
+                <TabPane
+                  tab={
+                    <>
+                      <SourceIcon />
+                      <span class=" ml-1">
+                        Ship By
+                      </span>
+                    </>
+                  }
+                  key="1"
+                >
+                  {/* <Suspense>
+                    <ShipBy />
+                  </Suspense> */}
+                </TabPane>
+                    <TabPane
+                  tab={
+                    <>
+                      <SourceIcon />
+                      <span class=" ml-1">
+                        BrandModel
+                      </span>
+                    </>
+                  }
+                  key="2"
+                >
+                  {/* <Suspense>
+                    <BrandModel />
+                  </Suspense> */}
+                </TabPane>
               </StyledTabs>
               <Suspense fallback={<div>Loading...</div>}>
                 {this.renderTabContent(activeKey)}
@@ -69,7 +111,9 @@ class OrderTab extends Component {
     );
   }
 }
-const mapStateToProps = ({ }) => ({});
+const mapStateToProps = ({auth }) => ({
+  user: auth.userDetails,
+});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderTab);

@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import dayjs from "dayjs";
-import {getProspectWeightedValue,getProspectOppValue,getProspectPipeLineValue,getProspectContactValue} from "../../CustomerAction"
+import {getProspectWeightedValue,
+  getWonCustomerOppValue,
+  getWonCustomerPipeLineValue,
+  getWonCustomerWeightedValue,
+  getProspectOppValue,getProspectPipeLineValue,getProspectContactValue} from "../../CustomerAction"
 import { JumpStartBox,JumpStartBox1,JumpStartBox2,JumpStartBox3 } from "../../../../Components/UI/Elements";
 class CustomerPulseJumpStart extends React.Component{
   constructor() {
@@ -25,6 +29,10 @@ class CustomerPulseJumpStart extends React.Component{
   };
 }
 componentDidMount() {
+  
+  this.props.getWonCustomerWeightedValue(this.props.customer.customerId)
+  this.props.getWonCustomerPipeLineValue(this.props.customer.customerId)
+  this.props.getWonCustomerOppValue(this.props.customer.customerId)
   // const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   // const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
   this.props.getProspectWeightedValue(this.props.customer.customerId)
@@ -47,6 +55,7 @@ render() {
   console.log(startDate)
   console.log(this.state.endDate.format("YYYY MM DD"))
   return(
+    <>
     <div class=" flex flex-row w-full" >
     <div class="flex w-full" >
         
@@ -137,12 +146,93 @@ render() {
           <JumpStartBox noProgress title="Total Visitors" bgColor="#8791a1" />
         </FlexContainer> */}
       </div>
+
+<div class=" flex flex-row w-full mt-4" >
+<div class="flex w-full" >
     
+    <JumpStartBox
+        noProgress
+        title={
+          <FormattedMessage
+            id="app.opportunities"
+            defaultMessage="Won Opportunities"
+          />
+        }
+        value={
+          this.props.WonCustomerOpp.CustomerWonOppertunityDetails
+
+        }
+        isLoading={this.props.fetchingWonCustomerOppValue} 
+        //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+      
+      />
+
+   
+      <JumpStartBox1
+        noProgress
+        title={
+          <FormattedMessage
+            id="app.pipeLineValue"
+            defaultMessage="Won Pipe line value"
+          />
+        }
+      
+        value={
+          this.props.WonCustomerPipeline.WonPipeLineValue
+
+        }
+         isLoading={this.props.fetchingWonCusPipelineValue} 
+        //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+      
+      />
+
+      <JumpStartBox2
+        noProgress
+        // title="Open Tasks"
+        title={
+          <FormattedMessage
+            id="app.weightedValue"
+            defaultMessage="Won Weighted Value"
+          />
+        }
+        value={
+          this.props.WonCustomerWeighted.weightedValue
+
+        }
+        isLoading={this.props.fetchingWonCusmWeightedValue} 
+        //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+      
+        
+      />
+
+ 
+       
+
+    </div>
+
+    {/* <FlexContainer>
+      <JumpStartBox noProgress title="All Products" bgColor="#8791a1" />
+      <JumpStartBox noProgress title="Quantity On Hand" bgColor="#8791a1" />
+      <JumpStartBox
+        noProgress
+        title="Out of Stock Products"
+        bgColor="#8791a1"
+      />
+      <JumpStartBox noProgress title="Total Visitors" bgColor="#8791a1" />
+    </FlexContainer> */}
+  </div>
+  </>
   ); 
 }
 }
 const mapStateToProps = ({ customer,auth }) => ({
   contactValue:customer.contactValue,
+  WonCustomerWeighted:customer.WonCustomerWeighted,
+  fetchingWonCusmWeightedValue:customer.fetchingWonCusmWeightedValue,
+  WonCustomerPipeline:customer.WonCustomerPipeline,
+  fetchingWonCusPipelineValue:customer.fetchingWonCusPipelineValue,
+  WonCustomerOpp:customer.WonCustomerOpp,
+  fetchingWonCustomerOppValue:customer.fetchingWonCustomerOppValue,
   fetchingContactValue:customer.fetchingContactValue,
   pipelineValue:customer.pipelineValue,
   fetchingPipelineValue:customer.fetchingPipelineValue,
@@ -155,8 +245,11 @@ const mapStateToProps = ({ customer,auth }) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getProspectWeightedValue,
   getProspectOppValue,
+  getWonCustomerWeightedValue,
+  getWonCustomerPipeLineValue,
   getProspectPipeLineValue,
-  getProspectContactValue
+  getProspectContactValue,
+  getWonCustomerOppValue
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerPulseJumpStart);

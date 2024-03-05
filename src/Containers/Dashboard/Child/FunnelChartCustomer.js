@@ -80,7 +80,7 @@ const FunnelChartCustomer = (props) => {
         
           <Funnel 
           // className=" h-[218px] w-[401px]"
-          style={{height:"218px",width:"401px"}}
+          style={{height:"177px",width:"354px"}}
           {...config} />
         </div>
       );

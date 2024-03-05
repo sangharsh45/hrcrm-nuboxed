@@ -6,6 +6,8 @@ const initialState = {
     fetchingCurrencyList: false,
     fetchingCurrencyListError: false,
     currencyList: [],
+    fetchingCurrencySearchData:false,
+    fetchingCurrencySearchDataError:false,
 
     addingCurrencyToggle: false,
               addingCurrencyToggleError: false,
@@ -81,6 +83,24 @@ export const currencyReducer = (state = initialState, action) => {
                 addingMandatoryCurrency: false,
                 addingMandatoryCurrencyError: true,
               };
+
+              case types.GET_CURRENCY_SEARCH_REQUEST:
+                return { ...state, fetchingCurrencySearchData: true };
+              case types.GET_CURRENCY_SEARCH_SUCCESS:
+                return {
+                  ...state,
+                  fetchingCurrencySearchData: false,
+                  currencyList: action.payload,
+                  // serachedData: action.payload,
+                };
+              case types.GET_CURRENCY_SEARCH_FAILURE:
+                return { ...state, fetchingCurrencySearchDataError: true };
+      
+                case types.HANDLE_CLAER_REDUCER_DATA_CURRENCY:
+                  return { ...state, 
+                    currencyList: [], 
+                    // deletedTruck: [] 
+                  };
 
      
     default:
