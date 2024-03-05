@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../../../Config/Auth";
 import { message } from "antd"
+import Swal from 'sweetalert2'
 
 /**
  * get all the Sector
@@ -52,13 +53,20 @@ export const addSources = (source,orgId, cb) => (dispatch) => {
         // dispatch(getSources(orgId));
         {res.data.message?  
           message.success(res.data.message):
-        message.success("source has been added successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Sector has been added successfully!',
+            showConfirmButton: false,
+            // timer: 1500
+          })
+        //  message.success("source has been added successfully!");
         }
         console.log(res);
         dispatch({
           type: types.ADD_SOURCE_SUCCESS,
           payload: { ...source, },
         });
+      
         cb();
       })
       .catch((err) => {
@@ -122,12 +130,18 @@ export const updateSource = ( sourceId,name,listType,cb) => (dispatch) => {
       )
       .then((res) => {
         
-        message.success("Sector has been updated successfully!");
+        // message.success("Sector has been updated successfully!");
         console.log(res);
         dispatch({
           type: types.UPDATE_SOURCE_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Sector has been updated successfully!',
+          showConfirmButton: false,
+          // timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);

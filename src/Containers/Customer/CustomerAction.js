@@ -2435,6 +2435,91 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       });
   };
 
+  export const getWonCustomerOppValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_CUSTOMER_OPP_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/won-oppertunity/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_CUSTOMER_OPP_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_CUSTOMER_OPP_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+      
+  };
+
+  export const getWonCustomerPipeLineValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_CUSTOMER_PIPELINE_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/won-oppertunity/proposal-value/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_CUSTOMER_PIPELINE_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_CUSTOMER_PIPELINE_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getWonCustomerWeightedValue = (customerId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_WON_CUSTOMER_WEIGHTED_VALUE_REQUEST });
+  
+    axios
+      .get(
+        `${base_url}/customer/won-oppertunity/weighted-value/count/${customerId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_WON_CUSTOMER_WEIGHTED_VALUE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_WON_CUSTOMER_WEIGHTED_VALUE_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
 
 
   

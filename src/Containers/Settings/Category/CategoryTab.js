@@ -96,14 +96,14 @@ function CategoryTab (props) {
           <div>
             {/* <Suspense fallback={"Loading..."}> */}
               <div class=" flex flex-no-wrap w-full" >
-                <div class=" w-[20%]" >
+                <div class=" w-[22%]" >
                   <CategoryActionLeft
                     handleRuleClick={handleRuleClick}
                     rules={rules}
                     currentRulesOpen={currentRulesOpen}
                   />
                 </div>
-                <div class=" w-[80%]" >
+                <div class=" w-[78%]" >
                   <CategoryActionRight current={currentRulesOpen} />
                 </div>
               </div>

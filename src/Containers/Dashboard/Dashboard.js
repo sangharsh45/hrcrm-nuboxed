@@ -5,6 +5,7 @@ import { PieChart_ } from "../../Components/Charts";
 import Piechart1 from "../../Components/Charts/PieChart1";
 import { BundleLoader } from "../../Components/Placeholder";
 import CustomerGoogleMap from "./Child/Chart/CustomerGoogleMap";
+import CustomerDashboardJumpStart from "./Child/JumpStart/CustomerDashboardJumpStart";
 import {setDashboardViewType} from "./DashboardAction";
 const DashboardCustomerTab= lazy(()=>import("./DashboardCustomerTab"));
 const FunnelChartAll= lazy(()=>import("./FunnelChartAll"));
@@ -109,6 +110,8 @@ class Dashboard extends Component {
              (<DashboardOrderJumpstart/>)
              : this.state.activeButton==="Finance" ?
              (<DashboardFinanceJumpstart/>)
+             : this.state.activeButton==="Accounts" ?
+             (<CustomerDashboardJumpStart/>)
              :
              (
               <DashboardJumpstart />
@@ -149,23 +152,20 @@ class Dashboard extends Component {
       
     </div>
     </div>
+
     <div class=" flex justify-between" >
                 
                  {viewType==="ME"?(
                    <StackedClosureChartAll/> )
                    :this.state.activeButton==="Investors" ?
                    (<DashInvestorsChartTab/>)
+                   : this.state.activeButton==="Accounts" ?
+                   (<CustomerGoogleMap/>)
                    :this.state.activeButton==="RecruitPro" ?
                    (<DashboardDetailsTab viewType={viewType}/>)
                    :this.state.activeButton==="Finance" ?(
                     null)
                     : viewType==="ALL" || this.state.activeButton==="Customer" ? ( <CustomerGoogleMap
-                    //   emptyTruckLoad={props.emptyTruckLoad}
-                    //   latLngArray={latLngArray}
-                    //   origin={origin}
-                    //  //  truckIcon={truckIcon}
-                    //   selectedMarker={selectedMarker}
-                    //   handleMarkerClick={handleMarkerClick}
                       />)
                   
                   //  : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
@@ -177,9 +177,10 @@ class Dashboard extends Component {
           )}
                
             </div> 
-        
+
     </div>
     </div>
+
      <div class="w-[47%] max-sm:w-wk">
      <div class=" flex flex-col display-block" >
        <div class=" flex justify-between" >
@@ -232,8 +233,9 @@ class Dashboard extends Component {
       
     </div>
     </div>
-   
+ 
     </div>
+  
     </div>
     </Suspense>
 

@@ -1,6 +1,7 @@
 import { Badge, Tag,Tooltip,Avatar } from "antd";
 import React, { useState } from "react";
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import OnDeviceTrainingIcon from '@mui/icons-material/OnDeviceTraining';
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import {
@@ -46,7 +47,7 @@ const DashboardActionLeft = (props) => {
 
 {user.dashboardFullListInd===true && (
               <Tag
-                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                color={showShareForm && viewType === "ALL" ? "tomato" : "#FFA500"}
                 style={{
                   cursor: "pointer",                  
                   fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
@@ -59,7 +60,7 @@ const DashboardActionLeft = (props) => {
                   toggleShareForm(); // Toggle the state when switching to "ALL"
                 }}
               >
-                 {showShareForm ?"Enterprise": "My view"  }
+                 { showShareForm ?"Enterprise": "My view"  }
                 {/* <FormattedMessage
                   id="app.enterprise"
                   defaultMessage="Enterprise"
@@ -152,7 +153,7 @@ const DashboardActionLeft = (props) => {
     </Badge>
 )}
 
-{user.financeInd === true && (
+{user.repairInd === true && (
     <Badge
     size="small"
     // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -165,9 +166,9 @@ const DashboardActionLeft = (props) => {
       
     }}
     >
-       <Tooltip title="Finance">
+       <Tooltip title="Refurbish">
        <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
-      <ReceiptIcon  className="text-white"/>
+      <OnDeviceTrainingIcon  className="text-white"/>
       </Avatar>
       </Tooltip>
       
@@ -366,7 +367,7 @@ const DashboardActionLeft = (props) => {
     </Badge>
 )}
 
-{user.financeInd === true && (
+{user.repairInd === true && (
     <Badge
     size="small"
     // count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
@@ -379,9 +380,9 @@ const DashboardActionLeft = (props) => {
       
     }}
     >
-       <Tooltip title="Finance">
+       <Tooltip title="Refurbish">
        <Avatar style={{ background: activeButton === "Finance" ? "#f279ab" : "#4bc076" }}>     
-      <ReceiptIcon  className="text-white"/>
+      <OnDeviceTrainingIcon  className="text-white"/>
       </Avatar>
       </Tooltip>
       

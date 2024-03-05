@@ -39,11 +39,13 @@ function ApprovalTab(props) {
                         <ContactUserForm/>
                         </div>
                     </TabPane>
-                    <TabPane tab={`Phones Pair`} key="5">
+                    {props.user.repairInd === true && (
+                    <TabPane tab={`Repair`} key="5">
                         <div style={{ marginTop: 10 }}>
                         <PhonesPairApproveForm/>
                         </div>
                     </TabPane>
+                    )}
                     {/* <TabPane tab={`ApproveList`} key="4">
                         <div style={{ marginTop: 10 }}>
                             <ApproveTable/>
@@ -56,7 +58,7 @@ function ApprovalTab(props) {
 }
 
 const mapStateToProps = ({ settings, auth }) => ({
-
+    user: auth.userDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>
