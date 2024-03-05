@@ -94,13 +94,16 @@ class UpdateSuppliesForm extends Component {
                     </div>
                   </div>
                   <Field
+                    defaultValue={{
+                      label: this.props.particularDiscountData.categoryName,
+                      value: this.props.particularDiscountData.categoryName,
+                    }}
                     isRequired
                     name="categoryName"
                     label="Category"
                     placeholder="Start typing to search or create..."
                     optionLabel="categoryName"
                     optionValue="categoryName"
-                    value={values.categoryName}
                     url={`${base_url2}/supplies/category`}
                     component={LazySelect}
                     isColumn
@@ -108,6 +111,10 @@ class UpdateSuppliesForm extends Component {
                     style={{ flexBasis: "80%" }}
                   />
                   <Field
+                    defaultValue={{
+                      label: this.props.particularDiscountData.subCategoryName,
+                      value: this.props.particularDiscountData.subCategoryName,
+                    }}
                     name="subCategoryName"
                     label="Sub Category"
                     placeholder="Start typing to search or create..."
@@ -121,6 +128,10 @@ class UpdateSuppliesForm extends Component {
                   <div class="flex justify-between">
                     <div class="w-full">
                       <Field
+                        defaultValue={{
+                          label: this.props.particularDiscountData.attributeName,
+                          value: this.props.particularDiscountData.attributeName,
+                        }}
                         name="attributeName"
                         label="Attribute"
                         placeholder="Start typing to search or create..."
@@ -132,6 +143,10 @@ class UpdateSuppliesForm extends Component {
                         inlineLabel
                       />
                       <Field
+                        defaultValue={{
+                          label: this.props.particularDiscountData.subAttributeName,
+                          value: this.props.particularDiscountData.subAttributeName,
+                        }}
                         name="subAttributeName"
                         label="Sub Attribute"
                         placeholder="Start typing to search or create..."
