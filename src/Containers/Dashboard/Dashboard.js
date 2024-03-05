@@ -86,8 +86,8 @@ class Dashboard extends Component {
         activeButton={this.state.activeButton}
         />
         <Suspense fallback={<BundleLoader />}>
-          <div class="max-sm:h-[36rem] max-sm:overflow-x-auto">
-         <div class="flex justify-between max-sm:flex-col">
+          <div class=" height-[44vh] max-sm:h-[36rem] max-sm:overflow-x-auto">
+         <div class="flex justify-between  max-sm:flex-col">
            <div class="w-[53%] max-sm:w-wk">
            <div class=" flex flex-col display-block" >
            {viewType==="ME"?(
@@ -235,8 +235,63 @@ class Dashboard extends Component {
     </div>
  
     </div>
+
+
   
     </div>
+
+    {/* <div class=" height-[44vh] max-sm:h-[36rem] max-sm:overflow-x-auto">
+         <div class="flex justify-between  max-sm:flex-col">
+           <div class="w-[53%] max-sm:w-wk">
+           <div class=" flex flex-col display-block" >
+          
+     
+
+    <div class=" flex justify-between" >
+                
+              
+                 
+                    { viewType==="ALL" || this.state.activeButton==="Customer" ? ( <CustomerGoogleMap
+                      />)
+                  
+                  //  : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
+            
+           
+            :(
+              
+              <StackedClosureChart/>
+          )}
+               
+            </div> 
+
+    </div>
+    </div>
+
+     <div class="w-[47%] max-sm:w-wk">
+     <div class=" flex flex-col display-block" >
+       <div class=" flex justify-between" >
+      
+                  {this.state.activeButton==="Customer"&&
+       <FunnelTab/>
+             }
+
+ 
+ 
+
+
+   
+      </div>
+
+  
+      
+    </div>
+    </div>
+ 
+    </div>
+
+
+  
+    </div> */}
     </Suspense>
 
 
