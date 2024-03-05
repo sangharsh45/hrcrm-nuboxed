@@ -4,10 +4,9 @@ import { bindActionCreators } from "redux";
 import QrCode from "./QrCode"
 import {
   getSuppliesList,
-  deleteSupplies,
+  deletePurchaseData,
   handleUpdateSupplieDrawer,
   setEditSupplies,
-  deletePurchaseData,
   handleCurrencyPriceModal,
   handleBrandModel,
   handleMaterialBuilderDrawer
@@ -186,7 +185,7 @@ function SuppliesTable(props) {
                         <div>
                           <Popconfirm
                             title="Do you want to delete?"
-                            onConfirm={() => props.deleteSupplies(item.suppliesId)}
+                            onConfirm={() => props.deletePurchaseData(item.suppliesId)}
                           >
                             <DeleteFilled
                               style={{ cursor: "pointer", color: "red" }}
@@ -361,7 +360,7 @@ function SuppliesTable(props) {
                       <div>
                         <Popconfirm
                           title="Do you want to delete?"
-                        //  onConfirm={() => props.deleteShipperData(item.shipperId)}
+                          onConfirm={() => props.deletePurchaseData(item.suppliesId)}
                         >
                           <DeleteFilled
                             style={{ cursor: "pointer", color: "red" }}
@@ -413,10 +412,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getSuppliesList,
-      deleteSupplies,
+      deletePurchaseData,
       handleUpdateSupplieDrawer,
       setEditSupplies,
-      deletePurchaseData,
       handleCurrencyPriceModal,
       handleBrandModel,
       handleMaterialBuilderDrawer

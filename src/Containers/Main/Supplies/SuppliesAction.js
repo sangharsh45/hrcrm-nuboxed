@@ -543,7 +543,7 @@ export const deleteSupplies = (data, suppliesId) => (
     type: types.DELETE_SUPPLIES_REQUEST,
   });
   axios
-    .put(`${base_url2}/delete/supplies/${suppliesId}`, data)
+    .put(`${base_url2}/supplies/${suppliesId}`, data)
     .then((res) => {
       dispatch({
         type: types.DELETE_SUPPLIES_SUCCESS,
