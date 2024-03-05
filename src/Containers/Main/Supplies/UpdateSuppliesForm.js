@@ -15,16 +15,8 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 
 const SuppliesSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  hsn: Yup.string().required("Input needed!"),
 });
 class UpdateSuppliesForm extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      newimageId:"",
-    };
-  }
 
   componentDidMount() {
     this.props.getCurrency()
@@ -32,41 +24,37 @@ class UpdateSuppliesForm extends Component {
   render() {
     const currencyType = this.props.currencies.map((item) => {
       return {
-        label: item.currencyName || "",
-        value: item.currencyName,
+        label: item.currency_name || "",
+        value: item.currency_name,
       };
     })
-   
-    const setImage = (imageId) => {
-      this.setState({newimageId:imageId});
-    };
-
+    console.log(this.props.particularDiscountData)
     return (
       <>
         <Formik
           initialValues={{
             attribute: "",
-            attributeName:this.props.particularDiscountData.attributeName || "",
-            category: "",
+            attributeName: this.props.particularDiscountData.attributeName || "",
+            category: this.props.particularDiscountData.category || "",
             categoryName: this.props.particularDiscountData.categoryName || "",
-            description:this.props.particularDiscountData.description || "",
-            imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
-            name:this.props.particularDiscountData.name || "",
-            hsn:this.props.particularDiscountData.hsn || "",
-            subAttribute: "",
-            subAttributeName:this.props.particularDiscountData.subAttributeName || "",
-            subCategory: "",
+            description: this.props.particularDiscountData.description || "",
+            imageId: this.props.particularDiscountData.imageId,
+            name: this.props.particularDiscountData.suppliesName || "",
+            hsn: this.props.particularDiscountData.hsn || "",
+            subAttribute: this.props.particularDiscountData.subAttribute || "",
+            subAttributeName: this.props.particularDiscountData.subAttributeName || "",
+            subCategory: this.props.particularDiscountData.subCategory || "",
             subCategoryName: this.props.particularDiscountData.subCategoryName || "",
             price: 0,
             tax: 0,
-            groupId: this.props.groupId,
+            orgId: this.props.orgId,
             userId: this.props.userId,
-            currencyName: "",
-            grossWeight:this.props.particularDiscountData.grossWeight || "",
-            grossUnit:this.props.particularDiscountData.grossUnit || "",
-            netUnit:this.props.particularDiscountData.netUnit || "",
-            netWeight:this.props.particularDiscountData.netWeight || "",
-            reorder:this.props.particularDiscountData.reorder || "",
+            currencyName: this.props.particularDiscountData.costCurrencyName || "",
+            grossWeight: this.props.particularDiscountData.grossWeight || "",
+            grossUnit: this.props.particularDiscountData.grossUnit || "",
+            netUnit: this.props.particularDiscountData.netUnit || "",
+            netWeight: this.props.particularDiscountData.netWeight || "",
+            reorder: this.props.particularDiscountData.reorder || "",
           }}
           validationSchema={SuppliesSchema}
           onSubmit={(values, { resetForm }) => {
@@ -74,7 +62,7 @@ class UpdateSuppliesForm extends Component {
             this.props.updateSupplies(
               {
                 ...values,
-                imageId: this.state.newimageId !== "" ? this.state.newimageId : this.props.particularDiscountData.imageId,
+                imageId: this.props.particularDiscountData.imageId,
               },
               this.props.particularDiscountData.suppliesId
             );
@@ -90,32 +78,29 @@ class UpdateSuppliesForm extends Component {
             ...rest
           }) => (
             <Form class="form-background">
-               <div class="flex justify-between">
+              <div class="flex justify-between">
                 <div class="h-full w-[45%]">
                   <div class="flex-nowrap">
                     <div class="w-[40%]">
                       <div class="mt-3">
-                      <EditUpload
-                    imageId={this.props.particularDiscountData.imageId}
-                    imgWidth={100}
-                    imgHeight={100}
-                    getImage={setImage}
-                  />
-                     
-                    </div>
+                        <EditUpload
+                          imageId={this.props.particularDiscountData.imageId}
+                          imgWidth={100}
+                          imgHeight={100}
+                        // getImage={setImage}
+                        />
+
+                      </div>
                     </div>
                   </div>
                   <Field
                     isRequired
-                    defaultValue={{
-                      label: this.props.particularDiscountData.categoryName,
-                      value: this.props.particularDiscountData.categoryName,
-                    }}
                     name="categoryName"
                     label="Category"
                     placeholder="Start typing to search or create..."
                     optionLabel="categoryName"
                     optionValue="categoryName"
+                    value={values.categoryName}
                     url={`${base_url2}/supplies/category`}
                     component={LazySelect}
                     isColumn
@@ -123,10 +108,6 @@ class UpdateSuppliesForm extends Component {
                     style={{ flexBasis: "80%" }}
                   />
                   <Field
-                  defaultValue={{
-                    label: this.props.particularDiscountData.subCategoryName,
-                    value: this.props.particularDiscountData.subCategoryName,
-                  }}
                     name="subCategoryName"
                     label="Sub Category"
                     placeholder="Start typing to search or create..."
@@ -137,13 +118,9 @@ class UpdateSuppliesForm extends Component {
                     isColumn
                     inlineLabel
                   />
-                   <div class="flex justify-between">
+                  <div class="flex justify-between">
                     <div class="w-full">
                       <Field
-                       defaultValue={{
-                        label: this.props.particularDiscountData.attributeName,
-                        value: this.props.particularDiscountData.attributeName,
-                      }}
                         name="attributeName"
                         label="Attribute"
                         placeholder="Start typing to search or create..."
@@ -155,10 +132,6 @@ class UpdateSuppliesForm extends Component {
                         inlineLabel
                       />
                       <Field
-                          defaultValue={{
-                            label: this.props.particularDiscountData.subAttributeName,
-                            value: this.props.particularDiscountData.subAttributeName,
-                          }}
                         name="subAttributeName"
                         label="Sub Attribute"
                         placeholder="Start typing to search or create..."
@@ -174,7 +147,7 @@ class UpdateSuppliesForm extends Component {
                   </div>
                 </div>
                 <div class="h-full w-[50%]">
-                <div class="flex justify-between">
+                  <div class="flex justify-between">
                     <div class="w-[47%]">
                       <Field
                         name="name"
@@ -273,7 +246,7 @@ class UpdateSuppliesForm extends Component {
                     </div>
                   </div>
                   <div class="flex justify-between mt-4">
-                  <div class="w-full">
+                    <div class="w-full">
                       <Field
                         name="description"
                         label="Description"
@@ -308,6 +281,7 @@ const mapStateToProps = ({ auth, supplies }) => ({
   groupId: auth.userDetails.groupId,
   userId: auth.userDetails.userId,
   currencies: auth.currencies,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
