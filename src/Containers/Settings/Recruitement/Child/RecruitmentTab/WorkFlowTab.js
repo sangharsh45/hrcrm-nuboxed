@@ -4,7 +4,7 @@ import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SupplierOnboardingTab from "./SupplierOnboarding/SupplierOnboardingTab";
-// const ProductionTab = lazy(() => import("./ProductionTab/ProductionTab"));
+const ProductionTab = lazy(() => import("./ProductionTab/ProductionTab"));
 const OnboardingTab = lazy(() => import("./OnboardingTab/OnboardingTab"));
 const HiringTab = lazy(() => import("./HiringTab"));
 const TaskTab = lazy(() => import("../Configure/TaskTab"));
@@ -48,11 +48,11 @@ function WorkFlow(props) {
             <SupplierOnboardingTab />
             </div>
           </TabPane>
-          {/* <TabPane tab={`Production`} key="7">
+          <TabPane tab={`Production`} key="7">
           <div  class=" mt-[10px]" >
             <ProductionTab />
             </div>
-          </TabPane> */}
+          </TabPane>
 
         </StyledTabs>
       </TabsWrapper>

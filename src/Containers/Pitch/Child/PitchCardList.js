@@ -794,6 +794,7 @@ const PitchCardList = (props) => {
                 {/* qual */}
                                     </div>
                                     <div>
+                                    {item.companyName ? (
                                     <Tooltip title="Qualify? Pitch will move to Investor section!">
                         <ConnectWithoutContactIcon
                           onClick={() => {
@@ -804,6 +805,13 @@ const PitchCardList = (props) => {
                           className="!text-base cursor-pointer text-[blue]"
                         />
                       </Tooltip>
+                        ) : (
+                          <Tooltip title="Company name is required to enable qualification action">
+                            <ConnectWithoutContactIcon
+                              className="!text-base cursor-not-allowed text-gray-400"
+                            />
+                          </Tooltip>
+                        )}
 {/* <StatusPitchToggle
             type={props.convertInd ? "primary" : "danger"}
             investorLeadsId={item.investorLeadsId}

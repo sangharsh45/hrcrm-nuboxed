@@ -4758,3 +4758,238 @@ export const getProcessForProduction = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const updateProcessNameForProduction = (process, productionWorkflowDetailsId, cb) => (dispatch) => {
+  debugger;
+  dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_REQUEST });
+
+  axios
+    .put(`${base_url}/productionWorkflow/workflow/${productionWorkflowDetailsId}`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const deleteProductionProcessData = (productionWorkflowDetailsId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_PRODUCTION_PROCESS_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/productionWorkflow/${productionWorkflowDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_PRODUCTION_PROCESS_DATA_SUCCESS,
+        payload: productionWorkflowDetailsId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_PRODUCTION_PROCESS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addProcessStageForProduction = (stage, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_PROCESS_STAGE_FOR_PRODUCTION_REQUEST });
+
+  axios
+    .post(`${base_url}/productionWorkflow/stages`, stage, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_PRODUCTION_SUCCESS,
+        payload: { ...stage, stageId: res.data },
+      });
+      cb && cb("Success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_PRODUCTION_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const getProcessStagesForProduction = (productionWorkflowDetailsId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_PROCESS_STAGES_FOR_PRODUCTION_REQUEST,
+  });
+  axios
+    .get(`${base_url}/productionWorkflow/Stages/${productionWorkflowDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_PRODUCTION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateStageForProduction = (
+  productionStagesId,
+  responsible,
+  stageName,
+
+  probability,
+  days,
+  cb
+) => (dispatch) => {
+  console.log(stageName, probability);
+  dispatch({
+    type: types.UPDATE_STAGE_FOR_PRODUCTION_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/productionWorkflow/stage/${productionStagesId}`,
+      { productionStagesId, responsible, stageName, probability, days },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_PRODUCTION_FAILURE,
+      });
+      cb && cb("error");
+    });
+};
+
+export const deleteProductionStagesData = (productionStagesId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_PRODUCTION_STAGES_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/workflow/productionStages/${productionStagesId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_PRODUCTION_STAGES_DATA_SUCCESS,
+        payload: productionStagesId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_PRODUCTION_STAGES_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const LinkProductionProcessPublish = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_PRODUCTION_PROCESS_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/productionWorkflow/update/publishInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_PRODUCTION_PROCESS_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_PRODUCTION_PROCESS_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+
+export const LinkProductionStagePublish = (data, cb) => (dispatch) => {
+  dispatch({ type: types.LINK_PRODUCTION_STAGES_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/productionStages/update/publishInd `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_PRODUCTION_STAGES_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_PRODUCTION_STAGES_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};

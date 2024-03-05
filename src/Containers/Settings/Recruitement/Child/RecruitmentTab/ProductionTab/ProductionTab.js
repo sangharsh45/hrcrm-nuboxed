@@ -13,18 +13,19 @@ import {
 } from "../../../../../../Components/UI/Elements";
 import {addProcessForProductionOnboarding,
     getProcessForProduction,
-    addProcessStageForSupplier,
-    getProcessStagesForSupplier,
-    LinkSupplierProcessPublish,
-    LinkSupplierStagePublish,
-  deleteSupplierProcessData,
-  updateProcessNameForSupplier,
-  updateStageForSupplier
+    addProcessStageForProduction,
+    getProcessStagesForProduction,
+    LinkProductionProcessPublish,
+    LinkProductionStagePublish,
+    deleteProductionProcessData,
+  updateProcessNameForProduction,
+  updateStageForProduction
  } from "../../../../SettingsAction"
 import {  StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-//  const SingleSupplierStages = lazy(() => import("./SingleSupplierStages"));
+
+  const SingleProductionStages = lazy(() => import("./SingleProductionStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
@@ -78,7 +79,7 @@ class ProductionTab extends Component {
     this.setState({
       currentProcess: item,
     });
-      this.props.getProcessStagesForSupplier(item.supplierUnboardingWorkflowDetailsId);
+      this.props.getProcessStagesForProduction(item.productionWorkflowDetailsId);
   };
 
 
@@ -86,13 +87,13 @@ class ProductionTab extends Component {
     const { currentProcess, publish } = this.state;
     console.log(currentProcess);
 
-    const Id = currentProcess.supplierUnboardingWorkflowDetailsId;
+    const Id = currentProcess.productionWorkflowDetailsId;
     let data = {
-        supplierUnboardingWorkflowDetailsId: Id,
+      productionWorkflowDetailsId: Id,
       publishInd: currentProcess.publishInd ? false : true,
     };
 
-    this.props.LinkSupplierProcessPublish(data, this.handleCallBack1);
+    this.props.LinkProductionProcessPublish(data, this.handleCallBack1);
   };
 
 
@@ -115,53 +116,53 @@ class ProductionTab extends Component {
     }
   };
   handleEditProcessName = () => {
-    const { updateProcessNameForSupplier } = this.props;
+    const { updateProcessNameForProduction } = this.props;
 
     const {
       workflowName,
 
       currentProcess,
     } = this.state;
-    const Id = currentProcess.supplierUnboardingWorkflowDetailsId;
-    let process = { workflowName, supplierUnboardingWorkflowDetailsId: Id };
-    updateProcessNameForSupplier(process,Id,this.handleCallBack1 );
+    const Id = currentProcess.productionWorkflowDetailsId;
+    let process = { workflowName, productionWorkflowDetailsId: Id };
+    updateProcessNameForProduction(process,Id,this.handleCallBack1 );
     this.setState({
       isProcessTextInputOpen: false,
     });
   };
 
-  handleUpdateStage = (supplierUnboardingStagesId, stageName, probability, days) => {
+  handleUpdateStage = (productionStagesId, stageName, probability, days) => {
     //debugger;
-    const { supplierProcessStages } = this.props;
+    const { productionProcessStages } = this.props;
     let exist =
-    supplierProcessStages &&
-    supplierProcessStages.some((element) => element.stageName == stageName);
+    productionProcessStages &&
+    productionProcessStages.some((element) => element.stageName == stageName);
     if (exist) {
       message.error(
         "Stage with same name already exists as part of this workflow"
       );
     } else {
-      this.props.updateStageForSupplier(supplierUnboardingStagesId, stageName, probability, days);
+      this.props.updateStageForProduction(productionStagesId, stageName, probability, days);
     }
   };
 
-handleStagePublishClick = (supplierUnboardingStagesId, publishInd) => {
+handleStagePublishClick = (productionStagesId, publishInd) => {
   const { recruitProcessStages } = this.props;
   const data = {
-    supplierUnboardingStagesId,
+    productionStagesId,
     publishInd: publishInd ? false : true,
   };
   console.log(publishInd);
-  this.props.LinkSupplierStagePublish(data, this.handleCallBack);
+  this.props.LinkProductionStagePublish(data, this.handleCallBack);
 };
 
   handleCallBack = (status) => {
     if (status === "Success") {
       const {
-        currentProcess: { supplierUnboardingWorkflowDetailsId },
+        currentProcess: { productionWorkflowDetailsId },
       } = this.state;
 
-       this.props.getProcessStagesForSupplier(supplierUnboardingWorkflowDetailsId);
+       this.props.getProcessStagesForProduction(productionWorkflowDetailsId);
     } else {
       alert("error");
     }
@@ -227,12 +228,12 @@ handleStagePublishClick = (supplierUnboardingStagesId, publishInd) => {
       currentStage,
     } = this.state;
 
-    const { supplierProcessStages } = this.props;
+    const { productionProcessStages } = this.props;
     let exist =
-    supplierProcessStages &&
-    supplierProcessStages.some((element) => element.stageName == stageName);
+    productionProcessStages &&
+    productionProcessStages.some((element) => element.stageName == stageName);
 
-    const Id = currentProcess.supplierUnboardingWorkflowDetailsId;
+    const Id = currentProcess.productionWorkflowDetailsId;
     console.log(Id);
     console.log(currentProcess);
     let stage = {
@@ -242,18 +243,18 @@ handleStagePublishClick = (supplierUnboardingStagesId, publishInd) => {
       responsible,
       // oppworkFlowId: Id,
       orgId: this.props.orgId,
-      supplierUnboardingWorkflowDetailsId: Id,
+      productionWorkflowDetailsId: Id,
     };
     if (exist) {
       debugger;
       message.error("Can not create as another stage exists with same name !");
     } else {
       // message.success("probability add");
-      this.props.addProcessStageForSupplier(
+      this.props.addProcessStageForProduction(
         stage,
         this.handleCallBack,
         this.props.orgId,
-        this.props.supplierUnboardingWorkflowDetailsId
+        this.props.productionWorkflowDetailsId
       );
       // this.props.getProcessStagesForRecruit(this.props.recruitmentProcessId);
     }
@@ -427,7 +428,7 @@ handleStagePublishClick = (supplierUnboardingStagesId, publishInd) => {
                       title="Do you want to delete?"
                       okText="Yes"
                       cancelText="No"
-                        onConfirm={() => this.props.deleteSupplierProcessData(this.state.currentProcess.supplierUnboardingWorkflowDetailsId )}
+                        onConfirm={() => this.props.deleteProductionProcessData(this.state.currentProcess.productionWorkflowDetailsId )}
                     >
                       <DeleteIcon
                       type="delete" style={{ color: "white",marginLeft:"1rem" }} />
@@ -452,28 +453,27 @@ handleStagePublishClick = (supplierUnboardingStagesId, publishInd) => {
                 </>
               )}
             </div>
-{/* 
-          {this.props.supplierProcessStages.map((supplierProcessStages, i) => (
-              <SingleSupplierStages
+          {this.props.productionProcessStages.map((productionProcessStages, i) => (
+              <SingleProductionStages
                 key={i}
                 stageValue1={this.state.stageName}
                 newStageName="stageName"
                 newProbability="probability"
                 newDays="days"
-                supplierUnboardingWorkflowDetailsId={
-                  this.state.currentProcess.supplierUnboardingWorkflowDetailsId
+                productionWorkflowDetailsId={
+                  this.state.currentProcess.productionWorkflowDetailsId
                 }
-                supplierProcessStages={supplierProcessStages}
+                productionProcessStages={productionProcessStages}
                 organization={this.props.organization}
                 handleApproveIconClick={this.handleApproveIconClick}
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
                 handleStagePublishClick={this.handleStagePublishClick}
-                supplierUnboardingStagesId={supplierProcessStages.supplierUnboardingStagesId}
+                productionStagesId={productionProcessStages.productionStagesId}
                 className="scrollbar"
                 id="style-3"
               />
-            ))}   */}
+            ))}   
 
             <Spacer />
             {this.state.isTextInputOpen ? (
@@ -573,7 +573,7 @@ const mapStateToProps = ({ settings, auth }) => ({
   auth.userDetails.metaData.organization,
   dealsStagesPublish: settings.dealsStagesPublish,
   dealsProcessPublish: settings.dealsProcessPublish,
-  supplierProcessStages: settings.supplierProcessStages,
+  productionProcessStages: settings.productionProcessStages,
   orgId: auth.userDetails && auth.userDetails.organizationId,
 });
 
@@ -582,13 +582,13 @@ const mapDispatchToProps = (dispatch) =>
     {
         addProcessForProductionOnboarding,
         getProcessForProduction,
-        addProcessStageForSupplier,
-        getProcessStagesForSupplier,
-        LinkSupplierProcessPublish,
-        LinkSupplierStagePublish,
-      deleteSupplierProcessData,
-      updateProcessNameForSupplier,
-      updateStageForSupplier
+        addProcessStageForProduction,
+        getProcessStagesForProduction,
+        LinkProductionProcessPublish,
+        LinkProductionStagePublish,
+        deleteProductionProcessData,
+      updateProcessNameForProduction,
+      updateStageForProduction
    
     },
     dispatch

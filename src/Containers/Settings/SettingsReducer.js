@@ -47,6 +47,9 @@ const initialState = {
   fetchingSequenceError: false,
   sequence: [],
 
+  updateProcessNameForProduction: false,
+  updateProcessNameForProductionError: false,
+
 
   fetchingTaskForRecruit: false,
   fetchingTaskForRecruitError: false,
@@ -238,6 +241,9 @@ const initialState = {
   fetchingProcessForRecruitError: false,
   recruitProcess: [],
 
+  deleteProductionProcessData: false,
+   deleteProductionProcessDataError: false, 
+
   addingProcessForRecruit: false,
   addingProcessForRecruitError: false,
 
@@ -304,6 +310,10 @@ const initialState = {
   linkingDealsStagesPublish: false,
   linkingDealsStagesPublishError: false,
   dealsStagesPublish: [],
+
+  fetchingProcessStagesForProduction: false,
+  fetchingProcessStagesForProductionError: false,
+  productionProcessStages: [],
 
   linkingOnboardingProcessPublish: false,
   linkingOnboardingProcessPublishError: false,
@@ -379,6 +389,9 @@ const initialState = {
   updateTaskNameForRecruit: false,
   updateTaskNameForRecruitError: false,
 
+  addingProcessStagesForProduction: false,
+  addingProcessStagesForProduction: false,
+
   fetchingCommission: false,
   fetchingCommissionError: false,
   commissionData: [],
@@ -421,6 +434,9 @@ const initialState = {
   addingScheduler: false,
   addingSchedulerError: false,
 
+  updatingStagesForProduction: false,
+  updatingStagesForProductionError: false,
+
   fetchingScheduler: false,
   fetchingSchedulerError: false,
   scheduler: [],
@@ -434,6 +450,10 @@ const initialState = {
   fetchingThirdPartyAccess: false,
   fetchingThirdPartyAccessError: false,
   thirdPartyAccess: [],
+
+  linkingProductionStagesPublish: false,
+  linkingProductionStagesPublishError: false,
+  productionStagesPublish:[],
 
   addingUpWorkAccess: false,
   addingUpWorkAccessError: false,
@@ -502,6 +522,10 @@ const initialState = {
   linkingSupplierProcessPublishError: false,
   supplierProcessPublish:[],
 
+  linkingProductionProcessPublish: false,
+  linkingProductionProcessPublishError: false,
+  productionProcessPublish:[],
+
   addingNotificationAccess: false,
   addingNotificationAccessError: false,
 
@@ -523,6 +547,9 @@ const initialState = {
   fetchingOpportunitiesDuration: false,
   fetchingOpportunitiesDurationError: false,
   opportunityDuration: [],
+
+  deletingProductionStagesData: false,
+   deletingProductionStagesDataError: false,
 
   fetchingPermissionAccess: false,
   fetchingPermissionAccessError: false,
@@ -3506,6 +3533,159 @@ export const settingsReducer = (state = initialState, action) => {
               fetchingProcessForProduction: false,
               fetchingProcessForProductionError: true,
             };
+
+            case types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_REQUEST:
+              return { ...state, updateProcessNameForProduction: true };
+            case types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_SUCCESS:
+              // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+              return {
+                ...state,
+                updateProcessNameForProduction: false,
+        
+                productionProcess: state.productionProcess.map((state) =>
+                  state.productionWorkflowDetailsId === action.payload.productionWorkflowDetailsId
+                    ? action.payload
+                    : state
+                ),
+              };
+            case types.UPDATE_PROCESS_NAME_FOR_PRODUCTION_FAILURE:
+              return {
+                ...state,
+                updateProcessNameForProduction: false,
+                updateProcessNameForProductionError: true,
+              };
+          
+
+              case types.DELETE_PRODUCTION_PROCESS_DATA_REQUEST:
+                return { ...state, deleteProductionProcessData: true };
+              case types.DELETE_PRODUCTION_PROCESS_DATA_SUCCESS:
+                return {
+                  ...state,
+                  deleteProductionProcessData: false,
+                  productionProcess: state.productionProcess.filter(
+                    (item) => item.productionWorkflowDetailsId !== action.payload
+                  ),
+                };
+              case types.DELETE_PRODUCTION_PROCESS_DATA_FAILURE:
+                return { ...state, deleteProductionProcessData: false, deleteProductionProcessDataError: false };
+
+                case types.ADD_PROCESS_STAGE_FOR_PRODUCTION_REQUEST:
+                  return { ...state, addingProcessStagesForProduction: true };
+                case types.ADD_PROCESS_STAGE_FOR_PRODUCTION_SUCCESS:
+                  return {
+                    ...state,
+                    addingProcessStagesForProduction: false,
+                    productionProcessStages: [...state.productionProcessStages, action.payload],
+                  };
+                case types.ADD_PROCESS_STAGE_FOR_PRODUCTION_FAILURE:
+                  return {
+                    ...state,
+                    addingProcessStagesForProduction: false,
+                    addingProcessStagesForProduction: true,
+                  };
+
+                  case types.GET_PROCESS_STAGES_FOR_PRODUCTION_REQUEST:
+                    return {
+                      ...state,
+                      fetchingProcessStagesForProduction: true,
+                      fetchingProcessStagesForProductionError: false,
+                    };
+                  case types.GET_PROCESS_STAGES_FOR_PRODUCTION_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingProcessStagesForProduction: false,
+                      fetchingProcessStagesForProductionError: false,
+                      productionProcessStages: action.payload,
+                    };
+                  case types.GET_PROCESS_STAGES_FOR_PRODUCTION_FAILURE:
+                    return {
+                      ...state,
+                      fetchingProcessStagesForProduction: false,
+                      fetchingProcessStagesForProductionError: true,
+                    };
+
+
+                    case types.UPDATE_STAGE_FOR_PRODUCTION_REQUEST:
+                      return { ...state, updatingStagesForProduction: true };
+                    case types.UPDATE_STAGE_FOR_PRODUCTION_SUCCESS:
+                      // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+                      return {
+                        ...state,
+                        updatingStagesForProduction: false,
+                        productionProcessStages: state.productionProcessStages.map((state) =>
+                          state.productionStagesId === action.payload.productionStagesId ? action.payload : state
+                        ),
+                      };
+                    case types.UPDATE_STAGE_FOR_PRODUCTION_FAILURE:
+                      return {
+                        ...state,
+                        updatingStagesForProduction: false,
+                        updatingStagesForProductionError: true,
+                      };
+
+                      case types.DELETE_PRODUCTION_STAGES_DATA_REQUEST:
+                        return { ...state, deletingProductionStagesData: true };
+                      case types.DELETE_PRODUCTION_STAGES_DATA_SUCCESS:
+                        return {
+                          ...state,
+                          deletingProductionStagesData: false,
+                          productionProcessStages: state.productionProcessStages.filter(
+                            (item) => item.productionStagesId !== action.payload
+                          ),
+                        };
+                      case types.DELETE_PRODUCTION_STAGES_DATA_FAILURE:
+                        return { ...state, deletingProductionStagesData: false, deletingProductionStagesDataError: false };
+
+                        case types.LINK_PRODUCTION_PROCESS_PUBLISH_REQUEST:
+                          return {
+                            ...state,
+                            linkingProductionProcessPublish: true,
+                          };
+                        case types.LINK_PRODUCTION_PROCESS_PUBLISH_SUCCESS:
+                          return {
+                            ...state,
+                            linkingProductionProcessPublish: false,
+                            productionProcessPublish: state.productionProcessPublish.map((item) => {
+                              if (
+                                item.productionWorkflowDetailsId === action.payload.productionWorkflowDetailsId
+                              ) {
+                                return action.payload;
+                              } else {
+                                return item;
+                              }
+                            }),
+                          };
+                        case types.LINK_PRODUCTION_PROCESS_PUBLISH_FAILURE:
+                          return {
+                            ...state,
+                            linkingProductionProcessPublish: false,
+                            linkingProductionProcessPublishError: true,
+                          };
+
+                          case types.LINK_PRODUCTION_STAGES_PUBLISH_REQUEST:
+                            return {
+                              ...state,
+                              linkingProductionStagesPublish: true,
+                            };
+                          case types.LINK_PRODUCTION_STAGES_PUBLISH_SUCCESS:
+                            return {
+                              ...state,
+                              linkingProductionStagesPublish: false,
+                              productionStagesPublish: state.productionStagesPublish.map((item) => {
+                                if (item.productionStagesId === action.payload.productionStagesId) {
+                                  return action.payload;
+                                } else {
+                                  return item;
+                                }
+                              }),
+                            };
+                          case types.LINK_PRODUCTION_STAGES_PUBLISH_FAILURE:
+                            return {
+                              ...state,
+                              linkingProductionStagesPublish: false,
+                              linkingProductionStagesPublishError: true,
+                            };
+        
           
 
     default:

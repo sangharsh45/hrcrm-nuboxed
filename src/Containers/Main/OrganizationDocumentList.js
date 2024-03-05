@@ -91,10 +91,13 @@ this.setState({
       <div className="overflow-y-auto h-[60vh] overflow-x-hidden">
      <div className="flex flex-col justify-center flex-wrap w-full max-sm:justify-between max-sm:items-center">
           {this.props.repositoryData.map((item) => (
+            <>
+            {item.shareInd === true &&(
             <div class="rounded-md border-2 bg-[#ffffff] shadow-[0_0.25em_0.62em] shadow-[#aaa] h-[3rem] 
             text-[#444444] m-3 p-1 w-wk flex flex-col  "
             
             key={item.id}>
+             
               <div className="flex flex-row justify-between w-wk max-sm:flex-col">
                 <div className="flex">
                   <div className="flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between">
@@ -134,21 +137,20 @@ this.setState({
                     <div className="text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                  
                     </div>
-                  {(item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  || user.role === "ADMIN")  ? (
+                  {/* {(item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  || user.role === "ADMIN")  ? (
                       <Button
-                            // style={{width:"5rem"}}
-                        // onClick={this.handlePublishClick}
+                        
                         onClick={() => {
                         
                           this.handlePublishClick(item);
                         }}
                       >
-                        {/* {this.state.change?"Publish":"Unpublish"}  */}
+                       
                         {item.publishInd
                           ? "Unpublish"
                           : "Publish"}
                       </Button>
-                    ):null} 
+                    ):null}  */}
                   </div>
                   <div className=" flex font-medium flex-col  max-sm:flex-row w-full mt-1 max-sm:justify-between">
                   {(item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true || user.role === "ADMIN") ? (
@@ -194,8 +196,12 @@ this.setState({
                         </div>
                 </div>
               </div>
+               
             </div>
+            )}
+               </>
           ))}
+       
         </div>
       </div>
     );

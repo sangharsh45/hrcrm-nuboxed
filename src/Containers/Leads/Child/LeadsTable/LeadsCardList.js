@@ -752,18 +752,24 @@ const LeadsCardList = (props) => {
                   <div className=" flex font-medium flex-col md:w-[4.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
-                    <Tooltip title="Qualify? Lead will move to Prospect section!">
-                        <ConnectWithoutContactIcon
-                          onClick={() => {
-                            handleRowData(item);
-                            props.handleLeadsConfirmationModal(true);
-                         
-                          }}
-                          className="!text-base cursor-pointer text-[blue]"
-                        />
-                      </Tooltip>
-                     
-                    </div>
+    {item.companyName ? (
+      <Tooltip title="Qualify? Lead will move to Prospect section!">
+        <ConnectWithoutContactIcon
+          onClick={() => {
+            handleRowData(item);
+            props.handleLeadsConfirmationModal(true);
+          }}
+          className="!text-base cursor-pointer text-[blue]"
+        />
+      </Tooltip>
+    ) : (
+      <Tooltip title="Company name is required to enable qualification action">
+        <ConnectWithoutContactIcon
+          className="!text-base cursor-not-allowed text-gray-400"
+        />
+      </Tooltip>
+    )}
+  </div>
                   </div>
                   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
