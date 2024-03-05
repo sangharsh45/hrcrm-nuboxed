@@ -3,8 +3,8 @@ import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-import PaymentIcon from '@mui/icons-material/Payment';
 import SourceIcon from '@mui/icons-material/Source';
+import PaymentIcon from '@mui/icons-material/Payment';
 import FactoryIcon from '@mui/icons-material/Factory';
 import { FormattedMessage } from "react-intl";
 const Payment = lazy(() =>
@@ -16,15 +16,11 @@ const Sectors = lazy(() =>
 const Source = lazy(() =>
   import("./Source/Source")
 );
-const ShipBy = lazy(() =>
-  import("./ShipBy/ShipBy")
-);
+
 const Customer = lazy(() =>
   import("./Customer/Customer")
 );
-const BrandModel = lazy(() =>
-  import("./Brand&Model/BrandModel")
-);
+
 const Vat = lazy(() =>
   import("./Vat/Vat")
 );
@@ -54,14 +50,10 @@ class CustomerSectorTab extends Component {
       case "1":
         return  <Source />;
       case "2":
-        return     <ShipBy />;
-      case "3":
         return    <Customer />;
-        case "4":
-          return        <BrandModel />;
-          case "5":
+          case "3":
             return            <Vat />;
-            case "6":
+            case "4":
               return              <Payment />;
       default:
         return null;
@@ -113,47 +105,18 @@ class CustomerSectorTab extends Component {
                     <>
                       <SourceIcon />
                       <span class=" ml-1">
-                        Ship By
+                      Type
                       </span>
                     </>
                   }
                   key="2"
                 >
                   {/* <Suspense>
-                    <ShipBy />
-                  </Suspense> */}
-                </TabPane>
-                <TabPane
-                  tab={
-                    <>
-                      <SourceIcon />
-                      <span class=" ml-1">
-                      Type
-                      </span>
-                    </>
-                  }
-                  key="3"
-                >
-                  {/* <Suspense>
                     <Customer />
                   </Suspense> */}
                 </TabPane>
 
-                <TabPane
-                  tab={
-                    <>
-                      <SourceIcon />
-                      <span class=" ml-1">
-                        BrandModel
-                      </span>
-                    </>
-                  }
-                  key="4"
-                >
-                  {/* <Suspense>
-                    <BrandModel />
-                  </Suspense> */}
-                </TabPane>
+            
                 <TabPane
                   tab={
                     <>
@@ -163,7 +126,7 @@ class CustomerSectorTab extends Component {
                       </span>
                     </>
                   }
-                  key="5"
+                  key="3"
                 >
                   <Suspense>
                     <Vat />
@@ -178,7 +141,7 @@ class CustomerSectorTab extends Component {
                       </span>
                     </>
                   }
-                  key="6"
+                  key="4"
                 >
                   {/* <Suspense>
                     <Payment />

@@ -1,13 +1,12 @@
 import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
-import { Spin } from "antd";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import {addingModules,getModules} from "../Module/ModuleAction"
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
 import {  Popconfirm, Switch } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import FWLogo from "../../../../Assets/Images/crm.jpg";
 import FWLogo1 from "../../../../Assets/Images/Im.jpg";
 import FWLogo2 from "../../../../Assets/Images/Hr.jpg";
@@ -623,7 +622,7 @@ logisticsStatus={logisticsStatus}
             </div>
            
           </MainWrapper>
-          <div>Updated on {moment(props.moduleList.updationDate).format("ll")} by {props.moduleList.updatedBy}</div>
+          <div class=" font-bold">Updated on {dayjs(props.moduleList.updationDate).format('YYYY-MM-DD')} by {props.moduleList.updatedBy}</div>
         </div>
      
       </>

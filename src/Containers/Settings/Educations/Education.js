@@ -138,7 +138,7 @@ class Education extends Component {
       linkedEducations,
     } = this.state;
     if (fetchingEducations) return <BundleLoader/>;
-    if (fetchingEducationsError) return <p>We are unable to load data</p>;
+    // if (fetchingEducationsError) return <p>We are unable to load data</p>;
     return (
       <>
       <div class="flex flex-nowrap" >

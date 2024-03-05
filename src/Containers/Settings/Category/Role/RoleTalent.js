@@ -2,6 +2,7 @@ import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
+import dayjs from "dayjs";
 import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
  import { BundleLoader } from "../../../../Components/Placeholder";
@@ -223,7 +224,7 @@ class RoleTalent extends Component {
             </div>
          
           </MainWrapper>
-     
+          <div class=" font-bold">Updated on {dayjs(this.props.talentRoles && this.props.talentRoles.length && this.props.talentRoles[0].updationDate).format('YYYY-MM-DD')} by {this.props.talentRoles && this.props.talentRoles.length && this.props.talentRoles[0].name}</div>
    
         </div>
       </>

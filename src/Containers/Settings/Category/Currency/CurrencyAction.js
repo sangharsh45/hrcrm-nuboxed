@@ -89,4 +89,42 @@ import { message } from "antd"
       })
   };
 
+  export const searchCurrencyName = (currencyName) => (dispatch) => {
+    dispatch({
+      type: types.GET_CURRENCY_SEARCH_REQUEST,
+    });
+    axios
+      .get(`${base_url}/countries/currency/search/${currencyName}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // const actualData = res.data;
+        // const filteredData = actualData.filter((item) => { return item.name !== null })
+        message.success(res.data.message);
+    
+      
+      
+        dispatch({
+          type: types.GET_CURRENCY_SEARCH_SUCCESS,
+          payload: res.data,
+        });
+  
+      }
+      )
+      .catch((err) => {
+        dispatch({
+          type: types.GET_CURRENCY_SEARCH_FAILURE,
+          payload: err,
+        });
+      });
+  }; 
+
+  export const ClearReducerDataOfCurrency = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CURRENCY,
+    });
+  };
+
 

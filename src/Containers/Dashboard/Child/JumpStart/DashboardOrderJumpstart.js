@@ -76,7 +76,7 @@ function DashboardOrderJumpstart(props) {
               noProgress
               title={<FormattedMessage
                 id="app.financeadded"
-                defaultMessage="Receivable Added"
+                defaultMessage="Receivables Added"
               />}
             // jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
             // cursorData={"pointer"}
@@ -88,7 +88,7 @@ function DashboardOrderJumpstart(props) {
               noProgress
               title={<FormattedMessage
                 id="app.financeopen"
-                defaultMessage="Receivable Open"
+                defaultMessage="Receivables Open"
               />}
             // jumpstartClick={()=>handlePitchAddedDrawer(true)}
             // cursorData={"pointer"}
@@ -101,7 +101,7 @@ function DashboardOrderJumpstart(props) {
               noProgress
               title={<FormattedMessage
                 id="app.financeclosed"
-                defaultMessage="Receivable Closed"
+                defaultMessage="Receivables Closed"
               />}
             // jumpstartClick={()=>handleDealAddedDrawer(true)}
             // cursorData={"pointer"}
@@ -112,7 +112,7 @@ function DashboardOrderJumpstart(props) {
               noProgress
               title={<FormattedMessage
                 id="app.financecancelled"
-                defaultMessage="Receivable Cancelled"
+                defaultMessage="Receivables Cancelled"
               />}
             // jumpstartClick={()=>handleDealClosedDrawer(true)}
             // cursorData={"pointer"}
