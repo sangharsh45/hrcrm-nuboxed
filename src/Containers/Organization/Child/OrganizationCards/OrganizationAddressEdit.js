@@ -72,7 +72,7 @@ class OrganizationAddressEdit extends Component {
             name={"address1"}
              value={this.state.fields.addressdata}
             // disabled={"disabled"}
-            width="100%"
+            width="99%"
           />
     <div class=" m-[2px]">
           <EditableInput
