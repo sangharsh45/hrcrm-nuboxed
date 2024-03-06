@@ -69,7 +69,7 @@ class OrganizationAddressEdit extends Component {
           <EditableInput
           defaultValue={addressdata}
             handleChange={this.handleChange}
-            name={"address[0].address1"}
+            name={"address1"}
              value={this.state.fields.addressdata}
             // disabled={"disabled"}
             width="100%"

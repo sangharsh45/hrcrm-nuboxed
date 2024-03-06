@@ -25,7 +25,11 @@ class OrganizationActionLeft extends Component {
       <>
    
 
-      <OrganizationHeaderTab     handleOnClick={this.props.handleOnClick}/>
+      <OrganizationHeaderTab
+       activeTab={this.props.activeTab}
+      organizationDetailsList={this.props.organizationDetailsList} 
+      organizationDetails={this.props.organizationDetails}   
+       handleOnClick={this.props.handleOnClick}/>
  
   
  
@@ -35,7 +39,7 @@ class OrganizationActionLeft extends Component {
   }
 }
 const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
-  organizationDetailsList:auth.organizationDetailsList,
+  // organizationDetailsList:auth.organizationDetailsList,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
