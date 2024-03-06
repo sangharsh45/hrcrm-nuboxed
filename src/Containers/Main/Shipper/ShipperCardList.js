@@ -73,73 +73,58 @@ function ShipperCardList(props) {
             {props.shipperByUserId.map((item) => {
               return (
                 <>
-                  <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3">
-                    <div class=" flex flex-row items-center justify-evenly w-wk max-sm:flex-col">
-                      <div className=" flex font-medium  md:w-[12.1rem] max-sm:justify-between w-full max-sm:flex-row ">
+                  <div  >
+                    <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
+                      <div className=" flex font-medium flex-col md:w-[13.6rem] max-sm:w-full  ">
 
-                        <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
-                          <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                          <div class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Name
-
-</div>  */}
-
-
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"
-                                to={`shipper/${item.shipperId}`} title={item.shipperName}>
-                                {item.shipperName}
-                              </Link>
-                            </div>
-
+                            <Link class="overflow-ellipsis whitespace-nowrap h-8 text-sm p-1 text-[#042E8A] cursor-pointer"
+                              to={`shipper/${item.shipperId}`} title={item.shipperName}>
+                              {item.shipperName}
+                            </Link>
                           </div>
-                          <div className=" flex font-medium  md:w-[6.2rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+                        </div>
+                      </div>
+                      <div className=" flex font-medium  md:w-[6.2rem] max-sm:justify-between w-full max-sm:flex-row ">
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {item.dialCode} {item.phoneNo}
+                        </div>
 
-Phone #
+                      </div>
+                      <div className=" flex font-medium  md:w-[14.3rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-</div>  */}
-
-
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {item.dialCode} {item.phoneNo}
-                            </div>
-
-                          </div>
-                          <div className=" flex font-medium  md:w-[14.3rem] max-sm:justify-between w-full max-sm:flex-row ">
-
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Email
 
 </div>  */}
 
 
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {item.emailId}
-                            </div>
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {item.emailId}
+                        </div>
 
-                          </div>
+                      </div>
 
-                          <div className=" flex font-medium  md:w-[11.12rem] max-sm:justify-between w-full max-sm:flex-row ">
+                      <div className=" flex font-medium  md:w-[11.12rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Ship By
 
 </div>  */}
 
 
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {item.shipByName}
-                            </div>
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {item.shipByName}
+                        </div>
 
-                          </div>
-                          <div className=" flex font-medium  md:w-[11.31rem] max-sm:justify-between w-full max-sm:flex-row ">
-                            {/* 
+                      </div>
+                      <div className=" flex font-medium  md:w-[11.31rem] max-sm:justify-between w-full max-sm:flex-row ">
+                        {/* 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Address
@@ -147,89 +132,88 @@ Address
 </div>  */}
 
 
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].state) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].street) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].city) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].pinCode) || ""}`}
-                            </div>
+                        </div>
 
-                          </div>
-                          <div className=" flex font-medium  md:w-[11.21rem] max-sm:justify-between w-full max-sm:flex-row ">
+                      </div>
+                      <div className=" flex font-medium  md:w-[11.21rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 City
 
 </div>  */}
 
 
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {(item.addresses &&
-                                item.addresses.length &&
-                                item.addresses[0].city) ||
-                                ""}
-                            </div>
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {(item.addresses &&
+                            item.addresses.length &&
+                            item.addresses[0].city) ||
+                            ""}
+                        </div>
 
-                          </div>
-                          <div className=" flex font-medium  md:w-[11.45rem] max-sm:justify-between w-full max-sm:flex-row ">
+                      </div>
+                      <div className=" flex font-medium  md:w-[11.45rem] max-sm:justify-between w-full max-sm:flex-row ">
 
-                            {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+                        {/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 PinCode
 
 </div>  */}
 
 
-                            <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
-                              {(item.addresses &&
-                                item.addresses.length &&
-                                item.addresses[0].pinCode) ||
-                                ""}
-                            </div>
+                        <div class=" font-normal text-[0.85rem] text-cardBody font-poppins">
+                          {(item.addresses &&
+                            item.addresses.length &&
+                            item.addresses[0].pinCode) ||
+                            ""}
+                        </div>
 
-                          </div>
-                          <div>
-                            <Switch
-                              className="toggle-clr"
-                              //checked={item.productionInd}
-                              isLoading={true}
-                              checkedChildren="Yes"
-                              unCheckedChildren="No"
+                      </div>
+                      <div>
+                        <Switch
+                          className="toggle-clr"
+                          //checked={item.productionInd}
+                          isLoading={true}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                      <div class="flex flex-col w-[3%] ml-1 max-sm:flex-row max-sm:w-[10%]">
+                        <div>
+                          <Tooltip title="Edit">
+                            <BorderColorIcon
+                              className=" !text-base cursor-pointer text-[tomato]"
+
+                              onClick={() => {
+                                props.setEditShipper(item);
+                                handleRowData(item);
+                                handleUpdateShipperModal(true);
+                                handleSetCurrentShipperId(item.shipperId);
+                              }}
                             />
-                          </div>
-                          <div class="flex flex-col w-[3%] ml-1 max-sm:flex-row max-sm:w-[10%]">
-                            <div>
-                              <Tooltip title="Edit">
-                                <BorderColorIcon
-                                  className=" !text-base cursor-pointer text-[tomato]"
+                          </Tooltip>
+                        </div>
+                        <div>
+                          <Popconfirm
+                            title="Do you want to delete?"
+                            onConfirm={() => props.deleteShipperData(item.shipperId)}
+                          >
+                            <DeleteOutlined
+                              className=" !text-base cursor-pointer text-[red]"
 
-                                  onClick={() => {
-                                    props.setEditShipper(item);
-                                    handleRowData(item);
-                                    handleUpdateShipperModal(true);
-                                    handleSetCurrentShipperId(item.shipperId);
-                                  }}
-                                />
-                              </Tooltip>
-                            </div>
-                            <div>
-                              <Popconfirm
-                                title="Do you want to delete?"
-                                onConfirm={() => props.deleteShipperData(item.shipperId)}
-                              >
-                                <DeleteOutlined
-                                  className=" !text-base cursor-pointer text-[red]"
-
-                                />
-                              </Popconfirm>
-                            </div>
-                          </div>
-
-
+                            />
+                          </Popconfirm>
                         </div>
                       </div>
+
+
+
                     </div>
                   </div>
                 </>
