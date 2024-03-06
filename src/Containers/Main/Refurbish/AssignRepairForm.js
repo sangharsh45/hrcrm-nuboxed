@@ -1,10 +1,10 @@
-import { Button, DatePicker, Select,  } from 'antd'
+import { Button, DatePicker, Select, } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProductionUsersById, getRepairPhoneById, UpdateTechnicianForRepairPhone } from "./RefurbishAction"
+import { getProductionUsersById, getRepairPhoneById, closeRepairModal, UpdateTechnicianForRepairPhone } from "./RefurbishAction"
 import QRCodeModal from '../../../Components/UI/Elements/QRCodeModal'
 import { SubTitle } from '../../../Components/UI/Elements';
 
@@ -48,6 +48,12 @@ const AssignRepairForm = (props) => {
 
     const hanldeOnChange = (value) => {
         setDueDate(value)
+    }
+
+    const handleCallback = () => {
+        if (!props.repairPhoneByOrder.length) {
+            props.closeRepairModal()
+        }
     }
     const column = [
         {
@@ -126,9 +132,7 @@ const AssignRepairForm = (props) => {
                 <div>
                     <label class="text-[15px] font-semibold m-[10px]">Department</label>
                     <Select
-                        style={{
-                            width: 250,
-                        }}
+                        className="w-[350px]"
                         value={department}
                         onChange={(value) => handleDepartment(value)}
                     >
@@ -138,11 +142,9 @@ const AssignRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                <label class="text-[15px] font-semibold m-[10px]">Technician</label>
+                    <label class="text-[15px] font-semibold m-[10px]">Technician</label>
                     <Select
-                        style={{
-                            width: 250,
-                        }}
+                        className="w-[350px]"
                         value={technician}
                         onChange={(value) => handleTechnician(value)}
                     >
@@ -152,11 +154,9 @@ const AssignRepairForm = (props) => {
                     </Select>
                 </div>
                 <div>
-                <label class="text-[15px] font-semibold m-[10px]">Due Date</label>
+                    <label class="text-[15px] font-semibold m-[10px]">Due Date</label>
                     <DatePicker
-                        style={{
-                            width: 250,
-                        }}
+                        className="w-[250px]"
                         value={dueDate}
                         onChange={(value) => hanldeOnChange(value)}
                     />
@@ -173,6 +173,7 @@ const AssignRepairForm = (props) => {
             <div class="flex justify-end mt-1">
                 <Button
                     type='primary'
+                    loading={props.updatingTechnicianForRepair}
                     onClick={() => props.UpdateTechnicianForRepairPhone({
                         phoneDetailsList: checkedValue,
                         orderPhoneId: props.rowData.orderPhoneId,
@@ -182,7 +183,8 @@ const AssignRepairForm = (props) => {
                         repairDueDate: dueDate
                     },
                         props.rowData.orderPhoneId,
-                        props.locationId
+                        props.locationId,
+                        handleCallback()
                     )}>
                     Submit
                 </Button>
@@ -196,10 +198,12 @@ const mapStateToProps = ({ auth, refurbish, departments }) => ({
     productionUser: refurbish.productionUser,
     repairPhoneByOrder: refurbish.repairPhoneByOrder,
     noOfPhoneById: refurbish.noOfPhoneById,
+    showAssignRepairModal: refurbish.showAssignRepairModal,
     locationId: auth.userDetails.locationId,
     fetchingNoOfPhonesById: refurbish.fetchingNoOfPhonesById,
     userId: auth.userDetails.userId,
     departments: departments.departments,
+    updatingTechnicianForRepair: refurbish.updatingTechnicianForRepair
 });
 
 const mapDispatchToProps = (dispatch) =>

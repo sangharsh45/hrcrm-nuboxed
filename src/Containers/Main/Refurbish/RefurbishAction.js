@@ -391,6 +391,11 @@ export const UpdateTechnicianByPhone = (data, id, locationDetailsId) => (dispatc
     .then((res) => {
       dispatch(getNoOfPhoneById(id));
       dispatch(getProductionOrderId(locationDetailsId))
+      Swal.fire({
+        icon: 'success',
+        title: 'Phone Assigned To Technician',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.UPDATE_TECHNICIAN_BY_PHONE_SUCCESS,
         payload: res.data,
@@ -420,6 +425,11 @@ export const UpdateTechnicianForRepairPhone = (data, id, locationDetailsId) => (
     .then((res) => {
       dispatch(getRepairPhoneById(id))
       dispatch(getProductionOrderId(locationDetailsId))
+      Swal.fire({
+        icon: 'success',
+        title: 'Phone Assigned To Technician',
+        showConfirmButton: true,
+      })
       dispatch({
         type: types.UPDATE_TECHNICIAN_FOR_REPAIR_PHONE_SUCCESS,
         payload: res.data,
@@ -1486,3 +1496,6 @@ export const gettASKItemCounts = (phoneId) => (dispatch) => {
       });
     });
 };
+
+export const closeRepairModal = (close) => (dispatch) =>
+  dispatch({ type: types.SET_CLOSE_REPAIR_MODAL, payload: close });

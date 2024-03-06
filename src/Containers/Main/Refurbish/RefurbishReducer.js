@@ -803,6 +803,9 @@ export const refurbishReducer = (state = initialState, action) => {
     case types.HANDLE_PRODUCT_BUILDER_IN_PROCESS_MODAL:
       return { ...state, showProductBuilderList: action.payload };
 
+    case types.SET_CLOSE_REPAIR_MODAL:
+      return { ...state, showAssignRepairModal: false, assignOrderById: false };
+
     case types.GET_CATALOGUE_LIST_IN_REFURBISH_REQUEST:
       return { ...state, fetchingCatalogueListInReurbish: true };
     case types.GET_CATALOGUE_LIST_IN_REFURBISH_SUCCESS:

@@ -4,7 +4,7 @@ import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
-import { getProductionUsersById, UpdateTechnicianByPhone, getNoOfPhoneById } from "./RefurbishAction"
+import { getProductionUsersById, UpdateTechnicianByPhone, getNoOfPhoneById, closeRepairModal } from "./RefurbishAction"
 import { SubTitle } from '../../../Components/UI/Elements';
 
 const QRCodeModal = lazy(() => import('../../../Components/UI/Elements/QRCodeModal'));
@@ -51,6 +51,11 @@ const AssignPhoneByTechnician = (props) => {
 
     const hanldeOnChange = (value) => {
         setDueDate(value)
+    }
+    const handleCallback = () => {
+        if (!props.noOfPhoneById.length) {
+            props.closeRepairModal()
+        }
     }
     const column = [
         {
@@ -123,9 +128,9 @@ const AssignPhoneByTechnician = (props) => {
 
     return (
         <div>
-            <div class="flex justify-between m-2">
+            <div class="mt-[10px] flex justify-between">
                 <div>
-                    <div class="text-sm font-semibold m-2">Department</div>
+                    <label class="text-[15px] font-semibold m-[10px]">Department</label>
                     <Select
                         className="w-[350px]"
                         value={department}
@@ -137,7 +142,7 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <div class="text-sm font-semibold m-2">Technician</div>
+                    <label class="text-[15px] font-semibold m-[10px]">Technician</label>
                     <Select
                         className="w-[350px]"
                         value={technician}
@@ -149,7 +154,7 @@ const AssignPhoneByTechnician = (props) => {
                     </Select>
                 </div>
                 <div>
-                    <div class="text-sm font-semibold m-2">Due Date</div>
+                    <label class="text-[15px] font-semibold m-[10px]">Due Date</label>
                     <DatePicker
                         className="w-[250px]"
                         value={dueDate}
@@ -170,6 +175,7 @@ const AssignPhoneByTechnician = (props) => {
             )}
             <div class="flex justify-end mt-1">
                 <Button
+                    loading={props.updatingtechnicianByPhone}
                     type='primary'
                     onClick={() => props.UpdateTechnicianByPhone({
                         phoneDetailsList: checkedValue,
@@ -180,7 +186,8 @@ const AssignPhoneByTechnician = (props) => {
                         dueDate: dueDate
                     },
                         props.rowData.orderPhoneId,
-                        props.locationId
+                        props.locationId,
+                        handleCallback()
                     )}>
                     Submit
                 </Button>
@@ -197,6 +204,8 @@ const mapStateToProps = ({ auth, refurbish, departments }) => ({
     userId: auth.userDetails.userId,
     departments: departments.departments,
     locationId: auth.userDetails.locationId,
+    assignOrderById: refurbish.assignOrderById,
+    updatingtechnicianByPhone: refurbish.updatingtechnicianByPhone
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -205,7 +214,8 @@ const mapDispatchToProps = (dispatch) =>
             getProductionUsersById,
             UpdateTechnicianByPhone,
             getNoOfPhoneById,
-            getDepartments
+            getDepartments,
+            closeRepairModal
         },
         dispatch
     );
