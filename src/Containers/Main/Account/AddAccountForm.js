@@ -24,7 +24,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   country: Yup.string().required("Input needed!"),
-  phoneNo: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8, "Minimum 8 digits").max(10, "Number is too long")
+  phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8, "Minimum 8 digits").max(10, "Number is too long")
 });
 
 const AddAccountForm = ({
