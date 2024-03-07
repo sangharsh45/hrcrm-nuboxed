@@ -152,7 +152,7 @@ useEffect(() => {
   }
 }, [props.organizationDetailsList]); // Watch for changes in organizationDetailsList
 
-console.log("activeTab", activeTab);
+
 
   const handleTabClick = (key) => {
     console.log(key)
